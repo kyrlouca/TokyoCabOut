@@ -33,15 +33,13 @@ object X_readFileFRM: TX_readFileFRM
       AlignWithMargins = True
       Left = 5
       Top = 5
-      Width = 865
-      Height = 43
+      Width = 187
+      Height = 32
       Align = alClient
       Alignment = taCenter
       Caption = 'Read XML File'
       Transparent = True
       Layout = tlCenter
-      ExplicitWidth = 187
-      ExplicitHeight = 32
     end
   end
   object RzPanel2: TRzPanel
@@ -55,7 +53,7 @@ object X_readFileFRM: TX_readFileFRM
     object ProcessFLD: TRzLabel
       Left = 0
       Top = 305
-      Width = 875
+      Width = 148
       Height = 29
       Align = alBottom
       Alignment = taCenter
@@ -66,7 +64,6 @@ object X_readFileFRM: TX_readFileFRM
       Font.Name = 'Tahoma'
       Font.Style = []
       ParentFont = False
-      ExplicitWidth = 148
     end
     object RzBitBtn2: TRzBitBtn
       Left = 22

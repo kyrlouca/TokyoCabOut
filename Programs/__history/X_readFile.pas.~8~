@@ -293,7 +293,6 @@ THawbAge=(haNotFound, haSame, haPartial, haOld, haDuplicate);
 
 
   function ReadTheFile(Const FileName:String) :boolean;
-  function ReadOneXML(Const FileName:String) :Boolean;
   function findMawb(Const MawbId:String):TMawbRec;
   function isPartialMawb(const mawbNode:IXMLNode):Integer;
   function isOldMawb(const mawbNode:IXMLNode):Integer;
@@ -459,65 +458,6 @@ begin
 
   end;
 
-
-
-function TX_readFileFRM.ReadOneXML(Const FileName:String) :Boolean;
-var
-  Doc: IXMLDocument;
-  Data: IXMLNode;
-  Movements, Mawbs,Hawbs :IXMLNodeList;
-  aHeader,aMovement,aMawb,aHawb:ixmlnODE;
-  I: Integer;
-//  j:Integer;
-  MawbRec:TmawbRec;
-  str:String;
-  temptime:TDateTime;
-  TotalHawbs:Integer;
-
-begin
-  TotalHawbs:=0;
-  result:=true;
-  Doc := LoadXMLDocument(FileName);
-  Data := Doc.DocumentElement;
-
-  Movements:=Data.ChildNodes['Dtls'].ChildNodes['Entries'].ChildNodes['Entry'].childNOdes['Mvmts'].ChildNodes;
-  aHeader:=Data.ChildNodes['Hdr'];
-
-
-  if Movements.Count <1 then begin
-    result:=False;
-    exit;
-  end;
-// ShowMessage(Movements[0].ChildNodes['MvmtNo'].Text);
-
-  Mawbs:=Movements[0].ChildNodes['TDOCs'].ChildNodes; //only one movement is sent
-  aMovement:=Movements[0];
-  if Mawbs.Count <1 then begin
-    result:=False;
-    exit;
-  end;
-
-  //same first mawb exists in another file
-  aMawb := Mawbs[0];
-  if isMawbFileExists(aHeader, aMawb) then begin
-    result:=False;
-    exit;
-  end;
-
-  for I := 0 to Mawbs.Count-1 do  begin
-  //each movement may hawe one or more mawbs  (each mawb is a TDOC) but may have more than one same mawb
-    aMawb := Mawbs[i];
-    TotalHawbs := TotalHawbs + ProcessOneMawb(aHeader,aMawb,fileName);
-  end;
-
-  MessagesMemo.Lines.Add('---------------------------------------------------------');
-  MessagesMemo.Lines.Add('--------------------- Total Created:'+InttoStr(Totalhawbs));
-
-
-  end;
-
-
-
 procedure TX_readFileFRM.RzBitBtn1Click(Sender: TObject);
 begin
 close;
@@ -570,7 +510,7 @@ begin
    end;
   Tfile.Delete(fileName);
 
-  ReadOneXML(FileNameXyz);
+  ReadTheFile(FileNameXyz);
 
 
  temp:=Tpath.ChangeExtension(FileNameXYZ,'.XXX');
@@ -695,23 +635,21 @@ begin
   +' '+ HeaderNode.ChildNodes['MsgCtl'].ChildNodes['MsgTime'].Text;
   MsgTime:=ConvertUTCTimeStampF(str);
 
-//
-//  str:= 'select reference_Number ,FILE_NAME_XML from mawb ma'
-//  +' where ma.mawb_id= :mawbId and ma.msg_time= :MsgTime';
-//
-//  try
-//    qr:=TksQuery.Create(cn,str);
-//    qr.ParamByName('MawbID').Value:=MawbId;
-//    qr.ParamByName('MsgTime').AsDateTime:=MsgTime;
-//    qr.Open;
-//    fileName:=qr.FieldByName('FILE_NAME_XML').AsString;
-//    result:= not qr.IsEmpty;
-//    close;
-//  finally
-//    qr.Free;
-//  end;
 
-result:=false;
+  str:= 'select reference_Number ,FILE_NAME_XML from mawb ma'
+  +' where ma.mawb_id= :mawbId and ma.msg_time= :MsgTime';
+  try
+    qr:=TksQuery.Create(cn,str);
+    qr.ParamByName('MawbID').Value:=MawbId;
+    qr.ParamByName('MsgTime').AsDateTime:=MsgTime;
+    qr.Open;
+    fileName:=qr.FieldByName('FILE_NAME_XML').AsString;
+    result:= not qr.IsEmpty;
+    close;
+  finally
+    qr.Free;
+  end;
+
   if (result) then begin
     MessagesMemo.Lines.add('*******ERROR - SAME Mawb (Msg_Time) already EXISTS'+'Mawb id: '+ MawbId );
     MessagesMemo.Lines.add('----- Previous FileName '+ FileName );

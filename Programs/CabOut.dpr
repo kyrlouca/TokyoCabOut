@@ -34,7 +34,8 @@ uses
   G_KyrSQL in 'G_KyrSQL.pas',
   GeneralProcedures in 'GeneralProcedures.pas',
   KyriacosTypes in 'KyriacosTypes.pas',
-  S_SelectCustomerx in 'S_SelectCustomerx.pas' {S_SelectCustomerXFRM};
+  S_SelectCustomerx in 'S_SelectCustomerx.pas' {S_SelectCustomerXFRM},
+  GeneralParametersNew in 'GeneralParametersNew.pas';
 
 {$R *.RES}
 
@@ -65,7 +66,7 @@ begin
   Application.CreateForm(TM_ServiceCodesFRM, M_ServiceCodesFRM);
   Application.CreateForm(TM_CurrencyFRM, M_CurrencyFRM);
   Application.CreateForm(TL_AdditionalParametersFRM, L_AdditionalParametersFRM);
-//  Application.CreateForm(TR_ReadAllFilesFRM, R_ReadAllFilesFRM);
+  //  Application.CreateForm(TR_ReadAllFilesFRM, R_ReadAllFilesFRM);
   Application.CreateForm(TM_additionalParametersFRM, M_additionalParametersFRM);
   Application.CreateForm(TX_readFileFRM, X_readFileFRM);
   Application.CreateForm(TS_SelectCustomerXFRM, S_SelectCustomerXFRM);

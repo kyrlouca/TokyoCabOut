@@ -191,6 +191,7 @@
             <Form>S_SelectCustomerXFRM</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="GeneralParametersNew.pas"/>
         <None Include="CabOut.todo">
             <ContainerId>ToDo</ContainerId>
         </None>
