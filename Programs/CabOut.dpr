@@ -29,13 +29,13 @@ uses
   M_additionalParameters in 'M_additionalParameters.pas' {M_additionalParametersFRM},
   X_readFile in 'X_readFile.pas' {X_readFileFRM},
   G_DebugUnit in 'G_DebugUnit.pas',
-  G_generalProcs in 'G_generalProcs.pas',
   G_kyriacosTypes in 'G_kyriacosTypes.pas',
   G_KyrSQL in 'G_KyrSQL.pas',
   GeneralProcedures in 'GeneralProcedures.pas',
   KyriacosTypes in 'KyriacosTypes.pas',
   S_SelectCustomerx in 'S_SelectCustomerx.pas' {S_SelectCustomerXFRM},
-  GeneralParametersNew in 'GeneralParametersNew.pas';
+  GeneralParametersNew in 'GeneralParametersNew.pas',
+  G_generalProcs in 'G_generalProcs.pas';
 
 {$R *.RES}
 

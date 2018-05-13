@@ -182,7 +182,6 @@
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="G_DebugUnit.pas"/>
-        <DCCReference Include="G_generalProcs.pas"/>
         <DCCReference Include="G_kyriacosTypes.pas"/>
         <DCCReference Include="G_KyrSQL.pas"/>
         <DCCReference Include="GeneralProcedures.pas"/>
@@ -192,6 +191,7 @@
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="GeneralParametersNew.pas"/>
+        <DCCReference Include="G_generalProcs.pas"/>
         <None Include="CabOut.todo">
             <ContainerId>ToDo</ContainerId>
         </None>

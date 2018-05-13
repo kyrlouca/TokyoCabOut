@@ -5,7 +5,6 @@ program CabOut;
 uses
   Forms,
   L_Mawbs in 'L_Mawbs.pas' {L_MawbsFRM},
-  CreateOneXMLFile in 'CreateOneXMLFile.pas' {CreateOneXMLFileFRM},
   H_flightOut in 'H_flightOut.pas' {H_FlightOutFRM},
   H_FlightAirwaybill in 'H_FlightAirwaybill.pas' {H_FlightairwaybillFRM},
   M_parameters in 'M_parameters.pas' {M_ParametersFRM},
@@ -17,23 +16,26 @@ uses
   H_Airwaybill2 in 'H_Airwaybill2.pas' {H_airwaybill2FRM},
   L_FlightOutList in 'L_FlightOutList.pas' {L_FlightOutListFRM},
   M_customerNew in 'M_customerNew.pas' {M_CustomerNewFRM},
-  KyriacosTypes in 'KyriacosTypes.pas',
   M_NewTariff2 in 'M_NewTariff2.pas' {M_TariffNew2FRM},
-  S_SelectCustomerx in 'S_SelectCustomerx.pas' {S_SelectCustomerXFRM},
   S_SelectTariffY in 'S_SelectTariffY.pas' {S_SelectTariffYFRM},
   MainForm in 'MainForm.pas' {MainFormFRM},
   M_District in 'M_District.pas' {M_DistrictFRM},
   H_ScanAirwaybillNew in 'H_ScanAirwaybillNew.pas' {H_ScanAirwaibillNewFRM},
   L_AIrwaybillHigh in 'L_AIrwaybillHigh.pas' {L_AirwaybillsHighFRM},
-  ReadFIle in 'ReadFIle.pas' {ReadFileFRM},
-  GeneralProcedures in 'GeneralProcedures.pas',
-  CopyOfReadFIle in 'CopyOfReadFIle.pas' {ReadFileCopyofFRM},
   M_incoterms in 'M_incoterms.pas' {M_incotermsFRM},
   M_serviceCode in 'M_serviceCode.pas' {M_ServiceCodesFRM},
   M_Currency in 'M_Currency.pas' {M_CurrencyFRM},
   l_FlightAirwaybillParameters in 'l_FlightAirwaybillParameters.pas' {L_AdditionalParametersFRM},
-  R_ReadALLXMLFiles in 'R_ReadALLXMLFiles.pas' {R_ReadAllFilesFRM},
-  M_additionalParameters in 'M_additionalParameters.pas' {M_additionalParametersFRM};
+  M_additionalParameters in 'M_additionalParameters.pas' {M_additionalParametersFRM},
+  X_readFile in 'X_readFile.pas' {X_readFileFRM},
+  G_DebugUnit in 'G_DebugUnit.pas',
+  G_generalProcs in 'G_generalProcs.pas',
+  G_kyriacosTypes in 'G_kyriacosTypes.pas',
+  G_KyrSQL in 'G_KyrSQL.pas',
+  GeneralProcedures in 'GeneralProcedures.pas',
+  KyriacosTypes in 'KyriacosTypes.pas',
+  S_SelectCustomerx in 'S_SelectCustomerx.pas' {S_SelectCustomerXFRM},
+  GeneralParametersNew in 'GeneralParametersNew.pas';
 
 {$R *.RES}
 
@@ -49,7 +51,6 @@ begin
   Application.CreateForm(TM_countryFRM, M_countryFRM);
   Application.CreateForm(TM_ParametersFRM, M_ParametersFRM);
   Application.CreateForm(TH_FlightOutFRM, H_FlightOutFRM);
-  Application.CreateForm(TCreateOneXMLFileFRM, CreateOneXMLFileFRM);
   Application.CreateForm(TL_MawbsFRM, L_MawbsFRM);
   Application.CreateForm(TH_FlightairwaybillFRM, H_FlightairwaybillFRM);
   Application.CreateForm(TL_ItineraryFRM, L_ItineraryFRM);
@@ -61,13 +62,13 @@ begin
   Application.CreateForm(TM_DistrictFRM, M_DistrictFRM);
   Application.CreateForm(TH_ScanAirwaibillNewFRM, H_ScanAirwaibillNewFRM);
   Application.CreateForm(TL_AirwaybillsHighFRM, L_AirwaybillsHighFRM);
-  Application.CreateForm(TReadFileFRM, ReadFileFRM);
-  Application.CreateForm(TReadFileCopyofFRM, ReadFileCopyofFRM);
   Application.CreateForm(TM_incotermsFRM, M_incotermsFRM);
   Application.CreateForm(TM_ServiceCodesFRM, M_ServiceCodesFRM);
   Application.CreateForm(TM_CurrencyFRM, M_CurrencyFRM);
   Application.CreateForm(TL_AdditionalParametersFRM, L_AdditionalParametersFRM);
-  Application.CreateForm(TR_ReadAllFilesFRM, R_ReadAllFilesFRM);
+  //  Application.CreateForm(TR_ReadAllFilesFRM, R_ReadAllFilesFRM);
   Application.CreateForm(TM_additionalParametersFRM, M_additionalParametersFRM);
+  Application.CreateForm(TX_readFileFRM, X_readFileFRM);
+  Application.CreateForm(TS_SelectCustomerXFRM, S_SelectCustomerXFRM);
   Application.Run;
 end.

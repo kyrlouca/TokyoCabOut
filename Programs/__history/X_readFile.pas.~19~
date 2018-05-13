@@ -154,95 +154,6 @@ THawbAge=(haNotFound, haSame, haPartial, haOld, haDuplicate);
     MawbSQLF63: TStringField;
     MawbSQLSTATUSC: TStringField;
     MawbSQLTDID_MEDIUM: TStringField;
-    HawbSQLSERIAL_NUMBER: TIntegerField;
-    HawbSQLHAB_ID: TStringField;
-    HawbSQLFK_MAWB_REFER_NUMBER: TIntegerField;
-    HawbSQLFK_CUSTOMER_CODE: TIntegerField;
-    HawbSQLFK_CLEARANCE_INSTRUCTION: TStringField;
-    HawbSQLDESCRIPTION: TStringField;
-    HawbSQLWEIGHT: TFloatField;
-    HawbSQLFK_CLEARING_STATE: TStringField;
-    HawbSQLFK_INVOICE_STATUS: TStringField;
-    HawbSQLFK_CURRENCY: TStringField;
-    HawbSQLEXCHANGE_RATE: TFloatField;
-    HawbSQLINVOICE_TOTAL: TFloatField;
-    HawbSQLFREIGHT_AMOUNT: TFloatField;
-    HawbSQLFK_OTHER_CHARGE_CODE: TStringField;
-    HawbSQLOTHER_CHARGE_AMOUNT: TFloatField;
-    HawbSQLOTHER_CHARGE_PAID: TStringField;
-    HawbSQLSTAMPS_AMOUNT: TFloatField;
-    HawbSQLEXPS_NON_INVOICABLE: TFloatField;
-    HawbSQLCUSTOMS_VALUE: TFloatField;
-    HawbSQLINVOICE_SERIAL: TIntegerField;
-    HawbSQLCOURIER_INVOICE_SERIAL: TIntegerField;
-    HawbSQLCOURIER_INVOICE_VALUE: TFloatField;
-    HawbSQLHIGH_VALUE: TStringField;
-    HawbSQLFK_SEC_MAWB_REFER_NUMBER: TIntegerField;
-    HawbSQLEDE_STORAGE_EXPENSES: TFloatField;
-    HawbSQLEDE_DELIVERY_EXPENSES: TFloatField;
-    HawbSQLDATE_INVOICED: TDateField;
-    HawbSQLSENT_TO_HEAD: TStringField;
-    HawbSQLNUM_OF_PIECES_ARRIVED: TIntegerField;
-    HawbSQLTOTAL_NUM_OF_PIECES: TIntegerField;
-    HawbSQLFK_CLEARANCE_TYPE: TStringField;
-    HawbSQLFK_DELIVERY_TERM: TStringField;
-    HawbSQLORIGIN_STATION: TStringField;
-    HawbSQLEC2_NUMBER_DATE: TStringField;
-    HawbSQLSENDERS_INV_NO: TStringField;
-    HawbSQLNUMBER_OF_PARCELS: TIntegerField;
-    HawbSQLFK_CUSTOMER_ACCOUNT: TIntegerField;
-    HawbSQLDISTRICT: TStringField;
-    HawbSQLDELIVERY_ORDER_AMOUNT: TFloatField;
-    HawbSQLOTHER2_CHARGE_AMOUNT: TFloatField;
-    HawbSQLFK_OTHER2_CHARGE_CODE: TStringField;
-    HawbSQLPOSOSTOSIS: TStringField;
-    HawbSQLTOTAL_DUTIES: TFloatField;
-    HawbSQLCLEARANCE_WAITING_CODE: TStringField;
-    HawbSQLCLEARANCE_WAITING_REASON: TStringField;
-    HawbSQLDATE_CLEARED: TDateField;
-    HawbSQLDATE_REGISTERED: TDateField;
-    HawbSQLFACTOR: TFloatField;
-    HawbSQLFK_COUNTRY_ORIGIN: TIntegerField;
-    HawbSQLCHARGE_TRL: TFloatField;
-    HawbSQLCHARGE_VAT: TFloatField;
-    HawbSQLCHARGE_EXCISE: TFloatField;
-    HawbSQLCHARGE_IMPORT: TFloatField;
-    HawbSQLINVOICABLE: TStringField;
-    HawbSQLTOTAL_CHARGES: TFloatField;
-    HawbSQLCUSTOMER_NAME: TStringField;
-    HawbSQLEDE_COMMENTS: TStringField;
-    HawbSQLFK_MAWB_ID: TStringField;
-    HawbSQLSIGNATORY_NAME: TStringField;
-    HawbSQLXML_HOUSE_ID: TStringField;
-    HawbSQLSENDER_NAME: TStringField;
-    HawbSQLSENDER_ADDRESS_1: TStringField;
-    HawbSQLSENDER_ADDRESS_2: TStringField;
-    HawbSQLSENDER_ADDRESS_3: TStringField;
-    HawbSQLIS_PRIVATE: TStringField;
-    HawbSQLDELIVERY_ORDER_ID: TStringField;
-    HawbSQLOTHER4_CHARGE_AMOUNT: TFloatField;
-    HawbSQLFK_OTHER4_CHARGE: TStringField;
-    HawbSQLIS_PAID: TStringField;
-    HawbSQLPARTIAL_FLAG: TStringField;
-    HawbSQLPARTIAL_WEIGHT: TFloatField;
-    HawbSQLPARTIAL_DELIVERY_ORDER_ID: TStringField;
-    HawbSQLPARTIAL_MAWB_ID: TStringField;
-    HawbSQLPARTIAL_PIECES: TIntegerField;
-    HawbSQLPARTIAL_MAWB_REFER_NUMBER: TIntegerField;
-    HawbSQLSTATUS_C: TStringField;
-    HawbSQLIS_MEDIUM: TStringField;
-    HawbSQLMEDIUM_VAT_RATE: TFloatField;
-    HawbSQLIS_CHARGED_DELIVERY: TStringField;
-    HawbSQLIS_VALID: TStringField;
-    HawbSQLIS_PREPAID: TStringField;
-    HawbSQLOTHER5_CHARGE_AMOUNT: TFloatField;
-    HawbSQLFK_DUTY_RELIEVE: TStringField;
-    HawbSQLSENDER_POST_CODE: TStringField;
-    HawbSQLSENDER_CITY: TStringField;
-    HawbSQLSENDER_COUNTRY: TStringField;
-    HawbSQLCUSTOMER_VAT_ID: TStringField;
-    HawbSQLCUSTOMER_AUTHORITY_TO_AGENT: TStringField;
-    HawbSQLIS_LOW: TStringField;
     Panel1: TRzPanel;
     Label1: TLabel;
     RzPanel2: TRzPanel;
@@ -259,12 +170,59 @@ THawbAge=(haNotFound, haSame, haPartial, haOld, haDuplicate);
     MawbSQLFILE_NAME_XML: TStringField;
     ProcessFLD: TRzLabel;
     OpenfileDLG: TRzOpenDialog;
-    HawbSQLDESTINATION_STATION: TStringField;
     All: TButton;
     MawbSQLMSG_TIME: TDateTimeField;
     MawbSQLMOVEMENT_NUMBER: TStringField;
     MawbSQLDATE_DEPART: TDateField;
     MessagesMemo: TRzMemo;
+    HawbSQLSERIAL_NUMBER: TIntegerField;
+    HawbSQLSEQUENCE_NUMBER: TIntegerField;
+    HawbSQLHAWB_ID: TStringField;
+    HawbSQLSHIPMENT_ORIGIN_AREA: TStringField;
+    HawbSQLSHIPMENT_ORIGIN_COUNTRY: TStringField;
+    HawbSQLPIECES: TIntegerField;
+    HawbSQLWEIGHT: TFloatField;
+    HawbSQLDESCRIPTION: TStringField;
+    HawbSQLFK_DOCUMENT_MASTER_SERIAL: TIntegerField;
+    HawbSQLFK_MOVEMENT_SERIAL: TIntegerField;
+    HawbSQLPIECES_S: TStringField;
+    HawbSQLSENDER_NAME: TStringField;
+    HawbSQLSENDER_ADDRESS: TStringField;
+    HawbSQLSENDER_POST_CODE: TStringField;
+    HawbSQLSENDER_CITY: TStringField;
+    HawbSQLSENDER_COUNTRY_CODE: TStringField;
+    HawbSQLCONSIGNEE_NAME: TStringField;
+    HawbSQLCONSIGNEE_ADDRESS: TStringField;
+    HawbSQLCONSIGNEE_POST_CODE: TStringField;
+    HawbSQLCONSIGNEE_CITY: TStringField;
+    HawbSQLCONSIGNEE_COUNTRY_CODE: TStringField;
+    HawbSQLFK_ITINERARY_SERIAL: TIntegerField;
+    HawbSQLPACKAGES_COUNT: TIntegerField;
+    HawbSQLITEMS_COUNT: TIntegerField;
+    HawbSQLPAYMENT_METHOD: TStringField;
+    HawbSQLIS_HIGH: TStringField;
+    HawbSQLVALUE_TYPE: TStringField;
+    HawbSQLCUSTOMS_VALUE: TFloatField;
+    HawbSQLCURRENCY: TStringField;
+    HawbSQLCURRENCY_RATE: TFloatField;
+    HawbSQLSENDER_ADDRESS_1: TStringField;
+    HawbSQLSENDER_ADDRESS_2: TStringField;
+    HawbSQLSENDER_ADDRESS_3: TStringField;
+    HawbSQLSENDER_DEVICE_TYPE: TStringField;
+    HawbSQLSENDER_DEVICE_DETAILS: TStringField;
+    HawbSQLCONSIGNEE_ADDRESS_1: TStringField;
+    HawbSQLCONSIGNEE_ADDRESS_2: TStringField;
+    HawbSQLCONSIGNEE_ADDRESS_3: TStringField;
+    HawbSQLCONSIGNEE_DEVICE_TYPE: TStringField;
+    HawbSQLCONSIGNEE_DEVICE_DETAILS: TStringField;
+    HawbSQLINCOTERMS: TStringField;
+    HawbSQLIS_SCANNED: TStringField;
+    HawbSQLSENDER_EMAIL: TStringField;
+    HawbSQLCONSIGNEE_EMAIL: TStringField;
+    HawbSQLSERVICE_CODE: TStringField;
+    HawbSQLACCOUNT_NUMBER: TStringField;
+    HawbSQLCONSIGNEE_PREFERRED_NAME: TStringField;
+    HawbSQLSENDER_PREFERRED_NAME: TStringField;
     procedure Button1Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure RzBitBtn2Click(Sender: TObject);
@@ -293,6 +251,7 @@ THawbAge=(haNotFound, haSame, haPartial, haOld, haDuplicate);
 
 
   function ReadTheFile(Const FileName:String) :boolean;
+  function ReadOneXML(Const FileName:String) :Boolean;
   function findMawb(Const MawbId:String):TMawbRec;
   function isPartialMawb(const mawbNode:IXMLNode):Integer;
   function isOldMawb(const mawbNode:IXMLNode):Integer;
@@ -333,8 +292,8 @@ implementation
 
 {$R *.dfm}
 
-uses  G_kyriacosTypes,  G_KyrSQL, G_generalProcs, U_ClairDML, MainFFF,
-  V_MawbHawb, G_DebugUnit;
+uses  G_kyriacosTypes,  G_KyrSQL, G_generalProcs, G_DebugUnit, MainForm,
+  GeneralParametersNew;
 
 
 
@@ -344,11 +303,10 @@ function TX_readFileFRM.FindMediumWaitingReason() :String;
 var
   qr:TksQuery;
 begin
-  result:='';
-  qr:=TksQuery.Create(cn,'select first 1 * from CLEARANCE_WAITING_CODE where DEFAULT_FOR_MEDIUM_VALUE =''Y'' ');
+  qr:=TksQuery.Create(cn,'select first 1 * customer');
   try
     qr.Open;
-    result:=qr.FieldByName('code').asString;
+    result:='a';
   finally
     qr.Free;
   end;
@@ -360,12 +318,11 @@ function TX_readFileFRM.FindDefaultDelivery() :String;
 var
   qr:TksQuery;
 begin
-  qr:=TksQuery.Create(cn,'select first 1 * from delivery_term order by order_number');
+  qr:=TksQuery.Create(cn,'select first 1 * customer');
   try
     qr.Open;
-    result:=qr.FieldByName('code').asString;
+    result:='a';
   finally
-
     qr.Free;
   end;
 
@@ -377,10 +334,10 @@ function TX_readFileFRM.FindDefaultUnit() :String;
 var
   qr:TksQuery;
 begin
-  qr:=TksQuery.Create(cn,'select first 1 * from UNIT_measure where is_default= ''Y'' ');
+  qr:=TksQuery.Create(cn,'select first 1 * customer');
   try
     qr.Open;
-    result:=qr.FieldByName('UNIT').asString;
+    result:='a';
   finally
     qr.Free;
   end;
@@ -391,11 +348,12 @@ end;
 procedure TX_readFileFRM.FormActivate(Sender: TObject);
 begin
 ProcessFLD.Visible:=false;
+
 end;
 
 procedure TX_readFileFRM.FormCreate(Sender: TObject);
 begin
-  cn:=ClairDML.CabCOnnection;
+  cn:= MainFormFRM.CabOutData;
 end;
 
 
@@ -460,6 +418,9 @@ begin
 
   end;
 
+
+
+
 procedure TX_readFileFRM.RzBitBtn1Click(Sender: TObject);
 begin
 close;
@@ -490,7 +451,7 @@ begin
       exit;
   end;
 
-   MoveFOlder := GetTheSystemParameter(cn, 'F_1').P_String5;
+   MoveFOlder := GN_GetTheSystemParameter(cn, 'F_1').P_String5;
    If not System.SysUtils.DirectoryExists(MoveFolder) then begin
     MessageDlg('Destination Directory Does NOT exist:'+#13+#10+ MOveFolder, mtError, [mbOK], 0);
     exit;
@@ -502,6 +463,7 @@ begin
   FileNameXyz:=Tpath.ChangeExtension(FileName,'.xyz');
 
   try
+  //Convert to utf to strip control chars
     temp:=trim(system.IOutils.Tfile.ReadAllText(filename));
     strings:=TStringList.Create();
     strings.Add(temp);
@@ -511,13 +473,7 @@ begin
    end;
   Tfile.Delete(fileName);
 
-{
-  if not RenameFile(FileName,FileNameXyz) then begin
-    MessageDlg('Cannot Temporarily change file extension to xyz:'+#13+#10+ FileName, mtError, [mbOK], 0);
-    exit;
-  end;
-}
-  ReadTheFile(FileNameXyz);
+  ReadOneXML(FileNameXyz);
 
 
  temp:=Tpath.ChangeExtension(FileNameXYZ,'.XXX');
@@ -536,6 +492,145 @@ begin
   ProcessFLD.Visible:=false;
 
 end;
+
+
+function TX_readFileFRM.ReadOneXML(Const FileName:String) :Boolean;
+var
+  Doc: IXMLDocument;
+  Data: IXMLNode;
+  Movements, Mawbs,Hawbs :IXMLNodeList;
+  aHeader,aMovement,aMawb,aHawb:ixmlnODE;
+  I: Integer;
+//  j:Integer;
+  MawbRec:TmawbRec;
+  str:String;
+  temptime:TDateTime;
+  TotalHawbs:Integer;
+
+begin
+  TotalHawbs:=0;
+  result:=true;
+  Doc := LoadXMLDocument(FileName);
+  Data := Doc.DocumentElement;
+
+  Movements:=Data.ChildNodes['Dtls'].ChildNodes['Entries'].ChildNodes['Entry'].childNOdes['Mvmts'].ChildNodes;
+  aHeader:=Data.ChildNodes['Hdr'];
+
+
+  if Movements.Count <1 then begin
+    result:=False;
+    exit;
+  end;
+// ShowMessage(Movements[0].ChildNodes['MvmtNo'].Text);
+
+  Mawbs:=Movements[0].ChildNodes['TDOCs'].ChildNodes; //only one movement is sent
+  aMovement:=Movements[0];
+  if Mawbs.Count <1 then begin
+    result:=False;
+    exit;
+  end;
+
+  //same first mawb exists in another file
+  aMawb := Mawbs[0];
+  if isMawbFileExists(aHeader, aMawb) then begin
+    result:=False;
+    exit;
+  end;
+
+  for I := 0 to Mawbs.Count-1 do  begin
+  //each movement may hawe one or more mawbs  (each mawb is a TDOC) but may have more than one same mawb
+    aMawb := Mawbs[i];
+    TotalHawbs := TotalHawbs + ProcessOneMawb(aHeader,aMawb,fileName);
+  end;
+
+  MessagesMemo.Lines.Add('---------------------------------------------------------');
+  MessagesMemo.Lines.Add('--------------------- Total Created:'+InttoStr(Totalhawbs));
+
+
+  end;
+
+
+
+function TX_readFileFRM.ProcessOneMawb(headerNode:IXMLNode;MawbNode:IXMLNode;FileName:string):Integer;
+var
+  MawbId:String;
+  hawbNodes :IXMLNodeList;
+  hawbNode:ixmlnODE;
+  hawbItemNodes:IxmlNodeList;
+  hawbItemNode:IxmlNode;
+  j,k:Integer;
+  MawbSerial:Integer;
+  Hawbserial:integer;
+  hawb:string;
+  isNewMawb:Boolean;
+  HawbAge:THawbAge;
+//  OldmawbRec:TmawbRec;
+  newEqId:String;
+  CountNew,CountSame,CountPartial:integer;
+  MawbMessage:String;
+  ClearingInstruction:String;
+  ArrivalDate:TDate;
+  DepartureDate:TDate;
+  OldMawbSerial:Integer;
+  TraderId:Integer;
+
+begin
+  CountNew:=0;
+  CountSame:=0;
+  CountPartial:=0;
+//  ksOpenTables([MawbSQL,HawbSQL,SenderInvoiceSQL,HawbItemSQL]);
+
+  MawbId:=MawbNode.ChildNodes['TDOCNo'].Text;
+  ArrivalDate   :=ConvertDateF(MawbNode.ParentNode.ParentNode.ChildNodes['ArrivalDate'].Text);
+  DepartureDate :=ConvertDateF(MawbNode.ParentNode.ParentNode.ChildNodes['DepartureDate'].Text);
+
+
+  hawbNOdes:=MawbNOde.ChildNodes['Shps'].ChildNodes;
+
+  for j:= 0 to hawbNodes.Count -1 do begin
+      hawbNode:=hawbNodes[j];
+      hawb:=hawbNode.ChildNodes['HAWB'].Text;
+
+      hawbAge:=haOld;
+      case hawbAge of
+        haNotFound,haOld: begin
+            inc(countNew);
+            HawbSerial := CreateHawb(MawbSerial,hawbNode);
+
+
+            hawbItemNodes:=hawbNode.ChildNodes['LineItems'].ChildNodes;
+            for k:= 0 to hawbItemNodes.Count -1 do begin
+              hawbItemNode:= hawbItemNodes[k];
+//              CreateHawbItem(MawbSerial,Hawbserial,HawbItemNode);
+            end;
+        end;
+        haSame: begin
+            inc(countSame);
+//            HawbSerial := UpdateHawb(HawbSerial,HawbNode);
+            continue;
+        end;
+        haPartial: begin
+            inc(countPartial);
+//            CreatePartialHawb(hawb,Mawbserial,hawbNode);
+        end;
+      end;
+
+
+  end;
+
+  if IsNewMawb then
+    MawbMessage:='New Mawb Created:'
+  else
+    MawbMessage:='EXISTING Mawb UPDATED:';
+
+  MessagesMemo.Lines.Add(MawbMessage+MawbId);
+  MessagesMemo.Lines.Add('------Hawbs Created:'+IntToStr(CountNew));
+  MessagesMemo.Lines.Add('------Partial Hawbs:'+IntToStr(CountPartial));
+  MessagesMemo.Lines.Add('------Rejected Same Hawbs:'+InttoStr(CountSame));
+  result:=CountNew;
+end;
+
+
 
 function TX_readFileFRM.findMawb(Const MawbId:String):TmawbRec;
 var
@@ -557,24 +652,6 @@ begin
 
 End;
 
-{
-function TX_readFileFRM.findMawbEquipmentId(Const MawbId:String;Const EqId:String):Integer;
-var
-  qr:TksQuery;
-begin
-  try
-  qr:=TksQuery.Create(cn,'select reference_number,Mawb_id,DHL_Equipment_id,date_arrived from Mawb where Mawb_id= :MawbID and DHL_EQUIPMENT_ID= :EqId');
-  qr.ParamByName('MawbID').Value:=MawbId;
-  qr.ParamByName('EqId').Value:=EqId;
-  qr.Open;
-  result:=qr.FieldByName('reference_number').AsInteger;
-  close;
-  finally
-    qr.Free;
-  end;
-
-End;
-}
 
 
 
@@ -660,21 +737,23 @@ begin
   +' '+ HeaderNode.ChildNodes['MsgCtl'].ChildNodes['MsgTime'].Text;
   MsgTime:=ConvertUTCTimeStampF(str);
 
+//
+//  str:= 'select reference_Number ,FILE_NAME_XML from mawb ma'
+//  +' where ma.mawb_id= :mawbId and ma.msg_time= :MsgTime';
+//
+//  try
+//    qr:=TksQuery.Create(cn,str);
+//    qr.ParamByName('MawbID').Value:=MawbId;
+//    qr.ParamByName('MsgTime').AsDateTime:=MsgTime;
+//    qr.Open;
+//    fileName:=qr.FieldByName('FILE_NAME_XML').AsString;
+//    result:= not qr.IsEmpty;
+//    close;
+//  finally
+//    qr.Free;
+//  end;
 
-  str:= 'select reference_Number ,FILE_NAME_XML from mawb ma'
-  +' where ma.mawb_id= :mawbId and ma.msg_time= :MsgTime';
-  try
-    qr:=TksQuery.Create(cn,str);
-    qr.ParamByName('MawbID').Value:=MawbId;
-    qr.ParamByName('MsgTime').AsDateTime:=MsgTime;
-    qr.Open;
-    fileName:=qr.FieldByName('FILE_NAME_XML').AsString;
-    result:= not qr.IsEmpty;
-    close;
-  finally
-    qr.Free;
-  end;
-
+result:=false;
   if (result) then begin
     MessagesMemo.Lines.add('*******ERROR - SAME Mawb (Msg_Time) already EXISTS'+'Mawb id: '+ MawbId );
     MessagesMemo.Lines.add('----- Previous FileName '+ FileName );
@@ -773,124 +852,6 @@ begin
   result:=ksCountRecSQL(cn,str,[hawbId,IntToStr(MawbSerial)])>0 ;
 
 End;
-
-function TX_readFileFRM.ProcessOneMawb(headerNode:IXMLNode;MawbNode:IXMLNode;FileName:string):Integer;
-var
-  MawbId:String;
-  hawbNodes :IXMLNodeList;
-  hawbNode:ixmlnODE;
-  hawbItemNodes:IxmlNodeList;
-  hawbItemNode:IxmlNode;
-  j,k:Integer;
-  MawbSerial:Integer;
-  Hawbserial:integer;
-  hawb:string;
-  isNewMawb:Boolean;
-  HawbAge:THawbAge;
-//  OldmawbRec:TmawbRec;
-  newEqId:String;
-  CountNew,CountSame,CountPartial:integer;
-  MawbMessage:String;
-  ClearingInstruction:String;
-  ArrivalDate:TDate;
-  DepartureDate:TDate;
-  OldMawbSerial:Integer;
-  TraderId:Integer;
-
-begin
-  CountNew:=0;
-  CountSame:=0;
-  CountPartial:=0;
-  ksOpenTables([MawbSQL,HawbSQL,SenderInvoiceSQL,HawbItemSQL]);
-
-
-
-  MawbId:=MawbNode.ChildNodes['TDOCNo'].Text;
-  ArrivalDate   :=ConvertDateF(MawbNode.ParentNode.ParentNode.ChildNodes['ArrivalDate'].Text);
-  DepartureDate :=ConvertDateF(MawbNode.ParentNode.ParentNode.ChildNodes['DepartureDate'].Text);
-
-  newEqID:=MawbNode.ChildNodes['EquipmentID'].Text;
-
-  //same mawb found with different dates but still not sure if is partial or Old
-  OldMawbSerial:=isOldMawb(MawbNode);
-  if (oldMawbSerial>0) then begin
-    if (MessageDlg('Mawb: '+MawbId+ ' already Exists. Create NEW ONE ??', mtInformation, [mbYes, mbNo], 0)=mrYes) then begin
-      MawbSerial:=0;
-    end else begin
-      MawbSerial:=OldMawbSerial;
-    end;
-  end else begin
-    MawbSerial:=IsPartialMawb(MawbNode);
-  end;
-
-  isNewMawb:=False;
-  if (MawbSerial=0) then begin
-      MawbSerial:=CreateMawb(MawbId,HeaderNode,MawbNode,Tpath.GetFileName(fileName));
-      isNewmawb:=True;
-  end;
-
-  hawbNOdes:=MawbNOde.ChildNodes['Shps'].ChildNodes;
-
-  for j:= 0 to hawbNodes.Count -1 do begin
-      hawbNode:=hawbNodes[j];
-      hawb:=hawbNode.ChildNodes['HAWB'].Text;
-
-      hawbAge:= FindHawbSmart(hawb,MawbId,Tpath.GetFileName( fileName));
-      case hawbAge of
-        haNotFound,haOld: begin
-            inc(countNew);
-            HawbSerial := CreateHawb(MawbSerial,hawbNode);
-            if HawbSerial <1 then begin
-              continue;
-            end;
-
-            TraderId:=StrToIntDef(hawbNode.ChildNodes['ShpImpter'].ChildNodes['ImpterCoDtls'].ChildNodes['TraderID'].Text,0);
-            if TraderId>0 then begin
-                if (ksCountRecVarSQL(cn,'select name from customer where code = :customerSerial',[TraderId] )>0) then begin
-                  ksExecSQLVar(cn,'update hawb set FK_CUSTOMER_CODE = :cuCode where serial_number= :hawbSerial',[TraderId,HawbSerial]);
-                  UpdateCustomer(HawbSerial,TraderId,HawbNOde);
-                end;
-            end;
-
-            //It will ONLY create Group Charges
-            //for Medium will also create charege
-            ClearingInstruction:=GetClearingInstruction(Hawbserial);
-            V_MawbHawbDML.ApplyGroupTariffs(HawbSerial,ClearingInstruction);
-            if ClearingInstruction='MED' then begin
-                V_MawbHawbDML.CreateMediumVatCharge(hawbSerial);
-            end;
-
-            hawbItemNodes:=hawbNode.ChildNodes['LineItems'].ChildNodes;
-            for k:= 0 to hawbItemNodes.Count -1 do begin
-              hawbItemNode:= hawbItemNodes[k];
-              CreateHawbItem(MawbSerial,Hawbserial,HawbItemNode);
-            end;
-        end;
-        haSame: begin
-            inc(countSame);
-            HawbSerial := UpdateHawb(HawbSerial,HawbNode);
-            continue;
-        end;
-        haPartial: begin
-            inc(countPartial);
-            CreatePartialHawb(hawb,Mawbserial,hawbNode);
-        end;
-      end;
-
-
-  end;
-
-  if IsNewMawb then
-    MawbMessage:='New Mawb Created:'
-  else
-    MawbMessage:='EXISTING Mawb UPDATED:';
-
-  MessagesMemo.Lines.Add(MawbMessage+MawbId);
-  MessagesMemo.Lines.Add('------Hawbs Created:'+IntToStr(CountNew));
-  MessagesMemo.Lines.Add('------Partial Hawbs:'+IntToStr(CountPartial));
-  MessagesMemo.Lines.Add('------Rejected Same Hawbs:'+InttoStr(CountSame));
-  result:=CountNew;
-end;
 
 
 
@@ -1033,6 +994,7 @@ var
   isError:boolean;
 begin
 
+
     HawbId:= hawbNode.ChildNodes['HAWB'].Text;
     senderNode:=hawbNode.ChildNodes['ShpCnsgnr'].ChildNodes['CnsgnrCoDtls'];
     CustomerNode:=hawbNode.ChildNodes['ShpCnsgne'].ChildNodes['CnsgneCoDtls'];
@@ -1040,63 +1002,28 @@ begin
 
 //      codesite.Send('HawbID'+HawbId);
 
-
-    qr:=HawbSQL;
+    qr:=TksQuery.Create(cn,'Select * from airwaybill where serial_number= -1');
     try
+    qr.Open;
     qr.Insert;
     isError:=false;
 
-    hawbSerial:=qr.FieldByName('serial_number').AsInteger;
-    qr.FieldByName('Hab_id').value               :=hawbId;
-    qr.FieldByName('fk_mawb_refer_number').value :=MawbSerial;
-    qr.FieldByName('FK_mawb_id').value           :=''; //NOT used anymore
-
-    qr.FieldByName('SENT_TO_HEAD').value   :='Y';
-    qr.FieldByName('POSOSTOSIS').value      :='N';
-    qr.FieldByName('DELIVERY_ORDER_AMOUNT').value :=0;
-
-    qr.FieldByName('FK_CLEARING_STATE').value   :='0';
-    qr.FieldByName('FK_INVOICE_STATUS').value   :='0';
-
-//    temp:=HawbNode.ChildNodes['Status'].Text;
-//    qr.FieldByName('CLEARANCE_WAITING_CODE').Value:= FindWaitingReason(temp);
-    qr.FieldByName('CLEARANCE_WAITING_CODE').Value:= Trim(HawbNode.ChildNodes['Status'].Text);
-
-    /////////////////////////////////
-    IsDTP:=trim(hawbNode.ChildNodes['DHLServiceCd'].Text);
-    if (IsDTP='DDP') or (IsDTP='DTP') then
-        qr.FieldByName('IS_PREPAID').Value:='Y';
-
-    ClearingInstruction:=FindClearanceInstruction(HawbNode.ChildNodes['Category'].Text);
-
-    if ClearingInstruction='MED' then begin
-        qr.FieldByName('FK_CLEARANCE_INSTRUCTION').Value:=FindMediumWaitingReason();
-        qr.FieldByName('MEDIUM_VAT_RATE').Value:=GetDefaultMediumVatRate;
-    end;
-    qr.FieldByName('FK_CLEARANCE_INSTRUCTION').Value:=ClearingInstruction;
+     qr.FieldByName('Hawb_id').Value:= hawbNode.ChildNodes['HAWB'].Text;
+     qr.FieldByName('weight').Value:= hawbNode.ChildNodes['GrossWgt'].Text;
+     qr.FieldByName('SHIPMENT_ORIGIN_AREA').Value:=  qr.FieldByName('Hawb_id').Value
+     qr.FieldByName('SHIPMENT_ORIGIN_COUNTRY').Value:= hawbNode.ChildNodes['ShpCtryOrgn'].Text;
 
 
-    /////////////////////////////////////////////////
+     qr.FieldByName('DESCRIPTION').Value:= hawbNode.ChildNodes['CargoDesc'].Text;
+     qr.FieldByName('CUSTOMS_VALUE').Value:= hawbNode.ChildNodes['CstmsVal'].Text;
+     qr.FieldByName('CURRENCY').Value:= hawbNode.ChildNodes['CstmsValCrncyCd'].Text;
+     qr.FieldByName('INCOTERMS').Value:= hawbNode.ChildNodes['Incoterms'].Text;
+     qr.FieldByName('SERVICE_CODE').Value:= hawbNode.ChildNodes['DHLServiceCd'].Text;
 
-    temp:=trim(hawbNode.ChildNodes['Incoterms'].Text);
-    if temp='' then temp:=FindDefaultDelivery();
-    qr.FieldByName('FK_DELIVERY_TERM').value   := temp;
-
-
-    qr.FieldByName('date_registered').value     := NOW;
-    qr.FieldByName('fk_country_origin').value   :=FindCountry( hawbNode.ChildNodes['ShpCtryOrgn'].Text);
-
-    qr.FieldByName('DESTINATION_STATION').value := Trim(hawbNode.ChildNodes['ShpDest'].Text);
-    qr.FieldByName('ORIGIN_STATION').value      := Trim( hawbNode.ChildNodes['ShpOrgn'].Text);
-
-
-    qr.FieldByName('NUMBER_OF_PARCELS').value   :=StrToIntDef( hawbNode.ChildNodes['SDPieces'].Text,0);
-    qr.FieldByName('NUM_OF_PIECES_ARRIVED').value :=StrToIntDef( hawbNode.ChildNodes['ManifestedPieces'].Text,0);
-    qr.FieldByName('DESCRIPTION').value         := hawbNode.ChildNodes['CargoDesc'].Text;
-
-    qr.FieldByName('weight').value              :=ConvertDecimalF( hawbNode.ChildNodes['GrossWgt'].Text);
-
-     qr.FieldByName('Customer_name').Value:=CustomerNode.ChildNodes['CoName'].Text;
+     qr.FieldByName('PIECES').Value:= hawbNode.ChildNodes['SDPieces'].Text;
+     //qr.FieldByName('VALUE_TYPE').Value:= hawbNode.ChildNodes['Category'].Text;
+     qr.FieldByName('ACCOUNT_NUMBER').Value:= hawbNode.ChildNodes['DHLAcctNo'].Text;
+     qr.FieldByName('PAYMENT_METHOD').Value:= hawbNode.ChildNodes['X_PaymentMethod'].Text;
 
 
      qr.FieldByName('Sender_name').Value:=senderNode.ChildNodes['CoName'].Text;
@@ -1106,49 +1033,35 @@ begin
      qr.FieldByName('SENDER_ADDRESS_3').Value:=senderNode.ChildNodes['AddrEng'].ChildNodes['AddrLn3'].Text;
      qr.FieldByName('SENDER_POST_CODE').Value:=senderNode.ChildNodes['AddrEng'].ChildNodes['PostalCd'].Text;
      qr.FieldByName('SENDER_CITY').Value:=senderNode.ChildNodes['AddrEng'].ChildNodes['City'].Text;
-     qr.FieldByName('SENDER_COUNTRY').Value:=senderNode.ChildNodes['AddrEng'].ChildNodes['CtryCd'].Text;
+     qr.FieldByName('SENDER_COUNTRY_CODE').Value:=senderNode.ChildNodes['AddrEng'].ChildNodes['CtryCd'].Text;
+
+
+     qr.FieldByName('SENDER_DEVICE_TYPE').Value:=senderNode.ChildNodes['AddrEng'].ChildNodes['DeviceType'].Text;
+     qr.FieldByName('SENDER_DEVICE_DETAILS').Value:=senderNode.ChildNodes['AddrEng'].ChildNodes['DeviceDtls'].Text;
+     qr.FieldByName('SENDER_PREFERRED_NAME').Value:=senderNode.ChildNodes['AddrEng'].ChildNodes['PreferredName'].Text;
+
+
+     qr.FieldByName('CONSIGNEE_NAME').Value:=senderNode.ChildNodes['CoName'].Text;
+     qr.FieldByName('CONSIGNEE_ADDRESS_1').Value:=senderNode.ChildNodes['AddrEng'].ChildNodes['AddrLn1'].Text;
+     qr.FieldByName('CONSIGNEE_ADDRESS_2').Value:=senderNode.ChildNodes['AddrEng'].ChildNodes['AddrLn2'].Text;
+     qr.FieldByName('CONSIGNEE_ADDRESS_3').Value:=senderNode.ChildNodes['AddrEng'].ChildNodes['AddrLn3'].Text;
+     qr.FieldByName('CONSIGNEE_POST_CODE').Value:=senderNode.ChildNodes['AddrEng'].ChildNodes['PostalCd'].Text;
+     qr.FieldByName('CONSIGNEE_CITY').Value:=senderNode.ChildNodes['AddrEng'].ChildNodes['City'].Text;
+     qr.FieldByName('CONSIGNEE_COUNTRY_CODE').Value:=senderNode.ChildNodes['AddrEng'].ChildNodes['CtryCd'].Text;
+
+
+     qr.FieldByName('CONSIGNEE_DEVICE_TYPE').Value:=senderNode.ChildNodes['AddrEng'].ChildNodes['DeviceType'].Text;
+     qr.FieldByName('CONSIGNEE_DEVICE_TYPE').Value:=senderNode.ChildNodes['AddrEng'].ChildNodes['DeviceDtls'].Text;
+     qr.FieldByName('CONSIGNEE_PREFERRED_NAME').Value:=senderNode.ChildNodes['AddrEng'].ChildNodes['PreferredName'].Text;
+
+
+
 
 
       qr.Post;
-     except
-      G_DebugUnit.GD_ShowDataRecord(qr);
-       ShowMessage('hawb-id'+hawbid);
-      result:=0;
-      qr.Cancel;
-      exit;
-
-    end;
-
-    try
-
-    siSQL:=SenderInvoiceSQL;
-    siSQL.Insert;
-    siSQL.FieldByName('fk_hawb_serial').Value        :=hawbSerial;
-    siSQL.FieldByName('Invoice_serial').Value        :=1;
-    siSQL.FieldByName('fk_mawb_serial').value  :=MawbSerial;
-    siSQL.FieldByName('fk_Hawb_id').value                :=''; //NOT used anymore
-    siSQL.FieldByName('Invoice_number').Value        :='';
-    siSQL.FieldByName('IS_VALID').Value        :='Y';
-    siSQL.FieldByName('PRE_DISCOUNT_AMOUNT').value   :=ConvertDecimalF( hawbNode.ChildNodes['TxAndDty'].ChildNodes['CstmsVal'].Text);
-
-    temp:=hawbNode.ChildNodes['Frght'].Text;
-    if temp='asf' then showMessage('s');
-    siSQL.FieldByName('FREIGHT_AMOUNT').value   :=ConvertDecimalF( hawbNode.ChildNodes['Frght'].Text);
-
-
-    Currency:=hawbNode.ChildNodes['TxAndDty'].ChildNodes['CstmsValCrncyCd'].Text;
-    siSQL.FieldByName('CURRENCY').value   :=Currency;
-    siSQL.FieldByName('EXCHANGE_RATE').Value :=FindExchangeRate(currency);
-
-    siSQL.FieldByName('invoice_amount').Value        :=0.00;
-
-      siSQL.Post;
-     except
-      G_DebugUnit.GD_ShowDataRecord(siSQL);
-       ShowMessage('SenderInvoice error: '+hawbid);
-      siSQL.Cancel;
-      result:=0;
-      exit;
+     finally
+     qr.Free;
+//      G_DebugUnit.GD_ShowDataRecord(qr);
     end;
 
 
@@ -1399,13 +1312,11 @@ Var
         DefaultDir:String;
         ParamRec:TParameterRecord;
 Begin
-        DefaultDir:= GetTheSystemParameter(cn, 'F_1').P_String4;
+        DefaultDir:= GN_GetTheSystemParameter(cn, 'F_1').P_String4;
         If DefaultDir='' then begin
           MessageDlg('Menu ->System->Params-> System Parameters. Then Add record with Code=F1 ', mtWarning, [mbOK], 0);
         end;
 
-//        OpenDialog1.InitialDir:=DefaultDir;
-//        OpenDialog1.Filter:='XML files (*.XML) | *.XML';
         OpenFileDLG.InitialDir:=Defaultdir;
         OpenFIleDLG.Filter:='No Extention|*.;XML|*.XML';
 
