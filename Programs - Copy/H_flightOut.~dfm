@@ -1,0 +1,1048 @@
+object H_FlightOutFRM: TH_FlightOutFRM
+  Left = 453
+  Top = 230
+  Width = 1072
+  Height = 623
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -13
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poDesktopCenter
+  OnActivate = FormActivate
+  OnClose = FormClose
+  OnCloseQuery = FormCloseQuery
+  PixelsPerInch = 120
+  TextHeight = 16
+  object Label5: TLabel
+    Left = 55
+    Top = 324
+    Width = 42
+    Height = 16
+    Caption = 'Weight'
+  end
+  object Label9: TLabel
+    Left = 201
+    Top = 356
+    Width = 42
+    Height = 16
+    Caption = 'Pieces'
+    Color = clBtnFace
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentColor = False
+    ParentFont = False
+  end
+  object TitlePNL: TPanel
+    Left = 0
+    Top = 0
+    Width = 1054
+    Height = 65
+    Align = alTop
+    Caption = 'Edit Flight Out'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clBlue
+    Font.Height = -33
+    Font.Name = 'Arial'
+    Font.Style = [fsBold]
+    ParentFont = False
+    TabOrder = 0
+  end
+  object Panel4: TPanel
+    Left = 0
+    Top = 512
+    Width = 1054
+    Height = 66
+    Align = alBottom
+    TabOrder = 1
+    object AcceptBTN: TBitBtn
+      Left = 22
+      Top = 8
+      Width = 94
+      Height = 49
+      Caption = 'Accept'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -15
+      Font.Name = 'MS Sans Serif'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 0
+      OnClick = AcceptBTNClick
+      Glyph.Data = {
+        DE010000424DDE01000000000000760000002800000024000000120000000100
+        0400000000006801000000000000000000001000000000000000000000000000
+        80000080000000808000800000008000800080800000C0C0C000808080000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
+        3333333333333333333333330000333333333333333333333333F33333333333
+        00003333344333333333333333388F3333333333000033334224333333333333
+        338338F3333333330000333422224333333333333833338F3333333300003342
+        222224333333333383333338F3333333000034222A22224333333338F338F333
+        8F33333300003222A3A2224333333338F3838F338F33333300003A2A333A2224
+        33333338F83338F338F33333000033A33333A222433333338333338F338F3333
+        0000333333333A222433333333333338F338F33300003333333333A222433333
+        333333338F338F33000033333333333A222433333333333338F338F300003333
+        33333333A222433333333333338F338F00003333333333333A22433333333333
+        3338F38F000033333333333333A223333333333333338F830000333333333333
+        333A333333333333333338330000333333333333333333333333333333333333
+        0000}
+      NumGlyphs = 2
+    end
+    object CancelBTN: TBitBtn
+      Left = 138
+      Top = 8
+      Width = 95
+      Height = 49
+      Cancel = True
+      Caption = 'Cancel'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -15
+      Font.Name = 'MS Sans Serif'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 1
+      OnClick = CancelBTNClick
+      Glyph.Data = {
+        DE010000424DDE01000000000000760000002800000024000000120000000100
+        0400000000006801000000000000000000001000000000000000000000000000
+        80000080000000808000800000008000800080800000C0C0C000808080000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
+        333333333333333333333333000033338833333333333333333F333333333333
+        0000333911833333983333333388F333333F3333000033391118333911833333
+        38F38F333F88F33300003339111183911118333338F338F3F8338F3300003333
+        911118111118333338F3338F833338F3000033333911111111833333338F3338
+        3333F8330000333333911111183333333338F333333F83330000333333311111
+        8333333333338F3333383333000033333339111183333333333338F333833333
+        00003333339111118333333333333833338F3333000033333911181118333333
+        33338333338F333300003333911183911183333333383338F338F33300003333
+        9118333911183333338F33838F338F33000033333913333391113333338FF833
+        38F338F300003333333333333919333333388333338FFF830000333333333333
+        3333333333333333333888330000333333333333333333333333333333333333
+        0000}
+      NumGlyphs = 2
+    end
+  end
+  object Panel3: TPanel
+    Left = 0
+    Top = 65
+    Width = 1054
+    Height = 447
+    Align = alClient
+    TabOrder = 2
+    object GroupBox1: TGroupBox
+      Left = 24
+      Top = 48
+      Width = 473
+      Height = 321
+      Caption = 'Details'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'MS Sans Serif'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 0
+      object Label1: TLabel
+        Left = 72
+        Top = 40
+        Width = 35
+        Height = 16
+        Caption = 'Serial'
+        Color = clBtnFace
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
+        ParentColor = False
+        ParentFont = False
+      end
+      object Label2: TLabel
+        Left = 31
+        Top = 174
+        Width = 76
+        Height = 16
+        Caption = 'Dest Country'
+        Color = clBtnFace
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
+        ParentColor = False
+        ParentFont = False
+      end
+      object Label3: TLabel
+        Left = 71
+        Top = 68
+        Width = 36
+        Height = 16
+        Caption = 'Mawb'
+        Color = clBtnFace
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
+        ParentColor = False
+        ParentFont = False
+      end
+      object Label4: TLabel
+        Left = 8
+        Top = 148
+        Width = 99
+        Height = 16
+        Caption = 'Destination Area'
+        Color = clBtnFace
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
+        ParentColor = False
+        ParentFont = False
+      end
+      object Label6: TLabel
+        Left = 15
+        Top = 212
+        Width = 92
+        Height = 16
+        Caption = 'Departure Date'
+        Color = clBtnFace
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
+        ParentColor = False
+        ParentFont = False
+      end
+      object Label8: TLabel
+        Left = 52
+        Top = 238
+        Width = 55
+        Height = 16
+        Caption = 'Remarks'
+        Color = clBtnFace
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
+        ParentColor = False
+        ParentFont = False
+      end
+      object Label7: TLabel
+        Left = 71
+        Top = 100
+        Width = 32
+        Height = 16
+        Caption = 'Flight'
+        Color = clBtnFace
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
+        ParentColor = False
+        ParentFont = False
+      end
+      object SerialFLD: TwwDBEdit
+        Left = 112
+        Top = 40
+        Width = 73
+        Height = 24
+        Color = clBtnFace
+        DataField = 'SERIAL_NUMBER'
+        DataSource = FlightOutSRC
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
+        ParentFont = False
+        ReadOnly = True
+        TabOrder = 0
+        UnboundDataType = wwDefault
+        WantReturns = False
+        WordWrap = False
+      end
+      object DestCountryFLD: TwwDBEdit
+        Left = 112
+        Top = 170
+        Width = 73
+        Height = 24
+        Color = clWhite
+        DataField = 'DESTINATION_COUNTRY'
+        DataSource = FlightOutSRC
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 4
+        UnboundDataType = wwDefault
+        WantReturns = False
+        WordWrap = False
+      end
+      object DestAreaFLD: TwwDBEdit
+        Left = 112
+        Top = 144
+        Width = 73
+        Height = 24
+        Color = clWhite
+        DataField = 'DESTINATION_AREA'
+        DataSource = FlightOutSRC
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 3
+        UnboundDataType = wwDefault
+        WantReturns = False
+        WordWrap = False
+      end
+      object RemarksFLD: TwwDBEdit
+        Left = 112
+        Top = 234
+        Width = 321
+        Height = 24
+        Color = clWhite
+        DataField = 'REMARKS'
+        DataSource = FlightOutSRC
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 6
+        UnboundDataType = wwDefault
+        WantReturns = False
+        WordWrap = False
+      end
+      object MawbFLD: TwwDBEdit
+        Left = 112
+        Top = 67
+        Width = 89
+        Height = 24
+        CharCase = ecUpperCase
+        Color = clWhite
+        DataField = 'MAWB'
+        DataSource = FlightOutSRC
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 1
+        UnboundDataType = wwDefault
+        WantReturns = False
+        WordWrap = False
+      end
+      object wwDBLookupCombo1: TwwDBLookupCombo
+        Left = 112
+        Top = 96
+        Width = 121
+        Height = 24
+        CharCase = ecUpperCase
+        DropDownAlignment = taLeftJustify
+        Selected.Strings = (
+          'FLIGHT_NAME'#9'9'#9'FLIGHT_NAME'#9'F'
+          'DESTINATION_COUNTRY_CODE'#9'2'#9'DESTINATION_COUNTRY_CODE'#9'F')
+        DataField = 'FK_FLIGHT_TABLE'
+        DataSource = FlightOutSRC
+        LookupTable = FlightTableSQL
+        LookupField = 'SERIAL_NUMBER'
+        TabOrder = 2
+        AutoDropDown = True
+        ShowButton = True
+        AllowClearKey = False
+        ShowMatchText = True
+      end
+      object wwDBDateTimePicker1: TwwDBDateTimePicker
+        Left = 112
+        Top = 208
+        Width = 121
+        Height = 24
+        CalendarAttributes.Font.Charset = DEFAULT_CHARSET
+        CalendarAttributes.Font.Color = clWindowText
+        CalendarAttributes.Font.Height = -13
+        CalendarAttributes.Font.Name = 'MS Sans Serif'
+        CalendarAttributes.Font.Style = []
+        DataField = 'DATE_DEPART'
+        DataSource = FlightOutSRC
+        Epoch = 1950
+        MaxDate = 43831
+        MinDate = 41275
+        ShowButton = True
+        TabOrder = 5
+        DisplayFormat = 'dd/mm/yyyy'
+      end
+    end
+    object CountryLookupFLD: TwwDBLookupCombo
+      Left = 544
+      Top = 328
+      Width = 121
+      Height = 24
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      DropDownAlignment = taLeftJustify
+      Selected.Strings = (
+        'CODE_2'#9'8'#9'Code2'#9'F'
+        'NAME'#9'60'#9'NAME'#9'F')
+      DataField = 'COUNTRY_CODE'
+      DataSource = FlightOutCountrySRC
+      LookupTable = CountrySQL
+      LookupField = 'CODE_2'
+      ParentFont = False
+      TabOrder = 1
+      AutoDropDown = False
+      ShowButton = True
+      AllowClearKey = False
+    end
+    object GroupBox2: TGroupBox
+      Left = 512
+      Top = 56
+      Width = 305
+      Height = 273
+      Caption = 'Itinerary'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'MS Sans Serif'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 2
+      object wwDBLookupCombo2: TwwDBLookupCombo
+        Left = 16
+        Top = 24
+        Width = 121
+        Height = 24
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
+        DropDownAlignment = taLeftJustify
+        LookupTable = ItinerarySQL
+        LookupField = 'FLIGHT_NAME'
+        ParentFont = False
+        TabOrder = 0
+        AutoDropDown = True
+        ShowButton = True
+        AllowClearKey = False
+        OnCloseUp = wwDBLookupCombo2CloseUp
+      end
+      object wwDBNavigator2: TwwDBNavigator
+        Left = 17
+        Top = 65
+        Width = 200
+        Height = 24
+        AutosizeStyle = asNone
+        DataSource = FlightOutCountrySRC
+        RepeatInterval.InitialDelay = 500
+        RepeatInterval.Interval = 100
+        object wwNavButton1: TwwNavButton
+          Left = 0
+          Top = 0
+          Width = 25
+          Height = 25
+          Hint = 'Move to prior record'
+          ImageIndex = -1
+          NumGlyphs = 2
+          Spacing = 4
+          Transparent = False
+          Caption = 'wwDBNavigator1Prior'
+          Enabled = False
+          DisabledTextColors.ShadeColor = clGray
+          DisabledTextColors.HighlightColor = clBtnHighlight
+          Index = 0
+          Style = nbsPrior
+        end
+        object wwNavButton2: TwwNavButton
+          Left = 25
+          Top = 0
+          Width = 25
+          Height = 25
+          Hint = 'Move to next record'
+          ImageIndex = -1
+          NumGlyphs = 2
+          Spacing = 4
+          Transparent = False
+          Caption = 'wwDBNavigator1Next'
+          Enabled = False
+          DisabledTextColors.ShadeColor = clGray
+          DisabledTextColors.HighlightColor = clBtnHighlight
+          Index = 1
+          Style = nbsNext
+        end
+        object wwNavButton3: TwwNavButton
+          Left = 50
+          Top = 0
+          Width = 25
+          Height = 25
+          Hint = 'Insert new record'
+          ImageIndex = -1
+          NumGlyphs = 2
+          Spacing = 4
+          Transparent = False
+          Caption = 'wwDBNavigator1Insert'
+          DisabledTextColors.ShadeColor = clGray
+          DisabledTextColors.HighlightColor = clBtnHighlight
+          Index = 2
+          Style = nbsInsert
+        end
+        object wwNavButton4: TwwNavButton
+          Left = 75
+          Top = 0
+          Width = 25
+          Height = 25
+          Hint = 'Delete current record'
+          ImageIndex = -1
+          NumGlyphs = 2
+          Spacing = 4
+          Transparent = False
+          Caption = 'wwDBNavigator1Delete'
+          Enabled = False
+          DisabledTextColors.ShadeColor = clGray
+          DisabledTextColors.HighlightColor = clBtnHighlight
+          Index = 3
+          Style = nbsDelete
+        end
+        object wwNavButton5: TwwNavButton
+          Left = 100
+          Top = 0
+          Width = 25
+          Height = 25
+          Hint = 'Post changes of current record'
+          ImageIndex = -1
+          NumGlyphs = 2
+          Spacing = 4
+          Transparent = False
+          Caption = 'wwDBNavigator1Post'
+          Enabled = False
+          DisabledTextColors.ShadeColor = clGray
+          DisabledTextColors.HighlightColor = clBtnHighlight
+          Index = 4
+          Style = nbsPost
+        end
+        object wwNavButton6: TwwNavButton
+          Left = 125
+          Top = 0
+          Width = 25
+          Height = 25
+          Hint = 'Cancel changes made to current record'
+          ImageIndex = -1
+          NumGlyphs = 2
+          Spacing = 4
+          Transparent = False
+          Caption = 'wwDBNavigator1Cancel'
+          Enabled = False
+          DisabledTextColors.ShadeColor = clGray
+          DisabledTextColors.HighlightColor = clBtnHighlight
+          Index = 5
+          Style = nbsCancel
+        end
+        object wwNavButton7: TwwNavButton
+          Left = 150
+          Top = 0
+          Width = 25
+          Height = 25
+          Hint = 'Refresh the contents of the dataset'
+          ImageIndex = -1
+          NumGlyphs = 2
+          Spacing = 4
+          Transparent = False
+          Caption = 'wwDBNavigator1Refresh'
+          DisabledTextColors.ShadeColor = clGray
+          DisabledTextColors.HighlightColor = clBtnHighlight
+          Index = 6
+          Style = nbsRefresh
+        end
+      end
+      object wwDBGrid1: TwwDBGrid
+        Left = 16
+        Top = 104
+        Width = 289
+        Height = 161
+        ControlType.Strings = (
+          'COUNTRY_CODE;CustomEdit;CountryLookupFLD')
+        Selected.Strings = (
+          'ORDER_POSITION'#9'5'#9'Pos'
+          'COUNTRY_CODE'#9'8'#9'Code'
+          'CountryName'#9'20'#9'CountryName')
+        IniAttributes.Delimiter = ';;'
+        TitleColor = clBtnFace
+        FixedCols = 0
+        ShowHorzScrollBar = True
+        DataSource = FlightOutCountrySRC
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
+        Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgCancelOnExit, dgWordWrap]
+        ParentFont = False
+        TabOrder = 2
+        TitleAlignment = taLeftJustify
+        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -13
+        TitleFont.Name = 'MS Sans Serif'
+        TitleFont.Style = []
+        TitleLines = 1
+        TitleButtons = False
+        IndicatorColor = icBlack
+      end
+    end
+  end
+  object FlightOutSRC: TIBCDataSource
+    DataSet = FlightOutSQL
+    Left = 184
+    Top = 65
+  end
+  object FlightTableSQL: TIBCQuery
+    SQLInsert.Strings = (
+      'INSERT INTO FLIGHT_TABLE'
+      '  (SERIAL_NUMBER, FLIGHT_NAME, DESTINATION_COUNTRY_CODE)'
+      'VALUES'
+      '  (:SERIAL_NUMBER, :FLIGHT_NAME, :DESTINATION_COUNTRY_CODE)')
+    SQLDelete.Strings = (
+      'DELETE FROM FLIGHT_TABLE'
+      'WHERE'
+      '  SERIAL_NUMBER = :Old_SERIAL_NUMBER')
+    SQLUpdate.Strings = (
+      'UPDATE FLIGHT_TABLE'
+      'SET'
+      
+        '  SERIAL_NUMBER = :SERIAL_NUMBER, FLIGHT_NAME = :FLIGHT_NAME, DE' +
+        'STINATION_COUNTRY_CODE = :DESTINATION_COUNTRY_CODE'
+      'WHERE'
+      '  SERIAL_NUMBER = :Old_SERIAL_NUMBER')
+    SQLRefresh.Strings = (
+      
+        'SELECT SERIAL_NUMBER, FLIGHT_NAME, DESTINATION_COUNTRY_CODE FROM' +
+        ' FLIGHT_TABLE'
+      'WHERE'
+      '  SERIAL_NUMBER = :SERIAL_NUMBER')
+    SQLLock.Strings = (
+      'SELECT NULL FROM FLIGHT_TABLE'
+      'WHERE'
+      'SERIAL_NUMBER = :Old_SERIAL_NUMBER'
+      'FOR UPDATE WITH LOCK')
+    Connection = MainFormFRM.CabOutData
+    Transaction = MainFormFRM.UsedForReadOnlyTrans
+    SQL.Strings = (
+      'select * from flight_table')
+    FetchAll = True
+    ReadOnly = True
+    Active = True
+    Left = 288
+    Top = 209
+    object FlightTableSQLFLIGHT_NAME: TStringField
+      DisplayWidth = 9
+      FieldName = 'FLIGHT_NAME'
+      Required = True
+      FixedChar = True
+      Size = 9
+    end
+    object FlightTableSQLDESTINATION_COUNTRY_CODE: TStringField
+      DisplayWidth = 2
+      FieldName = 'DESTINATION_COUNTRY_CODE'
+      Required = True
+      FixedChar = True
+      Size = 2
+    end
+    object FlightTableSQLSERIAL_NUMBER: TIntegerField
+      DisplayWidth = 10
+      FieldName = 'SERIAL_NUMBER'
+      Required = True
+      Visible = False
+    end
+  end
+  object FlightOutCountrySQL: TIBCQuery
+    SQLInsert.Strings = (
+      'INSERT INTO FLIGHT_OUT_COUNTRY'
+      '  (FK_FLIGHT_OUT, COUNTRY_CODE, ORDER_POSITION)'
+      'VALUES'
+      '  (:FK_FLIGHT_OUT, :COUNTRY_CODE, :ORDER_POSITION)')
+    SQLDelete.Strings = (
+      'DELETE FROM FLIGHT_OUT_COUNTRY'
+      'WHERE'
+      
+        '  FK_FLIGHT_OUT = :Old_FK_FLIGHT_OUT AND COUNTRY_CODE = :Old_COU' +
+        'NTRY_CODE')
+    SQLUpdate.Strings = (
+      'UPDATE FLIGHT_OUT_COUNTRY'
+      'SET'
+      
+        '  FK_FLIGHT_OUT = :FK_FLIGHT_OUT, COUNTRY_CODE = :COUNTRY_CODE, ' +
+        'ORDER_POSITION = :ORDER_POSITION'
+      'WHERE'
+      
+        '  FK_FLIGHT_OUT = :Old_FK_FLIGHT_OUT AND COUNTRY_CODE = :Old_COU' +
+        'NTRY_CODE')
+    SQLRefresh.Strings = (
+      
+        'SELECT FK_FLIGHT_OUT, COUNTRY_CODE, ORDER_POSITION FROM FLIGHT_O' +
+        'UT_COUNTRY'
+      'WHERE'
+      
+        '  FK_FLIGHT_OUT = :FK_FLIGHT_OUT AND COUNTRY_CODE = :COUNTRY_COD' +
+        'E')
+    SQLLock.Strings = (
+      'SELECT NULL FROM FLIGHT_OUT_COUNTRY'
+      'WHERE'
+      
+        'FK_FLIGHT_OUT = :Old_FK_FLIGHT_OUT AND COUNTRY_CODE = :Old_COUNT' +
+        'RY_CODE'
+      'FOR UPDATE WITH LOCK')
+    Connection = MainFormFRM.CabOutData
+    Transaction = MainFormFRM.UsedForReadOnlyTrans
+    UpdateTransaction = UPdateTransaction
+    SQL.Strings = (
+      'Select * from Flight_Out_country order by Order_position')
+    MasterFields = 'SERIAL_NUMBER'
+    DetailFields = 'FK_FLIGHT_OUT'
+    MasterSource = FlightOutSRC
+    Active = True
+    Left = 536
+    Top = 257
+    ParamData = <
+      item
+        DataType = ftInteger
+        Name = 'SERIAL_NUMBER'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'SERIAL_NUMBER'
+        ParamType = ptInput
+      end>
+    object FlightOutCountrySQLORDER_POSITION: TIntegerField
+      DisplayLabel = 'Pos'
+      DisplayWidth = 5
+      FieldName = 'ORDER_POSITION'
+    end
+    object FlightOutCountrySQLCOUNTRY_CODE: TStringField
+      DisplayLabel = 'Code'
+      DisplayWidth = 8
+      FieldName = 'COUNTRY_CODE'
+      Required = True
+      FixedChar = True
+      Size = 2
+    end
+    object FlightOutCountrySQLCountryName: TStringField
+      DisplayWidth = 20
+      FieldKind = fkLookup
+      FieldName = 'CountryName'
+      LookupDataSet = CountrySQL
+      LookupKeyFields = 'CODE_2'
+      LookupResultField = 'NAME'
+      KeyFields = 'COUNTRY_CODE'
+      Lookup = True
+    end
+    object FlightOutCountrySQLFK_FLIGHT_OUT: TIntegerField
+      DisplayWidth = 10
+      FieldName = 'FK_FLIGHT_OUT'
+      Required = True
+      Visible = False
+    end
+  end
+  object FlightOutCountrySRC: TIBCDataSource
+    DataSet = FlightOutCountrySQL
+    Left = 664
+    Top = 265
+  end
+  object CountrySQL: TIBCQuery
+    SQLInsert.Strings = (
+      'INSERT INTO COUNTRY'
+      
+        '  (CODE_3, CODE_2, NAME, FK_CURRENCY_CODE, GREEK_NAME, SERIAL_NU' +
+        'MBER)'
+      'VALUES'
+      
+        '  (:CODE_3, :CODE_2, :NAME, :FK_CURRENCY_CODE, :GREEK_NAME, :SER' +
+        'IAL_NUMBER)')
+    SQLDelete.Strings = (
+      'DELETE FROM COUNTRY'
+      'WHERE'
+      '  SERIAL_NUMBER = :Old_SERIAL_NUMBER')
+    SQLUpdate.Strings = (
+      'UPDATE COUNTRY'
+      'SET'
+      
+        '  CODE_3 = :CODE_3, CODE_2 = :CODE_2, NAME = :NAME, FK_CURRENCY_' +
+        'CODE = :FK_CURRENCY_CODE, GREEK_NAME = :GREEK_NAME, SERIAL_NUMBE' +
+        'R = :SERIAL_NUMBER'
+      'WHERE'
+      '  SERIAL_NUMBER = :Old_SERIAL_NUMBER')
+    SQLRefresh.Strings = (
+      
+        'SELECT CODE_3, CODE_2, NAME, FK_CURRENCY_CODE, GREEK_NAME, SERIA' +
+        'L_NUMBER FROM COUNTRY'
+      'WHERE'
+      '  SERIAL_NUMBER = :SERIAL_NUMBER')
+    SQLLock.Strings = (
+      'SELECT NULL FROM COUNTRY'
+      'WHERE'
+      'SERIAL_NUMBER = :Old_SERIAL_NUMBER'
+      'FOR UPDATE WITH LOCK')
+    Connection = MainFormFRM.CabOutData
+    Transaction = MainFormFRM.UsedForReadOnlyTrans
+    SQL.Strings = (
+      'Select * from Country')
+    ReadOnly = True
+    Active = True
+    Left = 761
+    Top = 18
+    object CountrySQLCODE_2: TStringField
+      DisplayLabel = 'Code2'
+      DisplayWidth = 8
+      FieldName = 'CODE_2'
+      FixedChar = True
+      Size = 2
+    end
+    object CountrySQLNAME: TStringField
+      DisplayWidth = 60
+      FieldName = 'NAME'
+      FixedChar = True
+      Size = 60
+    end
+  end
+  object ItinerarySQL: TIBCQuery
+    SQLInsert.Strings = (
+      'INSERT INTO ITINERARY'
+      '  (SERIAL_NUMBER, FLIGHT_NAME)'
+      'VALUES'
+      '  (:SERIAL_NUMBER, :FLIGHT_NAME)')
+    SQLDelete.Strings = (
+      'DELETE FROM ITINERARY'
+      'WHERE'
+      '  SERIAL_NUMBER = :Old_SERIAL_NUMBER')
+    SQLUpdate.Strings = (
+      'UPDATE ITINERARY'
+      'SET'
+      '  SERIAL_NUMBER = :SERIAL_NUMBER, FLIGHT_NAME = :FLIGHT_NAME'
+      'WHERE'
+      '  SERIAL_NUMBER = :Old_SERIAL_NUMBER')
+    SQLRefresh.Strings = (
+      'SELECT SERIAL_NUMBER, FLIGHT_NAME FROM ITINERARY'
+      'WHERE'
+      '  SERIAL_NUMBER = :SERIAL_NUMBER')
+    SQLLock.Strings = (
+      'SELECT NULL FROM ITINERARY'
+      'WHERE'
+      'SERIAL_NUMBER = :Old_SERIAL_NUMBER'
+      'FOR UPDATE WITH LOCK')
+    Connection = MainFormFRM.CabOutData
+    Transaction = MainFormFRM.UsedForReadOnlyTrans
+    UpdateTransaction = UPdateTransaction
+    SQL.Strings = (
+      'Select * from Itinerary')
+    ReadOnly = True
+    Active = True
+    Left = 592
+    Top = 361
+    object ItinerarySQLFLIGHT_NAME: TStringField
+      DisplayLabel = 'Itinerary'
+      DisplayWidth = 30
+      FieldName = 'FLIGHT_NAME'
+      FixedChar = True
+      Size = 30
+    end
+    object ItinerarySQLSERIAL_NUMBER: TIntegerField
+      DisplayWidth = 10
+      FieldName = 'SERIAL_NUMBER'
+      Required = True
+      Visible = False
+    end
+  end
+  object ItineraryCRC: TIBCDataSource
+    DataSet = ItinerarySQL
+    Left = 680
+    Top = 369
+  end
+  object ItineraryCountrySQL: TIBCQuery
+    SQLInsert.Strings = (
+      'INSERT INTO ITINERARY_COUNTRY'
+      '  (SERIAL_NUMBER, FK_ITINERARY_SERIAL, COUNTRY_CODE)'
+      'VALUES'
+      '  (:SERIAL_NUMBER, :FK_ITINERARY_SERIAL, :COUNTRY_CODE)')
+    SQLDelete.Strings = (
+      'DELETE FROM ITINERARY_COUNTRY'
+      'WHERE'
+      '  SERIAL_NUMBER = :Old_SERIAL_NUMBER')
+    SQLUpdate.Strings = (
+      'UPDATE ITINERARY_COUNTRY'
+      'SET'
+      
+        '  SERIAL_NUMBER = :SERIAL_NUMBER, FK_ITINERARY_SERIAL = :FK_ITIN' +
+        'ERARY_SERIAL, COUNTRY_CODE = :COUNTRY_CODE'
+      'WHERE'
+      '  SERIAL_NUMBER = :Old_SERIAL_NUMBER')
+    SQLRefresh.Strings = (
+      
+        'SELECT SERIAL_NUMBER, FK_ITINERARY_SERIAL, COUNTRY_CODE FROM ITI' +
+        'NERARY_COUNTRY'
+      'WHERE'
+      '  SERIAL_NUMBER = :SERIAL_NUMBER')
+    SQLLock.Strings = (
+      'SELECT NULL FROM ITINERARY_COUNTRY'
+      'WHERE'
+      'SERIAL_NUMBER = :Old_SERIAL_NUMBER'
+      'FOR UPDATE WITH LOCK')
+    Connection = MainFormFRM.CabOutData
+    Transaction = MainFormFRM.UsedForReadOnlyTrans
+    SQL.Strings = (
+      'select * from itinerary_country order by order_position')
+    MasterFields = 'SERIAL_NUMBER'
+    DetailFields = 'FK_ITINERARY_SERIAL'
+    MasterSource = ItineraryCRC
+    ReadOnly = True
+    Active = True
+    Left = 600
+    Top = 433
+    ParamData = <
+      item
+        DataType = ftInteger
+        Name = 'SERIAL_NUMBER'
+        ParamType = ptInput
+        Value = 12
+      end
+      item
+        DataType = ftInteger
+        Name = 'SERIAL_NUMBER'
+        ParamType = ptInput
+        Value = 12
+      end>
+    object ItineraryCountrySQLSERIAL_NUMBER: TIntegerField
+      FieldName = 'SERIAL_NUMBER'
+      Required = True
+    end
+    object ItineraryCountrySQLFK_ITINERARY_SERIAL: TIntegerField
+      FieldName = 'FK_ITINERARY_SERIAL'
+      Required = True
+    end
+    object ItineraryCountrySQLCOUNTRY_CODE: TStringField
+      FieldName = 'COUNTRY_CODE'
+      FixedChar = True
+      Size = 2
+    end
+    object ItineraryCountrySQLORDER_POSITION: TIntegerField
+      FieldName = 'ORDER_POSITION'
+    end
+  end
+  object FlightOutSQL: TIBCQuery
+    KeyFields = 'serial_number'
+    KeyGenerator = 'FLIGHT_OUT_GENERATOR'
+    GeneratorMode = gmInsert
+    SQLInsert.Strings = (
+      'INSERT INTO FLIGHT_OUT'
+      
+        '  (SERIAL_NUMBER, MAWB, FK_MOVEMENT_SERIAL, FK_DOCUMENT_MASTER_S' +
+        'ERIAL, DATE_DEPART, REMARKS, DESTINATION_AREA, DESTINATION_COUNT' +
+        'RY, FK_FLIGHT_TABLE)'
+      'VALUES'
+      
+        '  (:SERIAL_NUMBER, :MAWB, :FK_MOVEMENT_SERIAL, :FK_DOCUMENT_MAST' +
+        'ER_SERIAL, :DATE_DEPART, :REMARKS, :DESTINATION_AREA, :DESTINATI' +
+        'ON_COUNTRY, :FK_FLIGHT_TABLE)')
+    SQLDelete.Strings = (
+      'DELETE FROM FLIGHT_OUT'
+      'WHERE'
+      '  SERIAL_NUMBER = :Old_SERIAL_NUMBER')
+    SQLUpdate.Strings = (
+      'UPDATE FLIGHT_OUT'
+      'SET'
+      
+        '  SERIAL_NUMBER = :SERIAL_NUMBER, MAWB = :MAWB, FK_MOVEMENT_SERI' +
+        'AL = :FK_MOVEMENT_SERIAL, FK_DOCUMENT_MASTER_SERIAL = :FK_DOCUME' +
+        'NT_MASTER_SERIAL, DATE_DEPART = :DATE_DEPART, REMARKS = :REMARKS' +
+        ', DESTINATION_AREA = :DESTINATION_AREA, DESTINATION_COUNTRY = :D' +
+        'ESTINATION_COUNTRY, FK_FLIGHT_TABLE = :FK_FLIGHT_TABLE'
+      'WHERE'
+      '  SERIAL_NUMBER = :Old_SERIAL_NUMBER')
+    SQLRefresh.Strings = (
+      
+        'SELECT SERIAL_NUMBER, MAWB, FK_MOVEMENT_SERIAL, FK_DOCUMENT_MAST' +
+        'ER_SERIAL, DATE_DEPART, REMARKS, DESTINATION_AREA, DESTINATION_C' +
+        'OUNTRY, FK_FLIGHT_TABLE FROM FLIGHT_OUT'
+      'WHERE'
+      '  SERIAL_NUMBER = :SERIAL_NUMBER')
+    SQLLock.Strings = (
+      'SELECT NULL FROM FLIGHT_OUT'
+      'WHERE'
+      'SERIAL_NUMBER = :Old_SERIAL_NUMBER'
+      'FOR UPDATE WITH LOCK')
+    Connection = MainFormFRM.CabOutData
+    Transaction = MainFormFRM.UsedForReadOnlyTrans
+    UpdateTransaction = UPdateTransaction
+    SQL.Strings = (
+      'Select * from Flight_Out where serial_number= :SerialNumber')
+    Active = True
+    Left = 40
+    Top = 65
+    ParamData = <
+      item
+        DataType = ftInteger
+        Name = 'SerialNumber'
+        ParamType = ptInput
+      end>
+    object FlightOutSQLSERIAL_NUMBER: TIntegerField
+      FieldName = 'SERIAL_NUMBER'
+    end
+    object FlightOutSQLMAWB: TStringField
+      FieldName = 'MAWB'
+      Required = True
+      FixedChar = True
+      Size = 15
+    end
+    object FlightOutSQLFK_MOVEMENT_SERIAL: TIntegerField
+      FieldName = 'FK_MOVEMENT_SERIAL'
+    end
+    object FlightOutSQLFK_DOCUMENT_MASTER_SERIAL: TIntegerField
+      FieldName = 'FK_DOCUMENT_MASTER_SERIAL'
+    end
+    object FlightOutSQLDATE_DEPART: TDateTimeField
+      FieldName = 'DATE_DEPART'
+    end
+    object FlightOutSQLREMARKS: TStringField
+      FieldName = 'REMARKS'
+      FixedChar = True
+      Size = 60
+    end
+    object FlightOutSQLDESTINATION_AREA: TStringField
+      FieldName = 'DESTINATION_AREA'
+      FixedChar = True
+      Size = 3
+    end
+    object FlightOutSQLDESTINATION_COUNTRY: TStringField
+      FieldName = 'DESTINATION_COUNTRY'
+      FixedChar = True
+      Size = 3
+    end
+    object FlightOutSQLFK_FLIGHT_TABLE: TIntegerField
+      FieldName = 'FK_FLIGHT_TABLE'
+    end
+  end
+  object UPdateTransaction: TIBCTransaction
+    DefaultConnection = MainFormFRM.CabOutData
+    Left = 280
+    Top = 81
+  end
+end

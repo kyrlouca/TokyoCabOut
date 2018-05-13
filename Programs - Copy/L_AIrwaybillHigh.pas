@@ -1,0 +1,344 @@
+unit L_AIrwaybillHigh;
+
+interface
+
+uses
+
+  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  StdCtrls, Mask,  IBC, MemDS, IBCError, wwSpeedButton, wwDBNavigator,
+  wwclearpanel, Buttons, ExtCtrls, wwdbedit, Grids, Wwdbigrd, Wwdbgrid,
+  Wwquery, DASQLMonitor, IBCSQLMonitor, DBAccess, Db, ImgList, Wwkeycb,MemData;
+
+
+type
+  TL_AirwaybillsHighFRM = class(TForm)
+    Panel1: TPanel;
+    Panel4: TPanel;
+    BitBtn2: TBitBtn;
+    Panel3: TPanel;
+    AirwayBillSQL: TIBCQuery;
+    AirwayBillSQLSERIAL_NUMBER: TIntegerField;
+    AirwayBillSQLSEQUENCE_NUMBER: TIntegerField;
+    AirwayBillSQLHAWB_ID: TStringField;
+    AirwayBillSQLSHIPMENT_ORIGIN_AREA: TStringField;
+    AirwayBillSQLSHIPMENT_ORIGIN_COUNTRY: TStringField;
+    AirwayBillSQLPIECES: TIntegerField;
+    AirwayBillSQLWEIGHT: TFloatField;
+    AirwayBillSQLDESCRIPTION: TStringField;
+    AirwayBillSQLFK_DOCUMENT_MASTER_SERIAL: TIntegerField;
+    AirwayBillSQLFK_MOVEMENT_SERIAL: TIntegerField;
+    Panel5: TPanel;
+    Button1: TButton;
+    Panel2: TPanel;
+    FindHawbBTN: TSpeedButton;
+    Panel6: TPanel;
+    Panel7: TPanel;
+    Panel8: TPanel;
+    Panel9: TPanel;
+    AirGRD: TwwDBGrid;
+    DeleteSelectedBTN: TBitBtn;
+    AirwayBillSQLPIECES_S: TStringField;
+    InsertBTN: TBitBtn;
+    UpdateTRans: TIBCTransaction;
+    ReadTrans: TIBCTransaction;
+    DeleteAirwaybillItemsSQL: TIBCSQL;
+    AirwaybillCDS: TIBCDataSource;
+    AirwayBillSQLSENDER_NAME: TStringField;
+    AirwayBillSQLSENDER_ADDRESS: TStringField;
+    AirwayBillSQLSENDER_POST_CODE: TStringField;
+    AirwayBillSQLSENDER_CITY: TStringField;
+    AirwayBillSQLSENDER_COUNTRY_CODE: TStringField;
+    AirwayBillSQLCONSIGNEE_NAME: TStringField;
+    AirwayBillSQLCONSIGNEE_ADDRESS: TStringField;
+    AirwayBillSQLCONSIGNEE_POST_CODE: TStringField;
+    AirwayBillSQLCONSIGNEE_CITY: TStringField;
+    AirwayBillSQLCONSIGNEE_COUNTRY_CODE: TStringField;
+    AirwayBillSQLFK_ITINERARY_SERIAL: TIntegerField;
+    AirwayBillSQLPACKAGES_COUNT: TIntegerField;
+    AirwayBillSQLITEMS_COUNT: TIntegerField;
+    AirwayBillSQLPAYMENT_METHOD: TStringField;
+    ImageList1: TImageList;
+    Label1: TLabel;
+    SpeedButton1: TSpeedButton;
+    HawbIdFLD: TwwDBEdit;
+    AirGRDIButton: TwwIButton;
+    AirwayBillSQLIS_HIGH: TStringField;
+    AirwayBillSQLIS_SCANNED: TStringField;
+    wwDBNavigator1: TwwDBNavigator;
+    wwDBNavigator1First: TwwNavButton;
+    wwDBNavigator1Prior: TwwNavButton;
+    wwDBNavigator1Next: TwwNavButton;
+    wwDBNavigator1Last: TwwNavButton;
+    wwDBNavigator1Refresh: TwwNavButton;
+    Button2: TButton;
+    UpdateTableSQL: TIBCSQL;
+    Button3: TButton;
+    procedure FormActivate(Sender: TObject);
+    procedure BitBtn2Click(Sender: TObject);
+    procedure MovementSQLBeforeEdit(DataSet: TDataSet);
+    procedure Button1Click(Sender: TObject);
+    procedure DeleteSelectedBTNClick(Sender: TObject);
+    procedure BitBtn1Click(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+    procedure AirGRDDblClick(Sender: TObject);
+    procedure InsertBTNClick(Sender: TObject);
+    procedure AirGRDTitleButtonClick(Sender: TObject; AFieldName: String);
+    procedure SpeedButton1Click(Sender: TObject);
+    procedure Button3Click(Sender: TObject);
+  private
+    { Private declarations }
+    PreviousSortedField:String;
+  public
+    { Public declarations }
+        procedure DeleteOneAirwaybill(AirSerial:Integer);
+  end;
+
+var
+  L_AirwaybillsHighFRM: TL_AirwaybillsHighFRM;
+
+implementation
+
+uses MainForm, H_Airwaybill, H_Airwaybill2;
+
+{$R *.DFM}
+
+procedure TL_AirwaybillsHighFRM.FormActivate(Sender: TObject);
+begin
+If not AIrwayBillSQL.Active then
+        AIrwayBillSQL.Open
+else
+        AIrwayBillSQL.Refresh;
+
+end;
+
+procedure TL_AirwaybillsHighFRM.BitBtn2Click(Sender: TObject);
+begin
+close;
+end;
+
+procedure TL_AirwaybillsHighFRM.MovementSQLBeforeEdit(
+  DataSet: TDataSet);
+begin
+end;
+{
+   Dataset.FieldByName('Code').ReadOnly:=true;
+}
+
+procedure TL_AirwaybillsHighFRM.Button1Click(Sender: TObject);
+begin
+AIrwayBillSQL.Refresh;
+
+end;
+
+procedure TL_AirwaybillsHighFRM.DeleteSelectedBTNClick(Sender: TObject);
+Var
+I: integer;
+SelectedCount:Integer;
+AirSerial:Integer;
+TheDataset:TDataset;
+begin
+
+{
+     TheDataset:= AirGRD.datasource.dataset;
+     SelectedCount:=  AirGRD.SelectedList.Count;
+
+     //DisableControls; don't do it , because children cannot follow
+//     for i:= 0 to SelectedCount-1 do begin
+
+//        TheDataset.GotoBookmark(AirGRD.SelectedList.items[i]);
+//        TheDataset.Freebookmark(AirGRD.SelectedList.items[i]);
+        AirSerial:=TheDataset.FieldbyName('serial_Number').AsInteger;
+        DeleteOneAIrwaybill(AirSerial);
+//     end;
+//     AirGRD.SelectedList.Clear;
+
+}
+
+
+     TheDataset:= AirGRD.datasource.dataset;
+     SelectedCount:=  AirGRD.SelectedList.Count;
+
+     //DisableControls; don't do it , because children cannot follow
+     for i:= 0 to SelectedCount-1 do begin
+        TheDataset.GotoBookmark(AirGRD.SelectedList.items[i]);
+        AirSerial:=TheDataset.FieldbyName('serial_Number').AsInteger;
+        DeleteOneAIrwaybill(AirSerial);
+        //ShowMessage(intToStr(AirSerial));
+        TheDataset.Freebookmark(AirGRD.SelectedList.items[i]);
+     end;
+     AirGRD.SelectedList.Clear;
+
+End;
+
+procedure TL_AirwaybillsHighFRM.BitBtn1Click(Sender: TObject);
+begin
+     AirGRD.UnselectAll;
+     AirGRD.SelectedList.Clear;
+
+
+end;
+
+procedure TL_AirwaybillsHighFRM.DeleteOneAirwaybill(AirSerial:Integer);
+Begin
+
+
+        AirwaybillSQL.AutoCommit:=FALSE;
+
+        AirwayBillSQL.UpdateTransaction.StartTransaction;
+
+        DeleteAirwayBillItemsSQL.ParamByName('AirwayBillSerial').Value:=AirSErial;
+        DeleteAirwayBillItemsSQL.Execute;
+        AirwayBillSQL.delete;
+
+        AirwayBillSQL.UpdateTransaction.Commit;
+
+End;
+
+procedure TL_AirwaybillsHighFRM.Button2Click(Sender: TObject);
+Var
+        dString:STring;
+begin
+
+
+  With UpdateTableSQL do begin
+        SQL.Clear;
+        dString:='Update AirwayBill AB set ab.IS_SCANNED=''Y'', AB.SENDER_DEVICE_TYPE=''KL'' where '
+                +'not exists (Select SERIAL_NUMBER FROM FLIGHT_AIRWAYBILL FA WHERE FA.FK_AIRWAYBILL_SERIAL=AB.SERIAL_NUMBER) '
+                +' and (ab.IS_SCANNED is NUll)';
+
+        SQL.Add(dString);
+        //ParambyName('FlightAir').Value:=Serial;
+        Execute;
+
+  end;
+
+  AirwaybillSQL.Refresh;
+
+
+end;
+
+procedure TL_AirwaybillsHighFRM.AirGRDDblClick(Sender: TObject);
+Var
+        AirSerial:Integer;
+begin
+        AIrSerial:=AirGRD.DataSource.DataSet.fieldbyName('serial_number').AsInteger;
+        H_airwaybill2FRM.GAction:='EDIT';
+        H_airwaybill2FRM.GInSerial:=aiRsERIAL;
+        H_airwaybill2FRM.SHowmodal;
+        AirwaybillSQL.Refresh;
+        AirwaybillSQL.Locate('SERIAL_NUMBER',AirSerial,[]);
+
+
+
+
+end;
+
+procedure TL_AirwaybillsHighFRM.InsertBTNClick(Sender: TObject);
+Var
+        AirSerial:Integer;
+begin
+
+
+        H_airwaybill2FRM.GAction:='INSERT';
+
+
+        H_airwaybill2FRM.SHowmodal;
+        AirwaybillSQL.Refresh;
+        AirwaybillSQL.Open;
+
+        AIrSerial:=H_airwaybill2FRM.GOutSerial;
+        AirwaybillSQL.Locate('SERIAL_NUMBER',AirSerial,[]);
+
+end;
+
+procedure TL_AirwaybillsHighFRM.AirGRDTitleButtonClick(Sender: TObject;
+  AFieldName: String);
+Var
+        HawbDS:TIBCQUery;
+        Bm:TBookMark;
+        AscOrderPOs:integer;
+        DescOrderPOs:integer;
+        CurrentSortField:String;
+        NewSOrt:String;
+        ImageIndex: Integer;
+        Bmp: TBitmap;
+begin
+
+
+        HawbDS:=TIBCQUery(AirGRD.DataSource.DataSet);
+        Bm:=HawbDS.GetBookmark;
+        HawbDs.ControlsDisabled;
+        HawbDS.close;
+
+        If AfieldName=PreviousSortedField then begin
+                AscOrderPos:=Pos('ASC',HawbDS.GetOrderBy);
+                DescOrderPos:=Pos('DESC',HawbDS.GetOrderBy);
+                iF (AscOrderPos>0) then begin
+                        CurrentSortField:=Trim(Copy(HawbDS.GetOrderBy, 1, Length(HawbDS.getorderBy)-3));
+                        NewSOrt:=AFieldName + ' DESC';
+                        ImageIndex := 1;
+                end else if (DescOrderPos>0) then begin
+                        CurrentSortField:=Trim(Copy(HawbDS.GetOrderBy, 1, Length(HawbDS.getorderBy)-4));
+                        NewSort:= AFieldName +' ASC';
+                        ImageIndex := 0;
+                end else begin
+                        CurrentSOrtField:=Trim(HawbDS.GetOrderBy);
+                        NewSOrt:= AFieldName +' ASC';
+                        ImageIndex := 0;
+               end;
+        end else begin
+                NewSOrt:=AFieldName +' ASC';
+                CurrentSOrtField:=AFieldName;
+                ImageIndex := 0;
+        end;
+
+        Bmp:=TBitmap.Create;
+        ImageList1.GetBitmap(ImageIndex, Bmp);
+        AirGRD.IndicatorButton.Glyph.Assign(Bmp);
+        Bmp.Free;
+                //ShowMessage(CurrentSortField+'new' + NewSort);
+
+        HawbDS.SetOrderBy(NewSOrt);
+        PreviousSortedField:=CurrentSortField;
+
+        HawbDS.open;
+        HawbDs.EnableControls;
+        //if Hawbds.BookmarkValid(bm) then
+                HawbDS.GotoBookmark(Bm);
+
+        AIrGRD.SelectRecord;
+
+end;
+
+procedure TL_AirwaybillsHighFRM.SpeedButton1Click(Sender: TObject);
+Var
+ HawbId:String;
+begin
+        HawbId:=Trim(Hawbidfld.text);
+AirwaybillSQL.LocateEx('hawb_id',HawbId,[lxPartialKey]);
+end;
+
+procedure TL_AirwaybillsHighFRM.Button3Click(Sender: TObject);
+Var
+        dString:STring;
+begin
+
+
+  With UpdateTableSQL do begin
+        SQL.Clear;
+        dString:='Update AirwayBill AB set ab.IS_SCANNED = NULL where '
+                +'not exists (Select SERIAL_NUMBER FROM FLIGHT_AIRWAYBILL FA WHERE FA.FK_AIRWAYBILL_SERIAL=AB.SERIAL_NUMBER) '
+                +' and (AB.SENDER_DEVICE_TYPE=''KL'' AND ab.IS_SCANNED=''Y'')';
+
+        SQL.Add(dString);
+        //ParambyName('FlightAir').Value:=Serial;
+        Execute;
+
+  end;
+  AirwaybillSQL.Refresh;
+
+
+end;
+
+END.
+

@@ -1,0 +1,232 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{F9134485-63C5-4314-AC2B-FC4A8ACFA126}</ProjectGuid>
+        <MainSource>CabOut.dpr</MainSource>
+        <Base>True</Base>
+        <Config Condition="'$(Config)'==''">Debug</Config>
+        <TargetedPlatforms>1</TargetedPlatforms>
+        <AppType>Application</AppType>
+        <FrameworkType>VCL</FrameworkType>
+        <ProjectVersion>18.2</ProjectVersion>
+        <Platform Condition="'$(Platform)'==''">Win32</Platform>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Base)'=='true') or '$(Base_Win32)'!=''">
+        <Base_Win32>true</Base_Win32>
+        <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Config)'=='Release' or '$(Cfg_1)'!=''">
+        <Cfg_1>true</Cfg_1>
+        <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Cfg_1)'=='true') or '$(Cfg_1_Win32)'!=''">
+        <Cfg_1_Win32>true</Cfg_1_Win32>
+        <CfgParent>Cfg_1</CfgParent>
+        <Cfg_1>true</Cfg_1>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Config)'=='Debug' or '$(Cfg_2)'!=''">
+        <Cfg_2>true</Cfg_2>
+        <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Cfg_2)'=='true') or '$(Cfg_2_Win32)'!=''">
+        <Cfg_2_Win32>true</Cfg_2_Win32>
+        <CfgParent>Cfg_2</CfgParent>
+        <Cfg_2>true</Cfg_2>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Base)'!=''">
+        <DCC_E>false</DCC_E>
+        <DCC_F>false</DCC_F>
+        <DCC_K>false</DCC_K>
+        <DCC_N>true</DCC_N>
+        <DCC_S>false</DCC_S>
+        <DCC_ImageBase>00400000</DCC_ImageBase>
+        <DCC_Alignment>1</DCC_Alignment>
+        <DCC_DebugInformation>1</DCC_DebugInformation>
+        <DCC_WriteableConstants>true</DCC_WriteableConstants>
+        <DCC_SymbolReferenceInfo>1</DCC_SymbolReferenceInfo>
+        <DCC_Description>Customs XML project</DCC_Description>
+        <DCC_ExeOutput>C:\Data\DelphiProjects\CabOut271\Programs</DCC_ExeOutput>
+        <DCC_DcuOutput>C:\Data\DelphiProjects\CabOut271\Programs</DCC_DcuOutput>
+        <DCC_BplOutput>C:\Data\DelphiProjects\CabOut271\Programs</DCC_BplOutput>
+        <DCC_DcpOutput>C:\Data\DelphiProjects\CabOut271\Programs</DCC_DcpOutput>
+        <DCC_UnitSearchPath>C:\Data\DelphiProjects\CabOut271\Programs;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
+        <DebugSourcePath>C:\Data\DelphiProjects\CabOut271\Programs;$(DebugSourcePath)</DebugSourcePath>
+        <DCC_UsePackage>Vcl50;Vclx50;VclSmp50;Vcldb50;vclado50;ibevnt50;Vclbde50;vcldbx50;Qrpt50;TeeUI50;TeeDB50;Tee50;Dss50;TeeQR50;VCLIB50;Vclmid50;vclie50;Inetdb50;Inet50;NMFast50;webmid50;dclocx50;dclaxserver50;rbUSER55;rbRCL55;rbBDE55;ip50client_d5;ip50_d5;ip50word_d5;FirstClass2000_vcl5;$(DCC_UsePackage)</DCC_UsePackage>
+        <SanitizedProjectName>CabOut</SanitizedProjectName>
+        <DCC_Namespace>Vcl;Vcl.Imaging;Vcl.Touch;Vcl.Samples;Vcl.Shell;System;Xml;Data;Datasnap;Web;Soap;Winapi;$(DCC_Namespace)</DCC_Namespace>
+        <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
+        <VerInfo_MinorVer>1</VerInfo_MinorVer>
+        <VerInfo_Locale>1032</VerInfo_Locale>
+        <VerInfo_Keys>CompanyName=KLD;FileDescription=Create XML files;FileVersion=1.1.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=Cabex;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Base_Win32)'!=''">
+        <DCC_Namespace>System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;Bde;$(DCC_Namespace)</DCC_Namespace>
+        <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
+        <VerInfo_Keys>CompanyName=;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=;ProgramID=com.embarcadero.$(MSBuildProjectName)</VerInfo_Keys>
+        <VerInfo_Locale>1033</VerInfo_Locale>
+        <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
+        <Icon_MainIcon>CabOut_Icon.ico</Icon_MainIcon>
+        <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
+        <UWP_DelphiLogo44>$(BDS)\bin\Artwork\Windows\UWP\delphi_UwpDefault_44.png</UWP_DelphiLogo44>
+        <UWP_DelphiLogo150>$(BDS)\bin\Artwork\Windows\UWP\delphi_UwpDefault_150.png</UWP_DelphiLogo150>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_1)'!=''">
+        <DCC_Define>RELEASE;$(DCC_Define)</DCC_Define>
+        <DCC_DebugInformation>0</DCC_DebugInformation>
+        <DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
+        <DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
+        <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
+        <AppEnableHighDPI>true</AppEnableHighDPI>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_2)'!=''">
+        <DCC_Define>DEBUG;$(DCC_Define)</DCC_Define>
+        <DCC_Optimize>false</DCC_Optimize>
+        <DCC_GenerateStackFrames>true</DCC_GenerateStackFrames>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_2_Win32)'!=''">
+        <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
+        <AppEnableHighDPI>true</AppEnableHighDPI>
+        <DCC_DcpOutput>C:\Data\DelphiProjects\TokyoCabOut\EXE\</DCC_DcpOutput>
+        <DCC_ExeOutput>C:\Data\DelphiProjects\TokyoCabOut\EXE\</DCC_ExeOutput>
+        <DCC_BplOutput>C:\Data\DelphiProjects\TokyoCabOut\EXE\</DCC_BplOutput>
+        <DCC_UnitSearchPath>C:\Data\DelphiProjects\TokyoCabOut\Programs;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
+        <DCC_DcuOutput>C:\Data\DelphiProjects\TokyoCabOut\DCU\</DCC_DcuOutput>
+        <VerInfo_MinorVer>0</VerInfo_MinorVer>
+        <VerInfo_Locale>1033</VerInfo_Locale>
+        <VerInfo_Keys>CompanyName=;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=;ProgramID=com.embarcadero.$(MSBuildProjectName)</VerInfo_Keys>
+    </PropertyGroup>
+    <ItemGroup>
+        <DelphiCompile Include="$(MainSource)">
+            <MainSource>MainSource</MainSource>
+        </DelphiCompile>
+        <DCCReference Include="L_Mawbs.pas">
+            <Form>L_MawbsFRM</Form>
+        </DCCReference>
+        <DCCReference Include="CreateOneXMLFile.pas">
+            <Form>CreateOneXMLFileFRM</Form>
+        </DCCReference>
+        <DCCReference Include="H_flightOut.pas">
+            <Form>H_FlightOutFRM</Form>
+        </DCCReference>
+        <DCCReference Include="H_FlightAirwaybill.pas">
+            <Form>H_FlightairwaybillFRM</Form>
+        </DCCReference>
+        <DCCReference Include="M_parameters.pas">
+            <Form>M_ParametersFRM</Form>
+        </DCCReference>
+        <DCCReference Include="M_country.pas">
+            <Form>M_countryFRM</Form>
+        </DCCReference>
+        <DCCReference Include="L_itinerary.pas">
+            <Form>L_ItineraryFRM</Form>
+        </DCCReference>
+        <DCCReference Include="M_Itinerary.pas">
+            <Form>M_ItineraryFRM</Form>
+        </DCCReference>
+        <DCCReference Include="H_scanAirwaybill.pas">
+            <Form>H_ScanAirwaybillFRM</Form>
+        </DCCReference>
+        <DCCReference Include="M_FlightTable.pas">
+            <Form>M_FlightTableFRM</Form>
+        </DCCReference>
+        <DCCReference Include="H_Airwaybill2.pas">
+            <Form>H_airwaybill2FRM</Form>
+        </DCCReference>
+        <DCCReference Include="L_FlightOutList.pas">
+            <Form>L_FlightOutListFRM</Form>
+        </DCCReference>
+        <DCCReference Include="M_customerNew.pas">
+            <Form>M_CustomerNewFRM</Form>
+        </DCCReference>
+        <DCCReference Include="KyriacosTypes.pas"/>
+        <DCCReference Include="M_NewTariff2.pas">
+            <Form>M_TariffNew2FRM</Form>
+        </DCCReference>
+        <DCCReference Include="S_SelectCustomerx.pas">
+            <Form>S_SelectCustomerXFRM</Form>
+        </DCCReference>
+        <DCCReference Include="S_SelectTariffY.pas">
+            <Form>S_SelectTariffYFRM</Form>
+        </DCCReference>
+        <DCCReference Include="MainForm.pas">
+            <Form>MainFormFRM</Form>
+        </DCCReference>
+        <DCCReference Include="M_District.pas">
+            <Form>M_DistrictFRM</Form>
+        </DCCReference>
+        <DCCReference Include="H_ScanAirwaybillNew.pas">
+            <Form>H_ScanAirwaibillNewFRM</Form>
+        </DCCReference>
+        <DCCReference Include="L_AIrwaybillHigh.pas">
+            <Form>L_AirwaybillsHighFRM</Form>
+        </DCCReference>
+        <DCCReference Include="ReadFIle.pas">
+            <Form>ReadFileFRM</Form>
+        </DCCReference>
+        <DCCReference Include="GeneralProcedures.pas"/>
+        <DCCReference Include="CopyOfReadFIle.pas">
+            <Form>ReadFileCopyofFRM</Form>
+        </DCCReference>
+        <DCCReference Include="M_incoterms.pas">
+            <Form>M_incotermsFRM</Form>
+        </DCCReference>
+        <DCCReference Include="M_serviceCode.pas">
+            <Form>M_ServiceCodesFRM</Form>
+        </DCCReference>
+        <DCCReference Include="M_Currency.pas">
+            <Form>M_CurrencyFRM</Form>
+        </DCCReference>
+        <DCCReference Include="l_FlightAirwaybillParameters.pas">
+            <Form>L_AdditionalParametersFRM</Form>
+        </DCCReference>
+        <DCCReference Include="R_ReadALLXMLFiles.pas">
+            <Form>R_ReadAllFilesFRM</Form>
+        </DCCReference>
+        <DCCReference Include="M_additionalParameters.pas">
+            <Form>M_additionalParametersFRM</Form>
+        </DCCReference>
+        <None Include="CabOut.todo">
+            <ContainerId>ToDo</ContainerId>
+        </None>
+        <BuildConfiguration Include="Debug">
+            <Key>Cfg_2</Key>
+            <CfgParent>Base</CfgParent>
+        </BuildConfiguration>
+        <BuildConfiguration Include="Base">
+            <Key>Base</Key>
+        </BuildConfiguration>
+        <BuildConfiguration Include="Release">
+            <Key>Cfg_1</Key>
+            <CfgParent>Base</CfgParent>
+        </BuildConfiguration>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Delphi.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Delphi.Personality>
+                <Source>
+                    <Source Name="MainSource">CabOut.dpr</Source>
+                </Source>
+                <Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\ipstudiowinwordxp250.bpl">Woll2Woll InfoPower RichEdit for MSWord XP</Excluded_Packages>
+                </Excluded_Packages>
+            </Delphi.Personality>
+            <Platforms>
+                <Platform value="Win32">True</Platform>
+            </Platforms>
+        </BorlandProject>
+        <ProjectFileVersion>12</ProjectFileVersion>
+    </ProjectExtensions>
+    <Import Project="$(BDS)\Bin\CodeGear.Delphi.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Delphi.Targets')"/>
+    <Import Project="$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj" Condition="Exists('$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj')"/>
+</Project>

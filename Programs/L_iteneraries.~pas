@@ -1,0 +1,149 @@
+unit L_iteneraries;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  StdCtrls, Mask,  IBC, MemDS, IBCError, wwSpeedButton, wwDBNavigator,
+  wwclearpanel, Buttons, ExtCtrls, wwdbedit, Grids, Wwdbigrd, Wwdbgrid,
+  Wwquery, wwstorep, fcButton, fcImgBtn, fcShapeBtn, Wwkeycb, DBAccess, Db;
+
+type
+  TL_ItineraryFRM = class(TForm)
+    Panel1: TPanel;
+    Panel4: TPanel;
+    Panel3: TPanel;
+    ItinerarySQL: TIBCQuery;
+    Label5: TLabel;
+    Label9: TLabel;
+    Panel2: TPanel;
+    Panel5: TPanel;
+    Panel6: TPanel;
+    FlightOutGRD: TwwDBGrid;
+    DeleteSelectedBTN: TBitBtn;
+    InsertBTN: TBitBtn;
+    BitBtn2: TBitBtn;
+    BitBtn1: TBitBtn;
+    ByMawbFLD: TwwIncrementalSearch;
+    Label1: TLabel;
+    UsedForUpdateTrans: TIBCTransaction;
+    ItinerarySRC: TIBCDataSource;
+    ItinerarySQLSERIAL_NUMBER: TIntegerField;
+    ItinerarySQLFLIGHT_NAME: TStringField;
+    ItineraryCountrySQL: TIBCQuery;
+    ItineraryCountrySQLSERIAL_NUMBER: TIntegerField;
+    ItineraryCountrySQLFK_ITINERARY_SERIAL: TIntegerField;
+    ItineraryCountrySQLCOUNTRY_CODE: TStringField;
+    wwDBGrid1: TwwDBGrid;
+    itineraryCountrySRC: TIBCDataSource;
+    procedure BitBtn2Click(Sender: TObject);
+    procedure FlightOutGRDDblClick(Sender: TObject);
+    procedure InsertBTNClick(Sender: TObject);
+    procedure FlightBTNClick(Sender: TObject);
+    procedure BitBtn1Click(Sender: TObject);
+    procedure DeleteSelectedBTNClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    GAction:string;
+    GAirSerial:Integer;
+    GMovementSerial:Integer;
+    GDocumentMasterSerial:Integer;
+    procedure EditFlightOUt(SerialNumber:Integer);
+    procedure InsertFlightOUt(Var SerialNumber:Integer;MovementSerial,DocumentMasterSerial:Integer);
+
+
+  end;
+
+var
+  L_ItineraryFRM: TL_ItineraryFRM;
+
+implementation
+
+uses MainForm, H_flightOut, H_scanAirwaybill, CreateOneXMLFile;
+
+{$R *.DFM}
+
+procedure TL_ItineraryFRM.BitBtn2Click(Sender: TObject);
+begin
+close;
+end;
+
+
+procedure TL_ItineraryFRM.EditFlightOut(SerialNumber:Integer);
+begin
+{
+with FlightOutSQL do begin
+        close;
+        If not prepared then Prepare;
+        ParamByName('serialNumber').value:= SerialNumber;
+        Open;
+end;
+}
+End;
+
+procedure TL_ItineraryFRM.InsertFlightOut(Var SerialNumber:Integer;MovementSerial,DocumentMasterSerial:Integer);
+begin
+{
+with  FlightOutSQL do begin
+        close;
+        If not prepared then Prepare;
+        Open;
+        Insert;
+        SerialNumber:=FieldbyName('serial_number').AsInteger;
+end;
+}
+End;
+
+
+procedure TL_ItineraryFRM.FlightOutGRDDblClick(Sender: TObject);
+Var
+        FlightSerial:Integer;
+begin
+{
+        FlightSerial:=FlightOutGRD.DataSource.DataSet.fieldbyName('serial_number').AsInteger;
+        H_FlightOutFRM.GAction:='EDIT';
+        H_FlightOutFRM.GOutFlightOutSerial:=FlightSerial;
+        H_FlightOutFRM.SHowmodal;
+        FlightOutSQL.Close;
+        FlightOutSQL.Open;
+        FlightOutSQL.Locate('SERIAL_NUMBER',FlightSerial,[]);
+}
+end;
+
+procedure TL_ItineraryFRM.InsertBTNClick(Sender: TObject);
+//Var
+//        FlightOutSerial:Integer;
+begin
+//        H_FlightOutFRM.GAction:='INSERT';
+//        H_FlightOutFRM.SHowmodal;
+End;
+
+
+
+procedure TL_ItineraryFRM.FlightBTNClick(Sender: TObject);
+Var
+FlightOutSerial:Integer;
+begin
+
+FlightOutSerial:=FLightOutGRD.DataSource.DataSet.FieldbyName('serial_number').AsInteger;
+H_ScanAirwaybillFRM.GAction:='EDIT';
+H_ScanAirwaybillFRM.GFlightOutSerial:=FlightOutSerial;
+H_ScanAirwaybillFRM.SearchFlightOutFLD.Text:=FLightOutGRD.DataSource.DataSet.FieldbyName('Mawb').AsString;
+
+H_ScanAirwaybillFRM.showmodal;
+end;
+
+procedure TL_ItineraryFRM.BitBtn1Click(Sender: TObject);
+begin
+//H_FlightOutFRM.GAction:='EDIT';
+//H_FlightOutFRM.SHowmodal;
+end;
+
+procedure TL_ItineraryFRM.DeleteSelectedBTNClick(Sender: TObject);
+begin
+//FlightOUtSQL.Delete;
+end;
+
+END.

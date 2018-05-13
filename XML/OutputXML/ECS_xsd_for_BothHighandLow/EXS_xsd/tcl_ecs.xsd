@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tcl_ecs="http://ecs.dgtaxud.ec/tcl_ecs" xmlns:doc="http://ecs.dgtaxud.ec/doc" targetNamespace="http://ecs.dgtaxud.ec/tcl_ecs" attributeFormDefault="unqualified" elementFormDefault="unqualified" version="26.00">
+  <!--=========================================-->
+  <!--===== Technical Code Lists -->
+  <!--===== ECS P2 Domain Definition  -->
+  <!--===== DDNXA 4.00  -->
+  <!--===== XSD version v26.00  -->
+  <!--=========================================-->
+  <!--===== Imports =====-->
+  <xs:import namespace="http://ecs.dgtaxud.ec/doc" schemaLocation="doc.xsd" />
+</xs:schema>
+

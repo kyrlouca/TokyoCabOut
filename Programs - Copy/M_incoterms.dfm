@@ -1,0 +1,472 @@
+object M_incotermsFRM: TM_incotermsFRM
+  Left = 421
+  Top = 299
+  Width = 764
+  Height = 678
+  Caption = 'Incoterms'
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -13
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  KeyPreview = True
+  OldCreateOrder = False
+  WindowState = wsMaximized
+  OnActivate = FormActivate
+  OnKeyUp = FormKeyUp
+  PixelsPerInch = 120
+  TextHeight = 16
+  object Panel1: TPanel
+    Left = 0
+    Top = 0
+    Width = 746
+    Height = 65
+    Align = alTop
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clBlue
+    Font.Height = -33
+    Font.Name = 'Arial'
+    Font.Style = [fsBold]
+    ParentFont = False
+    TabOrder = 0
+    object fcLabel1: TfcLabel
+      Left = 1
+      Top = 1
+      Width = 744
+      Height = 63
+      Align = alClient
+      Caption = 'Incoterms'
+      Font.Charset = GREEK_CHARSET
+      Font.Color = clBlue
+      Font.Height = -38
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentFont = False
+      TextOptions.Alignment = taCenter
+      TextOptions.Style = fclsLowered
+      TextOptions.VAlignment = vaVCenter
+    end
+  end
+  object Panel4: TPanel
+    Left = 0
+    Top = 580
+    Width = 746
+    Height = 53
+    Align = alBottom
+    TabOrder = 1
+    object BitBtn3: TBitBtn
+      Left = 9
+      Top = 5
+      Width = 109
+      Height = 42
+      Caption = 'Close'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -18
+      Font.Name = 'Arial'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 0
+      OnClick = BitBtn2Click
+      Glyph.Data = {
+        F6060000424DF606000000000000360000002800000018000000180000000100
+        180000000000C006000000000000000000000000000000000000FFFFFFFFFFFF
+        FFFFFF0004450004450004450004450004450004450004450004450004450004
+        45000445000445000445000445000445000445000445000445FFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFF000A4D3461A53F70B44B7DC15789CE5F91D66396DB
+        6396DB6396DB6598DD6295DA6295DA5D90D55688CD4C7EC24374B83765A9000A
+        4DFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0011563B6DB14174B84B7EC256
+        89CE5E91D66396DB6396DB6396DB6598DD6295DA6295DA5D90D55689CE4D80C4
+        4477BB3E70B4001156FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0018613869
+        AE3366A72B5EA22B5EA22B5EA22B5EA22B5EA2497CCE6396DB3164A52B5EA22B
+        5EA22B5EA22B5EA22D60A43869AE001861FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFF001F6A3A6CB02C5FA32B5EA22B5EA22B5EA22B5EA22B5EA24779CA6093
+        D8295CA02B5EA22B5EA22B5EA22B5EA22E61A53A6CB0001F6AFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFF00226D3B6DB128579B2B5EA22B5EA22B5EA22B5EA2
+        2B5EA24274C45B8ED42554982B5EA22B5EA22B5EA22B5EA22E61A53B6DB10022
+        6DFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0024703D6FB42451952B5EA22B
+        5EA22B5EA22B5EA22B5EA23F70BE578ACF214E922B5EA22B5EA22B5EA22B5EA2
+        2E61A53D6FB4002470FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0026723E70
+        B51E498E2A5CA02B5EA22B5EA22B5EA22B5EA23B6BB95285CB1D478C2A5CA02B
+        5EA22B5EA22B5EA22D60A43E70B5002672FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFF0028754072B7183F842451962B5EA22B5EA22B5EA22B5EA23766B44E81
+        C7173D812451962B5EA22B5EA22B5EA22D60A44072B7002875FFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFF002A784274B9133479193F84224F9328599D2B5EA2
+        2B5EA23463AF4A7DC2113176193F84224F9328599D2B5EA22E61A54274B9002A
+        78FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF002C7A4376BB0C296F0F307415
+        3A7E1A43871D488C214F933261AD487BC00B276B0F3074153A7E1A43871D488C
+        2451964376BB002C7AFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF002E7D4578
+        BD477ABF477ABF477ABF477ABF477ABF477ABF477ABF477ABF477ABF477ABF47
+        7ABF477ABF477ABF142669142669002E7DFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFF002F7F477ABF3260AC3260AC3160AC325FAB325FAC3160AB3463AE477A
+        BF3260AC3260AC3160AB325FAC3160AB3166B45287D1002F7FFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFF003182497CC13265A6285B9F285B9F285B9F285B9F
+        285B9F3462AF4A7DC22E61A2285B9F285B9F285B9F285B9F70A3EB84B7FC0031
+        82FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0033844B7EC3295CA0275A9E27
+        5A9E275A9E275A9E275A9E3A6AB85184CA26589C275A9E275A9E275A9E275A9E
+        2B5EA24B7EC3003384FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0035864D80
+        C525549826599D26599D26599D26599D26599D4172C2598CD2214F9326599D26
+        599D26599D26599D2B5EA24D80C5003586FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFF0036894E81C7204D9125589C25589C25589C25589C25589C497BCE6295
+        DB1D488C25589C25589C25589C25589C2A5DA14E81C7003689FFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFF00388B5083C91C458A23559924579B24579B24579B
+        24579B5286DC6C9FE518418423559924579B24579B24579B295CA05083C90038
+        8BFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00398C5084CA163C7F1D4A8D23
+        569A23569A23569A23569A5B90E675A8ED1337791D4A8D23569A23569A23569A
+        295CA05084CA00398CFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF003B8E5286
+        CC0F2F7213397A1A478A1F5094225599225599629AF17DB0F50C2A6B13397A1A
+        478A1F5094225599285B9F5286CC003B8EFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFF003C905387CD0A266A0C2869123576153D7F1942851C488B67A0F882B5
+        FA0722620C2A6B123576153D7F174083214E925387CD003C90FFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFF003D91598DD25F92D7699CE174A7EC7DB0F584B7FC
+        84B7FC84B7FC82B5FA82B5FA82B5FA7CAFF473A6EB6A9DE26194D95B8FD4003D
+        91FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF003E935085CC5D91D7689CE173
+        A6EC7EB1F684B7FC84B7FC84B7FC82B5FA82B5FA82B5FA7BAEF373A6EC699DE2
+        6093D95388CF003E93FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF003F94003F
+        94003F94003F94003F94003F94003F94003F94003F94003F94003F94003F9400
+        3F94003F94003F94003F94003F94003F94FFFFFFFFFFFFFFFFFF}
+    end
+  end
+  object Panel2: TPanel
+    Left = 0
+    Top = 65
+    Width = 746
+    Height = 48
+    Align = alTop
+    TabOrder = 2
+    object Nav1: TwwDBNavigator
+      Left = 1
+      Top = 9
+      Width = 246
+      Height = 32
+      AutosizeStyle = asSizeNavButtons
+      DataSource = TableSRC
+      RepeatInterval.InitialDelay = 500
+      RepeatInterval.Interval = 100
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -15
+      Font.Name = 'Arial'
+      Font.Style = []
+      object Nav1Prior: TwwNavButton
+        Left = 0
+        Top = 0
+        Width = 41
+        Height = 32
+        Hint = 'Move to prior record'
+        ImageIndex = -1
+        NumGlyphs = 2
+        Spacing = 4
+        Transparent = False
+        Caption = 'Nav1Prior'
+        Enabled = False
+        DisabledTextColors.ShadeColor = clGray
+        DisabledTextColors.HighlightColor = clBtnHighlight
+        Index = 0
+        Style = nbsPrior
+      end
+      object Nav1Next: TwwNavButton
+        Left = 41
+        Top = 0
+        Width = 41
+        Height = 32
+        Hint = 'Move to next record'
+        ImageIndex = -1
+        NumGlyphs = 2
+        Spacing = 4
+        Transparent = False
+        Caption = 'Nav1Next'
+        Enabled = False
+        DisabledTextColors.ShadeColor = clGray
+        DisabledTextColors.HighlightColor = clBtnHighlight
+        Index = 1
+        Style = nbsNext
+      end
+      object Nav1Insert: TwwNavButton
+        Left = 82
+        Top = 0
+        Width = 41
+        Height = 32
+        Hint = 'Insert new record'
+        ImageIndex = -1
+        NumGlyphs = 2
+        Spacing = 4
+        Transparent = False
+        Caption = 'Nav1Insert'
+        DisabledTextColors.ShadeColor = clGray
+        DisabledTextColors.HighlightColor = clBtnHighlight
+        Index = 2
+        Style = nbsInsert
+      end
+      object Nav1Delete: TwwNavButton
+        Left = 123
+        Top = 0
+        Width = 41
+        Height = 32
+        Hint = 'Delete current record'
+        ImageIndex = -1
+        NumGlyphs = 2
+        Spacing = 4
+        Transparent = False
+        Caption = 'Nav1Delete'
+        Enabled = False
+        DisabledTextColors.ShadeColor = clGray
+        DisabledTextColors.HighlightColor = clBtnHighlight
+        Index = 3
+        Style = nbsDelete
+      end
+      object Nav1Post: TwwNavButton
+        Left = 164
+        Top = 0
+        Width = 41
+        Height = 32
+        Hint = 'Post changes of current record'
+        ImageIndex = -1
+        NumGlyphs = 2
+        Spacing = 4
+        Transparent = False
+        Caption = 'Nav1Post'
+        Enabled = False
+        DisabledTextColors.ShadeColor = clGray
+        DisabledTextColors.HighlightColor = clBtnHighlight
+        Index = 4
+        Style = nbsPost
+      end
+      object Nav1Cancel: TwwNavButton
+        Left = 205
+        Top = 0
+        Width = 41
+        Height = 32
+        Hint = 'Cancel changes made to current record'
+        ImageIndex = -1
+        NumGlyphs = 2
+        Spacing = 4
+        Transparent = False
+        Caption = 'Nav1Cancel'
+        Enabled = False
+        DisabledTextColors.ShadeColor = clGray
+        DisabledTextColors.HighlightColor = clBtnHighlight
+        Index = 5
+        Style = nbsCancel
+      end
+    end
+  end
+  object Panel3: TPanel
+    Left = 0
+    Top = 113
+    Width = 746
+    Height = 467
+    Align = alClient
+    TabOrder = 3
+    object Panel5: TPanel
+      Left = 1
+      Top = 1
+      Width = 744
+      Height = 208
+      Align = alTop
+      BevelOuter = bvNone
+      TabOrder = 0
+      object GroupBox1: TGroupBox
+        Left = 20
+        Top = 18
+        Width = 582
+        Height = 101
+        Caption = 'Details'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+        TabOrder = 0
+        object Label2: TLabel
+          Left = 8
+          Top = 58
+          Width = 70
+          Height = 18
+          Caption = 'Description'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -15
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentFont = False
+        end
+        object Label3: TLabel
+          Left = 45
+          Top = 28
+          Width = 33
+          Height = 18
+          Caption = 'Code'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -15
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentFont = False
+        end
+        object NameFLD: TwwDBEdit
+          Left = 89
+          Top = 26
+          Width = 112
+          Height = 23
+          BorderStyle = bsNone
+          CharCase = ecUpperCase
+          DataField = 'CODE'
+          DataSource = TableSRC
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -15
+          Font.Name = 'Arial'
+          Font.Style = []
+          Frame.Enabled = True
+          Frame.NonFocusBorders = [efLeftBorder, efTopBorder, efRightBorder, efBottomBorder]
+          Frame.FocusStyle = efsFrameSingle
+          Frame.NonFocusStyle = efsFrameSunken
+          ParentFont = False
+          TabOrder = 0
+          UnboundDataType = wwDefault
+          WantReturns = False
+          WordWrap = False
+        end
+        object wwDBEdit2: TwwDBEdit
+          Left = 89
+          Top = 56
+          Width = 454
+          Height = 23
+          BorderStyle = bsNone
+          DataField = 'DESCRIPTION'
+          DataSource = TableSRC
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -15
+          Font.Name = 'Arial'
+          Font.Style = []
+          Frame.Enabled = True
+          Frame.NonFocusBorders = [efLeftBorder, efTopBorder, efRightBorder, efBottomBorder]
+          Frame.FocusStyle = efsFrameSingle
+          Frame.NonFocusStyle = efsFrameSunken
+          ParentFont = False
+          TabOrder = 1
+          UnboundDataType = wwDefault
+          WantReturns = False
+          WordWrap = False
+        end
+      end
+    end
+    object Grid1: TwwDBGrid
+      Left = 1
+      Top = 209
+      Width = 744
+      Height = 257
+      Selected.Strings = (
+        'CODE'#9'5'#9'Code'
+        'DESCRIPTION'#9'56'#9'Description')
+      IniAttributes.Delimiter = ';;'
+      TitleColor = clBtnFace
+      FixedCols = 0
+      ShowHorzScrollBar = True
+      Align = alClient
+      Color = 12713983
+      DataSource = TableSRC
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Arial'
+      Font.Style = []
+      KeyOptions = []
+      Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgWordWrap]
+      ParentFont = False
+      ReadOnly = True
+      TabOrder = 1
+      TitleAlignment = taLeftJustify
+      TitleFont.Charset = DEFAULT_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -15
+      TitleFont.Name = 'Arial'
+      TitleFont.Style = []
+      TitleLines = 1
+      TitleButtons = False
+      IndicatorColor = icBlack
+    end
+  end
+  object TableSRC: TDataSource
+    DataSet = IncotermsSQL
+    OnStateChange = TableSRCStateChange
+    Left = 544
+    Top = 17
+  end
+  object IncotermsSQL: TIBCQuery
+    UpdatingTable = 'INCOTERMS'
+    KeyFields = 'SERIAL_NUMBER'
+    KeyGenerator = 'INCOTERMS_GENERATOR'
+    SQLInsert.Strings = (
+      'INSERT INTO INCOTERMS'
+      '  (SERIAL_NUMBER, CODE, DESCRIPTION)'
+      'VALUES'
+      '  (:SERIAL_NUMBER, :CODE, :DESCRIPTION)')
+    SQLDelete.Strings = (
+      'DELETE FROM INCOTERMS'
+      'WHERE'
+      '  SERIAL_NUMBER = :Old_SERIAL_NUMBER')
+    SQLUpdate.Strings = (
+      'UPDATE INCOTERMS'
+      'SET'
+      
+        '  SERIAL_NUMBER = :SERIAL_NUMBER, CODE = :CODE, DESCRIPTION = :D' +
+        'ESCRIPTION'
+      'WHERE'
+      '  SERIAL_NUMBER = :Old_SERIAL_NUMBER')
+    SQLRefresh.Strings = (
+      'SELECT SERIAL_NUMBER, CODE, DESCRIPTION FROM INCOTERMS'
+      'WHERE'
+      '  SERIAL_NUMBER = :SERIAL_NUMBER')
+    SQLLock.Strings = (
+      'SELECT NULL FROM INCOTERMS'
+      'WHERE'
+      'SERIAL_NUMBER = :Old_SERIAL_NUMBER'
+      'FOR UPDATE WITH LOCK')
+    SQLRecCount.Strings = (
+      'SELECT COUNT(*) FROM ('
+      'SELECT 1 AS C  FROM INCOTERMS'
+      ''
+      ') q')
+    Connection = MainFormFRM.CabOutData
+    Transaction = MainFormFRM.UsedForReadOnlyTrans
+    UpdateTransaction = WriteTrans
+    SQL.Strings = (
+      'SELECT'
+      '*'
+      'FROM'
+      '    INCOTERMS')
+    Active = True
+    AfterInsert = IncotermsSQLAfterInsert
+    Left = 537
+    Top = 117
+    object IncotermsSQLCODE: TStringField
+      DisplayLabel = 'Code'
+      DisplayWidth = 5
+      FieldName = 'CODE'
+      FixedChar = True
+      Size = 5
+    end
+    object IncotermsSQLDESCRIPTION: TStringField
+      DisplayLabel = 'Description'
+      DisplayWidth = 56
+      FieldName = 'DESCRIPTION'
+      FixedChar = True
+      Size = 30
+    end
+    object IncotermsSQLSERIAL_NUMBER: TIntegerField
+      DisplayWidth = 10
+      FieldName = 'SERIAL_NUMBER'
+      Visible = False
+    end
+  end
+  object WriteTrans: TIBCTransaction
+    DefaultConnection = MainFormFRM.CabOutData
+    Left = 593
+    Top = 181
+  end
+end

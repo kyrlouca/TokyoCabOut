@@ -1,0 +1,2 @@
+localhost
+E:\All\Databases\cabout\t1.fdb

@@ -1,0 +1,391 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns="http://www.eurodyn.com"
+	targetNamespace="http://www.eurodyn.com"
+	elementFormDefault="qualified">
+	
+	<!--Technical Code Lists-->
+
+	<xsd:simpleType name="CL1">
+		<xsd:restriction base="xsd:string">
+			<xsd:maxLength value="6"/>
+			<xsd:enumeration value="BANSTA"/>
+			<xsd:enumeration value="CUSDEC"/>
+			<xsd:enumeration value="CUSRES"/>
+			<xsd:enumeration value="FINSTA"/>
+			<xsd:enumeration value="GENRAL"/>
+			<xsd:enumeration value="GESMES"/>
+			<xsd:enumeration value="PARTTC"/>
+			<xsd:enumeration value="SANCRT"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="CL21">
+		<xsd:restriction base="xsd:string">
+			<xsd:maxLength value="4"/>
+			<xsd:enumeration value="UNOC"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="CL22">
+		<xsd:restriction base="xsd:integer">
+			<xsd:totalDigits value="1"/>
+			<xsd:enumeration value="3"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="CL23">
+		<xsd:restriction base="xsd:integer">
+			<xsd:totalDigits value="2"/>
+			<xsd:enumeration value="12"/>
+			<xsd:enumeration value="13"/>
+			<xsd:enumeration value="14"/>
+			<xsd:enumeration value="15"/>
+			<xsd:enumeration value="16"/>
+			<xsd:enumeration value="18"/>
+			<xsd:enumeration value="19"/>
+			<xsd:enumeration value="2"/>
+			<xsd:enumeration value="21"/>
+			<xsd:enumeration value="22"/>
+			<xsd:enumeration value="23"/>
+			<xsd:enumeration value="26"/>
+			<xsd:enumeration value="28"/>
+			<xsd:enumeration value="29"/>
+			<xsd:enumeration value="3"/>
+			<xsd:enumeration value="32"/>
+			<xsd:enumeration value="33"/>
+			<xsd:enumeration value="35"/>
+			<xsd:enumeration value="36"/>
+			<xsd:enumeration value="37"/>
+			<xsd:enumeration value="38"/>
+			<xsd:enumeration value="39"/>
+			<xsd:enumeration value="40"/>
+			<xsd:enumeration value="6"/>
+			<xsd:enumeration value="7"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="CL24">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="C"/>
+			<xsd:enumeration value="D"/>
+			<xsd:enumeration value="U"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="CL26">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="01"/>
+			<xsd:enumeration value="02"/>
+			<xsd:enumeration value="03"/>
+			<xsd:enumeration value="04"/>
+			<xsd:enumeration value="05"/>
+			<xsd:enumeration value="06"/>
+			<xsd:enumeration value="07"/>
+			<xsd:enumeration value="08"/>
+			<xsd:enumeration value="09"/>
+			<xsd:enumeration value="10"/>
+			<xsd:enumeration value="11"/>
+			<xsd:enumeration value="12"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="CL27">
+		<xsd:restriction base="xsd:integer">
+			<xsd:totalDigits value="1"/>
+			<xsd:enumeration value="0"/>
+			<xsd:enumeration value="1"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="CL28">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="F"/>
+			<xsd:enumeration value="L"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="CL32">
+		<xsd:restriction base="xsd:string">
+			<xsd:maxLength value="3"/>
+			<xsd:enumeration value="4"/>
+			<xsd:enumeration value="7"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="CL33">
+		<xsd:restriction base="xsd:string">
+			<xsd:maxLength value="3"/>
+			<xsd:enumeration value="UNB"/>
+			<xsd:enumeration value="UNZ"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="CL34">
+		<xsd:restriction base="xsd:string">
+			<xsd:maxLength value="3"/>
+			<xsd:enumeration value="UNH"/>
+			<xsd:enumeration value="UNT"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="CL35">
+		<xsd:restriction base="xsd:string">
+			<xsd:maxLength value="3"/>
+			<xsd:enumeration value="D"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="CL36">
+		<xsd:restriction base="xsd:string">
+			<xsd:maxLength value="3"/>
+			<xsd:enumeration value="96B"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="CL37">
+		<xsd:restriction base="xsd:string">
+			<xsd:maxLength value="2"/>
+			<xsd:enumeration value="UN"/>
+			<xsd:enumeration value="EC"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="CL49">
+		<xsd:restriction base="xsd:integer">
+			<xsd:totalDigits value="2"/>
+			<xsd:enumeration value="12"/>
+			<xsd:enumeration value="13"/>
+			<xsd:enumeration value="14"/>
+			<xsd:enumeration value="15"/>
+			<xsd:enumeration value="19"/>
+			<xsd:enumeration value="26"/>
+			<xsd:enumeration value="35"/>
+			<xsd:enumeration value="37"/>
+			<xsd:enumeration value="38"/>
+			<xsd:enumeration value="39"/>
+			<xsd:enumeration value="40"/>
+			<xsd:enumeration value="90"/>
+			<xsd:enumeration value="91"/>
+			<xsd:enumeration value="92"/>
+			<xsd:enumeration value="93"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="CL53">
+		<xsd:restriction base="xsd:string">
+			<xsd:maxLength value="1"/>
+			<xsd:enumeration value="A"/>
+			<xsd:enumeration value="E"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="CL60">
+		<xsd:restriction base="xsd:string">
+			<xsd:maxLength value="6"/>
+			<xsd:enumeration value="CD030A">
+			</xsd:enumeration>
+			<xsd:enumeration value="CD031A">
+			</xsd:enumeration>
+			<xsd:enumeration value="CC529A">
+			</xsd:enumeration>
+			<xsd:enumeration value="CD032A">
+			</xsd:enumeration>
+			<xsd:enumeration value="CD032B">
+			</xsd:enumeration>
+			<xsd:enumeration value="CD501A">
+			</xsd:enumeration>
+			<xsd:enumeration value="CC514A">
+			</xsd:enumeration>
+			<xsd:enumeration value="CD501B">
+			</xsd:enumeration>
+			<xsd:enumeration value="CD502A">
+			</xsd:enumeration>
+			<xsd:enumeration value="CD503A">
+			</xsd:enumeration>
+			<xsd:enumeration value="CC508A">
+			</xsd:enumeration>
+			<xsd:enumeration value="CC517A">
+			</xsd:enumeration>
+			<xsd:enumeration value="CC615A">
+			</xsd:enumeration>
+			<xsd:enumeration value="CD503B">
+			</xsd:enumeration>
+			<xsd:enumeration value="CC509A">
+			</xsd:enumeration>
+			<xsd:enumeration value="CC616A">
+			</xsd:enumeration>
+			<xsd:enumeration value="CC513A">
+			</xsd:enumeration>
+			<xsd:enumeration value="CC515A">
+			</xsd:enumeration>
+			<xsd:enumeration value="CC516A">
+			</xsd:enumeration>
+			<xsd:enumeration value="CC521A">
+			</xsd:enumeration>
+			<xsd:enumeration value="CC522A">
+			</xsd:enumeration>
+			<xsd:enumeration value="CC525A">
+			</xsd:enumeration>
+			<xsd:enumeration value="CC528A">
+			</xsd:enumeration>
+			<xsd:enumeration value="CC547A">
+			</xsd:enumeration>
+			<xsd:enumeration value="CC519A">
+			</xsd:enumeration>
+			<xsd:enumeration value="CC554A">
+			</xsd:enumeration>
+			<xsd:enumeration value="CC504A">
+			</xsd:enumeration>
+			<xsd:enumeration value="CC551A">
+			</xsd:enumeration>
+			<xsd:enumeration value="CC548A">
+			</xsd:enumeration>
+			<xsd:enumeration value="CC507A">
+			</xsd:enumeration>
+			<xsd:enumeration value="CC560A">
+			</xsd:enumeration>
+			<xsd:enumeration value="CC561A">
+			</xsd:enumeration>
+			<xsd:enumeration value="CC562A">
+			</xsd:enumeration>
+			<xsd:enumeration value="CC582A">
+			</xsd:enumeration>
+			<xsd:enumeration value="CC583A">
+			</xsd:enumeration>
+			<xsd:enumeration value="CC590A">
+			</xsd:enumeration>
+			<xsd:enumeration value="CC604A">
+			</xsd:enumeration>
+			<xsd:enumeration value="CC605A">
+			</xsd:enumeration>
+			<xsd:enumeration value="CC613A">
+			</xsd:enumeration>
+			<xsd:enumeration value="CC505A">
+			</xsd:enumeration>
+			<xsd:enumeration value="CC628A">
+			</xsd:enumeration>
+			<xsd:enumeration value="CD510A">
+			</xsd:enumeration>
+			<xsd:enumeration value="CD518A">
+			</xsd:enumeration>
+			<xsd:enumeration value="CD518B">
+			</xsd:enumeration>
+			<xsd:enumeration value="CD524A">
+			</xsd:enumeration>
+			<xsd:enumeration value="CD524B">
+			</xsd:enumeration>
+			<xsd:enumeration value="CD527A">
+			</xsd:enumeration>
+			<xsd:enumeration value="CD538A">
+			</xsd:enumeration>
+			<xsd:enumeration value="CD584A">
+			</xsd:enumeration>
+			<xsd:enumeration value="CD586A">
+			</xsd:enumeration>
+			<xsd:enumeration value="CD599A">
+			</xsd:enumeration>
+			<xsd:enumeration value="CD601A">
+			</xsd:enumeration>
+			<xsd:enumeration value="CD603A">
+			</xsd:enumeration>
+			<xsd:enumeration value="CD901A">
+			</xsd:enumeration>
+			<xsd:enumeration value="CD901B">
+			</xsd:enumeration>
+			<xsd:enumeration value="CD904A">
+			</xsd:enumeration>
+			<xsd:enumeration value="CD905A">
+			</xsd:enumeration>
+			<xsd:enumeration value="CD906A">
+			</xsd:enumeration>
+			<xsd:enumeration value="CD907A">
+			</xsd:enumeration>
+			<xsd:enumeration value="CD913A">
+			</xsd:enumeration>
+			<xsd:enumeration value="CD914A">
+			</xsd:enumeration>
+			<xsd:enumeration value="CD916A">
+			</xsd:enumeration>
+			<xsd:enumeration value="CD931A">
+			</xsd:enumeration>
+			<xsd:enumeration value="CD932A">
+			</xsd:enumeration>
+			<xsd:enumeration value="CD932B">
+			</xsd:enumeration>
+			<xsd:enumeration value="CD071A">
+			</xsd:enumeration>
+			<xsd:enumeration value="CD070A">
+			</xsd:enumeration>
+			<xsd:enumeration value="CD971A">
+			</xsd:enumeration>
+			<xsd:enumeration value="CD411B">
+			</xsd:enumeration>
+			<xsd:enumeration value="CD412B">
+			</xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="CL68">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="F"/>
+			<xsd:enumeration value="H"/>
+			<xsd:enumeration value="I"/>
+			<xsd:enumeration value="K"/>
+			<xsd:enumeration value="L"/>		
+			<xsd:enumeration value="N"/>
+			<xsd:enumeration value="Q"/>
+			<xsd:enumeration value="S"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="CL70">
+		<xsd:restriction base="xsd:string">
+			<xsd:maxLength value="2"/>
+			<xsd:enumeration value="AD"/>
+			<xsd:enumeration value="AT"/>
+			<xsd:enumeration value="BE"/>
+			<xsd:enumeration value="BG"/>
+			<xsd:enumeration value="CH"/>
+			<xsd:enumeration value="CY"/>
+			<xsd:enumeration value="CZ"/>
+			<xsd:enumeration value="DE"/>
+			<xsd:enumeration value="DK"/>
+			<xsd:enumeration value="EE"/>
+			<xsd:enumeration value="ES"/>
+			<xsd:enumeration value="FI"/>
+			<xsd:enumeration value="FR"/>
+			<xsd:enumeration value="GB"/>
+			<xsd:enumeration value="GR"/>
+			<xsd:enumeration value="HR"/>		
+			<xsd:enumeration value="HU"/>
+			<xsd:enumeration value="IE"/>
+			<xsd:enumeration value="IS"/>
+			<xsd:enumeration value="IT"/>
+			<xsd:enumeration value="LT"/>
+			<xsd:enumeration value="LU"/>
+			<xsd:enumeration value="LV"/>
+			<xsd:enumeration value="MT"/>
+			<xsd:enumeration value="NL"/>
+			<xsd:enumeration value="NO"/>
+			<xsd:enumeration value="PL"/>
+			<xsd:enumeration value="PT"/>
+			<xsd:enumeration value="RO"/>
+			<xsd:enumeration value="SE"/>
+			<xsd:enumeration value="SI"/>
+			<xsd:enumeration value="SK"/>
+			<xsd:enumeration value="SM"/>
+			<xsd:enumeration value="TR"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="CL79">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="N"/>
+			<xsd:enumeration value="S"/>
+			<xsd:enumeration value="U"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="CL105">
+		<xsd:restriction base="xsd:integer">
+			<xsd:totalDigits value="1"/>
+			<xsd:enumeration value="1"/>
+			<xsd:enumeration value="2"/>
+			<xsd:enumeration value="3"/>
+			<xsd:enumeration value="4"/>
+			<xsd:enumeration value="5"/>
+			<xsd:enumeration value="6"/>
+			<xsd:enumeration value="7"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="CL136">
+		<xsd:restriction base="xsd:integer">
+			<xsd:totalDigits value="2"/>
+			<xsd:enumeration value="1"/>
+			<xsd:enumeration value="2"/>
+			<xsd:enumeration value="3"/>
+			<xsd:enumeration value="4"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+</xsd:schema>

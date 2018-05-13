@@ -1,0 +1,671 @@
+object P_DeconsolidationFRM: TP_DeconsolidationFRM
+  Left = 558
+  Top = 153
+  Anchors = [akLeft, akTop, akRight, akBottom]
+  BorderIcons = [biSystemMenu, biMaximize]
+  BorderStyle = bsSingle
+  Caption = 'P_DeconsolidationFRM'
+  ClientHeight = 784
+  ClientWidth = 1061
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -14
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  OldCreateOrder = False
+  WindowState = wsMaximized
+  OnActivate = FormActivate
+  PixelsPerInch = 120
+  TextHeight = 16
+  object Panel1: TPanel
+    Left = 0
+    Top = 70
+    Width = 1061
+    Height = 661
+    Align = alClient
+    TabOrder = 0
+    object Label6: TLabel
+      Left = 20
+      Top = 399
+      Width = 81
+      Height = 16
+      Caption = 'Update TD id'
+    end
+    object Label2: TLabel
+      Left = 384
+      Top = 400
+      Width = 458
+      Height = 16
+      Caption = 
+        'x42 and if empty ->   http://localhost:8006/manifest/fileload/de' +
+        'con_manifest.dtd'
+    end
+    object MawbPNL: TGroupBox
+      Left = 0
+      Top = 102
+      Width = 267
+      Height = 126
+      Caption = 'MAWB Reference'
+      Enabled = False
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -15
+      Font.Name = 'MS Sans Serif'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 0
+      object Label1: TLabel
+        Left = 16
+        Top = 25
+        Width = 63
+        Height = 16
+        Caption = 'Reference'
+        Color = clBtnFace
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -15
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
+        ParentColor = False
+        ParentFont = False
+      end
+      object Label3: TLabel
+        Left = 14
+        Top = 52
+        Width = 63
+        Height = 16
+        Caption = 'MAWB No'
+        Color = clBtnFace
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -15
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
+        ParentColor = False
+        ParentFont = False
+      end
+      object Label8: TLabel
+        Left = 44
+        Top = 81
+        Width = 33
+        Height = 16
+        Caption = 'TD id'
+        Color = clBtnFace
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -15
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
+        ParentColor = False
+        ParentFont = False
+      end
+      object wwDBEdit1: TwwDBEdit
+        Left = 80
+        Top = 20
+        Width = 167
+        Height = 24
+        TabStop = False
+        BiDiMode = bdLeftToRight
+        CharCase = ecUpperCase
+        Color = clBtnFace
+        ParentBiDiMode = False
+        DataField = 'REFERENCE_NUMBER'
+        DataSource = DocumentSRC
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
+        ParentFont = False
+        ReadOnly = True
+        TabOrder = 0
+        UnboundDataType = wwDefault
+        WantReturns = False
+        WordWrap = False
+      end
+      object MawbFLD: TwwDBEdit
+        Left = 80
+        Top = 49
+        Width = 167
+        Height = 24
+        CharCase = ecUpperCase
+        Color = clBtnFace
+        DataField = 'MAWB_ID'
+        DataSource = DocumentSRC
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
+        ParentFont = False
+        Picture.PictureMask = '*11#'
+        Picture.AutoFill = False
+        TabOrder = 1
+        UnboundDataType = wwDefault
+        WantReturns = False
+        WordWrap = False
+      end
+      object TDidFLD: TwwDBEdit
+        Left = 80
+        Top = 79
+        Width = 167
+        Height = 24
+        CharCase = ecUpperCase
+        Color = clBtnFace
+        DataField = 'XML_CONSOLIDATED_ID'
+        DataSource = DocumentSRC
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
+        ParentFont = False
+        Picture.PictureMask = '*11#'
+        Picture.AutoFill = False
+        TabOrder = 2
+        UnboundDataType = wwDefault
+        WantReturns = False
+        WordWrap = False
+      end
+    end
+    object AirportPNL: TGroupBox
+      Left = 305
+      Top = 102
+      Width = 226
+      Height = 244
+      Caption = 'General Details'
+      Enabled = False
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -15
+      Font.Name = 'MS Sans Serif'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 1
+      object Label13: TLabel
+        Left = 26
+        Top = 85
+        Width = 50
+        Height = 16
+        Caption = 'Rotation'
+        Color = clBtnFace
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -15
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
+        ParentColor = False
+        ParentFont = False
+      end
+      object Label12: TLabel
+        Left = 30
+        Top = 114
+        Width = 45
+        Height = 16
+        Caption = 'C/Book'
+        Color = clBtnFace
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -15
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
+        ParentColor = False
+        ParentFont = False
+      end
+      object Label4: TLabel
+        Left = 7
+        Top = 54
+        Width = 70
+        Height = 16
+        Caption = 'Arrival Date'
+        Color = clBtnFace
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -15
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
+        ParentColor = False
+        ParentFont = False
+      end
+      object Label9: TLabel
+        Left = 15
+        Top = 25
+        Width = 63
+        Height = 16
+        Caption = 'Form Date'
+        Color = clBtnFace
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -15
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
+        ParentColor = False
+        ParentFont = False
+      end
+      object RotationFLD: TwwDBEdit
+        Left = 79
+        Top = 80
+        Width = 127
+        Height = 24
+        Color = clBtnFace
+        DataField = 'ROTATION_NUMBER'
+        DataSource = DocumentSRC
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 0
+        UnboundDataType = wwDefault
+        WantReturns = False
+        WordWrap = False
+      end
+      object CBookFLD: TwwDBEdit
+        Left = 79
+        Top = 110
+        Width = 127
+        Height = 24
+        Color = clBtnFace
+        DataField = 'CBOOK_NUMBER'
+        DataSource = DocumentSRC
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 1
+        UnboundDataType = wwDefault
+        WantReturns = False
+        WordWrap = False
+      end
+      object wwDBEdit3: TwwDBEdit
+        Left = 79
+        Top = 49
+        Width = 129
+        Height = 24
+        TabStop = False
+        CharCase = ecUpperCase
+        Color = clBtnFace
+        DataField = 'DATE_ARRIVED'
+        DataSource = DocumentSRC
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
+        ParentFont = False
+        ReadOnly = True
+        TabOrder = 2
+        UnboundDataType = wwDefault
+        WantReturns = False
+        WordWrap = False
+      end
+      object wwDBEdit6: TwwDBEdit
+        Left = 79
+        Top = 20
+        Width = 129
+        Height = 24
+        TabStop = False
+        CharCase = ecUpperCase
+        Color = clBtnFace
+        DataField = 'FORM_DATE'
+        DataSource = DocumentSRC
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
+        ParentFont = False
+        ReadOnly = True
+        TabOrder = 3
+        UnboundDataType = wwDefault
+        WantReturns = False
+        WordWrap = False
+      end
+    end
+    object fcShapeBtn1: TfcShapeBtn
+      Left = 532
+      Top = 108
+      Width = 149
+      Height = 61
+      Caption = 'Create XML'
+      Color = clBtnFace
+      DitherColor = clWhite
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -17
+      Font.Name = 'MS Sans Serif'
+      Font.Style = [fsBold]
+      Glyph.Data = {
+        76010000424D7601000000000000760000002800000020000000100000000100
+        04000000000000010000120B0000120B00001000000000000000000000000000
+        800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF003FFFFFFFFFFF
+        FFFF33333333333FFFFF3FFFFFFFFF00000F333333333377777F33FFFFFFFF09
+        990F33333333337F337F333FFFFFFF09990F33333333337F337F3333FFFFFF09
+        990F33333333337FFF7F33333FFFFF00000F3333333333777773333333FFFFFF
+        FFFF3FFFFF3333333F330000033FFFFF0FFF77777F3333337FF30EEE0333FFF0
+        00FF7F337FFF333777FF0EEE00033F00000F7F33777F3777777F0EEE0E033000
+        00007FFF7F7FF777777700000E00033000FF777773777F3777F3330EEE0E0330
+        00FF337FFF7F7F3777F33300000E033000FF337777737F37773333330EEE0300
+        03FF33337FFF77777333333300000333333F3333777773333333}
+      NumGlyphs = 2
+      ParentClipping = True
+      ParentFont = False
+      RoundRectBias = 25
+      ShadeStyle = fbsHighlight
+      TabOrder = 2
+      TextOptions.Alignment = taCenter
+      TextOptions.Style = fclsLowered
+      TextOptions.VAlignment = vaVCenter
+    end
+    object wwDBEdit4: TwwDBEdit
+      Left = 108
+      Top = 394
+      Width = 149
+      Height = 24
+      DataField = 'XML_CONSOLIDATED_ID'
+      DataSource = DocumentSRC
+      TabOrder = 3
+      UnboundDataType = wwDefault
+      WantReturns = False
+      WordWrap = False
+    end
+    object GroupBox1: TGroupBox
+      Left = 1
+      Top = 1
+      Width = 1059
+      Height = 89
+      Align = alTop
+      Caption = 'Find Mawb'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -15
+      Font.Name = 'MS Sans Serif'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 4
+      object Label7: TLabel
+        Left = 20
+        Top = 25
+        Width = 55
+        Height = 16
+        Caption = 'By Mawb'
+        Color = clBtnFace
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -15
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
+        ParentColor = False
+        ParentFont = False
+      end
+      object SpeedButton2: TSpeedButton
+        Left = 176
+        Top = 49
+        Width = 26
+        Height = 26
+        Hint = 'Find Hawb in this Mawb'
+        Flat = True
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = 'MS Sans Serif'
+        Font.Style = [fsBold]
+        Glyph.Data = {
+          76010000424D7601000000000000760000002800000020000000100000000100
+          04000000000000010000130B0000130B00001000000000000000000000000000
+          800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+          FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
+          33033333333333333F7F3333333333333000333333333333F777333333333333
+          000333333333333F777333333333333000333333333333F77733333333333300
+          033333333FFF3F777333333700073B703333333F7773F77733333307777700B3
+          33333377333777733333307F8F8F7033333337F333F337F3333377F8F9F8F773
+          3333373337F3373F3333078F898F870333337F33F7FFF37F333307F99999F703
+          33337F377777337F3333078F898F8703333373F337F33373333377F8F9F8F773
+          333337F3373337F33333307F8F8F70333333373FF333F7333333330777770333
+          333333773FF77333333333370007333333333333777333333333}
+        NumGlyphs = 2
+        ParentFont = False
+        OnClick = SpeedButton2Click
+      end
+      object Label11: TLabel
+        Left = 246
+        Top = 25
+        Width = 52
+        Height = 16
+        Caption = 'By TD id'
+        Color = clBtnFace
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -15
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
+        ParentColor = False
+        ParentFont = False
+      end
+      object SpeedButton3: TSpeedButton
+        Left = 399
+        Top = 49
+        Width = 26
+        Height = 26
+        Hint = 'Find Hawb in this Mawb'
+        Flat = True
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = 'MS Sans Serif'
+        Font.Style = [fsBold]
+        Glyph.Data = {
+          76010000424D7601000000000000760000002800000020000000100000000100
+          04000000000000010000130B0000130B00001000000000000000000000000000
+          800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+          FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
+          33033333333333333F7F3333333333333000333333333333F777333333333333
+          000333333333333F777333333333333000333333333333F77733333333333300
+          033333333FFF3F777333333700073B703333333F7773F77733333307777700B3
+          33333377333777733333307F8F8F7033333337F333F337F3333377F8F9F8F773
+          3333373337F3373F3333078F898F870333337F33F7FFF37F333307F99999F703
+          33337F377777337F3333078F898F8703333373F337F33373333377F8F9F8F773
+          333337F3373337F33333307F8F8F70333333373FF333F7333333330777770333
+          333333773FF77333333333370007333333333333777333333333}
+        NumGlyphs = 2
+        ParentFont = False
+        OnClick = SpeedButton3Click
+      end
+      object ByMawbFLD: TwwDBEdit
+        Left = 20
+        Top = 49
+        Width = 149
+        Height = 24
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
+        ParentFont = False
+        Picture.PictureMask = '*11#'
+        Picture.AutoFill = False
+        Picture.AllowInvalidExit = True
+        TabOrder = 0
+        UnboundDataType = wwDefault
+        WantReturns = False
+        WordWrap = False
+      end
+      object ByTdidFLD: TwwDBEdit
+        Left = 246
+        Top = 49
+        Width = 149
+        Height = 24
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 1
+        UnboundDataType = wwDefault
+        WantReturns = False
+        WordWrap = False
+      end
+    end
+  end
+  object Panel2: TPanel
+    Left = 0
+    Top = 0
+    Width = 1061
+    Height = 70
+    Align = alTop
+    BevelInner = bvRaised
+    Caption = 'Panel2'
+    TabOrder = 1
+    object fcLabel1: TfcLabel
+      Left = 2
+      Top = 2
+      Width = 1057
+      Height = 66
+      Align = alClient
+      Caption = 'Deconsolidation'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlue
+      Font.Height = -38
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentFont = False
+      TextOptions.Alignment = taCenter
+      TextOptions.Style = fclsLowered
+      TextOptions.VAlignment = vaVCenter
+    end
+  end
+  object Panel4: TPanel
+    Left = 0
+    Top = 731
+    Width = 1061
+    Height = 53
+    Align = alBottom
+    TabOrder = 2
+    object BitBtn2: TBitBtn
+      Left = 10
+      Top = 6
+      Width = 88
+      Height = 41
+      Caption = 'Close'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -18
+      Font.Name = 'MS Sans Serif'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 0
+      OnClick = BitBtn2Click
+      Glyph.Data = {
+        76010000424D7601000000000000760000002800000020000000100000000100
+        04000000000000010000120B0000120B00001000000000000000000000000000
+        800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00330000000000
+        03333377777777777F333301111111110333337F333333337F33330111111111
+        0333337F333333337F333301111111110333337F333333337F33330111111111
+        0333337F333333337F333301111111110333337F333333337F33330111111111
+        0333337F3333333F7F333301111111B10333337F333333737F33330111111111
+        0333337F333333337F333301111111110333337F33FFFFF37F3333011EEEEE11
+        0333337F377777F37F3333011EEEEE110333337F37FFF7F37F3333011EEEEE11
+        0333337F377777337F333301111111110333337F333333337F33330111111111
+        0333337FFFFFFFFF7F3333000000000003333377777777777333}
+      NumGlyphs = 2
+    end
+  end
+  object DocumentSQL: TQuery
+    DatabaseName = 'CabOutData'
+    RequestLive = True
+    SQL.Strings = (
+      'Select * from Document_master where serial_Number= :SerialNUmber')
+    Left = 720
+    Top = 184
+    ParamData = <
+      item
+        DataType = ftInteger
+        Name = 'SerialNUmber'
+        ParamType = ptInput
+        Value = 0
+      end>
+  end
+  object DocumentSRC: TDataSource
+    DataSet = DocumentSQL
+    Left = 720
+    Top = 257
+  end
+  object ParameterSQL: TwwQuery
+    DatabaseName = 'CabOutData'
+    SQL.Strings = (
+      'Select * from System_parameters where key = :Key')
+    ValidateWithMask = True
+    Left = 592
+    Top = 368
+    ParamData = <
+      item
+        DataType = ftInteger
+        Name = 'Key'
+        ParamType = ptInput
+        Value = 0
+      end>
+    object ParameterSQLPARAMETER_ID: TStringField
+      FieldName = 'PARAMETER_ID'
+      Origin = 'CABOUTDATA.SYSTEM_PARAMETERS.PARAMETER_ID'
+      FixedChar = True
+    end
+    object ParameterSQLINT_1: TIntegerField
+      FieldName = 'INT_1'
+      Origin = 'CABOUTDATA.SYSTEM_PARAMETERS.INT_1'
+    end
+    object ParameterSQLINT_2: TIntegerField
+      FieldName = 'INT_2'
+      Origin = 'CABOUTDATA.SYSTEM_PARAMETERS.INT_2'
+    end
+    object ParameterSQLSTR_1: TStringField
+      FieldName = 'STR_1'
+      Origin = 'CABOUTDATA.SYSTEM_PARAMETERS.STR_1'
+      FixedChar = True
+      Size = 30
+    end
+    object ParameterSQLSTR_2: TStringField
+      FieldName = 'STR_2'
+      Origin = 'CABOUTDATA.SYSTEM_PARAMETERS.STR_2'
+      FixedChar = True
+      Size = 30
+    end
+    object ParameterSQLSTR_3: TStringField
+      FieldName = 'STR_3'
+      Origin = 'CABOUTDATA.SYSTEM_PARAMETERS.STR_3'
+      Size = 80
+    end
+    object ParameterSQLSTR_4: TStringField
+      FieldName = 'STR_4'
+      Origin = 'CABOUTDATA.SYSTEM_PARAMETERS.STR_4'
+      Size = 80
+    end
+    object ParameterSQLNUM_1: TFloatField
+      FieldName = 'NUM_1'
+      Origin = 'CABOUTDATA.SYSTEM_PARAMETERS.NUM_1'
+    end
+    object ParameterSQLNUM_2: TFloatField
+      FieldName = 'NUM_2'
+      Origin = 'CABOUTDATA.SYSTEM_PARAMETERS.NUM_2'
+    end
+    object ParameterSQLDATE_1: TDateTimeField
+      FieldName = 'DATE_1'
+      Origin = 'CABOUTDATA.SYSTEM_PARAMETERS.DATE_1'
+    end
+    object ParameterSQLDATE_2: TDateTimeField
+      FieldName = 'DATE_2'
+      Origin = 'CABOUTDATA.SYSTEM_PARAMETERS.DATE_2'
+    end
+    object ParameterSQLSTR_5: TStringField
+      FieldName = 'STR_5'
+      Origin = 'CABOUTDATA.SYSTEM_PARAMETERS.STR_5'
+      Size = 80
+    end
+  end
+end

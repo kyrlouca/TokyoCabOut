@@ -1,0 +1,26 @@
+BDE/IBX Migration Wizard log
+
+Created at: 1/13/2013 9:12:02 AM
+
+Initializing unit list
+
+Creating backup folder
+
+Allocating temporary folder
+
+Processing file: E:\All\CabOut\Programs\Airwaybill.pas
+
+3 change(s)
+
+Processing file: E:\All\CabOut\Programs\Airwaybill.DFM
+
+2 change(s)
+
+Replacing original files with changed versions
+
+Backup file: E:\All\CabOut\Programs\RBackup\RExpert.reu
+
+Removing temporary folder
+
+Replace procedure was performed sucessfully.
+
