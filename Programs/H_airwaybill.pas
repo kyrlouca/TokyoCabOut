@@ -4,9 +4,8 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  StdCtrls, Mask,  IBC, MemDS, IBCError, wwSpeedButton, wwDBNavigator,
-  wwclearpanel, Buttons, ExtCtrls, wwdbedit, Grids, Wwdbigrd, Wwdbgrid,
-  Wwquery, wwstorep, Db, DBAccess;
+  StdCtrls, Mask,  IBC, MemDS, IBCError, wwSpeedButton, wwDBNavigator, DBAccess,
+  Data.DB, vcl.Wwdbedit, Vcl.Buttons, Vcl.ExtCtrls;
 
 type
   TH_airwaybillFRM = class(TForm)

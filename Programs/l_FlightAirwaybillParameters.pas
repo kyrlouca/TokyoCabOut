@@ -5,9 +5,9 @@ interface
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   StdCtrls, Mask,  IBC, MemDS, IBCError, wwSpeedButton, wwDBNavigator,
-  wwclearpanel, Buttons, ExtCtrls, wwdbedit, Grids, Wwdbigrd, Wwdbgrid,
-  Wwquery, wwstorep, fcButton, fcImgBtn, fcShapeBtn, Wwkeycb, DBAccess, Db,
-  fcdbtreeview, DBCtrls, DBCGrids, wwdblook;
+  wwclearpanel, Buttons, ExtCtrls, wwdbedit, Grids, Wwdbigrd, Wwdbgrid, Data.DB,
+  DBAccess;
+
 
 type
   TL_AdditionalParametersFRM = class(TForm)

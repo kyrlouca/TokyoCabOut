@@ -1,0 +1,22 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
+        <AppEnableHighDPI>true</AppEnableHighDPI>
+        <DCC_DcpOutput>C:\Data\DelphiProjects\TokyoCabOut\EXE\</DCC_DcpOutput>
+        <DCC_ExeOutput>C:\Data\DelphiProjects\TokyoCabOut\EXE\</DCC_ExeOutput>
+        <DCC_BplOutput>C:\Data\DelphiProjects\TokyoCabOut\EXE\</DCC_BplOutput>
+        <DCC_UnitSearchPath>C:\Data\DelphiProjects\TokyoCabOut\Programs</DCC_UnitSearchPath>
+        <DCC_DcuOutput>C:\Data\DelphiProjects\TokyoCabOut\DCU\</DCC_DcuOutput>
+        <VerInfo_MinorVer>0</VerInfo_MinorVer>
+        <VerInfo_Locale>1033</VerInfo_Locale>
+        <VerInfo_Keys>CompanyName=;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=;ProgramID=com.embarcadero.$(MSBuildProjectName)</VerInfo_Keys>
+    </PropertyGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Delphi.Personality.12</Borland.Personality>
+        <Borland.ProjectType>OptionSet</Borland.ProjectType>
+        <BorlandProject>
+            <Delphi.Personality/>
+        </BorlandProject>
+        <ProjectFileVersion>12</ProjectFileVersion>
+    </ProjectExtensions>
+</Project>

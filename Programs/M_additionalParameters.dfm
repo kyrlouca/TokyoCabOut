@@ -1,9 +1,9 @@
 object M_additionalParametersFRM: TM_additionalParametersFRM
   Left = 317
   Top = 126
-  Width = 764
-  Height = 678
   Caption = 'Additional Params'
+  ClientHeight = 0
+  ClientWidth = 120
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -20,7 +20,7 @@ object M_additionalParametersFRM: TM_additionalParametersFRM
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 748
+    Width = 120
     Height = 53
     Align = alTop
     Caption = 'Additional Parameters'
@@ -31,14 +31,17 @@ object M_additionalParametersFRM: TM_additionalParametersFRM
     Font.Style = [fsBold]
     ParentFont = False
     TabOrder = 0
+    ExplicitWidth = 748
   end
   object Panel4: TPanel
     Left = 0
-    Top = 596
-    Width = 748
+    Top = -43
+    Width = 120
     Height = 43
     Align = alBottom
     TabOrder = 1
+    ExplicitTop = 596
+    ExplicitWidth = 748
     object BitBtn3: TBitBtn
       Left = 7
       Top = 4
@@ -50,9 +53,6 @@ object M_additionalParametersFRM: TM_additionalParametersFRM
       Font.Height = -15
       Font.Name = 'Arial'
       Font.Style = [fsBold]
-      ParentFont = False
-      TabOrder = 0
-      OnClick = BitBtn2Click
       Glyph.Data = {
         F6060000424DF606000000000000360000002800000018000000180000000100
         180000000000C006000000000000000000000000000000000000FFFFFFFFFFFF
@@ -110,15 +110,19 @@ object M_additionalParametersFRM: TM_additionalParametersFRM
         6093D95388CF003E93FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF003F94003F
         94003F94003F94003F94003F94003F94003F94003F94003F94003F94003F9400
         3F94003F94003F94003F94003F94003F94FFFFFFFFFFFFFFFFFF}
+      ParentFont = False
+      TabOrder = 0
+      OnClick = BitBtn2Click
     end
   end
   object Panel2: TPanel
     Left = 0
     Top = 53
-    Width = 748
+    Width = 120
     Height = 39
     Align = alTop
     TabOrder = 2
+    ExplicitWidth = 748
     object Nav1: TwwDBNavigator
       Left = 1
       Top = 7
@@ -237,18 +241,19 @@ object M_additionalParametersFRM: TM_additionalParametersFRM
   object Panel3: TPanel
     Left = 0
     Top = 92
-    Width = 748
+    Width = 120
     Height = 504
     Align = alClient
     TabOrder = 3
     object Panel5: TPanel
       Left = 1
       Top = 1
-      Width = 746
+      Width = 118
       Height = 169
       Align = alTop
       BevelOuter = bvNone
       TabOrder = 0
+      ExplicitWidth = 746
       object GroupBox1: TGroupBox
         Left = 16
         Top = 15
@@ -340,13 +345,14 @@ object M_additionalParametersFRM: TM_additionalParametersFRM
     object Grid1: TwwDBGrid
       Left = 1
       Top = 170
-      Width = 746
+      Width = 118
       Height = 333
       Selected.Strings = (
         'SERIAL_NUMBER'#9'5'#9'S/N'
         'INFO_TYPE'#9'12'#9'Parameter'
         'INFO_VALUE'#9'30'#9'Value')
       IniAttributes.Delimiter = ';;'
+      IniAttributes.UnicodeIniFile = False
       TitleColor = clBtnFace
       FixedCols = 0
       ShowHorzScrollBar = True
@@ -371,7 +377,6 @@ object M_additionalParametersFRM: TM_additionalParametersFRM
       TitleFont.Style = []
       TitleLines = 1
       TitleButtons = False
-      IndicatorColor = icBlack
     end
   end
   object TableSRC: TDataSource

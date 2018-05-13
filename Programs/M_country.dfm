@@ -1,8 +1,8 @@
 object M_countryFRM: TM_countryFRM
   Left = 352
   Top = 165
-  Width = 1052
-  Height = 700
+  ClientHeight = 0
+  ClientWidth = 120
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -40,7 +40,7 @@ object M_countryFRM: TM_countryFRM
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 1034
+    Width = 120
     Height = 65
     Align = alTop
     Caption = 'Edit Countries'
@@ -51,14 +51,17 @@ object M_countryFRM: TM_countryFRM
     Font.Style = [fsBold]
     ParentFont = False
     TabOrder = 0
+    ExplicitWidth = 1034
   end
   object Panel4: TPanel
     Left = 0
-    Top = 589
-    Width = 1034
+    Top = -66
+    Width = 120
     Height = 66
     Align = alBottom
     TabOrder = 1
+    ExplicitTop = 589
+    ExplicitWidth = 1034
     object AcceptBTN: TBitBtn
       Left = 22
       Top = 8
@@ -70,9 +73,6 @@ object M_countryFRM: TM_countryFRM
       Font.Height = -15
       Font.Name = 'MS Sans Serif'
       Font.Style = [fsBold]
-      ParentFont = False
-      TabOrder = 0
-      OnClick = AcceptBTNClick
       Glyph.Data = {
         DE010000424DDE01000000000000760000002800000024000000120000000100
         0400000000006801000000000000000000001000000000000000000000000000
@@ -91,6 +91,9 @@ object M_countryFRM: TM_countryFRM
         333A333333333333333338330000333333333333333333333333333333333333
         0000}
       NumGlyphs = 2
+      ParentFont = False
+      TabOrder = 0
+      OnClick = AcceptBTNClick
     end
     object CancelBTN: TBitBtn
       Left = 138
@@ -104,9 +107,6 @@ object M_countryFRM: TM_countryFRM
       Font.Height = -15
       Font.Name = 'MS Sans Serif'
       Font.Style = [fsBold]
-      ParentFont = False
-      TabOrder = 1
-      OnClick = CancelBTNClick
       Glyph.Data = {
         DE010000424DDE01000000000000760000002800000024000000120000000100
         0400000000006801000000000000000000001000000000000000000000000000
@@ -125,12 +125,15 @@ object M_countryFRM: TM_countryFRM
         3333333333333333333888330000333333333333333333333333333333333333
         0000}
       NumGlyphs = 2
+      ParentFont = False
+      TabOrder = 1
+      OnClick = CancelBTNClick
     end
   end
   object Panel3: TPanel
     Left = 0
     Top = 65
-    Width = 1034
+    Width = 120
     Height = 524
     Align = alClient
     TabOrder = 2
@@ -262,6 +265,7 @@ object M_countryFRM: TM_countryFRM
         'CODE_2'#9'6'#9'Code'
         'NAME'#9'60'#9'Name')
       IniAttributes.Delimiter = ';;'
+      IniAttributes.UnicodeIniFile = False
       TitleColor = clBtnFace
       FixedCols = 0
       ShowHorzScrollBar = True
@@ -280,7 +284,6 @@ object M_countryFRM: TM_countryFRM
       TitleFont.Style = []
       TitleLines = 1
       TitleButtons = False
-      IndicatorColor = icBlack
     end
     object wwDBNavigator1: TwwDBNavigator
       Left = 16

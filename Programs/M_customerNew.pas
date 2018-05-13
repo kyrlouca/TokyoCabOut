@@ -5,9 +5,8 @@ interface
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   StdCtrls, Buttons, ExtCtrls, wwSpeedButton, wwDBNavigator, Db, Wwdatsrc,
-   DBAccess, IBC, MemDS, IBCError, Wwtable, Grids, Wwdbigrd, Wwdbgrid, Wwkeycb, wwDialog, wwidlg,
-  Mask, wwdbedit, DBCtrls, wwdblook, wwstorep, Wwdotdot, Wwdbcomb, ComCtrls,
-  wwclearpanel,KyriacosTypes;
+   DBAccess, IBC, MemDS, IBCError, Grids, Wwdbigrd, Wwdbgrid, Wwkeycb, wwDialog, wwidlg,
+  Mask, wwdbedit, vcl.wwdblook, Vcl.DBCtrls, vcl.Wwdotdot, vcl.Wwdbcomb;
 
 type
   TM_CustomerNewFRM = class(TForm)
@@ -120,7 +119,7 @@ type
     InCustomerName:String;
     InCustomerCode:Integer;
 
-    GOutCustomerRecord:TCustomerRecord;
+//    GOutCustomerRecord:TCustomerRecord;
     OutCustomerCode:Integer;
     OutCustomerName:String;
     OUtCustomerAccount:Integer;
@@ -245,15 +244,15 @@ procedure TM_CustomerNewFRM.AcceptBTNClick(Sender: TObject);
 Var
 TheBookMark:TBookMark;
 begin
-     if CustomerSQL.State in [dsEdit,dsInsert] then
-        CustomerSQL.Post;
-
-        GOutCustomerRecord.Code:=CustomerSQL.fieldByName('Code').AsInteger;
-        GOutCustomerRecord.CustomerAccount:=CustomerSQL.fieldByName('Account_Number').AsInteger;
-        GOutCustomerRecord.Name:=CustomerSQL.fieldByName('Name').AsString;
-        GOutCustomerRecord.District:=CustomerSQL.fieldByName('D_DISTRICT_CODE').AsString;
-        GOutCustomerRecord.District_serial:=CustomerSQL.fieldByName('FK_DISTRICT').AsInteger;
-        GOutCustomerRecord.DistrictName:=CustomerSQL.fieldByName('D_Desc').AsString;
+//     if CustomerSQL.State in [dsEdit,dsInsert] then
+//        CustomerSQL.Post;
+//
+//        GOutCustomerRecord.Code:=CustomerSQL.fieldByName('Code').AsInteger;
+//        GOutCustomerRecord.CustomerAccount:=CustomerSQL.fieldByName('Account_Number').AsInteger;
+//        GOutCustomerRecord.Name:=CustomerSQL.fieldByName('Name').AsString;
+//        GOutCustomerRecord.District:=CustomerSQL.fieldByName('D_DISTRICT_CODE').AsString;
+//        GOutCustomerRecord.District_serial:=CustomerSQL.fieldByName('FK_DISTRICT').AsInteger;
+//        GOutCustomerRecord.DistrictName:=CustomerSQL.fieldByName('D_Desc').AsString;
 
 end;
 

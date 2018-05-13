@@ -1,8 +1,8 @@
 object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
   Left = 145
   Top = 305
-  Width = 1364
-  Height = 860
+  ClientHeight = 821
+  ClientWidth = 1348
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -100,9 +100,6 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
       Font.Height = -12
       Font.Name = 'MS Sans Serif'
       Font.Style = [fsBold]
-      ParentFont = False
-      TabOrder = 0
-      OnClick = AcceptBTNClick
       Glyph.Data = {
         DE010000424DDE01000000000000760000002800000024000000120000000100
         0400000000006801000000000000000000001000000000000000000000000000
@@ -121,6 +118,9 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         333A333333333333333338330000333333333333333333333333333333333333
         0000}
       NumGlyphs = 2
+      ParentFont = False
+      TabOrder = 0
+      OnClick = AcceptBTNClick
     end
     object CancelBTN: TBitBtn
       Left = 112
@@ -134,10 +134,6 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
       Font.Height = -12
       Font.Name = 'MS Sans Serif'
       Font.Style = [fsBold]
-      ModalResult = 2
-      ParentFont = False
-      TabOrder = 1
-      OnClick = CancelBTNClick
       Glyph.Data = {
         DE010000424DDE01000000000000760000002800000024000000120000000100
         0400000000006801000000000000000000001000000000000000000000000000
@@ -155,7 +151,11 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         38F338F300003333333333333919333333388333338FFF830000333333333333
         3333333333333333333888330000333333333333333333333333333333333333
         0000}
+      ModalResult = 2
       NumGlyphs = 2
+      ParentFont = False
+      TabOrder = 1
+      OnClick = CancelBTNClick
     end
   end
   object Panel3: TPanel
@@ -483,7 +483,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         Left = 65
         Top = 74
         Width = 98
-        Height = 27
+        Height = 26
         ShowButton = True
         Style = csDropDown
         MapList = True
@@ -505,7 +505,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         Left = 65
         Top = 217
         Width = 72
-        Height = 24
+        Height = 21
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
@@ -523,13 +523,14 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         TabOrder = 8
         AutoDropDown = False
         ShowButton = True
+        PreciseEditRegion = False
         AllowClearKey = False
       end
       object ServiceCodeFLD: TwwDBLookupCombo
         Left = 187
         Top = 217
         Width = 67
-        Height = 24
+        Height = 21
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
@@ -547,6 +548,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         TabOrder = 9
         AutoDropDown = False
         ShowButton = True
+        PreciseEditRegion = False
         AllowClearKey = False
       end
       object AccountNumbFD: TwwDBEdit
@@ -795,7 +797,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         Left = 65
         Top = 176
         Width = 98
-        Height = 27
+        Height = 26
         CharCase = ecUpperCase
         DropDownAlignment = taLeftJustify
         Selected.Strings = (
@@ -808,6 +810,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         TabOrder = 7
         AutoDropDown = True
         ShowButton = True
+        PreciseEditRegion = False
         AllowClearKey = False
         ShowMatchText = True
       end
@@ -1105,7 +1108,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         Left = 65
         Top = 176
         Width = 98
-        Height = 27
+        Height = 26
         CharCase = ecUpperCase
         DropDownAlignment = taLeftJustify
         Selected.Strings = (
@@ -1118,6 +1121,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         TabOrder = 6
         AutoDropDown = True
         ShowButton = True
+        PreciseEditRegion = False
         AllowClearKey = False
         ShowMatchText = True
       end
@@ -1265,6 +1269,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
           'AMOUNT'#9'10'#9'Amount'
           'CURRENCY'#9'10'#9'Currency')
         IniAttributes.Delimiter = ';;'
+        IniAttributes.UnicodeIniFile = False
         TitleColor = clBtnFace
         FixedCols = 0
         ShowHorzScrollBar = True
@@ -1278,7 +1283,6 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         TitleFont.Style = []
         TitleLines = 1
         TitleButtons = False
-        IndicatorColor = icBlack
       end
       object wwDBNavigator2: TwwDBNavigator
         Left = 20
@@ -1446,7 +1450,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         Left = 13
         Top = 20
         Width = 183
-        Height = 24
+        Height = 21
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
@@ -1461,6 +1465,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         TabOrder = 0
         AutoDropDown = False
         ShowButton = True
+        PreciseEditRegion = False
         AllowClearKey = False
         OnCloseUp = ItineraryFLDCloseUp
       end
@@ -1604,6 +1609,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
           'COUNTRY_CODE'#9'8'#9'Code'
           'Country'#9'16'#9'Country')
         IniAttributes.Delimiter = ';;'
+        IniAttributes.UnicodeIniFile = False
         TitleColor = clBtnFace
         FixedCols = 0
         ShowHorzScrollBar = True
@@ -1624,13 +1630,12 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         TitleFont.Style = []
         TitleLines = 1
         TitleButtons = False
-        IndicatorColor = icBlack
       end
       object CountryLookupFLD: TwwDBLookupCombo
         Left = 124
         Top = 163
         Width = 98
-        Height = 24
+        Height = 21
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
@@ -1650,6 +1655,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         AutoDropDown = True
         ShowButton = True
         SeqSearchOptions = [ssoEnabled, ssoCaseSensitive]
+        PreciseEditRegion = False
         AllowClearKey = False
         ShowMatchText = True
       end
@@ -1671,7 +1677,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         Left = 13
         Top = 20
         Width = 215
-        Height = 25
+        Height = 23
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -12
@@ -1687,6 +1693,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         TabOrder = 0
         AutoDropDown = False
         ShowButton = True
+        PreciseEditRegion = False
         AllowClearKey = False
         ShowMatchText = True
         OnCloseUp = ParamGroupFLDCloseUp
@@ -1811,6 +1818,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
           'INFO_TYPE'#9'11'#9'Parameter'
           'INFO_VALUE'#9'20'#9'Value')
         IniAttributes.Delimiter = ';;'
+        IniAttributes.UnicodeIniFile = False
         TitleColor = clBtnFace
         FixedCols = 1
         ShowHorzScrollBar = True
@@ -1831,7 +1839,6 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         TitleFont.Style = []
         TitleLines = 1
         TitleButtons = False
-        IndicatorColor = icBlack
       end
     end
   end
@@ -1839,7 +1846,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
     Left = 273
     Top = 644
     Width = 98
-    Height = 24
+    Height = 21
     DropDownAlignment = taLeftJustify
     DataField = 'CURRENCY'
     DataSource = FA_ItemSRC
@@ -1848,6 +1855,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
     TabOrder = 3
     AutoDropDown = False
     ShowButton = True
+    PreciseEditRegion = False
     AllowClearKey = False
   end
   object FlightAirwaybillCDS: TIBCDataSource
@@ -1909,11 +1917,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         DataType = ftInteger
         Name = 'SERIAL_NUMBER'
         ParamType = ptInput
-      end
-      item
-        DataType = ftInteger
-        Name = 'SERIAL_NUMBER'
-        ParamType = ptInput
+        Value = nil
       end>
     object FairwaybillCountrySQLORDER_POSITION: TIntegerField
       DisplayLabel = 'Pos'
@@ -2093,12 +2097,6 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         Name = 'SERIAL_NUMBER'
         ParamType = ptInput
         Value = 12
-      end
-      item
-        DataType = ftInteger
-        Name = 'SERIAL_NUMBER'
-        ParamType = ptInput
-        Value = 12
       end>
     object ItineraryCountrySQLSERIAL_NUMBER: TIntegerField
       FieldName = 'SERIAL_NUMBER'
@@ -2236,6 +2234,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         DataType = ftInteger
         Name = 'SerialNumber'
         ParamType = ptInput
+        Value = nil
       end>
     object FlightAirwaybillSQLHAWB_ID: TStringField
       DisplayLabel = 'Hawb Id'
@@ -2562,10 +2561,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
       item
         DataType = ftUnknown
         Name = 'SERIAL_NUMBER'
-      end
-      item
-        DataType = ftUnknown
-        Name = 'SERIAL_NUMBER'
+        Value = nil
       end>
     object FA_ItemSQLSEQUENCE: TIntegerField
       DisplayLabel = 'Sequence'
@@ -2767,10 +2763,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
       item
         DataType = ftUnknown
         Name = 'SERIAL_NUMBER'
-      end
-      item
-        DataType = ftUnknown
-        Name = 'SERIAL_NUMBER'
+        Value = nil
       end>
     object FAIrwayBillParamSQLINFO_TYPE: TStringField
       DisplayLabel = 'Parameter'

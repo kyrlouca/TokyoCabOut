@@ -1,9 +1,9 @@
 object L_AirwaybillsHighFRM: TL_AirwaybillsHighFRM
   Left = -87
   Top = 84
-  Width = 1364
-  Height = 850
   Caption = 'L_AirwaybillsHighFRM'
+  ClientHeight = 0
+  ClientWidth = 120
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -18,7 +18,7 @@ object L_AirwaybillsHighFRM: TL_AirwaybillsHighFRM
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 1348
+    Width = 120
     Height = 53
     Align = alTop
     Caption = 'List Airwaybills NOT Scanned'
@@ -29,14 +29,17 @@ object L_AirwaybillsHighFRM: TL_AirwaybillsHighFRM
     Font.Style = [fsBold]
     ParentFont = False
     TabOrder = 0
+    ExplicitWidth = 1348
   end
   object Panel4: TPanel
     Left = 0
-    Top = 768
-    Width = 1348
+    Top = -43
+    Width = 120
     Height = 43
     Align = alBottom
     TabOrder = 1
+    ExplicitTop = 768
+    ExplicitWidth = 1348
     object BitBtn2: TBitBtn
       Left = 7
       Top = 7
@@ -48,9 +51,6 @@ object L_AirwaybillsHighFRM: TL_AirwaybillsHighFRM
       Font.Height = -15
       Font.Name = 'MS Sans Serif'
       Font.Style = [fsBold]
-      ParentFont = False
-      TabOrder = 0
-      OnClick = BitBtn2Click
       Glyph.Data = {
         76010000424D7601000000000000760000002800000020000000100000000100
         04000000000000010000120B0000120B00001000000000000000000000000000
@@ -65,12 +65,15 @@ object L_AirwaybillsHighFRM: TL_AirwaybillsHighFRM
         0333337F377777337F333301111111110333337F333333337F33330111111111
         0333337FFFFFFFFF7F3333000000000003333377777777777333}
       NumGlyphs = 2
+      ParentFont = False
+      TabOrder = 0
+      OnClick = BitBtn2Click
     end
   end
   object Panel3: TPanel
     Left = 0
     Top = 53
-    Width = 1348
+    Width = 120
     Height = 715
     Align = alClient
     TabOrder = 2
@@ -132,7 +135,7 @@ object L_AirwaybillsHighFRM: TL_AirwaybillsHighFRM
     object Panel6: TPanel
       Left = 40
       Top = 1
-      Width = 1307
+      Width = 79
       Height = 713
       Align = alClient
       BevelOuter = bvNone
@@ -141,11 +144,12 @@ object L_AirwaybillsHighFRM: TL_AirwaybillsHighFRM
       object Panel7: TPanel
         Left = 0
         Top = 0
-        Width = 1307
+        Width = 79
         Height = 79
         Align = alTop
         BevelOuter = bvNone
         TabOrder = 0
+        ExplicitWidth = 1307
         object Label1: TLabel
           Left = 1
           Top = 16
@@ -312,16 +316,17 @@ object L_AirwaybillsHighFRM: TL_AirwaybillsHighFRM
       object Panel8: TPanel
         Left = 0
         Top = 79
-        Width = 1307
+        Width = 79
         Height = 634
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 1
+        ExplicitWidth = 1307
       end
       object Panel9: TPanel
         Left = 0
         Top = 79
-        Width = 1307
+        Width = 79
         Height = 634
         Align = alClient
         BevelOuter = bvNone
@@ -331,7 +336,7 @@ object L_AirwaybillsHighFRM: TL_AirwaybillsHighFRM
           Left = 0
           Top = 0
           Width = 911
-          Height = 629
+          Height = 634
           Selected.Strings = (
             'SERIAL_NUMBER'#9'9'#9'SN'
             'SEQUENCE_NUMBER'#9'3'#9'Seq'
@@ -345,6 +350,7 @@ object L_AirwaybillsHighFRM: TL_AirwaybillsHighFRM
             'CONSIGNEE_NAME'#9'27'#9'Consignee'
             'IS_SCANNED'#9'12'#9'Scanned')
           IniAttributes.Delimiter = ';;'
+          IniAttributes.UnicodeIniFile = False
           TitleColor = clBtnFace
           FixedCols = 0
           ShowHorzScrollBar = True
@@ -364,9 +370,9 @@ object L_AirwaybillsHighFRM: TL_AirwaybillsHighFRM
           TitleButtons = True
           OnTitleButtonClick = AirGRDTitleButtonClick
           OnDblClick = AirGRDDblClick
-          IndicatorColor = icBlack
           ImageList = ImageList1
           TitleImageList = ImageList1
+          ExplicitHeight = 629
           object AirGRDIButton: TwwIButton
             Left = 0
             Top = 0
@@ -444,9 +450,6 @@ object L_AirwaybillsHighFRM: TL_AirwaybillsHighFRM
           Font.Height = -12
           Font.Name = 'MS Sans Serif'
           Font.Style = [fsBold]
-          ParentFont = False
-          TabOrder = 1
-          OnClick = DeleteSelectedBTNClick
           Glyph.Data = {
             DE010000424DDE01000000000000760000002800000024000000120000000100
             0400000000006801000000000000000000001000000000000000000000000000
@@ -465,6 +468,9 @@ object L_AirwaybillsHighFRM: TL_AirwaybillsHighFRM
             3333333333333333333333330000333333333333333333333333333333333333
             0000}
           NumGlyphs = 2
+          ParentFont = False
+          TabOrder = 1
+          OnClick = DeleteSelectedBTNClick
         end
         object InsertBTN: TBitBtn
           Left = 936
@@ -478,9 +484,6 @@ object L_AirwaybillsHighFRM: TL_AirwaybillsHighFRM
           Font.Height = -12
           Font.Name = 'MS Sans Serif'
           Font.Style = [fsBold]
-          ParentFont = False
-          TabOrder = 2
-          OnClick = InsertBTNClick
           Glyph.Data = {
             DE010000424DDE01000000000000760000002800000024000000120000000100
             0400000000006801000000000000000000001000000000000000000000000000
@@ -499,7 +502,10 @@ object L_AirwaybillsHighFRM: TL_AirwaybillsHighFRM
             3333333333333877733333330000333333333333333333333333338883333333
             0000}
           NumGlyphs = 2
+          ParentFont = False
           Style = bsNew
+          TabOrder = 2
+          OnClick = InsertBTNClick
         end
       end
     end
@@ -793,6 +799,7 @@ object L_AirwaybillsHighFRM: TL_AirwaybillsHighFRM
         DataType = ftInteger
         Name = 'AirwaybillSerial'
         ParamType = ptInput
+        Value = nil
       end>
   end
   object AirwaybillCDS: TIBCDataSource
@@ -804,7 +811,7 @@ object L_AirwaybillsHighFRM: TL_AirwaybillsHighFRM
     Left = 1081
     Top = 363
     Bitmap = {
-      494C010102000400040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010102000400080010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

@@ -1,8 +1,8 @@
 object M_FlightTableFRM: TM_FlightTableFRM
   Left = 402
   Top = 83
-  Width = 1052
-  Height = 698
+  ClientHeight = 0
+  ClientWidth = 120
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -40,7 +40,7 @@ object M_FlightTableFRM: TM_FlightTableFRM
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 1034
+    Width = 120
     Height = 65
     Align = alTop
     Caption = 'Edit Flights'
@@ -51,14 +51,17 @@ object M_FlightTableFRM: TM_FlightTableFRM
     Font.Style = [fsBold]
     ParentFont = False
     TabOrder = 0
+    ExplicitWidth = 1034
   end
   object Panel4: TPanel
     Left = 0
-    Top = 587
-    Width = 1034
+    Top = -66
+    Width = 120
     Height = 66
     Align = alBottom
     TabOrder = 1
+    ExplicitTop = 587
+    ExplicitWidth = 1034
     object AcceptBTN: TBitBtn
       Left = 22
       Top = 8
@@ -70,9 +73,6 @@ object M_FlightTableFRM: TM_FlightTableFRM
       Font.Height = -15
       Font.Name = 'MS Sans Serif'
       Font.Style = [fsBold]
-      ParentFont = False
-      TabOrder = 0
-      OnClick = AcceptBTNClick
       Glyph.Data = {
         DE010000424DDE01000000000000760000002800000024000000120000000100
         0400000000006801000000000000000000001000000000000000000000000000
@@ -91,6 +91,9 @@ object M_FlightTableFRM: TM_FlightTableFRM
         333A333333333333333338330000333333333333333333333333333333333333
         0000}
       NumGlyphs = 2
+      ParentFont = False
+      TabOrder = 0
+      OnClick = AcceptBTNClick
     end
     object CancelBTN: TBitBtn
       Left = 138
@@ -104,9 +107,6 @@ object M_FlightTableFRM: TM_FlightTableFRM
       Font.Height = -15
       Font.Name = 'MS Sans Serif'
       Font.Style = [fsBold]
-      ParentFont = False
-      TabOrder = 1
-      OnClick = CancelBTNClick
       Glyph.Data = {
         DE010000424DDE01000000000000760000002800000024000000120000000100
         0400000000006801000000000000000000001000000000000000000000000000
@@ -125,12 +125,15 @@ object M_FlightTableFRM: TM_FlightTableFRM
         3333333333333333333888330000333333333333333333333333333333333333
         0000}
       NumGlyphs = 2
+      ParentFont = False
+      TabOrder = 1
+      OnClick = CancelBTNClick
     end
   end
   object Panel3: TPanel
     Left = 0
     Top = 65
-    Width = 1034
+    Width = 120
     Height = 522
     Align = alClient
     TabOrder = 2
@@ -247,6 +250,7 @@ object M_FlightTableFRM: TM_FlightTableFRM
         TabOrder = 2
         AutoDropDown = False
         ShowButton = True
+        PreciseEditRegion = False
         AllowClearKey = False
         ShowMatchText = True
       end
@@ -261,6 +265,7 @@ object M_FlightTableFRM: TM_FlightTableFRM
         'FLIGHT_NAME'#9'32'#9'Flight Name'
         'DESTINATION_COUNTRY_CODE'#9'10'#9'Destination ')
       IniAttributes.Delimiter = ';;'
+      IniAttributes.UnicodeIniFile = False
       TitleColor = clBtnFace
       FixedCols = 0
       ShowHorzScrollBar = True
@@ -279,7 +284,6 @@ object M_FlightTableFRM: TM_FlightTableFRM
       TitleFont.Style = []
       TitleLines = 1
       TitleButtons = False
-      IndicatorColor = icBlack
     end
     object wwDBNavigator1: TwwDBNavigator
       Left = 16
@@ -334,7 +338,6 @@ object M_FlightTableFRM: TM_FlightTableFRM
         Spacing = 4
         Transparent = False
         Caption = 'wwDBNavigator1Next'
-        Enabled = False
         DisabledTextColors.ShadeColor = clGray
         DisabledTextColors.HighlightColor = clBtnHighlight
         Index = 2
@@ -351,7 +354,6 @@ object M_FlightTableFRM: TM_FlightTableFRM
         Spacing = 4
         Transparent = False
         Caption = 'wwDBNavigator1Last'
-        Enabled = False
         DisabledTextColors.ShadeColor = clGray
         DisabledTextColors.HighlightColor = clBtnHighlight
         Index = 3
@@ -385,7 +387,6 @@ object M_FlightTableFRM: TM_FlightTableFRM
         Spacing = 4
         Transparent = False
         Caption = 'wwDBNavigator1Delete'
-        Enabled = False
         DisabledTextColors.ShadeColor = clGray
         DisabledTextColors.HighlightColor = clBtnHighlight
         Index = 5

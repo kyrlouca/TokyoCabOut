@@ -6,8 +6,7 @@ uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   StdCtrls, Mask,  IBC, MemDS, IBCError, wwSpeedButton, wwDBNavigator,
   wwclearpanel, Buttons, ExtCtrls, wwdbedit, Grids, Wwdbigrd, Wwdbgrid,
-  Wwquery, wwstorep, fcButton, fcImgBtn, fcShapeBtn, Wwkeycb, DBAccess, Db,
-  wwdblook,dascript;
+  DBAccess, Data.DB, vcl.Wwkeycb, vcl.wwdblook;
 
 type
   TL_FlightOutListFRM = class(TForm)
@@ -33,7 +32,6 @@ type
     InsertBTN: TBitBtn;
     BitBtn2: TBitBtn;
     BitBtn1: TBitBtn;
-    FlightBTN: TfcShapeBtn;
     Label1: TLabel;
     FlightOutCDS: TIBCDataSource;
     FlightTableSQL: TIBCQuery;
@@ -75,7 +73,7 @@ var
 
 implementation
 
-uses MainForm, H_flightOut, H_scanAirwaybill, CreateOneXMLFile,
+uses MainForm, H_flightOut, H_scanAirwaybill,
   H_ScanAirwaybillNew;
 
 {$R *.DFM}

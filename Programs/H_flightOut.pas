@@ -5,9 +5,8 @@ interface
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   StdCtrls, Mask,  DBAccess, IBC, MemDS, IBCError, wwSpeedButton, wwDBNavigator,
-  wwclearpanel, Buttons, ExtCtrls, wwdbedit, Grids, Wwdbigrd, Wwdbgrid,
-  Wwquery, wwstorep, Db, wwdblook, wwdbdatetimepicker;
-
+  Data.DB, Vcl.Grids, vcl.wwdbigrd, vcl.wwdbgrid, vcl.wwclearpanel,
+  vcl.Wwdbdatetimepicker, vcl.wwdblook, vcl.Wwdbedit, Vcl.Buttons, Vcl.ExtCtrls;
 type
   TH_FlightOutFRM = class(TForm)
     TitlePNL: TPanel;

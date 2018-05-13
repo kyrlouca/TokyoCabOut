@@ -5,9 +5,8 @@ interface
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   StdCtrls, Mask, IBC, MemDS, IBCError, wwSpeedButton, wwDBNavigator,
-  wwclearpanel, Buttons, ExtCtrls, wwdbedit, Grids, Wwdbigrd, Wwdbgrid,
-  Wwquery, wwstorep, Wwdatsrc, DBAccess, Db, fcButton, fcImgBtn, fcShapeBtn,
-  wwdblook;
+  wwclearpanel, Buttons, ExtCtrls, wwdbedit, Grids, DBAccess, Data.DB,
+  vcl.wwdbigrd, vcl.wwdbgrid, vcl.wwdblook;
 
 type
   TH_ScanAirwaybillFRM = class(TForm)
@@ -115,10 +114,6 @@ type
     FlightAirwaybillSQLPAYMENT_METHOD: TStringField;
     AirwaybillOriginalSQLPAYMENT_METHOD: TStringField;
     DeleteFlightCountriesSQL: TIBCSQL;
-    XMLBTN: TfcShapeBtn;
-    XMLForOneBTN: TfcShapeBtn;
-    EditOneBTN: TfcShapeBtn;
-    DeleteXBTN: TfcShapeBtn;
     FlightTableSQL: TIBCQuery;
     FlightOutSQLFK_FLIGHT_TABLE: TIntegerField;
     FlightTableSQLSERIAL_NUMBER: TIntegerField;
@@ -181,7 +176,7 @@ var
 
 implementation
 
-uses MainForm, H_FlightAirwaybill, H_flightOut, CreateOneXMLFile;
+uses MainForm, H_FlightAirwaybill, H_flightOut;
 
 {$R *.DFM}
 
@@ -477,9 +472,9 @@ Var
         SerialNumber:Integer;
         Mawb:String;
 begin
-SerialNumber:=FLightOutSQL.FieldByName('serial_number').AsInteger;
-CreateOneXMLFileFRM.GFlightOutSerial:=SerialNumber;
-CreateOneXMLFileFRM.ProcessFlightOut(SerialNumber);
+//SerialNumber:=FLightOutSQL.FieldByName('serial_number').AsInteger;
+//CreateOneXMLFileFRM.GFlightOutSerial:=SerialNumber;
+//CreateOneXMLFileFRM.ProcessFlightOut(SerialNumber);
 
 end;
 
@@ -489,7 +484,7 @@ Var
         Mawb:String;
 begin
 SerialNumber:=FLightAirwaybillSQL.FieldByName('serial_number').AsInteger;
-CreateOneXMLFileFRM.ProcessOneAir(SerialNumber);
+//CreateOneXMLFileFRM.ProcessOneAir(SerialNumber);
 
 end;
 
@@ -501,7 +496,7 @@ Var
 begin
 SerialNumber:=FLightAirwaybillSQL.FieldByName('serial_number').AsInteger;
 Mawb:= FlightOutSQL.FieldbyName('Mawb').AsString;
-CreateOneXMLFileFRM.ProcessOneAir(SerialNumber);
+//CreateOneXMLFileFRM.ProcessOneAir(SerialNumber);
 
 end;
 

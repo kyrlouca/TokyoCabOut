@@ -4,10 +4,9 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  StdCtrls, Mask, DBCtrls, Db,  DBAccess, IBC, MemDS, IBCError, wwSpeedButton, wwDBNavigator,
-  wwclearpanel, Buttons, ExtCtrls, wwdbedit, Grids, Wwdbigrd, Wwdbgrid,KyriacosTypes,
-  fcButton, fcImgBtn, fcShapeBtn;
-
+  StdCtrls, Mask,
+  Vcl.Grids, vcl.wwdbigrd, vcl.wwdbgrid, vcl.Wwdbedit, Vcl.Buttons, Vcl.ExtCtrls,
+  Data.DB, MemDS, DBAccess, IBC,KyriacosTYpes;
 type
   TS_SelectCustomerXFRM = class(TForm)
     Panel1: TPanel;
@@ -30,8 +29,6 @@ type
     ByNameBTN: TSpeedButton;
     Label1: TLabel;
     Label2: TLabel;
-    NewHawbBTN: TfcShapeBtn;
-    EditBTN: TfcShapeBtn;
     CustomerSQLACCOUNT_NUMBER: TIntegerField;
     CustomerSQLQUARANTEE_NUMBER: TStringField;
     CustomerSQLFK_DISTRICT: TIntegerField;
@@ -129,20 +126,20 @@ procedure TS_SelectCustomerXFRM.wwDBGrid1DblClick(Sender: TObject);
 Var
         CustomerSerial:Integer;
 begin
-        CUstomerSerial:=CustomerSQL.fieldByName('Code').AsInteger;
-
-        GCustomerRecord.Code:=CustomerSQL.fieldByName('Code').AsInteger;
-        GCustomerRecord.CustomerAccount:=CustomerSQL.fieldByName('Account_Number').AsInteger;
-        GCustomerRecord.Name:=CustomerSQL.fieldByName('Name').AsString;
-        GCustomerRecord.Address1:=CustomerSQL.fieldByName('ADDRESS1').AsString;
-        GCustomerRecord.Address2:=CustomerSQL.fieldByName('ADDRESS2').AsString;
-        GCustomerRecord.Address3:=CustomerSQL.fieldByName('ADDRESS3').AsString;
-        GCustomerRecord.PostCode:=CustomerSQL.fieldByName('post_code').AsString;
-        GCustomerRecord.District_serial:=CustomerSQL.fieldByName('FK_DISTRICT').AsInteger;
-        GCustomerRecord.District:=CustomerSQL.fieldByName('D_DISTRICT_CODE').AsString;
-        GCustomerRecord.DistrictName:=CustomerSQL.fieldByName('D_Desc').AsString;
-
-
+//        CUstomerSerial:=CustomerSQL.fieldByName('Code').AsInteger;
+//
+//        GCustomerRecord.Code:=CustomerSQL.fieldByName('Code').AsInteger;
+//        GCustomerRecord.CustomerAccount:=CustomerSQL.fieldByName('Account_Number').AsInteger;
+//        GCustomerRecord.Name:=CustomerSQL.fieldByName('Name').AsString;
+//        GCustomerRecord.Address1:=CustomerSQL.fieldByName('ADDRESS1').AsString;
+//        GCustomerRecord.Address2:=CustomerSQL.fieldByName('ADDRESS2').AsString;
+//        GCustomerRecord.Address3:=CustomerSQL.fieldByName('ADDRESS3').AsString;
+//        GCustomerRecord.PostCode:=CustomerSQL.fieldByName('post_code').AsString;
+//        GCustomerRecord.District_serial:=CustomerSQL.fieldByName('FK_DISTRICT').AsInteger;
+//        GCustomerRecord.District:=CustomerSQL.fieldByName('D_DISTRICT_CODE').AsString;
+//        GCustomerRecord.DistrictName:=CustomerSQL.fieldByName('D_Desc').AsString;
+//
+//
         //ShowMessage(intToStr(GCustomerRecord.Code));
         Close;
 
@@ -183,17 +180,16 @@ begin
 
 M_customerNewFRM.InAction:='INSERT';
 M_CustomerNewFRM.InCustomerName:=Trim(NameFld.Text);
-if (M_CustomerNewFRM.ShowModal=MrOK) then begin
-        NameFLD.Text:=M_CustomerNewFRM.GOutCustomerRecord.Name;
-
-        SelectCustomer(Trim(NameFLD.text));
+//if (M_CustomerNewFRM.ShowModal=MrOK) then begin
+//        NameFLD.Text:=M_CustomerNewFRM.GOutCustomerRecord.Name;
+//
+//        SelectCustomer(Trim(NameFLD.text));
 
 
 end;
 
 //M_customerNewFRM.SHowModal;
 
-end;
 
 procedure TS_SelectCustomerXFRM.EditBTNClick(Sender: TObject);
 begin

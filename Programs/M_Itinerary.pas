@@ -5,8 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   StdCtrls, Mask,  DBAccess, IBC, MemDS, IBCError, wwSpeedButton, wwDBNavigator,
-  wwclearpanel, Buttons, ExtCtrls, wwdbedit, Grids, Wwdbigrd, Wwdbgrid,
-  Wwquery, wwstorep, Db;
+  Data.DB, vcl.Wwdbedit, Vcl.Buttons, Vcl.ExtCtrls;
 
 type
   TM_ItineraryFRM = class(TForm)

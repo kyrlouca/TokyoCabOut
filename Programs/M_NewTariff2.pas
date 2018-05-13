@@ -5,8 +5,8 @@ interface
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   StdCtrls, Buttons, ExtCtrls, wwSpeedButton, wwDBNavigator, Db, Wwdatsrc,
-   DBAccess, IBC, MemDS, IBCError, Wwtable, Grids, Wwdbigrd, Wwdbgrid, Wwkeycb, wwDialog, wwidlg,
-  Mask, wwdbedit, DBCtrls, wwdblook, wwstorep, Wwdotdot, Wwdbcomb, ComCtrls,
+   DBAccess, IBC, MemDS, IBCError,
+  Mask, wwdbedit, DBCtrls, wwdblook,
   wwclearpanel,KyriacosTypes;
 
 type

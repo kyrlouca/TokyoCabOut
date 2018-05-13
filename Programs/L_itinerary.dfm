@@ -1,8 +1,8 @@
 object L_ItineraryFRM: TL_ItineraryFRM
   Left = 285
   Top = 102
-  Width = 1009
-  Height = 794
+  ClientHeight = 0
+  ClientWidth = 120
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -40,7 +40,7 @@ object L_ItineraryFRM: TL_ItineraryFRM
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 991
+    Width = 120
     Height = 65
     Align = alTop
     Caption = 'List Itineraries'
@@ -51,14 +51,17 @@ object L_ItineraryFRM: TL_ItineraryFRM
     Font.Style = [fsBold]
     ParentFont = False
     TabOrder = 0
+    ExplicitWidth = 991
   end
   object Panel4: TPanel
     Left = 0
-    Top = 683
-    Width = 991
+    Top = -66
+    Width = 120
     Height = 66
     Align = alBottom
     TabOrder = 1
+    ExplicitTop = 683
+    ExplicitWidth = 991
     object BitBtn2: TBitBtn
       Left = 26
       Top = 4
@@ -70,9 +73,6 @@ object L_ItineraryFRM: TL_ItineraryFRM
       Font.Height = -18
       Font.Name = 'MS Sans Serif'
       Font.Style = [fsBold]
-      ParentFont = False
-      TabOrder = 0
-      OnClick = BitBtn2Click
       Glyph.Data = {
         76010000424D7601000000000000760000002800000020000000100000000100
         04000000000000010000120B0000120B00001000000000000000000000000000
@@ -87,28 +87,32 @@ object L_ItineraryFRM: TL_ItineraryFRM
         0333337F377777337F333301111111110333337F333333337F33330111111111
         0333337FFFFFFFFF7F3333000000000003333377777777777333}
       NumGlyphs = 2
+      ParentFont = False
+      TabOrder = 0
+      OnClick = BitBtn2Click
     end
   end
   object Panel3: TPanel
     Left = 0
     Top = 65
-    Width = 991
+    Width = 120
     Height = 618
     Align = alClient
     TabOrder = 2
     object Panel2: TPanel
       Left = 1
       Top = 1
-      Width = 989
+      Width = 118
       Height = 64
       Align = alTop
       BevelOuter = bvNone
       TabOrder = 0
+      ExplicitWidth = 989
     end
     object Panel5: TPanel
       Left = 1
       Top = 65
-      Width = 989
+      Width = 118
       Height = 552
       Align = alClient
       BevelOuter = bvNone
@@ -135,11 +139,6 @@ object L_ItineraryFRM: TL_ItineraryFRM
         Font.Height = -15
         Font.Name = 'MS Sans Serif'
         Font.Style = [fsBold]
-        ParentBiDiMode = False
-        ParentFont = False
-        TabOrder = 1
-        Visible = False
-        OnClick = DeleteSelectedBTNClick
         Glyph.Data = {
           DE010000424DDE01000000000000760000002800000024000000120000000100
           0400000000006801000000000000000000001000000000000000000000000000
@@ -158,6 +157,11 @@ object L_ItineraryFRM: TL_ItineraryFRM
           3333333333333333333333330000333333333333333333333333333333333333
           0000}
         NumGlyphs = 2
+        ParentBiDiMode = False
+        ParentFont = False
+        TabOrder = 1
+        Visible = False
+        OnClick = DeleteSelectedBTNClick
       end
       object InsertBTN: TBitBtn
         Left = 696
@@ -172,11 +176,6 @@ object L_ItineraryFRM: TL_ItineraryFRM
         Font.Height = -15
         Font.Name = 'MS Sans Serif'
         Font.Style = [fsBold]
-        ParentBiDiMode = False
-        ParentFont = False
-        TabOrder = 2
-        Visible = False
-        OnClick = InsertBTNClick
         Glyph.Data = {
           DE010000424DDE01000000000000760000002800000024000000120000000100
           0400000000006801000000000000000000001000000000000000000000000000
@@ -195,7 +194,12 @@ object L_ItineraryFRM: TL_ItineraryFRM
           3333333333333877733333330000333333333333333333333333338883333333
           0000}
         NumGlyphs = 2
+        ParentBiDiMode = False
+        ParentFont = False
         Style = bsNew
+        TabOrder = 2
+        Visible = False
+        OnClick = InsertBTNClick
       end
       object BitBtn1: TBitBtn
         Left = 720
@@ -210,11 +214,6 @@ object L_ItineraryFRM: TL_ItineraryFRM
         Font.Height = -15
         Font.Name = 'MS Sans Serif'
         Font.Style = [fsBold]
-        ParentBiDiMode = False
-        ParentFont = False
-        TabOrder = 3
-        Visible = False
-        OnClick = BitBtn1Click
         Glyph.Data = {
           F6060000424DF606000000000000360000002800000018000000180000000100
           180000000000C006000074120000741200000000000000000000FFFFFFF8F8F8
@@ -272,7 +271,12 @@ object L_ItineraryFRM: TL_ItineraryFRM
           7458A1795EA39A87BCE5E1EFFEFDFEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
           FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
           FFFFF7F6FAE1DCEBD5CCE2DDD7E8F9F8FBFFFFFFFFFFFFFFFFFF}
+        ParentBiDiMode = False
+        ParentFont = False
         Style = bsNew
+        TabOrder = 3
+        Visible = False
+        OnClick = BitBtn1Click
       end
       object BitBtn3: TBitBtn
         Left = 712
@@ -287,11 +291,6 @@ object L_ItineraryFRM: TL_ItineraryFRM
         Font.Height = -15
         Font.Name = 'MS Sans Serif'
         Font.Style = [fsBold]
-        ParentBiDiMode = False
-        ParentFont = False
-        TabOrder = 4
-        Visible = False
-        OnClick = InsertBTNClick
         Glyph.Data = {
           DE010000424DDE01000000000000760000002800000024000000120000000100
           0400000000006801000000000000000000001000000000000000000000000000
@@ -310,7 +309,12 @@ object L_ItineraryFRM: TL_ItineraryFRM
           3333333333333877733333330000333333333333333333333333338883333333
           0000}
         NumGlyphs = 2
+        ParentBiDiMode = False
+        ParentFont = False
         Style = bsNew
+        TabOrder = 4
+        Visible = False
+        OnClick = InsertBTNClick
       end
       object GroupBox1: TGroupBox
         Left = 40
@@ -334,6 +338,7 @@ object L_ItineraryFRM: TL_ItineraryFRM
             'SERIAL_NUMBER'#9'5'#9'S/N'
             'FLIGHT_NAME'#9'33'#9'Name')
           IniAttributes.Delimiter = ';;'
+          IniAttributes.UnicodeIniFile = False
           TitleColor = clBtnFace
           FixedCols = 1
           ShowHorzScrollBar = True
@@ -361,7 +366,6 @@ object L_ItineraryFRM: TL_ItineraryFRM
           TitleLines = 1
           TitleButtons = False
           OnDblClick = FlightOutGRDDblClick
-          IndicatorColor = icBlack
         end
         object wwDBNavigator2: TwwDBNavigator
           Left = 2
@@ -510,6 +514,7 @@ object L_ItineraryFRM: TL_ItineraryFRM
         TabOrder = 6
         AutoDropDown = False
         ShowButton = True
+        PreciseEditRegion = False
         AllowClearKey = False
         ShowMatchText = True
       end
@@ -664,6 +669,7 @@ object L_ItineraryFRM: TL_ItineraryFRM
             'COUNTRY_CODE'#9'9'#9'Country'#9'F'
             'CountryName'#9'25'#9'CountryName'#9'F')
           IniAttributes.Delimiter = ';;'
+          IniAttributes.UnicodeIniFile = False
           TitleColor = clBtnFace
           FixedCols = 0
           ShowHorzScrollBar = False
@@ -694,7 +700,6 @@ object L_ItineraryFRM: TL_ItineraryFRM
           TitleLines = 1
           TitleButtons = False
           OnDblClick = FlightOutGRDDblClick
-          IndicatorColor = icBlack
         end
       end
     end
@@ -808,12 +813,6 @@ object L_ItineraryFRM: TL_ItineraryFRM
     Left = 632
     Top = 297
     ParamData = <
-      item
-        DataType = ftInteger
-        Name = 'SERIAL_NUMBER'
-        ParamType = ptInput
-        Value = 12
-      end
       item
         DataType = ftInteger
         Name = 'SERIAL_NUMBER'

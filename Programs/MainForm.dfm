@@ -1,9 +1,9 @@
 object MainFormFRM: TMainFormFRM
   Left = 140
   Top = 131
-  Width = 1037
-  Height = 372
   Caption = 'MainFormFRM'
+  ClientHeight = 394
+  ClientWidth = 624
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -18,8 +18,8 @@ object MainFormFRM: TMainFormFRM
   TextHeight = 13
   object Panel1: TPanel
     Left = 0
-    Top = 248
-    Width = 1021
+    Top = 329
+    Width = 624
     Height = 65
     Align = alBottom
     TabOrder = 0
@@ -34,9 +34,6 @@ object MainFormFRM: TMainFormFRM
       Font.Height = -15
       Font.Name = 'MS Sans Serif'
       Font.Style = [fsBold]
-      ParentFont = False
-      TabOrder = 0
-      OnClick = BitBtn2Click
       Glyph.Data = {
         76010000424D7601000000000000760000002800000020000000100000000100
         04000000000000010000120B0000120B00001000000000000000000000000000
@@ -51,16 +48,19 @@ object MainFormFRM: TMainFormFRM
         0333337F377777337F333301111111110333337F333333337F33330111111111
         0333337FFFFFFFFF7F3333000000000003333377777777777333}
       NumGlyphs = 2
+      ParentFont = False
+      TabOrder = 0
+      OnClick = BitBtn2Click
     end
   end
   object Panel3: TPanel
     Left = 0
     Top = 0
-    Width = 1021
+    Width = 624
     Height = 41
     Align = alTop
     BevelInner = bvRaised
-    Caption = 'CabOut P2.71'
+    Caption = 'Tokyo CabOut '
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBlue
     Font.Height = -32
@@ -72,13 +72,14 @@ object MainFormFRM: TMainFormFRM
   object Panel2: TPanel
     Left = 0
     Top = 41
-    Width = 1021
-    Height = 207
+    Width = 624
+    Height = 288
     Align = alClient
     TabOrder = 2
+    ExplicitTop = 35
     object fcShapeBtn2: TButton
-      Left = 20
-      Top = 98
+      Left = 26
+      Top = 208
       Width = 169
       Height = 59
       Caption = 'List Files'
@@ -93,8 +94,8 @@ object MainFormFRM: TMainFormFRM
       OnClick = fcShapeBtn2Click
     end
     object fcShapeBtn1: TButton
-      Left = 319
-      Top = 33
+      Left = 26
+      Top = 17
       Width = 169
       Height = 59
       Caption = 'Read XML File'
@@ -162,8 +163,8 @@ object MainFormFRM: TMainFormFRM
       OnClick = Button2Click
     end
     object PendingBTN: TButton
-      Left = 319
-      Top = 98
+      Left = 26
+      Top = 82
       Width = 169
       Height = 59
       Caption = 'List Pending'
@@ -176,22 +177,6 @@ object MainFormFRM: TMainFormFRM
       ParentFont = False
       TabOrder = 6
       OnClick = PendingBTNClick
-    end
-    object ReadText: TButton
-      Left = 20
-      Top = 33
-      Width = 169
-      Height = 59
-      Caption = 'Read Text File'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -17
-      Font.Name = 'Arial'
-      Font.Style = []
-      ModalResult = 5
-      ParentFont = False
-      TabOrder = 7
-      OnClick = ReadTextClick
     end
   end
   object MainMenu1: TMainMenu

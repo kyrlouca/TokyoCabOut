@@ -1,8 +1,8 @@
 object H_FlightOutFRM: TH_FlightOutFRM
   Left = 453
   Top = 230
-  Width = 1072
-  Height = 623
+  ClientHeight = 584
+  ClientWidth = 1056
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -41,7 +41,7 @@ object H_FlightOutFRM: TH_FlightOutFRM
   object TitlePNL: TPanel
     Left = 0
     Top = 0
-    Width = 1054
+    Width = 1056
     Height = 65
     Align = alTop
     Caption = 'Edit Flight Out'
@@ -52,14 +52,17 @@ object H_FlightOutFRM: TH_FlightOutFRM
     Font.Style = [fsBold]
     ParentFont = False
     TabOrder = 0
+    ExplicitWidth = 1054
   end
   object Panel4: TPanel
     Left = 0
-    Top = 512
-    Width = 1054
+    Top = 518
+    Width = 1056
     Height = 66
     Align = alBottom
     TabOrder = 1
+    ExplicitTop = 512
+    ExplicitWidth = 1054
     object AcceptBTN: TBitBtn
       Left = 22
       Top = 8
@@ -71,9 +74,6 @@ object H_FlightOutFRM: TH_FlightOutFRM
       Font.Height = -15
       Font.Name = 'MS Sans Serif'
       Font.Style = [fsBold]
-      ParentFont = False
-      TabOrder = 0
-      OnClick = AcceptBTNClick
       Glyph.Data = {
         DE010000424DDE01000000000000760000002800000024000000120000000100
         0400000000006801000000000000000000001000000000000000000000000000
@@ -92,6 +92,9 @@ object H_FlightOutFRM: TH_FlightOutFRM
         333A333333333333333338330000333333333333333333333333333333333333
         0000}
       NumGlyphs = 2
+      ParentFont = False
+      TabOrder = 0
+      OnClick = AcceptBTNClick
     end
     object CancelBTN: TBitBtn
       Left = 138
@@ -105,9 +108,6 @@ object H_FlightOutFRM: TH_FlightOutFRM
       Font.Height = -15
       Font.Name = 'MS Sans Serif'
       Font.Style = [fsBold]
-      ParentFont = False
-      TabOrder = 1
-      OnClick = CancelBTNClick
       Glyph.Data = {
         DE010000424DDE01000000000000760000002800000024000000120000000100
         0400000000006801000000000000000000001000000000000000000000000000
@@ -126,13 +126,16 @@ object H_FlightOutFRM: TH_FlightOutFRM
         3333333333333333333888330000333333333333333333333333333333333333
         0000}
       NumGlyphs = 2
+      ParentFont = False
+      TabOrder = 1
+      OnClick = CancelBTNClick
     end
   end
   object Panel3: TPanel
     Left = 0
     Top = 65
-    Width = 1054
-    Height = 447
+    Width = 1056
+    Height = 453
     Align = alClient
     TabOrder = 2
     object GroupBox1: TGroupBox
@@ -367,6 +370,7 @@ object H_FlightOutFRM: TH_FlightOutFRM
         TabOrder = 2
         AutoDropDown = True
         ShowButton = True
+        PreciseEditRegion = False
         AllowClearKey = False
         ShowMatchText = True
       end
@@ -383,8 +387,8 @@ object H_FlightOutFRM: TH_FlightOutFRM
         DataField = 'DATE_DEPART'
         DataSource = FlightOutSRC
         Epoch = 1950
-        MaxDate = 43831
-        MinDate = 41275
+        MaxDate = 43831.000000000000000000
+        MinDate = 41275.000000000000000000
         ShowButton = True
         TabOrder = 5
         DisplayFormat = 'dd/mm/yyyy'
@@ -412,6 +416,7 @@ object H_FlightOutFRM: TH_FlightOutFRM
       TabOrder = 1
       AutoDropDown = False
       ShowButton = True
+      PreciseEditRegion = False
       AllowClearKey = False
     end
     object GroupBox2: TGroupBox
@@ -444,6 +449,7 @@ object H_FlightOutFRM: TH_FlightOutFRM
         TabOrder = 0
         AutoDropDown = True
         ShowButton = True
+        PreciseEditRegion = False
         AllowClearKey = False
         OnCloseUp = wwDBLookupCombo2CloseUp
       end
@@ -586,6 +592,7 @@ object H_FlightOutFRM: TH_FlightOutFRM
           'COUNTRY_CODE'#9'8'#9'Code'
           'CountryName'#9'20'#9'CountryName')
         IniAttributes.Delimiter = ';;'
+        IniAttributes.UnicodeIniFile = False
         TitleColor = clBtnFace
         FixedCols = 0
         ShowHorzScrollBar = True
@@ -606,7 +613,6 @@ object H_FlightOutFRM: TH_FlightOutFRM
         TitleFont.Style = []
         TitleLines = 1
         TitleButtons = False
-        IndicatorColor = icBlack
       end
     end
   end
@@ -727,11 +733,7 @@ object H_FlightOutFRM: TH_FlightOutFRM
         DataType = ftInteger
         Name = 'SERIAL_NUMBER'
         ParamType = ptInput
-      end
-      item
-        DataType = ftInteger
-        Name = 'SERIAL_NUMBER'
-        ParamType = ptInput
+        Value = nil
       end>
     object FlightOutCountrySQLORDER_POSITION: TIntegerField
       DisplayLabel = 'Pos'
@@ -923,12 +925,6 @@ object H_FlightOutFRM: TH_FlightOutFRM
         Name = 'SERIAL_NUMBER'
         ParamType = ptInput
         Value = 12
-      end
-      item
-        DataType = ftInteger
-        Name = 'SERIAL_NUMBER'
-        ParamType = ptInput
-        Value = 12
       end>
     object ItineraryCountrySQLSERIAL_NUMBER: TIntegerField
       FieldName = 'SERIAL_NUMBER'
@@ -1002,6 +998,7 @@ object H_FlightOutFRM: TH_FlightOutFRM
         DataType = ftInteger
         Name = 'SerialNumber'
         ParamType = ptInput
+        Value = nil
       end>
     object FlightOutSQLSERIAL_NUMBER: TIntegerField
       FieldName = 'SERIAL_NUMBER'

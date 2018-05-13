@@ -5,8 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   StdCtrls, Mask, DBCtrls, Db,  DBAccess, IBC, MemDS, IBCError, wwSpeedButton, wwDBNavigator,
-  wwclearpanel, Buttons, ExtCtrls, wwdbedit, Grids, Wwdbigrd, Wwdbgrid,KyriacosTypes,
-  fcButton, fcImgBtn, fcShapeBtn;
+  wwclearpanel, Buttons, ExtCtrls, wwdbedit, Grids, Wwdbigrd, Wwdbgrid,KyriacosTypes;
 
 type
   TS_SelectTariffYFRM = class(TForm)
@@ -47,10 +46,9 @@ type
     CustomerSQLIS_TARIFF: TStringField;
     CustomerSQLUSER_KEYWORD: TStringField;
     ByDescBTN: TSpeedButton;
-    NewHawbBTN: TfcShapeBtn;
-    EditBTN: TfcShapeBtn;
     Label1: TLabel;
     Label2: TLabel;
+    EditBTN: TButton;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure BitBtn2Click(Sender: TObject);
     procedure CustomerSQLBeforeEdit(DataSet: TDataSet);

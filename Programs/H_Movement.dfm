@@ -1,9 +1,9 @@
 object H_MovementFRM: TH_MovementFRM
   Left = 252
   Top = 263
-  Width = 1344
-  Height = 834
   Caption = 'H_MovementFRM'
+  ClientHeight = 0
+  ClientWidth = 120
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -18,7 +18,7 @@ object H_MovementFRM: TH_MovementFRM
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 1326
+    Width = 120
     Height = 65
     Align = alTop
     Caption = 'Mawb and Airwaybills'
@@ -29,14 +29,17 @@ object H_MovementFRM: TH_MovementFRM
     Font.Style = [fsBold]
     ParentFont = False
     TabOrder = 0
+    ExplicitWidth = 1326
   end
   object Panel4: TPanel
     Left = 0
-    Top = 736
-    Width = 1326
+    Top = -53
+    Width = 120
     Height = 53
     Align = alBottom
     TabOrder = 1
+    ExplicitTop = 736
+    ExplicitWidth = 1326
     object BitBtn2: TBitBtn
       Left = 9
       Top = 9
@@ -48,9 +51,6 @@ object H_MovementFRM: TH_MovementFRM
       Font.Height = -18
       Font.Name = 'MS Sans Serif'
       Font.Style = [fsBold]
-      ParentFont = False
-      TabOrder = 0
-      OnClick = BitBtn2Click
       Glyph.Data = {
         76010000424D7601000000000000760000002800000020000000100000000100
         04000000000000010000120B0000120B00001000000000000000000000000000
@@ -65,12 +65,15 @@ object H_MovementFRM: TH_MovementFRM
         0333337F377777337F333301111111110333337F333333337F33330111111111
         0333337FFFFFFFFF7F3333000000000003333377777777777333}
       NumGlyphs = 2
+      ParentFont = False
+      TabOrder = 0
+      OnClick = BitBtn2Click
     end
   end
   object Panel3: TPanel
     Left = 0
     Top = 65
-    Width = 1326
+    Width = 120
     Height = 671
     Align = alClient
     TabOrder = 2
@@ -95,6 +98,7 @@ object H_MovementFRM: TH_MovementFRM
           'PIECES'#9'10'#9'Pieces'
           'WEIGHT'#9'10'#9'Weight')
         IniAttributes.Delimiter = ';;'
+        IniAttributes.UnicodeIniFile = False
         TitleColor = clBtnFace
         FixedCols = 0
         ShowHorzScrollBar = True
@@ -118,7 +122,6 @@ object H_MovementFRM: TH_MovementFRM
         TitleFont.Style = [fsBold]
         TitleLines = 1
         TitleButtons = False
-        IndicatorColor = icBlack
       end
       object Panel2: TPanel
         Left = 0
@@ -272,6 +275,7 @@ object H_MovementFRM: TH_MovementFRM
             'PACKAGES_COUNT'#9'10'#9'PACKAGES_COUNT'
             'PAYMENT_METHOD'#9'2'#9'PAYMENT_METHOD')
           IniAttributes.Delimiter = ';;'
+          IniAttributes.UnicodeIniFile = False
           TitleColor = clBtnFace
           FixedCols = 0
           ShowHorzScrollBar = True
@@ -290,7 +294,6 @@ object H_MovementFRM: TH_MovementFRM
           TitleLines = 1
           TitleButtons = False
           OnDblClick = AirGRDDblClick
-          IndicatorColor = icBlack
         end
         object DeleteSelectedBTN: TBitBtn
           Left = 744
@@ -304,9 +307,6 @@ object H_MovementFRM: TH_MovementFRM
           Font.Height = -15
           Font.Name = 'MS Sans Serif'
           Font.Style = [fsBold]
-          ParentFont = False
-          TabOrder = 1
-          OnClick = DeleteSelectedBTNClick
           Glyph.Data = {
             DE010000424DDE01000000000000760000002800000024000000120000000100
             0400000000006801000000000000000000001000000000000000000000000000
@@ -325,6 +325,9 @@ object H_MovementFRM: TH_MovementFRM
             3333333333333333333333330000333333333333333333333333333333333333
             0000}
           NumGlyphs = 2
+          ParentFont = False
+          TabOrder = 1
+          OnClick = DeleteSelectedBTNClick
         end
         object BitBtn1: TBitBtn
           Left = 746
@@ -337,9 +340,6 @@ object H_MovementFRM: TH_MovementFRM
           Font.Height = -15
           Font.Name = 'MS Sans Serif'
           Font.Style = [fsBold]
-          ParentFont = False
-          TabOrder = 2
-          OnClick = BitBtn1Click
           Glyph.Data = {
             DE010000424DDE01000000000000760000002800000024000000120000000100
             0400000000006801000000000000000000001000000000000000000000000000
@@ -358,6 +358,9 @@ object H_MovementFRM: TH_MovementFRM
             3333333333338888883333330000333333333333333333333333333333333333
             0000}
           NumGlyphs = 2
+          ParentFont = False
+          TabOrder = 2
+          OnClick = BitBtn1Click
         end
         object InsertBTN: TBitBtn
           Left = 744
@@ -371,10 +374,6 @@ object H_MovementFRM: TH_MovementFRM
           Font.Height = -15
           Font.Name = 'MS Sans Serif'
           Font.Style = [fsBold]
-          ParentFont = False
-          TabOrder = 3
-          Visible = False
-          OnClick = InsertBTNClick
           Glyph.Data = {
             DE010000424DDE01000000000000760000002800000024000000120000000100
             0400000000006801000000000000000000001000000000000000000000000000
@@ -393,7 +392,11 @@ object H_MovementFRM: TH_MovementFRM
             3333333333333877733333330000333333333333333333333333338883333333
             0000}
           NumGlyphs = 2
+          ParentFont = False
           Style = bsNew
+          TabOrder = 3
+          Visible = False
+          OnClick = InsertBTNClick
         end
       end
     end
@@ -559,19 +562,19 @@ object H_MovementFRM: TH_MovementFRM
         DataType = ftInteger
         Name = 'SERIAL_NUMBER'
         ParamType = ptInput
-        Value = 133
+        Value = 2189
       end
       item
         DataType = ftInteger
         Name = 'SERIAL_NUMBER'
         ParamType = ptInput
-        Value = 133
+        Value = 2189
       end
       item
         DataType = ftInteger
         Name = 'FK_MOVEMENT_SERIAL'
         ParamType = ptInput
-        Value = 137
+        Value = 2073
       end>
     object AirwayBillSQLSERIAL_NUMBER: TIntegerField
       DisplayLabel = 'SN'
@@ -762,6 +765,7 @@ object H_MovementFRM: TH_MovementFRM
         DataType = ftInteger
         Name = 'AirwaybillSerial'
         ParamType = ptInput
+        Value = nil
       end>
   end
   object DocumentMasterCDS: TIBCDataSource

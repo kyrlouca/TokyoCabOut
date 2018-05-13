@@ -4,9 +4,9 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  StdCtrls, Mask,  wwSpeedButton, wwDBNavigator,
-  wwclearpanel, Buttons, ExtCtrls, wwdbedit, Grids, Wwdbigrd, Wwdbgrid,
-  Wwquery, wwstorep, IBC, MemDs, CRGrid, DBAccess, Db;
+  StdCtrls, Mask,  wwSpeedButton, wwDBNavigator, DBAccess, IBC, Data.DB, MemDS,
+  vcl.wwclearpanel, Vcl.Grids, vcl.wwdbigrd, vcl.wwdbgrid, vcl.Wwdbedit,
+  Vcl.Buttons, Vcl.ExtCtrls;
 
 type
   TM_DistrictFRM = class(TForm)

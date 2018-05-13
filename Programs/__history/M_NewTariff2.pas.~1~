@@ -1,0 +1,224 @@
+unit M_NewTariff2;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  StdCtrls, Buttons, ExtCtrls, wwSpeedButton, wwDBNavigator, Db, Wwdatsrc,
+   DBAccess, IBC, MemDS, IBCError, Wwtable, Grids, Wwdbigrd, Wwdbgrid, Wwkeycb, wwDialog, wwidlg,
+  Mask, wwdbedit, DBCtrls, wwdblook, wwstorep, Wwdotdot, Wwdbcomb, ComCtrls,
+  wwclearpanel,KyriacosTypes;
+
+type
+  TM_TariffNew2FRM = class(TForm)
+    TitlePNL: TPanel;
+    DataPNL: TPanel;
+    ButtonsPNL: TPanel;
+    TariffSRC: TwwDataSource;
+    AcceptBTN: TBitBtn;
+    CancelBTN: TBitBtn;
+    CustomerGRP: TGroupBox;
+    Label1: TLabel;
+    Label2: TLabel;
+    KeywordFLD: TwwDBEdit;
+    WriteTrans: TIBCTransaction;
+    TariffSQL: TIBCQuery;
+    RateFLD: TDBEdit;
+    QRateFLD: TDBEdit;
+    PerFLD: TDBEdit;
+    Label5: TLabel;
+    TRLFLD: TDBEdit;
+    Label6: TLabel;
+    Label17: TLabel;
+    Label7: TLabel;
+    Button1: TButton;
+    CodeFLD: TwwDBEdit;
+    TariffSQLCODE: TStringField;
+    TariffSQLKEYWORD: TStringField;
+    TariffSQLFK_COUNTRY_ORIGIN: TIntegerField;
+    TariffSQLLAST_UPDATE_DATE: TDateTimeField;
+    TariffSQLFK_VAT_CATEGORY_CODE: TStringField;
+    TariffSQLPREFERENTIAL_DUTY_RATE: TFloatField;
+    TariffSQLPREFERENTIAL_DUTY_TRL: TFloatField;
+    TariffSQLGENERAL_DUTY_RATE: TFloatField;
+    TariffSQLGENERAL_DUTY_TRL: TFloatField;
+    TariffSQLGENERAL_DUTY_RATE_QUANT: TFloatField;
+    TariffSQLPREFER_DUTY_RATE_QUANT: TFloatField;
+    TariffSQLLICENSE_REQUIRED: TStringField;
+    TariffSQLFK_MEASUREMENT_UNIT: TStringField;
+    TariffSQLDUTY_METHOD_VALUE: TFloatField;
+    TariffSQLDUTY_METHOD_QUANTITY: TIntegerField;
+    TariffSQLDUTY_METHOD_MIXED: TFloatField;
+    TariffSQLDUTY_CALCULATION_OPERATOR: TStringField;
+    TariffSQLBASE_QUANTITY: TFloatField;
+    TariffSQLINVOICE_BASED: TStringField;
+    TariffSQLEXCISE_DUTY_RATE: TFloatField;
+    TariffSQLIMPORT_DUTY_PER_QTY: TFloatField;
+    TariffSQLDESCRIPTION: TStringField;
+    TariffSQLIS_HEADER: TStringField;
+    TariffSQLIS_TARIFF: TStringField;
+    TariffSQLUSER_KEYWORD: TStringField;
+    Label3: TLabel;
+    procedure CloseBTNClick(Sender: TObject);
+    procedure FormActivate(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure CustomerTBLBeforePost(DataSet: TDataSet);
+    procedure AcceptBTNClick(Sender: TObject);
+    procedure CancelBTNClick(Sender: TObject);
+    procedure wwDBNavigator1InsertClick(Sender: TObject);
+    procedure DistrictDLGNotInList(Sender: TObject; LookupTable: TDataSet;
+      NewValue: String; var Accept: Boolean);
+    procedure TariffSQLNewRecord(DataSet: TDataSet);
+    procedure Button1Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    InAction:string;
+    InTariffKey:String;
+    InTariffCode:String;
+    OutTariffCode:String;
+    GOutTariffRecord:TTariffRecord;
+  end;
+
+var
+  M_TariffNew2FRM: TM_TariffNew2FRM;
+
+implementation
+
+uses MainForm;
+
+
+
+{$R *.DFM}
+
+
+
+procedure TM_TariffNew2FRM.CloseBTNClick(Sender: TObject);
+begin
+close;
+
+end;
+
+procedure TM_TariffNew2FRM.FormActivate(Sender: TObject);
+Var
+Dataset:TDataset;
+I:Integer;
+
+begin
+for i := 0 to (Self as TForm).ComponentCount-1 do begin
+if (Self as TForm).Components[i] is TDataset then begin
+        Dataset:= TDataset(Tform(Self).Components[i]);
+        If not Dataset.Active then
+                Dataset.Open
+        end;
+end;
+
+     CodeFLD.SetFocus;
+     If InAction='INSERT' then begin
+        TariffSQL.close;
+        TariffSQL.Open;
+        TariffSQL.Insert;
+//        CustomerSQL.FieldByName('Name').value:= InCustomerName;
+//        NameFLd.SelStart := Length(NameFLD.Text);
+
+        TariffSQL.FieldByName('USER_KEYWORD').value:= InTariffKey;
+        TariffSQL.FieldByName('CODE').value:= InTariffCode;
+        KeyWordFLd.SelStart := Length(KeywordFLD.Text);
+
+     end else If InAction='DISPLAY' then begin
+        With TariffSQL do begin
+                Close;
+                TariffSQL.ParambyName('TariffCode').Value:= InTariffCode;
+                Open;
+                self.KeywordFLD.SetFocus;
+        end;
+        //CustomerTBL.Locate('Code',InCustomerCode,[]);
+     end;
+
+end;
+
+procedure TM_TariffNew2FRM.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+     if TariffSQL.state <> dsBrowse then begin
+        Action:=caNone;
+     end else begin
+        Action:=caHide;
+     end;
+end;
+
+procedure TM_TariffNew2FRM.CustomerTBLBeforePost(DataSet: TDataSet);
+Var
+    CustomerCode:Integer;
+   TheAccount:integer;
+   TheCustomer:Integer;
+   OtherCustomerCode:Integer;
+   OtherCustomerName:String;
+   NumberOfAccounts:integer;
+begin
+End;
+
+procedure TM_TariffNew2FRM.AcceptBTNClick(Sender: TObject);
+begin
+
+     if (CodeFLD.IsValidPictureValue('####  ## ## ##')) then begin
+        ShowMessage('Invalide Tariff Code');
+        abort;
+
+     end;
+
+     if TariffSQL.State in [dsEdit,dsInsert] then
+        TariffSQL.Post;
+     GOutTariffRecord.Code:=TariffSQL.fieldbyName('Code').AsString;
+     GOutTariffRecord.UserKeyword:=TariffSQL.fieldbyName('user_keyword').AsString;
+     AcceptBtn.ModalResult:=mrOk;
+     Self.ModalResult:=mrOk;
+     //close;
+
+end;
+
+
+
+procedure TM_TariffNew2FRM.CancelBTNClick(Sender: TObject);
+begin
+     if TariffSQL.State <> dsBrowse then
+     TariffSQL.Cancel;
+     close;
+
+end;
+
+procedure TM_TariffNew2FRM.wwDBNavigator1InsertClick(Sender: TObject);
+begin
+If CodeFLD.CanFocus then
+   codeFLD.SetFocus;
+end;
+
+
+
+procedure TM_TariffNew2FRM.DistrictDLGNotInList(Sender: TObject;
+  LookupTable: TDataSet; NewValue: String; var Accept: Boolean);
+begin
+Accept:=false;
+end;
+
+
+
+
+
+procedure TM_TariffNew2FRM.TariffSQLNewRecord(DataSet: TDataSet);
+begin
+   Dataset.FieldByName('FK_COUNTRY_ORIGIN').value      :=123;
+   Dataset.FieldByName('INVOICE_BASED').value         :='Y';
+   Dataset.FieldByName('IS_TARIFF').value              :='Y';
+   Dataset.FieldByName('IS_HEADER').value              :='Y';
+
+end;
+
+procedure TM_TariffNew2FRM.Button1Click(Sender: TObject);
+begin
+modalResult:=mrOk;
+close;
+end;
+
+END.

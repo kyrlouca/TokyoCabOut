@@ -6,8 +6,9 @@ uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   StdCtrls, Mask, IBC, MemDS, IBCError, wwSpeedButton, wwDBNavigator,
   wwclearpanel, Buttons, ExtCtrls, wwdbedit, Grids, Wwdbigrd, Wwdbgrid,
-  Wwquery, wwstorep, Wwdatsrc, DBAccess, Db, fcButton, fcImgBtn, fcShapeBtn,
-  wwdblook, Wwdotdot, Wwdbcomb;
+  DBAccess, Data.DB, vcl.Wwdotdot, vcl.Wwdbcomb, vcl.wwdblook;
+
+
 
 type
   TH_ScanAirwaibillNewFRM = class(TForm)
@@ -204,7 +205,6 @@ type
     AirwaybillOriginalSQLCONSIGNEE_DEVICE_DETAILS: TStringField;
     AirwaybillOriginalSQLINCOTERMS: TStringField;
     AirwaybillOriginalSQLIS_SCANNED: TStringField;
-    EditOneBTN: TfcShapeBtn;
     FlightAirwaybillGRD: TwwDBGrid;
     ValueFLD: TwwDBComboBox;
     HawbInputFLD: TwwDBEdit;
@@ -212,8 +212,6 @@ type
     SelectRGP: TRadioGroup;
     DeleteSelectedBTN: TBitBtn;
     SelectSQL: TIBCQuery;
-    XMLForOneBTN: TfcShapeBtn;
-    XMLBTN: TfcShapeBtn;
     FlightAirwaybillSQLSERVICE_CODE: TStringField;
     FlightAirwaybillSQLACCOUNT_NUMBER: TStringField;
     FlightAirwaybillSQLINCOTERMS: TStringField;
@@ -262,7 +260,7 @@ var
 
 implementation
 
-uses MainForm, H_FlightAirwaybill, H_flightOut, CreateOneXMLFile;
+uses MainForm, H_FlightAirwaybill, H_flightOut;
 
 {$R *.DFM}
 
@@ -663,8 +661,8 @@ Var
         Mawb:String;
 begin
 SerialNumber:=FLightOutSQL.FieldByName('serial_number').AsInteger;
-CreateOneXMLFileFRM.GFlightOutSerial:=SerialNumber;
-CreateOneXMLFileFRM.ProcessFlightOut(SerialNumber);
+//CreateOneXMLFileFRM.GFlightOutSerial:=SerialNumber;
+//CreateOneXMLFileFRM.ProcessFlightOut(SerialNumber);
 
 end;
 
@@ -674,7 +672,7 @@ Var
         Mawb:String;
 begin
 SerialNumber:=FLightAirwaybillSQL.FieldByName('serial_number').AsInteger;
-CreateOneXMLFileFRM.ProcessOneAir(SerialNumber);
+//CreateOneXMLFileFRM.ProcessOneAir(SerialNumber);
 
 end;
 
@@ -689,7 +687,7 @@ iF FlightAirwaybillCDS.DataSet.State=dsEdit then
 
 SerialNumber:=FLightAirwaybillSQL.FieldByName('serial_number').AsInteger;
 Mawb:= FlightOutSQL.FieldbyName('Mawb').AsString;
-CreateOneXMLFileFRM.ProcessOneAir(SerialNumber);
+//CreateOneXMLFileFRM.ProcessOneAir(SerialNumber);
 
 end;
 

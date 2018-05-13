@@ -47,9 +47,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, StdCtrls, Buttons,  ExtCtrls,
-  LibXmlParser, LibXmlComps, DAScript, IBCScript, Db, MemDS, DBAccess, IBC,
-  UnicodeConv,math,GeneralProcedures,FileCtrl, fcStatusBar, Grids,
-  Wwdbigrd, Wwdbgrid, Mask, wwdbedit;
+  Wwdbigrd, Wwdbgrid, Mask, wwdbedit, Data.DB, DBAccess, IBC, MemDS, Vcl.Grids;
 
 Const
 // These are special tags that mark the begining and ending of an XML Element
@@ -95,10 +93,8 @@ type
     Panel4: TPanel;
     BitBtn1: TBitBtn;
     Panel3: TPanel;
-    ReadFileBTN: TfcShapeBtn;
     ReadTrans: TIBCTransaction;
     WriteTrans: TIBCTransaction;
-    CSMIB1: TCSMIB;
     FlightOutSQL: TIBCQuery;
     SenderInvoiceSQL: TIBCQuery;
     SenderInvoiceSQLFK_HAWB_SERIAL: TIntegerField;
@@ -123,7 +119,6 @@ type
     SenderInvoiceSQLDISCOUNT_RATE: TFloatField;
     SenderInvoiceSQLFACTOR_NUMERIC: TFloatField;
     OpenDialog1: TOpenDialog;
-    XmlScanner1: TXmlScanner;
     Button1: TButton;
     Button2: TButton;
     FindCurrencySQL: TIBCQuery;
@@ -174,7 +169,6 @@ type
     FindCurrencySQLCURRENCY_CODE: TStringField;
     FindCurrencySQLCOUNTRY_CODE: TIntegerField;
     FindCurrencySQLXML_CURRENCY: TStringField;
-    fcStatusBar1: TfcStatusBar;
     FindCustomerSQL: TIBCQuery;
     FindCustomerSQLCODE: TIntegerField;
     FindCustomerSQLNAME: TStringField;
@@ -1533,7 +1527,6 @@ BEGIN
                 //************************************************************************
                         ItemType:=itMawb;
                         ob.Add(TStackItem.Create(MawbTag,itMawb));
-                        //ShowMessage('add '+TstackItem(ob.Items[ob.count-1]).State);
                         ItemType:=itMawb;
 
                         Inc(MawbIndex);
@@ -1628,38 +1621,16 @@ BEGIN
 
                 If TheTag=MawbTag then begin
 
-                        //FlightOUtSQL.Edit;
-                        //FixMawb(1);
-                        //UpdateTable(MawbTable);
-
                         MawbTable.FindNode('TDOCNo',xTagRecord);
                         if IsMawbExists(XTagRecord.FIeldValue,ExistingMawbSerial,ArrivalDate) then begin
-                                //ShowMessage('Id='+xTagRecord.FIeldValue+ IntToStr(mawbSerial));
-                                //ShowMessage('ERROR: MawbId '+XTagRecord.FIeldValue+ ' Already EXISTS but it will continue');
-                                //MawbSQL.FieldByName('mawb_id').Value:=MawbSQL.FieldbYName('reference_number').AsString;
-                                //ShowMessage(   MawbSQL.FieldByName('mawb_id').AsString);
-
                         end;
 
-//                        FlightOUtSQL.Post;
-//                        ProcessLowValue(MawbSerial);
                         MawbTable.CleanTableNodes;
                 end else If TheTag=HawbTag then begin
-//                         ViewTableNodes(HawbTable);
                          FixHawb(1);
-
-
-//                        HawbSQL.Edit;
-//                        SenderInvoiceSQL.Edit;
-
-//                        FixInvoice(1); // there is no InvoiceTable , may be I should have created it. After fixhawb to check for medium
-//                        FixSender(1);
-//                        FIxCustomer(1); // fixes values in both customer and customerName table
-                        //FIxCustomerName(TempFCustomer); updated in fixCustomer but ConsigneeTable still needed to copy values to table
-
                         HawbTable.FindNode('HAWB',BTagRecord);
                         HawbId:=BtagRecord.FIeldValue;
-//                        IsHawbExistsBool:= IsHawbExists(HawbId,HawbRecord);
+
                         If IsHawbExistsBool then begin
                         // Create the partial and delete the original hawb after
 
@@ -1703,9 +1674,7 @@ BEGIN
                         Inc(CountHawb);
                 end else if (TheTag=ItemTag) then begin
                         // do your stuff, insert the hawb item
-//                        FixItem(1);
                           UpdateTable(ItemTable);
-//                        HawbItemSQL.Post;
                         ItemTable.CleanTableNodes;
                 end else if (TheTag=SenderTag) then begin
                         // do your stuff in update hawb since sender details are actually contained in customer node
@@ -1721,7 +1690,6 @@ BEGIN
                 If ISGetTagValue then begin  // we had previously a usefule startag
                         //raph.GetNode(CurrentState,theTag,TagRecord);
                         if ItemType=itMawb then begin
-                                //ShowMessage('Mawb- '+TagRecord.TagName+' update =*'+ Parser.CurContent+'*');
                                 MawbTable.UpdateValue(TheTag,Parser.CurContent);
                         end else if ItemType=itHawb then begin
                                 HawbTable.UpdateValue(TheTag,Parser.CurContent);
@@ -1731,7 +1699,6 @@ BEGIN
                                 end;
 
                         end else if ItemType=itItem then begin
-                                //ShowMessage('Hawb item- '+TagRecord.TagName+' update =*'+ Parser.CurContent+'*');
                                 ItemTable.UpdateValue(TheTag,Parser.CurContent);
                         end else if ItemType=itSender then begin
                                 SenderTable.UpdateValue(TheTag,Parser.CurContent);

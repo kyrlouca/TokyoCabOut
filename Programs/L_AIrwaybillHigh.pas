@@ -6,9 +6,8 @@ uses
 
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   StdCtrls, Mask,  IBC, MemDS, IBCError, wwSpeedButton, wwDBNavigator,
-  wwclearpanel, Buttons, ExtCtrls, wwdbedit, Grids, Wwdbigrd, Wwdbgrid,
-  Wwquery, DASQLMonitor, IBCSQLMonitor, DBAccess, Db, ImgList, Wwkeycb,MemData;
-
+  System.ImageList, Vcl.ImgList, Data.DB, DBAccess, vcl.wwdbigrd, Vcl.Grids,
+  vcl.wwdbgrid, vcl.wwclearpanel, vcl.Wwdbedit, Vcl.Buttons, Vcl.ExtCtrls;
 
 type
   TL_AirwaybillsHighFRM = class(TForm)
@@ -315,7 +314,7 @@ Var
  HawbId:String;
 begin
         HawbId:=Trim(Hawbidfld.text);
-AirwaybillSQL.LocateEx('hawb_id',HawbId,[lxPartialKey]);
+AirwaybillSQL.LocateEx('hawb_id',HawbId,[]);
 end;
 
 procedure TL_AirwaybillsHighFRM.Button3Click(Sender: TObject);

@@ -6,8 +6,7 @@ uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   StdCtrls, Mask, IBC, MemDS, IBCError, wwSpeedButton, wwDBNavigator,
   wwclearpanel, Buttons, ExtCtrls, wwdbedit, Grids, Wwdbigrd, Wwdbgrid,
-  Wwquery, wwstorep, Db, DBAccess, wwdblook,KyriacosTypes, Wwdotdot,
-  Wwdbcomb;
+  Wwdbcomb, Data.DB, DBAccess, vcl.wwdblook, vcl.Wwdotdot;
 
 type
   TH_FlightairwaybillFRM = class(TForm)
@@ -253,7 +252,8 @@ var
 
 implementation
 
-uses MainForm,H_ScanAirwaybill, S_SelectCustomerx, S_SelectTariffY;
+uses MainForm,H_ScanAirwaybill, S_SelectCustomerx, S_SelectTariffY,
+  KyriacosTypes;
 
 {$R *.DFM}
 

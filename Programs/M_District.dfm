@@ -1,8 +1,8 @@
 object M_DistrictFRM: TM_DistrictFRM
   Left = 220
   Top = 210
-  Width = 1052
-  Height = 700
+  ClientHeight = 0
+  ClientWidth = 120
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -40,7 +40,7 @@ object M_DistrictFRM: TM_DistrictFRM
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 1036
+    Width = 120
     Height = 53
     Align = alTop
     Caption = 'Edit District'
@@ -51,14 +51,17 @@ object M_DistrictFRM: TM_DistrictFRM
     Font.Style = [fsBold]
     ParentFont = False
     TabOrder = 0
+    ExplicitWidth = 1036
   end
   object Panel4: TPanel
     Left = 0
-    Top = 608
-    Width = 1036
+    Top = -53
+    Width = 120
     Height = 53
     Align = alBottom
     TabOrder = 1
+    ExplicitTop = 608
+    ExplicitWidth = 1036
     object AcceptBTN: TBitBtn
       Left = 18
       Top = 7
@@ -70,9 +73,6 @@ object M_DistrictFRM: TM_DistrictFRM
       Font.Height = -12
       Font.Name = 'MS Sans Serif'
       Font.Style = [fsBold]
-      ParentFont = False
-      TabOrder = 0
-      OnClick = AcceptBTNClick
       Glyph.Data = {
         DE010000424DDE01000000000000760000002800000024000000120000000100
         0400000000006801000000000000000000001000000000000000000000000000
@@ -91,6 +91,9 @@ object M_DistrictFRM: TM_DistrictFRM
         333A333333333333333338330000333333333333333333333333333333333333
         0000}
       NumGlyphs = 2
+      ParentFont = False
+      TabOrder = 0
+      OnClick = AcceptBTNClick
     end
     object CancelBTN: TBitBtn
       Left = 112
@@ -104,9 +107,6 @@ object M_DistrictFRM: TM_DistrictFRM
       Font.Height = -12
       Font.Name = 'MS Sans Serif'
       Font.Style = [fsBold]
-      ParentFont = False
-      TabOrder = 1
-      OnClick = CancelBTNClick
       Glyph.Data = {
         DE010000424DDE01000000000000760000002800000024000000120000000100
         0400000000006801000000000000000000001000000000000000000000000000
@@ -125,12 +125,15 @@ object M_DistrictFRM: TM_DistrictFRM
         3333333333333333333888330000333333333333333333333333333333333333
         0000}
       NumGlyphs = 2
+      ParentFont = False
+      TabOrder = 1
+      OnClick = CancelBTNClick
     end
   end
   object Panel3: TPanel
     Left = 0
     Top = 53
-    Width = 1036
+    Width = 120
     Height = 555
     Align = alClient
     TabOrder = 2
@@ -262,6 +265,7 @@ object M_DistrictFRM: TM_DistrictFRM
         'CODE_X'#9'4'#9'Code'
         'DESCRIPTION'#9'15'#9'Name')
       IniAttributes.Delimiter = ';;'
+      IniAttributes.UnicodeIniFile = False
       TitleColor = clBtnFace
       FixedCols = 0
       ShowHorzScrollBar = True
@@ -280,7 +284,6 @@ object M_DistrictFRM: TM_DistrictFRM
       TitleFont.Style = []
       TitleLines = 1
       TitleButtons = False
-      IndicatorColor = icBlack
     end
     object wwDBNavigator1: TwwDBNavigator
       Left = 13

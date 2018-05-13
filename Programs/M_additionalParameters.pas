@@ -5,8 +5,8 @@ interface
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   StdCtrls, Mask, DBCtrls, Db, wwSpeedButton, wwDBNavigator,
-  wwclearpanel, Buttons, ExtCtrls, fcLabel, wwdblook, Wwkeycb, Grids,
-  DBAccess, IBC, MemDS, Wwdbigrd, Wwdbgrid, wwdbedit;
+  wwclearpanel, Buttons, ExtCtrls, DBAccess, IBC, MemDS, Vcl.Grids,
+  vcl.wwdbigrd, vcl.wwdbgrid, vcl.Wwdbedit;
 type
   TM_additionalParametersFRM = class(TForm)
     Panel1: TPanel;

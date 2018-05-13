@@ -107,33 +107,10 @@ Var
     TheDate:TDateTime;
      Year,Month,Day:String;
 Begin
-     ShortDateFormat:='yyyy-mm-dd';
-     DateSeparator:='-';
-     try
-        TheDate:=StrToDate(TheString);
-     except
-           TheDate:=int(Now);
-     end;
-     If TheDate < IncMonth(Now,-24) then begin
-           TheDate:=IncMonth(Now,-4);
-     end;
-     ShortDateFormat:='dd/mm/yyyy';
-     Result:=TheDate;
 End;
 
 Function StrToFloatMy(TheString:String):Double;
-Var
-        OldDS:Char;
 Begin
-        try
-                                OldDS:=DecimalSeparator;
-                                DecimalSeparator:='.';
-                                Result := StrToFloat(TheString);
-                                DecimalSeparator:=OldDS;
-                        except
-                                on Exception : EConvertError do
-                                Result:=0;
-                        end;
 End;
 
 

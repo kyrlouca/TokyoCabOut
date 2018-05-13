@@ -1,8 +1,8 @@
 object L_AdditionalParametersFRM: TL_AdditionalParametersFRM
   Left = 129
   Top = 89
-  Width = 1009
-  Height = 794
+  ClientHeight = 0
+  ClientWidth = 120
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -40,7 +40,7 @@ object L_AdditionalParametersFRM: TL_AdditionalParametersFRM
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 993
+    Width = 120
     Height = 53
     Align = alTop
     Caption = 'Additional Parameters'
@@ -51,14 +51,17 @@ object L_AdditionalParametersFRM: TL_AdditionalParametersFRM
     Font.Style = [fsBold]
     ParentFont = False
     TabOrder = 0
+    ExplicitWidth = 993
   end
   object Panel4: TPanel
     Left = 0
-    Top = 701
-    Width = 993
+    Top = -54
+    Width = 120
     Height = 54
     Align = alBottom
     TabOrder = 1
+    ExplicitTop = 701
+    ExplicitWidth = 993
     object BitBtn2: TBitBtn
       Left = 21
       Top = 3
@@ -70,9 +73,6 @@ object L_AdditionalParametersFRM: TL_AdditionalParametersFRM
       Font.Height = -15
       Font.Name = 'MS Sans Serif'
       Font.Style = [fsBold]
-      ParentFont = False
-      TabOrder = 0
-      OnClick = BitBtn2Click
       Glyph.Data = {
         76010000424D7601000000000000760000002800000020000000100000000100
         04000000000000010000120B0000120B00001000000000000000000000000000
@@ -87,15 +87,19 @@ object L_AdditionalParametersFRM: TL_AdditionalParametersFRM
         0333337F377777337F333301111111110333337F333333337F33330111111111
         0333337FFFFFFFFF7F3333000000000003333377777777777333}
       NumGlyphs = 2
+      ParentFont = False
+      TabOrder = 0
+      OnClick = BitBtn2Click
     end
   end
   object Panel3: TPanel
     Left = 0
     Top = 53
-    Width = 993
+    Width = 120
     Height = 648
     Align = alClient
     TabOrder = 2
+    ExplicitWidth = 993
     object Panel2: TPanel
       Left = 1
       Top = 1
@@ -135,11 +139,6 @@ object L_AdditionalParametersFRM: TL_AdditionalParametersFRM
         Font.Height = -12
         Font.Name = 'MS Sans Serif'
         Font.Style = [fsBold]
-        ParentBiDiMode = False
-        ParentFont = False
-        TabOrder = 1
-        Visible = False
-        OnClick = DeleteSelectedBTNClick
         Glyph.Data = {
           DE010000424DDE01000000000000760000002800000024000000120000000100
           0400000000006801000000000000000000001000000000000000000000000000
@@ -158,6 +157,11 @@ object L_AdditionalParametersFRM: TL_AdditionalParametersFRM
           3333333333333333333333330000333333333333333333333333333333333333
           0000}
         NumGlyphs = 2
+        ParentBiDiMode = False
+        ParentFont = False
+        TabOrder = 1
+        Visible = False
+        OnClick = DeleteSelectedBTNClick
       end
       object InsertBTN: TBitBtn
         Left = 579
@@ -172,11 +176,6 @@ object L_AdditionalParametersFRM: TL_AdditionalParametersFRM
         Font.Height = -12
         Font.Name = 'MS Sans Serif'
         Font.Style = [fsBold]
-        ParentBiDiMode = False
-        ParentFont = False
-        TabOrder = 2
-        Visible = False
-        OnClick = InsertBTNClick
         Glyph.Data = {
           DE010000424DDE01000000000000760000002800000024000000120000000100
           0400000000006801000000000000000000001000000000000000000000000000
@@ -195,7 +194,12 @@ object L_AdditionalParametersFRM: TL_AdditionalParametersFRM
           3333333333333877733333330000333333333333333333333333338883333333
           0000}
         NumGlyphs = 2
+        ParentBiDiMode = False
+        ParentFont = False
         Style = bsNew
+        TabOrder = 2
+        Visible = False
+        OnClick = InsertBTNClick
       end
       object BitBtn1: TBitBtn
         Left = 579
@@ -210,11 +214,6 @@ object L_AdditionalParametersFRM: TL_AdditionalParametersFRM
         Font.Height = -12
         Font.Name = 'MS Sans Serif'
         Font.Style = [fsBold]
-        ParentBiDiMode = False
-        ParentFont = False
-        TabOrder = 3
-        Visible = False
-        OnClick = BitBtn1Click
         Glyph.Data = {
           F6060000424DF606000000000000360000002800000018000000180000000100
           180000000000C006000074120000741200000000000000000000FFFFFFF8F8F8
@@ -272,7 +271,12 @@ object L_AdditionalParametersFRM: TL_AdditionalParametersFRM
           7458A1795EA39A87BCE5E1EFFEFDFEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
           FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
           FFFFF7F6FAE1DCEBD5CCE2DDD7E8F9F8FBFFFFFFFFFFFFFFFFFF}
+        ParentBiDiMode = False
+        ParentFont = False
         Style = bsNew
+        TabOrder = 3
+        Visible = False
+        OnClick = BitBtn1Click
       end
       object BitBtn3: TBitBtn
         Left = 579
@@ -287,11 +291,6 @@ object L_AdditionalParametersFRM: TL_AdditionalParametersFRM
         Font.Height = -12
         Font.Name = 'MS Sans Serif'
         Font.Style = [fsBold]
-        ParentBiDiMode = False
-        ParentFont = False
-        TabOrder = 4
-        Visible = False
-        OnClick = InsertBTNClick
         Glyph.Data = {
           DE010000424DDE01000000000000760000002800000024000000120000000100
           0400000000006801000000000000000000001000000000000000000000000000
@@ -310,7 +309,12 @@ object L_AdditionalParametersFRM: TL_AdditionalParametersFRM
           3333333333333877733333330000333333333333333333333333338883333333
           0000}
         NumGlyphs = 2
+        ParentBiDiMode = False
+        ParentFont = False
         Style = bsNew
+        TabOrder = 4
+        Visible = False
+        OnClick = InsertBTNClick
       end
       object GroupBox1: TGroupBox
         Left = 33
@@ -334,6 +338,7 @@ object L_AdditionalParametersFRM: TL_AdditionalParametersFRM
             'SERIAL_NUMBER'#9'5'#9'S/N'
             'DESCRIPTION'#9'34'#9'Description')
           IniAttributes.Delimiter = ';;'
+          IniAttributes.UnicodeIniFile = False
           TitleColor = clBtnFace
           FixedCols = 1
           ShowHorzScrollBar = True
@@ -359,7 +364,6 @@ object L_AdditionalParametersFRM: TL_AdditionalParametersFRM
           TitleFont.Style = []
           TitleLines = 1
           TitleButtons = False
-          IndicatorColor = icBlack
         end
         object wwDBNavigator2: TwwDBNavigator
           Left = 2
@@ -647,6 +651,7 @@ object L_AdditionalParametersFRM: TL_AdditionalParametersFRM
             'INFO_TYPE'#9'15'#9'Parameter'
             'INFO_VALUE'#9'26'#9'Value')
           IniAttributes.Delimiter = ';;'
+          IniAttributes.UnicodeIniFile = False
           TitleColor = clBtnFace
           FixedCols = 0
           ShowHorzScrollBar = False
@@ -676,7 +681,6 @@ object L_AdditionalParametersFRM: TL_AdditionalParametersFRM
           TitleFont.Style = []
           TitleLines = 1
           TitleButtons = False
-          IndicatorColor = icBlack
         end
       end
     end
@@ -739,11 +743,13 @@ object L_AdditionalParametersFRM: TL_AdditionalParametersFRM
         DataType = ftInteger
         Name = 'SERIAL_NUMBER'
         ParamType = ptInput
+        Value = nil
       end
       item
         DataType = ftInteger
         Name = 'SERIAL_NUMBER'
         ParamType = ptInput
+        Value = nil
       end>
     object ParamItemSQLINFO_TYPE: TStringField
       DisplayLabel = 'Parameter'

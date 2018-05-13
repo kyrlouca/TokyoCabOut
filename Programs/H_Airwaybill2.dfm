@@ -1,8 +1,8 @@
 object H_airwaybill2FRM: TH_airwaybill2FRM
   Left = 70
   Top = -8
-  Width = 1282
-  Height = 856
+  ClientHeight = 817
+  ClientWidth = 1266
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -144,9 +144,6 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
       Font.Height = -12
       Font.Name = 'MS Sans Serif'
       Font.Style = [fsBold]
-      ParentFont = False
-      TabOrder = 0
-      OnClick = AcceptBTNClick
       Glyph.Data = {
         DE010000424DDE01000000000000760000002800000024000000120000000100
         0400000000006801000000000000000000001000000000000000000000000000
@@ -165,6 +162,9 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
         333A333333333333333338330000333333333333333333333333333333333333
         0000}
       NumGlyphs = 2
+      ParentFont = False
+      TabOrder = 0
+      OnClick = AcceptBTNClick
     end
     object CancelBTN: TBitBtn
       Left = 112
@@ -178,9 +178,6 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
       Font.Height = -12
       Font.Name = 'MS Sans Serif'
       Font.Style = [fsBold]
-      ParentFont = False
-      TabOrder = 1
-      OnClick = CancelBTNClick
       Glyph.Data = {
         DE010000424DDE01000000000000760000002800000024000000120000000100
         0400000000006801000000000000000000001000000000000000000000000000
@@ -199,6 +196,9 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
         3333333333333333333888330000333333333333333333333333333333333333
         0000}
       NumGlyphs = 2
+      ParentFont = False
+      TabOrder = 1
+      OnClick = CancelBTNClick
     end
   end
   object Panel3: TPanel
@@ -603,7 +603,7 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
         Left = 65
         Top = 98
         Width = 98
-        Height = 24
+        Height = 21
         ShowButton = True
         Style = csDropDown
         MapList = True
@@ -632,7 +632,7 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
         Left = 65
         Top = 259
         Width = 59
-        Height = 24
+        Height = 21
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
@@ -650,13 +650,14 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
         TabOrder = 11
         AutoDropDown = False
         ShowButton = True
+        PreciseEditRegion = False
         AllowClearKey = False
       end
       object wwDBLookupCombo3: TwwDBLookupCombo
         Left = 206
         Top = 259
         Width = 61
-        Height = 24
+        Height = 21
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
@@ -674,6 +675,7 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
         TabOrder = 12
         AutoDropDown = False
         ShowButton = True
+        PreciseEditRegion = False
         AllowClearKey = False
       end
       object wwDBEdit2: TwwDBEdit
@@ -917,7 +919,7 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
         Left = 65
         Top = 173
         Width = 98
-        Height = 24
+        Height = 21
         CharCase = ecUpperCase
         DropDownAlignment = taLeftJustify
         Selected.Strings = (
@@ -930,6 +932,7 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
         TabOrder = 4
         AutoDropDown = True
         ShowButton = True
+        PreciseEditRegion = False
         AllowClearKey = False
         ShowMatchText = True
       end
@@ -1331,6 +1334,7 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
         'CURRENCY_RATE'#9'10'#9'Rate'
         'UNIT_OF_MEASURE'#9'8'#9'KG')
       IniAttributes.Delimiter = ';;'
+      IniAttributes.UnicodeIniFile = False
       TitleColor = clBtnFace
       FixedCols = 0
       ShowHorzScrollBar = True
@@ -1344,7 +1348,6 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
       TitleFont.Style = []
       TitleLines = 1
       TitleButtons = False
-      IndicatorColor = icBlack
     end
     object wwDBNavigator1: TwwDBNavigator
       Left = 26
@@ -1476,7 +1479,7 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
       Left = 676
       Top = 637
       Width = 98
-      Height = 24
+      Height = 21
       DropDownAlignment = taLeftJustify
       DataField = 'CURRENCY'
       DataSource = AirItemSRC
@@ -1485,6 +1488,7 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
       TabOrder = 5
       AutoDropDown = False
       ShowButton = True
+      PreciseEditRegion = False
       AllowClearKey = False
     end
   end
@@ -1621,6 +1625,7 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
         DataType = ftInteger
         Name = 'SerialNumber'
         ParamType = ptInput
+        Value = nil
       end>
     object AirwayBillSQLSERIAL_NUMBER: TIntegerField
       FieldName = 'SERIAL_NUMBER'
@@ -1935,11 +1940,7 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
         DataType = ftInteger
         Name = 'SERIAL_NUMBER'
         ParamType = ptInput
-      end
-      item
-        DataType = ftInteger
-        Name = 'SERIAL_NUMBER'
-        ParamType = ptInput
+        Value = nil
       end>
     object AirItemSQLSERIAL_NUMBER: TIntegerField
       DisplayLabel = 'S/N'

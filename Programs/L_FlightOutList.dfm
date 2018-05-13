@@ -1,8 +1,8 @@
 object L_FlightOutListFRM: TL_FlightOutListFRM
   Left = 494
   Top = 178
-  Width = 1101
-  Height = 739
+  ClientHeight = 354
+  ClientWidth = 733
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -41,7 +41,7 @@ object L_FlightOutListFRM: TL_FlightOutListFRM
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 1083
+    Width = 733
     Height = 65
     Align = alTop
     Caption = 'List Flights Out'
@@ -52,14 +52,17 @@ object L_FlightOutListFRM: TL_FlightOutListFRM
     Font.Style = [fsBold]
     ParentFont = False
     TabOrder = 0
+    ExplicitWidth = 120
   end
   object Panel4: TPanel
     Left = 0
-    Top = 628
-    Width = 1083
+    Top = 288
+    Width = 733
     Height = 66
     Align = alBottom
     TabOrder = 1
+    ExplicitTop = -66
+    ExplicitWidth = 120
     object BitBtn2: TBitBtn
       Left = 26
       Top = 4
@@ -71,9 +74,6 @@ object L_FlightOutListFRM: TL_FlightOutListFRM
       Font.Height = -18
       Font.Name = 'MS Sans Serif'
       Font.Style = [fsBold]
-      ParentFont = False
-      TabOrder = 0
-      OnClick = BitBtn2Click
       Glyph.Data = {
         76010000424D7601000000000000760000002800000020000000100000000100
         04000000000000010000120B0000120B00001000000000000000000000000000
@@ -88,19 +88,22 @@ object L_FlightOutListFRM: TL_FlightOutListFRM
         0333337F377777337F333301111111110333337F333333337F33330111111111
         0333337FFFFFFFFF7F3333000000000003333377777777777333}
       NumGlyphs = 2
+      ParentFont = False
+      TabOrder = 0
+      OnClick = BitBtn2Click
     end
   end
   object Panel3: TPanel
     Left = 0
     Top = 65
-    Width = 1083
-    Height = 563
+    Width = 733
+    Height = 223
     Align = alClient
     TabOrder = 2
     object Panel2: TPanel
       Left = 1
       Top = 1
-      Width = 1081
+      Width = 731
       Height = 72
       Align = alTop
       TabOrder = 0
@@ -132,6 +135,7 @@ object L_FlightOutListFRM: TL_FlightOutListFRM
         TabOrder = 0
         AutoDropDown = False
         ShowButton = True
+        PreciseEditRegion = False
         AllowClearKey = False
       end
       object wwIncrementalSearch1: TwwIncrementalSearch
@@ -149,34 +153,36 @@ object L_FlightOutListFRM: TL_FlightOutListFRM
     object Panel5: TPanel
       Left = 1
       Top = 73
-      Width = 1081
-      Height = 489
+      Width = 731
+      Height = 149
       Align = alClient
       TabOrder = 1
       object Panel6: TPanel
         Left = 738
         Top = 1
         Width = 24
-        Height = 487
+        Height = 147
         Align = alLeft
         TabOrder = 0
+        ExplicitHeight = 487
       end
       object FlightOutGRD: TwwDBGrid
         Left = 1
         Top = 1
         Width = 737
-        Height = 487
+        Height = 147
         ControlType.Strings = (
           'FK_FLIGHT_TABLE;CustomEdit;FlightTableFLD')
         Selected.Strings = (
-          'SERIAL_NUMBER'#9'10'#9'S/N'#9'F'
-          'MAWB'#9'14'#9'Name'#9'F'
-          'FK_FLIGHT_TABLE'#9'10'#9'Flight'#9'F'
-          'DATE_DEPART'#9'13'#9'Departure Date'#9'F'
-          'REMARKS'#9'22'#9'Remarks'#9'F'
-          'DESTINATION_AREA'#9'14'#9'Destination Area'#9'F'
-          'DESTINATION_COUNTRY'#9'18'#9'Destination Country'#9'F')
+          'SERIAL_NUMBER'#9'10'#9'S/N'
+          'MAWB'#9'14'#9'Name'
+          'FK_FLIGHT_TABLE'#9'10'#9'Flight'
+          'DATE_DEPART'#9'13'#9'Departure Date'
+          'REMARKS'#9'22'#9'Remarks'
+          'DESTINATION_AREA'#9'14'#9'Destination Area'
+          'DESTINATION_COUNTRY'#9'18'#9'Destination Country')
         IniAttributes.Delimiter = ';;'
+        IniAttributes.UnicodeIniFile = False
         TitleColor = clBtnFace
         FixedCols = 0
         ShowHorzScrollBar = True
@@ -197,7 +203,6 @@ object L_FlightOutListFRM: TL_FlightOutListFRM
         TitleLines = 1
         TitleButtons = False
         OnDblClick = FlightBTNClick
-        IndicatorColor = icBlack
       end
       object DeleteSelectedBTN: TBitBtn
         Left = 776
@@ -212,10 +217,6 @@ object L_FlightOutListFRM: TL_FlightOutListFRM
         Font.Height = -15
         Font.Name = 'MS Sans Serif'
         Font.Style = [fsBold]
-        ParentBiDiMode = False
-        ParentFont = False
-        TabOrder = 2
-        OnClick = DeleteSelectedBTNClick
         Glyph.Data = {
           DE010000424DDE01000000000000760000002800000024000000120000000100
           0400000000006801000000000000000000001000000000000000000000000000
@@ -234,6 +235,10 @@ object L_FlightOutListFRM: TL_FlightOutListFRM
           3333333333333333333333330000333333333333333333333333333333333333
           0000}
         NumGlyphs = 2
+        ParentBiDiMode = False
+        ParentFont = False
+        TabOrder = 2
+        OnClick = DeleteSelectedBTNClick
       end
       object InsertBTN: TBitBtn
         Left = 776
@@ -248,10 +253,6 @@ object L_FlightOutListFRM: TL_FlightOutListFRM
         Font.Height = -15
         Font.Name = 'MS Sans Serif'
         Font.Style = [fsBold]
-        ParentBiDiMode = False
-        ParentFont = False
-        TabOrder = 3
-        OnClick = InsertBTNClick
         Glyph.Data = {
           DE010000424DDE01000000000000760000002800000024000000120000000100
           0400000000006801000000000000000000001000000000000000000000000000
@@ -270,7 +271,11 @@ object L_FlightOutListFRM: TL_FlightOutListFRM
           3333333333333877733333330000333333333333333333333333338883333333
           0000}
         NumGlyphs = 2
+        ParentBiDiMode = False
+        ParentFont = False
         Style = bsNew
+        TabOrder = 3
+        OnClick = InsertBTNClick
       end
       object BitBtn1: TBitBtn
         Left = 776
@@ -285,10 +290,6 @@ object L_FlightOutListFRM: TL_FlightOutListFRM
         Font.Height = -15
         Font.Name = 'MS Sans Serif'
         Font.Style = [fsBold]
-        ParentBiDiMode = False
-        ParentFont = False
-        TabOrder = 4
-        OnClick = BitBtn1Click
         Glyph.Data = {
           F6060000424DF606000000000000360000002800000018000000180000000100
           180000000000C006000074120000741200000000000000000000FFFFFFF8F8F8
@@ -346,91 +347,11 @@ object L_FlightOutListFRM: TL_FlightOutListFRM
           7458A1795EA39A87BCE5E1EFFEFDFEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
           FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
           FFFFF7F6FAE1DCEBD5CCE2DDD7E8F9F8FBFFFFFFFFFFFFFFFFFF}
-        Style = bsNew
-      end
-      object FlightBTN: TfcShapeBtn
-        Left = 776
-        Top = 48
-        Width = 209
-        Height = 73
-        Caption = 'Scan Airwaybills'
-        Color = clBtnFace
-        DitherColor = clWhite
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -21
-        Font.Name = 'Arial'
-        Font.Style = []
-        Glyph.Data = {
-          F6060000424DF606000000000000360000002800000018000000180000000100
-          180000000000C006000000000000000000000000000000000000FFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF926544926544926644926644926643
-          9265449266449266449265439266439265439266449265439266449266439266
-          43926643926643FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF946744E3CAACE4
-          CAACE3CBACE3CBACE3CBACE4CAADE3CAADE4CAADE4CBACE4CAADE4CAACE4CBAC
-          E3CBACE4CAACE3CAACE3CAAC936644FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FF956845E5CCAFE4CCAFE4CCAFE5CCAFE5CCAFE4CCAEE4CCAFE4CCAFE4CCAFE4
-          CCAFE4CCAFE4CDAFE4CDAFE4CCAFE4CDAFE4CCAF956845FFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFFFFF330F0A804B19804A1944110B44110B44110B804B194411
-          0B44110B44110B44110B44110B44110B44110B44110BE5CEB2E5CEB2976945FF
-          FFFFFFFFFF926544926544926644926644926643926544926644926644926543
-          926643926543926644926543926644926643926643926643926643814C1CE6D1
-          B5E6D0B6996A46FFFFFFFFFFFF946744E3CAACE4CAACE3CBACE3CBACE3CBACE4
-          CAADE3CAADE4CAADE4CBACE4CAADE4CAACE4CBACE3CBACE4CAACE3CAACE3CAAC
-          936644824F21E7D3BAE7D3B99B6C47FFFFFFFFFFFF956845E5CCAFE4CCAFE4CC
-          AFE5CCAFE5CCAFE4CCAEE4CCAFE4CCAFE4CCAFE4CCAFE4CCAFE4CDAFE4CDAFE4
-          CCAFE4CDAFE4CCAF95684544110BE8D6BEE8D5BE9D6C48FFFFFFFFFFFF976945
-          E5CFB2E5CEB2A8744DA8744DA8744DE5CFB2A8744DA8744DA8744DA8744DA874
-          4DA8744DA8744DA8744DE5CEB2E5CEB297694584552AE9D9C3E9D8C39F6E48FF
-          FFFFFFFFFF996A46E6D1B6E6D1B5E6D1B6E6D0B6E6D0B6E6D1B6E6D0B6E6D0B6
-          E6D0B5E6D0B6E6D0B6E6D0B6E6D1B6E6D0B5E6D1B5E6D0B6996A4686582EEBDC
-          C9EBDCC9A27049FFFFFFFFFFFF9A6C47E7D3BAE7D3BAE7D3B9E7D3BAE7D3BAE7
-          D3BAE7D3B9E7D3BAE7D4BAE7D3B9E7D3BAE7D3BAE7D3B9E7D3BAE7D3BAE7D3B9
-          9B6C4744110BEBDECDECDECDA4714AFFFFFFFFFFFF9D6D48E8D6BEE8D6BEA874
-          4DA8744DA8744DA8744DA8744DA8744DA8744DA8744DA8744DA8744DA8744DA8
-          744DE8D6BEE8D5BE9D6C48875D37EDE2D1ECE2D1A6724BFFFFFFFFFFFF9F6E49
-          E9D9C3E9D9C2E9D9C3E9D9C3E9D9C3E9D9C3EAD9C3E9D8C3E9D8C2E9D8C3E9D9
-          C2E9D8C2EAD9C3E9D9C3E9D9C3E9D8C39F6E4888603BEEE4D6EEE4D6A8754CFF
-          FFFFFFFFFFA1704AEBDBC8EBDCC9EADBC8EADCC8EBDBC9EADCC8EADBC8EBDBC8
-          EBDCC8EADCC8EADBC8EADCC8EADCC9EBDCC8EBDCC9EBDCC9A2704944110BEFE7
-          DAEFE7DAAB764DFFFFFFFFFFFFA3724AEBDECDEBDECDA8744DA8744DA8744DA8
-          744DA8744DA8744DA8744DA8744DA8744DECDFCDA8744DA8744DEBDECDECDECD
-          A4714A8B6544F0E9DFF0EADEAD774EFFFFFFFFFFFFA6734BEDE1D2EDE1D1ECE1
-          D1EDE1D2EDE1D1EDE2D1EDE1D1ECE2D2ECE1D1ECE1D1EDE1D1EDE2D2EDE2D1EC
-          E1D1EDE2D1ECE2D1A6724B8C6848F1ECE2F1EBE2AE794FFFFFFFFFFFFFA8744C
-          EEE5D6EEE4D6EEE4D6EEE4D6EEE4D6EEE5D6EEE5D6EEE4D6EEE5D6EEE4D6EEE4
-          D6EEE4D6EEE5D6EDE4D5EEE4D6EEE4D6A8754C44110BF1EEE5F2EEE6B07950FF
-          FFFFFFFFFFAA764DEFE7DAEFE7DAA8744DA8744DA8744DA8744DA8744DA8744D
-          A8744DA8744DA8744DA8744DA8744DA8744DEFE7DAEFE7DAAB764D8E6C4DF3F0
-          E8F3F0E8B17A50FFFFFFFFFFFFAD774EF0EADEF0EADEF0E9DEF0E9DEF0E9DEF0
-          EADFF0EADEF0EADEF0EADFF0E9DEF0EADEF0E9DEF0E9DEF0E9DEF0E9DFF0EADE
-          AD774E8E6D50F3F1EAF3F1EAB37B50FFFFFFFFFFFFAE794FF1ECE1F1ECE2A874
-          4DA8744DA8744DF1ECE2F1ECE2F0EBE2F1ECE2F1ECE2F1ECE2F1ECE1F1EBE2F1
-          ECE2F1ECE2F1EBE2AE794F50120CB47C51B47C51B47C51FFFFFFFFFFFFB07A50
-          F1EEE6F2EEE5A8744DA8744DA8744DF1EEE5F2EEE5A8744DA8744DA8744DA874
-          4DA8744DA8744DA8744DF1EEE5F2EEE6B07950FFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFB17B50F3EFE7F3F0E8F2EFE8F2F0E8F3EFE8F2F0E8F2EFE7F3EFE8
-          F3F0E8F2F0E8F2EFE8F2F0E7F2F0E8F3F0E7F3F0E8F3F0E8B17A50FFFFFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFB37C51F3F1EAF3F1EAF3F1EAF3F1EAF3F1EAF3
-          F1EAF3F1EAF3F1EAF3F1EAF3F1EAF3F1EAF3F1EAF3F1EAF3F1EAF3F1EAF3F1EA
-          B37B50FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFB47C51B47C51B47C51B47C
-          51B47C51B47D51B47C51B47C51B47C51B47C51B47C51B47C51B47C51B47C51B4
-          7C51B47C51B47C51B47C51FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
-        Options = [boFocusable]
-        ParentClipping = False
+        ParentBiDiMode = False
         ParentFont = False
-        RoundRectBias = 25
-        ShadeStyle = fbsNormal
-        Shape = bsRoundRect
         Style = bsNew
-        TabOrder = 5
-        TabStop = True
-        TextOptions.Alignment = taLeftJustify
-        TextOptions.Style = fclsLowered
-        TextOptions.VAlignment = vaVCenter
-        OnClick = FlightBTNClick
+        TabOrder = 4
+        OnClick = BitBtn1Click
       end
     end
   end

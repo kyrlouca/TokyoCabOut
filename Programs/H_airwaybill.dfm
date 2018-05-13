@@ -1,8 +1,8 @@
 object H_airwaybillFRM: TH_airwaybillFRM
   Left = 725
   Top = 135
-  Width = 764
-  Height = 972
+  ClientHeight = 821
+  ClientWidth = 748
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -115,7 +115,7 @@ object H_airwaybillFRM: TH_airwaybillFRM
   object TitlePNL: TPanel
     Left = 0
     Top = 0
-    Width = 746
+    Width = 748
     Height = 65
     Align = alTop
     Caption = 'Edit AirwayBill'
@@ -126,14 +126,17 @@ object H_airwaybillFRM: TH_airwaybillFRM
     Font.Style = [fsBold]
     ParentFont = False
     TabOrder = 0
+    ExplicitWidth = 746
   end
   object Panel4: TPanel
     Left = 0
-    Top = 861
-    Width = 746
+    Top = 755
+    Width = 748
     Height = 66
     Align = alBottom
     TabOrder = 1
+    ExplicitTop = 861
+    ExplicitWidth = 746
     object AcceptBTN: TBitBtn
       Left = 22
       Top = 8
@@ -145,9 +148,6 @@ object H_airwaybillFRM: TH_airwaybillFRM
       Font.Height = -15
       Font.Name = 'MS Sans Serif'
       Font.Style = [fsBold]
-      ParentFont = False
-      TabOrder = 0
-      OnClick = AcceptBTNClick
       Glyph.Data = {
         DE010000424DDE01000000000000760000002800000024000000120000000100
         0400000000006801000000000000000000001000000000000000000000000000
@@ -166,6 +166,9 @@ object H_airwaybillFRM: TH_airwaybillFRM
         333A333333333333333338330000333333333333333333333333333333333333
         0000}
       NumGlyphs = 2
+      ParentFont = False
+      TabOrder = 0
+      OnClick = AcceptBTNClick
     end
     object CancelBTN: TBitBtn
       Left = 138
@@ -179,9 +182,6 @@ object H_airwaybillFRM: TH_airwaybillFRM
       Font.Height = -15
       Font.Name = 'MS Sans Serif'
       Font.Style = [fsBold]
-      ParentFont = False
-      TabOrder = 1
-      OnClick = CancelBTNClick
       Glyph.Data = {
         DE010000424DDE01000000000000760000002800000024000000120000000100
         0400000000006801000000000000000000001000000000000000000000000000
@@ -200,15 +200,20 @@ object H_airwaybillFRM: TH_airwaybillFRM
         3333333333333333333888330000333333333333333333333333333333333333
         0000}
       NumGlyphs = 2
+      ParentFont = False
+      TabOrder = 1
+      OnClick = CancelBTNClick
     end
   end
   object Panel3: TPanel
     Left = 0
     Top = 65
-    Width = 746
-    Height = 796
+    Width = 748
+    Height = 690
     Align = alClient
     TabOrder = 2
+    ExplicitWidth = 746
+    ExplicitHeight = 796
     object GroupBox1: TGroupBox
       Left = 32
       Top = 16
@@ -960,6 +965,7 @@ object H_airwaybillFRM: TH_airwaybillFRM
         DataType = ftInteger
         Name = 'SerialNUmber'
         ParamType = ptInput
+        Value = nil
       end>
     object AirwaybillSQLSERIAL_NUMBER: TIntegerField
       FieldName = 'SERIAL_NUMBER'

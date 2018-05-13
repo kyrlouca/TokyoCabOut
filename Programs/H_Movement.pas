@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   StdCtrls, Mask,  IBC, MemDS, IBCError, wwSpeedButton, wwDBNavigator,
   wwclearpanel, Buttons, ExtCtrls, wwdbedit, Grids, Wwdbigrd, Wwdbgrid,
-  Wwquery, DASQLMonitor, IBCSQLMonitor, DBAccess, Db;
+  DASQLMonitor, IBCSQLMonitor, Data.DB, DBAccess;
 
 type
   TH_MovementFRM = class(TForm)

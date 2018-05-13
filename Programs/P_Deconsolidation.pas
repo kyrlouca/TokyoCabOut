@@ -64,7 +64,7 @@ var
 
 implementation
 
-uses MainForm, CreateOneXMLFile;
+uses MainForm, GeneralProcedures, G_KyrSQL;
 
 {$R *.DFM}
 
@@ -77,24 +77,24 @@ End;
 
 
 Function TP_DeconsolidationFRM.GetValueFromSystemTable(Const TheKey,TheDescription:String):String;
-Var
-   TheQuery:TQUery;
+//Var
+//   TheQuery:TQUery;
 Begin
 
-
-   TheQuery:=ParameterSQL;
-   TheQUery.ParamByName('TheKey').Value:=TheKey;
-
-   TheQuery.close;
-   If TheQuery.Prepared then TheQuery.Prepare;
-   TheQUery.ParamByName('TheKey').Value:=TheKey;
-   TheQuery.Open;
-   If TheQuery.IsEmpty Then raise exception.create('Enter into General parameter the record:'+TheKey+' for '+TheDescription);
-
-   TheQuery.First;
-   Result:=Trim(TheQuery.fieldbyName('text_1').AsString);
-   TheQuery.Close;
-
+//
+//   TheQuery:=ParameterSQL;
+//   TheQUery.ParamByName('TheKey').Value:=TheKey;
+//
+//   TheQuery.close;
+//   If TheQuery.Prepared then TheQuery.Prepare;
+//   TheQUery.ParamByName('TheKey').Value:=TheKey;
+//   TheQuery.Open;
+//   If TheQuery.IsEmpty Then raise exception.create('Enter into General parameter the record:'+TheKey+' for '+TheDescription);
+//
+//   TheQuery.First;
+//   Result:=Trim(TheQuery.fieldbyName('text_1').AsString);
+//   TheQuery.Close;
+//
 
 End;
 

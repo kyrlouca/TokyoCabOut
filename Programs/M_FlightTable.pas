@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   StdCtrls, Mask,  wwSpeedButton, wwDBNavigator,
   wwclearpanel, Buttons, ExtCtrls, wwdbedit, Grids, Wwdbigrd, Wwdbgrid,
-  Wwquery, wwstorep, IBC, MemDs, CRGrid, DBAccess, Db, wwdblook;
+  DBAccess, IBC, Data.DB, MemDS, vcl.wwdblook;
 
 type
   TM_FlightTableFRM = class(TForm)

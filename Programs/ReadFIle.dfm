@@ -1884,6 +1884,7 @@ object ReadFileFRM: TReadFileFRM
     end
   end
   object RecentMawbSQL: TIBCQuery
+    Connection = MainFormFRM.CabOutData
     Transaction = ReadTrans
     SQL.Strings = (
       'Select'

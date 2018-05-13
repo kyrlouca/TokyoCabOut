@@ -4,17 +4,13 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  StdCtrls, Mask,  wwSpeedButton, wwDBNavigator,
-  wwclearpanel, Buttons, ExtCtrls, wwdbedit, Grids, Wwdbigrd, Wwdbgrid,
-  Wwquery, wwstorep, IBC, MemDs, CRGrid, DBAccess, Db, fcButton, fcImgBtn,
-  fcShapeBtn,GeneralProcedures,FileCtrl;
-
+  StdCtrls, Mask,  wwSpeedButton, wwDBNavigator, Data.DB, MemDS, DBAccess, IBC,
+  Vcl.ExtCtrls, Vcl.Buttons;
 type
   TR_ReadAllFilesFRM = class(TForm)
     Panel1: TPanel;
     Panel4: TPanel;
     Panel3: TPanel;
-    StartBTN: TfcShapeBtn;
     BitBtn3: TBitBtn;
     Timer1: TTimer;
     ParameterSQL: TIBCQuery;
@@ -33,6 +29,7 @@ type
     ParameterSQLDATE_1: TDateTimeField;
     ParameterSQLDATE_2: TDateTimeField;
     ParameterSQLDESCRIPTION: TStringField;
+    StartBtn: TButton;
     procedure BitBtn2Click(Sender: TObject);
     procedure FormActivate(Sender: TObject);
     procedure BitBtn3Click(Sender: TObject);
@@ -53,7 +50,7 @@ var
 
 implementation
 
-uses MainForm, ReadFIle;
+uses MainForm;
 
 {$R *.DFM}
 
@@ -99,11 +96,11 @@ Var
         S1:String;
 begin
         IF timer1.Enabled then begin
-                StartBTN.Color:=clgreen ;
-                StartBTN.Caption:='Processing Files Active';
+//                StartBTN.Color:=clgreen ;
+//                StartBTN.Caption:='Processing Files Active';
         end else begin
-                StartBTN.Color:=clred;
-                StartBTN.Caption:='Processing Files NOT Active';
+//                StartBTN.Color:=clred;
+//                StartBTN.Caption:='Processing Files NOT Active';
         end;
 
 
@@ -125,12 +122,12 @@ Timer1.Enabled:=not TimerStatus;
 GlobalStart:=Timer1.Enabled;
 
 If Timer1.Enabled then begin
-        StartBTN.Color:=clGreen;
-        StartBTN.Caption:= 'Processing Files - Active';
+//        StartBTN.Color:=clGreen;
+//        StartBTN.Caption:= 'Processing Files - Active';
 
 end else begin
-        StartBTN.Caption:= 'Processing Files - NOT Active';
-        StartBTN.Color:=clred;
+//        StartBTN.Caption:= 'Processing Files - NOT Active';
+//        StartBTN.Color:=clred;
 end;
 
 end;
