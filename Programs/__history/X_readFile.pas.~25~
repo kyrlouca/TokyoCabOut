@@ -154,95 +154,6 @@ THawbAge=(haNotFound, haSame, haPartial, haOld, haDuplicate);
     MawbSQLF63: TStringField;
     MawbSQLSTATUSC: TStringField;
     MawbSQLTDID_MEDIUM: TStringField;
-    HawbSQLSERIAL_NUMBER: TIntegerField;
-    HawbSQLHAB_ID: TStringField;
-    HawbSQLFK_MAWB_REFER_NUMBER: TIntegerField;
-    HawbSQLFK_CUSTOMER_CODE: TIntegerField;
-    HawbSQLFK_CLEARANCE_INSTRUCTION: TStringField;
-    HawbSQLDESCRIPTION: TStringField;
-    HawbSQLWEIGHT: TFloatField;
-    HawbSQLFK_CLEARING_STATE: TStringField;
-    HawbSQLFK_INVOICE_STATUS: TStringField;
-    HawbSQLFK_CURRENCY: TStringField;
-    HawbSQLEXCHANGE_RATE: TFloatField;
-    HawbSQLINVOICE_TOTAL: TFloatField;
-    HawbSQLFREIGHT_AMOUNT: TFloatField;
-    HawbSQLFK_OTHER_CHARGE_CODE: TStringField;
-    HawbSQLOTHER_CHARGE_AMOUNT: TFloatField;
-    HawbSQLOTHER_CHARGE_PAID: TStringField;
-    HawbSQLSTAMPS_AMOUNT: TFloatField;
-    HawbSQLEXPS_NON_INVOICABLE: TFloatField;
-    HawbSQLCUSTOMS_VALUE: TFloatField;
-    HawbSQLINVOICE_SERIAL: TIntegerField;
-    HawbSQLCOURIER_INVOICE_SERIAL: TIntegerField;
-    HawbSQLCOURIER_INVOICE_VALUE: TFloatField;
-    HawbSQLHIGH_VALUE: TStringField;
-    HawbSQLFK_SEC_MAWB_REFER_NUMBER: TIntegerField;
-    HawbSQLEDE_STORAGE_EXPENSES: TFloatField;
-    HawbSQLEDE_DELIVERY_EXPENSES: TFloatField;
-    HawbSQLDATE_INVOICED: TDateField;
-    HawbSQLSENT_TO_HEAD: TStringField;
-    HawbSQLNUM_OF_PIECES_ARRIVED: TIntegerField;
-    HawbSQLTOTAL_NUM_OF_PIECES: TIntegerField;
-    HawbSQLFK_CLEARANCE_TYPE: TStringField;
-    HawbSQLFK_DELIVERY_TERM: TStringField;
-    HawbSQLORIGIN_STATION: TStringField;
-    HawbSQLEC2_NUMBER_DATE: TStringField;
-    HawbSQLSENDERS_INV_NO: TStringField;
-    HawbSQLNUMBER_OF_PARCELS: TIntegerField;
-    HawbSQLFK_CUSTOMER_ACCOUNT: TIntegerField;
-    HawbSQLDISTRICT: TStringField;
-    HawbSQLDELIVERY_ORDER_AMOUNT: TFloatField;
-    HawbSQLOTHER2_CHARGE_AMOUNT: TFloatField;
-    HawbSQLFK_OTHER2_CHARGE_CODE: TStringField;
-    HawbSQLPOSOSTOSIS: TStringField;
-    HawbSQLTOTAL_DUTIES: TFloatField;
-    HawbSQLCLEARANCE_WAITING_CODE: TStringField;
-    HawbSQLCLEARANCE_WAITING_REASON: TStringField;
-    HawbSQLDATE_CLEARED: TDateField;
-    HawbSQLDATE_REGISTERED: TDateField;
-    HawbSQLFACTOR: TFloatField;
-    HawbSQLFK_COUNTRY_ORIGIN: TIntegerField;
-    HawbSQLCHARGE_TRL: TFloatField;
-    HawbSQLCHARGE_VAT: TFloatField;
-    HawbSQLCHARGE_EXCISE: TFloatField;
-    HawbSQLCHARGE_IMPORT: TFloatField;
-    HawbSQLINVOICABLE: TStringField;
-    HawbSQLTOTAL_CHARGES: TFloatField;
-    HawbSQLCUSTOMER_NAME: TStringField;
-    HawbSQLEDE_COMMENTS: TStringField;
-    HawbSQLFK_MAWB_ID: TStringField;
-    HawbSQLSIGNATORY_NAME: TStringField;
-    HawbSQLXML_HOUSE_ID: TStringField;
-    HawbSQLSENDER_NAME: TStringField;
-    HawbSQLSENDER_ADDRESS_1: TStringField;
-    HawbSQLSENDER_ADDRESS_2: TStringField;
-    HawbSQLSENDER_ADDRESS_3: TStringField;
-    HawbSQLIS_PRIVATE: TStringField;
-    HawbSQLDELIVERY_ORDER_ID: TStringField;
-    HawbSQLOTHER4_CHARGE_AMOUNT: TFloatField;
-    HawbSQLFK_OTHER4_CHARGE: TStringField;
-    HawbSQLIS_PAID: TStringField;
-    HawbSQLPARTIAL_FLAG: TStringField;
-    HawbSQLPARTIAL_WEIGHT: TFloatField;
-    HawbSQLPARTIAL_DELIVERY_ORDER_ID: TStringField;
-    HawbSQLPARTIAL_MAWB_ID: TStringField;
-    HawbSQLPARTIAL_PIECES: TIntegerField;
-    HawbSQLPARTIAL_MAWB_REFER_NUMBER: TIntegerField;
-    HawbSQLSTATUS_C: TStringField;
-    HawbSQLIS_MEDIUM: TStringField;
-    HawbSQLMEDIUM_VAT_RATE: TFloatField;
-    HawbSQLIS_CHARGED_DELIVERY: TStringField;
-    HawbSQLIS_VALID: TStringField;
-    HawbSQLIS_PREPAID: TStringField;
-    HawbSQLOTHER5_CHARGE_AMOUNT: TFloatField;
-    HawbSQLFK_DUTY_RELIEVE: TStringField;
-    HawbSQLSENDER_POST_CODE: TStringField;
-    HawbSQLSENDER_CITY: TStringField;
-    HawbSQLSENDER_COUNTRY: TStringField;
-    HawbSQLCUSTOMER_VAT_ID: TStringField;
-    HawbSQLCUSTOMER_AUTHORITY_TO_AGENT: TStringField;
-    HawbSQLIS_LOW: TStringField;
     Panel1: TRzPanel;
     Label1: TLabel;
     RzPanel2: TRzPanel;
@@ -259,12 +170,59 @@ THawbAge=(haNotFound, haSame, haPartial, haOld, haDuplicate);
     MawbSQLFILE_NAME_XML: TStringField;
     ProcessFLD: TRzLabel;
     OpenfileDLG: TRzOpenDialog;
-    HawbSQLDESTINATION_STATION: TStringField;
     All: TButton;
     MawbSQLMSG_TIME: TDateTimeField;
     MawbSQLMOVEMENT_NUMBER: TStringField;
     MawbSQLDATE_DEPART: TDateField;
     MessagesMemo: TRzMemo;
+    HawbSQLSERIAL_NUMBER: TIntegerField;
+    HawbSQLSEQUENCE_NUMBER: TIntegerField;
+    HawbSQLHAWB_ID: TStringField;
+    HawbSQLSHIPMENT_ORIGIN_AREA: TStringField;
+    HawbSQLSHIPMENT_ORIGIN_COUNTRY: TStringField;
+    HawbSQLPIECES: TIntegerField;
+    HawbSQLWEIGHT: TFloatField;
+    HawbSQLDESCRIPTION: TStringField;
+    HawbSQLFK_DOCUMENT_MASTER_SERIAL: TIntegerField;
+    HawbSQLFK_MOVEMENT_SERIAL: TIntegerField;
+    HawbSQLPIECES_S: TStringField;
+    HawbSQLSENDER_NAME: TStringField;
+    HawbSQLSENDER_ADDRESS: TStringField;
+    HawbSQLSENDER_POST_CODE: TStringField;
+    HawbSQLSENDER_CITY: TStringField;
+    HawbSQLSENDER_COUNTRY_CODE: TStringField;
+    HawbSQLCONSIGNEE_NAME: TStringField;
+    HawbSQLCONSIGNEE_ADDRESS: TStringField;
+    HawbSQLCONSIGNEE_POST_CODE: TStringField;
+    HawbSQLCONSIGNEE_CITY: TStringField;
+    HawbSQLCONSIGNEE_COUNTRY_CODE: TStringField;
+    HawbSQLFK_ITINERARY_SERIAL: TIntegerField;
+    HawbSQLPACKAGES_COUNT: TIntegerField;
+    HawbSQLITEMS_COUNT: TIntegerField;
+    HawbSQLPAYMENT_METHOD: TStringField;
+    HawbSQLIS_HIGH: TStringField;
+    HawbSQLVALUE_TYPE: TStringField;
+    HawbSQLCUSTOMS_VALUE: TFloatField;
+    HawbSQLCURRENCY: TStringField;
+    HawbSQLCURRENCY_RATE: TFloatField;
+    HawbSQLSENDER_ADDRESS_1: TStringField;
+    HawbSQLSENDER_ADDRESS_2: TStringField;
+    HawbSQLSENDER_ADDRESS_3: TStringField;
+    HawbSQLSENDER_DEVICE_TYPE: TStringField;
+    HawbSQLSENDER_DEVICE_DETAILS: TStringField;
+    HawbSQLCONSIGNEE_ADDRESS_1: TStringField;
+    HawbSQLCONSIGNEE_ADDRESS_2: TStringField;
+    HawbSQLCONSIGNEE_ADDRESS_3: TStringField;
+    HawbSQLCONSIGNEE_DEVICE_TYPE: TStringField;
+    HawbSQLCONSIGNEE_DEVICE_DETAILS: TStringField;
+    HawbSQLINCOTERMS: TStringField;
+    HawbSQLIS_SCANNED: TStringField;
+    HawbSQLSENDER_EMAIL: TStringField;
+    HawbSQLCONSIGNEE_EMAIL: TStringField;
+    HawbSQLSERVICE_CODE: TStringField;
+    HawbSQLACCOUNT_NUMBER: TStringField;
+    HawbSQLCONSIGNEE_PREFERRED_NAME: TStringField;
+    HawbSQLSENDER_PREFERRED_NAME: TStringField;
     procedure Button1Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure RzBitBtn2Click(Sender: TObject);
@@ -390,6 +348,7 @@ end;
 procedure TX_readFileFRM.FormActivate(Sender: TObject);
 begin
 ProcessFLD.Visible:=false;
+
 end;
 
 procedure TX_readFileFRM.FormCreate(Sender: TObject);
@@ -1021,9 +980,9 @@ end;
 
 function TX_readFileFRM.CreateHawb(Const mawbSerial:Integer; hawbNode:IXMLNode):Integer;
 var
+HawbSerial:Integer;
   qr:TIBCQuery;
   siSQL:TIBCQuery;
-  hawbSerial:Integer;
   temp:string;
   senderNode:IXMLNode;
   CustomerNode:IXMLNode;
@@ -1043,20 +1002,21 @@ begin
 
 //      codesite.Send('HawbID'+HawbId);
 
-
-    qr:=HawbSQL;
+    qr:=TksQuery.Create(cn,'Select * from airwaybill where serial_number= -1');
     try
+    qr.Open;
     qr.Insert;
     isError:=false;
 
+     qr.FieldByName('serial_number').Value:= G_KyrSQL.ksGenerateSerial(cn,'AIRWAYBILL_GENERATOR');
      qr.FieldByName('Hawb_id').Value:= hawbNode.ChildNodes['HAWB'].Text;
-     qr.FieldByName('weight').Value:= hawbNode.ChildNodes['GrossWgt'].Text;
+     qr.FieldByName('weight').Value:= G_generalProcs.ConvertDecimalF(hawbNode.ChildNodes['GrossWgt'].Text);
      qr.FieldByName('SHIPMENT_ORIGIN_AREA').Value:= hawbNode.ChildNodes['ShpOrgn'].Text;
      qr.FieldByName('SHIPMENT_ORIGIN_COUNTRY').Value:= hawbNode.ChildNodes['ShpCtryOrgn'].Text;
 
 
      qr.FieldByName('DESCRIPTION').Value:= hawbNode.ChildNodes['CargoDesc'].Text;
-     qr.FieldByName('CUSTOMS_VALUE').Value:= hawbNode.ChildNodes['CstmsVal'].Text;
+     qr.FieldByName('CUSTOMS_VALUE').Value:= ConvertDecimalF( hawbNode.ChildNodes['CstmsVal'].Text);
      qr.FieldByName('CURRENCY').Value:= hawbNode.ChildNodes['CstmsValCrncyCd'].Text;
      qr.FieldByName('INCOTERMS').Value:= hawbNode.ChildNodes['Incoterms'].Text;
      qr.FieldByName('SERVICE_CODE').Value:= hawbNode.ChildNodes['DHLServiceCd'].Text;
@@ -1100,13 +1060,9 @@ begin
 
 
       qr.Post;
-     except
+     finally
+     qr.Free;
 //      G_DebugUnit.GD_ShowDataRecord(qr);
-       ShowMessage('hawb-id'+hawbid);
-      result:=0;
-      qr.Cancel;
-      exit;
-
     end;
 
 
@@ -1419,7 +1375,11 @@ begin
 end;
 
 
+
+
 END.
+
+
 
 
 

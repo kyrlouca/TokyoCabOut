@@ -651,10 +651,6 @@ begin
   end;
 
 End;
-
-
-
-
 function TX_readFileFRM.isPartialMawb(const mawbNode:IXMLNode):Integer;
 // same mawb, same date arrived and depart
 var
@@ -684,7 +680,6 @@ begin
   end;
 
 End;
-
 function TX_readFileFRM.isOldMawb(const mawbNode:IXMLNode):Integer;
 // same mawb, but different date arrived and depart
 var
@@ -715,10 +710,6 @@ begin
   end;
 
 End;
-
-
-
-
 function TX_readFileFRM.isMawbFileExists(const HeaderNode:IXMLNode;const mawbNode:IXMLNode):Boolean;
 //will only check the first mawb in the file, since same mawb may exist in the same file
 // same mawb, same date arrived but different file
@@ -762,9 +753,6 @@ result:=false;
   end;
 
 End;
-
-
-
 function TX_readFileFRM.findHawbSmart(Const HawbId:String;Const mawbId:string; Const FileName:String):THawbAge;
 var
 //  qr:TksQuery;
@@ -839,9 +827,6 @@ Str:= 'select alla.serial_number ,alla.fk_mawb_refer_number, alla.daysOld'
   end;
 
 End;
-
-
-
 function TX_readFileFRM.findHawb(Const HawbId:String;Mawbserial:Integer):boolean;
 var
   qr:TksQuery;
@@ -852,9 +837,6 @@ begin
   result:=ksCountRecSQL(cn,str,[hawbId,IntToStr(MawbSerial)])>0 ;
 
 End;
-
-
-
 function TX_readFileFRM.CreateMawb(Const MawbId:String;Const HeaderNode:IXMLNode;Const MawbNode:IXMLNode;Const FileName:String):integer;
 var
   ArrivalDate:TDate;
@@ -913,7 +895,6 @@ begin
 
   MawbSQL.Close;
 end;
-
 procedure TX_readFileFRM.DeleteMawb(aMawbSerial:Integer);
 var
   multiSQL:TksMultiSQL;
@@ -936,7 +917,6 @@ begin
 
 
    end;
-
 procedure TX_readFileFRM.DeleteallMawbs(aMawbSerial:Integer);
 var
   multiSQL:TksMultiSQL;
@@ -959,8 +939,6 @@ begin
 
 
    end;
-
-
 procedure TX_readFileFRM.Button2Click(Sender: TObject);
 begin
 DeleteHawb(StrToIntDef(ValueFLD.Text,0));
@@ -998,8 +976,6 @@ begin
     HawbId:= hawbNode.ChildNodes['HAWB'].Text;
     senderNode:=hawbNode.ChildNodes['ShpCnsgnr'].ChildNodes['CnsgnrCoDtls'];
     CustomerNode:=hawbNode.ChildNodes['ShpCnsgne'].ChildNodes['CnsgneCoDtls'];
-
-
 //      codesite.Send('HawbID'+HawbId);
 
     qr:=TksQuery.Create(cn,'Select * from airwaybill where serial_number= -1');
@@ -1042,25 +1018,25 @@ begin
      qr.FieldByName('SENDER_PREFERRED_NAME').Value:=senderNode.ChildNodes['AddrEng'].ChildNodes['PreferredName'].Text;
 
 
-     qr.FieldByName('CONSIGNEE_NAME').Value:=senderNode.ChildNodes['CoName'].Text;
-     qr.FieldByName('CONSIGNEE_ADDRESS_1').Value:=senderNode.ChildNodes['AddrEng'].ChildNodes['AddrLn1'].Text;
-     qr.FieldByName('CONSIGNEE_ADDRESS_2').Value:=senderNode.ChildNodes['AddrEng'].ChildNodes['AddrLn2'].Text;
-     qr.FieldByName('CONSIGNEE_ADDRESS_3').Value:=senderNode.ChildNodes['AddrEng'].ChildNodes['AddrLn3'].Text;
-     qr.FieldByName('CONSIGNEE_POST_CODE').Value:=senderNode.ChildNodes['AddrEng'].ChildNodes['PostalCd'].Text;
-     qr.FieldByName('CONSIGNEE_CITY').Value:=senderNode.ChildNodes['AddrEng'].ChildNodes['City'].Text;
-     qr.FieldByName('CONSIGNEE_COUNTRY_CODE').Value:=senderNode.ChildNodes['AddrEng'].ChildNodes['CtryCd'].Text;
+     qr.FieldByName('CONSIGNEE_NAME').Value:=CustomerNode.ChildNodes['CoName'].Text;
+     qr.FieldByName('CONSIGNEE_ADDRESS_1').Value:=CustomerNode.ChildNodes['AddrEng'].ChildNodes['AddrLn1'].Text;
+     qr.FieldByName('CONSIGNEE_ADDRESS_2').Value:=CustomerNode.ChildNodes['AddrEng'].ChildNodes['AddrLn2'].Text;
+     qr.FieldByName('CONSIGNEE_ADDRESS_3').Value:=CustomerNode.ChildNodes['AddrEng'].ChildNodes['AddrLn3'].Text;
+     qr.FieldByName('CONSIGNEE_POST_CODE').Value:=CustomerNode.ChildNodes['AddrEng'].ChildNodes['PostalCd'].Text;
+     qr.FieldByName('CONSIGNEE_CITY').Value:=CustomerNode.ChildNodes['AddrEng'].ChildNodes['City'].Text;
+     qr.FieldByName('CONSIGNEE_COUNTRY_CODE').Value:=CustomerNode.ChildNodes['AddrEng'].ChildNodes['CtryCd'].Text;
 
 
-     qr.FieldByName('CONSIGNEE_DEVICE_TYPE').Value:=senderNode.ChildNodes['AddrEng'].ChildNodes['DeviceType'].Text;
-     qr.FieldByName('CONSIGNEE_DEVICE_TYPE').Value:=senderNode.ChildNodes['AddrEng'].ChildNodes['DeviceDtls'].Text;
-     qr.FieldByName('CONSIGNEE_PREFERRED_NAME').Value:=senderNode.ChildNodes['AddrEng'].ChildNodes['PreferredName'].Text;
+     qr.FieldByName('CONSIGNEE_DEVICE_TYPE').Value:=CustomerNode.ChildNodes['AddrEng'].ChildNodes['DeviceType'].Text;
+     qr.FieldByName('CONSIGNEE_DEVICE_TYPE').Value:=CustomerNode.ChildNodes['AddrEng'].ChildNodes['DeviceDtls'].Text;
+     qr.FieldByName('CONSIGNEE_PREFERRED_NAME').Value:=CustomerNode.ChildNodes['AddrEng'].ChildNodes['PreferredName'].Text;
 
 
 
 
 
       qr.Post;
-     finally
+    finally
      qr.Free;
 //      G_DebugUnit.GD_ShowDataRecord(qr);
     end;

@@ -1,8 +1,14 @@
-﻿[Modules]
+﻿[Closed Files]
+File_0=TSourceModule,'C:\Data\DelphiProjects\TokyoCabOut\Programs\G_generalProcs.pas',0,1,470,1,485,0,0,,
+File_1=TSourceModule,'C:\Data\DelphiProjects\TokyoCabOut\Programs\GeneralParametersNew.pas',0,1,33,1,34,0,0,,
+File_2=TSourceModule,'C:\Data\DelphiProjects\TokyoCabOut\Programs\G_KyrSQL.pas',0,1,85,9,100,0,0,,
+File_3=TSourceModule,'C:\Data\DelphiProjects\TokyoCabOut\Programs\G_kyriacosTypes.pas',0,1,1,44,4,0,0,,
+File_4=TSourceModule,'C:\Data\DelphiProjects\TokyoCabOut\Programs\GeneralProcedures.pas',0,1,1,22,94,0,0,,
+
+[Modules]
 Module0=C:\Data\DelphiProjects\TokyoCabOut\Programs\X_readFile.pas
 Module1=C:\Data\DelphiProjects\TokyoCabOut\Programs\MainForm.pas
-Module2=default.htm
-Count=3
+Count=2
 EditWindowCount=1
 
 [C:\Data\DelphiProjects\TokyoCabOut\Programs\X_readFile.pas]
@@ -11,15 +17,11 @@ ModuleType=TSourceModule
 [C:\Data\DelphiProjects\TokyoCabOut\Programs\MainForm.pas]
 ModuleType=TSourceModule
 
-[default.htm]
-ModuleType=TURLModule
-
 [EditWindow0]
-ViewCount=3
+ViewCount=2
 CurrentEditView=C:\Data\DelphiProjects\TokyoCabOut\Programs\X_readFile.pas
 View0=0
 View1=1
-View2=2
 PercentageSizes=1
 Create=1
 Visible=1
@@ -35,22 +37,18 @@ ClientWidth=10000
 ClientHeight=8655
 DockedToMainForm=1
 TopPanelSize=0
-LeftPanelSize=1615
+LeftPanelSize=1332
 LeftPanelClients=WatchWindow,CallStackWindow,PropertyInspector
-LeftPanelData=000008000101010000000F00000043616C6C537461636B57696E646F774710000000000000014F0600000000000001000000003B1200001100000050726F7065727479496E73706563746F7201000000000B1A00000B000000576174636857696E646F77FFFFFFFF
-RightPanelSize=2679
+LeftPanelData=000008000101010000000F00000043616C6C537461636B57696E646F776D1200000000000001340500000000000001000000003B1200001100000050726F7065727479496E73706563746F7201000000007C1D00000B000000576174636857696E646F77FFFFFFFF
+RightPanelSize=253
 RightPanelClients=DockSite1,ToolForm
-RightPanelData=00000800010100000000471000000000000001770A0000000000000100000000B80D000009000000446F636B536974653101000000000B1A000008000000546F6F6C466F726DFFFFFFFF
-BottomPanelSize=1917
+RightPanelData=000008000101000000006D1200000000000001FD000000000000000100000000B80D000009000000446F636B536974653101000000007C1D000008000000546F6F6C466F726DFFFFFFFF
+BottomPanelSize=1036
 BottomPanelClients=MessageView,DockSite0
-BottomPanelData=00000800010200000000DF3A000000000000027D070000000000000100000000701D000009000000446F636B53697465300100000000DF3A00000F0000004D65737361676556696577466F726DFFFFFFFF
+BottomPanelData=00000800010200000000DF3A000000000000020C040000000000000100000000701D000009000000446F636B53697465300100000000DF3A00000F0000004D65737361676556696577466F726DFFFFFFFF
 BottomMiddlePanelSize=0
 
 [View0]
-CustomEditViewType=TWelcomePageView
-WelcomePageURL=bds:/default.htm
-
-[View1]
 CustomEditViewType=TEditView
 Module=C:\Data\DelphiProjects\TokyoCabOut\Programs\MainForm.pas
 CursorX=1
@@ -59,33 +57,43 @@ TopLine=1
 LeftCol=1
 Elisions=
 Bookmarks=
-EditViewName=Borland.FormDesignerView
+EditViewName=C:\Data\DelphiProjects\TokyoCabOut\Programs\MainForm.pas
 
-[View2]
+[View1]
 CustomEditViewType=TEditView
 Module=C:\Data\DelphiProjects\TokyoCabOut\Programs\X_readFile.pas
 CursorX=1
-CursorY=1
-TopLine=1
+CursorY=483
+TopLine=541
 LeftCol=1
-Elisions=
+Elisions={{635,63},{653,3},{''}}{{654,71},{682,3},{''}}{{683,67},{712,3},{''}}{{713,100},{755,3},{''}}{{756,111},{829,3},{''}}{{830,81},{839,3},{''}}{{840,136},{897,3},{''}}{{898,57},{919,6},{''}}{{920,61},{941,6},{''}}
 Bookmarks=
-EditViewName=Borland.FormDesignerView
+EditViewName=C:\Data\DelphiProjects\TokyoCabOut\Programs\X_readFile.pas
 
 [UndockedDesigner]
 Count=0
 
 [Breakpoints]
-Count=0
+Count=2
+Breakpoint0='C:\Data\DelphiProjects\TokyoCabOut\Programs\X_readFile.pas',598,'',0,1,'',1,0,0,'',1,'','','',0,''
+Breakpoint1='C:\Data\DelphiProjects\TokyoCabOut\Programs\X_readFile.pas',976,'',0,1,'',1,0,0,'',1,'','','',0,''
 
 [EmbarcaderoWin32Debugger_AddressBreakpoints]
 Count=0
 
 [Watches]
-Count=0
+Count=8
+Watch0='MawbId',256,0,18,1,0,'Watches',1
+Watch1='hawb',256,0,18,1,0,'Watches',1
+Watch2='MawbId',256,0,18,1,0,'Watches',1
+Watch3='ArrivalDate',256,0,18,1,0,'Watches',1
+Watch4='HawbId',256,0,18,1,0,'Watches',1
+Watch5='qr.FieldByName(''serial_number'').Value',256,0,18,1,0,'Watches',1
+Watch6='qr.FieldByName(''customs_value'').Value',256,0,18,1,0,'Watches',1
+Watch7='hawbNode.ChildNodes[''GrossWgt''].Text',256,0,18,1,0,'Watches',1
 
 [WatchWindow]
-WatchColumnWidth=120
+WatchColumnWidth=324
 WatchShowColumnHeaders=1
 PercentageSizes=1
 Create=1
@@ -94,14 +102,14 @@ Docked=1
 State=0
 Left=0
 Top=410
-Width=1714
-Height=1786
+Width=1414
+Height=2667
 MaxLeft=-1
 MaxTop=-1
-ClientWidth=1714
-ClientHeight=1786
+ClientWidth=1414
+ClientHeight=2667
 TBDockHeight=7726
-LRDockWidth=1714
+LRDockWidth=1414
 Dockable=1
 StayOnTop=0
 
@@ -133,11 +141,11 @@ Docked=1
 State=0
 Left=0
 Top=0
-Width=2844
+Width=269
 Height=3250
 MaxLeft=-1
 MaxTop=-1
-ClientWidth=2844
+ClientWidth=269
 ClientHeight=3250
 TBDockHeight=7155
 LRDockWidth=1777
@@ -153,12 +161,12 @@ State=0
 Left=633
 Top=18
 Width=5000
-Height=1702
+Height=821
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=5000
-ClientHeight=1702
-TBDockHeight=1702
+ClientHeight=821
+TBDockHeight=821
 LRDockWidth=2773
 Dockable=1
 StayOnTop=0
@@ -197,14 +205,14 @@ Docked=1
 State=0
 Left=0
 Top=313
-Width=2844
-Height=2940
+Width=948
+Height=3821
 MaxLeft=-1
 MaxTop=-1
-ClientWidth=2844
-ClientHeight=2940
+ClientWidth=948
+ClientHeight=3821
 TBDockHeight=7155
-LRDockWidth=2844
+LRDockWidth=948
 Dockable=1
 StayOnTop=0
 
@@ -254,22 +262,22 @@ Docked=1
 State=0
 Left=0
 Top=18
-Width=1714
+Width=1414
 Height=4405
 MaxLeft=-1
 MaxTop=-1
-ClientWidth=1714
+ClientWidth=1414
 ClientHeight=4405
 TBDockHeight=7726
-LRDockWidth=1714
+LRDockWidth=1414
 Dockable=1
 StayOnTop=0
-SplitPos=69
+SplitPos=82
 
 [PropInspDesignerSelection]
 ArrangeBy=Name
-SelectedItem=Caption,
-ExpandedItems=Anchors=0,BorderIcons=0
+SelectedItem=Name,CustomHint
+ExpandedItems=Encryption=0,FilterOptions=0,Options=1,RefreshOptions=0,SmartFetch=0,Transaction=0,UpdateTransaction=0,Anchors=0,BorderIcons=0,DefaultTransaction=0,PoolingOptions=0,HorzScrollBar=0,LiveBindings=0,Margins=0,ParseOptions=0,Connection=0,Padding=0
 
 [frmDesignPreview]
 PercentageSizes=1
@@ -318,11 +326,11 @@ State=0
 Left=0
 Top=0
 Width=4968
-Height=1702
+Height=821
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=4968
-ClientHeight=1702
+ClientHeight=821
 TBDockHeight=2083
 LRDockWidth=6390
 Dockable=1
@@ -425,12 +433,12 @@ State=0
 Left=0
 Top=18
 Width=4968
-Height=1702
+Height=821
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=4968
-ClientHeight=1702
-TBDockHeight=1702
+ClientHeight=821
+TBDockHeight=821
 LRDockWidth=2449
 Dockable=1
 StayOnTop=0
@@ -448,14 +456,14 @@ Docked=1
 State=0
 Left=0
 Top=18
-Width=2844
+Width=269
 Height=3250
 MaxLeft=-1
 MaxTop=-1
-ClientWidth=2844
+ClientWidth=269
 ClientHeight=3250
 TBDockHeight=1417
-LRDockWidth=2844
+LRDockWidth=269
 Dockable=1
 StayOnTop=0
 TabPosition=1
