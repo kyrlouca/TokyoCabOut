@@ -55,7 +55,7 @@ var
 
 implementation
 
-uses MainForm, GeneralParametersNew;
+uses MainForm, GeneralParametersNew, X_readFile;
 
 {$R *.DFM}
 
@@ -195,6 +195,7 @@ Timer1.Enabled:=False;
 
                         //Read the renamed file to avoic clashes
 //                        ReadFileFRM.ProcessFile(FileNewName,mawbArray,CountMawbs,CountHawbs);
+                        X_readFileFRM.
                         writeln(wFile,FormatDateTime('yyyy/mm/dd hh:mm:ss',now)+'=> '+FileFullName+' Mawbs:'+IntToStr(CountMawbs)+' Hawbs:'+IntToStr(CountHawbs));
 
 
@@ -241,8 +242,10 @@ procedure TR_ReadAllFilesFRM.ReadXFiles;
    strFiles: TStringDynArray;
    i: integer;
    CurrentDir:String;
+   MovedDir:String;
    fileName:string;
    WorkingFile:String;
+   MovedFile:string;
    Ext:String;
 
 begin
@@ -253,12 +256,34 @@ begin
   exit;
  end;
 
+ MovedDir:=GeneralParametersNew.GN_GetTheSystemParameter(cn,'S03').P_String4;
+ if not directoryexists(MovedDir) then begin
+  ShowMessage(CurrentDir+' does not exist');
+  exit;
+ end;
+
+   memo1.Clear;
   strFiles := TDirectory.GetFiles(CUrrentDir);
    for i := 0  to High(strFiles) do begin
      fileName:=StrFiles[i];
      ext:= TPath.GetExtension(fileName);
      if (ext='') then begin
-        WorkingFile:=TPath.GetFileName(filename)+'.xyz';
+        //rename the file to .xyz and work on that
+        WorkingFile:=TPath.GetDirectoryName(fileName)+'\'+TPath.GetFileName(filename)+'.xyz';
+        if Tfile.Exists(WorkingFile)then
+          Tfile.Delete(WorkingFile);
+        Tfile.Move(FileName,WorkingFile);
+
+        ////To The Job
+        ReadFileFRM.ProcessFile(FileNewName,mawbArray,CountMawbs,CountHawbs);
+
+
+        ///Move the file to new directory with extension xxx
+        MovedFile:=MovedDir+'\'+TPath.GetFileName(filename)+'.xxx';
+        if Tfile.Exists(MovedFile)then
+          Tfile.Delete(MovedFile);
+        Tfile.Move(WorkingFile,MovedFile);
+
         Memo1.Lines.Add(workingFile);
      end;
    end;

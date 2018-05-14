@@ -222,13 +222,11 @@ THawbAge=(haNotFound, haSame, haPartial, haOld, haDuplicate);
     HawbSQLACCOUNT_NUMBER: TStringField;
     HawbSQLCONSIGNEE_PREFERRED_NAME: TStringField;
     HawbSQLSENDER_PREFERRED_NAME: TStringField;
-    procedure Button1Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure RzBitBtn2Click(Sender: TObject);
     procedure RzBitBtn1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure FormActivate(Sender: TObject);
-    procedure AllClick(Sender: TObject);
   private
     { Private declarations }
     cn:TIBCConnection;
@@ -247,10 +245,8 @@ THawbAge=(haNotFound, haSame, haPartial, haOld, haDuplicate);
   function CreateHawbItem(Const hawbSerial:Integer ; hawbItemNode:IXMLNode):Integer;
 
   procedure DeleteHawb(hawbSerial:Integer);
-  procedure DeleteMawb(aMawbSerial:Integer);
-  procedure DeleteallMawbs(aMawbSerial:Integer);
 // Function GetDefaultMediumVatRate():Double;
-Function ConvertCategory(const Category:string):string;
+  Function ConvertCategory(const Category:string):string;
 
 
   public
@@ -592,63 +588,12 @@ begin
 
   MawbSQL.Close;
 end;
-procedure TX_readFileFRM.DeleteMawb(aMawbSerial:Integer);
-var
-  multiSQL:TksMultiSQL;
-  hiStr:String;
-//  mawbSerial:String;
-begin
-//    mawbserial:= IntToStr(aMawbSerial);
-    hiStr:= 'Delete  from hawb_item_certificate dd where dd.fk_hawb_item in '
-    + '( select hi.serial_number from  hawb_item hi where hi.fk_mawb= :mawb)';
-
-    ksExecSQLVar(cn,hiStr,[aMawbSerial]);
-    ksExecSQLVar(cn,'delete from hawb_comments hc where hc.fk_hawb_serial in '
-         +' (select serial_number from hawb ha where hc.fk_hawb_serial= ha.serial_number and ha.fk_mawb_refer_number= :mawb)',[aMawbserial]);
-    ksExecSQLVar(cn,'delete from hawb_partial where FK_MAWB_SERIAL_ORIGINAL = :mawb',[aMawbSerial] );
-    ksExecSQLVar(cn,'delete from hawb_partial hp where hp.fk_mawb_serial_arrived  = :mawb ',[aMawbSerial] );
-    ksExecSQLVar(cn,'Delete from hawb_item hi where hi.fk_hawb_serial in(select serial_number from hawb ha where ha.fk_mawb_refer_number= :mawb)',[amawbSerial]);
-    ksExecSQLVar(cn,'delete from sender_invoice where fk_Mawb_serial= :mawb' ,[amawbSerial]);
-    ksExecSQLVar(cn,'delete from hawb where fk_mawb_refer_number = :mawb ',[amawbSerial]) ;
 
 
 
-   end;
-procedure TX_readFileFRM.DeleteallMawbs(aMawbSerial:Integer);
-var
-  multiSQL:TksMultiSQL;
-  hiStr:String;
-
-begin
-//    mawbserial:= IntToStr(aMawbSerial);
-    hiStr:= 'Delete  from hawb_item_certificate dd where dd.fk_hawb_item in '
-    + '( select hi.serial_number from  hawb_item hi where hi.fk_mawb>= :mawb)';
-
-    ksExecSQLVar(cn,hiStr,[aMawbSerial]);
-    ksExecSQLVar(cn,'delete from hawb_comments hc where hc.fk_hawb_serial in '
-         +' (select serial_number from hawb ha where hc.fk_hawb_serial= ha.serial_number and ha.fk_mawb_refer_number >= :mawb)',[amawbserial]);
-    ksExecSQLVar(cn,'delete from hawb_partial where FK_MAWB_SERIAL_ORIGINAL >= :mawb',[aMawbSerial] );
-    ksExecSQLVar(cn,'delete from hawb_partial hp where hp.fk_mawb_serial_arrived  >= :mawb ',[aMawbSerial] );
-    ksExecSQLVar(cn,'Delete from hawb_item hi where hi.fk_hawb_serial in(select serial_number from hawb ha where ha.fk_mawb_refer_number >= :mawb)',[amawbSerial]);
-    ksExecSQLVar(cn,'delete from sender_invoice where fk_Mawb_serial >= :mawb' ,[amawbSerial]);
-    ksExecSQLVar(cn,'delete from hawb where fk_mawb_refer_number >= :mawb ',[amawbSerial]) ;
-
-
-
-   end;
-procedure TX_readFileFRM.Button2Click(Sender: TObject);
+   procedure TX_readFileFRM.Button2Click(Sender: TObject);
 begin
   DeleteHawb(StrToIntDef(ValueFLD.Text,0));
-end;
-
-procedure TX_readFileFRM.AllClick(Sender: TObject);
-begin
-  DeleteAllMawbs(StrToIntDef(ValueFLD.Text,0));
-end;
-
-procedure TX_readFileFRM.Button1Click(Sender: TObject);
-begin
-  DeleteMawb(StrToIntDef(ValueFLD.Text,0) );
 end;
 
 function TX_readFileFRM.CreateHawb(Const mawbSerial:Integer; hawbNode:IXMLNode):Integer;
@@ -657,13 +602,14 @@ HawbSerial:Integer;
   qr:TIBCQuery;
   siSQL:TIBCQuery;
   temp:string;
+  val:Double;
   senderNode:IXMLNode;
   CustomerNode:IXMLNode;
   ClearingInstruction:String;
   Currency:String;
-  TraderId:String;
+
   hawbId:String;
-  isDTP:String;
+  Category:String;
   isError:boolean;
 begin
 
@@ -689,13 +635,22 @@ begin
 
 
      qr.FieldByName('DESCRIPTION').Value:= hawbNode.ChildNodes['CargoDesc'].Text;
-     qr.FieldByName('CUSTOMS_VALUE').Value:= ConvertDecimalF( hawbNode.ChildNodes['CstmsVal'].Text);
-     qr.FieldByName('CURRENCY').Value:= hawbNode.ChildNodes['CstmsValCrncyCd'].Text;
+
+     qr.FieldByName('CUSTOMS_VALUE').Value:= G_generalProcs.ConvertDecimalF(hawbNode.ChildNodes['TxAndDty'].ChildNodes['CstmsVal'].Text);
+
+     temp:=hawbNode.ChildNodes['TxAndDty'].ChildNodes['CstmsValCrncyCd'].Text;
+     if temp<>'ss' then
+       qr.FieldByName('CURRENCY').Value:= hawbNode.ChildNodes['TxAndDty'].ChildNodes['CstmsValCrncyCd'].Text;
+
+
      qr.FieldByName('INCOTERMS').Value:= hawbNode.ChildNodes['Incoterms'].Text;
      qr.FieldByName('SERVICE_CODE').Value:= hawbNode.ChildNodes['DHLServiceCd'].Text;
 
      qr.FieldByName('PIECES').Value:= hawbNode.ChildNodes['SDPieces'].Text;
-     //qr.FieldByName('VALUE_TYPE').Value:= hawbNode.ChildNodes['Category'].Text;
+
+     category:=hawbNode.ChildNodes['Category'].Text;
+     qr.FieldByName('VALUE_TYPE').Value:= ConvertCategory(Category);
+
      qr.FieldByName('ACCOUNT_NUMBER').Value:= hawbNode.ChildNodes['DHLAcctNo'].Text;
      qr.FieldByName('PAYMENT_METHOD').Value:= hawbNode.ChildNodes['X_PaymentMethod'].Text;
 

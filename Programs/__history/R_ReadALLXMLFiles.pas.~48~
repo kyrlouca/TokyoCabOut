@@ -241,6 +241,12 @@ procedure TR_ReadAllFilesFRM.ReadXFiles;
    strFiles: TStringDynArray;
    i: integer;
    CurrentDir:String;
+   MovedDir:String;
+   fileName:string;
+   WorkingFile:String;
+   MovedFile:string;
+   Ext:String;
+
 begin
 
   CurrentDir:= GeneralParametersNew.GN_GetTheSystemParameter(cn,'S02').P_String4;
@@ -249,9 +255,33 @@ begin
   exit;
  end;
 
-  strFiles := TDirectory.GetFiles(CUrrentDir,'*.');
+ MovedDir:=GeneralParametersNew.GN_GetTheSystemParameter(cn,'S03').P_String4;
+ if not directoryexists(MovedDir) then begin
+  ShowMessage(CurrentDir+' does not exist');
+  exit;
+ end;
+
+   memo1.Clear;
+  strFiles := TDirectory.GetFiles(CUrrentDir);
    for i := 0  to High(strFiles) do begin
-    Memo1.Lines.Add(strFiles[i]);
+     fileName:=StrFiles[i];
+     ext:= TPath.GetExtension(fileName);
+     if (ext='') then begin
+        //rename the file to .xyz and work on that
+        WorkingFile:=TPath.GetDirectoryName(fileName)+'\'+TPath.GetFileName(filename)+'.xyz';
+        if Tfile.Exists(WorkingFile)then
+          Tfile.Delete(WorkingFile);
+        Tfile.Move(FileName,WorkingFile);
+
+
+        ////To The Job and then move file
+        MovedFile:=MovedDir+'\'+TPath.GetFileName(filename)+'.xxx';
+        if Tfile.Exists(MovedFile)then
+          Tfile.Delete(MovedFile);
+        Tfile.Move(WorkingFile,MovedFile);
+
+        Memo1.Lines.Add(workingFile);
+     end;
    end;
 
 

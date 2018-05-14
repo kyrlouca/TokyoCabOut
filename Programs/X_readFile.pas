@@ -237,7 +237,6 @@ THawbAge=(haNotFound, haSame, haPartial, haOld, haDuplicate);
 
 
   function ReadTheFile(Const FileName:String) :boolean;
-  function ReadOneXML(Const FileName:String) :Boolean;
 
   function ProcessOneMawb(headerNode:IXMLNode; mawbNode:IXMLNode;fileName:String):Integer;
   function CreateMawb(Const MawbId:String;Const HeaderNode:IXMLNode;Const MawbNode:IXMLNode;Const fileName:string):integer;
@@ -251,6 +250,7 @@ THawbAge=(haNotFound, haSame, haPartial, haOld, haDuplicate);
 
   public
     { Public declarations }
+    function ReadOneXML(Const FileName:String) :Boolean;
   end;
 
 var
@@ -276,57 +276,6 @@ begin
   cn:= MainFormFRM.CabOutData;
 end;
 
-
-
-function TX_readFileFRM.ReadTheFile(Const FileName:String) :Boolean;
-var
-  Doc: IXMLDocument;
-  Data: IXMLNode;
-  Movements, Mawbs,Hawbs :IXMLNodeList;
-  aHeader,aMovement,aMawb,aHawb:ixmlnODE;
-  I: Integer;
-//  j:Integer;
-  MawbRec:TmawbRec;
-  str:String;
-  temptime:TDateTime;
-  TotalHawbs:Integer;
-
-begin
-  TotalHawbs:=0;
-  result:=true;
-  Doc := LoadXMLDocument(FileName);
-  Data := Doc.DocumentElement;
-
-  Movements:=Data.ChildNodes['Dtls'].ChildNodes['Entries'].ChildNodes['Entry'].childNOdes['Mvmts'].ChildNodes;
-  aHeader:=Data.ChildNodes['Hdr'];
-
-
-  if Movements.Count <1 then begin
-    result:=False;
-    exit;
-  end;
-// ShowMessage(Movements[0].ChildNodes['MvmtNo'].Text);
-
-  Mawbs:=Movements[0].ChildNodes['TDOCs'].ChildNodes; //only one movement is sent
-  aMovement:=Movements[0];
-  if Mawbs.Count <1 then begin
-    result:=False;
-    exit;
-  end;
-
-  //same first mawb exists in another file
-  aMawb := Mawbs[0];
-
-  for I := 0 to Mawbs.Count-1 do  begin
-    aMawb := Mawbs[i];
-    TotalHawbs := TotalHawbs + ProcessOneMawb(aHeader,aMawb,fileName);
-  end;
-
-  MessagesMemo.Lines.Add('---------------------------------------------------------');
-  MessagesMemo.Lines.Add('--------------------- Total Created:'+InttoStr(Totalhawbs));
-
-
-  end;
 
 
 
@@ -399,6 +348,59 @@ begin
   ProcessFLD.Visible:=false;
 
 end;
+
+
+
+function TX_readFileFRM.ReadTheFile(Const FileName:String) :Boolean;
+var
+  Doc: IXMLDocument;
+  Data: IXMLNode;
+  Movements, Mawbs,Hawbs :IXMLNodeList;
+  aHeader,aMovement,aMawb,aHawb:ixmlnODE;
+  I: Integer;
+//  j:Integer;
+  MawbRec:TmawbRec;
+  str:String;
+  temptime:TDateTime;
+  TotalHawbs:Integer;
+
+begin
+  TotalHawbs:=0;
+  result:=true;
+  Doc := LoadXMLDocument(FileName);
+  Data := Doc.DocumentElement;
+
+  Movements:=Data.ChildNodes['Dtls'].ChildNodes['Entries'].ChildNodes['Entry'].childNOdes['Mvmts'].ChildNodes;
+  aHeader:=Data.ChildNodes['Hdr'];
+
+
+  if Movements.Count <1 then begin
+    result:=False;
+    exit;
+  end;
+// ShowMessage(Movements[0].ChildNodes['MvmtNo'].Text);
+
+  Mawbs:=Movements[0].ChildNodes['TDOCs'].ChildNodes; //only one movement is sent
+  aMovement:=Movements[0];
+  if Mawbs.Count <1 then begin
+    result:=False;
+    exit;
+  end;
+
+  //same first mawb exists in another file
+  aMawb := Mawbs[0];
+
+  for I := 0 to Mawbs.Count-1 do  begin
+    aMawb := Mawbs[i];
+    TotalHawbs := TotalHawbs + ProcessOneMawb(aHeader,aMawb,fileName);
+  end;
+
+  MessagesMemo.Lines.Add('---------------------------------------------------------');
+  MessagesMemo.Lines.Add('--------------------- Total Created:'+InttoStr(Totalhawbs));
+
+
+  end;
+
 
 
 function TX_readFileFRM.ReadOneXML(Const FileName:String) :Boolean;
