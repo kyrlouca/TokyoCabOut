@@ -235,9 +235,6 @@ THawbAge=(haNotFound, haSame, haPartial, haOld, haDuplicate);
 
   Function GetTheFile:String;
 
-
-  function ReadTheFile(Const FileName:String) :boolean;
-
   function ProcessOneMawb(headerNode:IXMLNode; mawbNode:IXMLNode;fileName:String):Integer;
   function CreateMawb(Const MawbId:String;Const HeaderNode:IXMLNode;Const MawbNode:IXMLNode;Const fileName:string):integer;
   function CreateHawb(Const mawbSerial:Integer; hawbNode:IXMLNode):Integer;
@@ -250,6 +247,7 @@ THawbAge=(haNotFound, haSame, haPartial, haOld, haDuplicate);
 
   public
     { Public declarations }
+    temp:integer;
     function ReadOneXML(Const FileName:String) :Boolean;
   end;
 
@@ -351,55 +349,6 @@ end;
 
 
 
-function TX_readFileFRM.ReadTheFile(Const FileName:String) :Boolean;
-var
-  Doc: IXMLDocument;
-  Data: IXMLNode;
-  Movements, Mawbs,Hawbs :IXMLNodeList;
-  aHeader,aMovement,aMawb,aHawb:ixmlnODE;
-  I: Integer;
-//  j:Integer;
-  MawbRec:TmawbRec;
-  str:String;
-  temptime:TDateTime;
-  TotalHawbs:Integer;
-
-begin
-  TotalHawbs:=0;
-  result:=true;
-  Doc := LoadXMLDocument(FileName);
-  Data := Doc.DocumentElement;
-
-  Movements:=Data.ChildNodes['Dtls'].ChildNodes['Entries'].ChildNodes['Entry'].childNOdes['Mvmts'].ChildNodes;
-  aHeader:=Data.ChildNodes['Hdr'];
-
-
-  if Movements.Count <1 then begin
-    result:=False;
-    exit;
-  end;
-// ShowMessage(Movements[0].ChildNodes['MvmtNo'].Text);
-
-  Mawbs:=Movements[0].ChildNodes['TDOCs'].ChildNodes; //only one movement is sent
-  aMovement:=Movements[0];
-  if Mawbs.Count <1 then begin
-    result:=False;
-    exit;
-  end;
-
-  //same first mawb exists in another file
-  aMawb := Mawbs[0];
-
-  for I := 0 to Mawbs.Count-1 do  begin
-    aMawb := Mawbs[i];
-    TotalHawbs := TotalHawbs + ProcessOneMawb(aHeader,aMawb,fileName);
-  end;
-
-  MessagesMemo.Lines.Add('---------------------------------------------------------');
-  MessagesMemo.Lines.Add('--------------------- Total Created:'+InttoStr(Totalhawbs));
-
-
-  end;
 
 
 
@@ -441,7 +390,7 @@ begin
   //same first mawb exists in another file
   aMawb := Mawbs[0];
 
-  for I := 0 to min(Mawbs.Count-1,1 )do  begin
+  for I := 0 to min(Mawbs.Count-1,100000) do begin
   //each movement may hawe one or more mawbs  (each mawb is a TDOC) but may have more than one same mawb
     aMawb := Mawbs[i];
     TotalHawbs := TotalHawbs + ProcessOneMawb(aHeader,aMawb,fileName);
@@ -491,7 +440,7 @@ begin
   hawbNOdes:=MawbNOde.ChildNodes['Shps'].ChildNodes;
 
 //  for j:= 0 to hawbNodes.Count -1 do begin
-  for j:= 0 to min(hawbNodes.Count -1,2) do begin
+  for j:= 0 to min(hawbNodes.Count -1,1000000) do begin
       hawbNode:=hawbNodes[j];
       hawb:=hawbNode.ChildNodes['HAWB'].Text;
 
@@ -644,6 +593,8 @@ begin
      if temp<>'ss' then
        qr.FieldByName('CURRENCY').Value:= hawbNode.ChildNodes['TxAndDty'].ChildNodes['CstmsValCrncyCd'].Text;
 
+
+     qr.FieldByName('IS_SCANNED').Value:= 'N';
 
      qr.FieldByName('INCOTERMS').Value:= hawbNode.ChildNodes['Incoterms'].Text;
      qr.FieldByName('SERVICE_CODE').Value:= hawbNode.ChildNodes['DHLServiceCd'].Text;

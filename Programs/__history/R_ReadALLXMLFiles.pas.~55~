@@ -42,6 +42,7 @@ type
   private
     { Private declarations }
         cn:TIBCConnection;
+        Function ReadFilesInFolder:Integer;
       procedure ReadXFiles;
 
   public
@@ -130,6 +131,8 @@ begin
   end;
 
 end;
+
+
 
 
 

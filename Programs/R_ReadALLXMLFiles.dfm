@@ -200,6 +200,7 @@ object R_ReadAllFilesFRM: TR_ReadAllFilesFRM
       Height = 25
       Caption = 'Button1'
       TabOrder = 1
+      Visible = False
       OnClick = Button1Click
     end
   end
@@ -211,6 +212,7 @@ object R_ReadAllFilesFRM: TR_ReadAllFilesFRM
     Lines.Strings = (
       'Memo1')
     TabOrder = 3
+    Visible = False
   end
   object Timer1: TTimer
     Enabled = False
