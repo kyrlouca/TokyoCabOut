@@ -1,8 +1,8 @@
 object R_ReadAllFilesFRM: TR_ReadAllFilesFRM
   Left = 216
   Top = 176
-  Width = 978
-  Height = 700
+  ClientHeight = 446
+  ClientWidth = 720
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -13,12 +13,13 @@ object R_ReadAllFilesFRM: TR_ReadAllFilesFRM
   Position = poDesktopCenter
   WindowState = wsMaximized
   OnActivate = FormActivate
+  OnCreate = FormCreate
   PixelsPerInch = 120
   TextHeight = 16
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 960
+    Width = 720
     Height = 65
     Align = alTop
     Caption = 'Process XML Files'
@@ -32,11 +33,12 @@ object R_ReadAllFilesFRM: TR_ReadAllFilesFRM
   end
   object Panel4: TPanel
     Left = 0
-    Top = 589
-    Width = 960
+    Top = 380
+    Width = 720
     Height = 66
     Align = alBottom
     TabOrder = 1
+    ExplicitTop = 208
     object BitBtn3: TBitBtn
       Left = 9
       Top = 5
@@ -48,9 +50,6 @@ object R_ReadAllFilesFRM: TR_ReadAllFilesFRM
       Font.Height = -18
       Font.Name = 'Arial'
       Font.Style = [fsBold]
-      ParentFont = False
-      TabOrder = 0
-      OnClick = BitBtn3Click
       Glyph.Data = {
         F6060000424DF606000000000000360000002800000018000000180000000100
         180000000000C006000000000000000000000000000000000000FFFFFFFFFFFF
@@ -108,28 +107,36 @@ object R_ReadAllFilesFRM: TR_ReadAllFilesFRM
         6093D95388CF003E93FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF003F94003F
         94003F94003F94003F94003F94003F94003F94003F94003F94003F94003F9400
         3F94003F94003F94003F94003F94003F94FFFFFFFFFFFFFFFFFF}
+      ParentFont = False
+      TabOrder = 0
+      OnClick = BitBtn3Click
     end
   end
   object Panel3: TPanel
     Left = 0
     Top = 65
-    Width = 960
-    Height = 524
+    Width = 720
+    Height = 315
     Align = alClient
     TabOrder = 2
-    object StartBTN: TfcShapeBtn
-      Left = 80
-      Top = 64
-      Width = 337
-      Height = 121
-      Caption = 'Processing FIles NOT Active'
-      Color = clBtnFace
-      DitherColor = clWhite
+    ExplicitHeight = 143
+    object TimerBTN: TRzBitBtn
+      Left = 32
+      Top = 111
+      Width = 297
+      Height = 88
+      FrameColor = clBtnText
+      Caption = 'Processing Files NOT Active'
+      Color = clBlack
       Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -23
+      Font.Color = clBtnText
+      Font.Height = -19
       Font.Name = 'Arial'
       Font.Style = []
+      HighlightColor = clBtnText
+      ParentFont = False
+      TabOrder = 0
+      OnClick = TimerBTNClick
       Glyph.Data = {
         F6060000424DF606000000000000360000002800000018000000180000000100
         180000000000C006000000000000000000000000000000000000FFFFFFFFFFFF
@@ -187,25 +194,14 @@ object R_ReadAllFilesFRM: TR_ReadAllFilesFRM
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
         FFFFFFFFFFFFFFF7F6F3EBE5DEE1D8CEDED4C9DBD1C6DBD2C6DDD4C9E1D9CEEB
         E5DEF7F6F3FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
-      Layout = blGlyphBottom
-      NumGlyphs = 0
-      ParentClipping = False
-      ParentFont = False
-      RoundRectBias = 25
-      ShadeStyle = fbsHighlight
-      Shape = bsRoundRect
-      TabOrder = 0
-      TextOptions.Alignment = taCenter
-      TextOptions.VAlignment = vaVCenter
-      OnClick = StartBTNClick
     end
   end
   object Timer1: TTimer
     Enabled = False
     Interval = 200000
     OnTimer = Timer1Timer
-    Left = 624
-    Top = 184
+    Left = 56
+    Top = 96
   end
   object ParameterSQL: TIBCQuery
     Connection = MainFormFRM.CabOutData

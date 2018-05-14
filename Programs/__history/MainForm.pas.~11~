@@ -6,8 +6,8 @@ interface
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   StdCtrls, Menus, wwSpeedButton, wwDBNavigator, ExtCtrls,
-  wwclearpanel, Grids, Wwdbigrd, Wwdbgrid, fcLabel, Buttons, fcButton,
-  fcImgBtn, fcShapeBtn, fcClearPanel, fcButtonGroup, IBC, DBAccess, Db,
+  wwclearpanel, Grids, Wwdbigrd, Wwdbgrid, Buttons,
+ IBC, DBAccess, Db,
   DASQLMonitor, IBCSQLMonitor, MemDS;
 
   
@@ -46,7 +46,6 @@ type
     Tariff1: TMenuItem;
     PendingBTN: TButton;
     ReadCSVFile1: TMenuItem;
-    ReadText: TButton;
     Incoterms1: TMenuItem;
     ServiceCodes1: TMenuItem;
     Currency1: TMenuItem;
@@ -98,12 +97,12 @@ var
 
 implementation
 
-uses  I_ReadHawbFile,I_readManifestFile, P_Deconsolidation,CreateOneXMLFile,
+uses  P_Deconsolidation,
   H_flightOut, L_FlightOutList, H_scanAirwaybill, M_parameters, M_country,
   L_itinerary, L_Mawbs, M_FlightTable, H_Airwaybill2,
   S_SelectCustomerx, S_SelectTariffY, M_District, L_AIrwaybillHigh,
-  ReadFIle, H_ScanAirwaybillNew, M_incoterms, M_serviceCode, M_Currency,
-  l_FlightAirwaybillParameters, R_ReadALLXMLFiles, M_additionalParameters;
+   H_ScanAirwaybillNew, M_incoterms, M_serviceCode, M_Currency,
+  l_FlightAirwaybillParameters,  M_additionalParameters, X_readFile;
 
 {$R *.DFM}
 
@@ -169,8 +168,7 @@ procedure TMainFormFRM.fcShapeBtn1Click(Sender: TObject);
 begin
 
 
-//I_readManifestFIleFRM.ShowModal;
-ReadFileFRM.SHowModal;
+X_readFileFRM.SHowModal;
 
 
 end;
@@ -232,7 +230,7 @@ end;
 procedure TMainFormFRM.Button1Click(Sender: TObject);
 begin
 //L_AirwaybillsHighFRM.ShowModal;
-ReadFileFRM.Showmodal;
+//ReadFileFRM.Showmodal;
 end;
 
 procedure TMainFormFRM.Country1Click(Sender: TObject);
@@ -264,7 +262,7 @@ end;
 procedure TMainFormFRM.Deconsolidation1Click(Sender: TObject);
 begin
 //I_readManifestFIleFRM.ShowModal;
-ReadFileFRM.SHowModal;
+//ReadFileFRM.SHowModal;
 
 end;
 
@@ -308,13 +306,13 @@ end;
 
 procedure TMainFormFRM.ReadCSVFile1Click(Sender: TObject);
 begin
-I_readManifestFIleFRM.ShowModal;
+//I_readManifestFIleFRM.ShowModal;
 
 end;
 
 procedure TMainFormFRM.ReadTextClick(Sender: TObject);
 begin
-I_readManifestFIleFRM.ShowModal;
+//I_readManifestFIleFRM.ShowModal;
 
 end;
 
@@ -340,7 +338,7 @@ end;
 
 procedure TMainFormFRM.ReadAllFIlesClick(Sender: TObject);
 begin
-R_ReadAllFilesFRM.ShowModal;
+//R_ReadAllFilesFRM.ShowModal;
 end;
 
 end.

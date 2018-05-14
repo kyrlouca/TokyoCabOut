@@ -197,6 +197,10 @@ object MainFormFRM: TMainFormFRM
         Caption = 'Edit File'
         OnClick = EditAirwaybill1Click
       end
+      object ReadCSVFile1: TMenuItem
+        Caption = 'Read CSV File'
+        OnClick = ReadCSVFile1Click
+      end
       object ReadAllFIles: TMenuItem
         Caption = 'Read All XML files'
         OnClick = ReadAllFIlesClick

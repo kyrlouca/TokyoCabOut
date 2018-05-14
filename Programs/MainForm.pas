@@ -45,7 +45,6 @@ type
     District1: TMenuItem;
     Tariff1: TMenuItem;
     PendingBTN: TButton;
-    ReadCSVFile1: TMenuItem;
     Incoterms1: TMenuItem;
     ServiceCodes1: TMenuItem;
     Currency1: TMenuItem;
@@ -102,7 +101,8 @@ uses  P_Deconsolidation,
   L_itinerary, L_Mawbs, M_FlightTable, H_Airwaybill2,
   S_SelectCustomerx, S_SelectTariffY, M_District, L_AIrwaybillHigh,
    H_ScanAirwaybillNew, M_incoterms, M_serviceCode, M_Currency,
-  l_FlightAirwaybillParameters,  M_additionalParameters, X_readFile;
+  l_FlightAirwaybillParameters,  M_additionalParameters, X_readFile,
+  R_ReadALLXMLFiles;
 
 {$R *.DFM}
 
@@ -338,7 +338,7 @@ end;
 
 procedure TMainFormFRM.ReadAllFIlesClick(Sender: TObject);
 begin
-//R_ReadAllFilesFRM.ShowModal;
+  R_ReadAllFilesFRM.ShowModal;
 end;
 
 end.

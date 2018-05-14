@@ -204,9 +204,9 @@ object R_ReadAllFilesFRM: TR_ReadAllFilesFRM
     end
   end
   object Memo1: TMemo
-    Left = 32
-    Top = 270
-    Width = 649
+    Left = 352
+    Top = 96
+    Width = 289
     Height = 89
     Lines.Strings = (
       'Memo1')

@@ -258,8 +258,8 @@ begin
      fileName:=StrFiles[i];
      ext:= TPath.GetExtension(fileName);
      if (ext='') then begin
-        WorkingFile:=TPath.GetFileName(filename)+'.xyz';
-        Memo1.Lines.Add(workingFile);
+        WorkingFile:=TfilePath.
+        Memo1.Lines.Add(strFiles[i]);
      end;
    end;
 

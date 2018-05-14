@@ -242,9 +242,7 @@ procedure TR_ReadAllFilesFRM.ReadXFiles;
    i: integer;
    CurrentDir:String;
    fileName:string;
-   WorkingFile:String;
    Ext:String;
-
 begin
 
   CurrentDir:= GeneralParametersNew.GN_GetTheSystemParameter(cn,'S02').P_String4;
@@ -253,14 +251,12 @@ begin
   exit;
  end;
 
-  strFiles := TDirectory.GetFiles(CUrrentDir);
+  strFiles := TDirectory.GetFiles(CUrrentDir,'*.');
    for i := 0  to High(strFiles) do begin
-     fileName:=StrFiles[i];
+     fileName:StrFiles[i];
      ext:= TPath.GetExtension(fileName);
-     if (ext='') then begin
-        WorkingFile:=TPath.GetFileName(filename)+'.xyz';
-        Memo1.Lines.Add(workingFile);
-     end;
+     if (ext='') then
+        Memo1.Lines.Add(strFiles[i]);
    end;
 
 
