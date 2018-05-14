@@ -2,8 +2,8 @@ object MainFormFRM: TMainFormFRM
   Left = 140
   Top = 131
   Caption = 'MainFormFRM'
-  ClientHeight = 428
-  ClientWidth = 804
+  ClientHeight = 394
+  ClientWidth = 624
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -12,20 +12,17 @@ object MainFormFRM: TMainFormFRM
   Font.Style = []
   Menu = MainMenu1
   OldCreateOrder = False
-  Position = poScreenCenter
   WindowState = wsMaximized
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   object Panel1: TPanel
     Left = 0
-    Top = 363
-    Width = 804
+    Top = 329
+    Width = 624
     Height = 65
     Align = alBottom
     TabOrder = 0
-    ExplicitTop = 329
-    ExplicitWidth = 624
     object BitBtn2: TBitBtn
       Left = 8
       Top = 13
@@ -59,7 +56,7 @@ object MainFormFRM: TMainFormFRM
   object Panel3: TPanel
     Left = 0
     Top = 0
-    Width = 804
+    Width = 624
     Height = 41
     Align = alTop
     BevelInner = bvRaised
@@ -71,17 +68,15 @@ object MainFormFRM: TMainFormFRM
     Font.Style = []
     ParentFont = False
     TabOrder = 1
-    ExplicitWidth = 624
   end
   object Panel2: TPanel
     Left = 0
     Top = 41
-    Width = 804
-    Height = 322
+    Width = 624
+    Height = 288
     Align = alClient
     TabOrder = 2
-    ExplicitWidth = 624
-    ExplicitHeight = 288
+    ExplicitTop = 35
     object fcShapeBtn2: TButton
       Left = 26
       Top = 208
