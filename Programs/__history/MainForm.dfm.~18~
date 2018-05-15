@@ -399,6 +399,10 @@ object MainFormFRM: TMainFormFRM
         Caption = 'List Flights'
         OnClick = ListFlights1Click
       end
+      object ScanAirwaybills1: TMenuItem
+        Caption = 'Scan Airwaybills'
+        OnClick = ScanAirwaybills1Click
+      end
     end
     object Tables1: TMenuItem
       Caption = 'Tables'

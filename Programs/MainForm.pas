@@ -8,7 +8,7 @@ uses
   StdCtrls, Menus, wwSpeedButton, wwDBNavigator, ExtCtrls,
   wwclearpanel, Grids, Wwdbigrd, Wwdbgrid, Buttons,
  IBC, DBAccess, Db,
-  DASQLMonitor, IBCSQLMonitor, MemDS;
+  DASQLMonitor, IBCSQLMonitor, MemDS, RzButton;
 
   
 type
@@ -23,13 +23,9 @@ type
     Panel3: TPanel;
     BitBtn2: TBitBtn;
     Panel2: TPanel;
-    fcShapeBtn2: TButton;
-    fcShapeBtn1: TButton;
-    EditAirwaybill1: TMenuItem;
     ScanBTN: TButton;
     ListFlights1: TMenuItem;
     Files1: TMenuItem;
-    ScanAirwaybills1: TMenuItem;
     System1: TMenuItem;
     Parameters1: TMenuItem;
     CabOutData: TIBCConnection;
@@ -37,25 +33,25 @@ type
     Tables1: TMenuItem;
     Country1: TMenuItem;
     Itinerary1: TMenuItem;
-    ListhBTN: TButton;
     Flights1: TMenuItem;
     Button1: TButton;
     Button2: TButton;
     Customer1: TMenuItem;
     District1: TMenuItem;
     Tariff1: TMenuItem;
-    PendingBTN: TButton;
     Incoterms1: TMenuItem;
     ServiceCodes1: TMenuItem;
     Currency1: TMenuItem;
     IBCSQLMonitor1: TIBCSQLMonitor;
     AdditionalParameters1: TMenuItem;
     ReadAllFIles: TMenuItem;
+    ReadXmlBTN: TRzBitBtn;
+    RzBitBtn1: TRzBitBtn;
+    FlightsOutBTN: TRzBitBtn;
     procedure ProductInfo1Click(Sender: TObject);
     procedure BitBtn2Click(Sender: TObject);
     procedure fcShapeBtn2Click(Sender: TObject);
     procedure XMLBTNClick(Sender: TObject);
-    procedure fcShapeBtn1Click(Sender: TObject);
     procedure ScanBTNClick(Sender: TObject);
     procedure House1Click(Sender: TObject);
     procedure Parameters1Click(Sender: TObject);
@@ -64,7 +60,6 @@ type
     procedure Country1Click(Sender: TObject);
     procedure Itinerary1Click(Sender: TObject);
     procedure ListFlights1Click(Sender: TObject);
-    procedure ListhBTNClick(Sender: TObject);
     procedure Flights1Click(Sender: TObject);
     procedure Deconsolidation1Click(Sender: TObject);
     procedure EditAirwaybill1Click(Sender: TObject);
@@ -73,7 +68,6 @@ type
     procedure Customer1Click(Sender: TObject);
     procedure District1Click(Sender: TObject);
     procedure Tariff1Click(Sender: TObject);
-    procedure PendingBTNClick(Sender: TObject);
     procedure ReadCSVFile1Click(Sender: TObject);
     procedure ReadTextClick(Sender: TObject);
     procedure Incoterms1Click(Sender: TObject);
@@ -81,6 +75,9 @@ type
     procedure Currency1Click(Sender: TObject);
     procedure AdditionalParameters1Click(Sender: TObject);
     procedure ReadAllFIlesClick(Sender: TObject);
+    procedure ReadXmlBTNClick(Sender: TObject);
+    procedure RzBitBtn1Click(Sender: TObject);
+    procedure FlightsOutBTNClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -164,15 +161,6 @@ begin
 
 end;
 
-procedure TMainFormFRM.fcShapeBtn1Click(Sender: TObject);
-begin
-
-
-X_readFileFRM.SHowModal;
-
-
-end;
-
 procedure TMainFormFRM.ScanBTNClick(Sender: TObject);
 begin
 H_ScanAirwaibillNewFRM.ShowModal;
@@ -249,15 +237,15 @@ begin
 L_flightOUtListFRM.SHowMOdal;
 end;
 
-procedure TMainFormFRM.ListhBTNClick(Sender: TObject);
-begin
-L_flightOUtListFRM.SHowMOdal;
-
-end;
-
 procedure TMainFormFRM.Flights1Click(Sender: TObject);
 begin
 M_flightTableFRM.SHowModal;
+end;
+
+procedure TMainFormFRM.FlightsOutBTNClick(Sender: TObject);
+begin
+L_flightOUtListFRM.SHowMOdal;
+
 end;
 
 procedure TMainFormFRM.Deconsolidation1Click(Sender: TObject);
@@ -265,6 +253,7 @@ begin
 //I_readManifestFIleFRM.ShowModal;
 //ReadFileFRM.SHowModal;
 
+X_readFileFRM.SHowModal;
 end;
 
 procedure TMainFormFRM.EditAirwaybill1Click(Sender: TObject);
@@ -299,12 +288,6 @@ begin
 S_SelectTariffyFRM.SHowMOdal;
 end;
 
-procedure TMainFormFRM.PendingBTNClick(Sender: TObject);
-begin
-L_AirwaybillsHighFRM.SHowModal;
-
-end;
-
 procedure TMainFormFRM.ReadCSVFile1Click(Sender: TObject);
 begin
 //I_readManifestFIleFRM.ShowModal;
@@ -314,6 +297,18 @@ end;
 procedure TMainFormFRM.ReadTextClick(Sender: TObject);
 begin
 //I_readManifestFIleFRM.ShowModal;
+
+end;
+
+procedure TMainFormFRM.ReadXmlBTNClick(Sender: TObject);
+begin
+X_readFileFRM.SHowModal;
+
+end;
+
+procedure TMainFormFRM.RzBitBtn1Click(Sender: TObject);
+begin
+L_AirwaybillsHighFRM.SHowModal;
 
 end;
 

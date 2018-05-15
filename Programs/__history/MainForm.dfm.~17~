@@ -388,6 +388,10 @@ object MainFormFRM: TMainFormFRM
         Caption = 'Read File'
         OnClick = Deconsolidation1Click
       end
+      object EditAirwaybill1: TMenuItem
+        Caption = 'Edit File'
+        OnClick = EditAirwaybill1Click
+      end
       object ReadAllFIles: TMenuItem
         Caption = 'Read All XML files'
         OnClick = ReadAllFIlesClick
@@ -398,6 +402,10 @@ object MainFormFRM: TMainFormFRM
       object ListFlights1: TMenuItem
         Caption = 'List Flights'
         OnClick = ListFlights1Click
+      end
+      object ScanAirwaybills1: TMenuItem
+        Caption = 'Scan Airwaybills'
+        OnClick = ScanAirwaybills1Click
       end
     end
     object Tables1: TMenuItem

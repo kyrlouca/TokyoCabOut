@@ -19,6 +19,7 @@ type
     Label5: TLabel;
     Label9: TLabel;
     HeaderPNL: TPanel;
+    BitBtn2: TBitBtn;
     FlightAirwaybillSQLSERIAL_NUMBER: TIntegerField;
     FlightAirwaybillSQLSEQUENCE_NUMBER: TIntegerField;
     FlightAirwaybillSQLHAWB_ID: TStringField;
@@ -209,6 +210,7 @@ type
     HawbInputFLD: TwwDBEdit;
     Label2: TLabel;
     SelectRGP: TRadioGroup;
+    DeleteSelectedBTN: TBitBtn;
     SelectSQL: TIBCQuery;
     FlightAirwaybillSQLSERVICE_CODE: TStringField;
     FlightAirwaybillSQLACCOUNT_NUMBER: TStringField;
@@ -217,11 +219,8 @@ type
     AirwaybillOriginalSQLCONSIGNEE_EMAIL: TStringField;
     AirwaybillOriginalSQLSERVICE_CODE: TStringField;
     AirwaybillOriginalSQLACCOUNT_NUMBER: TStringField;
-    BitBtn1: TBitBtn;
-    DeleteAirBTN: TBitBtn;
-    EditAirBTN: TBitBtn;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
-    procedure BitBtn1Click(Sender: TObject);
+    procedure BitBtn2Click(Sender: TObject);
     procedure AirwayBillSQLAfterPost(DataSet: TDataSet);
     procedure FlightAirwaybillGRDDblClick(Sender: TObject);
     procedure HawbInputFLDKeyPress(Sender: TObject; var Key: Char);
@@ -240,8 +239,7 @@ type
     procedure HighGRDTitleButtonClick(Sender: TObject;
       AFieldName: String);
     procedure SelectRGPClick(Sender: TObject);
-    procedure DeleteAirBTNClick(Sender: TObject);
-    procedure EditAirBTNClick(Sender: TObject);
+    procedure DeleteSelectedBTNClick(Sender: TObject);
   private
     { Private declarations }
         procedure UpdateHawbStatus(HawbSerial:Integer;IsHigh:String);
@@ -274,61 +272,10 @@ FlightAirwaybillSQL.Close;
 
 end;
 
-procedure TH_ScanAirwaibillNewFRM.BitBtn1Click(Sender: TObject);
+procedure TH_ScanAirwaibillNewFRM.BitBtn2Click(Sender: TObject);
 begin
 close;
 end;
-
-procedure TH_ScanAirwaibillNewFRM.DeleteAirBTNClick(Sender: TObject);
-Var
-        Serial:Integer;
-        FlightOutSerial:Integer;
-        AirSerial:Integer;
-begin
-
-        Serial:=FlightAirwaybillGRD.DataSource.DataSet.fieldbyName('serial_number').AsInteger;
-        AirSerial:=FlightAirwaybillGRD.DataSource.DataSet.fieldbyName('fk_airwaybill_serial').AsInteger;
-
-        If Serial<=0 then begin
-                abort;
-        end;
-
-        FLightOUtSerial:=FlightAirwaybillGRD.DataSource.DataSet.fieldbyName('fk_flight_out_serial').AsInteger;
-        With UpdateTableSQL do begin
-                SQL.Clear;
-                SQL.Add('Delete from Flight_airwaybill_country where FK_FLIGHT_AIRWAYBILL=:FlightAir ');
-                ParambyName('FlightAir').Value:=Serial;
-                Execute;
-
-        end;
-
-        With UpdateTableSQL do begin
-                SQL.Clear;
-                SQL.Add('Delete from Flight_airwaybill_Item where FK_FA_SERIAL=:FlightAir ');
-                ParambyName('FlightAir').Value:=Serial;
-                Execute;
-
-        end;
-        With UpdateTableSQL do begin
-                SQL.Clear;
-                SQL.Add('Delete from Flight_airwaybill where SERIAL_NUMBER=:FlightAir ');
-                ParambyName('FlightAir').Value:=Serial;
-                Execute;
-
-        end;
-
-        With UpdateTableSQL do begin
-                SQL.Clear;
-                SQL.Add('Update airwaybill set IS_SCANNED=''N'' where SERIAL_NUMBER=:AirSerial ');
-                ParambyName('AirSerial').Value:=AirSerial;
-                Execute;
-
-        end;
-
-
-        FlightAirwaybillSQL.Refresh;
-
-End;
 
 procedure TH_ScanAirwaibillNewFRM.AirwayBillSQLAfterPost(DataSet: TDataSet);
 Var
@@ -844,25 +791,55 @@ FlightAirwayBillSQL.close;
 FlightAirwayBillSQL.open;
 end;
 
-procedure TH_ScanAirwaibillNewFRM.EditAirBTNClick(Sender: TObject);
+procedure TH_ScanAirwaibillNewFRM.DeleteSelectedBTNClick(Sender: TObject);
 Var
         Serial:Integer;
         FlightOutSerial:Integer;
+        AirSerial:Integer;
 begin
 
         Serial:=FlightAirwaybillGRD.DataSource.DataSet.fieldbyName('serial_number').AsInteger;
+        AirSerial:=FlightAirwaybillGRD.DataSource.DataSet.fieldbyName('fk_airwaybill_serial').AsInteger;
+
         If Serial<=0 then begin
                 abort;
         end;
-        FLightOUtSerial:=FlightAirwaybillGRD.DataSource.DataSet.fieldbyName('fk_flight_out_serial').AsInteger;
-        H_FlightAirwaybillFRM.GFlightAIrSerial:=Serial;
-        H_FlightAirwaybillFRM.GFlightOutSerial:=FlightOutSerial;
-        H_FlightAirwaybillFRM.GAction:='EDIT';
 
-        H_FlightAirwaybillFRM.SHowmodal;
-        FlightAIrwaybillSQL.Refresh;
-        FlightAIrwaybillSQL.Locate('SERIAL_NUMBER',Serial,[]);
-        DetailsPNL.Visible:=False;
-end;
+        FLightOUtSerial:=FlightAirwaybillGRD.DataSource.DataSet.fieldbyName('fk_flight_out_serial').AsInteger;
+        With UpdateTableSQL do begin
+                SQL.Clear;
+                SQL.Add('Delete from Flight_airwaybill_country where FK_FLIGHT_AIRWAYBILL=:FlightAir ');
+                ParambyName('FlightAir').Value:=Serial;
+                Execute;
+
+        end;
+
+        With UpdateTableSQL do begin
+                SQL.Clear;
+                SQL.Add('Delete from Flight_airwaybill_Item where FK_FA_SERIAL=:FlightAir ');
+                ParambyName('FlightAir').Value:=Serial;
+                Execute;
+
+        end;
+        With UpdateTableSQL do begin
+                SQL.Clear;
+                SQL.Add('Delete from Flight_airwaybill where SERIAL_NUMBER=:FlightAir ');
+                ParambyName('FlightAir').Value:=Serial;
+                Execute;
+
+        end;
+
+        With UpdateTableSQL do begin
+                SQL.Clear;
+                SQL.Add('Update airwaybill set IS_SCANNED=''N'' where SERIAL_NUMBER=:AirSerial ');
+                ParambyName('AirSerial').Value:=AirSerial;
+                Execute;
+
+        end;
+
+
+        FlightAirwaybillSQL.Refresh;
+
+End;
 
 end.
