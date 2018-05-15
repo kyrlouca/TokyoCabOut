@@ -193,6 +193,7 @@ begin
                 CreateHighValueAirwaybillXML(SerialNumber);
           end else begin
 //                CreateLowValueAirwaybillXML(SerialNumber);
+                CreateHighValueAirwaybillXML(SerialNumber);
 
           end;
 
@@ -217,6 +218,8 @@ var
  MawbId:String;
 
 begin
+  CreateOneAirwabillXML(15119);
+  exit;
 
   OneFlightAirwayBillSQL.Close;
   OneFlightAirwayBillSQL.ParamByName('serial').Value:=229;
@@ -313,7 +316,7 @@ Begin
    Dataset:=OneFlightAirwaybillSQL;
    OneFlightAirwaybillSQL.close;
    If not OneFlightAirwaybillSQL.Prepared then OneFlightAirwaybillSQL.Prepare;
-   OneFlightAirwaybillSQL.ParamByName('Serial_Number').Value:=SerialNumber;
+   OneFlightAirwaybillSQL.ParamByName('Serial').Value:=SerialNumber;
 
    OneFlightAirwaybillSQL.Open;
    If OneFlightAirwaybillSQL.IsEmpty Then begin
@@ -340,6 +343,8 @@ Begin
         Temp:=OneFlightAirwaybillSQL.FieldByName('hawb_id').AsString;
         AIrwayBill:=temp;
         TheFileName:=  'C:\Data\DelphiProjects\TokyoCabOut\XML\OutputXML\test3.xml';
+
+
 
 
     FDoc:=XMLDocNew;

@@ -218,6 +218,12 @@ var
 
 begin
 
+  OneFlightAirwayBillSQL.Close;
+  OneFlightAirwayBillSQL.ParamByName('serial').Value:=229;
+  OneFlightAirwayBillSQL.Open;
+
+
+
   TheDoc:=XMLDocNew;
   TheDoc.Active := True;
 
@@ -238,6 +244,7 @@ begin
   groupNode:= CreateXmlNodeNew(TheDoc,ManifestNode,'GroupNode','',ntElement);
   CreateXmlNodeNew(TheDoc,GroupNode,'ChildNode','child1',ntText);
   CreateXmlNodeNew(TheDoc,GroupNode,'ChildNode','childSecond',ntText);
+  TBLCreateXMLNode(TheDoc,GroupNode,'TableVal','ab',OneFlightAirwayBillSQL,'hawb_id',ntText);
 
 //  strXML := StringReplace(TheDoc.XML.Text, ' xmlns=""', '', [rfReplaceAll]);
 //  TheDoc := LoadXMLData(strXML);
@@ -336,15 +343,13 @@ Begin
 
 
     FDoc:=XMLDocNew;
-
-  FDoc.Active := True;
-
-  FDoc.Version := '1.0';
-  FDoc.Encoding := 'UTF-8';
-  TheRoot := FDoc.AddChild('CC615A');
+    FDoc.Active := True;
+    FDoc.Version := '1.0';
+    FDoc.Encoding := 'UTF-8';
+    TheRoot := FDoc.AddChild('CC615A');
 //  iNode.SetAttributeNS('xmlns:test', '', 'http://www.foo.com' );
 //  iNode.SetAttributeNS('xmlns:xsi', '', 'http://www.w3.org/2001/XMLSchema');
-  TheRoot.SetAttributeNS('xmlns', '', 'http://www.eurodyn.com' );
+    TheRoot.SetAttributeNS('xmlns', '', 'http://www.eurodyn.com' );
 
 
      /////////////////////////////////////////////////////////////////////////
@@ -615,9 +620,19 @@ Var
    CxFather:IXMLNode;
    TheElement:IXMLNode;
    TheTextElement:IXMLNode;
+   MyValue:String;
 //   TheAttr:TDomAttr;
 Begin
 //     TblCreateXMLNode(FDoc,x1node,'TotalNumberOfItems','',Dataset,'ITEMS_COUNT',ntText);
+
+  If Dataset.FieldBYName(FieldName).DataType =ftfloat then begin
+        MyValue:=format('%.2f',[dataset.FieldBYName(FieldName).AsFloat]);
+  end else begin
+        MyValue:=Trim(dataset.FieldBYName(FieldName).AsString);
+  end;
+     //If MyValue='' then
+        //MyValue:= ElementName;
+     CreateXMLNodeNew(XMLDoc,ElementFather,ElementName,MyValue,ntText);
 
 End;
 
