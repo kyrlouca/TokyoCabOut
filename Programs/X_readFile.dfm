@@ -262,7 +262,6 @@ object X_readFileFRM: TX_readFileFRM
       Caption = 'Delete hawbs'
       TabOrder = 2
       Visible = False
-      OnClick = Button2Click
     end
     object ValueFLD: TwwDBEdit
       Left = 209

@@ -36,7 +36,8 @@ uses
   S_SelectCustomerx in 'S_SelectCustomerx.pas' {S_SelectCustomerXFRM},
   GeneralParametersNew in 'GeneralParametersNew.pas',
   G_generalProcs in 'G_generalProcs.pas',
-  R_ReadALLXMLFiles in 'R_ReadALLXMLFiles.pas' {R_ReadAllFilesFRM};
+  R_ReadALLXMLFiles in 'R_ReadALLXMLFiles.pas' {R_ReadAllFilesFRM},
+  X_createOneXML in 'X_createOneXML.pas' {X_CreateOneXmlFRM};
 
 {$R *.RES}
 
@@ -70,6 +71,7 @@ begin
   Application.CreateForm(TR_ReadAllFilesFRM, R_ReadAllFilesFRM);
   Application.CreateForm(TR_ReadAllFilesFRM, R_ReadAllFilesFRM);
   Application.CreateForm(TR_ReadAllFilesFRM, R_ReadAllFilesFRM);
+  Application.CreateForm(TX_CreateOneXmlFRM, X_CreateOneXmlFRM);
   //  Application.CreateForm(TR_ReadAllFilesFRM, R_ReadAllFilesFRM);
   Application.CreateForm(TM_additionalParametersFRM, M_additionalParametersFRM);
   Application.CreateForm(TX_readFileFRM, X_readFileFRM);

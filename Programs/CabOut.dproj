@@ -196,6 +196,10 @@
             <Form>R_ReadAllFilesFRM</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="X_createOneXML.pas">
+            <Form>X_CreateOneXmlFRM</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <None Include="CabOut.todo">
             <ContainerId>ToDo</ContainerId>
         </None>

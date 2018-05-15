@@ -102,7 +102,7 @@ uses  P_Deconsolidation,
   S_SelectCustomerx, S_SelectTariffY, M_District, L_AIrwaybillHigh,
    H_ScanAirwaybillNew, M_incoterms, M_serviceCode, M_Currency,
   l_FlightAirwaybillParameters,  M_additionalParameters, X_readFile,
-  R_ReadALLXMLFiles;
+  R_ReadALLXMLFiles, X_createOneXML;
 
 {$R *.DFM}
 
@@ -231,6 +231,7 @@ procedure TMainFormFRM.Button1Click(Sender: TObject);
 begin
 //L_AirwaybillsHighFRM.ShowModal;
 //ReadFileFRM.Showmodal;
+X_CreateOneXmlFRM.ShowModal;
 end;
 
 procedure TMainFormFRM.Country1Click(Sender: TObject);

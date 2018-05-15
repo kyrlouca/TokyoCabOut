@@ -24,8 +24,6 @@ object MainFormFRM: TMainFormFRM
     Height = 65
     Align = alBottom
     TabOrder = 0
-    ExplicitTop = 329
-    ExplicitWidth = 624
     object BitBtn2: TBitBtn
       Left = 8
       Top = 13
@@ -71,7 +69,6 @@ object MainFormFRM: TMainFormFRM
     Font.Style = []
     ParentFont = False
     TabOrder = 1
-    ExplicitWidth = 624
   end
   object Panel2: TPanel
     Left = 0
@@ -80,8 +77,6 @@ object MainFormFRM: TMainFormFRM
     Height = 322
     Align = alClient
     TabOrder = 2
-    ExplicitWidth = 624
-    ExplicitHeight = 288
     object fcShapeBtn2: TButton
       Left = 26
       Top = 208
@@ -154,7 +149,6 @@ object MainFormFRM: TMainFormFRM
       Height = 20
       Caption = 'Button1'
       TabOrder = 4
-      Visible = False
       OnClick = Button1Click
     end
     object Button2: TButton
