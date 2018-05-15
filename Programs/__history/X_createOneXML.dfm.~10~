@@ -387,6 +387,12 @@ object X_CreateOneXmlFRM: TX_CreateOneXmlFRM
       Size = 35
     end
   end
+  object FDoc: TXMLDocument
+    Options = [doNodeAutoCreate, doAttrNull]
+    Left = 520
+    Top = 29
+    DOMVendorDesc = 'MSXML'
+  end
   object FindFLightOutSQL: TIBCQuery
     SQLInsert.Strings = (
       'INSERT INTO FLIGHT_OUT'
@@ -725,62 +731,5 @@ object X_CreateOneXmlFRM: TX_CreateOneXmlFRM
     UniDirectional = True
     Left = 508
     Top = 242
-  end
-  object FlightAirCountrySQL: TIBCQuery
-    SQLInsert.Strings = (
-      'INSERT INTO FLIGHT_AIRWAYBILL_COUNTRY'
-      '  (COUNTRY_CODE, FK_FLIGHT_AIRWAYBILL)'
-      'VALUES'
-      '  (:COUNTRY_CODE, :FK_FLIGHT_AIRWAYBILL)')
-    SQLDelete.Strings = (
-      'DELETE FROM FLIGHT_AIRWAYBILL_COUNTRY'
-      'WHERE'
-      
-        '  FK_FLIGHT_AIRWAYBILL = :Old_FK_FLIGHT_AIRWAYBILL AND COUNTRY_C' +
-        'ODE = :Old_COUNTRY_CODE')
-    SQLUpdate.Strings = (
-      'UPDATE FLIGHT_AIRWAYBILL_COUNTRY'
-      'SET'
-      
-        '  COUNTRY_CODE = :COUNTRY_CODE, FK_FLIGHT_AIRWAYBILL = :FK_FLIGH' +
-        'T_AIRWAYBILL'
-      'WHERE'
-      
-        '  FK_FLIGHT_AIRWAYBILL = :Old_FK_FLIGHT_AIRWAYBILL AND COUNTRY_C' +
-        'ODE = :Old_COUNTRY_CODE')
-    SQLRefresh.Strings = (
-      
-        'SELECT COUNTRY_CODE, FK_FLIGHT_AIRWAYBILL FROM FLIGHT_AIRWAYBILL' +
-        '_COUNTRY'
-      'WHERE'
-      
-        '  FK_FLIGHT_AIRWAYBILL = :FK_FLIGHT_AIRWAYBILL AND COUNTRY_CODE ' +
-        '= :COUNTRY_CODE')
-    SQLLock.Strings = (
-      'SELECT NULL FROM FLIGHT_AIRWAYBILL_COUNTRY'
-      'WHERE'
-      
-        'FK_FLIGHT_AIRWAYBILL = :Old_FK_FLIGHT_AIRWAYBILL AND COUNTRY_COD' +
-        'E = :Old_COUNTRY_CODE'
-      'FOR UPDATE WITH LOCK')
-    Connection = MainFormFRM.CabOutData
-    SQL.Strings = (
-      'select * from Flight_airwaybill_country')
-    MasterFields = 'SERIAL_NUMBER'
-    DetailFields = 'FK_FLIGHT_AIRWAYBILL'
-    ReadOnly = True
-    Left = 544
-    Top = 296
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'SERIAL_NUMBER'
-        Value = nil
-      end
-      item
-        DataType = ftUnknown
-        Name = 'SERIAL_NUMBER'
-        Value = nil
-      end>
   end
 end

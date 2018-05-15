@@ -387,6 +387,12 @@ object X_CreateOneXmlFRM: TX_CreateOneXmlFRM
       Size = 35
     end
   end
+  object FDoc: TXMLDocument
+    Options = [doNodeAutoCreate, doAttrNull]
+    Left = 520
+    Top = 29
+    DOMVendorDesc = 'MSXML'
+  end
   object FindFLightOutSQL: TIBCQuery
     SQLInsert.Strings = (
       'INSERT INTO FLIGHT_OUT'

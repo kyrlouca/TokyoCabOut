@@ -70,6 +70,19 @@ type
     StringField16: TStringField;
     FindFLightOutSQLDATE_DEPART: TDateTimeField;
     FindFLightOutSQLFLIGHT_NAME: TStringField;
+    FA_ItemSQL: TIBCQuery;
+    FA_ItemSQLSEQUENCE: TIntegerField;
+    FA_ItemSQLWEIGHT: TFloatField;
+    FA_ItemSQLPIECES: TIntegerField;
+    FA_ItemSQLDESCRIPTION: TStringField;
+    FA_ItemSQLSERIAL_NUMBER: TIntegerField;
+    FA_ItemSQLTARIFF_CODE: TStringField;
+    FA_ItemSQLAMOUNT: TFloatField;
+    FA_ItemSQLCURRENCY_RATE: TFloatField;
+    FA_ItemSQLCURRENCY: TStringField;
+    FA_ItemSQLFK_FA_SERIAL: TIntegerField;
+    MakeSQL: TIBCQuery;
+    FlightAirCountrySQL: TIBCQuery;
     procedure Button1Click(Sender: TObject);
     procedure wwButton1Click(Sender: TObject);
   private
@@ -81,7 +94,7 @@ type
     Function  AddAtrribute(aNode:IXMLNode; AttributeName:String;AttributeText:String):IXMLNode;
   procedure  CreateHighValueAirwaybillXML(Const SerialNumber:Integer);
   function CreateXmlNodeNew(XMLDoc:TXMLDocument;ElementFather:IXMLNode;ElementName:String;ElementValue:String; ElementType: TNodeType =ntElement):IXMLNode;
-
+  function TBLCreateXMLNode(XMLDoc:TXMLDocument;ElementFather:IXMLNode;ElementName:String;ElementValue:String; Dataset: TDataset; FieldName:String; ElementType: TNodeType =ntElement):IXMLNode;
   public
     { Public declarations }
   end;
@@ -226,15 +239,28 @@ Begin
   result.Attributes['VALUE']:=NodeText;
 end;
 
-function TX_CreateOneXmlFRM.CreateXmlNodeNew(XMLDoc : TXMLDocument;ElementFather:IXMLNode;ElementName:String;ElementValue: TNodeType =ntElement):IXMLNode;
+
+function TX_CreateOneXmlFRM.CreateXmlNodeNew(XMLDoc:TXMLDocument;ElementFather:IXMLNode;ElementName:String;ElementValue:String; ElementType: TNodeType =ntElement):IXMLNode;
 Var
    CxFather:IXMLNode;
    TheElement:IXMLNode;
    TheTextElement:IXMLNode;
 //   TheAttr:TDomAttr;
 Begin
-//CreateXMLNodeNew(FDoc,TheRoot,'SyntaxIdentifier','UNOC',xtext);
+//CreateXMLNodeNew(FDoc,TheRoot,'SyntaxIdentifier','UNOC',ntText);
 End;
+
+function TX_CreateOneXmlFRM.TBLCreateXMLNode(XMLDoc:TXMLDocument;ElementFather:IXMLNode;ElementName:String;ElementValue:String; Dataset: TDataset; FieldName:String; ElementType: TNodeType =ntElement):IXMLNode;
+Var
+   CxFather:IXMLNode;
+   TheElement:IXMLNode;
+   TheTextElement:IXMLNode;
+//   TheAttr:TDomAttr;
+Begin
+//     TblCreateXMLNode(FDoc,x1node,'TotalNumberOfItems','',Dataset,'ITEMS_COUNT',ntText);
+
+End;
+
 
 
 
@@ -256,7 +282,7 @@ end;
 
 procedure TX_CreateOneXmlFRM.CreateHighValueAirwaybillXML(Const SerialNumber:Integer);
 Var
-    TheRoot,ManifestNode,tdNode,lpNode,aNode: IXmlNode;
+    TheRoot,x1Node,x2Node,tdNode,lpNode,aNode: IXmlNode;
    Airwaybill:String;
 //   DeconDirectory:String;
    TheFileName:String;
@@ -333,62 +359,62 @@ Begin
      /////////////////////////////////////////////////////////////////////////
 
 
-     CreateXMLNodeNew(FDoc,TheRoot,'SyntaxIdentifier','UNOC',xtext);
+     CreateXMLNodeNew(FDoc,TheRoot,'SyntaxIdentifier','UNOC',ntText);
 
-     CreateXMLNodeNew(FDoc,TheRoot,'SyntaxVersionNumber','3',xtext);
-     CreateXMLNodeNew(FDoc,TheRoot,'MessageSender','CY10016129G',xtext);
-     CreateXMLNodeNew(FDoc,TheRoot,'SenderIdCodeQualifier','CY',xtext);
-     CreateXMLNodeNew(FDoc,TheRoot,'MessageRecipient','NECA.CY',xtext);
-     CreateXMLNodeNew(FDoc,TheRoot,'RecipientIdentifCodeQualifier','CY',xtext);
+     CreateXMLNodeNew(FDoc,TheRoot,'SyntaxVersionNumber','3',ntText);
+     CreateXMLNodeNew(FDoc,TheRoot,'MessageSender','CY10016129G',ntText);
+     CreateXMLNodeNew(FDoc,TheRoot,'SenderIdCodeQualifier','CY',ntText);
+     CreateXMLNodeNew(FDoc,TheRoot,'MessageRecipient','NECA.CY',ntText);
+     CreateXMLNodeNew(FDoc,TheRoot,'RecipientIdentifCodeQualifier','CY',ntText);
 
 
      DString:=FormatDateTime('YYMMDD',now);
-     CreateXMLNodeNew(FDoc,TheRoot,'DateOfPreparation',DString,xtext);
+     CreateXMLNodeNew(FDoc,TheRoot,'DateOfPreparation',DString,ntText);
 
      DString:=FormatDateTime('HHMM',now);
-     CreateXMLNodeNew(FDoc,TheRoot,'TimeOfPreparation',DString,xtext);
+     CreateXMLNodeNew(FDoc,TheRoot,'TimeOfPreparation',DString,ntText);
 
-     CreateXMLNodeNew(FDoc,TheRoot,'InterchangeControlReference','CY823a7ac010e2',xtext);
-     CreateXMLNodeNew(FDoc,TheRoot,'MessageIdentification','CY823a7ac010e2',xtext);
-     CreateXMLNodeNew(FDoc,TheRoot,'MessageType','CC515A',xtext);
+     CreateXMLNodeNew(FDoc,TheRoot,'InterchangeControlReference','CY823a7ac010e2',ntText);
+     CreateXMLNodeNew(FDoc,TheRoot,'MessageIdentification','CY823a7ac010e2',ntText);
+     CreateXMLNodeNew(FDoc,TheRoot,'MessageType','CC515A',ntText);
 
 
 
 
      //********************************************
      //Header515
-     x1node:=CreateXMLNodeNew(FDoc,TheRoot,'Msg515Header','',xnode);
+     x1node:=CreateXMLNodeNew(FDoc,TheRoot,'Msg515Header','',ntElement);
 
      Temp:='DHL'+Airwaybill;
      //in file we have CY20150430 10 29 47 542  ????
-     CreateXMLNodeNew(FDoc,x1node,'ReferenceNumber',Temp,xtext);
+     CreateXMLNodeNew(FDoc,x1node,'ReferenceNumber',Temp,ntText);
 
-     CreateXMLNodeNew(FDoc,x1node,'TypeOfDeclaration','EX',xtext); //here
-     CreateXMLNodeNew(FDoc,x1node,'CountryOfDestinationCode','TR',xtext); //here
-     CreateXMLNodeNew(FDoc,x1node,'AgreedLocationOfGoodsCode','LCA',xtext); //here
-     CreateXMLNodeNew(FDoc,x1node,'AgreedLocationOfGoods','ARADIPPOU',xtext); //here
-     CreateXMLNodeNew(FDoc,x1node,'AgreedLocationOfGoodsLNG','EN',xtext); //here
-     CreateXMLNodeNew(FDoc,x1node,'CountryOfDispatchexportCode','CY',xtext); //here
-     CreateXMLNodeNew(FDoc,x1node,'TransportModeAtBorder','4',xtext); //here
-     CreateXMLNodeNew(FDoc,x1node,'IdMeansOfTransAtDeparture','3V167C',xtext); //here
-     CreateXMLNodeNew(FDoc,x1node,'IdMeansOfTransAtDepartureLNG','EN',xtext); //here
-     CreateXMLNodeNew(FDoc,x1node,'IdMeansOfTransCrossBorder','3V17C',xtext); //here
-     CreateXMLNodeNew(FDoc,x1node,'IdMeansOfTransCrossBorderLNG','EN',xtext); //here
-     CreateXMLNodeNew(FDoc,x1node,'NationOfMeansTransCrossBorder','BE',xtext); //here
-     CreateXMLNodeNew(FDoc,x1node,'ContainerisedIndicator','0',xtext); //here
-     CreateXMLNodeNew(FDoc,x1node,'ECSAccompanyingDocLangCode','EN',xtext); //here
+     CreateXMLNodeNew(FDoc,x1node,'TypeOfDeclaration','EX',ntText); //here
+     CreateXMLNodeNew(FDoc,x1node,'CountryOfDestinationCode','TR',ntText); //here
+     CreateXMLNodeNew(FDoc,x1node,'AgreedLocationOfGoodsCode','LCA',ntText); //here
+     CreateXMLNodeNew(FDoc,x1node,'AgreedLocationOfGoods','ARADIPPOU',ntText); //here
+     CreateXMLNodeNew(FDoc,x1node,'AgreedLocationOfGoodsLNG','EN',ntText); //here
+     CreateXMLNodeNew(FDoc,x1node,'CountryOfDispatchexportCode','CY',ntText); //here
+     CreateXMLNodeNew(FDoc,x1node,'TransportModeAtBorder','4',ntText); //here
+     CreateXMLNodeNew(FDoc,x1node,'IdMeansOfTransAtDeparture','3V167C',ntText); //here
+     CreateXMLNodeNew(FDoc,x1node,'IdMeansOfTransAtDepartureLNG','EN',ntText); //here
+     CreateXMLNodeNew(FDoc,x1node,'IdMeansOfTransCrossBorder','3V17C',ntText); //here
+     CreateXMLNodeNew(FDoc,x1node,'IdMeansOfTransCrossBorderLNG','EN',ntText); //here
+     CreateXMLNodeNew(FDoc,x1node,'NationOfMeansTransCrossBorder','BE',ntText); //here
+     CreateXMLNodeNew(FDoc,x1node,'ContainerisedIndicator','0',ntText); //here
+     CreateXMLNodeNew(FDoc,x1node,'ECSAccompanyingDocLangCode','EN',ntText); //here
 
 
-     TblCreateXMLNode(FDoc,x1node,'TotalNumberOfItems','',Dataset,'ITEMS_COUNT',xtext);
-     TblCreateXMLNode(FDoc,x1node,'TotalNumberOfPackages','',Dataset,'PIECES',xtext);
-     TblCreateXMLNode(FDoc,x1node,'TotalGrossMass','',Dataset,'WEIGHT',xtext);
+     TblCreateXMLNode(FDoc,x1node,'TotalNumberOfItems','',Dataset,'ITEMS_COUNT',ntText);
+     TblCreateXMLNode(FDoc,x1node,'TotalNumberOfPackages','',Dataset,'PIECES',ntText);
+     TblCreateXMLNode(FDoc,x1node,'TotalGrossMass','',Dataset,'WEIGHT',ntText);
 
      DString:=FormatDateTime('YYYY-MM-DD"T00:00:00+03:00"',now);
-     CreateXMLNodeNew(FDoc,x1node,'DeclarationDate',DString,xtext);
+     CreateXMLNodeNew(FDoc,x1node,'DeclarationDate',DString,ntText);
 
-     CreateXMLNodeNew(FDoc,x1node,'DeclarationPlace','LARNACA',xtext);
-     CreateXMLNodeNew(FDoc,x1node,'DeclarationPlaceLNG','EN',xtext);
-     CreateXMLNodeNew(FDoc,x1node,'SpecificCircumstanceIndicator','A',xtext);
+     CreateXMLNodeNew(FDoc,x1node,'DeclarationPlace','LARNACA',ntText);
+     CreateXMLNodeNew(FDoc,x1node,'DeclarationPlaceLNG','EN',ntText);
+     CreateXMLNodeNew(FDoc,x1node,'SpecificCircumstanceIndicator','A',ntText);
 
      Temp:=OneFlightAirwaybillSQL.FieldByName('Payment_method').AsString;
      If temp='A' then
@@ -397,46 +423,46 @@ Begin
         Dstring:='D'
      else
         Dstring:='D';
-     CreateXMLNodeNew(FDoc,x1node,'TranspChargesMethodOfPayment',Dstring,xtext);
+     CreateXMLNodeNew(FDoc,x1node,'TranspChargesMethodOfPayment',Dstring,ntText);
 
-     TblCreateXMLNode(FDoc,x1node,'CommercialReferenceNumber','',Dataset,'HAWB_ID',xtext);
-     CreateXMLNodeNew(FDoc,x1node,'TypeOfDeclarationBox12','A',xtext); //here
+     TblCreateXMLNode(FDoc,x1node,'CommercialReferenceNumber','',Dataset,'HAWB_ID',ntText);
+     CreateXMLNodeNew(FDoc,x1node,'TypeOfDeclarationBox12','A',ntText); //here
 
 //
 //********************************************
-     x1node:=CreateXMLNodeNew(FDoc,TheRoot,'Msg515Exporter','',xnode);
+     x1node:=CreateXMLNodeNew(FDoc,TheRoot,'Msg515Exporter','',ntElement);
 
-     TBLCreateXMLNode(FDoc,x1node,'TraderName','',Dataset,'SENDER_NAME',xtext);
+     TBLCreateXMLNode(FDoc,x1node,'TraderName','',Dataset,'SENDER_NAME',ntText);
      dString:=Trim(Dataset.fieldbyName('SENDER_ADDRESS_1').AsString)+','+Trim(Dataset.fieldbyName('SENDER_ADDRESS_2').AsString)+','+Trim(Dataset.fieldbyName('SENDER_ADDRESS_3').AsString);
      dString:=Copy(dString,1,34);
-     CreateXMLNodeNew(FDoc,x1node,'StreetAndNumber',dString,xtext);
-     TblCreateXMLNode(FDoc,x1node,'PostalCode','',Dataset,'SENDER_POST_CODE',xtext);
-     TblCreateXMLNode(FDoc,x1node,'City','',Dataset,'SENDER_CITY',xtext);
-     TblCreateXMLNode(FDoc,x1node,'CountryCode','',Dataset,'SENDER_COUNTRY_CODE',xtext);
-     CreateXMLNodeNew(FDoc,x1node,'NADLNG','EN',xtext);
-     CreateXMLNodeNew(FDoc,x1node,'TIN','CY10016129G',xtext);
+     CreateXMLNodeNew(FDoc,x1node,'StreetAndNumber',dString,ntText);
+     TblCreateXMLNode(FDoc,x1node,'PostalCode','',Dataset,'SENDER_POST_CODE',ntText);
+     TblCreateXMLNode(FDoc,x1node,'City','',Dataset,'SENDER_CITY',ntText);
+     TblCreateXMLNode(FDoc,x1node,'CountryCode','',Dataset,'SENDER_COUNTRY_CODE',ntText);
+     CreateXMLNodeNew(FDoc,x1node,'NADLNG','EN',ntText);
+     CreateXMLNodeNew(FDoc,x1node,'TIN','CY10016129G',ntText);
 
 //********************************************
-     x1node:=CreateXMLNodeNew(FDoc,TheRoot,'Msg515Consignee','',xnode);
-     TblCreateXMLNode(FDoc,x1node,'TraderName','',Dataset,'CONSIGNEE_NAME',xtext);
+     x1node:=CreateXMLNodeNew(FDoc,TheRoot,'Msg515Consignee','',ntElement);
+     TblCreateXMLNode(FDoc,x1node,'TraderName','',Dataset,'CONSIGNEE_NAME',ntText);
      dString:=Trim(Dataset.fieldbyName('CONSIGNEE_ADDRESS_1').AsString)+','+Trim(Dataset.fieldbyName('CONSIGNEE_ADDRESS_2').AsString)+','+Trim(Dataset.fieldbyName('CONSIGNEE_ADDRESS_3').AsString);
      dString:=Copy(dString,1,34);
-     CreateXMLNodeNew(FDoc,x1node,'StreetAndNumber',dString,xtext);
-     //TblCreateXMLNode(FDoc,x1node,'StreetAndNumber','',Dataset,'CONSIGNEE_ADDRESS',xtext);
+     CreateXMLNodeNew(FDoc,x1node,'StreetAndNumber',dString,ntText);
+     //TblCreateXMLNode(FDoc,x1node,'StreetAndNumber','',Dataset,'CONSIGNEE_ADDRESS',ntText);
 
-     TblCreateXMLNode(FDoc,x1node,'PostalCode','',Dataset,'CONSIGNEE_POST_CODE',xtext);
-     TblCreateXMLNode(FDoc,x1node,'City','',Dataset,'CONSIGNEE_CITY',xtext);
-     TblCreateXMLNode(FDoc,x1node,'CountryCode','',Dataset,'CONSIGNEE_COUNTRY_cODE',xtext);
-     CreateXMLNodeNew(FDoc,x1node,'NADLNG','EN',xtext);
+     TblCreateXMLNode(FDoc,x1node,'PostalCode','',Dataset,'CONSIGNEE_POST_CODE',ntText);
+     TblCreateXMLNode(FDoc,x1node,'City','',Dataset,'CONSIGNEE_CITY',ntText);
+     TblCreateXMLNode(FDoc,x1node,'CountryCode','',Dataset,'CONSIGNEE_COUNTRY_cODE',ntText);
+     CreateXMLNodeNew(FDoc,x1node,'NADLNG','EN',ntText);
 
 
      //****************************************
-     x1node:=CreateXMLNodeNew(FDoc,TheRoot,'Msg515ExportCustomsOffice','',xnode);
-     CreateXMLNodeNew(FDoc,x1node,'ReferenceNumber','CY000440',xtext);
+     x1node:=CreateXMLNodeNew(FDoc,TheRoot,'Msg515ExportCustomsOffice','',ntElement);
+     CreateXMLNodeNew(FDoc,x1node,'ReferenceNumber','CY000440',ntText);
      //****************************************
 
-     x1node:=CreateXMLNodeNew(FDoc,TheRoot,'Msg515ExitCustomsOffice','',xnode);
-     CreateXMLNodeNew(FDoc,x1node,'ReferenceNumber','CY000440',xtext);
+     x1node:=CreateXMLNodeNew(FDoc,TheRoot,'Msg515ExitCustomsOffice','',ntElement);
+     CreateXMLNodeNew(FDoc,x1node,'ReferenceNumber','CY000440',ntText);
 
      //****************************************
      //** For Each Item **************************************
@@ -448,22 +474,22 @@ Begin
         Open;
         first;
         //while not eof do begin
-                x1node:=CreateXMLNodeNew(FDoc,TheRoot,'Msg515GoodsItem','',xnode);
+                x1node:=CreateXMLNodeNew(FDoc,TheRoot,'Msg515GoodsItem','',ntElement);
 
-                TBLCreateXMLNode(FDoc,x1node,'ItemNumber','',ItemDataset,'SEQUENCE',xtext);
-                TBLCreateXMLNode(FDoc,x1node,'GoodsDescription','',ItemDataset,'DESCRIPTION',xtext);
-                CreateXMLNodeNew(FDoc,x1node,'GoodsDescriptionLNG','EN',xtext);
-                TBLCreateXMLNode(FDoc,x1node,'GrossMass','',ItemDataset,'WEIGHT',xtext);
-                TBLCreateXMLNode(FDoc,x1node,'NetMass','',ItemDataset,'WEIGHT',xtext);
-                CreateXMLNodeNew(FDoc,x1node,'ProcedureRequested','31',xtext);
-                CreateXMLNodeNew(FDoc,x1node,'PreviousProcedure','00',xtext);
+                TBLCreateXMLNode(FDoc,x1node,'ItemNumber','',ItemDataset,'SEQUENCE',ntText);
+                TBLCreateXMLNode(FDoc,x1node,'GoodsDescription','',ItemDataset,'DESCRIPTION',ntText);
+                CreateXMLNodeNew(FDoc,x1node,'GoodsDescriptionLNG','EN',ntText);
+                TBLCreateXMLNode(FDoc,x1node,'GrossMass','',ItemDataset,'WEIGHT',ntText);
+                TBLCreateXMLNode(FDoc,x1node,'NetMass','',ItemDataset,'WEIGHT',ntText);
+                CreateXMLNodeNew(FDoc,x1node,'ProcedureRequested','31',ntText);
+                CreateXMLNodeNew(FDoc,x1node,'PreviousProcedure','00',ntText);
 
                 dString:=Trim(ItemDataset.FieldByName('Currency').AsString);
                 If dString='' then dString:='EUR';
-                CreateXMLNodeNew(FDoc,x1node,'StatisticalValueCurrency',dString,xtext);
-                TBLCreateXMLNode(FDoc,x1node,'StatisticalValueAmount','',ItemDataset,'AMOUNT',xtext);
-                TblCreateXMLNode(FDoc,x1node,'CountryOfOrigin','',Dataset,'SENDER_COUNTRY_CODE',xtext);
-                CreateXMLNodeNew(FDoc,x1node,'SupplementaryUnits','1',xtext);
+                CreateXMLNodeNew(FDoc,x1node,'StatisticalValueCurrency',dString,ntText);
+                TBLCreateXMLNode(FDoc,x1node,'StatisticalValueAmount','',ItemDataset,'AMOUNT',ntText);
+                TblCreateXMLNode(FDoc,x1node,'CountryOfOrigin','',Dataset,'SENDER_COUNTRY_CODE',ntText);
+                CreateXMLNodeNew(FDoc,x1node,'SupplementaryUnits','1',ntText);
 
 
 
@@ -477,35 +503,35 @@ Begin
                         if not prepared then prepare;
                         Open;
                         while (not EOF) do begin
-                                x2node:=CreateXMLNodeNew(FDoc,x1node,'Msg515ProducedDocumentsCertif','',xtext);
+                                x2node:=CreateXMLNodeNew(FDoc,x1node,'Msg515ProducedDocumentsCertif','',ntText);
                                 Temp:= Fieldbyname('INFO_TYPE').AsString;
-                                CreateXMLNodeNew(FDoc,x2node,'DocumentType',Temp,xtext);
+                                CreateXMLNodeNew(FDoc,x2node,'DocumentType',Temp,ntText);
                                 Temp:= Fieldbyname('INFO_value').AsString;
-                                CreateXMLNodeNew(FDoc,x2node,'DocumentReference',temp,xtext);
-                                CreateXMLNodeNew(FDoc,x2node,'DocumentReferenceLNG','EN',xtext);
+                                CreateXMLNodeNew(FDoc,x2node,'DocumentReference',temp,ntText);
+                                CreateXMLNodeNew(FDoc,x2node,'DocumentReferenceLNG','EN',ntText);
                                 next;
                         end;
                         close;
                 end;
 
-                x2node:=CreateXMLNodeNew(FDoc,x1node,'Msg515SpecialMentions','',xtext);
-                CreateXMLNodeNew(FDoc,x2node,'AdditionalInformationCoded','AdditionalInformationCoded',xtext);
-                CreateXMLNodeNew(FDoc,x2node,'Text','Text',xtext);
-                CreateXMLNodeNew(FDoc,x2node,'TextLNG','EN',xtext);
+                x2node:=CreateXMLNodeNew(FDoc,x1node,'Msg515SpecialMentions','',ntText);
+                CreateXMLNodeNew(FDoc,x2node,'AdditionalInformationCoded','AdditionalInformationCoded',ntText);
+                CreateXMLNodeNew(FDoc,x2node,'Text','Text',ntText);
+                CreateXMLNodeNew(FDoc,x2node,'TextLNG','EN',ntText);
 
 
-                x2node:=CreateXMLNodeNew(FDoc,x1node,'Msg515CodeCommodity','',xtext);
-                CreateXMLNodeNew(FDoc,x2node,'CombinedNomenclature','CombinedNomenclature',xtext);
-                CreateXMLNodeNew(FDoc,x2node,'TARICCode','TARICCode',xtext);
-                CreateXMLNodeNew(FDoc,x2node,'TARICFirstAdditionalCode','TARICFirstAdditionalCode',xtext);
-                CreateXMLNodeNew(FDoc,x2node,'TARICSecondAdditionalCode','TARICSecondAdditionalCode',xtext);
+                x2node:=CreateXMLNodeNew(FDoc,x1node,'Msg515CodeCommodity','',ntText);
+                CreateXMLNodeNew(FDoc,x2node,'CombinedNomenclature','CombinedNomenclature',ntText);
+                CreateXMLNodeNew(FDoc,x2node,'TARICCode','TARICCode',ntText);
+                CreateXMLNodeNew(FDoc,x2node,'TARICFirstAdditionalCode','TARICFirstAdditionalCode',ntText);
+                CreateXMLNodeNew(FDoc,x2node,'TARICSecondAdditionalCode','TARICSecondAdditionalCode',ntText);
 
 
-                x2node:=CreateXMLNodeNew(FDoc,x1node,'Msg515Packages','',xtext);
-                TBLCreateXMLNode(FDoc,x2node,'MarksNumbersOfPackages','',ItemDataset,'TARIFF_CODE',xtext);
-                CreateXMLNodeNew(FDoc,x2node,'MarksNumbersOfPackagesLNG','EN',xtext);
-                CreateXMLNodeNew(FDoc,x2node,'KindOfPackages','PC',xtext);
-                TBLCreateXMLNode(FDoc,x2node,'NumberOfPackages','',Dataset,'PIECES',xtext);
+                x2node:=CreateXMLNodeNew(FDoc,x1node,'Msg515Packages','',ntText);
+                TBLCreateXMLNode(FDoc,x2node,'MarksNumbersOfPackages','',ItemDataset,'TARIFF_CODE',ntText);
+                CreateXMLNodeNew(FDoc,x2node,'MarksNumbersOfPackagesLNG','EN',ntText);
+                CreateXMLNodeNew(FDoc,x2node,'KindOfPackages','PC',ntText);
+                TBLCreateXMLNode(FDoc,x2node,'NumberOfPackages','',Dataset,'PIECES',ntText);
 
 
                 //next; JUST THE FIRST ITEM ??
@@ -518,47 +544,47 @@ Begin
         If not active then open;
         while (not EOF) do begin
                 Temp:= Fieldbyname('COUNTRY_CODE').AsString;
-                x1node:=CreateXMLNodeNew(FDoc,TheRoot,'Msg515Itinerary','',xnode);
-                CreateXMLNodeNew(FDoc,x1node,'CountryOfRoutingCode',temp,xtext);
+                x1node:=CreateXMLNodeNew(FDoc,TheRoot,'Msg515Itinerary','',ntElement);
+                CreateXMLNodeNew(FDoc,x1node,'CountryOfRoutingCode',temp,ntText);
                 next;
         end;
      end;
 
 
 //********************************************
-     x1node:=CreateXMLNodeNew(FDoc,TheRoot,'Msg515DeclarantTrader','',xnode);
-     CreateXMLNodeNew(FDoc,x1node,'TraderName','DHL (CYPRUS) LIMITED',xtext);
-     CreateXMLNodeNew(FDoc,x1node,'StreetAndNumber','AKROPOLEOS 13',xtext);
-     CreateXMLNodeNew(FDoc,x1node,'PostalCode','2006',xtext);
-     CreateXMLNodeNew(FDoc,x1node,'City','STROVOLOS',xtext);
-     CreateXMLNodeNew(FDoc,x1node,'CountryCode','CY',xtext);
-     CreateXMLNodeNew(FDoc,x1node,'NADLNG','EN',xtext);
-     CreateXMLNodeNew(FDoc,x1node,'TIN','CY10016129G',xtext);
+     x1node:=CreateXMLNodeNew(FDoc,TheRoot,'Msg515DeclarantTrader','',ntElement);
+     CreateXMLNodeNew(FDoc,x1node,'TraderName','DHL (CYPRUS) LIMITED',ntText);
+     CreateXMLNodeNew(FDoc,x1node,'StreetAndNumber','AKROPOLEOS 13',ntText);
+     CreateXMLNodeNew(FDoc,x1node,'PostalCode','2006',ntText);
+     CreateXMLNodeNew(FDoc,x1node,'City','STROVOLOS',ntText);
+     CreateXMLNodeNew(FDoc,x1node,'CountryCode','CY',ntText);
+     CreateXMLNodeNew(FDoc,x1node,'NADLNG','EN',ntText);
+     CreateXMLNodeNew(FDoc,x1node,'TIN','CY10016129G',ntText);
 
 //********************************************
-     x1node:=CreateXMLNodeNew(FDoc,TheRoot,'Msg515TermsDelivery','',xnode);
-     TBLCreateXMLNode(FDoc,x1node,'IncotermCode','',Dataset,'INCOTERMS',xtext);
-     CreateXMLNodeNew(FDoc,x1node,'ComplementaryCode','1',xtext);
-     CreateXMLNodeNew(FDoc,x1node,'ComplementOfInfo','LARNACA',xtext);
-     CreateXMLNodeNew(FDoc,x1node,'ComplementOfInfoLNG','EN',xtext);
+     x1node:=CreateXMLNodeNew(FDoc,TheRoot,'Msg515TermsDelivery','',ntElement);
+     TBLCreateXMLNode(FDoc,x1node,'IncotermCode','',Dataset,'INCOTERMS',ntText);
+     CreateXMLNodeNew(FDoc,x1node,'ComplementaryCode','1',ntText);
+     CreateXMLNodeNew(FDoc,x1node,'ComplementOfInfo','LARNACA',ntText);
+     CreateXMLNodeNew(FDoc,x1node,'ComplementOfInfoLNG','EN',ntText);
 //********************************************
 
 
 
      //x1node:=CreateXMLNodeNew(FDoc,TheRoot,'Msg615LodgementCustomsOffice','CY000440',xnode);
-     //CreateXMLNodeNew(FDoc,x1node,'ReferenceNumber','CY000440',xtext);
+     //CreateXMLNodeNew(FDoc,x1node,'ReferenceNumber','CY000440',ntText);
 
 //********************************************
 
      x1node:=CreateXMLNodeNew(FDoc,TheRoot,'Msg515DataTransaction','',xnode);
-     TBLCreateXMLNode(FDoc,x1node,'Currency','',ItemDataset,'Currency',xtext);
-     TBLCreateXMLNode(FDoc,x1node,'TotalAmountInvoiced','',ItemDataset,'amount',xtext);
-     TBLCreateXMLNode(FDoc,x1node,'ExchangeRate','',ItemDataset,'Currency_rate',xtext);
-     CreateXMLNodeNew(FDoc,x1node,'NatureOfTransactionCode','1',xtext);
+     TBLCreateXMLNode(FDoc,x1node,'Currency','',ItemDataset,'Currency',ntText);
+     TBLCreateXMLNode(FDoc,x1node,'TotalAmountInvoiced','',ItemDataset,'amount',ntText);
+     TBLCreateXMLNode(FDoc,x1node,'ExchangeRate','',ItemDataset,'Currency_rate',ntText);
+     CreateXMLNodeNew(FDoc,x1node,'NatureOfTransactionCode','1',ntText);
 //********************************************
 
      x1node:=CreateXMLNodeNew(FDoc,TheRoot,'Msg515StatusRepresentative','',xnode);
-     CreateXMLNodeNew(FDoc,x1node,'RepresentativeStatusCode','2',xtext);
+     CreateXMLNodeNew(FDoc,x1node,'RepresentativeStatusCode','2',ntText);
 
 
 
