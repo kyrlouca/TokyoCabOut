@@ -155,15 +155,18 @@ object X_CreateOneXmlFRM: TX_CreateOneXmlFRM
       ') q')
     Connection = MainFormFRM.CabOutData
     SQL.Strings = (
-      'select * from Flight_AIrwaybill where Serial_number= :Serial')
+      
+        'select * from Flight_AIrwaybill where Serial_number= :Serial_num' +
+        'ber')
     DetailFields = 'FK_FLIGHT_OUT_SERIAL'
     UniDirectional = True
     Left = 224
     Top = 242
     ParamData = <
       item
-        DataType = ftUnknown
-        Name = 'Serial'
+        DataType = ftInteger
+        Name = 'SERIAL_NUMBER'
+        ParamType = ptInput
         Value = nil
       end>
     object IntegerField1: TIntegerField
@@ -773,7 +776,7 @@ object X_CreateOneXmlFRM: TX_CreateOneXmlFRM
     MasterSource = OneFlightAirwayBillSRC
     ReadOnly = True
     Left = 200
-    Top = 307
+    Top = 299
     ParamData = <
       item
         DataType = ftUnknown

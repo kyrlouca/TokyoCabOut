@@ -81,6 +81,7 @@ type
     FA_ItemSQLCURRENCY: TStringField;
     FA_ItemSQLFK_FA_SERIAL: TIntegerField;
     MakeSQL: TIBCQuery;
+    OneFlightAirwayBillSRC: TIBCDataSource;
     FlightAirCountrySQL: TIBCQuery;
     procedure Button1Click(Sender: TObject);
     procedure wwButton1Click(Sender: TObject);
@@ -88,14 +89,18 @@ type
     { Private declarations }
     Function CreateOneHouseXML(Const HawbSerial:Integer):String;
     procedure CreateGensegRegData(FatherNode:IXMLNode);
+    procedure  CreateHighValueAirwaybillXML(Const SerialNumber:Integer);
+
     Function  AddNodeAtr(FatherNode:IXMLNode;NodeName:String; NodeText:String):IXMLNode;overload;
     Function  AddNodeAtr(FatherNode:IXMLNode;NodeName:String; AttributeName:String;AttributeText:String):IXMLNode; overload;
     Function  AddAtrribute(aNode:IXMLNode; AttributeName:String;AttributeText:String):IXMLNode;
-  procedure  CreateHighValueAirwaybillXML(Const SerialNumber:Integer);
-  function CreateXmlNodeNew(XMLDoc:IXMLDocument;ElementFather:IXMLNode;ElementName:String;ElementValue:String; ElementType: TNodeType =ntElement):IXMLNode;
-  function TBLCreateXMLNode(XMLDoc:IXMLDocument;ElementFather:IXMLNode;ElementName:String;ElementValue:String; Dataset: TDataset; FieldName:String; ElementType: TNodeType =ntElement):IXMLNode;
+    function CreateXmlNodeNew(XMLDoc:IXMLDocument;ElementFather:IXMLNode;ElementName:String;ElementValue:String; ElementType: TNodeType =ntElement):IXMLNode;
+    function TBLCreateXMLNode(XMLDoc:IXMLDocument;ElementFather:IXMLNode;ElementName:String;ElementValue:String; Dataset: TDataset; FieldName:String; ElementType: TNodeType =ntElement):IXMLNode;
+
   public
     { Public declarations }
+    procedure CreateOneAirwabillXML(Const SerialNumber:Integer);
+
   end;
 
 var
@@ -104,6 +109,8 @@ var
 implementation
 
 {$R *.dfm}
+
+uses MainForm;
 
 procedure TX_CreateOneXmlFRM.Button1Click(Sender: TObject);
 begin
@@ -165,11 +172,41 @@ begin
 
 end;
 
+procedure TX_CreateOneXmlFRM.CreateOneAirwabillXML(Const SerialNumber:Integer);
+var
+ValueType:String;
+
+
+begin
+          With MakeSQL do begin
+                Close;
+                ReadONly:=True;
+                SQL.Clear;
+                SQl.Add( 'Select value_type from flight_airwaybill where serial_number= :AirSerial');
+                ParamByName('AirSerial').value:=SerialNumber;
+                if not prepared then prepare;
+                Open;
+                ValueType:=FieldByName('value_type').AsString;
+                close;
+          end;
+          If ValueType='H' then begin
+                CreateHighValueAirwaybillXML(SerialNumber);
+          end else begin
+//                CreateLowValueAirwaybillXML(SerialNumber);
+
+          end;
+
+
+end;
+
+
+
+
 procedure TX_CreateOneXmlFRM.wwButton1Click(Sender: TObject);
 var
   FileName:string;
   TheDoc: IXmlDocument;
-  RootNode,ManifestNode,tdNode,lpNode,aNode: IXmlNode;
+  RootNode,ManifestNode,tdNode,GroupNode,aNode: IXmlNode;
   strXML:String;
   i,j:Integer;
   temp:String;
@@ -180,6 +217,12 @@ var
  MawbId:String;
 
 begin
+
+  OneFlightAirwayBillSQL.Close;
+  OneFlightAirwayBillSQL.ParamByName('serial').Value:=229;
+  OneFlightAirwayBillSQL.Open;
+
+
 
   TheDoc:=XMLDocNew;
   TheDoc.Active := True;
@@ -196,17 +239,15 @@ begin
   aNode:=ManifestNOde.AddChild('reftdid',-1);
   aNode.Text :='abc';
 
-  aNode:=ManifestNOde.AddChild('phydecondate',-1);
-  aNode.Text := 'date arrived';
+  aNode:= CreateXmlNodeNew(TheDoc,ManifestNode,'TestNode','TextCOntent',ntText);
 
-  aNode:=ManifestNOde.AddChild('remark',-1);
-  aNode.Text:='DHL';
-/////////////////////////////////////////////////////
+  groupNode:= CreateXmlNodeNew(TheDoc,ManifestNode,'GroupNode','',ntElement);
+  CreateXmlNodeNew(TheDoc,GroupNode,'ChildNode','child1',ntText);
+  CreateXmlNodeNew(TheDoc,GroupNode,'ChildNode','childSecond',ntText);
+  TBLCreateXMLNode(TheDoc,GroupNode,'TableVal','ab',OneFlightAirwayBillSQL,'hawb_id',ntText);
 
-    tdNode:=ManifestNOde.Addchild('td',-1);
-
-  strXML := StringReplace(TheDoc.XML.Text, ' xmlns=""', '', [rfReplaceAll]);
-  TheDoc := LoadXMLData(strXML);
+//  strXML := StringReplace(TheDoc.XML.Text, ' xmlns=""', '', [rfReplaceAll]);
+//  TheDoc := LoadXMLData(strXML);
 
   FileName:= 'C:\Data\DelphiProjects\TokyoCabOut\XML\OutputXML\test2.xml';
   TheDoc.SaveToFile(FileName);
@@ -230,52 +271,6 @@ begin
 
   aNode := AddNodeAtr(FatherNode , 'BOX1EXT1' ,'IM');
   aNode := AddNodeAtr(FatherNode , 'BOX1EXT2' ,'A');
-end;
-
-Function TX_CreateOneXmlFRM.AddNodeAtr(FatherNode:IXMLNode;NodeName:String; NodeText:String):IXMLNode;
-Begin
-  result:= FatherNode.AddChild(NodeName,-1);
-  result.Attributes['VALUE']:=NodeText;
-end;
-
-
-function TX_CreateOneXmlFRM.CreateXmlNodeNew(XMLDoc:IXMLDocument;ElementFather:IXMLNode;ElementName:String;ElementValue:String; ElementType: TNodeType =ntElement):IXMLNode;
-Var
-   CxFather:IXMLNode;
-   TheElement:IXMLNode;
-   TheTextElement:IXMLNode;
-//   TheAttr:TDomAttr;
-Begin
-//CreateXMLNodeNew(FDoc,TheRoot,'SyntaxIdentifier','UNOC',ntText);
-End;
-
-function TX_CreateOneXmlFRM.TBLCreateXMLNode(XMLDoc:IXMLDocument;ElementFather:IXMLNode;ElementName:String;ElementValue:String; Dataset: TDataset; FieldName:String; ElementType: TNodeType =ntElement):IXMLNode;
-Var
-   CxFather:IXMLNode;
-   TheElement:IXMLNode;
-   TheTextElement:IXMLNode;
-//   TheAttr:TDomAttr;
-Begin
-//     TblCreateXMLNode(FDoc,x1node,'TotalNumberOfItems','',Dataset,'ITEMS_COUNT',ntText);
-
-End;
-
-
-
-
-
-
-
-Function TX_CreateOneXmlFRM.AddNodeAtr(FatherNode:IXMLNode;NodeName:String; AttributeName:String;AttributeText:String):IXMLNode;
-Begin
-  result:= FatherNode.AddChild(NodeName,-1);
-  result.Attributes[AttributeName]:=AttributeText;
-end;
-
-Function TX_CreateOneXmlFRM.AddAtrribute(aNode:IXMLNode; AttributeName:String;AttributeText:String):IXMLNode;
-Begin
-  aNode.Attributes[AttributeName]:=AttributeText;
-  result:=aNode;
 end;
 
 
@@ -348,15 +343,13 @@ Begin
 
 
     FDoc:=XMLDocNew;
-
-  FDoc.Active := True;
-
-  FDoc.Version := '1.0';
-  FDoc.Encoding := 'UTF-8';
-  TheRoot := FDoc.AddChild('CC615A');
+    FDoc.Active := True;
+    FDoc.Version := '1.0';
+    FDoc.Encoding := 'UTF-8';
+    TheRoot := FDoc.AddChild('CC615A');
 //  iNode.SetAttributeNS('xmlns:test', '', 'http://www.foo.com' );
 //  iNode.SetAttributeNS('xmlns:xsi', '', 'http://www.w3.org/2001/XMLSchema');
-  TheRoot.SetAttributeNS('xmlns', '', 'http://www.eurodyn.com' );
+    TheRoot.SetAttributeNS('xmlns', '', 'http://www.eurodyn.com' );
 
 
      /////////////////////////////////////////////////////////////////////////
@@ -603,6 +596,64 @@ Begin
      OneFlightAirwaybillSQL.close;
 
 End;
+
+
+
+function TX_CreateOneXmlFRM.CreateXmlNodeNew(XMLDoc:IXMLDocument;ElementFather:IXMLNode;ElementName:String;ElementValue:String; ElementType: TNodeType =ntElement):IXMLNode;
+Var
+  aNode:IXMLNode;
+   CxFather:IXMLNode;
+   TheElement:IXMLNode;
+   TheTextElement:IXMLNode;
+//   TheAttr:TDomAttr;
+Begin
+
+  aNode:=ElementFather.AddChild(ElementName,-1);
+  if (Trim(ElementValue)>'') and (ElementType=ntText) then
+    aNode.Text:=ElementValue;
+  result:=aNode;
+
+End;
+
+function TX_CreateOneXmlFRM.TBLCreateXMLNode(XMLDoc:IXMLDocument;ElementFather:IXMLNode;ElementName:String;ElementValue:String; Dataset: TDataset; FieldName:String; ElementType: TNodeType =ntElement):IXMLNode;
+Var
+   CxFather:IXMLNode;
+   TheElement:IXMLNode;
+   TheTextElement:IXMLNode;
+   MyValue:String;
+//   TheAttr:TDomAttr;
+Begin
+//     TblCreateXMLNode(FDoc,x1node,'TotalNumberOfItems','',Dataset,'ITEMS_COUNT',ntText);
+
+  If Dataset.FieldBYName(FieldName).DataType =ftfloat then begin
+        MyValue:=format('%.2f',[dataset.FieldBYName(FieldName).AsFloat]);
+  end else begin
+        MyValue:=Trim(dataset.FieldBYName(FieldName).AsString);
+  end;
+     //If MyValue='' then
+        //MyValue:= ElementName;
+     CreateXMLNodeNew(XMLDoc,ElementFather,ElementName,MyValue,ntText);
+
+End;
+
+
+Function TX_CreateOneXmlFRM.AddNodeAtr(FatherNode:IXMLNode;NodeName:String; NodeText:String):IXMLNode;
+Begin
+  result:= FatherNode.AddChild(NodeName,-1);
+  result.Attributes['VALUE']:=NodeText;
+end;
+
+Function TX_CreateOneXmlFRM.AddNodeAtr(FatherNode:IXMLNode;NodeName:String; AttributeName:String;AttributeText:String):IXMLNode;
+Begin
+  result:= FatherNode.AddChild(NodeName,-1);
+  result.Attributes[AttributeName]:=AttributeText;
+end;
+
+Function TX_CreateOneXmlFRM.AddAtrribute(aNode:IXMLNode; AttributeName:String;AttributeText:String):IXMLNode;
+Begin
+  aNode.Attributes[AttributeName]:=AttributeText;
+  result:=aNode;
+end;
 
 
 

@@ -155,15 +155,18 @@ object X_CreateOneXmlFRM: TX_CreateOneXmlFRM
       ') q')
     Connection = MainFormFRM.CabOutData
     SQL.Strings = (
-      'select * from Flight_AIrwaybill where Serial_number= :Serial')
+      
+        'select * from Flight_AIrwaybill where Serial_number= :Serial_num' +
+        'ber')
     DetailFields = 'FK_FLIGHT_OUT_SERIAL'
     UniDirectional = True
     Left = 224
     Top = 242
     ParamData = <
       item
-        DataType = ftUnknown
-        Name = 'Serial'
+        DataType = ftInteger
+        Name = 'SERIAL_NUMBER'
+        ParamType = ptInput
         Value = nil
       end>
     object IntegerField1: TIntegerField
@@ -440,8 +443,8 @@ object X_CreateOneXmlFRM: TX_CreateOneXmlFRM
       '  fo.serial_number= :Serial_number')
     ReadOnly = True
     UniDirectional = True
-    Left = 20
-    Top = 42
+    Left = 332
+    Top = 234
     ParamData = <
       item
         DataType = ftInteger
@@ -574,8 +577,8 @@ object X_CreateOneXmlFRM: TX_CreateOneXmlFRM
     DetailFields = 'FK_FLIGHT_OUT_SERIAL'
     ReadOnly = True
     UniDirectional = True
-    Left = 24
-    Top = 99
+    Left = 416
+    Top = 227
     ParamData = <
       item
         DataType = ftUnknown
@@ -723,11 +726,6 @@ object X_CreateOneXmlFRM: TX_CreateOneXmlFRM
     Left = 508
     Top = 242
   end
-  object OneFlightAirwayBillSRC: TIBCDataSource
-    DataSet = OneFlightAirwayBillSQL
-    Left = 344
-    Top = 235
-  end
   object FlightAirCountrySQL: TIBCQuery
     SQLInsert.Strings = (
       'INSERT INTO FLIGHT_AIRWAYBILL_COUNTRY'
@@ -770,11 +768,15 @@ object X_CreateOneXmlFRM: TX_CreateOneXmlFRM
       'select * from Flight_airwaybill_country')
     MasterFields = 'SERIAL_NUMBER'
     DetailFields = 'FK_FLIGHT_AIRWAYBILL'
-    MasterSource = OneFlightAirwayBillSRC
     ReadOnly = True
-    Left = 200
-    Top = 307
+    Left = 544
+    Top = 296
     ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'SERIAL_NUMBER'
+        Value = nil
+      end
       item
         DataType = ftUnknown
         Name = 'SERIAL_NUMBER'

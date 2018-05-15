@@ -1,2 +1,2 @@
-<?xml version="1.0"?>
-<manifest_decon xmlns="MANIFEST.Decon"><manisd_decon><reftdid>abc</reftdid><phydecondate>date arrived</phydecondate><remark>DHL</remark><td/></manisd_decon></manifest_decon>
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest_decon xmlns="MANIFEST.Decon"><manisd_decon xmlns=""><reftdid>abc</reftdid><TestNode>TextCOntent</TestNode><GroupNode><ChildNode>child1</ChildNode><ChildNode>childSecond</ChildNode><TableVal>7732659152</TableVal></GroupNode></manisd_decon></manifest_decon>
