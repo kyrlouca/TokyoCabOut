@@ -13,6 +13,7 @@ type
   TL_AirwaybillsHighFRM = class(TForm)
     Panel1: TPanel;
     Panel4: TPanel;
+    BitBtn2: TBitBtn;
     Panel3: TPanel;
     AirwayBillSQL: TIBCQuery;
     AirwayBillSQLSERIAL_NUMBER: TIntegerField;
@@ -71,7 +72,6 @@ type
     Button2: TButton;
     UpdateTableSQL: TIBCSQL;
     Button3: TButton;
-    BitBtn1: TBitBtn;
     procedure FormActivate(Sender: TObject);
     procedure BitBtn2Click(Sender: TObject);
     procedure MovementSQLBeforeEdit(DataSet: TDataSet);

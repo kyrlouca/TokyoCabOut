@@ -220,7 +220,7 @@ type
     BitBtn1: TBitBtn;
     DeleteAirBTN: TBitBtn;
     EditAirBTN: TBitBtn;
-    CreateOneBTN: TRzBitBtn;
+    InsertBTN: TRzBitBtn;
     DeleteBTN: TRzBitBtn;
     RzBitBtn1: TRzBitBtn;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -245,7 +245,6 @@ type
     procedure SelectRGPClick(Sender: TObject);
     procedure DeleteAirBTNClick(Sender: TObject);
     procedure EditAirBTNClick(Sender: TObject);
-    procedure CreateOneBTNClick(Sender: TObject);
   private
     { Private declarations }
         procedure UpdateHawbStatus(HawbSerial:Integer;IsHigh:String);
@@ -266,7 +265,7 @@ var
 
 implementation
 
-uses MainForm, H_FlightAirwaybill, H_flightOut, X_createOneXML;
+uses MainForm, H_FlightAirwaybill, H_flightOut;
 
 {$R *.DFM}
 
@@ -703,21 +702,6 @@ begin
         H_FlightOutFRM.SHowmodal;
         FlightOutSerial:=H_flightOutFRM.GFlightOutSerial;
         OpenFlightOut(FlightOutSerial);
-
-end;
-
-procedure TH_ScanAirwaibillNewFRM.CreateOneBTNClick(Sender: TObject);
-Var
-        SerialNumber:Integer;
-        Mawb:String;
-begin
-  iF FlightAirwaybillCDS.DataSet.State=dsEdit then
-        FlightAirwaybillCDS.DataSet.Post;
-
-  SerialNumber:=FLightAirwaybillSQL.FieldByName('serial_number').AsInteger;
-  Mawb:= FlightOutSQL.FieldbyName('Mawb').AsString;
-
-  X_CreateOneXmlFRM.CreateOneAirwabillXML(SerialNumber);
 
 end;
 

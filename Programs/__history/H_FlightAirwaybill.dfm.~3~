@@ -26,7 +26,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
     Font.Color = clBlue
     Font.Height = -27
     Font.Name = 'Arial'
-    Font.Style = []
+    Font.Style = [fsBold]
     ParentFont = False
     TabOrder = 0
   end
@@ -1242,17 +1242,11 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         FixedCols = 0
         ShowHorzScrollBar = True
         DataSource = FA_ItemSRC
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -12
-        Font.Name = 'arial'
-        Font.Style = []
-        ParentFont = False
         TabOrder = 0
         TitleAlignment = taLeftJustify
         TitleFont.Charset = DEFAULT_CHARSET
         TitleFont.Color = clWindowText
-        TitleFont.Height = -12
+        TitleFont.Height = -10
         TitleFont.Name = 'arial'
         TitleFont.Style = []
         TitleLines = 1

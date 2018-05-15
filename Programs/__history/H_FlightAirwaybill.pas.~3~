@@ -12,8 +12,10 @@ type
   TH_FlightairwaybillFRM = class(TForm)
     Panel1: TPanel;
     Panel4: TPanel;
+    Label5: TLabel;
     AcceptBTN: TBitBtn;
     CancelBTN: TBitBtn;
+    Label9: TLabel;
     FlightAirwaybillCDS: TIBCDataSource;
     FairwaybillCountrySQL: TIBCQuery;
     FAirwaybillCountryCRC: TIBCDataSource;
@@ -123,6 +125,8 @@ type
     cadd2: TwwDBEdit;
     cadd3: TwwDBEdit;
     ValueFLD: TwwDBComboBox;
+    Label6: TLabel;
+    Label21: TLabel;
     Label22: TLabel;
     Label23: TLabel;
     GroupBox4: TGroupBox;

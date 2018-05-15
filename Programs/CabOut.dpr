@@ -72,6 +72,7 @@ begin
   Application.CreateForm(TR_ReadAllFilesFRM, R_ReadAllFilesFRM);
   Application.CreateForm(TR_ReadAllFilesFRM, R_ReadAllFilesFRM);
   Application.CreateForm(TX_CreateOneXmlFRM, X_CreateOneXmlFRM);
+  Application.CreateForm(TX_CreateOneXmlFRM, X_CreateOneXmlFRM);
   //  Application.CreateForm(TR_ReadAllFilesFRM, R_ReadAllFilesFRM);
   Application.CreateForm(TM_additionalParametersFRM, M_additionalParametersFRM);
   Application.CreateForm(TX_readFileFRM, X_readFileFRM);

@@ -717,7 +717,7 @@ begin
   SerialNumber:=FLightAirwaybillSQL.FieldByName('serial_number').AsInteger;
   Mawb:= FlightOutSQL.FieldbyName('Mawb').AsString;
 
-  X_CreateOneXmlFRM.CreateOneAirwabillXML(SerialNumber);
+  CreateOneXMLFileFRM.ProcessOneAir(SerialNumber);
 
 end;
 

@@ -12,6 +12,7 @@ type
   TM_ParametersFRM = class(TForm)
     Panel1: TPanel;
     Panel4: TPanel;
+    BitBtn2: TBitBtn;
     Panel2: TPanel;
     wwDBNavigator1: TwwDBNavigator;
     wwDBNavigator1Prior: TwwNavButton;
@@ -37,6 +38,7 @@ type
     DBEdit5: TDBEdit;
     str3lbl: TLabel;
     DBEdit6: TDBEdit;
+    Label1: TLabel;
     DBEdit7: TDBEdit;
     str4lbl: TLabel;
     Date_1: TLabel;
@@ -66,10 +68,6 @@ type
     FloatField1: TFloatField;
     DateTimeField1: TDateTimeField;
     StringField4: TStringField;
-    BitBtn2: TBitBtn;
-    Label1: TLabel;
-    DBEdit2: TDBEdit;
-    SystemParametersSQLSTR_4: TStringField;
     procedure FormActivate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure BitBtn2Click(Sender: TObject);

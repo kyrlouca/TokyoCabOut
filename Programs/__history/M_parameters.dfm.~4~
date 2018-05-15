@@ -311,7 +311,7 @@ object M_ParametersFRM: TM_ParametersFRM
       Font.Color = clWindowText
       Font.Height = -18
       Font.Name = 'arial'
-      Font.Style = []
+      Font.Style = [fsBold]
       NumGlyphs = 2
       ParentFont = False
       TabOrder = 4

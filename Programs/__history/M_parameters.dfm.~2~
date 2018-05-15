@@ -8,7 +8,7 @@ object M_ParametersFRM: TM_ParametersFRM
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -13
-  Font.Name = 'arial'
+  Font.Name = 'MS Sans Serif'
   Font.Style = []
   OldCreateOrder = False
   WindowState = wsMaximized
@@ -30,6 +30,7 @@ object M_ParametersFRM: TM_ParametersFRM
     Font.Style = [fsBold]
     ParentFont = False
     TabOrder = 0
+    ExplicitWidth = 120
   end
   object Panel4: TPanel
     Left = 0
@@ -38,6 +39,8 @@ object M_ParametersFRM: TM_ParametersFRM
     Height = 53
     Align = alBottom
     TabOrder = 1
+    ExplicitTop = -53
+    ExplicitWidth = 120
     object BitBtn2: TBitBtn
       Left = 10
       Top = 5
@@ -118,6 +121,7 @@ object M_ParametersFRM: TM_ParametersFRM
     Height = 48
     Align = alTop
     TabOrder = 2
+    ExplicitWidth = 120
     object wwDBNavigator1: TwwDBNavigator
       Left = 1
       Top = 9
@@ -261,8 +265,8 @@ object M_ParametersFRM: TM_ParametersFRM
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -18
-      Font.Name = 'arial'
-      Font.Style = []
+      Font.Name = 'MS Sans Serif'
+      Font.Style = [fsBold]
       NumGlyphs = 2
       ParentFont = False
       TabOrder = 1
@@ -277,8 +281,8 @@ object M_ParametersFRM: TM_ParametersFRM
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -18
-      Font.Name = 'arial'
-      Font.Style = []
+      Font.Name = 'MS Sans Serif'
+      Font.Style = [fsBold]
       NumGlyphs = 2
       ParentFont = False
       TabOrder = 2
@@ -286,15 +290,15 @@ object M_ParametersFRM: TM_ParametersFRM
     end
     object BitBtn1: TBitBtn
       Left = 615
-      Top = 8
+      Top = 7
       Width = 154
       Height = 35
       Caption = 'InvoiceTransfer'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -18
-      Font.Name = 'arial'
-      Font.Style = []
+      Font.Name = 'MS Sans Serif'
+      Font.Style = [fsBold]
       NumGlyphs = 2
       ParentFont = False
       TabOrder = 3
@@ -310,8 +314,8 @@ object M_ParametersFRM: TM_ParametersFRM
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -18
-      Font.Name = 'arial'
-      Font.Style = []
+      Font.Name = 'MS Sans Serif'
+      Font.Style = [fsBold]
       NumGlyphs = 2
       ParentFont = False
       TabOrder = 4
@@ -326,6 +330,8 @@ object M_ParametersFRM: TM_ParametersFRM
     Height = 396
     Align = alClient
     TabOrder = 3
+    ExplicitWidth = 120
+    ExplicitHeight = 652
     object GroupBox1: TGroupBox
       Left = 1
       Top = 42
@@ -334,54 +340,56 @@ object M_ParametersFRM: TM_ParametersFRM
       Align = alTop
       Caption = 'GroupBox1'
       TabOrder = 0
+      ExplicitLeft = 2
+      ExplicitTop = 48
       object idlbl: TLabel
         Left = 56
         Top = 54
-        Width = 67
+        Width = 66
         Height = 16
         Caption = 'KEY FIELD'
         FocusControl = KEyFld
       end
       object Str1lbl: TLabel
-        Left = 83
+        Left = 80
         Top = 131
-        Width = 39
+        Width = 42
         Height = 16
         Alignment = taRightJustify
         Caption = 'STR_1'
         FocusControl = Str1FLD
       end
       object str2lbl: TLabel
-        Left = 57
+        Left = 54
         Top = 81
-        Width = 65
+        Width = 68
         Height = 16
         Alignment = taRightJustify
         Caption = 'Description'
         FocusControl = DescriptionFLD
       end
       object str3lbl: TLabel
-        Left = 79
+        Left = 78
         Top = 194
-        Width = 43
+        Width = 44
         Height = 16
         Alignment = taRightJustify
         Caption = 'Float_1'
         FocusControl = DescriptionFLD
       end
       object str4lbl: TLabel
-        Left = 89
+        Left = 86
         Top = 225
-        Width = 33
+        Width = 36
         Height = 16
         Alignment = taRightJustify
         Caption = 'INT_1'
         FocusControl = DescriptionFLD
       end
       object Date_1: TLabel
-        Left = 81
+        Left = 79
         Top = 257
-        Width = 41
+        Width = 43
         Height = 16
         Alignment = taRightJustify
         Caption = 'Date_1'
@@ -390,15 +398,15 @@ object M_ParametersFRM: TM_ParametersFRM
       object Label2: TLabel
         Left = 36
         Top = 22
-        Width = 82
+        Width = 86
         Height = 16
         Caption = 'Serial Number'
         FocusControl = KEyFld
       end
       object Label1: TLabel
-        Left = 86
+        Left = 83
         Top = 158
-        Width = 39
+        Width = 42
         Height = 16
         Alignment = taRightJustify
         Caption = 'STR_4'
@@ -472,8 +480,8 @@ object M_ParametersFRM: TM_ParametersFRM
         TabOrder = 6
       end
       object Button1: TButton
-        Left = 584
-        Top = 208
+        Left = 712
+        Top = 160
         Width = 137
         Height = 25
         Caption = 'Insert Parameters'
@@ -499,6 +507,7 @@ object M_ParametersFRM: TM_ParametersFRM
       Align = alTop
       BevelOuter = bvNone
       TabOrder = 1
+      ExplicitWidth = 118
     end
     object Panel6: TPanel
       Left = 1
@@ -508,6 +517,8 @@ object M_ParametersFRM: TM_ParametersFRM
       Align = alClient
       BevelOuter = bvNone
       TabOrder = 2
+      ExplicitWidth = 118
+      ExplicitHeight = 322
       object ParamGRD: TCRDBGrid
         Left = 0
         Top = 0
@@ -523,7 +534,7 @@ object M_ParametersFRM: TM_ParametersFRM
         TitleFont.Charset = DEFAULT_CHARSET
         TitleFont.Color = clWindowText
         TitleFont.Height = -13
-        TitleFont.Name = 'arial'
+        TitleFont.Name = 'MS Sans Serif'
         TitleFont.Style = []
       end
     end
@@ -592,49 +603,40 @@ object M_ParametersFRM: TM_ParametersFRM
         Value = nil
       end>
     object SystemParametersSQLSERIAL_NUMBER: TIntegerField
-      DisplayWidth = 16
       FieldName = 'SERIAL_NUMBER'
     end
     object SystemParametersSQLKEY_FIELD: TStringField
-      DisplayWidth = 15
       FieldName = 'KEY_FIELD'
       Required = True
       FixedChar = True
       Size = 35
     end
     object SystemParametersSQLSYS_TYPE: TStringField
-      DisplayWidth = 10
       FieldName = 'SYS_TYPE'
       Required = True
       FixedChar = True
       Size = 3
     end
     object SystemParametersSQLINT_1: TIntegerField
-      DisplayWidth = 10
       FieldName = 'INT_1'
     end
     object SystemParametersSQLSTR_1: TStringField
-      DisplayWidth = 20
       FieldName = 'STR_1'
       FixedChar = True
       Size = 30
     end
     object SystemParametersSQLNUM_1: TFloatField
-      DisplayWidth = 10
       FieldName = 'NUM_1'
     end
     object SystemParametersSQLDATE_1: TDateTimeField
-      DisplayWidth = 10
       FieldName = 'DATE_1'
     end
     object SystemParametersSQLDESCRIPTION: TStringField
-      DisplayWidth = 60
       FieldName = 'DESCRIPTION'
       FixedChar = True
       Size = 60
     end
     object SystemParametersSQLSTR_4: TStringField
-      DisplayWidth = 80
       FieldName = 'STR_4'
       Size = 80
     end

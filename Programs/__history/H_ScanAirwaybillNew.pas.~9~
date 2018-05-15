@@ -266,7 +266,7 @@ var
 
 implementation
 
-uses MainForm, H_FlightAirwaybill, H_flightOut, X_createOneXML;
+uses MainForm, H_FlightAirwaybill, H_flightOut;
 
 {$R *.DFM}
 
@@ -716,8 +716,7 @@ begin
 
   SerialNumber:=FLightAirwaybillSQL.FieldByName('serial_number').AsInteger;
   Mawb:= FlightOutSQL.FieldbyName('Mawb').AsString;
-
-  X_CreateOneXmlFRM.CreateOneAirwabillXML(SerialNumber);
+  CreateOneXMLFileFRM.ProcessOneAir(SerialNumber);
 
 end;
 

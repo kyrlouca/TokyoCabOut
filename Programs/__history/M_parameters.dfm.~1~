@@ -1,14 +1,14 @@
 object M_ParametersFRM: TM_ParametersFRM
   Left = 304
   Top = 217
+  Width = 1030
+  Height = 863
   Caption = 'M_ParametersFRM'
-  ClientHeight = 562
-  ClientWidth = 833
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -13
-  Font.Name = 'arial'
+  Font.Name = 'MS Sans Serif'
   Font.Style = []
   OldCreateOrder = False
   WindowState = wsMaximized
@@ -16,10 +16,18 @@ object M_ParametersFRM: TM_ParametersFRM
   OnClose = FormClose
   PixelsPerInch = 120
   TextHeight = 16
+  object Label1: TLabel
+    Left = 127
+    Top = 346
+    Width = 42
+    Height = 16
+    Caption = 'STR_4'
+    FocusControl = DescriptionFLD
+  end
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 833
+    Width = 1012
     Height = 65
     Align = alTop
     Caption = 'System Parameters'
@@ -33,88 +41,45 @@ object M_ParametersFRM: TM_ParametersFRM
   end
   object Panel4: TPanel
     Left = 0
-    Top = 509
-    Width = 833
+    Top = 765
+    Width = 1012
     Height = 53
     Align = alBottom
     TabOrder = 1
     object BitBtn2: TBitBtn
-      Left = 10
-      Top = 5
-      Width = 97
-      Height = 44
+      Left = 9
+      Top = 9
+      Width = 88
+      Height = 40
       Caption = 'Close'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
-      Font.Height = -16
-      Font.Name = 'Arial'
-      Font.Style = []
-      Glyph.Data = {
-        F6060000424DF606000000000000360000002800000018000000180000000100
-        180000000000C006000000000000000000000000000000000000FFFFFFFFFFFF
-        FFFFFF0004450004450004450004450004450004450004450004450004450004
-        45000445000445000445000445000445000445000445000445FFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFF000A4D3461A53F70B44B7DC15789CE5F91D66396DB
-        6396DB6396DB6598DD6295DA6295DA5D90D55688CD4C7EC24374B83765A9000A
-        4DFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0011563B6DB14174B84B7EC256
-        89CE5E91D66396DB6396DB6396DB6598DD6295DA6295DA5D90D55689CE4D80C4
-        4477BB3E70B4001156FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0018613869
-        AE3366A72B5EA22B5EA22B5EA22B5EA22B5EA2497CCE6396DB3164A52B5EA22B
-        5EA22B5EA22B5EA22D60A43869AE001861FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFF001F6A3A6CB02C5FA32B5EA22B5EA22B5EA22B5EA22B5EA24779CA6093
-        D8295CA02B5EA22B5EA22B5EA22B5EA22E61A53A6CB0001F6AFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFF00226D3B6DB128579B2B5EA22B5EA22B5EA22B5EA2
-        2B5EA24274C45B8ED42554982B5EA22B5EA22B5EA22B5EA22E61A53B6DB10022
-        6DFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0024703D6FB42451952B5EA22B
-        5EA22B5EA22B5EA22B5EA23F70BE578ACF214E922B5EA22B5EA22B5EA22B5EA2
-        2E61A53D6FB4002470FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0026723E70
-        B51E498E2A5CA02B5EA22B5EA22B5EA22B5EA23B6BB95285CB1D478C2A5CA02B
-        5EA22B5EA22B5EA22D60A43E70B5002672FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFF0028754072B7183F842451962B5EA22B5EA22B5EA22B5EA23766B44E81
-        C7173D812451962B5EA22B5EA22B5EA22D60A44072B7002875FFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFF002A784274B9133479193F84224F9328599D2B5EA2
-        2B5EA23463AF4A7DC2113176193F84224F9328599D2B5EA22E61A54274B9002A
-        78FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF002C7A4376BB0C296F0F307415
-        3A7E1A43871D488C214F933261AD487BC00B276B0F3074153A7E1A43871D488C
-        2451964376BB002C7AFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF002E7D4578
-        BD477ABF477ABF477ABF477ABF477ABF477ABF477ABF477ABF477ABF477ABF47
-        7ABF477ABF477ABF142669142669002E7DFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFF002F7F477ABF3260AC3260AC3160AC325FAB325FAC3160AB3463AE477A
-        BF3260AC3260AC3160AB325FAC3160AB3166B45287D1002F7FFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFF003182497CC13265A6285B9F285B9F285B9F285B9F
-        285B9F3462AF4A7DC22E61A2285B9F285B9F285B9F285B9F70A3EB84B7FC0031
-        82FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0033844B7EC3295CA0275A9E27
-        5A9E275A9E275A9E275A9E3A6AB85184CA26589C275A9E275A9E275A9E275A9E
-        2B5EA24B7EC3003384FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0035864D80
-        C525549826599D26599D26599D26599D26599D4172C2598CD2214F9326599D26
-        599D26599D26599D2B5EA24D80C5003586FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFF0036894E81C7204D9125589C25589C25589C25589C25589C497BCE6295
-        DB1D488C25589C25589C25589C25589C2A5DA14E81C7003689FFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFF00388B5083C91C458A23559924579B24579B24579B
-        24579B5286DC6C9FE518418423559924579B24579B24579B295CA05083C90038
-        8BFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00398C5084CA163C7F1D4A8D23
-        569A23569A23569A23569A5B90E675A8ED1337791D4A8D23569A23569A23569A
-        295CA05084CA00398CFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF003B8E5286
-        CC0F2F7213397A1A478A1F5094225599225599629AF17DB0F50C2A6B13397A1A
-        478A1F5094225599285B9F5286CC003B8EFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFF003C905387CD0A266A0C2869123576153D7F1942851C488B67A0F882B5
-        FA0722620C2A6B123576153D7F174083214E925387CD003C90FFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFF003D91598DD25F92D7699CE174A7EC7DB0F584B7FC
-        84B7FC84B7FC82B5FA82B5FA82B5FA7CAFF473A6EB6A9DE26194D95B8FD4003D
-        91FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF003E935085CC5D91D7689CE173
-        A6EC7EB1F684B7FC84B7FC84B7FC82B5FA82B5FA82B5FA7BAEF373A6EC699DE2
-        6093D95388CF003E93FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF003F94003F
-        94003F94003F94003F94003F94003F94003F94003F94003F94003F94003F9400
-        3F94003F94003F94003F94003F94003F94FFFFFFFFFFFFFFFFFF}
+      Font.Height = -18
+      Font.Name = 'MS Sans Serif'
+      Font.Style = [fsBold]
       ParentFont = False
       TabOrder = 0
       OnClick = BitBtn2Click
+      Glyph.Data = {
+        76010000424D7601000000000000760000002800000020000000100000000100
+        04000000000000010000120B0000120B00001000000000000000000000000000
+        800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00330000000000
+        03333377777777777F333301111111110333337F333333337F33330111111111
+        0333337F333333337F333301111111110333337F333333337F33330111111111
+        0333337F333333337F333301111111110333337F333333337F33330111111111
+        0333337F3333333F7F333301111111B10333337F333333737F33330111111111
+        0333337F333333337F333301111111110333337F33FFFFF37F3333011EEEEE11
+        0333337F377777F37F3333011EEEEE110333337F37FFF7F37F3333011EEEEE11
+        0333337F377777337F333301111111110333337F333333337F33330111111111
+        0333337FFFFFFFFF7F3333000000000003333377777777777333}
+      NumGlyphs = 2
     end
   end
   object Panel2: TPanel
     Left = 0
     Top = 65
-    Width = 833
+    Width = 1012
     Height = 48
     Align = alTop
     TabOrder = 2
@@ -261,12 +226,12 @@ object M_ParametersFRM: TM_ParametersFRM
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -18
-      Font.Name = 'arial'
-      Font.Style = []
-      NumGlyphs = 2
+      Font.Name = 'MS Sans Serif'
+      Font.Style = [fsBold]
       ParentFont = False
       TabOrder = 1
       OnClick = SystemSelectBTNClick
+      NumGlyphs = 2
     end
     object XMLBtn: TBitBtn
       Left = 422
@@ -277,29 +242,29 @@ object M_ParametersFRM: TM_ParametersFRM
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -18
-      Font.Name = 'arial'
-      Font.Style = []
-      NumGlyphs = 2
+      Font.Name = 'MS Sans Serif'
+      Font.Style = [fsBold]
       ParentFont = False
       TabOrder = 2
       OnClick = XMLBtnClick
+      NumGlyphs = 2
     end
     object BitBtn1: TBitBtn
       Left = 615
-      Top = 8
+      Top = 7
       Width = 154
       Height = 35
       Caption = 'InvoiceTransfer'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -18
-      Font.Name = 'arial'
-      Font.Style = []
-      NumGlyphs = 2
+      Font.Name = 'MS Sans Serif'
+      Font.Style = [fsBold]
       ParentFont = False
       TabOrder = 3
       Visible = False
       OnClick = BitBtn1Click
+      NumGlyphs = 2
     end
     object EmailBTN: TBitBtn
       Left = 791
@@ -310,26 +275,26 @@ object M_ParametersFRM: TM_ParametersFRM
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -18
-      Font.Name = 'arial'
-      Font.Style = []
-      NumGlyphs = 2
+      Font.Name = 'MS Sans Serif'
+      Font.Style = [fsBold]
       ParentFont = False
       TabOrder = 4
       Visible = False
       OnClick = EmailBTNClick
+      NumGlyphs = 2
     end
   end
   object Panel3: TPanel
     Left = 0
     Top = 113
-    Width = 833
-    Height = 396
+    Width = 1012
+    Height = 652
     Align = alClient
     TabOrder = 3
     object GroupBox1: TGroupBox
       Left = 1
       Top = 42
-      Width = 831
+      Width = 1010
       Height = 287
       Align = alTop
       Caption = 'GroupBox1'
@@ -337,51 +302,51 @@ object M_ParametersFRM: TM_ParametersFRM
       object idlbl: TLabel
         Left = 56
         Top = 54
-        Width = 67
+        Width = 66
         Height = 16
         Caption = 'KEY FIELD'
         FocusControl = KEyFld
       end
       object Str1lbl: TLabel
-        Left = 83
+        Left = 80
         Top = 131
-        Width = 39
+        Width = 42
         Height = 16
         Alignment = taRightJustify
         Caption = 'STR_1'
         FocusControl = Str1FLD
       end
       object str2lbl: TLabel
-        Left = 57
+        Left = 54
         Top = 81
-        Width = 65
+        Width = 68
         Height = 16
         Alignment = taRightJustify
         Caption = 'Description'
         FocusControl = DescriptionFLD
       end
       object str3lbl: TLabel
-        Left = 79
-        Top = 194
-        Width = 43
+        Left = 78
+        Top = 159
+        Width = 44
         Height = 16
         Alignment = taRightJustify
         Caption = 'Float_1'
         FocusControl = DescriptionFLD
       end
       object str4lbl: TLabel
-        Left = 89
-        Top = 225
-        Width = 33
+        Left = 86
+        Top = 184
+        Width = 36
         Height = 16
         Alignment = taRightJustify
         Caption = 'INT_1'
         FocusControl = DescriptionFLD
       end
       object Date_1: TLabel
-        Left = 81
-        Top = 257
-        Width = 41
+        Left = 79
+        Top = 216
+        Width = 43
         Height = 16
         Alignment = taRightJustify
         Caption = 'Date_1'
@@ -390,24 +355,15 @@ object M_ParametersFRM: TM_ParametersFRM
       object Label2: TLabel
         Left = 36
         Top = 22
-        Width = 82
+        Width = 86
         Height = 16
         Caption = 'Serial Number'
         FocusControl = KEyFld
       end
-      object Label1: TLabel
-        Left = 86
-        Top = 158
-        Width = 39
-        Height = 16
-        Alignment = taRightJustify
-        Caption = 'STR_4'
-        FocusControl = Str1FLD
-      end
       object KEyFld: TDBEdit
         Left = 131
         Top = 49
-        Width = 114
+        Width = 78
         Height = 24
         CharCase = ecUpperCase
         DataField = 'KEY_FIELD'
@@ -434,8 +390,8 @@ object M_ParametersFRM: TM_ParametersFRM
       end
       object DBEdit5: TDBEdit
         Left = 131
-        Top = 188
-        Width = 114
+        Top = 154
+        Width = 417
         Height = 24
         DataField = 'NUM_1'
         DataSource = SystemParametersCDS
@@ -443,8 +399,8 @@ object M_ParametersFRM: TM_ParametersFRM
       end
       object DBEdit6: TDBEdit
         Left = 131
-        Top = 218
-        Width = 114
+        Top = 185
+        Width = 81
         Height = 24
         DataField = 'INT_1'
         DataSource = SystemParametersCDS
@@ -452,8 +408,8 @@ object M_ParametersFRM: TM_ParametersFRM
       end
       object DBEdit7: TDBEdit
         Left = 131
-        Top = 248
-        Width = 114
+        Top = 215
+        Width = 81
         Height = 24
         DataField = 'DATE_1'
         DataSource = SystemParametersCDS
@@ -462,7 +418,7 @@ object M_ParametersFRM: TM_ParametersFRM
       object DBEdit1: TDBEdit
         Left = 131
         Top = 17
-        Width = 114
+        Width = 81
         Height = 24
         CharCase = ecUpperCase
         Color = clBtnFace
@@ -472,8 +428,8 @@ object M_ParametersFRM: TM_ParametersFRM
         TabOrder = 6
       end
       object Button1: TButton
-        Left = 584
-        Top = 208
+        Left = 712
+        Top = 160
         Width = 137
         Height = 25
         Caption = 'Insert Parameters'
@@ -481,20 +437,11 @@ object M_ParametersFRM: TM_ParametersFRM
         Visible = False
         OnClick = Button1Click
       end
-      object DBEdit2: TDBEdit
-        Left = 131
-        Top = 155
-        Width = 417
-        Height = 24
-        DataField = 'STR_4'
-        DataSource = SystemParametersCDS
-        TabOrder = 8
-      end
     end
     object Panel5: TPanel
       Left = 1
       Top = 1
-      Width = 831
+      Width = 1010
       Height = 41
       Align = alTop
       BevelOuter = bvNone
@@ -503,16 +450,16 @@ object M_ParametersFRM: TM_ParametersFRM
     object Panel6: TPanel
       Left = 1
       Top = 329
-      Width = 831
-      Height = 66
+      Width = 1010
+      Height = 322
       Align = alClient
       BevelOuter = bvNone
       TabOrder = 2
       object ParamGRD: TCRDBGrid
         Left = 0
         Top = 0
-        Width = 831
-        Height = 66
+        Width = 1010
+        Height = 322
         OptionsEx = [dgeEnableSort, dgeLocalFilter, dgeRecordCount]
         Align = alClient
         BorderStyle = bsNone
@@ -523,7 +470,7 @@ object M_ParametersFRM: TM_ParametersFRM
         TitleFont.Charset = DEFAULT_CHARSET
         TitleFont.Color = clWindowText
         TitleFont.Height = -13
-        TitleFont.Name = 'arial'
+        TitleFont.Name = 'MS Sans Serif'
         TitleFont.Style = []
       end
     end
@@ -570,11 +517,6 @@ object M_ParametersFRM: TM_ParametersFRM
       'WHERE'
       'SERIAL_NUMBER = :Old_SERIAL_NUMBER'
       'FOR UPDATE WITH LOCK')
-    SQLRecCount.Strings = (
-      'SELECT COUNT(*) FROM ('
-      'SELECT 1 AS C  FROM SYSTEM_PARAMETERS'
-      ''
-      ') q')
     Connection = MainFormFRM.CabOutData
     UpdateTransaction = UsedForUpdateTrans
     SQL.Strings = (
@@ -589,54 +531,40 @@ object M_ParametersFRM: TM_ParametersFRM
       item
         DataType = ftUnknown
         Name = 'Type'
-        Value = nil
       end>
     object SystemParametersSQLSERIAL_NUMBER: TIntegerField
-      DisplayWidth = 16
       FieldName = 'SERIAL_NUMBER'
     end
     object SystemParametersSQLKEY_FIELD: TStringField
-      DisplayWidth = 15
       FieldName = 'KEY_FIELD'
       Required = True
       FixedChar = True
       Size = 35
     end
     object SystemParametersSQLSYS_TYPE: TStringField
-      DisplayWidth = 10
       FieldName = 'SYS_TYPE'
       Required = True
       FixedChar = True
       Size = 3
     end
     object SystemParametersSQLINT_1: TIntegerField
-      DisplayWidth = 10
       FieldName = 'INT_1'
     end
     object SystemParametersSQLSTR_1: TStringField
-      DisplayWidth = 20
       FieldName = 'STR_1'
       FixedChar = True
       Size = 30
     end
     object SystemParametersSQLNUM_1: TFloatField
-      DisplayWidth = 10
       FieldName = 'NUM_1'
     end
     object SystemParametersSQLDATE_1: TDateTimeField
-      DisplayWidth = 10
       FieldName = 'DATE_1'
     end
     object SystemParametersSQLDESCRIPTION: TStringField
-      DisplayWidth = 60
       FieldName = 'DESCRIPTION'
       FixedChar = True
       Size = 60
-    end
-    object SystemParametersSQLSTR_4: TStringField
-      DisplayWidth = 80
-      FieldName = 'STR_4'
-      Size = 80
     end
   end
   object UsedForUpdateTrans: TIBCTransaction
@@ -930,7 +858,6 @@ object M_ParametersFRM: TM_ParametersFRM
       item
         DataType = ftUnknown
         Name = 'Type'
-        Value = nil
       end>
     object IntegerField1: TIntegerField
       FieldName = 'SERIAL_NUMBER'

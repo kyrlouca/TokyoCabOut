@@ -11,7 +11,6 @@ object X_CreateOneXmlFRM: TX_CreateOneXmlFRM
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
-  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   object Button1: TButton
@@ -35,6 +34,7 @@ object X_CreateOneXmlFRM: TX_CreateOneXmlFRM
     NumGlyphs = 0
     ShadeStyle = wwbsNormal
     TabOrder = 1
+    TabStop = True
     TextOptions.Alignment = taCenter
     TextOptions.VAlignment = vaVCenter
     OnClick = wwButton1Click
