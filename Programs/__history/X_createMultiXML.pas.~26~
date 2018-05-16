@@ -99,7 +99,10 @@ type
     Function  AddAtrribute(aNode:IXMLNode; AttributeName:String;AttributeText:String):IXMLNode;
     function CreateXmlNodeNew(XMLDoc:IXMLDocument;ElementFather:IXMLNode;ElementName:String;ElementValue:String; ElementType: TNodeType =ntElement):IXMLNode;
     function TBLCreateXMLNode(XMLDoc:IXMLDocument;ElementFather:IXMLNode;ElementName:String;ElementValue:String; Dataset: TDataset; FieldName:String; ElementType: TNodeType =ntElement):IXMLNode;
-    procedure   CreateLowValueAirwaybillXML(Const SerialNumber:Integer);
+
+
+   function CreateNodeHeader(const dt :TDataset;FatherNode:IXMLNode):IXMLNode;
+
 
   public
     { Public declarations }
@@ -198,7 +201,7 @@ begin
           If ValueType='H' then begin
                 CreateHighValueAirwaybillXML(SerialNumber);
           end else begin
-                CreateLowValueAirwaybillXML(SerialNumber);
+//                CreateLowValueAirwaybillXML(SerialNumber);
 //                CreateHighValueAirwaybillXML(SerialNumber);
 
           end;
@@ -229,52 +232,6 @@ begin
   CreateOneAirwabillXML(229);
   exit;
 
-  OneFlightAirwayBillSQL.Close;
-  OneFlightAirwayBillSQL.ParamByName('serial').Value:=229;
-  OneFlightAirwayBillSQL.Open;
-
-
-
-  TheDoc:=XMLDocNew;
-  TheDoc.Active := True;
-
-  TheDoc.Version := '1.0';
-  TheDoc.Encoding := 'UTF-8';
-  RootNode := TheDoc.AddChild('manifest_decon');
-//  iNode.SetAttributeNS('xmlns:test', '', 'http://www.foo.com' );
-//  iNode.SetAttributeNS('xmlns:xsi', '', 'http://www.w3.org/2001/XMLSchema');
-  RootNode.SetAttributeNS('xmlns', '', 'MANIFEST.Decon' );
-
-  ManifestNode:=RootNode.AddChild('manisd_decon',-1);
-
-  aNode:=ManifestNOde.AddChild('reftdid',-1);
-  aNode.Text :='abc';
-
-  aNode:= CreateXmlNodeNew(TheDoc,ManifestNode,'TestNode','TextCOntent',ntText);
-
-  groupNode:= CreateXmlNodeNew(TheDoc,ManifestNode,'GroupNode','',ntElement);
-  CreateXmlNodeNew(TheDoc,GroupNode,'ChildNode','child1',ntText);
-  CreateXmlNodeNew(TheDoc,GroupNode,'ChildNode','childSecond',ntText);
-  TBLCreateXMLNode(TheDoc,GroupNode,'TableVal','ab',OneFlightAirwayBillSQL,'hawb_id',ntText);
-
-//  strXML := StringReplace(TheDoc.XML.Text, ' xmlns=""', '', [rfReplaceAll]);
-//  TheDoc := LoadXMLData(strXML);
-
-
-
-  DefaultDir:= GN_GetTheSystemParameter(cn, 'S01').P_String4;
-   If DefaultDir='' then begin
-      MessageDlg('Menu ->System->Params-> System Parameters. Then Add record with Code=S01 string_4 =Path', mtWarning, [mbOK], 0);
-  end;
-
-  Temp:=OneFlightAirwaybillSQL.FieldByName('hawb_id').AsString;
-//  FileName:= 'C:\Data\DelphiProjects\TokyoCabOut\XML\OutputXML\test2.xml';
-  FileName:= DefaultDir+'\'+Trim(temp)+'.xml';
-  TheDoc.SaveToFile(FileName);
-  TheDoc.Active:=false;
-
-
-
 end;
 
 procedure TX_CreateMultiXmlFRM.CreateGensegRegData(FatherNode:IXMLNode);
@@ -293,273 +250,6 @@ begin
   aNode := AddNodeAtr(FatherNode , 'BOX1EXT1' ,'IM');
   aNode := AddNodeAtr(FatherNode , 'BOX1EXT2' ,'A');
 end;
-
-
-procedure TX_CreateMultiXmlFRM.CreateLowValueAirwaybillXML(Const SerialNumber:Integer);
-Var
-
-   xDoc: TXMLDocument;
-   LVendor: TDOMVendor;
-
-   FDoc: IXMLDocument;
-   TheRoot:IXmlNode;
-   TempNode:IxmlNode;
-   TdNode,lpNode:IXmlNode;
-   X1Node:IxmlNode;
-   X2Node:IxmlNode;
-   DtdSpec:String;
-   Airwaybill:String;
-//   DeconDirectory:String;
-   TheFileName:String;
-   FlightOutSerial:Integer;
-   MawbDateArrived:Tdate;
-   Mawb:String;
-
-   TheCountrySQL:TIBCQuery;
-   ItemDataset:TIBCQuery;
-
-
-   Temp:String;
-   DString:String;
-   FlightName:String;
-   DateDepart:TDateTime;
-
-   WeightITem:double;
-   Dataset:TDataset;
-   strXML:string;
-   FileName:string;
-   DefaultDir:string;
-Begin
-// *********************************************************************************
-// LOW
-// LOW
-// We need to create the The Dom Document and the Root element for the XMLDocument
-// Then create the Dom Document
-// Finally send the Dom Document to the parser where it can be saved in file
-// *********************************************************************************
-
-    DefaultDir:= Trim(GN_GetTheSystemParameter(cn, 'S01').P_String4);
-    If DefaultDir='' then begin
-      MessageDlg('Menu ->System->Params-> System Parameters. Then Add record with Code=S01 string_4 = filePath', mtWarning, [mbOK], 0);
-      exit;
-    end;
-
-   Dataset:=OneFlightAirwaybillSQL;
-   OneFlightAirwaybillSQL.close;
-   If not OneFlightAirwaybillSQL.Prepared then OneFlightAirwaybillSQL.Prepare;
-   OneFlightAirwaybillSQL.ParamByName('Serial').Value:=SerialNumber;
-
-   OneFlightAirwaybillSQL.Open;
-   If OneFlightAirwaybillSQL.IsEmpty Then begin
-         raise Exception.Create('Cannot find airwaybill');
-   end else if OneFlightAirwaybillSQL.RecordCount>1 then begin
-         raise Exception.Create('More than one d');
-   end else begin
-      OneFlightAirwaybillSQL.First;
-        FlightOUtSErial:=OneFlightAirwaybillSQL.FieldByName('fk_flight_out_Serial').AsInteger;
-        //        XMLDocumentMasterSerial:=FlightOUtCDS.FieldByName('Serial_number').AsString;
-   end;
-
-
-   with FindFlightOutSQL do begin
-        close;
-        If not Prepared then Prepare;
-        ParamByName('Serial_Number').Value:=FlightOutSerial;
-
-        Open;
-        Mawb:=FieldByName('MAwb').ASString;
-        FlightName:=FieldByName('FLIGHT_NAME').ASString;
-        DateDepart:=FieldByName('date_depart').ASDateTime;
-   end;
-
-
-   //////////////////////////////////////////
-
-//    XDoc := TXMLDocument.Create(nil);
-//    LVendor := DOMVendors.Find('MSXML');
-//    XDoc.DOMVendor := LVendor;
-//    Xdoc.Options:=[doNodeAutoCreate, doAttrNull];
-//
-//    FDoc:=XDoc;
-   //////////////////////////////////////////
-
-
-    FDoc:=XMLDocNew;
-    FDoc.Active:=false;
-    Fdoc.XML.Text:='';
-
-    FDoc.Active := True;
-    FDoc.Version := '1.0';
-    FDoc.Encoding := 'UTF-8';
-    TheRoot := FDoc.AddChild('CC615A');
-//  iNode.SetAttributeNS('xmlns:test', '', 'http://www.foo.com' );
-//  iNode.SetAttributeNS('xmlns:xsi', '', 'http://www.w3.org/2001/XMLSchema');
-    TheRoot.SetAttributeNS('xmlns', '', 'http://www.eurodyn.com' );
-
-     CreateXMLNodeNew(FDoc,TheRoot,'SyntaxIdentifier','UNOC',ntText);
-
-     CreateXMLNodeNew(FDoc,TheRoot,'SyntaxVersionNumber','3',ntText);
-     CreateXMLNodeNew(FDoc,TheRoot,'MessageSender','CY10016129G',ntText);
-     CreateXMLNodeNew(FDoc,TheRoot,'SenderIdCodeQualifier','CY',ntText);
-     CreateXMLNodeNew(FDoc,TheRoot,'MessageRecipient','NECA.CY',ntText);
-     CreateXMLNodeNew(FDoc,TheRoot,'RecipientIdentifCodeQualifier','CY',ntText);
-
-
-     DString:=FormatDateTime('YYMMDD',now);
-     CreateXMLNodeNew(FDoc,TheRoot,'DateOfPreparation',DString,ntText);
-
-     DString:=FormatDateTime('HHMM',now);
-     CreateXMLNodeNew(FDoc,TheRoot,'TimeOfPreparation',DString,ntText);
-
-     CreateXMLNodeNew(FDoc,TheRoot,'InterchangeControlReference','CY1acbae4fdb51',ntText);
-     CreateXMLNodeNew(FDoc,TheRoot,'MessageIdentification','CY1acbae4fdb51',ntText);
-     CreateXMLNodeNew(FDoc,TheRoot,'MessageType','CC615A',ntText);
-
-
-
-
-     //********************************************
-     //Header615
-     x1node:=CreateXMLNodeNew(FDoc,TheRoot,'Msg615Header','',ntElement);
-
-     Temp:='DHL'+Airwaybill;
-     CreateXMLNodeNew(FDoc,x1node,'ReferenceNumber',Temp,ntText);
-
-     TblCreateXMLNode(FDoc,x1node,'TotalNumberOfItems','',Dataset,'ITEMS_COUNT',ntText);
-     TblCreateXMLNode(FDoc,x1node,'TotalNumberOfPackages','',Dataset,'PIECES',ntText);
-     TblCreateXMLNode(FDoc,x1node,'TotalGrossMass','',Dataset,'WEIGHT',ntText);
-
-
-     CreateXMLNodeNew(FDoc,x1node,'ArrivalAgreedLocationCode','LCA',ntText);
-
-     DString:=FlightName+'-'+FormatDateTime('DD/MM/YYYY',DateDepart);
-     CreateXMLNodeNew(FDoc,x1node,'ArrivalAgreedLocOfGoods',DString,ntText); //here
-     CreateXMLNodeNew(FDoc,x1node,'ArrivalAgreedLocOfGoodsLNG','EN',ntText);
-
-     DString:=FormatDateTime('YYYY-MM-DD"T00:00:00+03:00"',now);
-     CreateXMLNodeNew(FDoc,x1node,'DeclarationDate',DString,ntText);
-
-     CreateXMLNodeNew(FDoc,x1node,'DeclarationPlace','LARNACA',ntText);
-     CreateXMLNodeNew(FDoc,x1node,'DeclarationPlaceLNG','EN',ntText);
-     CreateXMLNodeNew(FDoc,x1node,'SpecificCircumstanceIndicator','A',ntText);
-
-     Temp:=OneFlightAirwaybillSQL.FieldByName('Payment_method').AsString;
-     If temp='A' then
-        DString:='Y'
-     else if temp='C' then
-        Dstring:='D'
-     else
-        Dstring:='D';
-
-     CreateXMLNodeNew(FDoc,x1node,'TranspChargesMethodOfPayment',Dstring,ntText);
-     TblCreateXMLNode(FDoc,x1node,'CommercialReferenceNumber','',Dataset,'HAWB_ID',ntText);
-
-
-
-
-
-
-//
-//********************************************
-     x1node:=CreateXMLNodeNew(FDoc,TheRoot,'Msg615Consignor','',ntElement);
-
-     TBLCreateXMLNode(FDoc,x1node,'TraderName','',Dataset,'SENDER_NAME',ntText);
-     dString:=Trim(Dataset.fieldbyName('SENDER_ADDRESS_1').AsString)+','+Trim(Dataset.fieldbyName('SENDER_ADDRESS_2').AsString)+','+Trim(Dataset.fieldbyName('SENDER_ADDRESS_3').AsString);
-     dString:=Copy(dString,1,34);
-     CreateXMLNodeNew(FDoc,x1node,'StreetAndNumber',dString,ntText);
-     TblCreateXMLNode(FDoc,x1node,'PostalCode','',Dataset,'SENDER_POST_CODE',ntText);
-     TblCreateXMLNode(FDoc,x1node,'City','',Dataset,'SENDER_CITY',ntText);
-     TblCreateXMLNode(FDoc,x1node,'CountryCode','',Dataset,'SENDER_COUNTRY_CODE',ntText);
-     CreateXMLNodeNew(FDoc,x1node,'NADLNG','EN',ntText);
-
-//********************************************
-     x1node:=CreateXMLNodeNew(FDoc,TheRoot,'Msg615Consignee','',ntElement);
-     TblCreateXMLNode(FDoc,x1node,'TraderName','',Dataset,'CONSIGNEE_NAME',ntText);
-     dString:=Trim(Dataset.fieldbyName('CONSIGNEE_ADDRESS_1').AsString)+','+Trim(Dataset.fieldbyName('CONSIGNEE_ADDRESS_2').AsString)+','+Trim(Dataset.fieldbyName('CONSIGNEE_ADDRESS_3').AsString);
-     dString:=Copy(dString,1,34);
-     CreateXMLNodeNew(FDoc,x1node,'StreetAndNumber',dString,ntText);
-     //TblCreateXMLNode(FDoc,x1node,'StreetAndNumber','',Dataset,'CONSIGNEE_ADDRESS',ntText);
-
-     TblCreateXMLNode(FDoc,x1node,'PostalCode','',Dataset,'CONSIGNEE_POST_CODE',ntText);
-     TblCreateXMLNode(FDoc,x1node,'City','',Dataset,'CONSIGNEE_CITY',ntText);
-     TblCreateXMLNode(FDoc,x1node,'CountryCode','',Dataset,'CONSIGNEE_COUNTRY_cODE',ntText);
-     CreateXMLNodeNew(FDoc,x1node,'NADLNG','EN',ntText);
-
-
-     //****************************************
-     x1node:=CreateXMLNodeNew(FDoc,TheRoot,'Msg615ExitCustomsOffice','',ntElement);
-     CreateXMLNodeNew(FDoc,x1node,'ReferenceNumber','CY000440',ntText);
-
-     //****************************************
-     //** For Each Item **************************************
-     ItemDataset:=FA_ItemSQL;
-     With ItemDataset do begin
-        close;
-        ParamByName('AirSerial').Value:=SerialNumber;
-        If not prepared then prepare;
-        Open;
-        first;
-        while not eof do begin
-                x1node:=CreateXMLNodeNew(FDoc,TheRoot,'Msg615GoodsItem','',ntElement);
-
-                TBLCreateXMLNode(FDoc,x1node,'ItemNumber','',ItemDataset,'SEQUENCE',ntText);
-                TBLCreateXMLNode(FDoc,x1node,'GoodsDescription','',ItemDataset,'DESCRIPTION',ntText);
-                CreateXMLNodeNew(FDoc,x1node,'GoodsDescriptionLNG','EN',ntText);
-                TBLCreateXMLNode(FDoc,x1node,'GrossMass','',ItemDataset,'WEIGHT',ntText);
-
-                x2node:=CreateXMLNodeNew(FDoc,x1node,'Msg615Packages','',ntText);
-                TBLCreateXMLNode(FDoc,x2node,'MarksNumbersOfPackages','',ItemDataset,'TARIFF_CODE',ntText);
-                CreateXMLNodeNew(FDoc,x2node,'MarksNumbersOfPackagesLNG','EN',ntText);
-                CreateXMLNodeNew(FDoc,x2node,'KindOfPackages','PC',ntText);
-                TBLCreateXMLNode(FDoc,x2node,'NumberOfPackages','',Dataset,'PIECES',ntText);
-
-
-                next;
-        end;
-     end;
-     //****************************************
-
-
-     {
-     x2node:=CreateXMLNodeNew(FDoc,x1node,'Msg615Packages','',ntText);
-     CreateXMLNodeNew(FDoc,x2node,'MarksNumbersOfPackages',AIrwaybill,ntText);
-     }
-
-
-     with FlightAirCountrySQL do begin
-        If not active then open;
-        while (not EOF) do begin
-                Temp:= Fieldbyname('COUNTRY_CODE').AsString;
-                x1node:=CreateXMLNodeNew(FDoc,TheRoot,'Msg615Itinerary','',ntElement);
-                CreateXMLNodeNew(FDoc,x1node,'CountryOfRoutingCode',temp,ntText);
-                next;
-        end;
-     end;
-
-
-     x1node:=CreateXMLNodeNew(FDoc,TheRoot,'Msg615LodgementCustomsOffice','CY000440',ntElement);
-     CreateXMLNodeNew(FDoc,x1node,'ReferenceNumber','CY000440',ntText);
-
-
-     x1node:=CreateXMLNodeNew(FDoc,TheRoot,'Msg615LodgingSumDeclarationPer','',ntElement);
-     CreateXMLNodeNew(FDoc,x1node,'TraderName','DHL (CYPRUS) LIMITED',ntText);
-     CreateXMLNodeNew(FDoc,x1node,'StreetAndNumber','AKROPOLEOS 13',ntText);
-     CreateXMLNodeNew(FDoc,x1node,'PostalCode','2006',ntText);
-     CreateXMLNodeNew(FDoc,x1node,'City','STROVOLOS',ntText);
-     CreateXMLNodeNew(FDoc,x1node,'CountryCode','CY',ntText);
-     CreateXMLNodeNew(FDoc,x1node,'NADLNG','EN',ntText);
-     CreateXMLNodeNew(FDoc,x1node,'TIN','CY10016129G',ntText);
-
-
-
-    strXML := StringReplace(FDoc.XML.Text, ' xmlns=""', '', [rfReplaceAll]);
-    FDoc := LoadXMLData(strXML);
-  //  FileName:= 'C:\Data\DelphiProjects\TokyoCabOut\XML\OutputXML\test2.xml';
-  FileName:= DefaultDir+'\'+ Trim(OneFlightAirwaybillSQL.FieldByName('hawb_id').AsString)+'.xml';
-  FDoc.SaveToFile(FileName);
-  OneFlightAirwaybillSQL.close;
-
-End;
 
 
 
@@ -966,6 +656,7 @@ var
   FDoc:IXMLDocument;
   TheRoot:IXMLNode;
   strXMl:String;
+  FileName:String;
 
   temp:String;
   FQr: TksQuery;
@@ -1003,8 +694,8 @@ Begin
 
     strXML := StringReplace(FDoc.XML.Text, ' xmlns=""', '', [rfReplaceAll]);
     FDoc := LoadXMLData(strXML);
-  //  FileName:= 'C:\Data\DelphiProjects\TokyoCabOut\XML\OutputXML\test2.xml';
-     FileName:= DefaultDir+'\'+ Trim(OneFlightAirwaybillSQL.FieldByName('hawb_id').AsString)+'.xml';
+    FileName:= 'C:\Data\DelphiProjects\TokyoCabOut\XML\OutputXML\test22.xml';
+//     FileName:= DefaultDir+'\'+ Trim(OneFlightAirwaybillSQL.FieldByName('hawb_id').AsString)+'.xml';
     FDoc.SaveToFile(FileName);
     OneFlightAirwaybillSQL.close;
 
@@ -1022,6 +713,21 @@ Begin
 
 end;
 
+function TX_CreateMultiXmlFRM.CreateNodeHeader(const dt :TDataset;FatherNode:IXMLNode):IXMLNode;
+var
+  aNode:IXMLNode;
+  val:String;
+  addr:string;
+begin
 
+  val:=dt.FieldByName('XML_HOUSE_ID').AsString;
+  addNodeAtr(FatherNode,'REFNUMBER','VALUE',val);
+
+  aNode := AddNodeAtr(FatherNode , 'BOXAEXT1','CY');
+  aNode := AddNodeAtr(FatherNode , 'BOXAEXT2','0440');
+
+  aNode := AddNodeAtr(FatherNode , 'BOX1EXT1' ,'IM');
+  aNode := AddNodeAtr(FatherNode , 'BOX1EXT2' ,'A');
+end;
 
 end.
