@@ -284,8 +284,9 @@ end;
 procedure TX_readFileFRM.RzBitBtn2Click(Sender: TObject);
 var
   FileName:String;
-  FileNameXyz:String;
-  MoveFolder:String;
+  FileNameOnly:String;
+  FromFolder:String;
+  ToFolder:String;
   MoveFile:String;
   temp:string;
   strings:TstringList;
@@ -299,46 +300,12 @@ begin
       exit;
   end;
 
-  temp:=UpperCase(Tpath.GetExtension(filename));
-  If UpperCase(temp)='.XYZ' then begin
-      showmessage('cannot read file with EXTENSION XYZ');
-      exit;
-  end;
-
-   MoveFOlder := GN_GetTheSystemParameter(cn, 'F_1').P_String5;
-   If not System.SysUtils.DirectoryExists(MoveFolder) then begin
-    MessageDlg('Destination Directory Does NOT exist:'+#13+#10+ MOveFolder, mtError, [mbOK], 0);
-    exit;
-   end;
 
   MessagesMemo.lines.Add('Processing File:    '+FileName);
-  FileNameXyz:=Tpath.ChangeExtension(FileName,'.xyz');
-
-  try
-  //Convert to utf to strip control chars
-    temp:=trim(system.IOutils.Tfile.ReadAllText(filename));
-    strings:=TStringList.Create();
-    strings.Add(temp);
-    strings.SaveToFile(FileNameXyz,TEncoding.UTF8);
-  finally
-    strings.Free;
-   end;
-
-  Tfile.Delete(fileName);
-  ReadOneXML(FileNameXyz);
-
-
-
-  temp:=Tpath.ChangeExtension(FileNameXYZ,'.XXX');
-  If RenameFile(FileNameXYZ,temp ) then begin
-      MoveFIle:=MoveFolder +'\'+System.SysUtils.ExtractFileName(temp);
-      TRY
-        Tfile.Move(temp,MoveFile);
-      FINALLY
-       self.ModalResult:=mrNone;
-      END;
-  end;
-
+  FromFolder:=TPath.GetDirectoryName(filename);
+  ToFolder:=FromFolder;
+  FileNameOnly:= TPath.GetFileName(FIleName);
+  ReadXFiles(FromFolder,ToFolder,FileNameOnly);
   MessagesMemo.lines.Add('----------------------------------------------------');
 //  MessagesMemo.lines.Add('Finish:    '+FileName);
   self.ModalResult:=mrNone;
@@ -628,9 +595,9 @@ Var
         DefaultDir:String;
         ParamRec:TParameterRecord;
 Begin
-        DefaultDir:= GN_GetTheSystemParameter(cn, 'S01').P_String4;
+        DefaultDir:= GN_GetTheSystemParameter(cn, 'S02').P_String4;
         If DefaultDir='' then begin
-          MessageDlg('Menu ->System->Params-> System Parameters. Then Add record with Code=S01 ', mtWarning, [mbOK], 0);
+          MessageDlg('Menu ->System->Params-> System Parameters. Then Add record with Code=S02', mtWarning, [mbOK], 0);
         end;
 
 
