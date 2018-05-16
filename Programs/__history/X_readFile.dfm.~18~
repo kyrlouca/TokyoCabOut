@@ -143,15 +143,6 @@ object X_readFileFRM: TX_readFileFRM
         F6F6FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
       Margin = -1
     end
-    object Button3: TButton
-      Left = 408
-      Top = 272
-      Width = 75
-      Height = 25
-      Caption = 'Button3'
-      TabOrder = 1
-      Visible = False
-    end
     object MessagesMemo: TRzMemo
       Left = 144
       Top = 45
@@ -159,7 +150,7 @@ object X_readFileFRM: TX_readFileFRM
       Height = 221
       Color = clInfoBk
       ReadOnly = True
-      TabOrder = 2
+      TabOrder = 1
     end
   end
   object Panel2: TRzPanel
@@ -262,7 +253,6 @@ object X_readFileFRM: TX_readFileFRM
       Caption = 'Delete Mawb'
       TabOrder = 1
       Visible = False
-      OnClick = Button1Click
     end
     object Button2: TButton
       Left = 112
@@ -293,7 +283,6 @@ object X_readFileFRM: TX_readFileFRM
       Caption = 'All'
       TabOrder = 4
       Visible = False
-      OnClick = AllClick
     end
   end
   object XMLDocument1: TXMLDocument

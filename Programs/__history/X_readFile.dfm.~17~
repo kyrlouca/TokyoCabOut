@@ -143,15 +143,6 @@ object X_readFileFRM: TX_readFileFRM
         F6F6FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
       Margin = -1
     end
-    object Button3: TButton
-      Left = 408
-      Top = 272
-      Width = 75
-      Height = 25
-      Caption = 'Button3'
-      TabOrder = 1
-      Visible = False
-    end
     object MessagesMemo: TRzMemo
       Left = 144
       Top = 45
@@ -159,7 +150,7 @@ object X_readFileFRM: TX_readFileFRM
       Height = 221
       Color = clInfoBk
       ReadOnly = True
-      TabOrder = 2
+      TabOrder = 1
     end
   end
   object Panel2: TRzPanel
@@ -262,7 +253,6 @@ object X_readFileFRM: TX_readFileFRM
       Caption = 'Delete Mawb'
       TabOrder = 1
       Visible = False
-      OnClick = Button1Click
     end
     object Button2: TButton
       Left = 112
@@ -293,7 +283,6 @@ object X_readFileFRM: TX_readFileFRM
       Caption = 'All'
       TabOrder = 4
       Visible = False
-      OnClick = AllClick
     end
   end
   object XMLDocument1: TXMLDocument
@@ -316,528 +305,325 @@ object X_readFileFRM: TX_readFileFRM
     KeyGenerator = 'HAWB_SERIAL_GENERATOR'
     GeneratorMode = gmInsert
     SQLInsert.Strings = (
-      'INSERT INTO HAWB'
+      'INSERT INTO AIRWAYBILL'
       
-        '  (SERIAL_NUMBER, HAB_ID, FK_MAWB_REFER_NUMBER, FK_CUSTOMER_CODE' +
-        ', FK_CLEARANCE_INSTRUCTION, DESCRIPTION, WEIGHT, FK_CLEARING_STA' +
-        'TE, FK_INVOICE_STATUS, FK_CURRENCY, EXCHANGE_RATE, INVOICE_TOTAL' +
-        ', FREIGHT_AMOUNT, FK_OTHER_CHARGE_CODE, OTHER_CHARGE_AMOUNT, OTH' +
-        'ER_CHARGE_PAID, STAMPS_AMOUNT, EXPS_NON_INVOICABLE, CUSTOMS_VALU' +
-        'E, INVOICE_SERIAL, COURIER_INVOICE_SERIAL, COURIER_INVOICE_VALUE' +
-        ', HIGH_VALUE, FK_SEC_MAWB_REFER_NUMBER, EDE_STORAGE_EXPENSES, ED' +
-        'E_DELIVERY_EXPENSES, DATE_INVOICED, SENT_TO_HEAD, NUM_OF_PIECES_' +
-        'ARRIVED, TOTAL_NUM_OF_PIECES, FK_CLEARANCE_TYPE, FK_DELIVERY_TER' +
-        'M, ORIGIN_STATION, EC2_NUMBER_DATE, SENDERS_INV_NO, NUMBER_OF_PA' +
-        'RCELS, FK_CUSTOMER_ACCOUNT, DISTRICT, DELIVERY_ORDER_AMOUNT, OTH' +
-        'ER2_CHARGE_AMOUNT, FK_OTHER2_CHARGE_CODE, POSOSTOSIS, TOTAL_DUTI' +
-        'ES, CLEARANCE_WAITING_CODE, CLEARANCE_WAITING_REASON, DATE_CLEAR' +
-        'ED, DATE_REGISTERED, FACTOR, FK_COUNTRY_ORIGIN, CHARGE_TRL, CHAR' +
-        'GE_VAT, CHARGE_EXCISE, CHARGE_IMPORT, INVOICABLE, TOTAL_CHARGES,' +
-        ' CUSTOMER_NAME, EDE_COMMENTS, FK_MAWB_ID, SIGNATORY_NAME, XML_HO' +
-        'USE_ID, SENDER_NAME, SENDER_ADDRESS_1, SENDER_ADDRESS_2, SENDER_' +
-        'ADDRESS_3, IS_PRIVATE, DELIVERY_ORDER_ID, OTHER4_CHARGE_AMOUNT, ' +
-        'FK_OTHER4_CHARGE, IS_PAID, PARTIAL_FLAG, PARTIAL_WEIGHT, PARTIAL' +
-        '_DELIVERY_ORDER_ID, PARTIAL_MAWB_ID, PARTIAL_PIECES, PARTIAL_MAW' +
-        'B_REFER_NUMBER, STATUS_C, IS_MEDIUM, MEDIUM_VAT_RATE, IS_CHARGED' +
-        '_DELIVERY, IS_VALID, IS_PREPAID, OTHER5_CHARGE_AMOUNT, FK_DUTY_R' +
-        'ELIEVE, SENDER_POST_CODE, SENDER_CITY, SENDER_COUNTRY, CUSTOMER_' +
-        'VAT_ID, CUSTOMER_AUTHORITY_TO_AGENT, IS_LOW, DESTINATION_STATION' +
-        ')'
+        '  (SERIAL_NUMBER, SEQUENCE_NUMBER, HAWB_ID, SHIPMENT_ORIGIN_AREA' +
+        ', SHIPMENT_ORIGIN_COUNTRY, PIECES, WEIGHT, DESCRIPTION, FK_DOCUM' +
+        'ENT_MASTER_SERIAL, FK_MOVEMENT_SERIAL, PIECES_S, SENDER_NAME, SE' +
+        'NDER_ADDRESS, SENDER_POST_CODE, SENDER_CITY, SENDER_COUNTRY_CODE' +
+        ', CONSIGNEE_NAME, CONSIGNEE_ADDRESS, CONSIGNEE_POST_CODE, CONSIG' +
+        'NEE_CITY, CONSIGNEE_COUNTRY_CODE, FK_ITINERARY_SERIAL, PACKAGES_' +
+        'COUNT, ITEMS_COUNT, PAYMENT_METHOD, IS_HIGH, VALUE_TYPE, CUSTOMS' +
+        '_VALUE, CURRENCY, CURRENCY_RATE, SENDER_ADDRESS_1, SENDER_ADDRES' +
+        'S_2, SENDER_ADDRESS_3, SENDER_DEVICE_TYPE, SENDER_DEVICE_DETAILS' +
+        ', CONSIGNEE_ADDRESS_1, CONSIGNEE_ADDRESS_2, CONSIGNEE_ADDRESS_3,' +
+        ' CONSIGNEE_DEVICE_TYPE, CONSIGNEE_DEVICE_DETAILS, INCOTERMS, IS_' +
+        'SCANNED, SENDER_EMAIL, CONSIGNEE_EMAIL, SERVICE_CODE, ACCOUNT_NU' +
+        'MBER, CONSIGNEE_PREFERRED_NAME, SENDER_PREFERRED_NAME)'
       'VALUES'
       
-        '  (:SERIAL_NUMBER, :HAB_ID, :FK_MAWB_REFER_NUMBER, :FK_CUSTOMER_' +
-        'CODE, :FK_CLEARANCE_INSTRUCTION, :DESCRIPTION, :WEIGHT, :FK_CLEA' +
-        'RING_STATE, :FK_INVOICE_STATUS, :FK_CURRENCY, :EXCHANGE_RATE, :I' +
-        'NVOICE_TOTAL, :FREIGHT_AMOUNT, :FK_OTHER_CHARGE_CODE, :OTHER_CHA' +
-        'RGE_AMOUNT, :OTHER_CHARGE_PAID, :STAMPS_AMOUNT, :EXPS_NON_INVOIC' +
-        'ABLE, :CUSTOMS_VALUE, :INVOICE_SERIAL, :COURIER_INVOICE_SERIAL, ' +
-        ':COURIER_INVOICE_VALUE, :HIGH_VALUE, :FK_SEC_MAWB_REFER_NUMBER, ' +
-        ':EDE_STORAGE_EXPENSES, :EDE_DELIVERY_EXPENSES, :DATE_INVOICED, :' +
-        'SENT_TO_HEAD, :NUM_OF_PIECES_ARRIVED, :TOTAL_NUM_OF_PIECES, :FK_' +
-        'CLEARANCE_TYPE, :FK_DELIVERY_TERM, :ORIGIN_STATION, :EC2_NUMBER_' +
-        'DATE, :SENDERS_INV_NO, :NUMBER_OF_PARCELS, :FK_CUSTOMER_ACCOUNT,' +
-        ' :DISTRICT, :DELIVERY_ORDER_AMOUNT, :OTHER2_CHARGE_AMOUNT, :FK_O' +
-        'THER2_CHARGE_CODE, :POSOSTOSIS, :TOTAL_DUTIES, :CLEARANCE_WAITIN' +
-        'G_CODE, :CLEARANCE_WAITING_REASON, :DATE_CLEARED, :DATE_REGISTER' +
-        'ED, :FACTOR, :FK_COUNTRY_ORIGIN, :CHARGE_TRL, :CHARGE_VAT, :CHAR' +
-        'GE_EXCISE, :CHARGE_IMPORT, :INVOICABLE, :TOTAL_CHARGES, :CUSTOME' +
-        'R_NAME, :EDE_COMMENTS, :FK_MAWB_ID, :SIGNATORY_NAME, :XML_HOUSE_' +
-        'ID, :SENDER_NAME, :SENDER_ADDRESS_1, :SENDER_ADDRESS_2, :SENDER_' +
-        'ADDRESS_3, :IS_PRIVATE, :DELIVERY_ORDER_ID, :OTHER4_CHARGE_AMOUN' +
-        'T, :FK_OTHER4_CHARGE, :IS_PAID, :PARTIAL_FLAG, :PARTIAL_WEIGHT, ' +
-        ':PARTIAL_DELIVERY_ORDER_ID, :PARTIAL_MAWB_ID, :PARTIAL_PIECES, :' +
-        'PARTIAL_MAWB_REFER_NUMBER, :STATUS_C, :IS_MEDIUM, :MEDIUM_VAT_RA' +
-        'TE, :IS_CHARGED_DELIVERY, :IS_VALID, :IS_PREPAID, :OTHER5_CHARGE' +
-        '_AMOUNT, :FK_DUTY_RELIEVE, :SENDER_POST_CODE, :SENDER_CITY, :SEN' +
-        'DER_COUNTRY, :CUSTOMER_VAT_ID, :CUSTOMER_AUTHORITY_TO_AGENT, :IS' +
-        '_LOW, :DESTINATION_STATION)')
+        '  (:SERIAL_NUMBER, :SEQUENCE_NUMBER, :HAWB_ID, :SHIPMENT_ORIGIN_' +
+        'AREA, :SHIPMENT_ORIGIN_COUNTRY, :PIECES, :WEIGHT, :DESCRIPTION, ' +
+        ':FK_DOCUMENT_MASTER_SERIAL, :FK_MOVEMENT_SERIAL, :PIECES_S, :SEN' +
+        'DER_NAME, :SENDER_ADDRESS, :SENDER_POST_CODE, :SENDER_CITY, :SEN' +
+        'DER_COUNTRY_CODE, :CONSIGNEE_NAME, :CONSIGNEE_ADDRESS, :CONSIGNE' +
+        'E_POST_CODE, :CONSIGNEE_CITY, :CONSIGNEE_COUNTRY_CODE, :FK_ITINE' +
+        'RARY_SERIAL, :PACKAGES_COUNT, :ITEMS_COUNT, :PAYMENT_METHOD, :IS' +
+        '_HIGH, :VALUE_TYPE, :CUSTOMS_VALUE, :CURRENCY, :CURRENCY_RATE, :' +
+        'SENDER_ADDRESS_1, :SENDER_ADDRESS_2, :SENDER_ADDRESS_3, :SENDER_' +
+        'DEVICE_TYPE, :SENDER_DEVICE_DETAILS, :CONSIGNEE_ADDRESS_1, :CONS' +
+        'IGNEE_ADDRESS_2, :CONSIGNEE_ADDRESS_3, :CONSIGNEE_DEVICE_TYPE, :' +
+        'CONSIGNEE_DEVICE_DETAILS, :INCOTERMS, :IS_SCANNED, :SENDER_EMAIL' +
+        ', :CONSIGNEE_EMAIL, :SERVICE_CODE, :ACCOUNT_NUMBER, :CONSIGNEE_P' +
+        'REFERRED_NAME, :SENDER_PREFERRED_NAME)')
     SQLDelete.Strings = (
-      'DELETE FROM HAWB'
+      'DELETE FROM AIRWAYBILL'
       'WHERE'
       '  SERIAL_NUMBER = :Old_SERIAL_NUMBER')
     SQLUpdate.Strings = (
-      'UPDATE HAWB'
+      'UPDATE AIRWAYBILL'
       'SET'
       
-        '  SERIAL_NUMBER = :SERIAL_NUMBER, HAB_ID = :HAB_ID, FK_MAWB_REFE' +
-        'R_NUMBER = :FK_MAWB_REFER_NUMBER, FK_CUSTOMER_CODE = :FK_CUSTOME' +
-        'R_CODE, FK_CLEARANCE_INSTRUCTION = :FK_CLEARANCE_INSTRUCTION, DE' +
-        'SCRIPTION = :DESCRIPTION, WEIGHT = :WEIGHT, FK_CLEARING_STATE = ' +
-        ':FK_CLEARING_STATE, FK_INVOICE_STATUS = :FK_INVOICE_STATUS, FK_C' +
-        'URRENCY = :FK_CURRENCY, EXCHANGE_RATE = :EXCHANGE_RATE, INVOICE_' +
-        'TOTAL = :INVOICE_TOTAL, FREIGHT_AMOUNT = :FREIGHT_AMOUNT, FK_OTH' +
-        'ER_CHARGE_CODE = :FK_OTHER_CHARGE_CODE, OTHER_CHARGE_AMOUNT = :O' +
-        'THER_CHARGE_AMOUNT, OTHER_CHARGE_PAID = :OTHER_CHARGE_PAID, STAM' +
-        'PS_AMOUNT = :STAMPS_AMOUNT, EXPS_NON_INVOICABLE = :EXPS_NON_INVO' +
-        'ICABLE, CUSTOMS_VALUE = :CUSTOMS_VALUE, INVOICE_SERIAL = :INVOIC' +
-        'E_SERIAL, COURIER_INVOICE_SERIAL = :COURIER_INVOICE_SERIAL, COUR' +
-        'IER_INVOICE_VALUE = :COURIER_INVOICE_VALUE, HIGH_VALUE = :HIGH_V' +
-        'ALUE, FK_SEC_MAWB_REFER_NUMBER = :FK_SEC_MAWB_REFER_NUMBER, EDE_' +
-        'STORAGE_EXPENSES = :EDE_STORAGE_EXPENSES, EDE_DELIVERY_EXPENSES ' +
-        '= :EDE_DELIVERY_EXPENSES, DATE_INVOICED = :DATE_INVOICED, SENT_T' +
-        'O_HEAD = :SENT_TO_HEAD, NUM_OF_PIECES_ARRIVED = :NUM_OF_PIECES_A' +
-        'RRIVED, TOTAL_NUM_OF_PIECES = :TOTAL_NUM_OF_PIECES, FK_CLEARANCE' +
-        '_TYPE = :FK_CLEARANCE_TYPE, FK_DELIVERY_TERM = :FK_DELIVERY_TERM' +
-        ', ORIGIN_STATION = :ORIGIN_STATION, EC2_NUMBER_DATE = :EC2_NUMBE' +
-        'R_DATE, SENDERS_INV_NO = :SENDERS_INV_NO, NUMBER_OF_PARCELS = :N' +
-        'UMBER_OF_PARCELS, FK_CUSTOMER_ACCOUNT = :FK_CUSTOMER_ACCOUNT, DI' +
-        'STRICT = :DISTRICT, DELIVERY_ORDER_AMOUNT = :DELIVERY_ORDER_AMOU' +
-        'NT, OTHER2_CHARGE_AMOUNT = :OTHER2_CHARGE_AMOUNT, FK_OTHER2_CHAR' +
-        'GE_CODE = :FK_OTHER2_CHARGE_CODE, POSOSTOSIS = :POSOSTOSIS, TOTA' +
-        'L_DUTIES = :TOTAL_DUTIES, CLEARANCE_WAITING_CODE = :CLEARANCE_WA' +
-        'ITING_CODE, CLEARANCE_WAITING_REASON = :CLEARANCE_WAITING_REASON' +
-        ', DATE_CLEARED = :DATE_CLEARED, DATE_REGISTERED = :DATE_REGISTER' +
-        'ED, FACTOR = :FACTOR, FK_COUNTRY_ORIGIN = :FK_COUNTRY_ORIGIN, CH' +
-        'ARGE_TRL = :CHARGE_TRL, CHARGE_VAT = :CHARGE_VAT, CHARGE_EXCISE ' +
-        '= :CHARGE_EXCISE, CHARGE_IMPORT = :CHARGE_IMPORT, INVOICABLE = :' +
-        'INVOICABLE, TOTAL_CHARGES = :TOTAL_CHARGES, CUSTOMER_NAME = :CUS' +
-        'TOMER_NAME, EDE_COMMENTS = :EDE_COMMENTS, FK_MAWB_ID = :FK_MAWB_' +
-        'ID, SIGNATORY_NAME = :SIGNATORY_NAME, XML_HOUSE_ID = :XML_HOUSE_' +
-        'ID, SENDER_NAME = :SENDER_NAME, SENDER_ADDRESS_1 = :SENDER_ADDRE' +
-        'SS_1, SENDER_ADDRESS_2 = :SENDER_ADDRESS_2, SENDER_ADDRESS_3 = :' +
-        'SENDER_ADDRESS_3, IS_PRIVATE = :IS_PRIVATE, DELIVERY_ORDER_ID = ' +
-        ':DELIVERY_ORDER_ID, OTHER4_CHARGE_AMOUNT = :OTHER4_CHARGE_AMOUNT' +
-        ', FK_OTHER4_CHARGE = :FK_OTHER4_CHARGE, IS_PAID = :IS_PAID, PART' +
-        'IAL_FLAG = :PARTIAL_FLAG, PARTIAL_WEIGHT = :PARTIAL_WEIGHT, PART' +
-        'IAL_DELIVERY_ORDER_ID = :PARTIAL_DELIVERY_ORDER_ID, PARTIAL_MAWB' +
-        '_ID = :PARTIAL_MAWB_ID, PARTIAL_PIECES = :PARTIAL_PIECES, PARTIA' +
-        'L_MAWB_REFER_NUMBER = :PARTIAL_MAWB_REFER_NUMBER, STATUS_C = :ST' +
-        'ATUS_C, IS_MEDIUM = :IS_MEDIUM, MEDIUM_VAT_RATE = :MEDIUM_VAT_RA' +
-        'TE, IS_CHARGED_DELIVERY = :IS_CHARGED_DELIVERY, IS_VALID = :IS_V' +
-        'ALID, IS_PREPAID = :IS_PREPAID, OTHER5_CHARGE_AMOUNT = :OTHER5_C' +
-        'HARGE_AMOUNT, FK_DUTY_RELIEVE = :FK_DUTY_RELIEVE, SENDER_POST_CO' +
+        '  SERIAL_NUMBER = :SERIAL_NUMBER, SEQUENCE_NUMBER = :SEQUENCE_NU' +
+        'MBER, HAWB_ID = :HAWB_ID, SHIPMENT_ORIGIN_AREA = :SHIPMENT_ORIGI' +
+        'N_AREA, SHIPMENT_ORIGIN_COUNTRY = :SHIPMENT_ORIGIN_COUNTRY, PIEC' +
+        'ES = :PIECES, WEIGHT = :WEIGHT, DESCRIPTION = :DESCRIPTION, FK_D' +
+        'OCUMENT_MASTER_SERIAL = :FK_DOCUMENT_MASTER_SERIAL, FK_MOVEMENT_' +
+        'SERIAL = :FK_MOVEMENT_SERIAL, PIECES_S = :PIECES_S, SENDER_NAME ' +
+        '= :SENDER_NAME, SENDER_ADDRESS = :SENDER_ADDRESS, SENDER_POST_CO' +
         'DE = :SENDER_POST_CODE, SENDER_CITY = :SENDER_CITY, SENDER_COUNT' +
-        'RY = :SENDER_COUNTRY, CUSTOMER_VAT_ID = :CUSTOMER_VAT_ID, CUSTOM' +
-        'ER_AUTHORITY_TO_AGENT = :CUSTOMER_AUTHORITY_TO_AGENT, IS_LOW = :' +
-        'IS_LOW, DESTINATION_STATION = :DESTINATION_STATION'
+        'RY_CODE = :SENDER_COUNTRY_CODE, CONSIGNEE_NAME = :CONSIGNEE_NAME' +
+        ', CONSIGNEE_ADDRESS = :CONSIGNEE_ADDRESS, CONSIGNEE_POST_CODE = ' +
+        ':CONSIGNEE_POST_CODE, CONSIGNEE_CITY = :CONSIGNEE_CITY, CONSIGNE' +
+        'E_COUNTRY_CODE = :CONSIGNEE_COUNTRY_CODE, FK_ITINERARY_SERIAL = ' +
+        ':FK_ITINERARY_SERIAL, PACKAGES_COUNT = :PACKAGES_COUNT, ITEMS_CO' +
+        'UNT = :ITEMS_COUNT, PAYMENT_METHOD = :PAYMENT_METHOD, IS_HIGH = ' +
+        ':IS_HIGH, VALUE_TYPE = :VALUE_TYPE, CUSTOMS_VALUE = :CUSTOMS_VAL' +
+        'UE, CURRENCY = :CURRENCY, CURRENCY_RATE = :CURRENCY_RATE, SENDER' +
+        '_ADDRESS_1 = :SENDER_ADDRESS_1, SENDER_ADDRESS_2 = :SENDER_ADDRE' +
+        'SS_2, SENDER_ADDRESS_3 = :SENDER_ADDRESS_3, SENDER_DEVICE_TYPE =' +
+        ' :SENDER_DEVICE_TYPE, SENDER_DEVICE_DETAILS = :SENDER_DEVICE_DET' +
+        'AILS, CONSIGNEE_ADDRESS_1 = :CONSIGNEE_ADDRESS_1, CONSIGNEE_ADDR' +
+        'ESS_2 = :CONSIGNEE_ADDRESS_2, CONSIGNEE_ADDRESS_3 = :CONSIGNEE_A' +
+        'DDRESS_3, CONSIGNEE_DEVICE_TYPE = :CONSIGNEE_DEVICE_TYPE, CONSIG' +
+        'NEE_DEVICE_DETAILS = :CONSIGNEE_DEVICE_DETAILS, INCOTERMS = :INC' +
+        'OTERMS, IS_SCANNED = :IS_SCANNED, SENDER_EMAIL = :SENDER_EMAIL, ' +
+        'CONSIGNEE_EMAIL = :CONSIGNEE_EMAIL, SERVICE_CODE = :SERVICE_CODE' +
+        ', ACCOUNT_NUMBER = :ACCOUNT_NUMBER, CONSIGNEE_PREFERRED_NAME = :' +
+        'CONSIGNEE_PREFERRED_NAME, SENDER_PREFERRED_NAME = :SENDER_PREFER' +
+        'RED_NAME'
       'WHERE'
       '  SERIAL_NUMBER = :Old_SERIAL_NUMBER')
     SQLRefresh.Strings = (
       
-        'SELECT SERIAL_NUMBER, HAB_ID, FK_MAWB_REFER_NUMBER, FK_CUSTOMER_' +
-        'CODE, FK_CLEARANCE_INSTRUCTION, DESCRIPTION, WEIGHT, FK_CLEARING' +
-        '_STATE, FK_INVOICE_STATUS, FK_CURRENCY, EXCHANGE_RATE, INVOICE_T' +
-        'OTAL, FREIGHT_AMOUNT, FK_OTHER_CHARGE_CODE, OTHER_CHARGE_AMOUNT,' +
-        ' OTHER_CHARGE_PAID, STAMPS_AMOUNT, EXPS_NON_INVOICABLE, CUSTOMS_' +
-        'VALUE, INVOICE_SERIAL, COURIER_INVOICE_SERIAL, COURIER_INVOICE_V' +
-        'ALUE, HIGH_VALUE, FK_SEC_MAWB_REFER_NUMBER, EDE_STORAGE_EXPENSES' +
-        ', EDE_DELIVERY_EXPENSES, DATE_INVOICED, SENT_TO_HEAD, NUM_OF_PIE' +
-        'CES_ARRIVED, TOTAL_NUM_OF_PIECES, FK_CLEARANCE_TYPE, FK_DELIVERY' +
-        '_TERM, ORIGIN_STATION, EC2_NUMBER_DATE, SENDERS_INV_NO, NUMBER_O' +
-        'F_PARCELS, FK_CUSTOMER_ACCOUNT, DISTRICT, DELIVERY_ORDER_AMOUNT,' +
-        ' OTHER2_CHARGE_AMOUNT, FK_OTHER2_CHARGE_CODE, POSOSTOSIS, TOTAL_' +
-        'DUTIES, CLEARANCE_WAITING_CODE, CLEARANCE_WAITING_REASON, DATE_C' +
-        'LEARED, DATE_REGISTERED, FACTOR, FK_COUNTRY_ORIGIN, CHARGE_TRL, ' +
-        'CHARGE_VAT, CHARGE_EXCISE, CHARGE_IMPORT, INVOICABLE, TOTAL_CHAR' +
-        'GES, CUSTOMER_NAME, EDE_COMMENTS, FK_MAWB_ID, SIGNATORY_NAME, XM' +
-        'L_HOUSE_ID, SENDER_NAME, SENDER_ADDRESS_1, SENDER_ADDRESS_2, SEN' +
-        'DER_ADDRESS_3, IS_PRIVATE, DELIVERY_ORDER_ID, OTHER4_CHARGE_AMOU' +
-        'NT, FK_OTHER4_CHARGE, IS_PAID, PARTIAL_FLAG, PARTIAL_WEIGHT, PAR' +
-        'TIAL_DELIVERY_ORDER_ID, PARTIAL_MAWB_ID, PARTIAL_PIECES, PARTIAL' +
-        '_MAWB_REFER_NUMBER, STATUS_C, IS_MEDIUM, MEDIUM_VAT_RATE, IS_CHA' +
-        'RGED_DELIVERY, IS_VALID, IS_PREPAID, OTHER5_CHARGE_AMOUNT, FK_DU' +
-        'TY_RELIEVE, SENDER_POST_CODE, SENDER_CITY, SENDER_COUNTRY, CUSTO' +
-        'MER_VAT_ID, CUSTOMER_AUTHORITY_TO_AGENT, IS_LOW, DESTINATION_STA' +
-        'TION FROM HAWB'
+        'SELECT SERIAL_NUMBER, SEQUENCE_NUMBER, HAWB_ID, SHIPMENT_ORIGIN_' +
+        'AREA, SHIPMENT_ORIGIN_COUNTRY, PIECES, WEIGHT, DESCRIPTION, FK_D' +
+        'OCUMENT_MASTER_SERIAL, FK_MOVEMENT_SERIAL, PIECES_S, SENDER_NAME' +
+        ', SENDER_ADDRESS, SENDER_POST_CODE, SENDER_CITY, SENDER_COUNTRY_' +
+        'CODE, CONSIGNEE_NAME, CONSIGNEE_ADDRESS, CONSIGNEE_POST_CODE, CO' +
+        'NSIGNEE_CITY, CONSIGNEE_COUNTRY_CODE, FK_ITINERARY_SERIAL, PACKA' +
+        'GES_COUNT, ITEMS_COUNT, PAYMENT_METHOD, IS_HIGH, VALUE_TYPE, CUS' +
+        'TOMS_VALUE, CURRENCY, CURRENCY_RATE, SENDER_ADDRESS_1, SENDER_AD' +
+        'DRESS_2, SENDER_ADDRESS_3, SENDER_DEVICE_TYPE, SENDER_DEVICE_DET' +
+        'AILS, CONSIGNEE_ADDRESS_1, CONSIGNEE_ADDRESS_2, CONSIGNEE_ADDRES' +
+        'S_3, CONSIGNEE_DEVICE_TYPE, CONSIGNEE_DEVICE_DETAILS, INCOTERMS,' +
+        ' IS_SCANNED, SENDER_EMAIL, CONSIGNEE_EMAIL, SERVICE_CODE, ACCOUN' +
+        'T_NUMBER, CONSIGNEE_PREFERRED_NAME, SENDER_PREFERRED_NAME FROM A' +
+        'IRWAYBILL'
       'WHERE'
       '  SERIAL_NUMBER = :SERIAL_NUMBER')
     SQLLock.Strings = (
-      'SELECT NULL FROM HAWB'
+      'SELECT NULL FROM AIRWAYBILL'
       'WHERE'
       'SERIAL_NUMBER = :Old_SERIAL_NUMBER'
       'FOR UPDATE WITH LOCK')
     SQLRecCount.Strings = (
       'SELECT COUNT(*) FROM ('
-      'SELECT 1 AS C  FROM HAWB'
+      'SELECT 1 AS C  FROM AIRWAYBILL'
       ''
       ') q')
     Connection = MainFormFRM.CabOutData
     Transaction = ReadTrans
     UpdateTransaction = WriteTrans
     SQL.Strings = (
-      'Select * from hawb where serial_number=-1')
+      'Select * from airwaybill where serial_number=-1')
     Left = 304
     Top = 64
     object HawbSQLSERIAL_NUMBER: TIntegerField
       FieldName = 'SERIAL_NUMBER'
       Required = True
     end
-    object HawbSQLHAB_ID: TStringField
-      FieldName = 'HAB_ID'
-      Required = True
+    object HawbSQLSEQUENCE_NUMBER: TIntegerField
+      FieldName = 'SEQUENCE_NUMBER'
+    end
+    object HawbSQLHAWB_ID: TStringField
+      FieldName = 'HAWB_ID'
       Size = 10
     end
-    object HawbSQLFK_MAWB_REFER_NUMBER: TIntegerField
-      FieldName = 'FK_MAWB_REFER_NUMBER'
-      Required = True
+    object HawbSQLSHIPMENT_ORIGIN_AREA: TStringField
+      FieldName = 'SHIPMENT_ORIGIN_AREA'
+      Size = 10
     end
-    object HawbSQLFK_CUSTOMER_CODE: TIntegerField
-      FieldName = 'FK_CUSTOMER_CODE'
-    end
-    object HawbSQLFK_CLEARANCE_INSTRUCTION: TStringField
-      FieldName = 'FK_CLEARANCE_INSTRUCTION'
+    object HawbSQLSHIPMENT_ORIGIN_COUNTRY: TStringField
+      FieldName = 'SHIPMENT_ORIGIN_COUNTRY'
       FixedChar = True
       Size = 5
     end
-    object HawbSQLDESCRIPTION: TStringField
-      FieldName = 'DESCRIPTION'
-      Size = 200
+    object HawbSQLPIECES: TIntegerField
+      FieldName = 'PIECES'
     end
     object HawbSQLWEIGHT: TFloatField
       FieldName = 'WEIGHT'
     end
-    object HawbSQLFK_CLEARING_STATE: TStringField
-      FieldName = 'FK_CLEARING_STATE'
-      Required = True
+    object HawbSQLDESCRIPTION: TStringField
+      FieldName = 'DESCRIPTION'
       FixedChar = True
-      Size = 1
+      Size = 60
     end
-    object HawbSQLFK_INVOICE_STATUS: TStringField
-      FieldName = 'FK_INVOICE_STATUS'
-      Required = True
-      FixedChar = True
-      Size = 1
+    object HawbSQLFK_DOCUMENT_MASTER_SERIAL: TIntegerField
+      FieldName = 'FK_DOCUMENT_MASTER_SERIAL'
     end
-    object HawbSQLFK_CURRENCY: TStringField
-      FieldName = 'FK_CURRENCY'
-      Size = 3
+    object HawbSQLFK_MOVEMENT_SERIAL: TIntegerField
+      FieldName = 'FK_MOVEMENT_SERIAL'
     end
-    object HawbSQLEXCHANGE_RATE: TFloatField
-      FieldName = 'EXCHANGE_RATE'
-    end
-    object HawbSQLINVOICE_TOTAL: TFloatField
-      FieldName = 'INVOICE_TOTAL'
-    end
-    object HawbSQLFREIGHT_AMOUNT: TFloatField
-      FieldName = 'FREIGHT_AMOUNT'
-    end
-    object HawbSQLFK_OTHER_CHARGE_CODE: TStringField
-      FieldName = 'FK_OTHER_CHARGE_CODE'
-      Size = 6
-    end
-    object HawbSQLOTHER_CHARGE_AMOUNT: TFloatField
-      FieldName = 'OTHER_CHARGE_AMOUNT'
-    end
-    object HawbSQLOTHER_CHARGE_PAID: TStringField
-      FieldName = 'OTHER_CHARGE_PAID'
-      Size = 1
-    end
-    object HawbSQLSTAMPS_AMOUNT: TFloatField
-      FieldName = 'STAMPS_AMOUNT'
-    end
-    object HawbSQLEXPS_NON_INVOICABLE: TFloatField
-      FieldName = 'EXPS_NON_INVOICABLE'
-    end
-    object HawbSQLCUSTOMS_VALUE: TFloatField
-      FieldName = 'CUSTOMS_VALUE'
-    end
-    object HawbSQLINVOICE_SERIAL: TIntegerField
-      FieldName = 'INVOICE_SERIAL'
-    end
-    object HawbSQLCOURIER_INVOICE_SERIAL: TIntegerField
-      FieldName = 'COURIER_INVOICE_SERIAL'
-    end
-    object HawbSQLCOURIER_INVOICE_VALUE: TFloatField
-      FieldName = 'COURIER_INVOICE_VALUE'
-    end
-    object HawbSQLHIGH_VALUE: TStringField
-      FieldName = 'HIGH_VALUE'
-      FixedChar = True
-      Size = 1
-    end
-    object HawbSQLFK_SEC_MAWB_REFER_NUMBER: TIntegerField
-      FieldName = 'FK_SEC_MAWB_REFER_NUMBER'
-    end
-    object HawbSQLEDE_STORAGE_EXPENSES: TFloatField
-      FieldName = 'EDE_STORAGE_EXPENSES'
-    end
-    object HawbSQLEDE_DELIVERY_EXPENSES: TFloatField
-      FieldName = 'EDE_DELIVERY_EXPENSES'
-    end
-    object HawbSQLDATE_INVOICED: TDateField
-      FieldName = 'DATE_INVOICED'
-    end
-    object HawbSQLSENT_TO_HEAD: TStringField
-      FieldName = 'SENT_TO_HEAD'
-      FixedChar = True
-      Size = 1
-    end
-    object HawbSQLNUM_OF_PIECES_ARRIVED: TIntegerField
-      FieldName = 'NUM_OF_PIECES_ARRIVED'
-    end
-    object HawbSQLTOTAL_NUM_OF_PIECES: TIntegerField
-      FieldName = 'TOTAL_NUM_OF_PIECES'
-    end
-    object HawbSQLFK_CLEARANCE_TYPE: TStringField
-      FieldName = 'FK_CLEARANCE_TYPE'
-      Size = 12
-    end
-    object HawbSQLFK_DELIVERY_TERM: TStringField
-      FieldName = 'FK_DELIVERY_TERM'
-      Size = 3
-    end
-    object HawbSQLORIGIN_STATION: TStringField
-      FieldName = 'ORIGIN_STATION'
-      Size = 12
-    end
-    object HawbSQLEC2_NUMBER_DATE: TStringField
-      FieldName = 'EC2_NUMBER_DATE'
-      Size = 40
-    end
-    object HawbSQLSENDERS_INV_NO: TStringField
-      FieldName = 'SENDERS_INV_NO'
-      Size = 50
-    end
-    object HawbSQLNUMBER_OF_PARCELS: TIntegerField
-      FieldName = 'NUMBER_OF_PARCELS'
-    end
-    object HawbSQLFK_CUSTOMER_ACCOUNT: TIntegerField
-      FieldName = 'FK_CUSTOMER_ACCOUNT'
-    end
-    object HawbSQLDISTRICT: TStringField
-      FieldName = 'DISTRICT'
-      FixedChar = True
-      Size = 3
-    end
-    object HawbSQLDELIVERY_ORDER_AMOUNT: TFloatField
-      FieldName = 'DELIVERY_ORDER_AMOUNT'
-    end
-    object HawbSQLOTHER2_CHARGE_AMOUNT: TFloatField
-      FieldName = 'OTHER2_CHARGE_AMOUNT'
-    end
-    object HawbSQLFK_OTHER2_CHARGE_CODE: TStringField
-      FieldName = 'FK_OTHER2_CHARGE_CODE'
-      FixedChar = True
-      Size = 6
-    end
-    object HawbSQLPOSOSTOSIS: TStringField
-      FieldName = 'POSOSTOSIS'
-      FixedChar = True
-      Size = 1
-    end
-    object HawbSQLTOTAL_DUTIES: TFloatField
-      FieldName = 'TOTAL_DUTIES'
-    end
-    object HawbSQLCLEARANCE_WAITING_CODE: TStringField
-      FieldName = 'CLEARANCE_WAITING_CODE'
-      FixedChar = True
-      Size = 5
-    end
-    object HawbSQLCLEARANCE_WAITING_REASON: TStringField
-      FieldName = 'CLEARANCE_WAITING_REASON'
-      FixedChar = True
-      Size = 40
-    end
-    object HawbSQLDATE_CLEARED: TDateField
-      FieldName = 'DATE_CLEARED'
-    end
-    object HawbSQLDATE_REGISTERED: TDateField
-      FieldName = 'DATE_REGISTERED'
-    end
-    object HawbSQLFACTOR: TFloatField
-      FieldName = 'FACTOR'
-    end
-    object HawbSQLFK_COUNTRY_ORIGIN: TIntegerField
-      FieldName = 'FK_COUNTRY_ORIGIN'
-    end
-    object HawbSQLCHARGE_TRL: TFloatField
-      FieldName = 'CHARGE_TRL'
-    end
-    object HawbSQLCHARGE_VAT: TFloatField
-      FieldName = 'CHARGE_VAT'
-    end
-    object HawbSQLCHARGE_EXCISE: TFloatField
-      FieldName = 'CHARGE_EXCISE'
-    end
-    object HawbSQLCHARGE_IMPORT: TFloatField
-      FieldName = 'CHARGE_IMPORT'
-    end
-    object HawbSQLINVOICABLE: TStringField
-      FieldName = 'INVOICABLE'
-      FixedChar = True
-      Size = 1
-    end
-    object HawbSQLTOTAL_CHARGES: TFloatField
-      FieldName = 'TOTAL_CHARGES'
-    end
-    object HawbSQLCUSTOMER_NAME: TStringField
-      FieldName = 'CUSTOMER_NAME'
-      FixedChar = True
-      Size = 40
-    end
-    object HawbSQLEDE_COMMENTS: TStringField
-      FieldName = 'EDE_COMMENTS'
-      Size = 100
-    end
-    object HawbSQLFK_MAWB_ID: TStringField
-      FieldName = 'FK_MAWB_ID'
+    object HawbSQLPIECES_S: TStringField
+      FieldName = 'PIECES_S'
       FixedChar = True
       Size = 15
-    end
-    object HawbSQLSIGNATORY_NAME: TStringField
-      FieldName = 'SIGNATORY_NAME'
-      FixedChar = True
-      Size = 50
-    end
-    object HawbSQLXML_HOUSE_ID: TStringField
-      FieldName = 'XML_HOUSE_ID'
-      FixedChar = True
-      Size = 13
     end
     object HawbSQLSENDER_NAME: TStringField
       FieldName = 'SENDER_NAME'
       FixedChar = True
-      Size = 60
+      Size = 35
     end
-    object HawbSQLSENDER_ADDRESS_1: TStringField
-      FieldName = 'SENDER_ADDRESS_1'
+    object HawbSQLSENDER_ADDRESS: TStringField
+      FieldName = 'SENDER_ADDRESS'
       FixedChar = True
-      Size = 60
-    end
-    object HawbSQLSENDER_ADDRESS_2: TStringField
-      FieldName = 'SENDER_ADDRESS_2'
-      FixedChar = True
-      Size = 60
-    end
-    object HawbSQLSENDER_ADDRESS_3: TStringField
-      FieldName = 'SENDER_ADDRESS_3'
-      FixedChar = True
-      Size = 60
-    end
-    object HawbSQLIS_PRIVATE: TStringField
-      FieldName = 'IS_PRIVATE'
-      FixedChar = True
-      Size = 1
-    end
-    object HawbSQLDELIVERY_ORDER_ID: TStringField
-      FieldName = 'DELIVERY_ORDER_ID'
-      FixedChar = True
-      Size = 10
-    end
-    object HawbSQLOTHER4_CHARGE_AMOUNT: TFloatField
-      FieldName = 'OTHER4_CHARGE_AMOUNT'
-    end
-    object HawbSQLFK_OTHER4_CHARGE: TStringField
-      FieldName = 'FK_OTHER4_CHARGE'
-      FixedChar = True
-      Size = 3
-    end
-    object HawbSQLIS_PAID: TStringField
-      FieldName = 'IS_PAID'
-      FixedChar = True
-      Size = 1
-    end
-    object HawbSQLPARTIAL_FLAG: TStringField
-      FieldName = 'PARTIAL_FLAG'
-      FixedChar = True
-      Size = 1
-    end
-    object HawbSQLPARTIAL_WEIGHT: TFloatField
-      FieldName = 'PARTIAL_WEIGHT'
-    end
-    object HawbSQLPARTIAL_DELIVERY_ORDER_ID: TStringField
-      FieldName = 'PARTIAL_DELIVERY_ORDER_ID'
-      Size = 10
-    end
-    object HawbSQLPARTIAL_MAWB_ID: TStringField
-      FieldName = 'PARTIAL_MAWB_ID'
-      FixedChar = True
-      Size = 15
-    end
-    object HawbSQLPARTIAL_PIECES: TIntegerField
-      FieldName = 'PARTIAL_PIECES'
-    end
-    object HawbSQLPARTIAL_MAWB_REFER_NUMBER: TIntegerField
-      FieldName = 'PARTIAL_MAWB_REFER_NUMBER'
-    end
-    object HawbSQLSTATUS_C: TStringField
-      FieldName = 'STATUS_C'
-      FixedChar = True
-      Size = 1
-    end
-    object HawbSQLIS_MEDIUM: TStringField
-      FieldName = 'IS_MEDIUM'
-      FixedChar = True
-      Size = 1
-    end
-    object HawbSQLMEDIUM_VAT_RATE: TFloatField
-      FieldName = 'MEDIUM_VAT_RATE'
-    end
-    object HawbSQLIS_CHARGED_DELIVERY: TStringField
-      FieldName = 'IS_CHARGED_DELIVERY'
-      FixedChar = True
-      Size = 1
-    end
-    object HawbSQLIS_VALID: TStringField
-      FieldName = 'IS_VALID'
-      FixedChar = True
-      Size = 1
-    end
-    object HawbSQLIS_PREPAID: TStringField
-      FieldName = 'IS_PREPAID'
-      FixedChar = True
-      Size = 1
-    end
-    object HawbSQLOTHER5_CHARGE_AMOUNT: TFloatField
-      FieldName = 'OTHER5_CHARGE_AMOUNT'
-    end
-    object HawbSQLFK_DUTY_RELIEVE: TStringField
-      FieldName = 'FK_DUTY_RELIEVE'
-      FixedChar = True
-      Size = 5
+      Size = 35
     end
     object HawbSQLSENDER_POST_CODE: TStringField
       FieldName = 'SENDER_POST_CODE'
       FixedChar = True
-      Size = 60
+      Size = 9
     end
     object HawbSQLSENDER_CITY: TStringField
       FieldName = 'SENDER_CITY'
       FixedChar = True
-      Size = 60
+      Size = 35
     end
-    object HawbSQLSENDER_COUNTRY: TStringField
-      FieldName = 'SENDER_COUNTRY'
+    object HawbSQLSENDER_COUNTRY_CODE: TStringField
+      FieldName = 'SENDER_COUNTRY_CODE'
       FixedChar = True
-      Size = 60
+      Size = 2
     end
-    object HawbSQLCUSTOMER_VAT_ID: TStringField
-      FieldName = 'CUSTOMER_VAT_ID'
+    object HawbSQLCONSIGNEE_NAME: TStringField
+      FieldName = 'CONSIGNEE_NAME'
       FixedChar = True
-      Size = 30
+      Size = 35
     end
-    object HawbSQLCUSTOMER_AUTHORITY_TO_AGENT: TStringField
-      FieldName = 'CUSTOMER_AUTHORITY_TO_AGENT'
+    object HawbSQLCONSIGNEE_ADDRESS: TStringField
+      FieldName = 'CONSIGNEE_ADDRESS'
       FixedChar = True
+      Size = 35
     end
-    object HawbSQLIS_LOW: TStringField
-      FieldName = 'IS_LOW'
+    object HawbSQLCONSIGNEE_POST_CODE: TStringField
+      FieldName = 'CONSIGNEE_POST_CODE'
+      FixedChar = True
+      Size = 9
+    end
+    object HawbSQLCONSIGNEE_CITY: TStringField
+      FieldName = 'CONSIGNEE_CITY'
+      FixedChar = True
+      Size = 35
+    end
+    object HawbSQLCONSIGNEE_COUNTRY_CODE: TStringField
+      FieldName = 'CONSIGNEE_COUNTRY_CODE'
+      FixedChar = True
+      Size = 2
+    end
+    object HawbSQLFK_ITINERARY_SERIAL: TIntegerField
+      FieldName = 'FK_ITINERARY_SERIAL'
+    end
+    object HawbSQLPACKAGES_COUNT: TIntegerField
+      FieldName = 'PACKAGES_COUNT'
+    end
+    object HawbSQLITEMS_COUNT: TIntegerField
+      FieldName = 'ITEMS_COUNT'
+    end
+    object HawbSQLPAYMENT_METHOD: TStringField
+      FieldName = 'PAYMENT_METHOD'
+      FixedChar = True
+      Size = 2
+    end
+    object HawbSQLIS_HIGH: TStringField
+      FieldName = 'IS_HIGH'
       FixedChar = True
       Size = 1
     end
-    object HawbSQLDESTINATION_STATION: TStringField
-      FieldName = 'DESTINATION_STATION'
+    object HawbSQLVALUE_TYPE: TStringField
+      FieldName = 'VALUE_TYPE'
       FixedChar = True
+      Size = 1
+    end
+    object HawbSQLCUSTOMS_VALUE: TFloatField
+      FieldName = 'CUSTOMS_VALUE'
+    end
+    object HawbSQLCURRENCY: TStringField
+      FieldName = 'CURRENCY'
+      FixedChar = True
+      Size = 3
+    end
+    object HawbSQLCURRENCY_RATE: TFloatField
+      FieldName = 'CURRENCY_RATE'
+    end
+    object HawbSQLSENDER_ADDRESS_1: TStringField
+      FieldName = 'SENDER_ADDRESS_1'
+      FixedChar = True
+      Size = 35
+    end
+    object HawbSQLSENDER_ADDRESS_2: TStringField
+      FieldName = 'SENDER_ADDRESS_2'
+      FixedChar = True
+      Size = 35
+    end
+    object HawbSQLSENDER_ADDRESS_3: TStringField
+      FieldName = 'SENDER_ADDRESS_3'
+      FixedChar = True
+      Size = 35
+    end
+    object HawbSQLSENDER_DEVICE_TYPE: TStringField
+      FieldName = 'SENDER_DEVICE_TYPE'
+      FixedChar = True
+      Size = 9
+    end
+    object HawbSQLSENDER_DEVICE_DETAILS: TStringField
+      FieldName = 'SENDER_DEVICE_DETAILS'
+      FixedChar = True
+      Size = 35
+    end
+    object HawbSQLCONSIGNEE_ADDRESS_1: TStringField
+      FieldName = 'CONSIGNEE_ADDRESS_1'
+      FixedChar = True
+      Size = 35
+    end
+    object HawbSQLCONSIGNEE_ADDRESS_2: TStringField
+      FieldName = 'CONSIGNEE_ADDRESS_2'
+      FixedChar = True
+      Size = 35
+    end
+    object HawbSQLCONSIGNEE_ADDRESS_3: TStringField
+      FieldName = 'CONSIGNEE_ADDRESS_3'
+      FixedChar = True
+      Size = 35
+    end
+    object HawbSQLCONSIGNEE_DEVICE_TYPE: TStringField
+      FieldName = 'CONSIGNEE_DEVICE_TYPE'
+      FixedChar = True
+      Size = 9
+    end
+    object HawbSQLCONSIGNEE_DEVICE_DETAILS: TStringField
+      FieldName = 'CONSIGNEE_DEVICE_DETAILS'
+      FixedChar = True
+      Size = 35
+    end
+    object HawbSQLINCOTERMS: TStringField
+      FieldName = 'INCOTERMS'
+      FixedChar = True
+      Size = 9
+    end
+    object HawbSQLIS_SCANNED: TStringField
+      FieldName = 'IS_SCANNED'
+      FixedChar = True
+      Size = 1
+    end
+    object HawbSQLSENDER_EMAIL: TStringField
+      FieldName = 'SENDER_EMAIL'
+      FixedChar = True
+      Size = 60
+    end
+    object HawbSQLCONSIGNEE_EMAIL: TStringField
+      FieldName = 'CONSIGNEE_EMAIL'
+      FixedChar = True
+      Size = 60
+    end
+    object HawbSQLSERVICE_CODE: TStringField
+      FieldName = 'SERVICE_CODE'
+      Size = 10
+    end
+    object HawbSQLACCOUNT_NUMBER: TStringField
+      FieldName = 'ACCOUNT_NUMBER'
+      FixedChar = True
+      Size = 15
+    end
+    object HawbSQLCONSIGNEE_PREFERRED_NAME: TStringField
+      FieldName = 'CONSIGNEE_PREFERRED_NAME'
+      FixedChar = True
+      Size = 35
+    end
+    object HawbSQLSENDER_PREFERRED_NAME: TStringField
+      FieldName = 'SENDER_PREFERRED_NAME'
+      FixedChar = True
+      Size = 35
     end
   end
   object MawbSQL: TIBCQuery

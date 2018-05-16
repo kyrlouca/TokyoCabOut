@@ -225,7 +225,6 @@ THawbAge=(haNotFound, haSame, haPartial, haOld, haDuplicate);
     procedure FormCreate(Sender: TObject);
     procedure RzBitBtn2Click(Sender: TObject);
     procedure RzBitBtn1Click(Sender: TObject);
-    procedure Button2Click(Sender: TObject);
     procedure FormActivate(Sender: TObject);
   private
     { Private declarations }
@@ -236,11 +235,9 @@ THawbAge=(haNotFound, haSame, haPartial, haOld, haDuplicate);
   Function GetTheFile:String;
 
   function ProcessOneMawb(headerNode:IXMLNode; mawbNode:IXMLNode;fileName:String):Integer;
-  function CreateMawb(Const MawbId:String;Const HeaderNode:IXMLNode;Const MawbNode:IXMLNode;Const fileName:string):integer;
   function CreateHawb(Const mawbSerial:Integer; hawbNode:IXMLNode):Integer;
   function CreateHawbItem(Const hawbSerial:Integer ; hawbItemNode:IXMLNode):Integer;
 
-  procedure DeleteHawb(hawbSerial:Integer);
 // Function GetDefaultMediumVatRate():Double;
   Function ConvertCategory(const Category:string):string;
 
@@ -330,7 +327,8 @@ begin
   ReadOneXML(FileNameXyz);
 
 
- temp:=Tpath.ChangeExtension(FileNameXYZ,'.XXX');
+
+  temp:=Tpath.ChangeExtension(FileNameXYZ,'.XXX');
   If RenameFile(FileNameXYZ,temp ) then begin
       MoveFIle:=MoveFolder +'\'+System.SysUtils.ExtractFileName(temp);
       TRY
@@ -481,71 +479,6 @@ end;
 
 
 
-function TX_readFileFRM.CreateMawb(Const MawbId:String;Const HeaderNode:IXMLNode;Const MawbNode:IXMLNode;Const FileName:String):integer;
-var
-  ArrivalDate:TDate;
-  DepartureDate:TDate;
-//  ArrivalDate2:TDate;
-  temp:String;
-  Movement:String;
-  str:string;
-  MsgTime:TDateTime;
-begin
-
-  if MawbSQL.Active then
-    MawbSQL.close;
-
-
-
-
-  MawbSql.Open;
-  MawbSQl.Edit;
-  MawbSQL.FieldByName('Mawb_id').Value:=MawbId;
-  mawbSQL.FieldByName('FILE_NAME_XML').value := TPath.GetFileName(FileName);
-
-  if Trim(MawbNode.ParentNode.ParentNode.ChildNodes['ArrivalDate'].Text) ='' then begin
-    ArrivalDate:=now;
-  end else begin
-    ArrivalDate:=ConvertDateF(MawbNode.ParentNode.ParentNode.ChildNodes['ArrivalDate'].Text);
-  end;
-  mawbSQL.FieldByName('date_arrived').value  :=arrivalDate;
-
-  DepartureDate:=ConvertDateF(MawbNode.ParentNode.ParentNode.ChildNodes['DepartureDate'].Text);
-  mawbSQL.FieldByName('date_depart').value  :=DepartureDate;
-
-
-  temp:= mawbNode.ParentNode.ParentNode.ChildNodes['DepartureDate'].Text;
-  mawbSQL.FieldByName('FORM_DATE').value  := ConvertDateF(temp);
-
-  temp:= mawbNode.ParentNode.ParentNode.ChildNodes['MvmtNo'].Text;
-  mawbSQL.FieldByName('FLIGHT_NUMBER').value  := temp;
-
-  MawbSQL.FieldByName('REFERENCE_YEAR').Value:=yearOf(arrivalDate);
-  MawbSQL.FieldByName('Passed').Value:='N';
-  MawbSQL.FieldByName('DHL_EQUIPMENT_ID').Value:=mawbNode.ChildNodes['EquipmentID'].Text;
-
-   Movement:=MawbNode.ParentNode.ParentNode.ChildNodes['MvmtNo'].Text;
-   MawbSQL.FieldByName('MOVEMENT_NUMBER').Value:=Movement;
-
-  Str:= HeaderNode.ChildNodes['MsgCtl'].ChildNodes['MsgDate'].Text
-  +' '+ HeaderNode.ChildNodes['MsgCtl'].ChildNodes['MsgTime'].Text;
-  MsgTime:=ConvertUTCTimeStampF(str);
-  MawbSQL.FieldByName('MSG_TIME').AsDateTime:=MsgTime;
-
-
-
-  MawbSQL.Post;
-  result:=MawbSQL.FieldByName('Reference_number').AsInteger;
-
-  MawbSQL.Close;
-end;
-
-
-
-   procedure TX_readFileFRM.Button2Click(Sender: TObject);
-begin
-  DeleteHawb(StrToIntDef(ValueFLD.Text,0));
-end;
 
 function TX_readFileFRM.CreateHawb(Const mawbSerial:Integer; hawbNode:IXMLNode):Integer;
 var
@@ -694,10 +627,11 @@ Var
         DefaultDir:String;
         ParamRec:TParameterRecord;
 Begin
-        DefaultDir:= GN_GetTheSystemParameter(cn, 'F_1').P_String4;
+        DefaultDir:= GN_GetTheSystemParameter(cn, 'S01').P_String4;
         If DefaultDir='' then begin
-          MessageDlg('Menu ->System->Params-> System Parameters. Then Add record with Code=F1 ', mtWarning, [mbOK], 0);
+          MessageDlg('Menu ->System->Params-> System Parameters. Then Add record with Code=S01 ', mtWarning, [mbOK], 0);
         end;
+
 
         OpenFileDLG.InitialDir:=Defaultdir;
         OpenFIleDLG.Filter:='No Extention|*.;XML|*.XML';
@@ -710,32 +644,6 @@ Begin
                 end; //execute
         end;{with}
 End;
-
-procedure TX_readFileFRM.DeleteHawb(hawbSerial:Integer);
-var
-  multiSQL:TksMultiSQL;
-  hiStr:String;
-  HawbStr:string;
-begin
-  HawbStr:=IntToStr(HawbSerial);
-   try
-    hiStr:= 'Delete  from hawb_item_certificate dd where dd.fk_hawb_item in '
-    + '( select hi.serial_number from  hawb_item hi where hi.fk_hawb_serial = :hawb )';
-
-    multiSQL:=TksMultiSQL.Create(cn)
-    .add(hiStr,[HawbStr])
-    .add('delete from hawb_comments where fk_hawb_serial = :hawb',[HawbStr] )
-    .add('delete from hawb_partial where FK_HAWB_SERIAL_ORIGINAL = :hawb',[HawbStr] )
-    .add('delete from hawb_item where fk_hawb_serial =:hawb',[HawbStr] )
-    .add('delete from sender_invoice where fk_hawb_serial = :hawb' ,[HawbStr])
-    .add('delete from hawb where serial_number = :hawb',[HawbStr])
-    .ExecSQL();
-
-   finally
-     multiSQL.Free;
-   end;
-
-end;
 
 
 Function TX_readFileFRM.ConvertCategory(const Category:string):string;

@@ -115,7 +115,7 @@ begin
     exit;
   end;
 
-  X_readFileFRM.readXFiles(FromDir,ToDir,'');
+  X_readFileFRM.readXFiles(FromDir,ToDir,'*.');
   If GlobalStart then begin
       Timer1.Enabled:=true;
   end;
@@ -164,7 +164,7 @@ begin
     exit;
   end;
 
-  X_readFileFRM.readXFiles(FromDir,ToDir,'11805141641159241000');
+  readXFiles(FromDir,ToDir,'11805141641159241000');
 
 
 end;

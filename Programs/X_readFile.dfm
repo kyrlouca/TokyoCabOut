@@ -261,7 +261,7 @@ object X_readFileFRM: TX_readFileFRM
       Height = 25
       Caption = 'Delete hawbs'
       TabOrder = 2
-      Visible = False
+      OnClick = Button2Click
     end
     object ValueFLD: TwwDBEdit
       Left = 209
@@ -273,15 +273,6 @@ object X_readFileFRM: TX_readFileFRM
       Visible = False
       WantReturns = False
       WordWrap = False
-    end
-    object All: TButton
-      Left = 360
-      Top = 6
-      Width = 75
-      Height = 25
-      Caption = 'All'
-      TabOrder = 4
-      Visible = False
     end
   end
   object XMLDocument1: TXMLDocument

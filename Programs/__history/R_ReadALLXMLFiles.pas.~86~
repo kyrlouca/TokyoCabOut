@@ -42,8 +42,7 @@ type
   private
     { Private declarations }
         cn:TIBCConnection;
-        Function ReadFilesInFolder:Integer;
-      procedure ReadXFiles;
+    procedure ReadXFiles(Const FromDir, ToDir:String; Const Pattern:String);
 
   public
     { Public declarations }
@@ -98,10 +97,25 @@ end;
 
 
 procedure TR_ReadAllFilesFRM.Timer1Timer(Sender: TObject);
+var
+  FromDir:String;
+  ToDir:String;
 begin
   Timer1.Enabled:=False;
 
-  readXFiles;
+  FromDir:= GeneralParametersNew.GN_GetTheSystemParameter(cn,'S02').P_String4;
+  if not directoryexists(FromDir) then begin
+    ShowMessage(FromDir+' does not exist');
+    exit;
+  end;
+
+  ToDir:=GeneralParametersNew.GN_GetTheSystemParameter(cn,'S03').P_String4;
+  if not directoryexists(ToDir) then begin
+    ShowMessage(ToDir+' does not exist');
+    exit;
+  end;
+
+  readXFiles(FromDir,ToDir,'*.');
 
   If GlobalStart then begin
       Timer1.Enabled:=true;
@@ -115,10 +129,9 @@ procedure TR_ReadAllFilesFRM.TimerBTNClick(Sender: TObject);
 var
   TimerStatus:Boolean;
 begin
-//self.ReadAllFiles;
   Timer1.Interval:=1000;
-  TimerStatus:=Timer1.Enabled;
-  Timer1.Enabled:=not TimerStatus;
+//  TimerStatus:=
+  Timer1.Enabled:=not Timer1.Enabled;
   GlobalStart:=Timer1.Enabled;
 
   If Timer1.Enabled then begin
@@ -134,63 +147,83 @@ end;
 
 
 
-
 procedure TR_ReadAllFilesFRM.Button1Click(Sender: TObject);
+var
+  FromDir:String;
+  ToDir:String;
 begin
- readXfiles;
+
+  FromDir:= GeneralParametersNew.GN_GetTheSystemParameter(cn,'S02').P_String4;
+  if not directoryexists(FromDir) then begin
+    ShowMessage(FromDir+' does not exist');
+    exit;
+  end;
+
+  ToDir:=GeneralParametersNew.GN_GetTheSystemParameter(cn,'S03').P_String4;
+  if not directoryexists(ToDir) then begin
+    ShowMessage(ToDir+' does not exist');
+    exit;
+  end;
+
+  readXFiles(FromDir,ToDir,'11805141641159241000.*');
+
+
 end;
 
 
-procedure TR_ReadAllFilesFRM.ReadXFiles;
+procedure TR_ReadAllFilesFRM.ReadXFiles(Const FromDir, ToDir:String; Const Pattern:String);
  var
    strFiles: TStringDynArray;
    i: integer;
-   CurrentDir:String;
-   MovedDir:String;
    fileName:string;
    WorkingFile:String;
    MovedFile:string;
    Ext:String;
+   IsOnlyWithoutExtention:boolean;
 
 begin
 
-  CurrentDir:= GeneralParametersNew.GN_GetTheSystemParameter(cn,'S02').P_String4;
- if not directoryexists(CurrentDir) then begin
-  ShowMessage(CurrentDir+' does not exist');
-  exit;
- end;
+  memo1.Clear;
+  //workaround to delphi bug for pattern '*.'
+  if pattern='' then begin
+    strFiles := TDirectory.GetFiles(FromDir);
+    IsOnlyWithoutExtention:=true;
+  end else begin
+    strFiles := TDirectory.GetFiles(FromDir,pattern);
+    IsOnlyWithoutExtention:=false;
+  end;
 
- MovedDir:=GeneralParametersNew.GN_GetTheSystemParameter(cn,'S03').P_String4;
- if not directoryexists(MovedDir) then begin
-  ShowMessage(CurrentDir+' does not exist');
-  exit;
- end;
-
-   memo1.Clear;
-  strFiles := TDirectory.GetFiles(CUrrentDir);
-   for i := 0  to High(strFiles) do begin
+  for i := 0  to High(strFiles) do begin
      fileName:=StrFiles[i];
      ext:= TPath.GetExtension(fileName);
-     if (ext='') then begin
+     SHOWmESSAGE('read:'+FileName);
+
+     //workaround to delphi bug for pattern '*.'
+     if (ext<>'') and IsOnlyWithoutExtention then begin
+       continue;
+     end;
+
+     SHOWmESSAGE('Process '+FileName);
+
         //rename the file to .xyz and work on that
-        WorkingFile:=TPath.GetDirectoryName(fileName)+'\'+TPath.GetFileName(filename)+'.xyz';
+        WorkingFile:=TPath.GetDirectoryName(fileName)+'\'+TPath.GetFileNameWithoutExtension(filename)+'.xyz';
         if Tfile.Exists(WorkingFile)then
           Tfile.Delete(WorkingFile);
         Tfile.Move(FileName,WorkingFile);
 
         ////To The Job
-        X_readFileFRM.ReadOneXML(WorkingFile);
+
+//        X_readFileFRM.ReadOneXML(WorkingFile);
 
         ///Move the file to new directory with extension xxx
 
-        MovedFile:=MovedDir+'\'+TPath.GetFileName(filename)+'.xxx';
+        MovedFile:=ToDir+'\'+TPath.GetFileNameWithoutExtension(filename)+'.xxx';
         if Tfile.Exists(MovedFile)then
           Tfile.Delete(MovedFile);
         Tfile.Move(WorkingFile,MovedFile);
 
         Memo1.Lines.Add(workingFile);
-     end;
-   end;
+  end;
 
 
 end;

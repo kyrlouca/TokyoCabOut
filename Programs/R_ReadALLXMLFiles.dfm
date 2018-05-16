@@ -118,6 +118,8 @@ object R_ReadAllFilesFRM: TR_ReadAllFilesFRM
     Height = 315
     Align = alClient
     TabOrder = 2
+    ExplicitLeft = 8
+    ExplicitTop = 59
     object TimerBTN: TRzBitBtn
       Left = 32
       Top = 111
@@ -200,7 +202,6 @@ object R_ReadAllFilesFRM: TR_ReadAllFilesFRM
       Height = 25
       Caption = 'Button1'
       TabOrder = 1
-      Visible = False
       OnClick = Button1Click
     end
   end

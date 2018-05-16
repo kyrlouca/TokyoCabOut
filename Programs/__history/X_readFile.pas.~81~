@@ -225,8 +225,8 @@ THawbAge=(haNotFound, haSame, haPartial, haOld, haDuplicate);
     procedure FormCreate(Sender: TObject);
     procedure RzBitBtn2Click(Sender: TObject);
     procedure RzBitBtn1Click(Sender: TObject);
-    procedure Button2Click(Sender: TObject);
     procedure FormActivate(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
   private
     { Private declarations }
     cn:TIBCConnection;
@@ -328,7 +328,8 @@ begin
   ReadOneXML(FileNameXyz);
 
 
- temp:=Tpath.ChangeExtension(FileNameXYZ,'.XXX');
+
+  temp:=Tpath.ChangeExtension(FileNameXYZ,'.XXX');
   If RenameFile(FileNameXYZ,temp ) then begin
       MoveFIle:=MoveFolder +'\'+System.SysUtils.ExtractFileName(temp);
       TRY
@@ -480,11 +481,6 @@ end;
 
 
 
-   procedure TX_readFileFRM.Button2Click(Sender: TObject);
-begin
-  DeleteHawb(StrToIntDef(ValueFLD.Text,0));
-end;
-
 function TX_readFileFRM.CreateHawb(Const mawbSerial:Integer; hawbNode:IXMLNode):Integer;
 var
 HawbSerial:Integer;
@@ -632,10 +628,11 @@ Var
         DefaultDir:String;
         ParamRec:TParameterRecord;
 Begin
-        DefaultDir:= GN_GetTheSystemParameter(cn, 'F_1').P_String4;
+        DefaultDir:= GN_GetTheSystemParameter(cn, 'S01').P_String4;
         If DefaultDir='' then begin
-          MessageDlg('Menu ->System->Params-> System Parameters. Then Add record with Code=F1 ', mtWarning, [mbOK], 0);
+          MessageDlg('Menu ->System->Params-> System Parameters. Then Add record with Code=S01 ', mtWarning, [mbOK], 0);
         end;
+
 
         OpenFileDLG.InitialDir:=Defaultdir;
         OpenFIleDLG.Filter:='No Extention|*.;XML|*.XML';
@@ -649,6 +646,14 @@ Begin
         end;{with}
 End;
 
+
+procedure TX_readFileFRM.Button2Click(Sender: TObject);
+begin
+
+  ksExecSQLVar(cn,'Delete from airwaybill_item ai where ai.serial_number > :Serial',[50000]);
+  ksExecSQLVar(cn,'Delete from airwaybill ab where ab.serial_number >= :Serial',[50000]);
+
+end;
 
 Function TX_readFileFRM.ConvertCategory(const Category:string):string;
 Begin

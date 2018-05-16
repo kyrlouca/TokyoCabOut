@@ -42,7 +42,7 @@ type
   private
     { Private declarations }
         cn:TIBCConnection;
-//    procedure ReadXFiles(Const FromDir, ToDir:String; Const Pattern:String);
+    procedure ReadXFiles(Const FromDir, ToDir:String; Const Pattern:String);
 
   public
     { Public declarations }
@@ -115,7 +115,8 @@ begin
     exit;
   end;
 
-  X_readFileFRM.readXFiles(FromDir,ToDir,'');
+  readXFiles(FromDir,ToDir,'*.');
+
   If GlobalStart then begin
       Timer1.Enabled:=true;
   end;
@@ -164,7 +165,7 @@ begin
     exit;
   end;
 
-  X_readFileFRM.readXFiles(FromDir,ToDir,'11805141641159241000');
+  readXFiles(FromDir,ToDir,'11805141641159241000');
 
 
 end;

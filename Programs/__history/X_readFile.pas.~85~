@@ -10,7 +10,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.DateUtils,System.Variants, System.Classes, System.ioUtils,Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Xml.xmldom, Xml.XMLIntf,
   Xml.XMLDoc, Data.DB, MemDS, DBAccess, IBC,Math, RzButton, RzPanel,
-  Vcl.ExtCtrls, Vcl.Mask, RzEdit, vcl.Wwdbedit, RzLabel, RzShellDialogs,CodeSiteLogging;
+  Vcl.ExtCtrls, Vcl.Mask, RzEdit, vcl.Wwdbedit, RzLabel, RzShellDialogs,CodeSiteLogging,System.Types;
 
 type
 TMawbRec =Record
@@ -169,7 +169,6 @@ THawbAge=(haNotFound, haSame, haPartial, haOld, haDuplicate);
     MawbSQLFILE_NAME_XML: TStringField;
     ProcessFLD: TRzLabel;
     OpenfileDLG: TRzOpenDialog;
-    All: TButton;
     MawbSQLMSG_TIME: TDateTimeField;
     MawbSQLMOVEMENT_NUMBER: TStringField;
     MawbSQLDATE_DEPART: TDateField;
@@ -225,8 +224,8 @@ THawbAge=(haNotFound, haSame, haPartial, haOld, haDuplicate);
     procedure FormCreate(Sender: TObject);
     procedure RzBitBtn2Click(Sender: TObject);
     procedure RzBitBtn1Click(Sender: TObject);
-    procedure Button2Click(Sender: TObject);
     procedure FormActivate(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
   private
     { Private declarations }
     cn:TIBCConnection;
@@ -235,22 +234,19 @@ THawbAge=(haNotFound, haSame, haPartial, haOld, haDuplicate);
 
   Function GetTheFile:String;
 
-
-  function ReadTheFile(Const FileName:String) :boolean;
-
   function ProcessOneMawb(headerNode:IXMLNode; mawbNode:IXMLNode;fileName:String):Integer;
-  function CreateMawb(Const MawbId:String;Const HeaderNode:IXMLNode;Const MawbNode:IXMLNode;Const fileName:string):integer;
   function CreateHawb(Const mawbSerial:Integer; hawbNode:IXMLNode):Integer;
   function CreateHawbItem(Const hawbSerial:Integer ; hawbItemNode:IXMLNode):Integer;
 
-  procedure DeleteHawb(hawbSerial:Integer);
 // Function GetDefaultMediumVatRate():Double;
   Function ConvertCategory(const Category:string):string;
 
 
   public
     { Public declarations }
+    temp:integer;
     function ReadOneXML(Const FileName:String) :Boolean;
+    procedure ReadXFiles(Const FromDir, ToDir:String; Const Pattern:String);
   end;
 
 var
@@ -332,7 +328,8 @@ begin
   ReadOneXML(FileNameXyz);
 
 
- temp:=Tpath.ChangeExtension(FileNameXYZ,'.XXX');
+
+  temp:=Tpath.ChangeExtension(FileNameXYZ,'.XXX');
   If RenameFile(FileNameXYZ,temp ) then begin
       MoveFIle:=MoveFolder +'\'+System.SysUtils.ExtractFileName(temp);
       TRY
@@ -351,55 +348,6 @@ end;
 
 
 
-function TX_readFileFRM.ReadTheFile(Const FileName:String) :Boolean;
-var
-  Doc: IXMLDocument;
-  Data: IXMLNode;
-  Movements, Mawbs,Hawbs :IXMLNodeList;
-  aHeader,aMovement,aMawb,aHawb:ixmlnODE;
-  I: Integer;
-//  j:Integer;
-  MawbRec:TmawbRec;
-  str:String;
-  temptime:TDateTime;
-  TotalHawbs:Integer;
-
-begin
-  TotalHawbs:=0;
-  result:=true;
-  Doc := LoadXMLDocument(FileName);
-  Data := Doc.DocumentElement;
-
-  Movements:=Data.ChildNodes['Dtls'].ChildNodes['Entries'].ChildNodes['Entry'].childNOdes['Mvmts'].ChildNodes;
-  aHeader:=Data.ChildNodes['Hdr'];
-
-
-  if Movements.Count <1 then begin
-    result:=False;
-    exit;
-  end;
-// ShowMessage(Movements[0].ChildNodes['MvmtNo'].Text);
-
-  Mawbs:=Movements[0].ChildNodes['TDOCs'].ChildNodes; //only one movement is sent
-  aMovement:=Movements[0];
-  if Mawbs.Count <1 then begin
-    result:=False;
-    exit;
-  end;
-
-  //same first mawb exists in another file
-  aMawb := Mawbs[0];
-
-  for I := 0 to Mawbs.Count-1 do  begin
-    aMawb := Mawbs[i];
-    TotalHawbs := TotalHawbs + ProcessOneMawb(aHeader,aMawb,fileName);
-  end;
-
-  MessagesMemo.Lines.Add('---------------------------------------------------------');
-  MessagesMemo.Lines.Add('--------------------- Total Created:'+InttoStr(Totalhawbs));
-
-
-  end;
 
 
 
@@ -441,7 +389,7 @@ begin
   //same first mawb exists in another file
   aMawb := Mawbs[0];
 
-  for I := 0 to min(Mawbs.Count-1,1 )do  begin
+  for I := 0 to min(Mawbs.Count-1,100000) do begin
   //each movement may hawe one or more mawbs  (each mawb is a TDOC) but may have more than one same mawb
     aMawb := Mawbs[i];
     TotalHawbs := TotalHawbs + ProcessOneMawb(aHeader,aMawb,fileName);
@@ -491,7 +439,7 @@ begin
   hawbNOdes:=MawbNOde.ChildNodes['Shps'].ChildNodes;
 
 //  for j:= 0 to hawbNodes.Count -1 do begin
-  for j:= 0 to min(hawbNodes.Count -1,2) do begin
+  for j:= 0 to min(hawbNodes.Count -1,1000000) do begin
       hawbNode:=hawbNodes[j];
       hawb:=hawbNode.ChildNodes['HAWB'].Text;
 
@@ -532,71 +480,6 @@ end;
 
 
 
-function TX_readFileFRM.CreateMawb(Const MawbId:String;Const HeaderNode:IXMLNode;Const MawbNode:IXMLNode;Const FileName:String):integer;
-var
-  ArrivalDate:TDate;
-  DepartureDate:TDate;
-//  ArrivalDate2:TDate;
-  temp:String;
-  Movement:String;
-  str:string;
-  MsgTime:TDateTime;
-begin
-
-  if MawbSQL.Active then
-    MawbSQL.close;
-
-
-
-
-  MawbSql.Open;
-  MawbSQl.Edit;
-  MawbSQL.FieldByName('Mawb_id').Value:=MawbId;
-  mawbSQL.FieldByName('FILE_NAME_XML').value := TPath.GetFileName(FileName);
-
-  if Trim(MawbNode.ParentNode.ParentNode.ChildNodes['ArrivalDate'].Text) ='' then begin
-    ArrivalDate:=now;
-  end else begin
-    ArrivalDate:=ConvertDateF(MawbNode.ParentNode.ParentNode.ChildNodes['ArrivalDate'].Text);
-  end;
-  mawbSQL.FieldByName('date_arrived').value  :=arrivalDate;
-
-  DepartureDate:=ConvertDateF(MawbNode.ParentNode.ParentNode.ChildNodes['DepartureDate'].Text);
-  mawbSQL.FieldByName('date_depart').value  :=DepartureDate;
-
-
-  temp:= mawbNode.ParentNode.ParentNode.ChildNodes['DepartureDate'].Text;
-  mawbSQL.FieldByName('FORM_DATE').value  := ConvertDateF(temp);
-
-  temp:= mawbNode.ParentNode.ParentNode.ChildNodes['MvmtNo'].Text;
-  mawbSQL.FieldByName('FLIGHT_NUMBER').value  := temp;
-
-  MawbSQL.FieldByName('REFERENCE_YEAR').Value:=yearOf(arrivalDate);
-  MawbSQL.FieldByName('Passed').Value:='N';
-  MawbSQL.FieldByName('DHL_EQUIPMENT_ID').Value:=mawbNode.ChildNodes['EquipmentID'].Text;
-
-   Movement:=MawbNode.ParentNode.ParentNode.ChildNodes['MvmtNo'].Text;
-   MawbSQL.FieldByName('MOVEMENT_NUMBER').Value:=Movement;
-
-  Str:= HeaderNode.ChildNodes['MsgCtl'].ChildNodes['MsgDate'].Text
-  +' '+ HeaderNode.ChildNodes['MsgCtl'].ChildNodes['MsgTime'].Text;
-  MsgTime:=ConvertUTCTimeStampF(str);
-  MawbSQL.FieldByName('MSG_TIME').AsDateTime:=MsgTime;
-
-
-
-  MawbSQL.Post;
-  result:=MawbSQL.FieldByName('Reference_number').AsInteger;
-
-  MawbSQL.Close;
-end;
-
-
-
-   procedure TX_readFileFRM.Button2Click(Sender: TObject);
-begin
-  DeleteHawb(StrToIntDef(ValueFLD.Text,0));
-end;
 
 function TX_readFileFRM.CreateHawb(Const mawbSerial:Integer; hawbNode:IXMLNode):Integer;
 var
@@ -644,6 +527,8 @@ begin
      if temp<>'ss' then
        qr.FieldByName('CURRENCY').Value:= hawbNode.ChildNodes['TxAndDty'].ChildNodes['CstmsValCrncyCd'].Text;
 
+
+     qr.FieldByName('IS_SCANNED').Value:= 'N';
 
      qr.FieldByName('INCOTERMS').Value:= hawbNode.ChildNodes['Incoterms'].Text;
      qr.FieldByName('SERVICE_CODE').Value:= hawbNode.ChildNodes['DHLServiceCd'].Text;
@@ -743,10 +628,11 @@ Var
         DefaultDir:String;
         ParamRec:TParameterRecord;
 Begin
-        DefaultDir:= GN_GetTheSystemParameter(cn, 'F_1').P_String4;
+        DefaultDir:= GN_GetTheSystemParameter(cn, 'S01').P_String4;
         If DefaultDir='' then begin
-          MessageDlg('Menu ->System->Params-> System Parameters. Then Add record with Code=F1 ', mtWarning, [mbOK], 0);
+          MessageDlg('Menu ->System->Params-> System Parameters. Then Add record with Code=S01 ', mtWarning, [mbOK], 0);
         end;
+
 
         OpenFileDLG.InitialDir:=Defaultdir;
         OpenFIleDLG.Filter:='No Extention|*.;XML|*.XML';
@@ -760,32 +646,14 @@ Begin
         end;{with}
 End;
 
-procedure TX_readFileFRM.DeleteHawb(hawbSerial:Integer);
-var
-  multiSQL:TksMultiSQL;
-  hiStr:String;
-  HawbStr:string;
+
+procedure TX_readFileFRM.Button2Click(Sender: TObject);
 begin
-  HawbStr:=IntToStr(HawbSerial);
-   try
-    hiStr:= 'Delete  from hawb_item_certificate dd where dd.fk_hawb_item in '
-    + '( select hi.serial_number from  hawb_item hi where hi.fk_hawb_serial = :hawb )';
 
-    multiSQL:=TksMultiSQL.Create(cn)
-    .add(hiStr,[HawbStr])
-    .add('delete from hawb_comments where fk_hawb_serial = :hawb',[HawbStr] )
-    .add('delete from hawb_partial where FK_HAWB_SERIAL_ORIGINAL = :hawb',[HawbStr] )
-    .add('delete from hawb_item where fk_hawb_serial =:hawb',[HawbStr] )
-    .add('delete from sender_invoice where fk_hawb_serial = :hawb' ,[HawbStr])
-    .add('delete from hawb where serial_number = :hawb',[HawbStr])
-    .ExecSQL();
-
-   finally
-     multiSQL.Free;
-   end;
+  ksExecSQLVar(cn,'Delete from airwaybill_item ai where ai.serial_number > :Serial',[50000]);
+  ksExecSQLVar(cn,'Delete from airwaybill ab where ab.serial_number >= :Serial',[50000]);
 
 end;
-
 
 Function TX_readFileFRM.ConvertCategory(const Category:string):string;
 Begin
@@ -803,6 +671,66 @@ Begin
         end;
 //        HawbTable.UpdateValue('X_Category',ValueType);
 End;
+
+
+
+
+procedure TX_readFileFRM.ReadXFiles(Const FromDir, ToDir:String; Const Pattern:String);
+ var
+   strFiles: TStringDynArray;
+   i: integer;
+   fileName:string;
+   WorkingFile:String;
+   MovedFile:string;
+   Ext:String;
+   IsOnlyWithoutExtention:boolean;
+
+begin
+
+  memo1.Clear;
+  //workaround to delphi bug for pattern '*.'
+  if pattern='' then begin
+    strFiles := TDirectory.GetFiles(FromDir);
+    IsOnlyWithoutExtention:=true;
+  end else begin
+    strFiles := TDirectory.GetFiles(FromDir,pattern);
+    IsOnlyWithoutExtention:=false;
+  end;
+
+  for i := 0  to High(strFiles) do begin
+     fileName:=StrFiles[i];
+     ext:= TPath.GetExtension(fileName);
+     //workaround to delphi bug for pattern '*.'
+     if (ext<>'') and IsOnlyWithoutExtention then begin
+       continue;
+     end;
+
+     If (UpperCase(ext)='.XYZ') then
+      continue;
+
+        //rename the file to .xyz and work on that
+        WorkingFile:=TPath.GetDirectoryName(fileName)+'\'+TPath.GetFileNameWithoutExtension(filename)+'.xyz';
+        if Tfile.Exists(WorkingFile)then
+          Tfile.Delete(WorkingFile);
+        Tfile.Move(FileName,WorkingFile);
+
+        ////To The Job
+
+//        X_readFileFRM.ReadOneXML(WorkingFile);
+
+        ///Move the file to new directory with extension xxx
+
+        MovedFile:=ToDir+'\'+TPath.GetFileNameWithoutExtension(filename)+'.xxx';
+        if Tfile.Exists(MovedFile)then
+          Tfile.Delete(MovedFile);
+        Tfile.Move(WorkingFile,MovedFile);
+
+        Memo1.Lines.Add(workingFile);
+  end;
+
+
+end;
+
 
 END.
 
