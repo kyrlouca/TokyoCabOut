@@ -1,0 +1,399 @@
+<?xml version="1.0"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.eurodyn.com"
+            targetNamespace="http://www.eurodyn.com" elementFormDefault="qualified">
+    <xsd:include schemaLocation="common_datatypes.xsd"/>
+    <xsd:include schemaLocation="CommonCodelists.xsd"/>
+    <xsd:element name="CC515A">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="SyntaxIdentifier" type="a4">
+                </xsd:element>
+                <xsd:element name="SyntaxVersionNumber" type="n1">
+                </xsd:element>
+                <xsd:element name="MessageSender" type="an..35">
+                </xsd:element>
+                <xsd:element name="SenderIdCodeQualifier" type="an..4" minOccurs="0"/>
+                <xsd:element name="MessageRecipient" type="an..35">
+                </xsd:element>
+                <xsd:element name="RecipientIdentifCodeQualifier" type="an..4" minOccurs="0"/>
+                <xsd:element name="DateOfPreparation" type="n6">
+                </xsd:element>
+                <xsd:element name="TimeOfPreparation" type="an4">
+                </xsd:element>
+                <xsd:element name="InterchangeControlReference" type="an..14">
+                </xsd:element>
+                <xsd:element name="RecipientsRefPasswd" type="an..14" minOccurs="0"/>
+                <xsd:element name="RecipientsRefPasswdQualifier" type="an2" minOccurs="0"/>
+                <xsd:element name="ApplicationReference" type="an..14" minOccurs="0"/>
+                <xsd:element name="Priority" type="a1" minOccurs="0"/>
+                <xsd:element name="AcknowledgementRequest" type="n1" minOccurs="0"/>
+                <xsd:element name="CommunicationsAgreementId" type="an..35" minOccurs="0"/>
+                <xsd:element name="TestIndicator" type="n1" minOccurs="0"/>
+                <xsd:element name="MessageIdentification" type="an..14">
+                </xsd:element>
+                <xsd:element name="MessageType" type="an..6">
+                </xsd:element>
+                <xsd:element name="CommonAccessReference" type="an..35" minOccurs="0"/>
+                <xsd:element name="Msg515Header" maxOccurs="1" minOccurs="1">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="ReferenceNumber" type="an..22">
+                            </xsd:element>
+                            <xsd:element name="TypeOfDeclaration" type="an..9">
+                            </xsd:element>
+                            <xsd:element name="CountryOfDestinationCode" type="a2" minOccurs="0"/>
+                            <xsd:element name="AgreedLocationOfGoodsCode" type="an..17"
+                                         minOccurs="0"/>
+                            <xsd:element name="AgreedLocationOfGoods" type="an..35" minOccurs="0"/>
+                            <xsd:element name="AgreedLocationOfGoodsLNG" type="a2" minOccurs="0"/>
+                            <xsd:element name="AuthorisedLocationOfGoodsCode" type="an..17"
+                                         minOccurs="0"/>
+                            <xsd:element name="CountryOfDispatchexportCode" type="a2" minOccurs="0"/>
+                            <xsd:element name="CustomsSubPlace" type="an..17" minOccurs="0"/>
+                            <xsd:element name="InlandTransportMode" type="n..2" minOccurs="0"/>
+                            <xsd:element name="TransportModeAtBorder" type="n..2">
+                            </xsd:element>
+                            <xsd:element name="IdMeansOfTransAtDeparture" type="an..27"
+                                         minOccurs="0"/>
+                            <xsd:element name="IdMeansOfTransAtDepartureLNG" type="a2" minOccurs="0"/>
+                            <xsd:element name="IdMeansOfTransCrossBorder" type="an..27"
+                                         minOccurs="0"/>
+                            <xsd:element name="IdMeansOfTransCrossBorderLNG" type="a2" minOccurs="0"/>
+                            <xsd:element name="NationOfMeansTransCrossBorder" type="a2"
+                                         minOccurs="0"/>
+                            <xsd:element name="TypeOfMeansOfTransCrossBorder" type="n..2"
+                                         minOccurs="0"/>
+                            <xsd:element name="ContainerisedIndicator" type="n1">
+                            </xsd:element>
+                            <xsd:element name="DialogLangIndicatorAtDeparture" type="a2"
+                                         minOccurs="0"/>
+                            <xsd:element name="ECSAccompanyingDocLangCode" type="a2">
+                            </xsd:element>
+                            <xsd:element name="TotalNumberOfItems" type="n..5">
+                            </xsd:element>
+                            <xsd:element name="TotalNumberOfPackages" type="n..7" minOccurs="0"/>
+                            <xsd:element name="TotalGrossMass" type="n..11.3" minOccurs="0"/>
+                            <xsd:element name="DeclarationDate" type="datetime">
+                            </xsd:element>
+                            <xsd:element name="DeclarationPlace" type="an..35">
+                            </xsd:element>
+                            <xsd:element name="DeclarationPlaceLNG" type="a2" minOccurs="0"/>
+                            <xsd:element name="SpecificCircumstanceIndicator" type="a1"
+                                         minOccurs="0"/>
+                            <xsd:element name="TranspChargesMethodOfPayment" type="a1" minOccurs="0"/>
+                            <xsd:element name="CommercialReferenceNumber" type="an..70"
+                                         minOccurs="0"/>
+                            <xsd:element name="GrandTotalTaxesAmount" type="n..15.2" minOccurs="0"/>
+                            <xsd:element name="TypeOfDeclarationBox12" type="a1">
+                            </xsd:element>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element name="Msg515Exporter" maxOccurs="1" minOccurs="0">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="TraderName" type="an..35" minOccurs="0"/>
+                            <xsd:element name="StreetAndNumber" type="an..35" minOccurs="0"/>
+                            <xsd:element name="PostalCode" type="an..9" minOccurs="0"/>
+                            <xsd:element name="City" type="an..35" minOccurs="0"/>
+                            <xsd:element name="CountryCode" type="a2" minOccurs="0"/>
+                            <xsd:element name="NADLNG" type="a2" minOccurs="0"/>
+                            <xsd:element name="TIN" type="an..17">
+                            </xsd:element>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element name="Msg515Consignee" maxOccurs="1" minOccurs="0">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="TraderName" type="an..35">
+                            </xsd:element>
+                            <xsd:element name="StreetAndNumber" type="an..35">
+                            </xsd:element>
+                            <xsd:element name="PostalCode" type="an..9">
+                            </xsd:element>
+                            <xsd:element name="City" type="an..35">
+                            </xsd:element>
+                            <xsd:element name="CountryCode" type="a2">
+                            </xsd:element>
+                            <xsd:element name="NADLNG" type="a2" minOccurs="0"/>
+                            <xsd:element name="TIN" type="an..17" minOccurs="0"/>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element name="Msg515ExportCustomsOffice" maxOccurs="1" minOccurs="1">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="ReferenceNumber" type="an8">
+                            </xsd:element>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element name="Msg515ExitCustomsOffice" maxOccurs="1" minOccurs="1">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="ReferenceNumber" type="an8">
+                            </xsd:element>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element name="Msg515ControlResult" maxOccurs="1" minOccurs="0">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="ControlResultCode" type="an2">
+                            </xsd:element>
+                            <xsd:element name="DateLimit" type="datetime">
+                            </xsd:element>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element name="Msg515SealsInfo" maxOccurs="1" minOccurs="0">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="SealsNumber" type="n..4">
+                            </xsd:element>
+                            <xsd:element name="Msg515SealsId" maxOccurs="99" minOccurs="0">
+                                <xsd:complexType>
+                                    <xsd:sequence>
+                                        <xsd:element name="SealsIdentity" type="an..20">
+                                        </xsd:element>
+                                        <xsd:element name="SealsIdentityLNG" type="a2" minOccurs="0"/>
+                                    </xsd:sequence>
+                                </xsd:complexType>
+                            </xsd:element>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element name="Msg515GoodsItem" maxOccurs="999" minOccurs="1">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="ItemNumber" type="n..5">
+                            </xsd:element>
+                            <xsd:element name="GoodsDescription" type="an..280">
+                            </xsd:element>
+                            <xsd:element name="GoodsDescriptionLNG" type="a2" minOccurs="0"/>
+                            <xsd:element name="GrossMass" type="n..11.3" minOccurs="0"/>
+                            <xsd:element name="NetMass" type="n..11.3">
+                            </xsd:element>
+                            <xsd:element name="CountryOfDispatchexportCode" type="a2" minOccurs="0"/>
+                            <xsd:element name="CountryOfDestinationCode" type="a2" minOccurs="0"/>
+                            <xsd:element name="TranspChargesMethodOfPayment" type="a1" minOccurs="0"/>
+                            <xsd:element name="ProcedureRequested" type="an2">
+                            </xsd:element>
+                            <xsd:element name="PreviousProcedure" type="an2">
+                            </xsd:element>
+                            <xsd:element name="CommunityNationalProcedure" type="an3" minOccurs="0"/>
+                            <xsd:element name="StatisticalValueCurrency" type="a3" minOccurs="0"/>
+                            <xsd:element name="StatisticalValueAmount" type="n..15.2" minOccurs="0"/>
+                            <xsd:element name="CountryOfOrigin" type="a2" minOccurs="0"/>
+                            <xsd:element name="DispatchProductionRegion" type="an..2" minOccurs="0"/>
+                            <xsd:element name="SupplementaryUnits" type="n..11" minOccurs="0"/>
+                            <xsd:element name="TotalItemTaxesAmount" type="n..15.2" minOccurs="0"/>
+                            <xsd:element name="CommercialReferenceNumber" type="an..70"
+                                         minOccurs="0"/>
+                            <xsd:element name="UNDangerousGoodsCode" type="an4" minOccurs="0"/>
+                            <xsd:element name="Msg515PreviousAdminReferences" maxOccurs="9"
+                                         minOccurs="0">
+                                <xsd:complexType>
+                                    <xsd:sequence>
+                                        <xsd:element name="PreviousDocumentType" type="an..6">
+                                        </xsd:element>
+                                        <xsd:element name="PreviousDocumentReference" type="an..35">
+                                        </xsd:element>
+                                        <xsd:element name="PreviousDocumentReferenceLNG" type="a2"
+                                                     minOccurs="0"/>
+                                        <xsd:element name="PreviousDocumentCategory" type="a1">
+                                        </xsd:element>
+                                    </xsd:sequence>
+                                </xsd:complexType>
+                            </xsd:element>
+                            <xsd:element name="Msg515ProducedDocumentsCertif" maxOccurs="99"
+                                         minOccurs="0">
+                                <xsd:complexType>
+                                    <xsd:sequence>
+                                        <xsd:element name="DocumentType" type="an..4">
+                                        </xsd:element>
+                                        <xsd:element name="DocumentReference" type="an..35">
+                                        </xsd:element>
+                                        <xsd:element name="DocumentReferenceLNG" type="a2"
+                                                     minOccurs="0"/>
+                                    </xsd:sequence>
+                                </xsd:complexType>
+                            </xsd:element>
+                            <xsd:element name="Msg515SpecialMentions" maxOccurs="99" minOccurs="0">
+                                <xsd:complexType>
+                                    <xsd:sequence>
+                                        <xsd:element name="AdditionalInformationCoded" type="an..5">
+                                        </xsd:element>
+                                        <xsd:element name="Text" type="an..70" minOccurs="0"/>
+                                        <xsd:element name="TextLNG" type="a2" minOccurs="0"/>
+                                    </xsd:sequence>
+                                </xsd:complexType>
+                            </xsd:element>
+                            <xsd:element name="Msg515ExporterTrader" maxOccurs="1" minOccurs="0">
+                                <xsd:complexType>
+                                    <xsd:sequence>
+                                        <xsd:element name="TraderName" type="an..35" minOccurs="0"/>
+                                        <xsd:element name="StreetAndNumber" type="an..35"
+                                                     minOccurs="0"/>
+                                        <xsd:element name="PostalCode" type="an..9" minOccurs="0"/>
+                                        <xsd:element name="City" type="an..35" minOccurs="0"/>
+                                        <xsd:element name="CountryCode" type="a2" minOccurs="0"/>
+                                        <xsd:element name="NADLNG" type="a2" minOccurs="0"/>
+                                        <xsd:element name="TIN" type="an..17">
+                                        </xsd:element>
+                                    </xsd:sequence>
+                                </xsd:complexType>
+                            </xsd:element>
+                            <xsd:element name="Msg515CodeCommodity" maxOccurs="1" minOccurs="1">
+                                <xsd:complexType>
+                                    <xsd:sequence>
+                                        <xsd:element name="CombinedNomenclature" type="an..8">
+                                        </xsd:element>
+                                        <xsd:element name="TARICCode" type="an2">
+                                        </xsd:element>
+                                        <xsd:element name="TARICFirstAdditionalCode" type="an4">
+                                        </xsd:element>
+                                        <xsd:element name="TARICSecondAdditionalCode" type="an4">
+                                        </xsd:element>
+                                        <xsd:element name="NationalAdditionalCode" type="an4"
+                                                     minOccurs="0"/>
+                                    </xsd:sequence>
+                                </xsd:complexType>
+                            </xsd:element>
+                            <xsd:element name="Msg515TaxesCalculation" maxOccurs="99" minOccurs="0">
+                                <xsd:complexType>
+                                    <xsd:sequence>
+                                        <xsd:element name="TypeOfTax" type="an3">
+                                        </xsd:element>
+                                        <xsd:element name="TaxBase" type="n..15.2">
+                                        </xsd:element>
+                                        <xsd:element name="RateOfTax" type="an..15">
+                                        </xsd:element>
+                                        <xsd:element name="AmountOfTax" type="n..15.2">
+                                        </xsd:element>
+                                        <xsd:element name="MethodOfPayment" type="a1">
+                                        </xsd:element>
+                                    </xsd:sequence>
+                                </xsd:complexType>
+                            </xsd:element>
+                            <xsd:element name="Msg515ConsigneeTrader" maxOccurs="1" minOccurs="0">
+                                <xsd:complexType>
+                                    <xsd:sequence>
+                                        <xsd:element name="TraderName" type="an..35">
+                                        </xsd:element>
+                                        <xsd:element name="StreetAndNumber" type="an..35">
+                                        </xsd:element>
+                                        <xsd:element name="PostalCode" type="an..9">
+                                        </xsd:element>
+                                        <xsd:element name="City" type="an..35">
+                                        </xsd:element>
+                                        <xsd:element name="CountryCode" type="a2">
+                                        </xsd:element>
+                                        <xsd:element name="NADLNG" type="a2" minOccurs="0"/>
+                                        <xsd:element name="TIN" type="an..17" minOccurs="0"/>
+                                    </xsd:sequence>
+                                </xsd:complexType>
+                            </xsd:element>
+                            <xsd:element name="Msg515Containers" maxOccurs="99" minOccurs="0">
+                                <xsd:complexType>
+                                    <xsd:sequence>
+                                        <xsd:element name="ContainerNumber" type="an..17">
+                                        </xsd:element>
+                                    </xsd:sequence>
+                                </xsd:complexType>
+                            </xsd:element>
+                            <xsd:element name="Msg515Packages" maxOccurs="99" minOccurs="1">
+                                <xsd:complexType>
+                                    <xsd:sequence>
+                                        <xsd:element name="MarksNumbersOfPackages" type="an..42"
+                                                     minOccurs="0"/>
+                                        <xsd:element name="MarksNumbersOfPackagesLNG" type="a2"
+                                                     minOccurs="0"/>
+                                        <xsd:element name="KindOfPackages" type="an..3">
+                                        </xsd:element>
+                                        <xsd:element name="NumberOfPackages" type="n..5"
+                                                     minOccurs="0"/>
+                                        <xsd:element name="NumberOfPieces" type="n..5" minOccurs="0"/>
+                                    </xsd:sequence>
+                                </xsd:complexType>
+                            </xsd:element>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element name="Msg515Itinerary" maxOccurs="99" minOccurs="0">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="CountryOfRoutingCode" type="a2">
+                            </xsd:element>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element name="Msg515DeclarantTrader" maxOccurs="1" minOccurs="1">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="TraderName" type="an..35" minOccurs="0"/>
+                            <xsd:element name="StreetAndNumber" type="an..35" minOccurs="0"/>
+                            <xsd:element name="PostalCode" type="an..9" minOccurs="0"/>
+                            <xsd:element name="City" type="an..35" minOccurs="0"/>
+                            <xsd:element name="CountryCode" type="a2" minOccurs="0"/>
+                            <xsd:element name="NADLNG" type="a2" minOccurs="0"/>
+                            <xsd:element name="TIN" type="an..17">
+                            </xsd:element>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element name="Msg515TermsDelivery" maxOccurs="1" minOccurs="0">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="IncotermCode" type="a3">
+                            </xsd:element>
+                            <xsd:element name="ComplementaryCode" type="n1" minOccurs="0"/>
+                            <xsd:element name="ComplementOfInfo" type="an..35">
+                            </xsd:element>
+                            <xsd:element name="ComplementOfInfoLNG" type="a2" minOccurs="0"/>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element name="Msg515DataTransaction" maxOccurs="1" minOccurs="0">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="Currency" type="an..3" minOccurs="0"/>
+                            <xsd:element name="TotalAmountInvoiced" type="n..15.2" minOccurs="0"/>
+                            <xsd:element name="ExchangeRate" type="n..6.5" minOccurs="0"/>
+                            <xsd:element name="NatureOfTransactionCode" type="n..2" minOccurs="0"/>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element name="Msg515PaymentDeferred" maxOccurs="9" minOccurs="0">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="AuthorisationReference" type="an..35">
+                            </xsd:element>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element name="Msg515WarehouseIdentification" maxOccurs="1" minOccurs="0">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="WarehouseType" type="a1">
+                            </xsd:element>
+                            <xsd:element name="AuthorizingCountry" type="a2">
+                            </xsd:element>
+                            <xsd:element name="WarehouseIdentification" type="an..14">
+                            </xsd:element>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element name="Msg515StatusRepresentative" maxOccurs="1" minOccurs="1">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="RepresentativeStatusCode" type="n1">
+                            </xsd:element>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+</xsd:schema>

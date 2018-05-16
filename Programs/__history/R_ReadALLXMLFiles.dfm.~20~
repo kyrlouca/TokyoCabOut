@@ -13,6 +13,7 @@ object R_ReadAllFilesFRM: TR_ReadAllFilesFRM
   Position = poDesktopCenter
   WindowState = wsMaximized
   OnActivate = FormActivate
+  OnCreate = FormCreate
   PixelsPerInch = 120
   TextHeight = 16
   object Panel1: TPanel
@@ -37,7 +38,6 @@ object R_ReadAllFilesFRM: TR_ReadAllFilesFRM
     Height = 66
     Align = alBottom
     TabOrder = 1
-    ExplicitTop = 208
     object BitBtn3: TBitBtn
       Left = 9
       Top = 5
@@ -118,7 +118,8 @@ object R_ReadAllFilesFRM: TR_ReadAllFilesFRM
     Height = 315
     Align = alClient
     TabOrder = 2
-    ExplicitHeight = 143
+    ExplicitLeft = 8
+    ExplicitTop = 59
     object TimerBTN: TRzBitBtn
       Left = 32
       Top = 111
@@ -194,13 +195,32 @@ object R_ReadAllFilesFRM: TR_ReadAllFilesFRM
         FFFFFFFFFFFFFFF7F6F3EBE5DEE1D8CEDED4C9DBD1C6DBD2C6DDD4C9E1D9CEEB
         E5DEF7F6F3FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
     end
+    object Button1: TButton
+      Left = 400
+      Top = 160
+      Width = 75
+      Height = 25
+      Caption = 'Button1'
+      TabOrder = 1
+      OnClick = Button1Click
+    end
+  end
+  object Memo1: TMemo
+    Left = 32
+    Top = 270
+    Width = 649
+    Height = 89
+    Lines.Strings = (
+      'Memo1')
+    TabOrder = 3
+    Visible = False
   end
   object Timer1: TTimer
     Enabled = False
     Interval = 200000
     OnTimer = Timer1Timer
-    Left = 448
-    Top = 168
+    Left = 56
+    Top = 96
   end
   object ParameterSQL: TIBCQuery
     Connection = MainFormFRM.CabOutData

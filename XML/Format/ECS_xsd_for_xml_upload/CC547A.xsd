@@ -1,0 +1,111 @@
+<?xml version="1.0"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.eurodyn.com"
+    targetNamespace="http://www.eurodyn.com" elementFormDefault="qualified">
+    <xsd:include schemaLocation="common_datatypes.xsd"/>
+    <xsd:include schemaLocation="CommonCodelists.xsd"/>
+    <xsd:element name="CC547A">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="SyntaxIdentifier" type="a4"> </xsd:element>
+                <xsd:element name="SyntaxVersionNumber" type="n1"> </xsd:element>
+                <xsd:element name="MessageSender" type="an..35"> </xsd:element>
+                <xsd:element name="SenderIdCodeQualifier" type="an..4" minOccurs="0"/>
+                <xsd:element name="MessageRecipient" type="an..35"> </xsd:element>
+                <xsd:element name="RecipientIdentifCodeQualifier" type="an..4" minOccurs="0"/>
+                <xsd:element name="DateOfPreparation" type="n6"> </xsd:element>
+                <xsd:element name="TimeOfPreparation" type="an4"> </xsd:element>
+                <xsd:element name="InterchangeControlReference" type="an..14"> </xsd:element>
+                <xsd:element name="RecipientsRefPasswd" type="an..14" minOccurs="0"/>
+                <xsd:element name="RecipientsRefPasswdQualifier" type="an2" minOccurs="0"/>
+                <xsd:element name="ApplicationReference" type="an..14" minOccurs="0"/>
+                <xsd:element name="Priority" type="a1" minOccurs="0"/>
+                <xsd:element name="AcknowledgementRequest" type="n1" minOccurs="0"/>
+                <xsd:element name="CommunicationsAgreementId" type="an..35" minOccurs="0"/>
+                <xsd:element name="TestIndicator" type="n1" minOccurs="0"/>
+                <xsd:element name="MessageIdentification" type="an..14"> </xsd:element>
+                <xsd:element name="MessageType" type="an..6"> </xsd:element>
+                <xsd:element name="CommonAccessReference" type="an..35" minOccurs="0"/>
+                <xsd:element name="Msg547Header" maxOccurs="1" minOccurs="1">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="TotalNumberOfPackages" type="n..7"> </xsd:element>
+                            <xsd:element name="TotalGrossMass" type="n..11.3"> </xsd:element>
+                            <xsd:element name="TotalNumberOfManifestItems" type="n..5"> </xsd:element>
+                            <xsd:element name="ManifestReferenceNumber" type="an..22"> </xsd:element>
+                            <xsd:element name="DateOfPresentation" type="datetime"> </xsd:element>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element name="Msg547ActualExitCustomsOffice" maxOccurs="1" minOccurs="1">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="ReferenceNumber" type="an8"> </xsd:element>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element name="Msg547ExitCarrierTrader" maxOccurs="1" minOccurs="1">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="TraderName" type="an..35" minOccurs="0"/>
+                            <xsd:element name="StreetAndNumber" type="an..35" minOccurs="0"/>
+                            <xsd:element name="PostalCode" type="an..9" minOccurs="0"/>
+                            <xsd:element name="City" type="an..35" minOccurs="0"/>
+                            <xsd:element name="CountryCode" type="a2" minOccurs="0"/>
+                            <xsd:element name="NADLNG" type="a2" minOccurs="0"/>
+                            <xsd:element name="TIN" type="an..17"> </xsd:element>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element name="Msg547ManifestItem" maxOccurs="unbounded" minOccurs="1">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="ManifestItemNumber" type="n..5"> </xsd:element>
+                            <xsd:element name="Msg547TransportDocumentData" maxOccurs="1"
+                                minOccurs="1">
+                                <xsd:complexType>
+                                    <xsd:sequence>
+                                        <xsd:element name="TransportDocumentReference" type="an..35"> </xsd:element>
+                                        <xsd:element name="MarksNumbersOfPackages" type="an..42"
+                                            minOccurs="0"/>
+                                        <xsd:element name="MarksNumbersOfPackagesLNG" type="a2"
+                                            minOccurs="0"/>
+                                        <xsd:element name="KindOfPackages" type="an..3"> </xsd:element>
+                                        <xsd:element name="NumberOfPackages" type="n..5"
+                                            minOccurs="0"/>
+                                        <xsd:element name="NumberOfPieces" type="n..5" minOccurs="0"/>
+                                        <xsd:element name="GrossMass" type="n..11.3"> </xsd:element>
+                                        <xsd:element name="CommodityCodetaricCode" type="an..6"
+                                            minOccurs="0"/>
+                                        <xsd:element name="GoodsDescriptionText" type="an..35"
+                                            minOccurs="0"/>
+                                        <xsd:element name="GoodsDescriptionLNG" type="a2"
+                                            minOccurs="0"/>
+                                        <xsd:element name="Msg547CustomsData" maxOccurs="unbounded"
+                                            minOccurs="1">
+                                            <xsd:complexType>
+                                                <xsd:sequence>
+                                                  <xsd:element name="DocumentReferenceNumber"
+                                                  type="an..21"> </xsd:element>
+                                                  <xsd:element name="FinalOrPartialShipmentFlag"
+                                                  type="n1"> </xsd:element>
+                                                  <xsd:element name="NumberOfPackages" type="n..5"
+                                                  minOccurs="0"/>
+                                                  <xsd:element name="NumberOfPieces" type="n..5"
+                                                  minOccurs="0"/>
+                                                  <xsd:element name="GrossMass" type="n..11.3"
+                                                  minOccurs="0"/>
+                                                  <xsd:element name="ItemNumber" type="n..5"
+                                                  minOccurs="0"/>
+                                                </xsd:sequence>
+                                            </xsd:complexType>
+                                        </xsd:element>
+                                    </xsd:sequence>
+                                </xsd:complexType>
+                            </xsd:element>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+</xsd:schema>

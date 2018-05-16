@@ -246,7 +246,8 @@ THawbAge=(haNotFound, haSame, haPartial, haOld, haDuplicate);
     { Public declarations }
     temp:integer;
     function ReadOneXML(Const FileName:String) :Boolean;
-    procedure ReadXFiles(Const FromDir, ToDir:String; Const Pattern:String);
+//    procedure ReadXFiles(Const FromDir, ToDir:String; Const Pattern:String);
+    procedure SelectXMLFiles(Const FromDir, ToDir:String; Const Pattern:String);
   end;
 
 var
@@ -284,8 +285,9 @@ end;
 procedure TX_readFileFRM.RzBitBtn2Click(Sender: TObject);
 var
   FileName:String;
-  FileNameXyz:String;
-  MoveFolder:String;
+  FileNameOnly:String;
+  FromFolder:String;
+  ToFolder:String;
   MoveFile:String;
   temp:string;
   strings:TstringList;
@@ -299,8 +301,12 @@ begin
       exit;
   end;
 
-  MessagesMemo.lines.Add('Processing File:    '+FileName);
 
+  MessagesMemo.lines.Add('Processing File:    '+FileName);
+  FromFolder:=TPath.GetDirectoryName(filename);
+  ToFolder:=FromFolder;
+  FileNameOnly:= TPath.GetFileName(FIleName);
+  SelectXmlFiles(FromFolder,ToFolder,FileNameOnly);
   MessagesMemo.lines.Add('----------------------------------------------------');
 //  MessagesMemo.lines.Add('Finish:    '+FileName);
   self.ModalResult:=mrNone;
@@ -590,9 +596,9 @@ Var
         DefaultDir:String;
         ParamRec:TParameterRecord;
 Begin
-        DefaultDir:= GN_GetTheSystemParameter(cn, 'S01').P_String4;
+        DefaultDir:= GN_GetTheSystemParameter(cn, 'S02').P_String4;
         If DefaultDir='' then begin
-          MessageDlg('Menu ->System->Params-> System Parameters. Then Add record with Code=S01 ', mtWarning, [mbOK], 0);
+          MessageDlg('Menu ->System->Params-> System Parameters. Then Add record with Code=S02', mtWarning, [mbOK], 0);
         end;
 
 
@@ -637,7 +643,7 @@ End;
 
 
 
-procedure TX_readFileFRM.ReadXFiles(Const FromDir, ToDir:String; Const Pattern:String);
+procedure TX_readFileFRM.SelectXMLFiles(Const FromDir, ToDir:String; Const Pattern:String);
  var
    strFiles: TStringDynArray;
    i: integer;

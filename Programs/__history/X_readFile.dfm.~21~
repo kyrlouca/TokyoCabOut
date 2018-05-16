@@ -253,7 +253,6 @@ object X_readFileFRM: TX_readFileFRM
       Caption = 'Delete Mawb'
       TabOrder = 1
       Visible = False
-      OnClick = Button1Click
     end
     object Button2: TButton
       Left = 112
@@ -275,16 +274,6 @@ object X_readFileFRM: TX_readFileFRM
       Visible = False
       WantReturns = False
       WordWrap = False
-    end
-    object All: TButton
-      Left = 360
-      Top = 6
-      Width = 75
-      Height = 25
-      Caption = 'All'
-      TabOrder = 4
-      Visible = False
-      OnClick = AllClick
     end
   end
   object XMLDocument1: TXMLDocument

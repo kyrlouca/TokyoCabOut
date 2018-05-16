@@ -42,7 +42,7 @@ type
   private
     { Private declarations }
         cn:TIBCConnection;
-    procedure ReadXFiles(Const FromDir, ToDir:String; Const Pattern:String);
+//    procedure ReadXFiles(Const FromDir, ToDir:String; Const Pattern:String);
 
   public
     { Public declarations }
@@ -115,8 +115,7 @@ begin
     exit;
   end;
 
-  readXFiles(FromDir,ToDir,'*.');
-
+  X_readFileFRM.SelectXmlFiles(FromDir,ToDir,'');
   If GlobalStart then begin
       Timer1.Enabled:=true;
   end;
@@ -165,65 +164,7 @@ begin
     exit;
   end;
 
-  readXFiles(FromDir,ToDir,'11805141641159241000.*');
-
-
-end;
-
-
-procedure TR_ReadAllFilesFRM.ReadXFiles(Const FromDir, ToDir:String; Const Pattern:String);
- var
-   strFiles: TStringDynArray;
-   i: integer;
-   fileName:string;
-   WorkingFile:String;
-   MovedFile:string;
-   Ext:String;
-   IsOnlyWithoutExtention:boolean;
-
-begin
-
-  memo1.Clear;
-  //workaround to delphi bug for pattern '*.'
-  if pattern='' then begin
-    strFiles := TDirectory.GetFiles(FromDir);
-    IsOnlyWithoutExtention:=true;
-  end else begin
-    strFiles := TDirectory.GetFiles(FromDir,pattern);
-    IsOnlyWithoutExtention:=false;
-  end;
-
-  for i := 0  to High(strFiles) do begin
-     fileName:=StrFiles[i];
-     ext:= TPath.GetExtension(fileName);
-     SHOWmESSAGE('read:'+FileName);
-
-     //workaround to delphi bug for pattern '*.'
-     if (ext<>'') and IsOnlyWithoutExtention then begin
-       continue;
-     end;
-
-     SHOWmESSAGE('Process '+FileName);
-
-        //rename the file to .xyz and work on that
-        WorkingFile:=TPath.GetDirectoryName(fileName)+'\'+TPath.GetFileNameWithoutExtension(filename)+'.xyz';
-        if Tfile.Exists(WorkingFile)then
-          Tfile.Delete(WorkingFile);
-        Tfile.Move(FileName,WorkingFile);
-
-        ////To The Job
-
-//        X_readFileFRM.ReadOneXML(WorkingFile);
-
-        ///Move the file to new directory with extension xxx
-
-        MovedFile:=ToDir+'\'+TPath.GetFileName(filename)+'.xxx';
-        if Tfile.Exists(MovedFile)then
-          Tfile.Delete(MovedFile);
-        Tfile.Move(WorkingFile,MovedFile);
-
-        Memo1.Lines.Add(workingFile);
-  end;
+  X_readFileFRM.readXFiles(FromDir,ToDir,'11805141641159241000');
 
 
 end;

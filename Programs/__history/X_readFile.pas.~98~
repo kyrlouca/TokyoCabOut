@@ -10,7 +10,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.DateUtils,System.Variants, System.Classes, System.ioUtils,Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Xml.xmldom, Xml.XMLIntf,
   Xml.XMLDoc, Data.DB, MemDS, DBAccess, IBC,Math, RzButton, RzPanel,
-  Vcl.ExtCtrls, Vcl.Mask, RzEdit, vcl.Wwdbedit, RzLabel, RzShellDialogs,CodeSiteLogging,System.Types,System.IOUtils;
+  Vcl.ExtCtrls, Vcl.Mask, RzEdit, vcl.Wwdbedit, RzLabel, RzShellDialogs,CodeSiteLogging,System.Types;
 
 type
 TMawbRec =Record
@@ -246,7 +246,8 @@ THawbAge=(haNotFound, haSame, haPartial, haOld, haDuplicate);
     { Public declarations }
     temp:integer;
     function ReadOneXML(Const FileName:String) :Boolean;
-    procedure ReadXFiles(Const FromDir, ToDir:String; Const Pattern:String);
+//    procedure ReadXFiles(Const FromDir, ToDir:String; Const Pattern:String);
+    procedure SelectXMLFiles(Const FromDir, ToDir:String; Const Pattern:String);
   end;
 
 var
@@ -284,8 +285,9 @@ end;
 procedure TX_readFileFRM.RzBitBtn2Click(Sender: TObject);
 var
   FileName:String;
-  FileNameXyz:String;
-  MoveFolder:String;
+  FileNameOnly:String;
+  FromFolder:String;
+  ToFolder:String;
   MoveFile:String;
   temp:string;
   strings:TstringList;
@@ -299,46 +301,12 @@ begin
       exit;
   end;
 
-  temp:=UpperCase(Tpath.GetExtension(filename));
-  If UpperCase(temp)='.XYZ' then begin
-      showmessage('cannot read file with EXTENSION XYZ');
-      exit;
-  end;
-
-   MoveFOlder := GN_GetTheSystemParameter(cn, 'F_1').P_String5;
-   If not System.SysUtils.DirectoryExists(MoveFolder) then begin
-    MessageDlg('Destination Directory Does NOT exist:'+#13+#10+ MOveFolder, mtError, [mbOK], 0);
-    exit;
-   end;
 
   MessagesMemo.lines.Add('Processing File:    '+FileName);
-  FileNameXyz:=Tpath.ChangeExtension(FileName,'.xyz');
-
-  try
-  //Convert to utf to strip control chars
-    temp:=trim(system.IOutils.Tfile.ReadAllText(filename));
-    strings:=TStringList.Create();
-    strings.Add(temp);
-    strings.SaveToFile(FileNameXyz,TEncoding.UTF8);
-  finally
-    strings.Free;
-   end;
-
-  Tfile.Delete(fileName);
-  ReadOneXML(FileNameXyz);
-
-
-
-  temp:=Tpath.ChangeExtension(FileNameXYZ,'.XXX');
-  If RenameFile(FileNameXYZ,temp ) then begin
-      MoveFIle:=MoveFolder +'\'+System.SysUtils.ExtractFileName(temp);
-      TRY
-        Tfile.Move(temp,MoveFile);
-      FINALLY
-       self.ModalResult:=mrNone;
-      END;
-  end;
-
+  FromFolder:=TPath.GetDirectoryName(filename);
+  ToFolder:=FromFolder;
+  FileNameOnly:= TPath.GetFileName(FIleName);
+  SelectXmlFiles(FromFolder,ToFolder,FileNameOnly);
   MessagesMemo.lines.Add('----------------------------------------------------');
 //  MessagesMemo.lines.Add('Finish:    '+FileName);
   self.ModalResult:=mrNone;
@@ -628,9 +596,9 @@ Var
         DefaultDir:String;
         ParamRec:TParameterRecord;
 Begin
-        DefaultDir:= GN_GetTheSystemParameter(cn, 'S01').P_String4;
+        DefaultDir:= GN_GetTheSystemParameter(cn, 'S02').P_String4;
         If DefaultDir='' then begin
-          MessageDlg('Menu ->System->Params-> System Parameters. Then Add record with Code=S01 ', mtWarning, [mbOK], 0);
+          MessageDlg('Menu ->System->Params-> System Parameters. Then Add record with Code=S02', mtWarning, [mbOK], 0);
         end;
 
 
@@ -650,8 +618,8 @@ End;
 procedure TX_readFileFRM.Button2Click(Sender: TObject);
 begin
 
-  ksExecSQLVar(cn,'Delete from airwaybill_item ai where ai.serial_number > :Serial',[50000]);
-  ksExecSQLVar(cn,'Delete from airwaybill ab where ab.serial_number >= :Serial',[50000]);
+  ksExecSQLVar(cn,'Delete from airwaybill_item ai where ai.serial_number < :Serial',[-1]);
+  ksExecSQLVar(cn,'Delete from airwaybill ab where ab.serial_number < :Serial',[-1]);
 
 end;
 
@@ -675,7 +643,7 @@ End;
 
 
 
-procedure TX_readFileFRM.ReadXFiles(Const FromDir, ToDir:String; Const Pattern:String);
+procedure TX_readFileFRM.SelectXMLFiles(Const FromDir, ToDir:String; Const Pattern:String);
  var
    strFiles: TStringDynArray;
    i: integer;
@@ -684,10 +652,11 @@ procedure TX_readFileFRM.ReadXFiles(Const FromDir, ToDir:String; Const Pattern:S
    MovedFile:string;
    Ext:String;
    IsOnlyWithoutExtention:boolean;
+   CleanString:String;
 
 begin
 
-  memo1.Clear;
+  MessagesMemo.Clear;
   //workaround to delphi bug for pattern '*.'
   if pattern='' then begin
     strFiles := TDirectory.GetFiles(FromDir);
@@ -712,20 +681,30 @@ begin
         WorkingFile:=TPath.GetDirectoryName(fileName)+'\'+TPath.GetFileNameWithoutExtension(filename)+'.xyz';
         if Tfile.Exists(WorkingFile)then
           Tfile.Delete(WorkingFile);
-        Tfile.Move(FileName,WorkingFile);
+
+
+
+       try
+        //Convert to utf to strip control chars
+        CleanString:=trim(system.IOutils.Tfile.ReadAllText(filename));
+        strings:=TStringList.Create();
+        strings.Add(temp);
+        strings.SaveToFile(WorkingFile,TEncoding.UTF8);
+        Tfile.Delete(FileName,FileName);
+       finally
+        strings.Free;
+       end;
 
         ////To The Job
-
-//        X_readFileFRM.ReadOneXML(WorkingFile);
+         X_readFileFRM.ReadOneXML(WorkingFile);
 
         ///Move the file to new directory with extension xxx
-
         MovedFile:=ToDir+'\'+TPath.GetFileNameWithoutExtension(filename)+'.xxx';
         if Tfile.Exists(MovedFile)then
           Tfile.Delete(MovedFile);
         Tfile.Move(WorkingFile,MovedFile);
 
-        Memo1.Lines.Add(workingFile);
+        MessagesMemo.Lines.Add(workingFile);
   end;
 
 
