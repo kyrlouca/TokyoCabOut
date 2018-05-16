@@ -201,6 +201,10 @@
             <Form>X_CreateOneXmlFRM</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="X_createMultiXML.pas">
+            <Form>X_CreateMultiXmlFRM</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <None Include="CabOut.todo">
             <ContainerId>ToDo</ContainerId>
         </None>

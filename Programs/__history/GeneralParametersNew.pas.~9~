@@ -29,7 +29,6 @@ Function GN_GetTheSystemParameter(cn:TIBCConnection ;Const Key:String):TParamete
 Var
         x1:Double;
         qr:TksQuery;
-
 Begin
   try
     qr:=TksQuery.Create(cn,' select *  from System_Parameters where Key_Field= :TheKey');

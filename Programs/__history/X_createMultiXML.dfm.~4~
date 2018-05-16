@@ -1,0 +1,800 @@
+object X_CreateMultiXmlFRM: TX_CreateMultiXmlFRM
+  Left = 0
+  Top = 0
+  Caption = 'X_CreateMultiXmlFRM'
+  ClientHeight = 367
+  ClientWidth = 808
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  OnCreate = FormCreate
+  PixelsPerInch = 96
+  TextHeight = 13
+  object RzLabel1: TRzLabel
+    Left = 0
+    Top = 0
+    Width = 808
+    Height = 45
+    Align = alTop
+    Alignment = taCenter
+    Caption = 'MULTI XML'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -37
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    ExplicitWidth = 187
+  end
+  object Button1: TButton
+    Left = 192
+    Top = 160
+    Width = 75
+    Height = 25
+    Caption = 'Button1'
+    TabOrder = 0
+    OnClick = Button1Click
+  end
+  object wwButton1: TwwButton
+    Left = 384
+    Top = 144
+    Width = 75
+    Height = 25
+    Caption = 'wwButton1'
+    Color = clBtnFace
+    DitherColor = clWhite
+    DitherStyle = wwdsDither
+    NumGlyphs = 0
+    ShadeStyle = wwbsNormal
+    TabOrder = 1
+    TextOptions.Alignment = taCenter
+    TextOptions.VAlignment = vaVCenter
+    OnClick = wwButton1Click
+  end
+  object XMLDoc: TXMLDocument
+    Options = [doNodeAutoCreate, doAttrNull]
+    Left = 248
+    Top = 13
+    DOMVendorDesc = 'ADOM XML v4'
+  end
+  object XMLDocNew: TXMLDocument
+    Options = [doNodeAutoCreate, doAttrNull]
+    Left = 408
+    Top = 37
+    DOMVendorDesc = 'MSXML'
+  end
+  object OneFlightAirwayBillSQL: TIBCQuery
+    SQLInsert.Strings = (
+      'INSERT INTO FLIGHT_AIRWAYBILL'
+      
+        '  (SERIAL_NUMBER, SEQUENCE_NUMBER, HAWB_ID, SHIPMENT_ORIGIN_AREA' +
+        ', SHIPMENT_ORIGIN_COUNTRY, PIECES, WEIGHT, DESCRIPTION, FK_DOCUM' +
+        'ENT_MASTER_SERIAL, FK_MOVEMENT_SERIAL, PIECES_S, FK_AIRWAYBILL_S' +
+        'ERIAL, FK_FLIGHT_OUT_SERIAL, SENDER_NAME, SENDER_ADDRESS, SENDER' +
+        '_POST_CODE, SENDER_CITY, SENDER_COUNTRY_CODE, CONSIGNEE_NAME, CO' +
+        'NSIGNEE_ADDRESS, CONSIGNEE_POST_CODE, CONSIGNEE_CITY, CONSIGNEE_' +
+        'COUNTRY_CODE, FK_ITINERARY_SERIAL, PACKAGES_COUNT, ITEMS_COUNT, ' +
+        'PAYMENT_METHOD, SENDER_ADDRESS_1, SENDER_ADDRESS_2, SENDER_ADDRE' +
+        'SS_3, SENDER_DEVICE_TYPE, SENDER_DEVICE_DETAILS, SENDER_ACCOUNT_' +
+        'NUMBER, FK_SENDER_SERIAL, VALUE_TYPE, CONSIGNEE_ADDRESS_1, CONSI' +
+        'GNEE_ADDRESS_2, CONSIGNEE_ADDRESS_3, CONSIGNEE_DEVICE_TYPE, CONS' +
+        'IGNEE_DEVICE_DETAILS, DISTRICT_CODE, TARIFF_CODE, TARIFF_KEYWORD' +
+        ', IS_CLEARED, IS_HIGH, SERVICE_CODE, ACCOUNT_NUMBER, INCOTERMS, ' +
+        'CONSIGNEE_PREFERRED_NAME)'
+      'VALUES'
+      
+        '  (:SERIAL_NUMBER, :SEQUENCE_NUMBER, :HAWB_ID, :SHIPMENT_ORIGIN_' +
+        'AREA, :SHIPMENT_ORIGIN_COUNTRY, :PIECES, :WEIGHT, :DESCRIPTION, ' +
+        ':FK_DOCUMENT_MASTER_SERIAL, :FK_MOVEMENT_SERIAL, :PIECES_S, :FK_' +
+        'AIRWAYBILL_SERIAL, :FK_FLIGHT_OUT_SERIAL, :SENDER_NAME, :SENDER_' +
+        'ADDRESS, :SENDER_POST_CODE, :SENDER_CITY, :SENDER_COUNTRY_CODE, ' +
+        ':CONSIGNEE_NAME, :CONSIGNEE_ADDRESS, :CONSIGNEE_POST_CODE, :CONS' +
+        'IGNEE_CITY, :CONSIGNEE_COUNTRY_CODE, :FK_ITINERARY_SERIAL, :PACK' +
+        'AGES_COUNT, :ITEMS_COUNT, :PAYMENT_METHOD, :SENDER_ADDRESS_1, :S' +
+        'ENDER_ADDRESS_2, :SENDER_ADDRESS_3, :SENDER_DEVICE_TYPE, :SENDER' +
+        '_DEVICE_DETAILS, :SENDER_ACCOUNT_NUMBER, :FK_SENDER_SERIAL, :VAL' +
+        'UE_TYPE, :CONSIGNEE_ADDRESS_1, :CONSIGNEE_ADDRESS_2, :CONSIGNEE_' +
+        'ADDRESS_3, :CONSIGNEE_DEVICE_TYPE, :CONSIGNEE_DEVICE_DETAILS, :D' +
+        'ISTRICT_CODE, :TARIFF_CODE, :TARIFF_KEYWORD, :IS_CLEARED, :IS_HI' +
+        'GH, :SERVICE_CODE, :ACCOUNT_NUMBER, :INCOTERMS, :CONSIGNEE_PREFE' +
+        'RRED_NAME)')
+    SQLDelete.Strings = (
+      'DELETE FROM FLIGHT_AIRWAYBILL'
+      'WHERE'
+      '  SERIAL_NUMBER = :Old_SERIAL_NUMBER')
+    SQLUpdate.Strings = (
+      'UPDATE FLIGHT_AIRWAYBILL'
+      'SET'
+      
+        '  SERIAL_NUMBER = :SERIAL_NUMBER, SEQUENCE_NUMBER = :SEQUENCE_NU' +
+        'MBER, HAWB_ID = :HAWB_ID, SHIPMENT_ORIGIN_AREA = :SHIPMENT_ORIGI' +
+        'N_AREA, SHIPMENT_ORIGIN_COUNTRY = :SHIPMENT_ORIGIN_COUNTRY, PIEC' +
+        'ES = :PIECES, WEIGHT = :WEIGHT, DESCRIPTION = :DESCRIPTION, FK_D' +
+        'OCUMENT_MASTER_SERIAL = :FK_DOCUMENT_MASTER_SERIAL, FK_MOVEMENT_' +
+        'SERIAL = :FK_MOVEMENT_SERIAL, PIECES_S = :PIECES_S, FK_AIRWAYBIL' +
+        'L_SERIAL = :FK_AIRWAYBILL_SERIAL, FK_FLIGHT_OUT_SERIAL = :FK_FLI' +
+        'GHT_OUT_SERIAL, SENDER_NAME = :SENDER_NAME, SENDER_ADDRESS = :SE' +
+        'NDER_ADDRESS, SENDER_POST_CODE = :SENDER_POST_CODE, SENDER_CITY ' +
+        '= :SENDER_CITY, SENDER_COUNTRY_CODE = :SENDER_COUNTRY_CODE, CONS' +
+        'IGNEE_NAME = :CONSIGNEE_NAME, CONSIGNEE_ADDRESS = :CONSIGNEE_ADD' +
+        'RESS, CONSIGNEE_POST_CODE = :CONSIGNEE_POST_CODE, CONSIGNEE_CITY' +
+        ' = :CONSIGNEE_CITY, CONSIGNEE_COUNTRY_CODE = :CONSIGNEE_COUNTRY_' +
+        'CODE, FK_ITINERARY_SERIAL = :FK_ITINERARY_SERIAL, PACKAGES_COUNT' +
+        ' = :PACKAGES_COUNT, ITEMS_COUNT = :ITEMS_COUNT, PAYMENT_METHOD =' +
+        ' :PAYMENT_METHOD, SENDER_ADDRESS_1 = :SENDER_ADDRESS_1, SENDER_A' +
+        'DDRESS_2 = :SENDER_ADDRESS_2, SENDER_ADDRESS_3 = :SENDER_ADDRESS' +
+        '_3, SENDER_DEVICE_TYPE = :SENDER_DEVICE_TYPE, SENDER_DEVICE_DETA' +
+        'ILS = :SENDER_DEVICE_DETAILS, SENDER_ACCOUNT_NUMBER = :SENDER_AC' +
+        'COUNT_NUMBER, FK_SENDER_SERIAL = :FK_SENDER_SERIAL, VALUE_TYPE =' +
+        ' :VALUE_TYPE, CONSIGNEE_ADDRESS_1 = :CONSIGNEE_ADDRESS_1, CONSIG' +
+        'NEE_ADDRESS_2 = :CONSIGNEE_ADDRESS_2, CONSIGNEE_ADDRESS_3 = :CON' +
+        'SIGNEE_ADDRESS_3, CONSIGNEE_DEVICE_TYPE = :CONSIGNEE_DEVICE_TYPE' +
+        ', CONSIGNEE_DEVICE_DETAILS = :CONSIGNEE_DEVICE_DETAILS, DISTRICT' +
+        '_CODE = :DISTRICT_CODE, TARIFF_CODE = :TARIFF_CODE, TARIFF_KEYWO' +
+        'RD = :TARIFF_KEYWORD, IS_CLEARED = :IS_CLEARED, IS_HIGH = :IS_HI' +
+        'GH, SERVICE_CODE = :SERVICE_CODE, ACCOUNT_NUMBER = :ACCOUNT_NUMB' +
+        'ER, INCOTERMS = :INCOTERMS, CONSIGNEE_PREFERRED_NAME = :CONSIGNE' +
+        'E_PREFERRED_NAME'
+      'WHERE'
+      '  SERIAL_NUMBER = :Old_SERIAL_NUMBER')
+    SQLRefresh.Strings = (
+      
+        'SELECT SERIAL_NUMBER, SEQUENCE_NUMBER, HAWB_ID, SHIPMENT_ORIGIN_' +
+        'AREA, SHIPMENT_ORIGIN_COUNTRY, PIECES, WEIGHT, DESCRIPTION, FK_D' +
+        'OCUMENT_MASTER_SERIAL, FK_MOVEMENT_SERIAL, PIECES_S, FK_AIRWAYBI' +
+        'LL_SERIAL, FK_FLIGHT_OUT_SERIAL, SENDER_NAME, SENDER_ADDRESS, SE' +
+        'NDER_POST_CODE, SENDER_CITY, SENDER_COUNTRY_CODE, CONSIGNEE_NAME' +
+        ', CONSIGNEE_ADDRESS, CONSIGNEE_POST_CODE, CONSIGNEE_CITY, CONSIG' +
+        'NEE_COUNTRY_CODE, FK_ITINERARY_SERIAL, PACKAGES_COUNT, ITEMS_COU' +
+        'NT, PAYMENT_METHOD, SENDER_ADDRESS_1, SENDER_ADDRESS_2, SENDER_A' +
+        'DDRESS_3, SENDER_DEVICE_TYPE, SENDER_DEVICE_DETAILS, SENDER_ACCO' +
+        'UNT_NUMBER, FK_SENDER_SERIAL, VALUE_TYPE, CONSIGNEE_ADDRESS_1, C' +
+        'ONSIGNEE_ADDRESS_2, CONSIGNEE_ADDRESS_3, CONSIGNEE_DEVICE_TYPE, ' +
+        'CONSIGNEE_DEVICE_DETAILS, DISTRICT_CODE, TARIFF_CODE, TARIFF_KEY' +
+        'WORD, IS_CLEARED, IS_HIGH, SERVICE_CODE, ACCOUNT_NUMBER, INCOTER' +
+        'MS, CONSIGNEE_PREFERRED_NAME FROM FLIGHT_AIRWAYBILL'
+      'WHERE'
+      '  SERIAL_NUMBER = :SERIAL_NUMBER')
+    SQLLock.Strings = (
+      'SELECT NULL FROM FLIGHT_AIRWAYBILL'
+      'WHERE'
+      'SERIAL_NUMBER = :Old_SERIAL_NUMBER'
+      'FOR UPDATE WITH LOCK')
+    SQLRecCount.Strings = (
+      'SELECT COUNT(*) FROM ('
+      'SELECT 1 AS C  FROM FLIGHT_AIRWAYBILL'
+      ''
+      ') q')
+    Connection = MainFormFRM.CabOutData
+    SQL.Strings = (
+      'select * from Flight_AIrwaybill where Serial_number= :Serial')
+    DetailFields = 'FK_FLIGHT_OUT_SERIAL'
+    UniDirectional = True
+    Left = 224
+    Top = 226
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'Serial'
+        Value = nil
+      end>
+    object IntegerField1: TIntegerField
+      FieldName = 'SERIAL_NUMBER'
+      Required = True
+    end
+    object IntegerField2: TIntegerField
+      FieldName = 'SEQUENCE_NUMBER'
+    end
+    object StringField1: TStringField
+      FieldName = 'HAWB_ID'
+      Size = 10
+    end
+    object StringField2: TStringField
+      FieldName = 'SHIPMENT_ORIGIN_AREA'
+      Size = 10
+    end
+    object StringField3: TStringField
+      FieldName = 'SHIPMENT_ORIGIN_COUNTRY'
+      FixedChar = True
+      Size = 5
+    end
+    object IntegerField3: TIntegerField
+      FieldName = 'PIECES'
+    end
+    object FloatField1: TFloatField
+      FieldName = 'WEIGHT'
+    end
+    object StringField4: TStringField
+      FieldName = 'DESCRIPTION'
+      FixedChar = True
+      Size = 60
+    end
+    object IntegerField4: TIntegerField
+      FieldName = 'FK_DOCUMENT_MASTER_SERIAL'
+    end
+    object IntegerField5: TIntegerField
+      FieldName = 'FK_MOVEMENT_SERIAL'
+    end
+    object StringField5: TStringField
+      FieldName = 'PIECES_S'
+      FixedChar = True
+      Size = 15
+    end
+    object IntegerField6: TIntegerField
+      FieldName = 'FK_AIRWAYBILL_SERIAL'
+    end
+    object IntegerField7: TIntegerField
+      FieldName = 'FK_FLIGHT_OUT_SERIAL'
+      Required = True
+    end
+    object StringField6: TStringField
+      FieldName = 'SENDER_NAME'
+      FixedChar = True
+      Size = 35
+    end
+    object StringField7: TStringField
+      FieldName = 'SENDER_ADDRESS'
+      FixedChar = True
+      Size = 35
+    end
+    object StringField8: TStringField
+      FieldName = 'SENDER_POST_CODE'
+      FixedChar = True
+      Size = 9
+    end
+    object StringField9: TStringField
+      FieldName = 'SENDER_CITY'
+      FixedChar = True
+      Size = 35
+    end
+    object StringField10: TStringField
+      FieldName = 'SENDER_COUNTRY_CODE'
+      FixedChar = True
+      Size = 2
+    end
+    object StringField11: TStringField
+      FieldName = 'CONSIGNEE_NAME'
+      FixedChar = True
+      Size = 35
+    end
+    object StringField12: TStringField
+      FieldName = 'CONSIGNEE_ADDRESS'
+      FixedChar = True
+      Size = 35
+    end
+    object StringField13: TStringField
+      FieldName = 'CONSIGNEE_POST_CODE'
+      FixedChar = True
+      Size = 9
+    end
+    object StringField14: TStringField
+      FieldName = 'CONSIGNEE_CITY'
+      FixedChar = True
+      Size = 35
+    end
+    object StringField15: TStringField
+      FieldName = 'CONSIGNEE_COUNTRY_CODE'
+      FixedChar = True
+      Size = 2
+    end
+    object IntegerField8: TIntegerField
+      FieldName = 'FK_ITINERARY_SERIAL'
+    end
+    object IntegerField9: TIntegerField
+      FieldName = 'PACKAGES_COUNT'
+    end
+    object IntegerField10: TIntegerField
+      FieldName = 'ITEMS_COUNT'
+    end
+    object OneFlightAirwayBillSQLPAYMENT_METHOD: TStringField
+      FieldName = 'PAYMENT_METHOD'
+      FixedChar = True
+      Size = 2
+    end
+    object OneFlightAirwayBillSQLSENDER_ADDRESS_1: TStringField
+      FieldName = 'SENDER_ADDRESS_1'
+      FixedChar = True
+      Size = 35
+    end
+    object OneFlightAirwayBillSQLSENDER_ADDRESS_2: TStringField
+      FieldName = 'SENDER_ADDRESS_2'
+      FixedChar = True
+      Size = 35
+    end
+    object OneFlightAirwayBillSQLSENDER_ADDRESS_3: TStringField
+      FieldName = 'SENDER_ADDRESS_3'
+      FixedChar = True
+      Size = 35
+    end
+    object OneFlightAirwayBillSQLSENDER_DEVICE_TYPE: TStringField
+      FieldName = 'SENDER_DEVICE_TYPE'
+      FixedChar = True
+      Size = 9
+    end
+    object OneFlightAirwayBillSQLSENDER_DEVICE_DETAILS: TStringField
+      FieldName = 'SENDER_DEVICE_DETAILS'
+      FixedChar = True
+      Size = 35
+    end
+    object OneFlightAirwayBillSQLSENDER_ACCOUNT_NUMBER: TIntegerField
+      FieldName = 'SENDER_ACCOUNT_NUMBER'
+    end
+    object OneFlightAirwayBillSQLFK_SENDER_SERIAL: TIntegerField
+      FieldName = 'FK_SENDER_SERIAL'
+    end
+    object OneFlightAirwayBillSQLVALUE_TYPE: TStringField
+      FieldName = 'VALUE_TYPE'
+      FixedChar = True
+      Size = 1
+    end
+    object OneFlightAirwayBillSQLCONSIGNEE_ADDRESS_1: TStringField
+      FieldName = 'CONSIGNEE_ADDRESS_1'
+      FixedChar = True
+      Size = 35
+    end
+    object OneFlightAirwayBillSQLCONSIGNEE_ADDRESS_2: TStringField
+      FieldName = 'CONSIGNEE_ADDRESS_2'
+      FixedChar = True
+      Size = 35
+    end
+    object OneFlightAirwayBillSQLCONSIGNEE_ADDRESS_3: TStringField
+      FieldName = 'CONSIGNEE_ADDRESS_3'
+      FixedChar = True
+      Size = 35
+    end
+    object OneFlightAirwayBillSQLCONSIGNEE_DEVICE_TYPE: TStringField
+      FieldName = 'CONSIGNEE_DEVICE_TYPE'
+      FixedChar = True
+      Size = 9
+    end
+    object OneFlightAirwayBillSQLCONSIGNEE_DEVICE_DETAILS: TStringField
+      FieldName = 'CONSIGNEE_DEVICE_DETAILS'
+      FixedChar = True
+      Size = 35
+    end
+    object OneFlightAirwayBillSQLDISTRICT_CODE: TStringField
+      FieldName = 'DISTRICT_CODE'
+      FixedChar = True
+      Size = 3
+    end
+    object OneFlightAirwayBillSQLTARIFF_CODE: TStringField
+      FieldName = 'TARIFF_CODE'
+      Size = 17
+    end
+    object OneFlightAirwayBillSQLTARIFF_KEYWORD: TStringField
+      FieldName = 'TARIFF_KEYWORD'
+      FixedChar = True
+      Size = 30
+    end
+    object OneFlightAirwayBillSQLIS_CLEARED: TStringField
+      FieldName = 'IS_CLEARED'
+      FixedChar = True
+      Size = 1
+    end
+    object OneFlightAirwayBillSQLIS_HIGH: TStringField
+      FieldName = 'IS_HIGH'
+      FixedChar = True
+      Size = 1
+    end
+    object OneFlightAirwayBillSQLSERVICE_CODE: TStringField
+      FieldName = 'SERVICE_CODE'
+      Size = 10
+    end
+    object OneFlightAirwayBillSQLACCOUNT_NUMBER: TStringField
+      FieldName = 'ACCOUNT_NUMBER'
+      FixedChar = True
+      Size = 15
+    end
+    object OneFlightAirwayBillSQLINCOTERMS: TStringField
+      FieldName = 'INCOTERMS'
+      FixedChar = True
+      Size = 9
+    end
+    object OneFlightAirwayBillSQLCONSIGNEE_PREFERRED_NAME: TStringField
+      FieldName = 'CONSIGNEE_PREFERRED_NAME'
+      FixedChar = True
+      Size = 35
+    end
+  end
+  object FindFLightOutSQL: TIBCQuery
+    SQLInsert.Strings = (
+      'INSERT INTO FLIGHT_OUT'
+      
+        '  (SERIAL_NUMBER, MAWB, FK_MOVEMENT_SERIAL, FK_DOCUMENT_MASTER_S' +
+        'ERIAL, DATE_DEPART, REMARKS, DESTINATION_AREA, DESTINATION_COUNT' +
+        'RY, FK_FLIGHT_TABLE)'
+      'VALUES'
+      
+        '  (:SERIAL_NUMBER, :MAWB, :FK_MOVEMENT_SERIAL, :FK_DOCUMENT_MAST' +
+        'ER_SERIAL, :DATE_DEPART, :REMARKS, :DESTINATION_AREA, :DESTINATI' +
+        'ON_COUNTRY, :FK_FLIGHT_TABLE)')
+    SQLDelete.Strings = (
+      'DELETE FROM FLIGHT_OUT'
+      'WHERE'
+      '  SERIAL_NUMBER = :Old_SERIAL_NUMBER')
+    SQLUpdate.Strings = (
+      'UPDATE FLIGHT_OUT'
+      'SET'
+      
+        '  SERIAL_NUMBER = :SERIAL_NUMBER, MAWB = :MAWB, FK_MOVEMENT_SERI' +
+        'AL = :FK_MOVEMENT_SERIAL, FK_DOCUMENT_MASTER_SERIAL = :FK_DOCUME' +
+        'NT_MASTER_SERIAL, DATE_DEPART = :DATE_DEPART, REMARKS = :REMARKS' +
+        ', DESTINATION_AREA = :DESTINATION_AREA, DESTINATION_COUNTRY = :D' +
+        'ESTINATION_COUNTRY, FK_FLIGHT_TABLE = :FK_FLIGHT_TABLE'
+      'WHERE'
+      '  SERIAL_NUMBER = :Old_SERIAL_NUMBER')
+    SQLRefresh.Strings = (
+      
+        'SELECT SERIAL_NUMBER, MAWB, FK_MOVEMENT_SERIAL, FK_DOCUMENT_MAST' +
+        'ER_SERIAL, DATE_DEPART, REMARKS, DESTINATION_AREA, DESTINATION_C' +
+        'OUNTRY, FK_FLIGHT_TABLE FROM FLIGHT_OUT'
+      'WHERE'
+      '  SERIAL_NUMBER = :SERIAL_NUMBER')
+    SQLLock.Strings = (
+      'SELECT NULL FROM FLIGHT_OUT'
+      'WHERE'
+      'SERIAL_NUMBER = :Old_SERIAL_NUMBER'
+      'FOR UPDATE WITH LOCK')
+    SQLRecCount.Strings = (
+      'SELECT COUNT(*) FROM ('
+      'SELECT 1 AS C  FROM FLIGHT_OUT'
+      ''
+      ') q')
+    Connection = MainFormFRM.CabOutData
+    SQL.Strings = (
+      'select FO.* ,FT.FLIGHT_NAME'
+      'from '
+      '  Flight_out FO '
+      'LEFT OUTER JOIN '
+      '  FLIGHT_TABLE FT'
+      'ON FO.FK_FLIGHT_TABLE=FT.SERIAL_NUMBER'
+      'where '
+      '  fo.serial_number= :Serial_number')
+    ReadOnly = True
+    UniDirectional = True
+    Left = 20
+    Top = 42
+    ParamData = <
+      item
+        DataType = ftInteger
+        Name = 'Serial_number'
+        ParamType = ptInput
+        Value = nil
+      end>
+    object IntegerField11: TIntegerField
+      FieldName = 'SERIAL_NUMBER'
+      Required = True
+    end
+    object StringField16: TStringField
+      FieldName = 'MAWB'
+      Required = True
+      FixedChar = True
+      Size = 15
+    end
+    object FindFLightOutSQLDATE_DEPART: TDateTimeField
+      FieldName = 'DATE_DEPART'
+    end
+    object FindFLightOutSQLFLIGHT_NAME: TStringField
+      FieldName = 'FLIGHT_NAME'
+      ReadOnly = True
+      FixedChar = True
+      Size = 9
+    end
+  end
+  object FA_ItemSQL: TIBCQuery
+    SQLInsert.Strings = (
+      'INSERT INTO FLIGHT_AIRWAYBILL'
+      
+        '  (SERIAL_NUMBER, SEQUENCE_NUMBER, HAWB_ID, SHIPMENT_ORIGIN_AREA' +
+        ', SHIPMENT_ORIGIN_COUNTRY, PIECES, WEIGHT, DESCRIPTION, FK_DOCUM' +
+        'ENT_MASTER_SERIAL, FK_MOVEMENT_SERIAL, PIECES_S, FK_AIRWAYBILL_S' +
+        'ERIAL, FK_FLIGHT_OUT_SERIAL, SENDER_NAME, SENDER_ADDRESS, SENDER' +
+        '_POST_CODE, SENDER_CITY, SENDER_COUNTRY_CODE, CONSIGNEE_NAME, CO' +
+        'NSIGNEE_ADDRESS, CONSIGNEE_POST_CODE, CONSIGNEE_CITY, CONSIGNEE_' +
+        'COUNTRY_CODE, FK_ITINERARY_SERIAL, PACKAGES_COUNT, ITEMS_COUNT, ' +
+        'PAYMENT_METHOD, SENDER_ADDRESS_1, SENDER_ADDRESS_2, SENDER_ADDRE' +
+        'SS_3, SENDER_DEVICE_TYPE, SENDER_DEVICE_DETAILS, SENDER_ACCOUNT_' +
+        'NUMBER, FK_SENDER_SERIAL, VALUE_TYPE, CONSIGNEE_ADDRESS_1, CONSI' +
+        'GNEE_ADDRESS_2, CONSIGNEE_ADDRESS_3, CONSIGNEE_DEVICE_TYPE, CONS' +
+        'IGNEE_DEVICE_DETAILS, DISTRICT_CODE, TARIFF_CODE, TARIFF_KEYWORD' +
+        ', IS_CLEARED, IS_HIGH)'
+      'VALUES'
+      
+        '  (:SERIAL_NUMBER, :SEQUENCE_NUMBER, :HAWB_ID, :SHIPMENT_ORIGIN_' +
+        'AREA, :SHIPMENT_ORIGIN_COUNTRY, :PIECES, :WEIGHT, :DESCRIPTION, ' +
+        ':FK_DOCUMENT_MASTER_SERIAL, :FK_MOVEMENT_SERIAL, :PIECES_S, :FK_' +
+        'AIRWAYBILL_SERIAL, :FK_FLIGHT_OUT_SERIAL, :SENDER_NAME, :SENDER_' +
+        'ADDRESS, :SENDER_POST_CODE, :SENDER_CITY, :SENDER_COUNTRY_CODE, ' +
+        ':CONSIGNEE_NAME, :CONSIGNEE_ADDRESS, :CONSIGNEE_POST_CODE, :CONS' +
+        'IGNEE_CITY, :CONSIGNEE_COUNTRY_CODE, :FK_ITINERARY_SERIAL, :PACK' +
+        'AGES_COUNT, :ITEMS_COUNT, :PAYMENT_METHOD, :SENDER_ADDRESS_1, :S' +
+        'ENDER_ADDRESS_2, :SENDER_ADDRESS_3, :SENDER_DEVICE_TYPE, :SENDER' +
+        '_DEVICE_DETAILS, :SENDER_ACCOUNT_NUMBER, :FK_SENDER_SERIAL, :VAL' +
+        'UE_TYPE, :CONSIGNEE_ADDRESS_1, :CONSIGNEE_ADDRESS_2, :CONSIGNEE_' +
+        'ADDRESS_3, :CONSIGNEE_DEVICE_TYPE, :CONSIGNEE_DEVICE_DETAILS, :D' +
+        'ISTRICT_CODE, :TARIFF_CODE, :TARIFF_KEYWORD, :IS_CLEARED, :IS_HI' +
+        'GH)')
+    SQLDelete.Strings = (
+      'DELETE FROM FLIGHT_AIRWAYBILL'
+      'WHERE'
+      '  SERIAL_NUMBER = :Old_SERIAL_NUMBER')
+    SQLUpdate.Strings = (
+      'UPDATE FLIGHT_AIRWAYBILL'
+      'SET'
+      
+        '  SERIAL_NUMBER = :SERIAL_NUMBER, SEQUENCE_NUMBER = :SEQUENCE_NU' +
+        'MBER, HAWB_ID = :HAWB_ID, SHIPMENT_ORIGIN_AREA = :SHIPMENT_ORIGI' +
+        'N_AREA, SHIPMENT_ORIGIN_COUNTRY = :SHIPMENT_ORIGIN_COUNTRY, PIEC' +
+        'ES = :PIECES, WEIGHT = :WEIGHT, DESCRIPTION = :DESCRIPTION, FK_D' +
+        'OCUMENT_MASTER_SERIAL = :FK_DOCUMENT_MASTER_SERIAL, FK_MOVEMENT_' +
+        'SERIAL = :FK_MOVEMENT_SERIAL, PIECES_S = :PIECES_S, FK_AIRWAYBIL' +
+        'L_SERIAL = :FK_AIRWAYBILL_SERIAL, FK_FLIGHT_OUT_SERIAL = :FK_FLI' +
+        'GHT_OUT_SERIAL, SENDER_NAME = :SENDER_NAME, SENDER_ADDRESS = :SE' +
+        'NDER_ADDRESS, SENDER_POST_CODE = :SENDER_POST_CODE, SENDER_CITY ' +
+        '= :SENDER_CITY, SENDER_COUNTRY_CODE = :SENDER_COUNTRY_CODE, CONS' +
+        'IGNEE_NAME = :CONSIGNEE_NAME, CONSIGNEE_ADDRESS = :CONSIGNEE_ADD' +
+        'RESS, CONSIGNEE_POST_CODE = :CONSIGNEE_POST_CODE, CONSIGNEE_CITY' +
+        ' = :CONSIGNEE_CITY, CONSIGNEE_COUNTRY_CODE = :CONSIGNEE_COUNTRY_' +
+        'CODE, FK_ITINERARY_SERIAL = :FK_ITINERARY_SERIAL, PACKAGES_COUNT' +
+        ' = :PACKAGES_COUNT, ITEMS_COUNT = :ITEMS_COUNT, PAYMENT_METHOD =' +
+        ' :PAYMENT_METHOD, SENDER_ADDRESS_1 = :SENDER_ADDRESS_1, SENDER_A' +
+        'DDRESS_2 = :SENDER_ADDRESS_2, SENDER_ADDRESS_3 = :SENDER_ADDRESS' +
+        '_3, SENDER_DEVICE_TYPE = :SENDER_DEVICE_TYPE, SENDER_DEVICE_DETA' +
+        'ILS = :SENDER_DEVICE_DETAILS, SENDER_ACCOUNT_NUMBER = :SENDER_AC' +
+        'COUNT_NUMBER, FK_SENDER_SERIAL = :FK_SENDER_SERIAL, VALUE_TYPE =' +
+        ' :VALUE_TYPE, CONSIGNEE_ADDRESS_1 = :CONSIGNEE_ADDRESS_1, CONSIG' +
+        'NEE_ADDRESS_2 = :CONSIGNEE_ADDRESS_2, CONSIGNEE_ADDRESS_3 = :CON' +
+        'SIGNEE_ADDRESS_3, CONSIGNEE_DEVICE_TYPE = :CONSIGNEE_DEVICE_TYPE' +
+        ', CONSIGNEE_DEVICE_DETAILS = :CONSIGNEE_DEVICE_DETAILS, DISTRICT' +
+        '_CODE = :DISTRICT_CODE, TARIFF_CODE = :TARIFF_CODE, TARIFF_KEYWO' +
+        'RD = :TARIFF_KEYWORD, IS_CLEARED = :IS_CLEARED, IS_HIGH = :IS_HI' +
+        'GH'
+      'WHERE'
+      '  SERIAL_NUMBER = :Old_SERIAL_NUMBER')
+    SQLRefresh.Strings = (
+      
+        'SELECT SERIAL_NUMBER, SEQUENCE_NUMBER, HAWB_ID, SHIPMENT_ORIGIN_' +
+        'AREA, SHIPMENT_ORIGIN_COUNTRY, PIECES, WEIGHT, DESCRIPTION, FK_D' +
+        'OCUMENT_MASTER_SERIAL, FK_MOVEMENT_SERIAL, PIECES_S, FK_AIRWAYBI' +
+        'LL_SERIAL, FK_FLIGHT_OUT_SERIAL, SENDER_NAME, SENDER_ADDRESS, SE' +
+        'NDER_POST_CODE, SENDER_CITY, SENDER_COUNTRY_CODE, CONSIGNEE_NAME' +
+        ', CONSIGNEE_ADDRESS, CONSIGNEE_POST_CODE, CONSIGNEE_CITY, CONSIG' +
+        'NEE_COUNTRY_CODE, FK_ITINERARY_SERIAL, PACKAGES_COUNT, ITEMS_COU' +
+        'NT, PAYMENT_METHOD, SENDER_ADDRESS_1, SENDER_ADDRESS_2, SENDER_A' +
+        'DDRESS_3, SENDER_DEVICE_TYPE, SENDER_DEVICE_DETAILS, SENDER_ACCO' +
+        'UNT_NUMBER, FK_SENDER_SERIAL, VALUE_TYPE, CONSIGNEE_ADDRESS_1, C' +
+        'ONSIGNEE_ADDRESS_2, CONSIGNEE_ADDRESS_3, CONSIGNEE_DEVICE_TYPE, ' +
+        'CONSIGNEE_DEVICE_DETAILS, DISTRICT_CODE, TARIFF_CODE, TARIFF_KEY' +
+        'WORD, IS_CLEARED, IS_HIGH FROM FLIGHT_AIRWAYBILL'
+      'WHERE'
+      '  SERIAL_NUMBER = :SERIAL_NUMBER')
+    SQLLock.Strings = (
+      'SELECT NULL FROM FLIGHT_AIRWAYBILL'
+      'WHERE'
+      'SERIAL_NUMBER = :Old_SERIAL_NUMBER'
+      'FOR UPDATE WITH LOCK')
+    SQLRecCount.Strings = (
+      'SELECT COUNT(*) FROM ('
+      'SELECT 1 AS C  FROM FLIGHT_AIRWAYBILL'
+      ''
+      ') q')
+    Connection = MainFormFRM.CabOutData
+    SQL.Strings = (
+      
+        'select * from Flight_AIrwaybill_Item where FK_FA_SERIAL = :AirSe' +
+        'rial;')
+    DetailFields = 'FK_FLIGHT_OUT_SERIAL'
+    ReadOnly = True
+    UniDirectional = True
+    Left = 24
+    Top = 99
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'AirSerial'
+        Value = nil
+      end>
+    object FA_ItemSQLSEQUENCE: TIntegerField
+      FieldName = 'SEQUENCE'
+    end
+    object FA_ItemSQLWEIGHT: TFloatField
+      FieldName = 'WEIGHT'
+    end
+    object FA_ItemSQLPIECES: TIntegerField
+      FieldName = 'PIECES'
+    end
+    object FA_ItemSQLDESCRIPTION: TStringField
+      FieldName = 'DESCRIPTION'
+      Size = 80
+    end
+    object FA_ItemSQLSERIAL_NUMBER: TIntegerField
+      FieldName = 'SERIAL_NUMBER'
+      Required = True
+    end
+    object FA_ItemSQLTARIFF_CODE: TStringField
+      FieldName = 'TARIFF_CODE'
+      Size = 17
+    end
+    object FA_ItemSQLAMOUNT: TFloatField
+      FieldName = 'AMOUNT'
+    end
+    object FA_ItemSQLCURRENCY_RATE: TFloatField
+      FieldName = 'CURRENCY_RATE'
+    end
+    object FA_ItemSQLCURRENCY: TStringField
+      FieldName = 'CURRENCY'
+      FixedChar = True
+      Size = 3
+    end
+    object FA_ItemSQLFK_FA_SERIAL: TIntegerField
+      FieldName = 'FK_FA_SERIAL'
+      Required = True
+    end
+  end
+  object MakeSQL: TIBCQuery
+    SQLInsert.Strings = (
+      'INSERT INTO FLIGHT_AIRWAYBILL'
+      
+        '  (SERIAL_NUMBER, SEQUENCE_NUMBER, HAWB_ID, SHIPMENT_ORIGIN_AREA' +
+        ', SHIPMENT_ORIGIN_COUNTRY, PIECES, WEIGHT, DESCRIPTION, FK_DOCUM' +
+        'ENT_MASTER_SERIAL, FK_MOVEMENT_SERIAL, PIECES_S, FK_AIRWAYBILL_S' +
+        'ERIAL, FK_FLIGHT_OUT_SERIAL, SENDER_NAME, SENDER_ADDRESS, SENDER' +
+        '_POST_CODE, SENDER_CITY, SENDER_COUNTRY_CODE, CONSIGNEE_NAME, CO' +
+        'NSIGNEE_ADDRESS, CONSIGNEE_POST_CODE, CONSIGNEE_CITY, CONSIGNEE_' +
+        'COUNTRY_CODE, FK_ITINERARY_SERIAL, PACKAGES_COUNT, ITEMS_COUNT, ' +
+        'PAYMENT_METHOD, SENDER_ADDRESS_1, SENDER_ADDRESS_2, SENDER_ADDRE' +
+        'SS_3, SENDER_DEVICE_TYPE, SENDER_DEVICE_DETAILS, SENDER_ACCOUNT_' +
+        'NUMBER, FK_SENDER_SERIAL, VALUE_TYPE, CONSIGNEE_ADDRESS_1, CONSI' +
+        'GNEE_ADDRESS_2, CONSIGNEE_ADDRESS_3, CONSIGNEE_DEVICE_TYPE, CONS' +
+        'IGNEE_DEVICE_DETAILS, DISTRICT_CODE, TARIFF_CODE, TARIFF_KEYWORD' +
+        ', IS_CLEARED, IS_HIGH)'
+      'VALUES'
+      
+        '  (:SERIAL_NUMBER, :SEQUENCE_NUMBER, :HAWB_ID, :SHIPMENT_ORIGIN_' +
+        'AREA, :SHIPMENT_ORIGIN_COUNTRY, :PIECES, :WEIGHT, :DESCRIPTION, ' +
+        ':FK_DOCUMENT_MASTER_SERIAL, :FK_MOVEMENT_SERIAL, :PIECES_S, :FK_' +
+        'AIRWAYBILL_SERIAL, :FK_FLIGHT_OUT_SERIAL, :SENDER_NAME, :SENDER_' +
+        'ADDRESS, :SENDER_POST_CODE, :SENDER_CITY, :SENDER_COUNTRY_CODE, ' +
+        ':CONSIGNEE_NAME, :CONSIGNEE_ADDRESS, :CONSIGNEE_POST_CODE, :CONS' +
+        'IGNEE_CITY, :CONSIGNEE_COUNTRY_CODE, :FK_ITINERARY_SERIAL, :PACK' +
+        'AGES_COUNT, :ITEMS_COUNT, :PAYMENT_METHOD, :SENDER_ADDRESS_1, :S' +
+        'ENDER_ADDRESS_2, :SENDER_ADDRESS_3, :SENDER_DEVICE_TYPE, :SENDER' +
+        '_DEVICE_DETAILS, :SENDER_ACCOUNT_NUMBER, :FK_SENDER_SERIAL, :VAL' +
+        'UE_TYPE, :CONSIGNEE_ADDRESS_1, :CONSIGNEE_ADDRESS_2, :CONSIGNEE_' +
+        'ADDRESS_3, :CONSIGNEE_DEVICE_TYPE, :CONSIGNEE_DEVICE_DETAILS, :D' +
+        'ISTRICT_CODE, :TARIFF_CODE, :TARIFF_KEYWORD, :IS_CLEARED, :IS_HI' +
+        'GH)')
+    SQLDelete.Strings = (
+      'DELETE FROM FLIGHT_AIRWAYBILL'
+      'WHERE'
+      '  SERIAL_NUMBER = :Old_SERIAL_NUMBER')
+    SQLUpdate.Strings = (
+      'UPDATE FLIGHT_AIRWAYBILL'
+      'SET'
+      
+        '  SERIAL_NUMBER = :SERIAL_NUMBER, SEQUENCE_NUMBER = :SEQUENCE_NU' +
+        'MBER, HAWB_ID = :HAWB_ID, SHIPMENT_ORIGIN_AREA = :SHIPMENT_ORIGI' +
+        'N_AREA, SHIPMENT_ORIGIN_COUNTRY = :SHIPMENT_ORIGIN_COUNTRY, PIEC' +
+        'ES = :PIECES, WEIGHT = :WEIGHT, DESCRIPTION = :DESCRIPTION, FK_D' +
+        'OCUMENT_MASTER_SERIAL = :FK_DOCUMENT_MASTER_SERIAL, FK_MOVEMENT_' +
+        'SERIAL = :FK_MOVEMENT_SERIAL, PIECES_S = :PIECES_S, FK_AIRWAYBIL' +
+        'L_SERIAL = :FK_AIRWAYBILL_SERIAL, FK_FLIGHT_OUT_SERIAL = :FK_FLI' +
+        'GHT_OUT_SERIAL, SENDER_NAME = :SENDER_NAME, SENDER_ADDRESS = :SE' +
+        'NDER_ADDRESS, SENDER_POST_CODE = :SENDER_POST_CODE, SENDER_CITY ' +
+        '= :SENDER_CITY, SENDER_COUNTRY_CODE = :SENDER_COUNTRY_CODE, CONS' +
+        'IGNEE_NAME = :CONSIGNEE_NAME, CONSIGNEE_ADDRESS = :CONSIGNEE_ADD' +
+        'RESS, CONSIGNEE_POST_CODE = :CONSIGNEE_POST_CODE, CONSIGNEE_CITY' +
+        ' = :CONSIGNEE_CITY, CONSIGNEE_COUNTRY_CODE = :CONSIGNEE_COUNTRY_' +
+        'CODE, FK_ITINERARY_SERIAL = :FK_ITINERARY_SERIAL, PACKAGES_COUNT' +
+        ' = :PACKAGES_COUNT, ITEMS_COUNT = :ITEMS_COUNT, PAYMENT_METHOD =' +
+        ' :PAYMENT_METHOD, SENDER_ADDRESS_1 = :SENDER_ADDRESS_1, SENDER_A' +
+        'DDRESS_2 = :SENDER_ADDRESS_2, SENDER_ADDRESS_3 = :SENDER_ADDRESS' +
+        '_3, SENDER_DEVICE_TYPE = :SENDER_DEVICE_TYPE, SENDER_DEVICE_DETA' +
+        'ILS = :SENDER_DEVICE_DETAILS, SENDER_ACCOUNT_NUMBER = :SENDER_AC' +
+        'COUNT_NUMBER, FK_SENDER_SERIAL = :FK_SENDER_SERIAL, VALUE_TYPE =' +
+        ' :VALUE_TYPE, CONSIGNEE_ADDRESS_1 = :CONSIGNEE_ADDRESS_1, CONSIG' +
+        'NEE_ADDRESS_2 = :CONSIGNEE_ADDRESS_2, CONSIGNEE_ADDRESS_3 = :CON' +
+        'SIGNEE_ADDRESS_3, CONSIGNEE_DEVICE_TYPE = :CONSIGNEE_DEVICE_TYPE' +
+        ', CONSIGNEE_DEVICE_DETAILS = :CONSIGNEE_DEVICE_DETAILS, DISTRICT' +
+        '_CODE = :DISTRICT_CODE, TARIFF_CODE = :TARIFF_CODE, TARIFF_KEYWO' +
+        'RD = :TARIFF_KEYWORD, IS_CLEARED = :IS_CLEARED, IS_HIGH = :IS_HI' +
+        'GH'
+      'WHERE'
+      '  SERIAL_NUMBER = :Old_SERIAL_NUMBER')
+    SQLRefresh.Strings = (
+      
+        'SELECT SERIAL_NUMBER, SEQUENCE_NUMBER, HAWB_ID, SHIPMENT_ORIGIN_' +
+        'AREA, SHIPMENT_ORIGIN_COUNTRY, PIECES, WEIGHT, DESCRIPTION, FK_D' +
+        'OCUMENT_MASTER_SERIAL, FK_MOVEMENT_SERIAL, PIECES_S, FK_AIRWAYBI' +
+        'LL_SERIAL, FK_FLIGHT_OUT_SERIAL, SENDER_NAME, SENDER_ADDRESS, SE' +
+        'NDER_POST_CODE, SENDER_CITY, SENDER_COUNTRY_CODE, CONSIGNEE_NAME' +
+        ', CONSIGNEE_ADDRESS, CONSIGNEE_POST_CODE, CONSIGNEE_CITY, CONSIG' +
+        'NEE_COUNTRY_CODE, FK_ITINERARY_SERIAL, PACKAGES_COUNT, ITEMS_COU' +
+        'NT, PAYMENT_METHOD, SENDER_ADDRESS_1, SENDER_ADDRESS_2, SENDER_A' +
+        'DDRESS_3, SENDER_DEVICE_TYPE, SENDER_DEVICE_DETAILS, SENDER_ACCO' +
+        'UNT_NUMBER, FK_SENDER_SERIAL, VALUE_TYPE, CONSIGNEE_ADDRESS_1, C' +
+        'ONSIGNEE_ADDRESS_2, CONSIGNEE_ADDRESS_3, CONSIGNEE_DEVICE_TYPE, ' +
+        'CONSIGNEE_DEVICE_DETAILS, DISTRICT_CODE, TARIFF_CODE, TARIFF_KEY' +
+        'WORD, IS_CLEARED, IS_HIGH FROM FLIGHT_AIRWAYBILL'
+      'WHERE'
+      '  SERIAL_NUMBER = :SERIAL_NUMBER')
+    SQLLock.Strings = (
+      'SELECT NULL FROM FLIGHT_AIRWAYBILL'
+      'WHERE'
+      'SERIAL_NUMBER = :Old_SERIAL_NUMBER'
+      'FOR UPDATE WITH LOCK')
+    SQLRecCount.Strings = (
+      'SELECT COUNT(*) FROM ('
+      'SELECT 1 AS C  FROM FLIGHT_AIRWAYBILL'
+      ''
+      ') q')
+    Connection = MainFormFRM.CabOutData
+    Transaction = MainFormFRM.UsedForReadOnlyTrans
+    ReadOnly = True
+    UniDirectional = True
+    Left = 508
+    Top = 242
+  end
+  object OneFlightAirwayBillSRC: TIBCDataSource
+    DataSet = OneFlightAirwayBillSQL
+    Left = 344
+    Top = 235
+  end
+  object FlightAirCountrySQL: TIBCQuery
+    SQLInsert.Strings = (
+      'INSERT INTO FLIGHT_AIRWAYBILL_COUNTRY'
+      '  (COUNTRY_CODE, FK_FLIGHT_AIRWAYBILL)'
+      'VALUES'
+      '  (:COUNTRY_CODE, :FK_FLIGHT_AIRWAYBILL)')
+    SQLDelete.Strings = (
+      'DELETE FROM FLIGHT_AIRWAYBILL_COUNTRY'
+      'WHERE'
+      
+        '  FK_FLIGHT_AIRWAYBILL = :Old_FK_FLIGHT_AIRWAYBILL AND COUNTRY_C' +
+        'ODE = :Old_COUNTRY_CODE')
+    SQLUpdate.Strings = (
+      'UPDATE FLIGHT_AIRWAYBILL_COUNTRY'
+      'SET'
+      
+        '  COUNTRY_CODE = :COUNTRY_CODE, FK_FLIGHT_AIRWAYBILL = :FK_FLIGH' +
+        'T_AIRWAYBILL'
+      'WHERE'
+      
+        '  FK_FLIGHT_AIRWAYBILL = :Old_FK_FLIGHT_AIRWAYBILL AND COUNTRY_C' +
+        'ODE = :Old_COUNTRY_CODE')
+    SQLRefresh.Strings = (
+      
+        'SELECT COUNTRY_CODE, FK_FLIGHT_AIRWAYBILL FROM FLIGHT_AIRWAYBILL' +
+        '_COUNTRY'
+      'WHERE'
+      
+        '  FK_FLIGHT_AIRWAYBILL = :FK_FLIGHT_AIRWAYBILL AND COUNTRY_CODE ' +
+        '= :COUNTRY_CODE')
+    SQLLock.Strings = (
+      'SELECT NULL FROM FLIGHT_AIRWAYBILL_COUNTRY'
+      'WHERE'
+      
+        'FK_FLIGHT_AIRWAYBILL = :Old_FK_FLIGHT_AIRWAYBILL AND COUNTRY_COD' +
+        'E = :Old_COUNTRY_CODE'
+      'FOR UPDATE WITH LOCK')
+    Connection = MainFormFRM.CabOutData
+    SQL.Strings = (
+      'select * from Flight_airwaybill_country')
+    MasterFields = 'SERIAL_NUMBER'
+    DetailFields = 'FK_FLIGHT_AIRWAYBILL'
+    MasterSource = OneFlightAirwayBillSRC
+    ReadOnly = True
+    Left = 200
+    Top = 307
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'SERIAL_NUMBER'
+        Value = nil
+      end>
+  end
+end

@@ -28,7 +28,6 @@ uses G_KyrSQL;
 Function GN_GetTheSystemParameter(cn:TIBCConnection ;Const Key:String):TParameterREcord;
 Var
         x1:Double;
-        qr:TksQuery;
 
 Begin
   try
