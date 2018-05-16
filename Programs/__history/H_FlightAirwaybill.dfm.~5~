@@ -114,7 +114,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
     Align = alClient
     TabOrder = 2
     ExplicitLeft = -8
-    ExplicitTop = 37
+    ExplicitTop = 54
     object GroupBox1: TGroupBox
       Left = 26
       Top = 6
@@ -1171,15 +1171,15 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
       end
     end
     object GroupBox4: TGroupBox
-      Left = 40
-      Top = 527
+      Left = 13
+      Top = 507
       Width = 969
-      Height = 182
+      Height = 137
       Caption = 'Items'
       TabOrder = 3
       object SpeedButton2: TSpeedButton
-        Left = 906
-        Top = 70
+        Left = 786
+        Top = 62
         Width = 21
         Height = 15
         Hint = 'Find Hawb in this Mawb'
@@ -1220,16 +1220,15 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         ParentFont = False
       end
       object wwDBGrid1: TwwDBGrid
-        Left = 3
-        Top = 39
-        Width = 718
-        Height = 145
+        Left = 13
+        Top = 46
+        Width = 586
+        Height = 78
         ControlType.Strings = (
           'CURRENCY;CustomEdit;CurrencyFLD')
         PictureMasks.Strings = (
           'TARIFF_CODE'#9'####  ## ## ##'#9'T'#9'T')
         Selected.Strings = (
-          'SERIAL_NUMBER'#9'6'#9'S/N'
           'SEQUENCE'#9'8'#9'Sequence'
           'DESCRIPTION'#9'19'#9'Description'
           'WEIGHT'#9'10'#9'Weight'
@@ -1388,8 +1387,8 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         end
       end
       object SelectTariffFLD: TwwDBEdit
-        Left = 739
-        Top = 67
+        Left = 620
+        Top = 59
         Width = 161
         Height = 23
         CharCase = ecUpperCase
@@ -1970,8 +1969,8 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
       'Select * from Country')
     ReadOnly = True
     Active = True
-    Left = 793
-    Top = 722
+    Left = 809
+    Top = 642
     object CountrySQLCODE_2: TStringField
       DisplayLabel = 'Code2'
       DisplayWidth = 5
@@ -2064,8 +2063,8 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
     MasterSource = ItineraryCRC
     ReadOnly = True
     Active = True
-    Left = 696
-    Top = 705
+    Left = 624
+    Top = 673
     ParamData = <
       item
         DataType = ftInteger
@@ -2538,11 +2537,6 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         Name = 'SERIAL_NUMBER'
         Value = nil
       end>
-    object FA_ItemSQLSERIAL_NUMBER: TIntegerField
-      DisplayLabel = 'S/N'
-      DisplayWidth = 6
-      FieldName = 'SERIAL_NUMBER'
-    end
     object FA_ItemSQLSEQUENCE: TIntegerField
       DisplayLabel = 'Sequence'
       DisplayWidth = 8
@@ -2586,6 +2580,11 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
       DisplayLabel = 'Curr Rate'
       DisplayWidth = 10
       FieldName = 'CURRENCY_RATE'
+      Visible = False
+    end
+    object FA_ItemSQLSERIAL_NUMBER: TIntegerField
+      DisplayWidth = 10
+      FieldName = 'SERIAL_NUMBER'
       Visible = False
     end
     object FA_ItemSQLFK_FA_SERIAL: TIntegerField

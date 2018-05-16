@@ -102,12 +102,14 @@ type
 
 
   function CreateNodeHeader( Const dt :TDataset; const Fdoc: IXMLDocument;FatherNode:IXMLNode):IXMLNode;
-  function CreateNode555( Const dt :TDataset; const Fdoc: IXMLDocument;FatherNode:IXMLNode):IXMLNode;
+  function CreateNodeAirwayBills( Const FlightSerial:Integer; const Fdoc: IXMLDocument;FatherNode:IXMLNode):IXMLNode;
+  function CreateNodeForItems( Const AirwaybillSerial:Integer; const Fdoc: IXMLDocument;FatherNode:IXMLNode):IXMLNode;
+  function CreateNodeFlightCountries( Const FlightSerial:Integer; const Fdoc: IXMLDocument;FatherNode:IXMLNode):IXMLNode;
 
 
   public
     { Public declarations }
-
+    IN_FlightSerial:Integer;
     procedure CreateOneAirwabillXML(Const SerialNumber:Integer);
   Function  CreateMultiXML(Const FlightOutSerial:Integer):Integer;
 
@@ -124,7 +126,8 @@ uses MainForm, GeneralParametersNew, G_KyrSQL;
 
 procedure TX_CreateMultiXmlFRM.Button1Click(Sender: TObject);
 begin
-CreateMultiXML(1855);
+
+CreateMultiXML(IN_FlightSerial);
 
 end;
 
@@ -662,20 +665,16 @@ var
 
   temp:String;
   FQr: TksQuery;
-  aQr: TksQuery;
   Mawb:String;
   flightSerial:Integer;
 
 Begin
   fQr:=TksQuery.Create(cn,' select *  from Flight_out where serial_number= :Serial');
-  aQr:=TksQuery.Create(cn,' select *  from Flight_airwaybill where FK_FLIGHT_OUT_SERIAL= :Serial');
   try
     fQr.ParambyName('serial').Value:= FlightOutSerial;
     fQr.Open;
     Mawb:=fQr.FieldByName('Mawb').AsString;
     ShowMessage(Mawb);
-    aqr.ParamByName('serial').Value:=FlightOutSerial;
-    aQr.Open;
 
     FDoc:=XMLDocNew;
     FDoc.active:=false;
@@ -688,13 +687,7 @@ Begin
     TheRoot.SetAttributeNS('xmlns', '', 'http://www.eurodyn.com' );
      /////////////////////////////////////////////////////////////////////////
     CreateNodeHeader(fqr,Fdoc,TheRoot);
-    aNode:= Cre
-
-    while(not aQr.Eof) do begin
-      Temp:=aqr.FieldByName('serial_number').AsString;
-      CreateNode555(aQr,Fdoc,aNode);
-      aQr.Next;
-    end;
+    CreateNodeAirwayBills(FlightOutSerial,Fdoc,TheRoot);
 
     strXML := StringReplace(FDoc.XML.Text, ' xmlns=""', '', [rfReplaceAll]);
     FDoc := LoadXMLData(strXML);
@@ -705,7 +698,6 @@ Begin
 
   finally
     fQr.Free;
-    aQr.Free;
   end;
 
 
@@ -743,20 +735,99 @@ begin
 end;
 
 
-function TX_CreateMultiXmlFRM.CreateNode555( Const dt :TDataset; const Fdoc: IXMLDocument;FatherNode:IXMLNode):IXMLNode;
+function TX_CreateMultiXmlFRM.CreateNodeAirwayBills( Const FlightSerial:Integer; const Fdoc: IXMLDocument;FatherNode:IXMLNode):IXMLNode;
+var
+  HeaderNode:IXMLNode;
+  aNode:IXMLNode;
+  val:String;
+  addr:string;
+  DString:String;
+  AirSerial:Integer;
+  qr: TksQuery;
+  ItemSerial:Integer;
+begin
+    HeaderNode:= CreateXmlNodeNew(Fdoc,FatherNode,'AirwayBills','');
+
+    Qr:=TksQuery.Create(cn,' select * from FLIGHT_AIRWAYBILL where FK_FLIGHT_OUT_SERIAL= :serial');
+    try
+      Qr.ParambyName('serial').Value:= FlightSerial;
+      Qr.Open;
+      while (not qr.eof) do begin
+       airSerial:=qr.FieldByName('Serial_number').AsInteger;
+       aNode :=CreateXMLNodeNew(FDoc,HEaderNode,'AirwayBill','',ntElement);
+
+       TblCreateXMLNode(FDoc,anode,'City','',qr,'HAWB_ID',ntText);
+       CreateXMLNodeNew(FDoc,aNOde,'weight','Ch1',ntText);
+
+       CreateNodeFlightCountries(AirSerial,Fdoc,aNode);
+       CreateNodeForItems(AirSerial,Fdoc,aNode);
+
+       qr.Next;
+      end;
+    finally
+      qr.Free;
+    end;
+
+end;
+
+
+function TX_CreateMultiXmlFRM.CreateNodeForItems( Const AirwaybillSerial:Integer; const Fdoc: IXMLDocument;FatherNode:IXMLNode):IXMLNode;
+var
+  HeaderNode,aNode:IXMLNode;
+  val:String;
+  addr:string;
+  DString:String;
+  qr:TksQuery;
+begin
+
+  HeaderNode :=CreateXMLNodeNew(FDoc,FatherNode,'HawbItems','',ntElement);
+  Qr:=TksQuery.Create(cn,' select *  from FLIGHT_AIRWAYBILL_ITEM where fK_fa_serial= :Serial');
+  try
+    Qr.ParambyName('serial').Value:= AirwayBillSerial;
+    Qr.Open;
+    while(not Qr.Eof) do begin
+     Val :=qr.FieldByName('SERIAL_NUMBER').AsString;
+
+     aNode :=CreateXMLNodeNew(FDoc,FatherNode,'HawbItem','',ntElement);
+     TblCreateXMLNode(FDoc,Anode, 'Serial', '',qr, 'Serial_number',ntText);
+     CreateXMLNodeNew(FDoc,ANOde,'itme','Ch1',ntText);
+     result:= aNode;
+     qr.Next;
+    end;
+  finally
+    qr.Free;
+  end;
+
+
+
+end;
+
+
+function TX_CreateMultiXmlFRM.CreateNodeFlightCountries( Const FlightSerial:Integer; const Fdoc: IXMLDocument;FatherNode:IXMLNode):IXMLNode;
 var
   aNode:IXMLNode;
   val:String;
   addr:string;
   DString:String;
+  qr:TksQuery;
 begin
 
-     aNode:=CreateXMLNodeNew(FDoc,FatherNode,'Children','',ntElement);
-       CreateXMLNodeNew(FDoc,aNOde,'Child','Ch1',ntText);
-       CreateXMLNodeNew(FDoc,aNOde,'Child','Ch2',ntText);
-       TblCreateXMLNode(FDoc,anode,'City','',Dt,'HAWB_ID',ntText);
-     result:= aNode;
+
+ aNode:=CreateXMLNodeNew(FDoc,FatherNOde,'Msg515Itinerary','',ntElement);
+ Qr:=TksQuery.Create(cn,' select * from Flight_airwaybill_country where FK_FLIGHT_AIRWAYBILL = :serial');
+  try
+    Qr.ParambyName('serial').Value:= FlightSerial;
+    Qr.Open;
+    TblCreateXMLNode(FDoc,anode, 'CountryOfRoutingCode', '',qr, 'Country_code',ntText);
+    result:= aNode;
+  finally
+    qr.Free;
+  end;
+
 end;
+
+
+
 
 
 end.
