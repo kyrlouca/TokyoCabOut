@@ -1,30 +1,36 @@
 ﻿[Closed Files]
-File_0=TSourceModule,'C:\Data\DelphiProjects\TokyoCabOut\Programs\H_FlightAirwaybill.pas',0,1,1,1,1,0,0,,
-File_1=TSourceModule,'C:\Data\DelphiProjects\TokyoCabOut\Programs\R_ReadALLXMLFiles.pas',0,1,149,20,167,0,0,,
-File_2=TSourceModule,'C:\Data\DelphiProjects\TokyoCabOut\Programs\M_parameters.pas',0,1,1,1,1,0,0,,
-File_3=TSourceModule,'C:\Data\DelphiProjects\TokyoCabOut\Programs\X_createOneXML.pas',0,1,1,1,1,0,0,,
-File_4=TSourceModule,'C:\Data\DelphiProjects\TokyoCabOut\Programs\G_generalProcs.pas',0,1,384,1,403,0,0,,
-File_5=TSourceModule,'C:\Data\DelphiProjects\TokyoCabOut\Programs\M_parameters.dfm',0,1,1,1,1,0,0,,
-File_6=TSourceModule,'C:\Data\DelphiProjects\TokyoCabOut\Programs\L_AIrwaybillHigh.dfm',0,1,1,1,1,0,0,,
-File_7=TSourceModule,'C:\Data\DelphiProjects\TokyoCabOut\Programs\H_FlightAirwaybill.dfm',0,1,1,1,1,0,0,,
-File_8=TSourceModule,'C:\Data\DelphiProjects\TokyoCabOut\Programs\H_ScanAirwaybillNew.dfm',0,1,1,1,1,0,0,,
-File_9=TSourceModule,'C:\Data\DelphiProjects\TokyoCabOut\Programs\L_FlightOutList.dfm',0,1,1,1,1,0,0,,
-File_10=TSourceModule,'C:\Data\DelphiProjects\TokyoCabOut\Programs\M_Currency.pas',0,1,1,1,1,0,0,,
+File_0=TSourceModule,'C:\Data\DelphiProjects\TokyoCabOut\Programs\R_ReadALLXMLFiles.pas',0,1,149,20,167,0,0,,
+File_1=TSourceModule,'C:\Data\DelphiProjects\TokyoCabOut\Programs\M_parameters.pas',0,1,1,1,1,0,0,,
+File_2=TSourceModule,'C:\Data\DelphiProjects\TokyoCabOut\Programs\X_createOneXML.pas',0,1,1,1,1,0,0,,
+File_3=TSourceModule,'C:\Data\DelphiProjects\TokyoCabOut\Programs\G_generalProcs.pas',0,1,384,1,403,0,0,,
+File_4=TSourceModule,'C:\Data\DelphiProjects\TokyoCabOut\Programs\M_parameters.dfm',0,1,1,1,1,0,0,,
+File_5=TSourceModule,'C:\Data\DelphiProjects\TokyoCabOut\Programs\L_AIrwaybillHigh.dfm',0,1,1,1,1,0,0,,
+File_6=TSourceModule,'C:\Data\DelphiProjects\TokyoCabOut\Programs\H_FlightAirwaybill.dfm',0,1,1,1,1,0,0,,
+File_7=TSourceModule,'C:\Data\DelphiProjects\TokyoCabOut\Programs\H_ScanAirwaybillNew.dfm',0,1,1,1,1,0,0,,
+File_8=TSourceModule,'C:\Data\DelphiProjects\TokyoCabOut\Programs\L_FlightOutList.dfm',0,1,1,1,1,0,0,,
+File_9=TSourceModule,'C:\Data\DelphiProjects\TokyoCabOut\Programs\M_Currency.pas',0,1,1,1,1,0,0,,
 
 [Modules]
 Module0=C:\Data\DelphiProjects\TokyoCabOut\Programs\X_createMultiXML.pas
-Module1=C:\Data\DelphiProjects\TokyoCabOut\Programs\H_ScanAirwaybillNew.pas
-Module2=C:\Data\DelphiProjects\TokyoCabOut\Programs\L_AIrwaybillHigh.pas
-Module3=C:\Data\DelphiProjects\TokyoCabOut\Programs\L_FlightOutList.pas
-Module4=C:\Data\DelphiProjects\TokyoCabOut\Programs\GeneralParametersNew.pas
-Module5=C:\Data\DelphiProjects\TokyoCabOut\Programs\G_KyrSQL.pas
-Module6=C:\Data\DelphiProjects\TokyoCabOut\Programs\X_readFile.pas
-Module7=C:\Data\DelphiProjects\TokyoCabOut\Programs\MainForm.pas
-Module8=C:\Data\DelphiProjects\TokyoCabOut\Programs\H_flightOut.pas
-Count=9
+Module1=C:\Data\DelphiProjects\TokyoCabOut\Programs\MainForm.pas
+Module2=C:\Data\DelphiProjects\TokyoCabOut\Programs\H_FlightAirwaybill.pas
+Module3=C:\Data\DelphiProjects\TokyoCabOut\Programs\H_ScanAirwaybillNew.pas
+Module4=C:\Data\DelphiProjects\TokyoCabOut\Programs\L_AIrwaybillHigh.pas
+Module5=C:\Data\DelphiProjects\TokyoCabOut\Programs\L_FlightOutList.pas
+Module6=C:\Data\DelphiProjects\TokyoCabOut\Programs\GeneralParametersNew.pas
+Module7=C:\Data\DelphiProjects\TokyoCabOut\Programs\G_KyrSQL.pas
+Module8=C:\Data\DelphiProjects\TokyoCabOut\Programs\X_readFile.pas
+Module9=C:\Data\DelphiProjects\TokyoCabOut\Programs\H_flightOut.pas
+Count=10
 EditWindowCount=1
 
 [C:\Data\DelphiProjects\TokyoCabOut\Programs\X_createMultiXML.pas]
+ModuleType=TSourceModule
+
+[C:\Data\DelphiProjects\TokyoCabOut\Programs\MainForm.pas]
+ModuleType=TSourceModule
+
+[C:\Data\DelphiProjects\TokyoCabOut\Programs\H_FlightAirwaybill.pas]
 ModuleType=TSourceModule
 
 [C:\Data\DelphiProjects\TokyoCabOut\Programs\H_ScanAirwaybillNew.pas]
@@ -45,14 +51,11 @@ ModuleType=TSourceModule
 [C:\Data\DelphiProjects\TokyoCabOut\Programs\X_readFile.pas]
 ModuleType=TSourceModule
 
-[C:\Data\DelphiProjects\TokyoCabOut\Programs\MainForm.pas]
-ModuleType=TSourceModule
-
 [C:\Data\DelphiProjects\TokyoCabOut\Programs\H_flightOut.pas]
 ModuleType=TSourceModule
 
 [EditWindow0]
-ViewCount=9
+ViewCount=10
 CurrentEditView=C:\Data\DelphiProjects\TokyoCabOut\Programs\X_createMultiXML.pas
 View0=0
 View1=1
@@ -63,6 +66,7 @@ View5=5
 View6=6
 View7=7
 View8=8
+View9=9
 PercentageSizes=1
 Create=1
 Visible=1
@@ -80,13 +84,13 @@ DockedToMainForm=1
 TopPanelSize=0
 LeftPanelSize=1615
 LeftPanelClients=WatchWindow,CallStackWindow,PropertyInspector
-LeftPanelData=000008000101010000000F00000043616C6C537461636B57696E646F77E011000000000000014F0600000000000001000000003B1200001100000050726F7065727479496E73706563746F720100000000991C00000B000000576174636857696E646F77FFFFFFFF
-RightPanelSize=900
+LeftPanelData=000008000101010000000F00000043616C6C537461636B57696E646F772611000000000000014F0600000000000001000000003B1200001100000050726F7065727479496E73706563746F720100000000701B00000B000000576174636857696E646F77FFFFFFFF
+RightPanelSize=2679
 RightPanelClients=DockSite1,ToolForm
-RightPanelData=00000800010100000000E0110000000000000184030000000000000100000000B80D000009000000446F636B53697465310100000000991C000008000000546F6F6C466F726DFFFFFFFF
-BottomPanelSize=1619
+RightPanelData=00000800010100000000261100000000000001770A0000000000000100000000B80D000009000000446F636B53697465310100000000701B000008000000546F6F6C466F726DFFFFFFFF
+BottomPanelSize=1917
 BottomPanelClients=MessageView,DockSite0
-BottomPanelData=00000800010200000000DF3A00000000000002530600000000000001000000002312000009000000446F636B53697465300100000000DF3A00000F0000004D65737361676556696577466F726DFFFFFFFF
+BottomPanelData=00000800010200000000DF3A000000000000027D070000000000000100000000701D000009000000446F636B53697465300100000000DF3A00000F0000004D65737361676556696577466F726DFFFFFFFF
 BottomMiddlePanelSize=0
 
 [View0]
@@ -125,9 +129,9 @@ EditViewName=Borland.FormDesignerView
 [View3]
 CustomEditViewType=TEditView
 Module=C:\Data\DelphiProjects\TokyoCabOut\Programs\H_ScanAirwaybillNew.pas
-CursorX=22
-CursorY=626
-TopLine=496
+CursorX=1
+CursorY=621
+TopLine=616
 LeftCol=1
 Elisions=
 Bookmarks=
@@ -135,16 +139,27 @@ EditViewName=C:\Data\DelphiProjects\TokyoCabOut\Programs\H_ScanAirwaybillNew.pas
 
 [View4]
 CustomEditViewType=TEditView
-Module=C:\Data\DelphiProjects\TokyoCabOut\Programs\X_createMultiXML.pas
+Module=C:\Data\DelphiProjects\TokyoCabOut\Programs\H_FlightAirwaybill.pas
 CursorX=1
-CursorY=875
-TopLine=875
+CursorY=1
+TopLine=1
 LeftCol=1
 Elisions=
 Bookmarks=
-EditViewName=C:\Data\DelphiProjects\TokyoCabOut\Programs\X_createMultiXML.pas
+EditViewName=Borland.FormDesignerView
 
 [View5]
+CustomEditViewType=TEditView
+Module=C:\Data\DelphiProjects\TokyoCabOut\Programs\X_createMultiXML.pas
+CursorX=1
+CursorY=805
+TopLine=790
+LeftCol=1
+Elisions=
+Bookmarks={1,672,1}
+EditViewName=C:\Data\DelphiProjects\TokyoCabOut\Programs\X_createMultiXML.pas
+
+[View6]
 CustomEditViewType=TEditView
 Module=C:\Data\DelphiProjects\TokyoCabOut\Programs\L_FlightOutList.pas
 CursorX=3
@@ -155,7 +170,7 @@ Elisions=
 Bookmarks=
 EditViewName=Borland.FormDesignerView
 
-[View6]
+[View7]
 CustomEditViewType=TEditView
 Module=C:\Data\DelphiProjects\TokyoCabOut\Programs\X_readFile.pas
 CursorX=34
@@ -166,7 +181,7 @@ Elisions=
 Bookmarks=
 EditViewName=C:\Data\DelphiProjects\TokyoCabOut\Programs\X_readFile.pas
 
-[View7]
+[View8]
 CustomEditViewType=TEditView
 Module=C:\Data\DelphiProjects\TokyoCabOut\Programs\G_KyrSQL.pas
 CursorX=13
@@ -177,7 +192,7 @@ Elisions=
 Bookmarks=
 EditViewName=C:\Data\DelphiProjects\TokyoCabOut\Programs\G_KyrSQL.pas
 
-[View8]
+[View9]
 CustomEditViewType=TEditView
 Module=C:\Data\DelphiProjects\TokyoCabOut\Programs\GeneralParametersNew.pas
 CursorX=1
@@ -192,21 +207,26 @@ EditViewName=C:\Data\DelphiProjects\TokyoCabOut\Programs\GeneralParametersNew.pa
 Count=0
 
 [Breakpoints]
-Count=8
-Breakpoint0='C:\Data\DelphiProjects\TokyoCabOut\Programs\X_createMultiXML.pas',246,'',0,1,'',1,0,0,'',1,'','','',0,''
-Breakpoint1='C:\Data\DelphiProjects\TokyoCabOut\Programs\X_createMultiXML.pas',229,'',0,1,'',1,0,0,'',1,'','','',0,''
-Breakpoint2='C:\Data\DelphiProjects\TokyoCabOut\Programs\X_createMultiXML.pas',661,'',0,1,'',1,0,0,'',1,'','','',0,''
-Breakpoint3='C:\Data\DelphiProjects\TokyoCabOut\Programs\X_createMultiXML.pas',198,'',0,1,'',1,0,0,'',1,'','','',0,''
-Breakpoint4='C:\Data\DelphiProjects\TokyoCabOut\Programs\X_createMultiXML.pas',270,'',0,1,'',1,0,0,'',1,'','','',0,''
-Breakpoint5='C:\Data\DelphiProjects\TokyoCabOut\Programs\X_createMultiXML.pas',894,'',0,1,'',1,0,0,'',1,'','','',0,''
-Breakpoint6='C:\Data\DelphiProjects\TokyoCabOut\Programs\R_ReadALLXMLFiles.pas',167,'',0,1,'',1,0,0,'',1,'','','',0,''
-Breakpoint7='C:\Data\DelphiProjects\TokyoCabOut\Programs\X_readFile.pas',309,'',0,1,'',1,0,0,'',1,'','','',0,''
+Count=13
+Breakpoint0='C:\Data\DelphiProjects\TokyoCabOut\Programs\X_createMultiXML.pas',236,'',0,1,'',1,0,0,'',1,'','','',0,''
+Breakpoint1='C:\Data\DelphiProjects\TokyoCabOut\Programs\X_createMultiXML.pas',355,'',0,1,'',1,0,0,'',1,'','','',0,''
+Breakpoint2='C:\Data\DelphiProjects\TokyoCabOut\Programs\X_createMultiXML.pas',205,'',0,1,'',1,0,0,'',1,'','','',0,''
+Breakpoint3='C:\Data\DelphiProjects\TokyoCabOut\Programs\X_createMultiXML.pas',588,'',0,1,'',1,0,0,'',1,'','','',0,''
+Breakpoint4='C:\Data\DelphiProjects\TokyoCabOut\Programs\R_ReadALLXMLFiles.pas',167,'',0,1,'',1,0,0,'',1,'','','',0,''
+Breakpoint5='C:\Data\DelphiProjects\TokyoCabOut\Programs\X_readFile.pas',309,'',0,1,'',1,0,0,'',1,'','','',0,''
+Breakpoint6='C:\Data\DelphiProjects\TokyoCabOut\Programs\X_createMultiXML.pas',833,'',0,1,'',1,0,0,'',1,'','','',0,''
+Breakpoint7='C:\Data\DelphiProjects\TokyoCabOut\Programs\X_createMultiXML.pas',672,'',0,1,'',1,0,0,'',1,'','','',0,''
+Breakpoint8='C:\Data\DelphiProjects\TokyoCabOut\Programs\X_createMultiXML.pas',690,'',0,1,'',1,0,0,'',1,'','','',0,''
+Breakpoint9='C:\Data\DelphiProjects\TokyoCabOut\Programs\X_createMultiXML.pas',805,'',0,1,'',1,0,0,'',1,'','','',0,''
+Breakpoint10='C:\Data\DelphiProjects\TokyoCabOut\Programs\X_createMultiXML.pas',746,'',0,1,'',1,0,0,'',1,'','','',0,''
+Breakpoint11='C:\Data\DelphiProjects\TokyoCabOut\Programs\X_createMultiXML.pas',745,'',0,1,'',1,0,0,'',1,'','','',0,''
+Breakpoint12='C:\Data\DelphiProjects\TokyoCabOut\Programs\X_createMultiXML.pas',715,'',0,1,'',1,0,0,'',1,'','','',0,''
 
 [EmbarcaderoWin32Debugger_AddressBreakpoints]
 Count=0
 
 [Watches]
-Count=10
+Count=16
 Watch0='FromDir',256,0,18,1,0,'Watches',1
 Watch1='ToDir',256,0,18,1,0,'Watches',1
 Watch2='fileName',256,0,18,1,0,'Watches',1
@@ -217,6 +237,12 @@ Watch6='ext',256,0,18,1,0,'Watches',1
 Watch7='FromFolder',256,0,18,1,0,'Watches',1
 Watch8='FileName',256,0,18,1,0,'Watches',1
 Watch9='FileNameOnly',256,0,18,1,0,'Watches',1
+Watch10='AirSerial',256,0,18,1,0,'Watches',1
+Watch11='var',256,0,18,1,0,'Watches',1
+Watch12='FlightSerial',256,0,18,1,0,'Watches',1
+Watch13='airSerial',256,0,18,1,0,'Watches',1
+Watch14='FlightOutSerial',256,0,18,1,0,'Watches',1
+Watch15='AirwaybillSerial',256,0,18,1,0,'Watches',1
 
 [WatchWindow]
 WatchColumnWidth=120
@@ -229,11 +255,11 @@ State=0
 Left=0
 Top=410
 Width=1714
-Height=2440
+Height=2143
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=1714
-ClientHeight=2440
+ClientHeight=2143
 TBDockHeight=7726
 LRDockWidth=1714
 Dockable=1
@@ -267,11 +293,11 @@ Docked=1
 State=0
 Left=0
 Top=0
-Width=956
+Width=2844
 Height=3250
 MaxLeft=-1
 MaxTop=-1
-ClientWidth=956
+ClientWidth=2844
 ClientHeight=3250
 TBDockHeight=7155
 LRDockWidth=1777
@@ -284,15 +310,15 @@ Create=1
 Visible=1
 Docked=1
 State=0
-Left=390
+Left=633
 Top=18
-Width=6919
-Height=1405
+Width=5000
+Height=1702
 MaxLeft=-1
 MaxTop=-1
-ClientWidth=6919
-ClientHeight=1405
-TBDockHeight=1405
+ClientWidth=5000
+ClientHeight=1702
+TBDockHeight=1702
 LRDockWidth=2773
 Dockable=1
 StayOnTop=0
@@ -331,14 +357,14 @@ Docked=1
 State=0
 Left=0
 Top=313
-Width=956
-Height=3595
+Width=2844
+Height=3298
 MaxLeft=-1
 MaxTop=-1
-ClientWidth=956
-ClientHeight=3595
+ClientWidth=2844
+ClientHeight=3298
 TBDockHeight=7155
-LRDockWidth=956
+LRDockWidth=2844
 Dockable=1
 StayOnTop=0
 
@@ -400,11 +426,6 @@ Dockable=1
 StayOnTop=0
 SplitPos=69
 
-[PropInspDesignerSelection]
-ArrangeBy=Name
-SelectedItem=Name,
-ExpandedItems=Anchors=0,Constraints=0
-
 [frmDesignPreview]
 PercentageSizes=1
 Create=1
@@ -451,12 +472,12 @@ Docked=1
 State=0
 Left=0
 Top=0
-Width=3049
-Height=1405
+Width=4968
+Height=1702
 MaxLeft=-1
 MaxTop=-1
-ClientWidth=3049
-ClientHeight=1405
+ClientWidth=4968
+ClientHeight=1702
 TBDockHeight=2083
 LRDockWidth=6390
 Dockable=1
@@ -558,13 +579,13 @@ Docked=1
 State=0
 Left=0
 Top=18
-Width=3049
-Height=1405
+Width=4968
+Height=1702
 MaxLeft=-1
 MaxTop=-1
-ClientWidth=3049
-ClientHeight=1405
-TBDockHeight=1405
+ClientWidth=4968
+ClientHeight=1702
+TBDockHeight=1702
 LRDockWidth=2449
 Dockable=1
 StayOnTop=0
@@ -582,14 +603,14 @@ Docked=1
 State=0
 Left=0
 Top=18
-Width=956
+Width=2844
 Height=3250
 MaxLeft=-1
 MaxTop=-1
-ClientWidth=956
+ClientWidth=2844
 ClientHeight=3250
 TBDockHeight=1417
-LRDockWidth=956
+LRDockWidth=2844
 Dockable=1
 StayOnTop=0
 TabPosition=1

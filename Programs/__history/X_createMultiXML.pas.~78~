@@ -353,26 +353,18 @@ Begin
 
 
      CreateXMLNodeNew(FDoc,TheRoot,'SyntaxIdentifier','UNOC',ntText);
-
      CreateXMLNodeNew(FDoc,TheRoot,'SyntaxVersionNumber','3',ntText);
      CreateXMLNodeNew(FDoc,TheRoot,'MessageSender','CY10016129G',ntText);
      CreateXMLNodeNew(FDoc,TheRoot,'SenderIdCodeQualifier','CY',ntText);
      CreateXMLNodeNew(FDoc,TheRoot,'MessageRecipient','NECA.CY',ntText);
      CreateXMLNodeNew(FDoc,TheRoot,'RecipientIdentifCodeQualifier','CY',ntText);
-
-
      DString:=FormatDateTime('YYMMDD',now);
      CreateXMLNodeNew(FDoc,TheRoot,'DateOfPreparation',DString,ntText);
-
      DString:=FormatDateTime('HHMM',now);
      CreateXMLNodeNew(FDoc,TheRoot,'TimeOfPreparation',DString,ntText);
-
      CreateXMLNodeNew(FDoc,TheRoot,'InterchangeControlReference','CY823a7ac010e2',ntText);
      CreateXMLNodeNew(FDoc,TheRoot,'MessageIdentification','CY823a7ac010e2',ntText);
      CreateXMLNodeNew(FDoc,TheRoot,'MessageType','CC515A',ntText);
-
-
-
 
      //********************************************
      //Header515
@@ -683,10 +675,10 @@ Begin
     FDoc.Version := '1.0';
     FDoc.Encoding := 'UTF-8';
 
-    TheRoot := FDoc.AddChild('CC500');
+    TheRoot := FDoc.AddChild('CC615A');
     TheRoot.SetAttributeNS('xmlns', '', 'http://www.eurodyn.com' );
      /////////////////////////////////////////////////////////////////////////
-    CreateNodeHeader(fqr,Fdoc,TheRoot);
+    CreateNodeHeader(FlightOutSerial,Fdoc,TheRoot);
     CreateNodeAirwayBills(FlightOutSerial,Fdoc,TheRoot);
      /////////////////////////////////////////////////////////////////////////
     strXML := StringReplace(FDoc.XML.Text, ' xmlns=""', '', [rfReplaceAll]);
@@ -703,47 +695,84 @@ Begin
 
 end;
 
-function TX_CreateMultiXmlFRM.CreateNodeHeader( Const AirwayBillSerial:Integer; const Fdoc: IXMLDocument;FatherNode:IXMLNode):IXMLNode;
+function TX_CreateMultiXmlFRM.CreateNodeHeader( Const FlightOutSerial:Integer; const Fdoc: IXMLDocument;FatherNode:IXMLNode):IXMLNode;
 var
   qr:TksQuery;
-  HeaderNode,aNode:IXMLNode;
+  HeaderNode,aNode,xlNode:IXMLNode;
   val:String;
   addr:string;
   DString:String;
+  MawbId:String;
 begin
+    Qr:=TksQuery.Create(cn,'select fo.mawb from flight_out fo where fo.serial_number= :serial');
+    try
+      Qr.ParambyName('serial').Value:= FlightOutSerial;
+      Qr.Open;
+      MawbId:=Qr.FieldByName(Mawb).AsString;
+      qr.Close;
+    finally
+      qr.Free;
+    end;
 
-    HeaderNode:= CreateXmlNodeNew(Fdoc,HEaderNOde,'HEader','');
+
+
+    HeaderNode:= CreateXmlNodeNew(Fdoc,FatherNOde,'HEader','');
 
     Qr:=TksQuery.Create(cn,' select * from FLIGHT_AIRWAYBILL where serial_number= :serial');
     try
       Qr.ParambyName('serial').Value:= AirwaybillSerial;
       Qr.Open;
-      while (not qr.eof) do begin
-      //actually Only One!
-       CreateXMLNodeNew(FDoc,HEaderNOde,'SyntaxIdentifier','UNOC',ntText);
 
-       CreateXMLNodeNew(FDoc,HEaderNOde,'SyntaxIdentifier','UNOC',ntText);
+     while (not qr.eof) do begin
 
-       CreateXMLNodeNew(FDoc,HEaderNOde,'SyntaxVersionNumber','3',ntText);
-       CreateXMLNodeNew(FDoc,HEaderNOde,'MessageSender','CY10016129G',ntText);
-        CreateXMLNodeNew(FDoc,HEaderNOde,'SenderIdCodeQualifier','CY',ntText);
-        CreateXMLNodeNew(FDoc,HEaderNOde,'MessageRecipient','NECA.CY',ntText);
-       CreateXMLNodeNew(FDoc,HEaderNOde,'RecipientIdentifCodeQualifier','CY',ntText);
+     CreateXMLNodeNew(FDoc,FatherNode,'SyntaxIdentifier','UNOC',ntText);
+     CreateXMLNodeNew(FDoc,FatherNode,'SyntaxVersionNumber','3',ntText);
+     CreateXMLNodeNew(FDoc,FatherNode,'MessageSender','CY10016129G',ntText);
+     CreateXMLNodeNew(FDoc,FatherNode,'SenderIdCodeQualifier','CY',ntText);
+     CreateXMLNodeNew(FDoc,FatherNode,'MessageRecipient','NECA.CY',ntText);
+     CreateXMLNodeNew(FDoc,FatherNode,'RecipientIdentifCodeQualifier','CY',ntText);
+     DString:=FormatDateTime('YYMMDD',now);
+     CreateXMLNodeNew(FDoc,FatherNode,'DateOfPreparation',DString,ntText);
+     DString:=FormatDateTime('HHMM',now);
+     CreateXMLNodeNew(FDoc,FatherNode,'TimeOfPreparation',DString,ntText);
+     CreateXMLNodeNew(FDoc,FatherNode,'InterchangeControlReference','CY1acbae4fdb51',ntText);
+     CreateXMLNodeNew(FDoc,FatherNode,'MessageIdentification','CY1acbae4fdb51',ntText);
+     CreateXMLNodeNew(FDoc,FatherNode,'MessageType','CC615A',ntText);
+
+    //********************************************
+     //Header615
+     Temp:=Mawb+FormatDateTime('YYMMDDHHMMSS', now);
+     x1node:=CreateXMLNodeNew(FDoc,TheRoot,'Msg615Header','',ntElement);
+     CreateXMLNodeNew(FDoc,x1node,'ReferenceNumber',Temp,ntText);
+//     TblCreateXMLNode(FDoc,x1node,'TotalNumberOfItems','',Dataset,'ITEMS_COUNT',ntText);
+//     TblCreateXMLNode(FDoc,x1node,'TotalNumberOfPackages','',Dataset,'PIECES',ntText);
+//     TblCreateXMLNode(FDoc,x1node,'TotalGrossMass','',Dataset,'WEIGHT',ntText);
+     CreateXMLNodeNew(FDoc,x1node,'ArrivalAgreedLocationCode','LCA',ntText);
+
+     DString:=FlightName+'-'+FormatDateTime('DD/MM/YYYY',DateDepart);
+     CreateXMLNodeNew(FDoc,x1node,'ArrivalAgreedLocOfGoods',DString,ntText); //here
+     CreateXMLNodeNew(FDoc,x1node,'ArrivalAgreedLocOfGoodsLNG','EN',ntText);
+
+     DString:=FormatDateTime('YYYY-MM-DD"T00:00:00+03:00"',now);
+     CreateXMLNodeNew(FDoc,x1node,'DeclarationDate',DString,ntText);
+
+     CreateXMLNodeNew(FDoc,x1node,'DeclarationPlace','LARNACA',ntText);
+     CreateXMLNodeNew(FDoc,x1node,'DeclarationPlaceLNG','EN',ntText);
+     CreateXMLNodeNew(FDoc,x1node,'SpecificCircumstanceIndicator','A',ntText);
+
+     Temp:=qr.FieldByName('Payment_method').AsString;
+     If temp='A' then
+        DString:='Y'
+     else if temp='C' then
+        Dstring:='D'
+     else
+        Dstring:='D';
+     CreateXMLNodeNew(FDoc,x1node,'TranspChargesMethodOfPayment',Dstring,ntText);
+     TblCreateXMLNode(FDoc,x1node,'CommercialReferenceNumber','',Dataset,'HAWB_ID',ntText);
 
 
-       DString:=FormatDateTime('YYMMDD',now);
-        CreateXMLNodeNew(FDoc,HEaderNOde,'DateOfPreparation',DString,ntText);
-
-       DString:=FormatDateTime('HHMM',now);
-        CreateXMLNodeNew(FDoc,HEaderNOde,'TimeOfPreparation',DString,ntText);
-
-        CreateXMLNodeNew(FDoc,HEaderNOde,'InterchangeControlReference','CY823a7ac010e2',ntText);
-        CreateXMLNodeNew(FDoc,HEaderNOde,'MessageIdentification','CY823a7ac010e2',ntText);
-        CreateXMLNodeNew(FDoc,HEaderNOde,'MessageType','CC515A',ntText);
-
-
-       qr.Next;
-      end;
+      qr.Next;
+    end;
      result:= HEaderNode;
     finally
       qr.Free;
