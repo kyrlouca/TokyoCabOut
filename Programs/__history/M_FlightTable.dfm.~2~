@@ -1,13 +1,13 @@
 object M_FlightTableFRM: TM_FlightTableFRM
   Left = 402
   Top = 83
-  ClientHeight = 475
-  ClientWidth = 740
+  ClientHeight = 0
+  ClientWidth = 120
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -13
-  Font.Name = 'ARIAL'
+  Font.Name = 'MS Sans Serif'
   Font.Style = []
   OldCreateOrder = False
   Position = poDesktopCenter
@@ -18,21 +18,21 @@ object M_FlightTableFRM: TM_FlightTableFRM
   object Label5: TLabel
     Left = 55
     Top = 324
-    Width = 41
+    Width = 42
     Height = 16
     Caption = 'Weight'
   end
   object Label9: TLabel
     Left = 201
     Top = 356
-    Width = 40
+    Width = 42
     Height = 16
     Caption = 'Pieces'
     Color = clBtnFace
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -13
-    Font.Name = 'ARIAL'
+    Font.Name = 'MS Sans Serif'
     Font.Style = []
     ParentColor = False
     ParentFont = False
@@ -40,7 +40,7 @@ object M_FlightTableFRM: TM_FlightTableFRM
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 740
+    Width = 120
     Height = 65
     Align = alTop
     Caption = 'Edit Flights'
@@ -51,14 +51,17 @@ object M_FlightTableFRM: TM_FlightTableFRM
     Font.Style = [fsBold]
     ParentFont = False
     TabOrder = 0
+    ExplicitWidth = 1034
   end
   object Panel4: TPanel
     Left = 0
-    Top = 409
-    Width = 740
+    Top = -66
+    Width = 120
     Height = 66
     Align = alBottom
     TabOrder = 1
+    ExplicitTop = 587
+    ExplicitWidth = 1034
     object AcceptBTN: TBitBtn
       Left = 22
       Top = 8
@@ -68,8 +71,8 @@ object M_FlightTableFRM: TM_FlightTableFRM
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -15
-      Font.Name = 'Arial'
-      Font.Style = []
+      Font.Name = 'MS Sans Serif'
+      Font.Style = [fsBold]
       Glyph.Data = {
         DE010000424DDE01000000000000760000002800000024000000120000000100
         0400000000006801000000000000000000001000000000000000000000000000
@@ -102,8 +105,8 @@ object M_FlightTableFRM: TM_FlightTableFRM
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -15
-      Font.Name = 'Arial'
-      Font.Style = []
+      Font.Name = 'MS Sans Serif'
+      Font.Style = [fsBold]
       Glyph.Data = {
         DE010000424DDE01000000000000760000002800000024000000120000000100
         0400000000006801000000000000000000001000000000000000000000000000
@@ -130,8 +133,8 @@ object M_FlightTableFRM: TM_FlightTableFRM
   object Panel3: TPanel
     Left = 0
     Top = 65
-    Width = 740
-    Height = 344
+    Width = 120
+    Height = 522
     Align = alClient
     TabOrder = 2
     object GroupBox1: TGroupBox
@@ -143,21 +146,21 @@ object M_FlightTableFRM: TM_FlightTableFRM
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -13
-      Font.Name = 'Arial'
-      Font.Style = []
+      Font.Name = 'MS Sans Serif'
+      Font.Style = [fsBold]
       ParentFont = False
       TabOrder = 0
       object Label1: TLabel
         Left = 40
         Top = 40
-        Width = 33
+        Width = 35
         Height = 16
         Caption = 'Serial'
         Color = clBtnFace
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -13
-        Font.Name = 'ARIAL'
+        Font.Name = 'MS Sans Serif'
         Font.Style = []
         ParentColor = False
         ParentFont = False
@@ -165,14 +168,14 @@ object M_FlightTableFRM: TM_FlightTableFRM
       object Label2: TLabel
         Left = 38
         Top = 86
-        Width = 34
+        Width = 37
         Height = 16
         Caption = 'Name'
         Color = clBtnFace
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -13
-        Font.Name = 'ARIAL'
+        Font.Name = 'MS Sans Serif'
         Font.Style = []
         ParentColor = False
         ParentFont = False
@@ -180,14 +183,14 @@ object M_FlightTableFRM: TM_FlightTableFRM
       object Label4: TLabel
         Left = 8
         Top = 116
-        Width = 65
+        Width = 67
         Height = 16
         Caption = 'Destination'
         Color = clBtnFace
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -13
-        Font.Name = 'ARIAL'
+        Font.Name = 'MS Sans Serif'
         Font.Style = []
         ParentColor = False
         ParentFont = False
@@ -203,7 +206,7 @@ object M_FlightTableFRM: TM_FlightTableFRM
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -13
-        Font.Name = 'ARIAL'
+        Font.Name = 'MS Sans Serif'
         Font.Style = []
         ParentFont = False
         TabOrder = 1
@@ -222,7 +225,7 @@ object M_FlightTableFRM: TM_FlightTableFRM
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -13
-        Font.Name = 'ARIAL'
+        Font.Name = 'MS Sans Serif'
         Font.Style = []
         ParentFont = False
         ReadOnly = True
@@ -277,7 +280,7 @@ object M_FlightTableFRM: TM_FlightTableFRM
       TitleFont.Charset = DEFAULT_CHARSET
       TitleFont.Color = clWindowText
       TitleFont.Height = -13
-      TitleFont.Name = 'ARIAL'
+      TitleFont.Name = 'MS Sans Serif'
       TitleFont.Style = []
       TitleLines = 1
       TitleButtons = False
