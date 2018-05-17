@@ -52,6 +52,7 @@ object X_CreateMultiXmlFRM: TX_CreateMultiXmlFRM
     TabOrder = 1
     TextOptions.Alignment = taCenter
     TextOptions.VAlignment = vaVCenter
+    OnClick = wwButton1Click
   end
   object XMLDoc: TXMLDocument
     Options = [doNodeAutoCreate, doAttrNull]

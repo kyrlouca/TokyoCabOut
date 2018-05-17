@@ -193,6 +193,7 @@ Begin
 //     FileName:= DefaultDir+'\'+ Trim(OneFlightAirwaybillSQL.FieldByName('hawb_id').AsString)+'.xml';
     FileName:= 'C:\Data\DelphiProjects\TokyoCabOut\XML\OutputXML\test22.xml';
     FDoc.SaveToFile(FileName);
+    OneFlightAirwaybillSQL.close;
 
   finally
     fQr.Free;

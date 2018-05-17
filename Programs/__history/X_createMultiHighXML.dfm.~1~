@@ -1,7 +1,7 @@
-object X_CreateMultiXmlFRM: TX_CreateMultiXmlFRM
+object X_CreateMultiXmlFRM1: TX_CreateMultiXmlFRM1
   Left = 0
   Top = 0
-  Caption = 'X_CreateMultiXmlFRM'
+  Caption = 'X_CreateMultiXmlFRM1'
   ClientHeight = 367
   ClientWidth = 808
   Color = clBtnFace
@@ -48,6 +48,7 @@ object X_CreateMultiXmlFRM: TX_CreateMultiXmlFRM
     Color = clBtnFace
     DitherColor = clWhite
     DitherStyle = wwdsDither
+    NumGlyphs = 0
     ShadeStyle = wwbsNormal
     TabOrder = 1
     TextOptions.Alignment = taCenter

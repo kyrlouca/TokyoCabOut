@@ -1,4 +1,4 @@
-unit X_createMultiXML;
+unit X_createMultiHighXML;
 
 interface
 
@@ -9,7 +9,7 @@ uses
   DBAccess, IBC, RzLabel;
 
 type
-  TX_CreateMultiXmlFRM = class(TForm)
+  TX_CreateMultiHighXmlFRM = class(TForm)
     Button1: TButton;
     XMLDoc: TXMLDocument;
     XMLDocNew: TXMLDocument;
@@ -44,7 +44,7 @@ type
   end;
 
 var
-  X_CreateMultiXmlFRM: TX_CreateMultiXmlFRM;
+  X_CreateMultiHighXmlFRM: TX_CreateMultiHighXmlFRM;
 
 implementation
 
@@ -52,7 +52,7 @@ implementation
 
 uses MainForm, GeneralParametersNew, G_KyrSQL, G_generalProcs;
 
-procedure TX_CreateMultiXmlFRM.Button1Click(Sender: TObject);
+procedure TX_CreateMultiHighXmlFRM.Button1Click(Sender: TObject);
 begin
 
 CreateMultiXML(IN_FlightSerial);
@@ -60,7 +60,7 @@ CreateMultiXML(IN_FlightSerial);
 end;
 
 
-Function TX_CreateMultiXmlFRM.TestOne(Const HawbSerial:Integer):String;
+Function TX_CreateMultiHighXmlFRM.TestOne(Const HawbSerial:Integer):String;
 var
   destPath:String;
   LDocument: IXMLDocument;
@@ -80,7 +80,7 @@ begin
 
 end;
 
-procedure TX_CreateMultiXmlFRM.CreateOneAirwabillXML(Const SerialNumber:Integer);
+procedure TX_CreateMultiHighXmlFRM.CreateOneAirwabillXML(Const SerialNumber:Integer);
 
 begin
 
@@ -89,7 +89,7 @@ end;
 
 
 
-function TX_CreateMultiXmlFRM.CreateXmlNodeNew(XMLDoc:IXMLDocument;ElementFather:IXMLNode;ElementName:String;ElementValue:String; ElementType: TNodeType =ntElement):IXMLNode;
+function TX_CreateMultiHighXmlFRM.CreateXmlNodeNew(XMLDoc:IXMLDocument;ElementFather:IXMLNode;ElementName:String;ElementValue:String; ElementType: TNodeType =ntElement):IXMLNode;
 Var
   HeaderNode:IXMLNode;
    CxFather:IXMLNode;
@@ -105,12 +105,12 @@ Begin
 
 End;
 
-procedure TX_CreateMultiXmlFRM.FormCreate(Sender: TObject);
+procedure TX_CreateMultiHighXmlFRM.FormCreate(Sender: TObject);
 begin
   cn:= MainFormFRM.CabOutData;
 end;
 
-function TX_CreateMultiXmlFRM.TBLCreateXMLNode(XMLDoc:IXMLDocument;ElementFather:IXMLNode;ElementName:String;ElementValue:String; Dataset: TDataset; FieldName:String; ElementType: TNodeType =ntElement):IXMLNode;
+function TX_CreateMultiHighXmlFRM.TBLCreateXMLNode(XMLDoc:IXMLDocument;ElementFather:IXMLNode;ElementName:String;ElementValue:String; Dataset: TDataset; FieldName:String; ElementType: TNodeType =ntElement):IXMLNode;
 Var
    CxFather:IXMLNode;
    TheElement:IXMLNode;
@@ -133,19 +133,19 @@ Begin
 End;
 
 
-Function TX_CreateMultiXmlFRM.AddNodeAtr(FatherNode:IXMLNode;NodeName:String; NodeText:String):IXMLNode;
+Function TX_CreateMultiHighXmlFRM.AddNodeAtr(FatherNode:IXMLNode;NodeName:String; NodeText:String):IXMLNode;
 Begin
   result:= FatherNode.AddChild(NodeName,-1);
   result.Attributes['VALUE']:=NodeText;
 end;
 
-Function TX_CreateMultiXmlFRM.AddNodeAtr(FatherNode:IXMLNode;NodeName:String; AttributeName:String;AttributeText:String):IXMLNode;
+Function TX_CreateMultiHighXmlFRM.AddNodeAtr(FatherNode:IXMLNode;NodeName:String; AttributeName:String;AttributeText:String):IXMLNode;
 Begin
   result:= FatherNode.AddChild(NodeName,-1);
   result.Attributes[AttributeName]:=AttributeText;
 end;
 
-Function TX_CreateMultiXmlFRM.AddAtrribute(HeaderNode:IXMLNode; AttributeName:String;AttributeText:String):IXMLNode;
+Function TX_CreateMultiHighXmlFRM.AddAtrribute(HeaderNode:IXMLNode; AttributeName:String;AttributeText:String):IXMLNode;
 Begin
   HeaderNode.Attributes[AttributeName]:=AttributeText;
   result:=HeaderNode;
@@ -153,7 +153,7 @@ end;
 
 
 
-Function TX_CreateMultiXmlFRM.CreateMultiXML(Const FlightOutSerial:Integer):integer;
+Function TX_CreateMultiHighXmlFRM.CreateMultiXML(Const FlightOutSerial:Integer):integer;
 var
   FDoc:IXMLDocument;
   TheRoot:IXMLNode;
@@ -201,7 +201,7 @@ Begin
 
 end;
 
-function TX_CreateMultiXmlFRM.CreateNodeHeader( Const FlightOutSerial:Integer; const Fdoc: IXMLDocument;FatherNode:IXMLNode):IXMLNode;
+function TX_CreateMultiHighXmlFRM.CreateNodeHeader( Const FlightOutSerial:Integer; const Fdoc: IXMLDocument;FatherNode:IXMLNode):IXMLNode;
 var
   qr:TksQuery;
   HeaderNode,x1Node:IXMLNode;
@@ -286,7 +286,7 @@ begin
 end;
 
 
-function TX_CreateMultiXmlFRM.CreateNodeAirwayBills( Const FlightSerial:Integer; const Fdoc: IXMLDocument;FatherNode:IXMLNode):IXMLNode;
+function TX_CreateMultiHighXmlFRM.CreateNodeAirwayBills( Const FlightSerial:Integer; const Fdoc: IXMLDocument;FatherNode:IXMLNode):IXMLNode;
 var
   HeaderNode:IXMLNode;
   x2Node:IXMLNode;
@@ -369,7 +369,7 @@ begin
 end;
 
 
-function TX_CreateMultiXmlFRM.CreateNodeForItems( Const AirwaybillSerial:Integer; const Fdoc: IXMLDocument;FatherNode:IXMLNode):IXMLNode;
+function TX_CreateMultiHighXmlFRM.CreateNodeForItems( Const AirwaybillSerial:Integer; const Fdoc: IXMLDocument;FatherNode:IXMLNode):IXMLNode;
 var
   HeaderNode,x2Node:IXMLNode;
   val:String;
@@ -401,7 +401,7 @@ begin
 end;
 
 
-function TX_CreateMultiXmlFRM.CreateNodeFlightCountries( Const FlightOutSerial:Integer; const Fdoc: IXMLDocument;FatherNode:IXMLNode):IXMLNode;
+function TX_CreateMultiHighXmlFRM.CreateNodeFlightCountries( Const FlightOutSerial:Integer; const Fdoc: IXMLDocument;FatherNode:IXMLNode):IXMLNode;
 var
   HeaderNode,x2Node:IXMLNode;
   val:String;

@@ -78,11 +78,66 @@ var
 
 begin
 
+  result:='';
+  houseDir:=' '   ;
+
+  DomImpl := GetDOM(sAdom4XmlVendor);
+  LDocument := TXMLDocument.Create(nil);
+  LDocument.Active := True;
+
+  {
+   You could also use this :LDocument.DOMDocument := DomImpl.createDocument('http://www.w3.org/2000/svg', 'svg:svg',
+      DomImpl.createDocumentType('DTD', 'ff1',
+      'http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd'));
+}
+  LDocument.DOMDocument := DomImpl.createDocument('http://www.w3.org/2000/svg', 'svg:svg',
+//      DomImpl.createDocumentType('DTD', 'steria','http://gdsp.customs.mof.gov.cy:8001/sad.dtd'));
+  DomImpl.createDocumentType('DDT', 'steria','http://localhost:8001/sad.dtd'));
+
+  { Define document content. }
+  LDocument.DocumentElement := LDocument.CreateNode('DDT', ntElement, '');
+
+  /////////////////////////////////////////////////
+  ///  GENSEG
+  DTDNode:=LDocument.DocumentElement;
+  HeaderNode:=LDocument.CreateNode('GENSEG',ntElement,'');
+  DTDNode.ChildNodes.Add(HeaderNode);
+
+  genNode:= DTDNode.ChildNodes['GENSEG'].AddChild('REGDDTDATA',-1);
+  CreateGensegRegData(genNode);
+
+
+  DestPath:= 'C:\Data\DelphiProjects\TokyoCabOut\XML\OutputXML\test1.xml';
+  LDocument.SaveToFile(DestPath);
+
+
 end;
 
 procedure TX_CreateMultiXmlFRM.CreateOneAirwabillXML(Const SerialNumber:Integer);
+var
+ValueType:String;
+
 
 begin
+          With MakeSQL do begin
+                Close;
+                ReadONly:=True;
+                SQL.Clear;
+                SQl.Add( 'Select value_type from flight_airwaybill where serial_number= :AirSerial');
+                ParamByName('AirSerial').value:=SerialNumber;
+                if not prepared then prepare;
+                Open;
+                ValueType:=FieldByName('value_type').AsString;
+                close;
+          end;
+          If ValueType='H' then begin
+                CreateHighValueAirwaybillXML(SerialNumber);
+          end else begin
+//                CreateLowValueAirwaybillXML(SerialNumber);
+//                CreateHighValueAirwaybillXML(SerialNumber);
+
+          end;
+
 
 end;
 
@@ -193,6 +248,7 @@ Begin
 //     FileName:= DefaultDir+'\'+ Trim(OneFlightAirwaybillSQL.FieldByName('hawb_id').AsString)+'.xml';
     FileName:= 'C:\Data\DelphiProjects\TokyoCabOut\XML\OutputXML\test22.xml';
     FDoc.SaveToFile(FileName);
+    OneFlightAirwaybillSQL.close;
 
   finally
     fQr.Free;

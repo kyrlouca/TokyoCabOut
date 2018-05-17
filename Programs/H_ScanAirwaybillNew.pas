@@ -223,6 +223,7 @@ type
     RzBitBtn1: TRzBitBtn;
     EditAirBTN: TBitBtn;
     DeleteAirBTN: TBitBtn;
+    MultiHighBTN: TRzBitBtn;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure BitBtn1Click(Sender: TObject);
     procedure AirwayBillSQLAfterPost(DataSet: TDataSet);
@@ -247,6 +248,7 @@ type
     procedure EditAirBTNClick(Sender: TObject);
     procedure CreateOneBTNClick(Sender: TObject);
     procedure RzBitBtn1Click(Sender: TObject);
+    procedure MultiHighBTNClick(Sender: TObject);
   private
     { Private declarations }
         procedure UpdateHawbStatus(HawbSerial:Integer;IsHigh:String);
@@ -268,7 +270,7 @@ var
 implementation
 
 uses MainForm, H_FlightAirwaybill, H_flightOut, X_createOneXML,
-  X_createMultiXML;
+  X_createMultiXML, X_createMultiHighXML;
 
 {$R *.DFM}
 
@@ -407,6 +409,14 @@ end;
 End;
 
 
+
+procedure TH_ScanAirwaibillNewFRM.MultiHighBTNClick(Sender: TObject);
+var
+  fserial:Integer;
+begin
+Fserial:=FlightOutSQL.FieldByName('serial_number').AsInteger;
+X_CreateMultiHighXmlFRM.CreateMultiXML(Fserial)
+end;
 
 procedure TH_ScanAirwaibillNewFRM.DeleteFlightAirwaybill(Var SerialNumber:Integer);
 begin

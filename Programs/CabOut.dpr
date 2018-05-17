@@ -38,7 +38,8 @@ uses
   G_generalProcs in 'G_generalProcs.pas',
   R_ReadALLXMLFiles in 'R_ReadALLXMLFiles.pas' {R_ReadAllFilesFRM},
   X_createOneXML in 'X_createOneXML.pas' {X_CreateOneXmlFRM},
-  X_createMultiXML in 'X_createMultiXML.pas' {X_CreateMultiXmlFRM};
+  X_createMultiXML in 'X_createMultiXML.pas' {X_CreateMultiXmlFRM},
+  X_createMultiHighXML in 'X_createMultiHighXML.pas' {X_CreateMultiHighXmlFRM};
 
 {$R *.RES}
 
@@ -72,10 +73,12 @@ begin
   Application.CreateForm(TR_ReadAllFilesFRM, R_ReadAllFilesFRM);
   Application.CreateForm(TR_ReadAllFilesFRM, R_ReadAllFilesFRM);
   Application.CreateForm(TR_ReadAllFilesFRM, R_ReadAllFilesFRM);
-  Application.CreateForm(TX_CreateMultiXmlFRM, X_CreateMultiXmlFRM);
+  Application.CreateForm(TX_CreateMultiHighXmlFRM, X_CreateMultiHighXmlFRM);
   Application.CreateForm(TX_CreateOneXmlFRM, X_CreateOneXmlFRM);
   Application.CreateForm(TX_CreateOneXmlFRM, X_CreateOneXmlFRM);
   Application.CreateForm(TX_CreateMultiXmlFRM, X_CreateMultiXmlFRM);
+  Application.CreateForm(TX_CreateMultiXmlFRM, X_CreateMultiXmlFRM);
+  Application.CreateForm(TX_CreateMultiHighXmlFRM, X_CreateMultiHighXmlFRM);
   //  Application.CreateForm(TX_CreateOneXmlFRM1, X_CreateOneXmlFRM1);
   //  Application.CreateForm(TR_ReadAllFilesFRM, R_ReadAllFilesFRM);
   Application.CreateForm(TM_additionalParametersFRM, M_additionalParametersFRM);
