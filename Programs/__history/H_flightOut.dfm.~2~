@@ -52,6 +52,7 @@ object H_FlightOutFRM: TH_FlightOutFRM
     Font.Style = [fsBold]
     ParentFont = False
     TabOrder = 0
+    ExplicitWidth = 1054
   end
   object Panel4: TPanel
     Left = 0
@@ -60,6 +61,8 @@ object H_FlightOutFRM: TH_FlightOutFRM
     Height = 66
     Align = alBottom
     TabOrder = 1
+    ExplicitTop = 512
+    ExplicitWidth = 1054
     object AcceptBTN: TBitBtn
       Left = 22
       Top = 8
@@ -392,8 +395,8 @@ object H_FlightOutFRM: TH_FlightOutFRM
       end
     end
     object CountryLookupFLD: TwwDBLookupCombo
-      Left = 533
-      Top = 345
+      Left = 544
+      Top = 328
       Width = 121
       Height = 24
       Font.Charset = DEFAULT_CHARSET

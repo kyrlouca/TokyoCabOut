@@ -96,7 +96,7 @@ type
 
     Function  AddNodeAtr(FatherNode:IXMLNode;NodeName:String; NodeText:String):IXMLNode;overload;
     Function  AddNodeAtr(FatherNode:IXMLNode;NodeName:String; AttributeName:String;AttributeText:String):IXMLNode; overload;
-    Function  AddAtrribute(aNode:IXMLNode; AttributeName:String;AttributeText:String):IXMLNode;
+    Function  AddAtrribute(HeaderNode:IXMLNode; AttributeName:String;AttributeText:String):IXMLNode;
     function CreateXmlNodeNew(XMLDoc:IXMLDocument;ElementFather:IXMLNode;ElementName:String;ElementValue:String; ElementType: TNodeType =ntElement):IXMLNode;
     function TBLCreateXMLNode(XMLDoc:IXMLDocument;ElementFather:IXMLNode;ElementName:String;ElementValue:String; Dataset: TDataset; FieldName:String; ElementType: TNodeType =ntElement):IXMLNode;
 
@@ -104,7 +104,7 @@ type
   function CreateNodeHeader( Const FlightOutSerial:Integer; const Fdoc: IXMLDocument;FatherNode:IXMLNode):IXMLNode;
   function CreateNodeAirwayBills( Const FlightSerial:Integer; const Fdoc: IXMLDocument;FatherNode:IXMLNode):IXMLNode;
   function CreateNodeForItems( Const AirwaybillSerial:Integer; const Fdoc: IXMLDocument;FatherNode:IXMLNode):IXMLNode;
-  function CreateNodeFlightCountries( Const FlightSerial:Integer; const Fdoc: IXMLDocument;FatherNode:IXMLNode):IXMLNode;
+  function CreateNodeFlightCountries( Const AirwaybillSerial:Integer; const Fdoc: IXMLDocument;FatherNode:IXMLNode):IXMLNode;
 
 
   public
@@ -138,7 +138,7 @@ var
   LDocument: IXMLDocument;
   DomImpl: IDOMImplementation;
   LNodeElement, NodeCData, NodeText: IXMLNode;
-  DTDNode, aNode,fNode:IXMLNode;
+  DTDNode, HeaderNode,fNode:IXMLNode;
   GenNOde:IXMLNode;
   MawbSerial:Integer;
   CustomerSerial:Integer;
@@ -172,8 +172,8 @@ begin
   /////////////////////////////////////////////////
   ///  GENSEG
   DTDNode:=LDocument.DocumentElement;
-  aNode:=LDocument.CreateNode('GENSEG',ntElement,'');
-  DTDNode.ChildNodes.Add(aNode);
+  HeaderNode:=LDocument.CreateNode('GENSEG',ntElement,'');
+  DTDNode.ChildNodes.Add(HeaderNode);
 
   genNode:= DTDNode.ChildNodes['GENSEG'].AddChild('REGDDTDATA',-1);
   CreateGensegRegData(genNode);
@@ -220,7 +220,7 @@ procedure TX_CreateMultiXmlFRM.wwButton1Click(Sender: TObject);
 var
   FileName:string;
   TheDoc: IXmlDocument;
-  RootNode,ManifestNode,tdNode,GroupNode,aNode: IXmlNode;
+  RootNode,ManifestNode,tdNode,GroupNode,HeaderNode: IXmlNode;
   strXML:String;
   i,j:Integer;
   temp:String;
@@ -240,7 +240,7 @@ end;
 
 procedure TX_CreateMultiXmlFRM.CreateGensegRegData(FatherNode:IXMLNode);
 var
-  aNode:IXMLNode;
+  HeaderNode:IXMLNode;
   val:String;
   addr:string;
 begin
@@ -248,11 +248,11 @@ begin
   val:= 'temp';
   addNodeAtr(FatherNode,'REFNUMBER','VALUE',val);
 
-  aNode := AddNodeAtr(FatherNode , 'BOXAEXT1','CY');
-  aNode := AddNodeAtr(FatherNode , 'BOXAEXT2','0440');
+  HeaderNode := AddNodeAtr(FatherNode , 'BOXAEXT1','CY');
+  HeaderNode := AddNodeAtr(FatherNode , 'BOXAEXT2','0440');
 
-  aNode := AddNodeAtr(FatherNode , 'BOX1EXT1' ,'IM');
-  aNode := AddNodeAtr(FatherNode , 'BOX1EXT2' ,'A');
+  HeaderNode := AddNodeAtr(FatherNode , 'BOX1EXT1' ,'IM');
+  HeaderNode := AddNodeAtr(FatherNode , 'BOX1EXT2' ,'A');
 end;
 
 
@@ -262,7 +262,7 @@ end;
 procedure TX_CreateMultiXmlFRM.CreateHighValueAirwaybillXML(Const SerialNumber:Integer);
 Var
     FDoc: IXmlDocument;
-    TheRoot,x1Node,x2Node,tdNode,lpNode,aNode: IXmlNode;
+    TheRoot,x1Node,x2Node,tdNode,lpNode,HeaderNode: IXmlNode;
    Airwaybill:String;
 //   DeconDirectory:String;
    TheFileName:String;
@@ -586,17 +586,17 @@ End;
 
 function TX_CreateMultiXmlFRM.CreateXmlNodeNew(XMLDoc:IXMLDocument;ElementFather:IXMLNode;ElementName:String;ElementValue:String; ElementType: TNodeType =ntElement):IXMLNode;
 Var
-  aNode:IXMLNode;
+  HeaderNode:IXMLNode;
    CxFather:IXMLNode;
    TheElement:IXMLNode;
    TheTextElement:IXMLNode;
 //   TheAttr:TDomAttr;
 Begin
 
-  aNode:=ElementFather.AddChild(ElementName,-1);
+  HeaderNode:=ElementFather.AddChild(ElementName,-1);
   if (Trim(ElementValue)>'') and (ElementType=ntText) then
-    aNode.Text:=ElementValue;
-  result:=aNode;
+    HeaderNode.Text:=ElementValue;
+  result:=HeaderNode;
 
 End;
 
@@ -640,10 +640,10 @@ Begin
   result.Attributes[AttributeName]:=AttributeText;
 end;
 
-Function TX_CreateMultiXmlFRM.AddAtrribute(aNode:IXMLNode; AttributeName:String;AttributeText:String):IXMLNode;
+Function TX_CreateMultiXmlFRM.AddAtrribute(HeaderNode:IXMLNode; AttributeName:String;AttributeText:String):IXMLNode;
 Begin
-  aNode.Attributes[AttributeName]:=AttributeText;
-  result:=aNode;
+  HeaderNode.Attributes[AttributeName]:=AttributeText;
+  result:=HeaderNode;
 end;
 
 
@@ -652,7 +652,7 @@ Function TX_CreateMultiXmlFRM.CreateMultiXML(Const FlightOutSerial:Integer):inte
 var
   FDoc:IXMLDocument;
   TheRoot:IXMLNode;
-  aNode:IXMLNode;
+  HeaderNode:IXMLNode;
   strXMl:String;
   FileName:String;
 
@@ -784,53 +784,54 @@ end;
 function TX_CreateMultiXmlFRM.CreateNodeAirwayBills( Const FlightSerial:Integer; const Fdoc: IXMLDocument;FatherNode:IXMLNode):IXMLNode;
 var
   HeaderNode:IXMLNode;
-  aNode,x2Node:IXMLNode;
+  x2Node:IXMLNode;
   val,temp:String;
   addr:string;
   DString:String;
   AirSerial:Integer;
   qr, qr2: TksQuery;
   ItemSerial:Integer;
+    i:Integer;
 begin
 //    HeaderNode:= CreateXmlNodeNew(Fdoc,FatherNode,'AirwayBills','');
-    HeaderNode:= FatherNode;
+
 
     Qr:=TksQuery.Create(cn,' select * from FLIGHT_AIRWAYBILL where FK_FLIGHT_OUT_SERIAL= :serial');
     try
+      i:=0;
       Qr.ParambyName('serial').Value:= FlightSerial;
       Qr.Open;
-
 //      name="Msg615ProducedDocumentsCertif"
-
       while (not qr.eof) do begin
+        inc(i);
        airSerial:=qr.FieldByName('Serial_number').AsInteger;
-       aNode :=CreateXMLNodeNew(FDoc,HEaderNode,'Msg615GoodsItem','',ntElement);
- //       TblCreateXMLNode(FDoc,anode,'City','',qr,'HAWB_ID',ntText);
+       HeaderNode :=CreateXMLNodeNew(FDoc,FatherNode,'Msg615GoodsItem','',ntElement);
+ //       TblCreateXMLNode(FDoc,HeaderNode,'City','',qr,'HAWB_ID',ntText);
 
-       TblCreateXMLNode(FDoc,anode,'ItemNumber','',qr,'SEQUENCE_NUMBER',ntText);
-       TblCreateXMLNode(FDoc,anode,'GoodsDescription','',qr,'DESCRIPTION',ntText);
-       CreateXMLNodeNew(FDoc,aNOde,'GoodsDescriptionLNG','EN',ntText);
-       TblCreateXMLNode(FDoc,anode,'GrossMass','',qr,'WEIGHT',ntText);
-       TblCreateXMLNode(FDoc,anode,'ItemNumber','',qr,'SEQUENCE_NUMBER',ntText);
-       CreateXMLNodeNew(FDoc,aNOde,'weight','Ch1',ntText);
+//       TblCreateXMLNode(FDoc,HeaderNode,'ItemNumber','',qr,'SEQUENCE_NUMBER',ntText);
+       CreateXMLNodeNew(FDoc,HeaderNode,'ItemNumber',intToStr(i),ntText);
+       TblCreateXMLNode(FDoc,HeaderNode,'GoodsDescription','',qr,'DESCRIPTION',ntText);
+       CreateXMLNodeNew(FDoc,HeaderNode,'GoodsDescriptionLNG','EN',ntText);
+       TblCreateXMLNode(FDoc,HeaderNode,'GrossMass','',qr,'WEIGHT',ntText);
 
        Temp:=qr.FieldByName('Payment_method').AsString;
         If temp='A'       then DString:='Y'
         else  if temp='C' then Dstring:='D'
         else  Dstring:='D';
 
-       CreateXMLNodeNew(FDoc,anode,'TranspChargesMethodOfPayment',Temp,ntText);
-       TblCreateXMLNode(FDoc,anode,'CommercialReferenceNumber','',qr,'HAWB_ID',ntText);
-       CreateXMLNodeNew(FDoc,anode,'UNDangerousGoodsCode','1',ntText);
+       CreateXMLNodeNew(FDoc,HeaderNode,'TranspChargesMethodOfPayment',Temp,ntText);
+       TblCreateXMLNode(FDoc,HeaderNode,'CommercialReferenceNumber','',qr,'HAWB_ID',ntText);
+       CreateXMLNodeNew(FDoc,HeaderNode,'UNDangerousGoodsCode','1',ntText);
 
-       x2Node:=CreateXMLNodeNew(FDoc,anode,'Msg615ProducedDocumentsCertif',Temp,ntText);
+       x2Node:=CreateXMLNodeNew(FDoc,HeaderNode,'Msg615ProducedDocumentsCertif',Temp,ntText);
        CreateXMLNodeNew(FDoc,x2node,'DocumentType','N741',ntText);
        TblCreateXMLNode(FDoc,x2node,'CommercialReferenceNumber','',qr,'HAWB_ID',ntText);
 
 
-       x2node:=CreateXMLNodeNew(FDoc,TheRoot,'Msg615ConsignorTrader','',ntElement);
+       //Consignor
+       x2node:=CreateXMLNodeNew(FDoc,HeaderNode,'Msg615ConsignorTrader','',ntElement);
        TBLCreateXMLNode(FDoc,x2node,'TraderName','',qr,'SENDER_NAME',ntText);
-       dString:=Trim(Dataset.fieldbyName('SENDER_ADDRESS_1').AsString)+','+Trim(qr.fieldbyName('SENDER_ADDRESS_2').AsString)+','+Trim(qr.fieldbyName('SENDER_ADDRESS_3').AsString);
+       dString:=Trim(qr.fieldbyName('SENDER_ADDRESS_1').AsString)+','+Trim(qr.fieldbyName('SENDER_ADDRESS_2').AsString)+','+Trim(qr.fieldbyName('SENDER_ADDRESS_3').AsString);
        dString:=Copy(dString,1,34);
        CreateXMLNodeNew(FDoc,x2node,'StreetAndNumber',dString,ntText);
        TblCreateXMLNode(FDoc,x2node,'PostalCode','',qr,'SENDER_POST_CODE',ntText);
@@ -838,8 +839,20 @@ begin
        TblCreateXMLNode(FDoc,x2node,'CountryCode','',qr,'SENDER_COUNTRY_CODE',ntText);
        CreateXMLNodeNew(FDoc,x2node,'NADLNG','EN',ntText);
 
-//       CreateNodeFlightCountries(AirSerial,Fdoc,aNode);
-//       CreateNodeForItems(AirSerial,Fdoc,aNode);
+       //Consignee
+       x2node:=CreateXMLNodeNew(FDoc,HeaderNode,'Msg615Consignee','',ntElement);
+       TblCreateXMLNode(FDoc,x2node,'TraderName','',qr,'CONSIGNEE_NAME',ntText);
+       dString:=Trim(qr.fieldbyName('CONSIGNEE_ADDRESS_1').AsString)+','+Trim(qr.fieldbyName('CONSIGNEE_ADDRESS_2').AsString)+','+Trim(qr.fieldbyName('CONSIGNEE_ADDRESS_3').AsString);
+       dString:=Copy(dString,1,34);
+       CreateXMLNodeNew(FDoc,x2node,'StreetAndNumber',dString,ntText);
+       TblCreateXMLNode(FDoc,x2node,'PostalCode','',qr,'CONSIGNEE_POST_CODE',ntText);
+       TblCreateXMLNode(FDoc,x2node,'City','',qr,'CONSIGNEE_CITY',ntText);
+       TblCreateXMLNode(FDoc,x2node,'CountryCode','',qr,'CONSIGNEE_COUNTRY_cODE',ntText);
+       CreateXMLNodeNew(FDoc,x2node,'NADLNG','EN',ntText);
+
+
+//       CreateNodeFlightCountries(AirSerial,Fdoc,HeaderNode);
+//       CreateNodeForItems(AirSerial,Fdoc,HeaderNode);
 
        qr.Next;
       end;
@@ -853,7 +866,7 @@ end;
 
 function TX_CreateMultiXmlFRM.CreateNodeForItems( Const AirwaybillSerial:Integer; const Fdoc: IXMLDocument;FatherNode:IXMLNode):IXMLNode;
 var
-  HeaderNode,aNode:IXMLNode;
+  HeaderNode,x2Node:IXMLNode;
   val:String;
   addr:string;
   DString:String;
@@ -868,10 +881,10 @@ begin
     while(not Qr.Eof) do begin
      Val :=qr.FieldByName('SERIAL_NUMBER').AsString;
 
-     aNode :=CreateXMLNodeNew(FDoc,HeaderNode,'HawbItem','',ntElement);
-     TblCreateXMLNode(FDoc,Anode, 'Serial', '',qr, 'Serial_number',ntText);
-     CreateXMLNodeNew(FDoc,ANOde,'itme','Ch1',ntText);
-     result:= aNode;
+     HeaderNode :=CreateXMLNodeNew(FDoc,HeaderNode,'HawbItem','',ntElement);
+     TblCreateXMLNode(FDoc,HeaderNode, 'Serial', '',qr, 'Serial_number',ntText);
+     CreateXMLNodeNew(FDoc,HeaderNode,'itme','Ch1',ntText);
+     result:= HeaderNode;
      qr.Next;
     end;
   finally
@@ -883,23 +896,23 @@ begin
 end;
 
 
-function TX_CreateMultiXmlFRM.CreateNodeFlightCountries( Const FlightSerial:Integer; const Fdoc: IXMLDocument;FatherNode:IXMLNode):IXMLNode;
+function TX_CreateMultiXmlFRM.CreateNodeFlightCountries( Const AirwaybillSerial:Integer; const Fdoc: IXMLDocument;FatherNode:IXMLNode):IXMLNode;
 var
-  aNode:IXMLNode;
+  HeaderNode,x2Node:IXMLNode;
   val:String;
   addr:string;
   DString:String;
   qr:TksQuery;
 begin
 
-
- aNode:=CreateXMLNodeNew(FDoc,FatherNOde,'Msg515Itinerary','',ntElement);
+ HeaderNode:=FatherNode;
+ x2Node:=CreateXMLNodeNew(FDoc,FatherNOde,'Msg515Itinerary','',ntElement);
  Qr:=TksQuery.Create(cn,' select * from Flight_airwaybill_country where FK_FLIGHT_AIRWAYBILL = :serial');
   try
-    Qr.ParambyName('serial').Value:= FlightSerial;
+    Qr.ParambyName('serial').Value:= 3;
     Qr.Open;
-    TblCreateXMLNode(FDoc,anode, 'CountryOfRoutingCode', '',qr, 'Country_code',ntText);
-    result:= aNode;
+    TblCreateXMLNode(FDoc,HeaderNode, 'CountryOfRoutingCode', '',qr, 'Country_code',ntText);
+    result:= HeaderNode;
   finally
     qr.Free;
   end;
