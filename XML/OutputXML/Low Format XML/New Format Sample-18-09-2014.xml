@@ -1,84 +1,84 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <CC615A xmlns="http://www.eurodyn.com">
-  <SyntaxIdentifier>UNOC</SyntaxIdentifier>
-  <SyntaxVersionNumber>3</SyntaxVersionNumber>
-  <MessageSender>CY10016129G</MessageSender>
-  <SenderIdCodeQualifier>CY</SenderIdCodeQualifier>
-  <MessageRecipient>NECA.CY</MessageRecipient>
-  <RecipientIdentifCodeQualifier>CY</RecipientIdentifCodeQualifier>
-  <DateOfPreparation>140918</DateOfPreparation>
-  <TimeOfPreparation>1803</TimeOfPreparation>
-  <InterchangeControlReference>CY1acbae4fdb51</InterchangeControlReference>
-  <MessageIdentification>CY1acbae4fdb51</MessageIdentification>
-  <MessageType>CC615A</MessageType>
-  <Msg615Header>
-    <ReferenceNumber>CY20140918060306060</ReferenceNumber>
-    <TotalNumberOfItems>1</TotalNumberOfItems>
-    <TotalNumberOfPackages>1</TotalNumberOfPackages>
-    <TotalGrossMass>1</TotalGrossMass>
-    <ArrivalAgreedLocationCode>LCA</ArrivalAgreedLocationCode>
-    <ArrivalAgreedLocOfGoods>ARADIPPOU</ArrivalAgreedLocOfGoods>
-    <ArrivalAgreedLocOfGoodsLNG>EN</ArrivalAgreedLocOfGoodsLNG>
-    <DeclarationDate>2014-09-18T00:00:00+03:00</DeclarationDate>
-    <DeclarationPlace>LARNACA</DeclarationPlace>
-    <DeclarationPlaceLNG>EN</DeclarationPlaceLNG>
-    <SpecificCircumstanceIndicator>A</SpecificCircumstanceIndicator>
-    <TranspChargesMethodOfPayment>Y</TranspChargesMethodOfPayment>
-    <CommercialReferenceNumber>61590176796</CommercialReferenceNumber>
-  </Msg615Header>
-  <Msg615Consignor>
-    <TraderName>E.R.TEAM GLOBAL CONSULTANS</TraderName>
-    <StreetAndNumber>15 Demetriou Karatas</StreetAndNumber>
-    <PostalCode>N/A</PostalCode>
-    <City>NICOSIA</City>
-    <CountryCode>CY</CountryCode>
-    <NADLNG>EN</NADLNG>
-  </Msg615Consignor>
-  <Msg615Consignee>
-    <TraderName>Sledstvennyj Komitet</TraderName>
-    <StreetAndNumber>2, Tehnicheskij pere</StreetAndNumber>
-    <PostalCode>N/A</PostalCode>
-    <City>MOSCOW</City>
-    <CountryCode>RU</CountryCode>
-    <NADLNG>EN</NADLNG>
-  </Msg615Consignee>
-  <Msg615ExitCustomsOffice>
-    <ReferenceNumber>CY000440</ReferenceNumber>
-  </Msg615ExitCustomsOffice>
-  <Msg615GoodsItem>
-    <ItemNumber>1</ItemNumber>
-    <GoodsDescription>CD</GoodsDescription>
-    <GoodsDescriptionLNG>EN</GoodsDescriptionLNG>
-    <GrossMass>1</GrossMass>
-    <Msg615Packages>
-      <MarksNumbersOfPackages>5220525273    </MarksNumbersOfPackages>
-      <MarksNumbersOfPackagesLNG>EN</MarksNumbersOfPackagesLNG>
-      <KindOfPackages>PC</KindOfPackages>
-      <NumberOfPackages>1</NumberOfPackages>
-    </Msg615Packages>
-  </Msg615GoodsItem>
-  <Msg615Itinerary>
-    <CountryOfRoutingCode>CY</CountryOfRoutingCode>
-  </Msg615Itinerary>
-  <Msg615Itinerary>
-    <CountryOfRoutingCode>GR</CountryOfRoutingCode>
-  </Msg615Itinerary>
-  <Msg615Itinerary>
-    <CountryOfRoutingCode>IT</CountryOfRoutingCode>
-  </Msg615Itinerary>
-  <Msg615Itinerary>
-    <CountryOfRoutingCode>RU</CountryOfRoutingCode>
-  </Msg615Itinerary>
-  <Msg615LodgementCustomsOffice>
-    <ReferenceNumber>CY000440</ReferenceNumber>
-  </Msg615LodgementCustomsOffice>
-  <Msg615LodgingSumDeclarationPer>
-    <TraderName>DHL (CYPRUS) LIMITED</TraderName>
-    <StreetAndNumber>AKROPOLEOS 13 </StreetAndNumber>
-    <PostalCode>2006</PostalCode>
-    <City>STROVOLOS</City>
-    <CountryCode>CY</CountryCode>
-    <NADLNG>EN</NADLNG>
-    <TIN>CY10016129G</TIN>
-  </Msg615LodgingSumDeclarationPer>
+	<SyntaxIdentifier>UNOC</SyntaxIdentifier>
+	<SyntaxVersionNumber>3</SyntaxVersionNumber>
+	<MessageSender>CY10016129G</MessageSender>
+	<SenderIdCodeQualifier>CY</SenderIdCodeQualifier>
+	<MessageRecipient>NECA.CY</MessageRecipient>
+	<RecipientIdentifCodeQualifier>CY</RecipientIdentifCodeQualifier>
+	<DateOfPreparation>140918</DateOfPreparation>
+	<TimeOfPreparation>1803</TimeOfPreparation>
+	<InterchangeControlReference>CY1acbae4fdb51</InterchangeControlReference>
+	<MessageIdentification>CY1acbae4fdb51</MessageIdentification>
+	<MessageType>CC615A</MessageType>
+	<Msg615Header>
+		<ReferenceNumber>CY20140918060306060</ReferenceNumber>
+		<TotalNumberOfItems>1</TotalNumberOfItems>
+		<TotalNumberOfPackages>1</TotalNumberOfPackages>
+		<TotalGrossMass>1</TotalGrossMass>
+		<ArrivalAgreedLocationCode>LCA</ArrivalAgreedLocationCode>
+		<ArrivalAgreedLocOfGoods>ARADIPPOU</ArrivalAgreedLocOfGoods>
+		<ArrivalAgreedLocOfGoodsLNG>EN</ArrivalAgreedLocOfGoodsLNG>
+		<DeclarationDate>2014-09-18T00:00:00+03:00</DeclarationDate>
+		<DeclarationPlace>LARNACA</DeclarationPlace>
+		<DeclarationPlaceLNG>EN</DeclarationPlaceLNG>
+		<SpecificCircumstanceIndicator>A</SpecificCircumstanceIndicator>
+		<TranspChargesMethodOfPayment>Y</TranspChargesMethodOfPayment>
+		<CommercialReferenceNumber>61590176796</CommercialReferenceNumber>
+	</Msg615Header>
+	<Msg615Consignor>
+		<TraderName>E.R.TEAM GLOBAL CONSULTANS</TraderName>
+		<StreetAndNumber>15 Demetriou Karatas</StreetAndNumber>
+		<PostalCode>N/A</PostalCode>
+		<City>NICOSIA</City>
+		<CountryCode>CY</CountryCode>
+		<NADLNG>EN</NADLNG>
+	</Msg615Consignor>
+	<Msg615Consignee>
+		<TraderName>Sledstvennyj Komitet</TraderName>
+		<StreetAndNumber>2, Tehnicheskij pere</StreetAndNumber>
+		<PostalCode>N/A</PostalCode>
+		<City>MOSCOW</City>
+		<CountryCode>RU</CountryCode>
+		<NADLNG>EN</NADLNG>
+	</Msg615Consignee>
+	<Msg615ExitCustomsOffice>
+		<ReferenceNumber>CY000440</ReferenceNumber>
+	</Msg615ExitCustomsOffice>
+	<Msg615GoodsItem>
+		<ItemNumber>1</ItemNumber>
+		<GoodsDescription>CD</GoodsDescription>
+		<GoodsDescriptionLNG>EN</GoodsDescriptionLNG>
+		<GrossMass>1</GrossMass>
+		<Msg615Packages>
+			<MarksNumbersOfPackages>5220525273    </MarksNumbersOfPackages>
+			<MarksNumbersOfPackagesLNG>EN</MarksNumbersOfPackagesLNG>
+			<KindOfPackages>PC</KindOfPackages>
+			<NumberOfPackages>1</NumberOfPackages>
+		</Msg615Packages>
+	</Msg615GoodsItem>
+	<Msg615Itinerary>
+		<CountryOfRoutingCode>CY</CountryOfRoutingCode>
+	</Msg615Itinerary>
+	<Msg615Itinerary>
+		<CountryOfRoutingCode>GR</CountryOfRoutingCode>
+	</Msg615Itinerary>
+	<Msg615Itinerary>
+		<CountryOfRoutingCode>IT</CountryOfRoutingCode>
+	</Msg615Itinerary>
+	<Msg615Itinerary>
+		<CountryOfRoutingCode>RU</CountryOfRoutingCode>
+	</Msg615Itinerary>
+	<Msg615LodgementCustomsOffice>
+		<ReferenceNumber>CY000440</ReferenceNumber>
+	</Msg615LodgementCustomsOffice>
+	<Msg615LodgingSumDeclarationPer>
+		<TraderName>DHL (CYPRUS) LIMITED</TraderName>
+		<StreetAndNumber>AKROPOLEOS 13 </StreetAndNumber>
+		<PostalCode>2006</PostalCode>
+		<City>STROVOLOS</City>
+		<CountryCode>CY</CountryCode>
+		<NADLNG>EN</NADLNG>
+		<TIN>CY10016129G</TIN>
+	</Msg615LodgingSumDeclarationPer>
 </CC615A>

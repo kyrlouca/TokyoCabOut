@@ -643,7 +643,7 @@ Begin
     FDoc.Active := True;
     FDoc.Version := '1.0';
     FDoc.Encoding := 'UTF-8';
-    TheRoot := FDoc.AddChild('CC615A');
+    TheRoot := FDoc.AddChild('CC515A');
 //  iNode.SetAttributeNS('xmlns:test', '', 'http://www.foo.com' );
 //  iNode.SetAttributeNS('xmlns:xsi', '', 'http://www.w3.org/2001/XMLSchema');
     TheRoot.SetAttributeNS('xmlns', '', 'http://www.eurodyn.com' );

@@ -181,7 +181,7 @@ Begin
     FDoc.Version := '1.0';
     FDoc.Encoding := 'UTF-8';
 
-    TheRoot := FDoc.AddChild('CC615A');
+    TheRoot := FDoc.AddChild('CC515A');
     TheRoot.SetAttributeNS('xmlns', '', 'http://www.eurodyn.com' );
      /////////////////////////////////////////////////////////////////////////
     CreateNodeHeader(FlightOutSerial,Fdoc,TheRoot);
@@ -191,7 +191,7 @@ Begin
     strXML := StringReplace(FDoc.XML.Text, ' xmlns=""', '', [rfReplaceAll]);
     FDoc := LoadXMLData(strXML);
 //     FileName:= DefaultDir+'\'+ Trim(OneFlightAirwaybillSQL.FieldByName('hawb_id').AsString)+'.xml';
-    FileName:= 'C:\Data\DelphiProjects\TokyoCabOut\XML\OutputXML\test22.xml';
+    FileName:= 'C:\Data\DelphiProjects\TokyoCabOut\XML\OutputXML\High22.xml';
     FDoc.SaveToFile(FileName);
 
   finally
@@ -243,23 +243,34 @@ begin
      CreateXMLNodeNew(FDoc,FatherNode,'DateOfPreparation',DString,ntText);
      DString:=FormatDateTime('HHMM',now);
      CreateXMLNodeNew(FDoc,FatherNode,'TimeOfPreparation',DString,ntText);
-     CreateXMLNodeNew(FDoc,FatherNode,'InterchangeControlReference','CY1acbae4fdb51',ntText);
-     CreateXMLNodeNew(FDoc,FatherNode,'MessageIdentification','CY1acbae4fdb51',ntText);
-     CreateXMLNodeNew(FDoc,FatherNode,'MessageType','CC615A',ntText);
+     CreateXMLNodeNew(FDoc,FatherNode,'InterchangeControlReference','CY823a7ac010e2',ntText);
+     CreateXMLNodeNew(FDoc,FatherNode,'MessageIdentification','CY823a7ac010e2',ntText);
+     CreateXMLNodeNew(FDoc,FatherNode,'MessageType','CC515A',ntText);
+
+/////////////////////////////////
+
 
     //********************************************
-     //Header615
+     //Header515
      val:=MawbId+FormatDateTime('YYMMDDHHMMSS', now);
-     x1node:=CreateXMLNodeNew(FDoc,FatherNode,'Msg615Header','',ntElement);
+     x1node:=CreateXMLNodeNew(FDoc,FatherNode,'Msg515Header','',ntElement);
      CreateXMLNodeNew(FDoc,x1node,'ReferenceNumber',val,ntText);
-//     TblCreateXMLNode(FDoc,x1node,'TotalNumberOfItems','',Dataset,'ITEMS_COUNT',ntText);
-//     TblCreateXMLNode(FDoc,x1node,'TotalNumberOfPackages','',Dataset,'PIECES',ntText);
-//     TblCreateXMLNode(FDoc,x1node,'TotalGrossMass','',Dataset,'WEIGHT',ntText);
-     CreateXMLNodeNew(FDoc,x1node,'ArrivalAgreedLocationCode','LCA',ntText);
 
-     DString:=FlightName+'-'+FormatDateTime('DD/MM/YYYY',DateDepart);
-     CreateXMLNodeNew(FDoc,x1node,'ArrivalAgreedLocOfGoods',DString,ntText); //here
-     CreateXMLNodeNew(FDoc,x1node,'ArrivalAgreedLocOfGoodsLNG','EN',ntText);
+     CreateXMLNodeNew(FDoc,x1node,'TypeOfDeclaration','EX',ntText); //here
+     CreateXMLNodeNew(FDoc,x1node,'CountryOfDestinationCode','TR',ntText); //here
+     CreateXMLNodeNew(FDoc,x1node,'AgreedLocationOfGoodsCode','LCA',ntText); //here
+     CreateXMLNodeNew(FDoc,x1node,'AgreedLocationOfGoods','ARADIPPOU',ntText); //here
+     CreateXMLNodeNew(FDoc,x1node,'AgreedLocationOfGoodsLNG','EN',ntText); //here
+     CreateXMLNodeNew(FDoc,x1node,'CountryOfDispatchexportCode','CY',ntText); //here
+     CreateXMLNodeNew(FDoc,x1node,'TransportModeAtBorder','4',ntText); //here
+     CreateXMLNodeNew(FDoc,x1node,'IdMeansOfTransAtDeparture','3V167C',ntText); //here
+     CreateXMLNodeNew(FDoc,x1node,'IdMeansOfTransAtDepartureLNG','EN',ntText); //here
+     CreateXMLNodeNew(FDoc,x1node,'IdMeansOfTransCrossBorder','3V17C',ntText); //here
+     CreateXMLNodeNew(FDoc,x1node,'IdMeansOfTransCrossBorderLNG','EN',ntText); //here
+     CreateXMLNodeNew(FDoc,x1node,'NationOfMeansTransCrossBorder','BE',ntText); //here
+     CreateXMLNodeNew(FDoc,x1node,'ContainerisedIndicator','0',ntText); //here
+     CreateXMLNodeNew(FDoc,x1node,'ECSAccompanyingDocLangCode','EN',ntText); //here
+
 
      DString:=FormatDateTime('YYYY-MM-DD"T00:00:00+03:00"',now);
      CreateXMLNodeNew(FDoc,x1node,'DeclarationDate',DString,ntText);
@@ -267,6 +278,9 @@ begin
      CreateXMLNodeNew(FDoc,x1node,'DeclarationPlace','LARNACA',ntText);
      CreateXMLNodeNew(FDoc,x1node,'DeclarationPlaceLNG','EN',ntText);
      CreateXMLNodeNew(FDoc,x1node,'SpecificCircumstanceIndicator','A',ntText);
+
+
+
 
 //     Temp:=qr.FieldByName('Payment_method').AsString;
 //     If temp='A' then
@@ -277,6 +291,14 @@ begin
 //        Dstring:='D';
 //     CreateXMLNodeNew(FDoc,x1node,'TranspChargesMethodOfPayment',Dstring,ntText);
 //     TblCreateXMLNode(FDoc,x1node,'CommercialReferenceNumber','',Dataset,'HAWB_ID',ntText);
+
+//     x1node:=CreateXMLNodeNew(FDoc,TheRoot,'Msg515Header','',ntElement);
+
+
+
+     CreateXMLNodeNew(FDoc,x1node,'TypeOfDeclarationBox12','A',ntText); //here
+
+
 
       qr.Close;
     finally
