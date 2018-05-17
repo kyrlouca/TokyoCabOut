@@ -451,13 +451,7 @@ Begin
      CreateXMLNodeNew(FDoc,x1node,'TranspChargesMethodOfPayment',Dstring,ntText);
      TblCreateXMLNode(FDoc,x1node,'CommercialReferenceNumber','',Dataset,'HAWB_ID',ntText);
 
-
-
-
-
-
-//
-//********************************************
+ //********************************************
      x1node:=CreateXMLNodeNew(FDoc,TheRoot,'Msg615Consignor','',ntElement);
 
      TBLCreateXMLNode(FDoc,x1node,'TraderName','',Dataset,'SENDER_NAME',ntText);
