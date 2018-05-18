@@ -48,6 +48,8 @@ type
     ReadXmlBTN: TRzBitBtn;
     RzBitBtn1: TRzBitBtn;
     FlightsOutBTN: TRzBitBtn;
+    DangerGoods1: TMenuItem;
+    Certificates1: TMenuItem;
     procedure ProductInfo1Click(Sender: TObject);
     procedure BitBtn2Click(Sender: TObject);
     procedure fcShapeBtn2Click(Sender: TObject);
@@ -78,6 +80,8 @@ type
     procedure ReadXmlBTNClick(Sender: TObject);
     procedure RzBitBtn1Click(Sender: TObject);
     procedure FlightsOutBTNClick(Sender: TObject);
+    procedure DangerGoods1Click(Sender: TObject);
+    procedure Certificates1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -99,7 +103,7 @@ uses  P_Deconsolidation,
   S_SelectCustomerx, S_SelectTariffY, M_District, L_AIrwaybillHigh,
    H_ScanAirwaybillNew, M_incoterms, M_serviceCode, M_Currency,
   l_FlightAirwaybillParameters,  M_additionalParameters, X_readFile,
-  R_ReadALLXMLFiles, X_createOneXML;
+  R_ReadALLXMLFiles, X_createOneXML, M_dangerGoods, M_certificates;
 
 {$R *.DFM}
 
@@ -177,6 +181,11 @@ begin
 M_parametersFRM.ShowModal;
 end;
 
+procedure TMainFormFRM.Certificates1Click(Sender: TObject);
+begin
+M_certificatesFRM.showModal;
+end;
+
 procedure TMainFormFRM.ConnectToDatabase;
 Var
         InFile:TextFile;
@@ -246,6 +255,11 @@ procedure TMainFormFRM.FlightsOutBTNClick(Sender: TObject);
 begin
 L_flightOUtListFRM.SHowMOdal;
 
+end;
+
+procedure TMainFormFRM.DangerGoods1Click(Sender: TObject);
+begin
+M_DangerGoodsFRM.ShowModal;
 end;
 
 procedure TMainFormFRM.Deconsolidation1Click(Sender: TObject);

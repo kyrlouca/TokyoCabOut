@@ -27,17 +27,10 @@ type
     Label4: TLabel;
     Label6: TLabel;
     Label7: TLabel;
-    Label5: TLabel;
     Label8: TLabel;
     DescriptionFLD: TwwDBEdit;
     AcceptBTN: TBitBtn;
     CancelBTN: TBitBtn;
-    Label9: TLabel;
-    Label15: TLabel;
-    Label16: TLabel;
-    Label17: TLabel;
-    Label18: TLabel;
-    Label19: TLabel;
     PiecesFLD: TwwDBEdit;
     wwDBEdit13: TwwDBEdit;
     Label25: TLabel;

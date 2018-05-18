@@ -1,7 +1,7 @@
 object H_airwaybill2FRM: TH_airwaybill2FRM
   Left = 70
   Top = -8
-  ClientHeight = 817
+  ClientHeight = 821
   ClientWidth = 1266
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -14,103 +14,6 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
   OnActivate = FormActivate
   PixelsPerInch = 96
   TextHeight = 13
-  object Label5: TLabel
-    Left = 45
-    Top = 263
-    Width = 34
-    Height = 13
-    Caption = 'Weight'
-  end
-  object Label9: TLabel
-    Left = 163
-    Top = 289
-    Width = 32
-    Height = 13
-    Caption = 'Pieces'
-    Color = clBtnFace
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -11
-    Font.Name = 'MS Sans Serif'
-    Font.Style = []
-    ParentColor = False
-    ParentFont = False
-  end
-  object Label15: TLabel
-    Left = 19
-    Top = 258
-    Width = 28
-    Height = 13
-    Caption = 'Name'
-    Color = clBtnFace
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -11
-    Font.Name = 'MS Sans Serif'
-    Font.Style = []
-    ParentColor = False
-    ParentFont = False
-  end
-  object Label16: TLabel
-    Left = 7
-    Top = 284
-    Width = 38
-    Height = 13
-    Caption = 'Address'
-    Color = clBtnFace
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -11
-    Font.Name = 'MS Sans Serif'
-    Font.Style = []
-    ParentColor = False
-    ParentFont = False
-  end
-  object Label17: TLabel
-    Left = -2
-    Top = 310
-    Width = 49
-    Height = 13
-    Caption = 'Post Code'
-    Color = clBtnFace
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -11
-    Font.Name = 'MS Sans Serif'
-    Font.Style = []
-    ParentColor = False
-    ParentFont = False
-  end
-  object Label18: TLabel
-    Left = 31
-    Top = 336
-    Width = 17
-    Height = 13
-    Caption = 'City'
-    Color = clBtnFace
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -11
-    Font.Name = 'MS Sans Serif'
-    Font.Style = []
-    ParentColor = False
-    ParentFont = False
-  end
-  object Label19: TLabel
-    Left = 12
-    Top = 362
-    Width = 36
-    Height = 13
-    Caption = 'Country'
-    Color = clBtnFace
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -11
-    Font.Name = 'MS Sans Serif'
-    Font.Style = []
-    ParentColor = False
-    ParentFont = False
-  end
   object TitlePNL: TPanel
     Left = 0
     Top = 0
@@ -128,11 +31,12 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
   end
   object Panel4: TPanel
     Left = 0
-    Top = 763
+    Top = 767
     Width = 1266
     Height = 54
     Align = alBottom
     TabOrder = 1
+    ExplicitTop = 763
     object AcceptBTN: TBitBtn
       Left = 18
       Top = 7
@@ -205,13 +109,14 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
     Left = 0
     Top = 46
     Width = 1266
-    Height = 717
+    Height = 721
     Align = alClient
     TabOrder = 2
+    ExplicitTop = 47
     object GroupBox1: TGroupBox
-      Left = 26
-      Top = 7
-      Width = 397
+      Left = 18
+      Top = 6
+      Width = 303
       Height = 289
       Caption = 'Details'
       Font.Charset = DEFAULT_CHARSET
@@ -372,8 +277,8 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
         ParentFont = False
       end
       object Label21: TLabel
-        Left = 131
-        Top = 262
+        Left = 148
+        Top = 240
         Width = 64
         Height = 13
         Caption = 'Service Code'
@@ -387,8 +292,8 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
         ParentFont = False
       end
       object Label22: TLabel
-        Left = 277
-        Top = 262
+        Left = 218
+        Top = 240
         Width = 43
         Height = 13
         Caption = 'Account '
@@ -420,7 +325,7 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
         Left = 65
         Top = 24
         Width = 59
-        Height = 24
+        Height = 21
         Color = clBtnFace
         DataField = 'SERIAL_NUMBER'
         DataSource = AirwaybillCDS
@@ -440,7 +345,7 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
         Left = 65
         Top = 77
         Width = 98
-        Height = 24
+        Height = 21
         Color = clWhite
         DataField = 'HAWB_ID'
         DataSource = AirwaybillCDS
@@ -459,7 +364,7 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
         Left = 65
         Top = 193
         Width = 59
-        Height = 24
+        Height = 21
         Color = clWhite
         DataField = 'PIECES'
         DataSource = AirwaybillCDS
@@ -478,7 +383,7 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
         Left = 65
         Top = 56
         Width = 59
-        Height = 24
+        Height = 21
         Color = clWhite
         DataField = 'SEQUENCE_NUMBER'
         DataSource = AirwaybillCDS
@@ -497,7 +402,7 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
         Left = 65
         Top = 123
         Width = 98
-        Height = 24
+        Height = 21
         Color = clWhite
         DataField = 'SHIPMENT_ORIGIN_COUNTRY'
         DataSource = AirwaybillCDS
@@ -516,7 +421,7 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
         Left = 65
         Top = 216
         Width = 59
-        Height = 24
+        Height = 21
         Color = clWhite
         DataField = 'WEIGHT'
         DataSource = AirwaybillCDS
@@ -533,9 +438,9 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
       end
       object DescriptionFLD: TwwDBEdit
         Left = 65
-        Top = 144
-        Width = 261
-        Height = 24
+        Top = 150
+        Width = 222
+        Height = 21
         Color = clWhite
         DataField = 'DESCRIPTION'
         DataSource = AirwaybillCDS
@@ -554,7 +459,7 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
         Left = 130
         Top = 193
         Width = 59
-        Height = 24
+        Height = 21
         Color = clWhite
         DataField = 'PIECES_S'
         DataSource = AirwaybillCDS
@@ -573,7 +478,7 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
         Left = 65
         Top = 171
         Width = 59
-        Height = 24
+        Height = 21
         DataField = 'ITEMS_COUNT'
         DataSource = AirwaybillCDS
         Font.Charset = DEFAULT_CHARSET
@@ -590,8 +495,8 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
       object wwDBEdit14: TwwDBEdit
         Left = 65
         Top = 236
-        Width = 98
-        Height = 24
+        Width = 77
+        Height = 21
         DataField = 'PAYMENT_METHOD'
         DataSource = AirwaybillCDS
         TabOrder = 9
@@ -654,7 +559,7 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
         AllowClearKey = False
       end
       object wwDBLookupCombo3: TwwDBLookupCombo
-        Left = 206
+        Left = 148
         Top = 259
         Width = 61
         Height = 21
@@ -679,10 +584,10 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
         AllowClearKey = False
       end
       object wwDBEdit2: TwwDBEdit
-        Left = 319
+        Left = 215
         Top = 259
         Width = 72
-        Height = 24
+        Height = 21
         DataField = 'ACCOUNT_NUMBER'
         DataSource = AirwaybillCDS
         Font.Charset = DEFAULT_CHARSET
@@ -698,10 +603,10 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
       end
     end
     object GroupBox4: TGroupBox
-      Left = 26
-      Top = 305
-      Width = 397
-      Height = 242
+      Left = 327
+      Top = 6
+      Width = 306
+      Height = 289
       Caption = 'Sender'
       TabOrder = 1
       OnClick = GroupBox4Click
@@ -781,8 +686,8 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
         ParentFont = False
       end
       object SpeedButton1: TSpeedButton
-        Left = 367
-        Top = 17
+        Left = 308
+        Top = 22
         Width = 21
         Height = 16
         Hint = 'Find Hawb in this Mawb'
@@ -810,8 +715,8 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
         OnClick = SpeedButton1Click
       end
       object Label31: TLabel
-        Left = 201
-        Top = 202
+        Left = 142
+        Top = 203
         Width = 25
         Height = 13
         Caption = 'Email'
@@ -842,8 +747,8 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
       object wwDBEdit15: TwwDBEdit
         Left = 65
         Top = 15
-        Width = 176
-        Height = 24
+        Width = 136
+        Height = 21
         Color = clWhite
         DataField = 'SENDER_NAME'
         DataSource = AirwaybillCDS
@@ -861,8 +766,8 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
       object wwDBEdit16: TwwDBEdit
         Left = 65
         Top = 44
-        Width = 306
-        Height = 24
+        Width = 237
+        Height = 21
         Color = clWhite
         DataField = 'SENDER_ADDRESS_1'
         DataSource = AirwaybillCDS
@@ -881,7 +786,7 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
         Left = 65
         Top = 122
         Width = 59
-        Height = 24
+        Height = 21
         Color = clWhite
         DataField = 'SENDER_POST_CODE'
         DataSource = AirwaybillCDS
@@ -899,8 +804,8 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
       object wwDBEdit18: TwwDBEdit
         Left = 65
         Top = 148
-        Width = 300
-        Height = 24
+        Width = 237
+        Height = 21
         Color = clWhite
         DataField = 'SENDER_CITY'
         DataSource = AirwaybillCDS
@@ -939,8 +844,8 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
       object wwDBEdit19: TwwDBEdit
         Left = 65
         Top = 70
-        Width = 306
-        Height = 24
+        Width = 237
+        Height = 21
         Color = clWhite
         DataField = 'SENDER_ADDRESS_2'
         DataSource = AirwaybillCDS
@@ -958,8 +863,8 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
       object wwDBEdit20: TwwDBEdit
         Left = 65
         Top = 96
-        Width = 306
-        Height = 24
+        Width = 237
+        Height = 21
         Color = clWhite
         DataField = 'SENDER_ADDRESS_3'
         DataSource = AirwaybillCDS
@@ -975,10 +880,10 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
         WordWrap = False
       end
       object SelectNameFLD: TwwDBEdit
-        Left = 247
-        Top = 15
-        Width = 111
-        Height = 24
+        Left = 207
+        Top = 17
+        Width = 95
+        Height = 21
         CharCase = ecUpperCase
         Color = 12319739
         Font.Charset = DEFAULT_CHARSET
@@ -993,10 +898,10 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
         WordWrap = False
       end
       object wwDBEdit4: TwwDBEdit
-        Left = 65
-        Top = 199
+        Left = 67
+        Top = 200
         Width = 59
-        Height = 24
+        Height = 21
         Color = clWhite
         DataField = 'SENDER_DEVICE_TYPE'
         DataSource = AirwaybillCDS
@@ -1012,10 +917,10 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
         WordWrap = False
       end
       object wwDBEdit5: TwwDBEdit
-        Left = 247
+        Left = 178
         Top = 199
         Width = 124
-        Height = 24
+        Height = 21
         Color = clWhite
         DataField = 'SENDER_DEVICE_DETAILS'
         DataSource = AirwaybillCDS
@@ -1032,10 +937,10 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
       end
     end
     object GroupBox3: TGroupBox
-      Left = 449
-      Top = 312
-      Width = 397
-      Height = 235
+      Left = 639
+      Top = 6
+      Width = 314
+      Height = 289
       Caption = 'Consignee'
       TabOrder = 2
       object Label10: TLabel
@@ -1115,7 +1020,7 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
       end
       object Label33: TLabel
         Left = 25
-        Top = 202
+        Top = 208
         Width = 34
         Height = 13
         Caption = 'Device'
@@ -1129,8 +1034,8 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
         ParentFont = False
       end
       object Label34: TLabel
-        Left = 201
-        Top = 202
+        Left = 130
+        Top = 208
         Width = 25
         Height = 13
         Caption = 'Email'
@@ -1146,8 +1051,8 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
       object CnameFLD: TwwDBEdit
         Left = 65
         Top = 18
-        Width = 306
-        Height = 24
+        Width = 234
+        Height = 21
         Color = clWhite
         DataField = 'CONSIGNEE_NAME'
         DataSource = AirwaybillCDS
@@ -1165,8 +1070,8 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
       object Cadd1FLD: TwwDBEdit
         Left = 65
         Top = 44
-        Width = 306
-        Height = 24
+        Width = 234
+        Height = 21
         Color = clWhite
         DataField = 'CONSIGNEE_ADDRESS_1'
         DataSource = AirwaybillCDS
@@ -1185,7 +1090,7 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
         Left = 65
         Top = 122
         Width = 59
-        Height = 24
+        Height = 21
         Color = clWhite
         DataField = 'CONSIGNEE_POST_CODE'
         DataSource = AirwaybillCDS
@@ -1203,8 +1108,8 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
       object CCityFLD: TwwDBEdit
         Left = 65
         Top = 148
-        Width = 300
-        Height = 24
+        Width = 234
+        Height = 21
         Color = clWhite
         DataField = 'CONSIGNEE_CITY'
         DataSource = AirwaybillCDS
@@ -1222,8 +1127,8 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
       object CAdd2FLd: TwwDBEdit
         Left = 65
         Top = 70
-        Width = 306
-        Height = 24
+        Width = 234
+        Height = 21
         Color = clWhite
         DataField = 'CONSIGNEE_ADDRESS_2'
         DataSource = AirwaybillCDS
@@ -1241,8 +1146,8 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
       object CAdd3FLD: TwwDBEdit
         Left = 65
         Top = 96
-        Width = 306
-        Height = 24
+        Width = 234
+        Height = 21
         Color = clWhite
         DataField = 'CONSIGNEE_ADDRESS_3'
         DataSource = AirwaybillCDS
@@ -1261,7 +1166,7 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
         Left = 65
         Top = 177
         Width = 59
-        Height = 24
+        Height = 21
         Color = clWhite
         DataField = 'CONSIGNEE_COUNTRY_CODE'
         DataSource = AirwaybillCDS
@@ -1278,9 +1183,9 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
       end
       object wwDBEdit6: TwwDBEdit
         Left = 65
-        Top = 199
+        Top = 204
         Width = 59
-        Height = 24
+        Height = 21
         Color = clWhite
         DataField = 'CONSIGNEE_DEVICE_TYPE'
         DataSource = AirwaybillCDS
@@ -1296,10 +1201,10 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
         WordWrap = False
       end
       object wwDBEdit7: TwwDBEdit
-        Left = 247
-        Top = 199
+        Left = 175
+        Top = 204
         Width = 124
-        Height = 24
+        Height = 21
         Color = clWhite
         DataField = 'CONSIGNEE_DEVICE_DETAILS'
         DataSource = AirwaybillCDS
@@ -1316,9 +1221,9 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
       end
     end
     object wwDBGrid1: TwwDBGrid
-      Left = 26
-      Top = 585
-      Width = 813
+      Left = 18
+      Top = 321
+      Width = 807
       Height = 98
       ControlType.Strings = (
         'CURRENCY;CustomEdit;CurrencyFLD')

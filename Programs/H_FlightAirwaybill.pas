@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   StdCtrls, Mask, IBC, MemDS, IBCError, wwSpeedButton, wwDBNavigator,
   wwclearpanel, Buttons, ExtCtrls, wwdbedit, Grids, Wwdbigrd, Wwdbgrid,
-  Wwdbcomb, Data.DB, DBAccess, vcl.wwdblook, vcl.Wwdotdot;
+  Wwdbcomb, Data.DB, DBAccess, vcl.wwdblook, vcl.Wwdotdot, vcl.wwbutton;
 
 type
   TH_FlightairwaybillFRM = class(TForm)
@@ -147,8 +147,6 @@ type
     FA_ItemSQLCURRENCY_RATE: TFloatField;
     FA_ItemSQLCURRENCY: TStringField;
     FA_ItemSQLFK_FA_SERIAL: TIntegerField;
-    SelectTariffFLD: TwwDBEdit;
-    SpeedButton2: TSpeedButton;
     Label24: TLabel;
     IncotermsSQL: TIBCQuery;
     IncotermsSQLCODE: TStringField;
@@ -200,7 +198,6 @@ type
     wwDBNavigator1Cancel: TwwNavButton;
     wwDBNavigator1Refresh: TwwNavButton;
     CountryGRD: TwwDBGrid;
-    CountryLookupFLD: TwwDBLookupCombo;
     GroupBox6: TGroupBox;
     ParamGroupFLD: TwwDBLookupCombo;
     wwDBNavigator3: TwwDBNavigator;
@@ -215,6 +212,35 @@ type
     ParamGroupItemSQLINFO_TYPE: TStringField;
     ParamGroupItemSQLINFO_VALUE: TStringField;
     MakeSQL: TIBCQuery;
+    SelectTariffFLD: TwwDBEdit;
+    SpeedButton2: TSpeedButton;
+    GroupBox7: TGroupBox;
+    wwDBLookupCombo1: TwwDBLookupCombo;
+    wwDBNavigator4: TwwDBNavigator;
+    wwNavButton10: TwwNavButton;
+    wwNavButton15: TwwNavButton;
+    wwNavButton16: TwwNavButton;
+    wwNavButton17: TwwNavButton;
+    wwNavButton18: TwwNavButton;
+    wwNavButton19: TwwNavButton;
+    wwNavButton20: TwwNavButton;
+    wwDBGrid3: TwwDBGrid;
+    GroupCertificateSQL: TIBCQuery;
+    GroupCertificateSQLCODE: TStringField;
+    GroupCertificateSQLDESCRIPTION: TStringField;
+    GroupCertificateSRC: TIBCDataSource;
+    CertItemSRC: TIBCDataSource;
+    CertItemSQL: TIBCQuery;
+    ReadTrans: TIBCTransaction;
+    wwButton1: TwwButton;
+    CertItemSQLSERIAL_NUMBER: TIntegerField;
+    CertItemSQLCERT_CODE: TStringField;
+    CertItemSQLFK_FLIGHT_AIRWAYBILL_ITEM: TIntegerField;
+    CertItemSQLDESCRIPTION: TStringField;
+    CertItemSQLCERT_TYPE: TStringField;
+    CertItemSQLCERT_VALUE: TStringField;
+    CertItemSQLFIELD_FOR_VALUE: TStringField;
+    CertItemSQLTABLE_FOR_VALUE: TStringField;
     procedure FormActivate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure BitBtn2Click(Sender: TObject);
@@ -230,8 +256,13 @@ type
     procedure SpeedButton1Click(Sender: TObject);
     procedure ParamGroupFLDCloseUp(Sender: TObject; LookupTable,
       FillTable: TDataSet; modified: Boolean);
+    procedure wwButton1Click(Sender: TObject);
+    procedure wwDBLookupCombo1CloseUp(Sender: TObject; LookupTable,
+      FillTable: TDataSet; modified: Boolean);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
+       cn:TIBCConnection;
         procedure SelectCustomer(CustomerName:String);
         Function SelectTariff(TariffCode:String):boolean;
   public
@@ -249,7 +280,7 @@ var
 implementation
 
 uses MainForm,H_ScanAirwaybill, S_SelectCustomerx, S_SelectTariffY,
-  KyriacosTypes;
+  KyriacosTypes, G_KyrSQL;
 
 {$R *.DFM}
 
@@ -370,6 +401,9 @@ if (Self as TForm).Components[i] is TDataset then begin
                 Dataset.Refresh;
 
         end;
+
+ksOpenTables([GroupCertificateSQL,CertItemSQL]);
+
 end;
 
 
@@ -403,9 +437,69 @@ end;
 
 end;
 
+procedure TH_FlightairwaybillFRM.FormCreate(Sender: TObject);
+begin
+  cn:= MainFormFRM.CabOutData;
+end;
+
 procedure TH_FlightairwaybillFRM.BitBtn2Click(Sender: TObject);
 begin
 close;
+
+end;
+
+procedure TH_FlightairwaybillFRM.wwButton1Click(Sender: TObject);
+begin
+CertItemSQL.Close;
+CertItemSQL.Open;
+end;
+
+procedure TH_FlightairwaybillFRM.wwDBLookupCombo1CloseUp(Sender: TObject;
+  LookupTable, FillTable: TDataSet; modified: Boolean);
+
+Var
+  GroupCode:String;
+  FaItem:Integer;
+  faCertSerial:Integer;
+  certItemSerial:Integer;
+  str:String;
+  qr:TksQuery;
+
+begin
+  GroupCode:=LookupTable.FieldByName('Code').AsString;
+  FaItem:=Fa_itemSQL.FieldByName('serial_Number').AsInteger;
+
+
+
+
+  showMessage(intToStr(faItem));
+  Str:='delete from flight_airwaybill_item_cert fi where fi.fk_flight_airwaybill_item = :fa_item';
+  ksExecSQLVar(cn, str,[FaItem]);
+
+  str:=
+  '   insert into flight_airwaybill_item_cert'
+  +'      (serial_number, FK_FLIGHT_AIRWAYBILL_ITEM, cert_code, cert_type, description, cert_value, table_for_value, field_for_value)'
+  +'    select'
+  +'    :ItemCertSerial, :ItemCert_fk , ci.cert_code, ci.cert_type, ci.description, ci.cert_value, ci.table_for_value, ci.field_for_value'
+  +'    from certificate_item ci where ci.serial_number = :CertSerial';
+
+  try
+    //read all the certificate_items for the group  which will apply for the flight_airwaybill_item
+    qr:=TksQuery.Create(cn,'select serial_number from certificate_item where fk_certificate_group= :group');
+    qr.ParamByName('group').Value:=GroupCode;
+    qr.Open;
+    while (not qr.Eof) do begin
+      FaCertSerial:= ksGenerateSerial(cn,'FLIGHT_AIRWAYBILL_ITEM_CERT_GEN');
+      CertItemSerial:=qr.FieldByName('serial_number').AsInteger;
+      ksExecSQLVar(cn, str,[FaCertSerial,faItem,CertItemSerial]);
+      qr.Next;
+    end;
+  finally
+    qr.Free;
+  end;
+  CertItemSQL.Refresh;
+
+
 
 end;
 
@@ -459,26 +553,26 @@ procedure TH_FlightairwaybillFRM.ItineraryFLDCloseUp(Sender: TObject;
   LookupTable, FillTable: TDataSet; modified: Boolean);
 begin
 
-If FlightAirwaybillSQL.State=dsInsert then begin
+  If FlightAirwaybillSQL.State=dsInsert then begin
         FlightAirwaybillSQL.Post;
 
-end;
+  end;
 
-With FAirwayBillCountrySQL do begin
+  With FAirwayBillCountrySQL do begin
         first;
         While not Eof do begin
                 delete;
         end;
-end;
+  end;
 
 
-If Trim(FlightAirwaybillSQL.FieldByName('SENDER_COUNTRY_CODE').AsString)>'' then begin
+  If Trim(FlightAirwaybillSQL.FieldByName('SENDER_COUNTRY_CODE').AsString)>'' then begin
         FAirwayBillCountrySQL.Insert;
         FAirwayBillCountrySQL.FieldByName('COUNTRY_CODE').Value:=FlightAirwaybillSQL.FieldBYName('sender_country_code').AsString;
         FAirwayBillCountrySQL.FieldByName('Order_position').Value:=0;
         FAirwayBillCountrySQL.Post;
-end;
-With ItineraryCountrySQL do begin
+  end;
+  With ItineraryCountrySQL do begin
         first;
         While not Eof do begin
                 FAirwayBillCountrySQL.Insert;
@@ -488,12 +582,13 @@ With ItineraryCountrySQL do begin
                 next;
 
         end;
-If Trim(FlightAirwaybillSQL.FieldByName('consignee_country_code').AsString)>'' then begin
+
+  If Trim(FlightAirwaybillSQL.FieldByName('consignee_country_code').AsString)>'' then begin
         FAirwayBillCountrySQL.Insert;
         FAirwayBillCountrySQL.FieldByName('COUNTRY_CODE').Value:=FlightAirwaybillSQL.FieldBYName('consignee_country_code').AsString;
         FAirwayBillCountrySQL.FieldByName('Order_position').Value:=100;
         FAirwayBillCountrySQL.Post;
-end;
+  end;
 
 end;
 

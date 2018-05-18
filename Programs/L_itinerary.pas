@@ -21,7 +21,6 @@ type
     Panel6: TPanel;
     DeleteSelectedBTN: TBitBtn;
     InsertBTN: TBitBtn;
-    BitBtn2: TBitBtn;
     BitBtn1: TBitBtn;
     UsedForUpdateTrans: TIBCTransaction;
     ItinerarySRC: TIBCDataSource;
@@ -59,6 +58,7 @@ type
     wwNavButton6: TwwNavButton;
     wwNavButton7: TwwNavButton;
     ItineraryCountrySQLORDER_POSITION: TIntegerField;
+    BitBtn2: TBitBtn;
     procedure BitBtn2Click(Sender: TObject);
     procedure FlightOutGRDDblClick(Sender: TObject);
     procedure InsertBTNClick(Sender: TObject);

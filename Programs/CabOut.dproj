@@ -124,17 +124,11 @@
         <DCCReference Include="M_country.pas">
             <Form>M_countryFRM</Form>
         </DCCReference>
-        <DCCReference Include="L_itinerary.pas">
-            <Form>L_ItineraryFRM</Form>
-        </DCCReference>
         <DCCReference Include="M_Itinerary.pas">
             <Form>M_ItineraryFRM</Form>
         </DCCReference>
         <DCCReference Include="H_scanAirwaybill.pas">
             <Form>H_ScanAirwaybillFRM</Form>
-        </DCCReference>
-        <DCCReference Include="M_FlightTable.pas">
-            <Form>M_FlightTableFRM</Form>
         </DCCReference>
         <DCCReference Include="H_Airwaybill2.pas">
             <Form>H_airwaybill2FRM</Form>
@@ -207,6 +201,22 @@
         </DCCReference>
         <DCCReference Include="X_createMultiHighXML.pas">
             <Form>X_CreateMultiHighXmlFRM</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="M_dangerGoods.pas">
+            <Form>M_DangerGoodsFRM</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="M_FlightTable.pas">
+            <Form>M_FlightTableFRM</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="M_certificates.pas">
+            <Form>M_certificatesFRM</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="L_itinerary.pas">
+            <Form>L_ItineraryFRM</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <None Include="CabOut.todo">
