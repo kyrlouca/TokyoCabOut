@@ -42,7 +42,7 @@ uses
   M_FlightTable in 'M_FlightTable.pas' {M_FlightTableFRM},
   M_certificates in 'M_certificates.pas' {M_certificatesFRM},
   L_itinerary in 'L_itinerary.pas' {L_ItineraryFRM},
-  H_FlightAirItem in 'H_FlightAirItem.pas' {H_FlightAirwaybillItemFRM};
+  H_FlightAirItem in 'H_FlightAirItem.pas' {H_FlightAirItemFRM};
 
 {$R *.RES}
 
@@ -82,6 +82,6 @@ begin
   Application.CreateForm(TM_FlightTableFRM, M_FlightTableFRM);
   Application.CreateForm(TM_certificatesFRM, M_certificatesFRM);
   Application.CreateForm(TL_ItineraryFRM, L_ItineraryFRM);
-  Application.CreateForm(TH_FlightAirwaybillItemFRM, H_FlightAirwaybillItemFRM);
+  Application.CreateForm(TH_FlightAirItemFRM, H_FlightAirItemFRM);
   Application.Run;
 end.

@@ -698,7 +698,7 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
           Selected.Strings = (
             'CERT_CODE'#9'10'#9'Code'
             'CERT_VALUE'#9'10'#9'Value'
-            'DESCRIPTION'#9'21'#9'Desc')
+            'DESCRIPTION'#9'17'#9'Desc')
           IniAttributes.Delimiter = ';;'
           IniAttributes.UnicodeIniFile = False
           TitleColor = clBtnFace
@@ -724,7 +724,7 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
         end
         object Select2: TwwDBLookupCombo
           Left = 202
-          Top = 17
+          Top = 25
           Width = 121
           Height = 24
           DropDownAlignment = taLeftJustify
@@ -739,7 +739,6 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
           ShowButton = True
           PreciseEditRegion = False
           AllowClearKey = False
-          OnCloseUp = Select2CloseUp
         end
         object SelGroupFLD: TwwDBLookupCombo
           Left = 16
@@ -1116,7 +1115,7 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
     end
     object CertItemSQLDESCRIPTION: TStringField
       DisplayLabel = 'Desc'
-      DisplayWidth = 21
+      DisplayWidth = 17
       FieldName = 'DESCRIPTION'
       FixedChar = True
       Size = 30

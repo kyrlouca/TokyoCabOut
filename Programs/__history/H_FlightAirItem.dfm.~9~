@@ -325,9 +325,9 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
       TabOrder = 1
       VisualStyle = vsClassic
       object GroupBox1: TGroupBox
-        Left = -18
+        Left = 0
         Top = 45
-        Width = 338
+        Width = 273
         Height = 331
         Caption = 'Details'
         Font.Charset = DEFAULT_CHARSET
@@ -338,8 +338,8 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
         ParentFont = False
         TabOrder = 0
         object Label2: TLabel
-          Left = 50
-          Top = 131
+          Left = 34
+          Top = 96
           Width = 34
           Height = 14
           Caption = 'Pieces'
@@ -351,7 +351,7 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
           ParentFont = False
         end
         object Label3: TLabel
-          Left = 63
+          Left = 47
           Top = 21
           Width = 21
           Height = 14
@@ -364,8 +364,8 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
           ParentFont = False
         end
         object asf: TLabel
-          Left = 46
-          Top = 103
+          Left = 30
+          Top = 123
           Width = 38
           Height = 14
           Caption = 'weight'
@@ -377,9 +377,9 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
           ParentFont = False
         end
         object SerialFLD: TRzDBLabel
-          Left = 98
+          Left = 77
           Top = 18
-          Width = 82
+          Width = 84
           Height = 20
           Alignment = taRightJustify
           BorderOuter = fsFlat
@@ -388,8 +388,8 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
           DataSource = TableSRC
         end
         object Label14: TLabel
-          Left = 196
-          Top = 217
+          Left = 20
+          Top = 198
           Width = 48
           Height = 14
           Caption = 'Currency'
@@ -401,8 +401,8 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
           ParentFont = False
         end
         object Label15: TLabel
-          Left = 40
-          Top = 216
+          Left = 24
+          Top = 150
           Width = 44
           Height = 14
           Caption = 'Amount'
@@ -414,8 +414,8 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
           ParentFont = False
         end
         object Label16: TLabel
-          Left = 29
-          Top = 44
+          Left = 13
+          Top = 69
           Width = 55
           Height = 14
           Caption = 'Sequence'
@@ -426,36 +426,10 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
           Font.Style = []
           ParentFont = False
         end
-        object Label1: TLabel
-          Left = 24
-          Top = 78
-          Width = 60
-          Height = 14
-          Caption = 'Description'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -12
-          Font.Name = 'Tahoma'
-          Font.Style = []
-          ParentFont = False
-        end
-        object Label5: TLabel
-          Left = 56
-          Top = 167
-          Width = 28
-          Height = 14
-          Caption = 'Tariff'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -12
-          Font.Name = 'Tahoma'
-          Font.Style = []
-          ParentFont = False
-        end
         object FirstFLD: TwwDBEdit
-          Left = 98
-          Top = 47
-          Width = 82
+          Left = 77
+          Top = 66
+          Width = 161
           Height = 22
           DataField = 'SEQUENCE'
           DataSource = TableSRC
@@ -465,9 +439,9 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
           WordWrap = False
         end
         object wwDBEdit1: TwwDBEdit
-          Left = 98
-          Top = 103
-          Width = 82
+          Left = 77
+          Top = 120
+          Width = 161
           Height = 22
           DataField = 'WEIGHT'
           DataSource = TableSRC
@@ -477,9 +451,9 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
           WordWrap = False
         end
         object wwDBEdit2: TwwDBEdit
-          Left = 250
-          Top = 213
-          Width = 52
+          Left = 77
+          Top = 195
+          Width = 161
           Height = 22
           DataField = 'CURRENCY'
           DataSource = TableSRC
@@ -489,9 +463,9 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
           WordWrap = False
         end
         object wwDBEdit12: TwwDBEdit
-          Left = 98
-          Top = 212
-          Width = 82
+          Left = 77
+          Top = 147
+          Width = 84
           Height = 22
           DataField = 'AMOUNT'
           DataSource = TableSRC
@@ -501,37 +475,13 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
           WordWrap = False
         end
         object wwDBEdit13: TwwDBEdit
-          Left = 98
-          Top = 131
-          Width = 82
+          Left = 77
+          Top = 93
+          Width = 161
           Height = 22
           DataField = 'PIECES'
           DataSource = TableSRC
           TabOrder = 1
-          UnboundDataType = wwDefault
-          WantReturns = False
-          WordWrap = False
-        end
-        object wwDBEdit3: TwwDBEdit
-          Left = 98
-          Top = 75
-          Width = 82
-          Height = 22
-          DataField = 'DESCRIPTION'
-          DataSource = TableSRC
-          TabOrder = 5
-          UnboundDataType = wwDefault
-          WantReturns = False
-          WordWrap = False
-        end
-        object wwDBEdit4: TwwDBEdit
-          Left = 98
-          Top = 159
-          Width = 82
-          Height = 22
-          DataField = 'TARIFF_CODE'
-          DataSource = TableSRC
-          TabOrder = 6
           UnboundDataType = wwDefault
           WantReturns = False
           WordWrap = False
@@ -545,13 +495,164 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
         Align = alTop
         BorderOuter = fsNone
         TabOrder = 1
-        ExplicitLeft = 6
+        object Nav1: TwwDBNavigator
+          Left = 20
+          Top = 5
+          Width = 184
+          Height = 26
+          AutosizeStyle = asSizeNavButtons
+          DataSource = TableSRC
+          RepeatInterval.InitialDelay = 500
+          RepeatInterval.Interval = 100
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -12
+          Font.Name = 'Arial'
+          Font.Style = []
+          object Nav1Button: TwwNavButton
+            Left = 0
+            Top = 0
+            Width = 23
+            Height = 26
+            Hint = 'Move to first record'
+            ImageIndex = -1
+            NumGlyphs = 2
+            Spacing = 4
+            Transparent = False
+            Caption = 'Nav1Button'
+            Enabled = False
+            DisabledTextColors.ShadeColor = clGray
+            DisabledTextColors.HighlightColor = clBtnHighlight
+            Index = 0
+            Style = nbsFirst
+          end
+          object Nav1Prior: TwwNavButton
+            Left = 23
+            Top = 0
+            Width = 23
+            Height = 26
+            Hint = 'Move to prior record'
+            ImageIndex = -1
+            NumGlyphs = 2
+            Spacing = 4
+            Transparent = False
+            Caption = 'Nav1Prior'
+            Enabled = False
+            DisabledTextColors.ShadeColor = clGray
+            DisabledTextColors.HighlightColor = clBtnHighlight
+            Index = 1
+            Style = nbsPrior
+          end
+          object Nav1Next: TwwNavButton
+            Left = 46
+            Top = 0
+            Width = 23
+            Height = 26
+            Hint = 'Move to next record'
+            ImageIndex = -1
+            NumGlyphs = 2
+            Spacing = 4
+            Transparent = False
+            Caption = 'Nav1Next'
+            Enabled = False
+            DisabledTextColors.ShadeColor = clGray
+            DisabledTextColors.HighlightColor = clBtnHighlight
+            Index = 2
+            Style = nbsNext
+          end
+          object Nav1Button1: TwwNavButton
+            Left = 69
+            Top = 0
+            Width = 23
+            Height = 26
+            Hint = 'Move to last record'
+            ImageIndex = -1
+            NumGlyphs = 2
+            Spacing = 4
+            Transparent = False
+            Caption = 'Nav1Button1'
+            Enabled = False
+            DisabledTextColors.ShadeColor = clGray
+            DisabledTextColors.HighlightColor = clBtnHighlight
+            Index = 3
+            Style = nbsLast
+          end
+          object Nav1Insert: TwwNavButton
+            Left = 92
+            Top = 0
+            Width = 23
+            Height = 26
+            Hint = 'Insert new record'
+            ImageIndex = -1
+            NumGlyphs = 2
+            Spacing = 4
+            Transparent = False
+            Caption = 'Nav1Insert'
+            Enabled = False
+            DisabledTextColors.ShadeColor = clGray
+            DisabledTextColors.HighlightColor = clBtnHighlight
+            OnClick = Nav1InsertClick
+            Index = 4
+            Style = nbsInsert
+          end
+          object Nav1Delete: TwwNavButton
+            Left = 115
+            Top = 0
+            Width = 23
+            Height = 26
+            Hint = 'Delete current record'
+            ImageIndex = -1
+            NumGlyphs = 2
+            Spacing = 4
+            Transparent = False
+            Caption = 'Nav1Delete'
+            Enabled = False
+            DisabledTextColors.ShadeColor = clGray
+            DisabledTextColors.HighlightColor = clBtnHighlight
+            Index = 5
+            Style = nbsDelete
+          end
+          object Nav1Post: TwwNavButton
+            Left = 138
+            Top = 0
+            Width = 23
+            Height = 26
+            Hint = 'Post changes of current record'
+            ImageIndex = -1
+            NumGlyphs = 2
+            Spacing = 4
+            Transparent = False
+            Caption = 'Nav1Post'
+            Enabled = False
+            DisabledTextColors.ShadeColor = clGray
+            DisabledTextColors.HighlightColor = clBtnHighlight
+            Index = 6
+            Style = nbsPost
+          end
+          object Nav1Cancel: TwwNavButton
+            Left = 161
+            Top = 0
+            Width = 23
+            Height = 26
+            Hint = 'Cancel changes made to current record'
+            ImageIndex = -1
+            NumGlyphs = 2
+            Spacing = 4
+            Transparent = False
+            Caption = 'Nav1Cancel'
+            Enabled = False
+            DisabledTextColors.ShadeColor = clGray
+            DisabledTextColors.HighlightColor = clBtnHighlight
+            Index = 7
+            Style = nbsCancel
+          end
+        end
       end
       object GroupBox2: TGroupBox
-        Left = 326
+        Left = 310
         Top = 45
         Width = 364
-        Height = 332
+        Height = 244
         Caption = 'Item Certificates'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -566,7 +667,6 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
           Width = 163
           Height = 20
           AutosizeStyle = asNone
-          DataSource = CertItemSRC
           RepeatInterval.InitialDelay = 500
           RepeatInterval.Interval = 100
           object wwNavButton1: TwwNavButton
@@ -614,6 +714,7 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
             Spacing = 4
             Transparent = False
             Caption = 'wwDBNavigator1Insert'
+            Enabled = False
             DisabledTextColors.ShadeColor = clGray
             DisabledTextColors.HighlightColor = clBtnHighlight
             Index = 2
@@ -681,6 +782,7 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
             Spacing = 4
             Transparent = False
             Caption = 'wwDBNavigator1Refresh'
+            Enabled = False
             DisabledTextColors.ShadeColor = clGray
             DisabledTextColors.HighlightColor = clBtnHighlight
             Index = 6
@@ -698,7 +800,7 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
           Selected.Strings = (
             'CERT_CODE'#9'10'#9'Code'
             'CERT_VALUE'#9'10'#9'Value'
-            'DESCRIPTION'#9'21'#9'Desc')
+            'DESCRIPTION'#9'17'#9'Desc')
           IniAttributes.Delimiter = ';;'
           IniAttributes.UnicodeIniFile = False
           TitleColor = clBtnFace
@@ -724,7 +826,7 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
         end
         object Select2: TwwDBLookupCombo
           Left = 202
-          Top = 17
+          Top = 25
           Width = 121
           Height = 24
           DropDownAlignment = taLeftJustify
@@ -739,7 +841,6 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
           ShowButton = True
           PreciseEditRegion = False
           AllowClearKey = False
-          OnCloseUp = Select2CloseUp
         end
         object SelGroupFLD: TwwDBLookupCombo
           Left = 16
@@ -776,7 +877,7 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
     DefaultConnection = MainFormFRM.CabOutData
     IsolationLevel = iblReadOnlyReadCommitted
     Left = 200
-    Top = 25
+    Top = 209
   end
   object TableSQL: TIBCQuery
     KeyFields = 'serial_number'
@@ -906,11 +1007,11 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
       ''
       ') q')
     Connection = MainFormFRM.CabOutData
-    Transaction = ReadTrans
-    UpdateTransaction = WriteTrans
+    Transaction = MainFormFRM.UsedForReadOnlyTrans
     SQL.Strings = (
       'Select * from Certificate_group')
     ReadOnly = True
+    Active = True
     Left = 312
     Top = 90
     object GroupCertificateSQLCODE: TStringField
@@ -1036,8 +1137,8 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
   end
   object CertItemSRC: TIBCDataSource
     DataSet = CertItemSQL
-    Left = 584
-    Top = 330
+    Left = 432
+    Top = 58
   end
   object CertItemSQL: TIBCQuery
     KeyFields = 'serial_number'
@@ -1086,19 +1187,18 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
       ') q')
     Connection = MainFormFRM.CabOutData
     Transaction = ReadTrans
-    UpdateTransaction = WriteTrans
     SQL.Strings = (
       'Select * from  FLIGHT_AIRWAYBILL_ITEM_CERT')
-    MasterFields = 'SERIAL_NUMBER'
-    DetailFields = 'FK_FLIGHT_AIRWAYBILL_ITEM'
+    MasterFields = 'FK_FA_SERIAL'
+    DetailFields = 'SERIAL_NUMBER'
     MasterSource = TableSRC
     Active = True
-    Left = 512
-    Top = 322
+    Left = 552
+    Top = 274
     ParamData = <
       item
         DataType = ftUnknown
-        Name = 'SERIAL_NUMBER'
+        Name = 'FK_FA_SERIAL'
         Value = nil
       end>
     object CertItemSQLCERT_CODE: TStringField
@@ -1116,7 +1216,7 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
     end
     object CertItemSQLDESCRIPTION: TStringField
       DisplayLabel = 'Desc'
-      DisplayWidth = 21
+      DisplayWidth = 17
       FieldName = 'DESCRIPTION'
       FixedChar = True
       Size = 30
@@ -1150,5 +1250,10 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
       FixedChar = True
       Size = 30
     end
+  end
+  object IBCDataSource1: TIBCDataSource
+    DataSet = CertItemSQL
+    Left = 608
+    Top = 266
   end
 end

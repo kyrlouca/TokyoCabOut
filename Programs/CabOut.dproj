@@ -220,7 +220,7 @@
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="H_FlightAirItem.pas">
-            <Form>H_FlightAirwaybillItemFRM</Form>
+            <Form>H_FlightAirItemFRM</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <None Include="CabOut.todo">

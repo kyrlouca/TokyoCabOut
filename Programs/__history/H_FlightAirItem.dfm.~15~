@@ -696,9 +696,9 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
             'COUNTRY_CODE;CustomEdit;CountryLookupFLD'
             'CERT_CODE;CustomEdit;Select2;F')
           Selected.Strings = (
-            'CERT_CODE'#9'10'#9'Code'
-            'CERT_VALUE'#9'10'#9'Value'
-            'DESCRIPTION'#9'21'#9'Desc')
+            'CERT_CODE'#9'10'#9'Code'#9#9
+            'CERT_VALUE'#9'10'#9'Value'#9#9
+            'DESCRIPTION'#9'17'#9'Desc'#9#9)
           IniAttributes.Delimiter = ';;'
           IniAttributes.UnicodeIniFile = False
           TitleColor = clBtnFace
@@ -1116,7 +1116,7 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
     end
     object CertItemSQLDESCRIPTION: TStringField
       DisplayLabel = 'Desc'
-      DisplayWidth = 21
+      DisplayWidth = 17
       FieldName = 'DESCRIPTION'
       FixedChar = True
       Size = 30
