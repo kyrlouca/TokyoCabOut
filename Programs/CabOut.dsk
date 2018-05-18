@@ -1,47 +1,32 @@
 ﻿[Closed Files]
-File_0=TSourceModule,'C:\Data\DelphiProjects\TokyoCabOut\Programs\L_itinerary.pas',0,1,1,1,1,0,0,,
-File_1=TSourceModule,'C:\Data\DelphiProjects\TokyoCabOut\Programs\L_itinerary.dfm',0,1,1,1,1,0,0,,
-File_2=TSourceModule,'C:\Data\DelphiProjects\TokyoCabOut\Programs\M_dangerGoods.pas',0,1,41,1,1,0,0,,
-File_3=TSourceModule,'C:\Data\DelphiProjects\TokyoCabOut\Programs\M_Itinerary.pas',0,1,1,1,1,0,0,,
-File_4=TSourceModule,'C:\Data\DelphiProjects\TokyoCabOut\Programs\X_createOneXML.pas',0,1,646,25,722,0,0,,
-File_5=TSourceModule,'C:\Data\DelphiProjects\TokyoCabOut\Programs\X_createMultiHighXML.pas',0,1,278,1,299,0,0,,
-File_6=TSourceModule,'C:\Data\DelphiProjects\TokyoCabOut\Programs\L_AIrwaybillHigh.pas',0,1,113,1,115,0,0,,
-File_7=TSourceModule,'C:\Data\DelphiProjects\TokyoCabOut\Programs\M_FlightTable.dfm',0,1,1,1,1,0,0,,
-File_8=TSourceModule,'C:\Data\DelphiProjects\TokyoCabOut\Programs\X_createMultiXML.pas',0,1,237,16,251,0,0,,
-File_9=TSourceModule,'C:\Data\DelphiProjects\TokyoCabOut\Programs\H_ScanAirwaybillNew.pas',0,1,321,98,417,0,0,,
-File_10=TSourceModule,'C:\Data\DelphiProjects\TokyoCabOut\Programs\H_flightOut.pas',0,1,1,1,1,0,0,,
-File_11=TSourceModule,'C:\Data\DelphiProjects\TokyoCabOut\Programs\G_KyrSQL.pas',0,1,166,1,141,0,0,,
-File_12=TSourceModule,'C:\Data\DelphiProjects\TokyoCabOut\Programs\H_FlightAirwaybill.pas',0,1,1,1,1,0,0,,
-File_13=TSourceModule,'C:\Data\DelphiProjects\TokyoCabOut\Programs\GeneralParametersNew.pas',0,1,22,1,43,0,0,,
-File_14=TSourceModule,'C:\Data\DelphiProjects\TokyoCabOut\Programs\L_FlightOutList.pas',0,1,136,3,148,0,0,,
+File_0=TSourceModule,'C:\Data\DelphiProjects\TokyoCabOut\Programs\G_generalProcs.pas',0,25,1,39,4,0,0,,
+File_1=TSourceModule,'C:\Data\DelphiProjects\TokyoCabOut\Programs\M_FlightTable.pas',0,1,1,1,1,0,0,,
+File_2=TSourceModule,'C:\Data\DelphiProjects\TokyoCabOut\Programs\H_FlightAirwaybill.pas',0,1,510,1,525,0,0,,
+File_3=TSourceModule,'C:\Data\DelphiProjects\TokyoCabOut\Programs\H_ScanAirwaybillNew.pas',0,1,389,98,417,0,0,,
+File_4=TSourceModule,'C:\Data\DelphiProjects\TokyoCabOut\Programs\H_Airwaybill2.pas',0,1,1,1,1,0,0,,
+File_5=TSourceModule,'C:\Data\DelphiProjects\TokyoCabOut\Programs\M_certificates.pas',0,1,144,21,127,0,0,,
+File_6=TSourceModule,'C:\Data\DelphiProjects\TokyoCabOut\Programs\R_ReadALLXMLFiles.pas',0,1,74,31,89,0,0,,
+File_7=TSourceModule,'C:\Data\DelphiProjects\TokyoCabOut\Programs\G_KyrSQL.pas',0,1,124,1,139,0,0,,
+File_8=TSourceModule,'C:\Data\DelphiProjects\TokyoCabOut\Programs\L_itinerary.pas',0,1,1,1,1,0,0,,
+File_9=TSourceModule,'C:\Data\DelphiProjects\TokyoCabOut\Programs\L_itinerary.dfm',0,1,1,1,1,0,0,,
+File_10=TSourceModule,'C:\Data\DelphiProjects\TokyoCabOut\Programs\M_dangerGoods.pas',0,1,41,1,1,0,0,,
+File_11=TSourceModule,'C:\Data\DelphiProjects\TokyoCabOut\Programs\M_Itinerary.pas',0,1,1,1,1,0,0,,
+File_12=TSourceModule,'C:\Data\DelphiProjects\TokyoCabOut\Programs\X_createOneXML.pas',0,1,646,25,722,0,0,,
+File_13=TSourceModule,'C:\Data\DelphiProjects\TokyoCabOut\Programs\X_createMultiHighXML.pas',0,1,278,1,299,0,0,,
+File_14=TSourceModule,'C:\Data\DelphiProjects\TokyoCabOut\Programs\L_AIrwaybillHigh.pas',0,1,113,1,115,0,0,,
 
 [Modules]
-Module0=C:\Data\DelphiProjects\TokyoCabOut\Programs\M_certificates.pas
-Module1=C:\Data\DelphiProjects\TokyoCabOut\Programs\MainForm.pas
-Module2=C:\Data\DelphiProjects\TokyoCabOut\Programs\CabOut.dproj
-Module3=C:\Data\DelphiProjects\TokyoCabOut\Programs\M_FlightTable.pas
-Count=4
+Module0=C:\Data\DelphiProjects\TokyoCabOut\Programs\MainForm.pas
+Count=1
 EditWindowCount=1
-
-[C:\Data\DelphiProjects\TokyoCabOut\Programs\M_certificates.pas]
-ModuleType=TSourceModule
 
 [C:\Data\DelphiProjects\TokyoCabOut\Programs\MainForm.pas]
 ModuleType=TSourceModule
 
-[C:\Data\DelphiProjects\TokyoCabOut\Programs\CabOut.dproj]
-ModuleType=TBaseProject
-
-[C:\Data\DelphiProjects\TokyoCabOut\Programs\M_FlightTable.pas]
-ModuleType=TSourceModule
-
 [EditWindow0]
-ViewCount=4
-CurrentEditView=C:\Data\DelphiProjects\TokyoCabOut\Programs\M_certificates.pas
+ViewCount=1
+CurrentEditView=C:\Data\DelphiProjects\TokyoCabOut\Programs\MainForm.pas
 View0=0
-View1=1
-View2=2
-View3=3
 PercentageSizes=1
 Create=1
 Visible=1
@@ -79,50 +64,18 @@ Elisions=
 Bookmarks=
 EditViewName=Borland.FormDesignerView
 
-[View1]
-CustomEditViewType=TEditView
-Module=C:\Data\DelphiProjects\TokyoCabOut\Programs\CabOut.dpr
-CursorX=1
-CursorY=90
-TopLine=32
-LeftCol=1
-Elisions=
-Bookmarks=
-EditViewName=C:\Data\DelphiProjects\TokyoCabOut\Programs\CabOut.dpr
-
-[View2]
-CustomEditViewType=TEditView
-Module=C:\Data\DelphiProjects\TokyoCabOut\Programs\M_FlightTable.pas
-CursorX=1
-CursorY=1
-TopLine=1
-LeftCol=1
-Elisions=
-Bookmarks=
-EditViewName=Borland.FormDesignerView
-
-[View3]
-CustomEditViewType=TEditView
-Module=C:\Data\DelphiProjects\TokyoCabOut\Programs\M_certificates.pas
-CursorX=1
-CursorY=1
-TopLine=1
-LeftCol=1
-Elisions=
-Bookmarks=
-EditViewName=Borland.FormDesignerView
-
 [UndockedDesigner]
 Count=0
 
 [Breakpoints]
-Count=0
+Count=1
+Breakpoint0='C:\Data\DelphiProjects\TokyoCabOut\Programs\H_FlightAirwaybill.pas',525,'',0,1,'',1,0,0,'',1,'','','',0,''
 
 [EmbarcaderoWin32Debugger_AddressBreakpoints]
 Count=0
 
 [Watches]
-Count=16
+Count=20
 Watch0='FromDir',256,0,18,1,0,'Watches',1
 Watch1='ToDir',256,0,18,1,0,'Watches',1
 Watch2='fileName',256,0,18,1,0,'Watches',1
@@ -139,6 +92,10 @@ Watch12='FlightSerial',256,0,18,1,0,'Watches',1
 Watch13='airSerial',256,0,18,1,0,'Watches',1
 Watch14='FlightOutSerial',256,0,18,1,0,'Watches',1
 Watch15='AirwaybillSerial',256,0,18,1,0,'Watches',1
+Watch16='GroupCode',256,0,18,1,0,'Watches',1
+Watch17='FaItem',256,0,18,1,0,'Watches',1
+Watch18='FaCertSerial',256,0,18,1,0,'Watches',1
+Watch19='CertItemSerial',256,0,18,1,0,'Watches',1
 
 [WatchWindow]
 WatchColumnWidth=120
@@ -324,8 +281,8 @@ SplitPos=69
 
 [PropInspDesignerSelection]
 ArrangeBy=Name
-SelectedItem=AutoCommit,
-ExpandedItems=Encryption=0,FilterOptions=0,Options=0,RefreshOptions=0,SmartFetch=0,Transaction=0,UpdateTransaction=0,Anchors=0,BorderIcons=0,DefaultTransaction=0,PoolingOptions=0,HorzScrollBar=0,LiveBindings=0,Margins=0,Connection=0
+SelectedItem=Action,
+ExpandedItems=Encryption=0,FilterOptions=0,Options=0,RefreshOptions=0,SmartFetch=0,Transaction=0,UpdateTransaction=0,Anchors=0,BorderIcons=0,DefaultTransaction=0,PoolingOptions=0,HorzScrollBar=0,LiveBindings=0,Margins=0
 
 [frmDesignPreview]
 PercentageSizes=1

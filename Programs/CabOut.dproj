@@ -219,6 +219,10 @@
             <Form>L_ItineraryFRM</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="H_FlightAirItem.pas">
+            <Form>H_FlightAirwaybillItemFRM</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <None Include="CabOut.todo">
             <ContainerId>ToDo</ContainerId>
         </None>

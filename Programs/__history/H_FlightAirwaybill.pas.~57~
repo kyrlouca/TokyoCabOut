@@ -242,6 +242,16 @@ type
     CertItemSQLFIELD_FOR_VALUE: TStringField;
     CertItemSQLTABLE_FOR_VALUE: TStringField;
     wwDBComboBox1: TwwDBComboBox;
+    SelectCertSQL: TIBCQuery;
+    SelectCertSQLSERIAL_NUMBER: TIntegerField;
+    SelectCertSQLCERT_CODE: TStringField;
+    SelectCertSQLFK_CERTIFICATE_GROUP: TStringField;
+    SelectCertSQLCERT_TYPE: TStringField;
+    SelectCertSQLCERT_VALUE: TStringField;
+    SelectCertSQLFIELD_FOR_VALUE: TStringField;
+    SelectCertSQLTABLE_FOR_VALUE: TStringField;
+    SelectCertSQLDESCRIPTION: TStringField;
+    Select2: TwwDBLookupCombo;
     procedure FormActivate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure BitBtn2Click(Sender: TObject);
@@ -262,6 +272,8 @@ type
       FillTable: TDataSet; modified: Boolean);
     procedure FormCreate(Sender: TObject);
     procedure SelectCertFLDCloseUp(Sender: TwwDBComboBox; Select: Boolean);
+    procedure Select2CloseUp(Sender: TObject; LookupTable, FillTable: TDataSet;
+      modified: Boolean);
   private
     { Private declarations }
        cn:TIBCConnection;
@@ -344,6 +356,13 @@ end;
 }
 //**************************
 
+procedure TH_FlightairwaybillFRM.Select2CloseUp(Sender: TObject; LookupTable,
+  FillTable: TDataSet; modified: Boolean);
+begin
+FillTable.FieldByName('description').Value:= LookupTable.FieldByName('Description').AsString;
+FillTable.FieldByName('Cert_value').Value:= LookupTable.FieldByName('Cert_value').AsString;
+end;
+
 procedure TH_FlightairwaybillFRM.SelectCertFLDCloseUp(Sender: TwwDBComboBox;
   Select: Boolean);
 begin
@@ -401,7 +420,7 @@ Var
 
 Begin
 
-ksfillComboF1(cn,SelectCertFLD, 'Certificate_item','cert_CODE','CERT_CODE','DESCRIPTION',true);
+//ksfillComboF1(cn,SelectCertFLD, 'Certificate_item','cert_CODE','CERT_CODE','DESCRIPTION',true);
 
 for i := 0 to (Self as TForm).ComponentCount-1 do begin
 if (Self as TForm).Components[i] is TDataset then begin
@@ -414,7 +433,7 @@ if (Self as TForm).Components[i] is TDataset then begin
 
         end;
 
-ksOpenTables([GroupCertificateSQL,CertItemSQL]);
+ksOpenTables([GroupCertificateSQL,CertItemSQL,SelectCertSQL]);
 
 end;
 

@@ -9,10 +9,8 @@ uses
   H_FlightAirwaybill in 'H_FlightAirwaybill.pas' {H_FlightairwaybillFRM},
   M_parameters in 'M_parameters.pas' {M_ParametersFRM},
   M_country in 'M_country.pas' {M_countryFRM},
-  L_itinerary in 'L_itinerary.pas' {L_ItineraryFRM},
   M_Itinerary in 'M_Itinerary.pas' {M_ItineraryFRM},
   H_scanAirwaybill in 'H_scanAirwaybill.pas' {H_ScanAirwaybillFRM},
-  M_FlightTable in 'M_FlightTable.pas' {M_FlightTableFRM},
   H_Airwaybill2 in 'H_Airwaybill2.pas' {H_airwaybill2FRM},
   L_FlightOutList in 'L_FlightOutList.pas' {L_FlightOutListFRM},
   M_customerNew in 'M_customerNew.pas' {M_CustomerNewFRM},
@@ -37,7 +35,13 @@ uses
   GeneralParametersNew in 'GeneralParametersNew.pas',
   G_generalProcs in 'G_generalProcs.pas',
   R_ReadALLXMLFiles in 'R_ReadALLXMLFiles.pas' {R_ReadAllFilesFRM},
-  X_createMultiXML in 'X_createMultiXML.pas' {X_CreateMultiXmlFRM};
+  X_createOneXML in 'X_createOneXML.pas' {X_CreateOneXmlFRM},
+  X_createMultiXML in 'X_createMultiXML.pas' {X_CreateMultiXmlFRM},
+  X_createMultiHighXML in 'X_createMultiHighXML.pas' {X_CreateMultiHighXmlFRM},
+  M_dangerGoods in 'M_dangerGoods.pas' {M_DangerGoodsFRM},
+  M_FlightTable in 'M_FlightTable.pas' {M_FlightTableFRM},
+  M_certificates in 'M_certificates.pas' {M_certificatesFRM},
+  L_itinerary in 'L_itinerary.pas' {L_ItineraryFRM};
 
 {$R *.RES}
 
@@ -48,14 +52,14 @@ begin
   Application.CreateForm(TMainFormFRM, MainFormFRM);
   Application.CreateForm(TM_TariffNew2FRM, M_TariffNew2FRM);
   Application.CreateForm(TM_CustomerNewFRM, M_CustomerNewFRM);
-  Application.CreateForm(TM_FlightTableFRM, M_FlightTableFRM);
+  Application.CreateForm(TM_DangerGoodsFRM, M_DangerGoodsFRM);
   Application.CreateForm(TM_ItineraryFRM, M_ItineraryFRM);
   Application.CreateForm(TM_countryFRM, M_countryFRM);
   Application.CreateForm(TM_ParametersFRM, M_ParametersFRM);
   Application.CreateForm(TH_FlightOutFRM, H_FlightOutFRM);
   Application.CreateForm(TL_MawbsFRM, L_MawbsFRM);
   Application.CreateForm(TH_FlightairwaybillFRM, H_FlightairwaybillFRM);
-  Application.CreateForm(TL_ItineraryFRM, L_ItineraryFRM);
+  Application.CreateForm(TM_certificatesFRM, M_certificatesFRM);
   Application.CreateForm(TH_ScanAirwaybillFRM, H_ScanAirwaybillFRM);
   Application.CreateForm(TH_airwaybill2FRM, H_airwaybill2FRM);
   Application.CreateForm(TL_FlightOutListFRM, L_FlightOutListFRM);
@@ -71,12 +75,17 @@ begin
   Application.CreateForm(TR_ReadAllFilesFRM, R_ReadAllFilesFRM);
   Application.CreateForm(TR_ReadAllFilesFRM, R_ReadAllFilesFRM);
   Application.CreateForm(TR_ReadAllFilesFRM, R_ReadAllFilesFRM);
-  Application.CreateForm(TX_CreateMultiXmlFRM, X_CreateMultiXmlFRM);
+  Application.CreateForm(TX_CreateMultiHighXmlFRM, X_CreateMultiHighXmlFRM);
   Application.CreateForm(TX_CreateOneXmlFRM, X_CreateOneXmlFRM);
-//  Application.CreateForm(TX_CreateOneXmlFRM1, X_CreateOneXmlFRM1);
-  //  Application.CreateForm(TR_ReadAllFilesFRM, R_ReadAllFilesFRM);
+  Application.CreateForm(TX_CreateOneXmlFRM, X_CreateOneXmlFRM);
+  Application.CreateForm(TX_CreateMultiXmlFRM, X_CreateMultiXmlFRM);
+  Application.CreateForm(TX_CreateMultiXmlFRM, X_CreateMultiXmlFRM);
+  Application.CreateForm(TX_CreateMultiHighXmlFRM, X_CreateMultiHighXmlFRM);
   Application.CreateForm(TM_additionalParametersFRM, M_additionalParametersFRM);
   Application.CreateForm(TX_readFileFRM, X_readFileFRM);
   Application.CreateForm(TS_SelectCustomerXFRM, S_SelectCustomerXFRM);
+  Application.CreateForm(TM_FlightTableFRM, M_FlightTableFRM);
+  Application.CreateForm(TL_ItineraryFRM, L_ItineraryFRM);
+  //  Application.CreateForm(TL_ItineraryFRM1, L_ItineraryFRM1);
   Application.Run;
 end.

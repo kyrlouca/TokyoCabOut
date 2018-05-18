@@ -296,7 +296,7 @@ var
 implementation
 
 uses MainForm,H_ScanAirwaybill, S_SelectCustomerx, S_SelectTariffY,
-  KyriacosTypes, G_KyrSQL, G_generalProcs;
+  KyriacosTypes, G_KyrSQL, G_generalProcs, H_FlightAirItem;
 
 {$R *.DFM}
 
@@ -489,7 +489,7 @@ end;
 
 procedure TH_FlightairwaybillFRM.wwButton2Click(Sender: TObject);
 begin
-H_FlightairwaybillFRM.ShowModal;
+H_FlightAirItemFRM.ShowModal;
 end;
 
 procedure TH_FlightairwaybillFRM.wwDBLookupCombo1CloseUp(Sender: TObject;
