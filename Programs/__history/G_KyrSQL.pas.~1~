@@ -33,7 +33,9 @@ unit G_KyrSQL;
 //  m1.Free();
 //end;
 //
-// ksfillCombo Check General Procedures
+// will fill the stringlist of the combo, with values from
+// remember to set map displayed value if you want to show other value
+// ksfillCombo(MainFRM.IBCConnection1,vatFLD.Items,'vat_category','code','rate' );
 //
 // will fill a TRZRadioGroup with values and display
 //  ksfillRadioGroup(cn,ClearanceRGP,'TableName','Key','Description');

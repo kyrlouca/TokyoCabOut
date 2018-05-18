@@ -241,6 +241,17 @@ type
     CertItemSQLCERT_VALUE: TStringField;
     CertItemSQLFIELD_FOR_VALUE: TStringField;
     CertItemSQLTABLE_FOR_VALUE: TStringField;
+    wwDBComboBox1: TwwDBComboBox;
+    SelectCertSQL: TIBCQuery;
+    SelectCertSQLSERIAL_NUMBER: TIntegerField;
+    SelectCertSQLCERT_CODE: TStringField;
+    SelectCertSQLFK_CERTIFICATE_GROUP: TStringField;
+    SelectCertSQLCERT_TYPE: TStringField;
+    SelectCertSQLCERT_VALUE: TStringField;
+    SelectCertSQLFIELD_FOR_VALUE: TStringField;
+    SelectCertSQLTABLE_FOR_VALUE: TStringField;
+    SelectCertSQLDESCRIPTION: TStringField;
+    Select2: TwwDBLookupCombo;
     procedure FormActivate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure BitBtn2Click(Sender: TObject);
@@ -260,6 +271,9 @@ type
     procedure wwDBLookupCombo1CloseUp(Sender: TObject; LookupTable,
       FillTable: TDataSet; modified: Boolean);
     procedure FormCreate(Sender: TObject);
+    procedure SelectCertFLDCloseUp(Sender: TwwDBComboBox; Select: Boolean);
+    procedure Select2CloseUp(Sender: TObject; LookupTable, FillTable: TDataSet;
+      modified: Boolean);
   private
     { Private declarations }
        cn:TIBCConnection;
@@ -280,7 +294,7 @@ var
 implementation
 
 uses MainForm,H_ScanAirwaybill, S_SelectCustomerx, S_SelectTariffY,
-  KyriacosTypes, G_KyrSQL;
+  KyriacosTypes, G_KyrSQL, G_generalProcs;
 
 {$R *.DFM}
 
@@ -342,6 +356,21 @@ end;
 }
 //**************************
 
+procedure TH_FlightairwaybillFRM.Select2CloseUp(Sender: TObject; LookupTable,
+  FillTable: TDataSet; modified: Boolean);
+begin
+FillTable.FieldByName('description').Value:= LookupTable.FieldByName('Description').AsString;
+FillTable.FieldByName('Cert_value').Value:= LookupTable.FieldByName('Cert_value').AsString;
+end;
+
+procedure TH_FlightairwaybillFRM.SelectCertFLDCloseUp(Sender: TwwDBComboBox;
+  Select: Boolean);
+begin
+if Select then begin
+  showMessage(sender.Field.value);
+end;
+end;
+
 procedure TH_FlightairwaybillFRM.SelectCustomer(CustomerName:String);
 Var
         CustomerRecord:TCustomerRecord;
@@ -391,6 +420,8 @@ Var
 
 Begin
 
+//ksfillComboF1(cn,SelectCertFLD, 'Certificate_item','cert_CODE','CERT_CODE','DESCRIPTION',true);
+
 for i := 0 to (Self as TForm).ComponentCount-1 do begin
 if (Self as TForm).Components[i] is TDataset then begin
         Dataset:= TDataset(Tform(Self).Components[i]);
@@ -402,7 +433,7 @@ if (Self as TForm).Components[i] is TDataset then begin
 
         end;
 
-ksOpenTables([GroupCertificateSQL,CertItemSQL]);
+ksOpenTables([GroupCertificateSQL,CertItemSQL,SelectCertSQL]);
 
 end;
 

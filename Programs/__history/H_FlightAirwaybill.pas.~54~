@@ -234,13 +234,25 @@ type
     ReadTrans: TIBCTransaction;
     wwButton1: TwwButton;
     CertItemSQLSERIAL_NUMBER: TIntegerField;
-    CertItemSQLFK_FLIGHT_AIRWAYBILL_ITEM: TIntegerField;
     CertItemSQLCERT_CODE: TStringField;
+    CertItemSQLFK_FLIGHT_AIRWAYBILL_ITEM: TIntegerField;
     CertItemSQLDESCRIPTION: TStringField;
     CertItemSQLCERT_TYPE: TStringField;
     CertItemSQLCERT_VALUE: TStringField;
-    CertItemSQLTABLE_FOR_VALUE: TIntegerField;
     CertItemSQLFIELD_FOR_VALUE: TStringField;
+    CertItemSQLTABLE_FOR_VALUE: TStringField;
+    wwDBComboBox1: TwwDBComboBox;
+    SelectCertFLD: TwwDBLookupCombo;
+    SelectCertSQL: TIBCQuery;
+    SelectCertSQLSERIAL_NUMBER: TIntegerField;
+    SelectCertSQLCERT_CODE: TStringField;
+    SelectCertSQLFK_CERTIFICATE_GROUP: TStringField;
+    SelectCertSQLCERT_TYPE: TStringField;
+    SelectCertSQLCERT_VALUE: TStringField;
+    SelectCertSQLFIELD_FOR_VALUE: TStringField;
+    SelectCertSQLTABLE_FOR_VALUE: TStringField;
+    SelectCertSQLDESCRIPTION: TStringField;
+    Select2: TwwDBLookupCombo;
     procedure FormActivate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure BitBtn2Click(Sender: TObject);
@@ -260,6 +272,7 @@ type
     procedure wwDBLookupCombo1CloseUp(Sender: TObject; LookupTable,
       FillTable: TDataSet; modified: Boolean);
     procedure FormCreate(Sender: TObject);
+    procedure SelectCertFLDCloseUp(Sender: TwwDBComboBox; Select: Boolean);
   private
     { Private declarations }
        cn:TIBCConnection;
@@ -280,7 +293,7 @@ var
 implementation
 
 uses MainForm,H_ScanAirwaybill, S_SelectCustomerx, S_SelectTariffY,
-  KyriacosTypes, G_KyrSQL;
+  KyriacosTypes, G_KyrSQL, G_generalProcs;
 
 {$R *.DFM}
 
@@ -342,6 +355,14 @@ end;
 }
 //**************************
 
+procedure TH_FlightairwaybillFRM.SelectCertFLDCloseUp(Sender: TwwDBComboBox;
+  Select: Boolean);
+begin
+if Select then begin
+  showMessage(sender.Field.value);
+end;
+end;
+
 procedure TH_FlightairwaybillFRM.SelectCustomer(CustomerName:String);
 Var
         CustomerRecord:TCustomerRecord;
@@ -391,6 +412,8 @@ Var
 
 Begin
 
+//ksfillComboF1(cn,SelectCertFLD, 'Certificate_item','cert_CODE','CERT_CODE','DESCRIPTION',true);
+
 for i := 0 to (Self as TForm).ComponentCount-1 do begin
 if (Self as TForm).Components[i] is TDataset then begin
         Dataset:= TDataset(Tform(Self).Components[i]);
@@ -402,7 +425,7 @@ if (Self as TForm).Components[i] is TDataset then begin
 
         end;
 
-ksOpenTables([GroupCertificateSQL,CertItemSQL]);
+ksOpenTables([GroupCertificateSQL,CertItemSQL,SelectCertSQL]);
 
 end;
 
@@ -461,7 +484,7 @@ Var
   GroupCode:String;
   FaItem:Integer;
   faCertSerial:Integer;
-  certSerial:Integer;
+  certItemSerial:Integer;
   str:String;
   qr:TksQuery;
 
@@ -475,7 +498,6 @@ begin
   showMessage(intToStr(faItem));
   Str:='delete from flight_airwaybill_item_cert fi where fi.fk_flight_airwaybill_item = :fa_item';
   ksExecSQLVar(cn, str,[FaItem]);
-  CertItemSQL.Refresh;
 
   str:=
   '   insert into flight_airwaybill_item_cert'
@@ -488,14 +510,17 @@ begin
     //read all the certificate_items for the group  which will apply for the flight_airwaybill_item
     qr:=TksQuery.Create(cn,'select serial_number from certificate_item where fk_certificate_group= :group');
     qr.ParamByName('group').Value:=GroupCode;
+    qr.Open;
     while (not qr.Eof) do begin
       FaCertSerial:= ksGenerateSerial(cn,'FLIGHT_AIRWAYBILL_ITEM_CERT_GEN');
       CertItemSerial:=qr.FieldByName('serial_number').AsInteger;
-      ksExecSQLVar(cn, str,[Serial,faItem,CertItemSerial])
+      ksExecSQLVar(cn, str,[FaCertSerial,faItem,CertItemSerial]);
+      qr.Next;
     end;
   finally
-
+    qr.Free;
   end;
+  CertItemSQL.Refresh;
 
 
 

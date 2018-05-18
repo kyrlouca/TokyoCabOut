@@ -1955,17 +1955,17 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         end
       end
       object wwDBGrid3: TwwDBGrid
-        Left = 13
+        Left = 3
         Top = 72
         Width = 332
         Height = 156
         ControlType.Strings = (
-          'COUNTRY_CODE;CustomEdit;CountryLookupFLD')
+          'COUNTRY_CODE;CustomEdit;CountryLookupFLD'
+          'CERT_CODE;CustomEdit;SelectCertFLD;F')
         Selected.Strings = (
-          'CERT_TYPE'#9'4'#9'Type'#9#9
           'CERT_CODE'#9'10'#9'Code'#9#9
-          'DESCRIPTION'#9'15'#9'Desc'#9#9
-          'CERT_VALUE'#9'10'#9'Value'#9#9)
+          'CERT_VALUE'#9'10'#9'Value'#9#9
+          'DESCRIPTION'#9'17'#9'Desc'#9#9)
         IniAttributes.Delimiter = ';;'
         IniAttributes.UnicodeIniFile = False
         TitleColor = clBtnFace
@@ -1988,6 +1988,21 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         TitleFont.Style = []
         TitleLines = 1
         TitleButtons = False
+        object wwDBComboBox1: TwwDBComboBox
+          Left = 190
+          Top = 131
+          Width = 121
+          Height = 21
+          ShowButton = True
+          Style = csDropDown
+          MapList = False
+          AllowClearKey = False
+          DropDownCount = 8
+          ItemHeight = 0
+          Sorted = False
+          TabOrder = 0
+          UnboundDataType = wwDefault
+        end
       end
     end
     object wwButton1: TwwButton
@@ -2019,6 +2034,30 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
     LookupTable = CurrencySQL
     LookupField = 'CURRENCY_CODE'
     TabOrder = 3
+    AutoDropDown = False
+    ShowButton = True
+    PreciseEditRegion = False
+    AllowClearKey = False
+  end
+  object wwDBLookupCombo2: TwwDBLookupCombo
+    Left = 624
+    Top = 416
+    Width = 121
+    Height = 21
+    DropDownAlignment = taLeftJustify
+    TabOrder = 4
+    AutoDropDown = False
+    ShowButton = True
+    PreciseEditRegion = False
+    AllowClearKey = False
+  end
+  object SelectCertFLD: TwwDBLookupCombo
+    Left = 1000
+    Top = 600
+    Width = 121
+    Height = 21
+    DropDownAlignment = taLeftJustify
+    TabOrder = 5
     AutoDropDown = False
     ShowButton = True
     PreciseEditRegion = False
@@ -3174,8 +3213,8 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
     SQL.Strings = (
       'Select * from Certificate_group')
     ReadOnly = True
-    Left = 896
-    Top = 705
+    Left = 952
+    Top = 697
     object GroupCertificateSQLCODE: TStringField
       DisplayWidth = 10
       FieldName = 'CODE'
@@ -3206,11 +3245,11 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
       'INSERT INTO FLIGHT_AIRWAYBILL_ITEM_CERT'
       
         '  (SERIAL_NUMBER, CERT_CODE, FK_FLIGHT_AIRWAYBILL_ITEM, DESCRIPT' +
-        'ION, CERT_TYPE, CERT_VALUE, TABLE_FOR_VALUE, FIELD_FOR_VALUE)'
+        'ION, CERT_TYPE, CERT_VALUE, FIELD_FOR_VALUE, TABLE_FOR_VALUE)'
       'VALUES'
       
         '  (:SERIAL_NUMBER, :CERT_CODE, :FK_FLIGHT_AIRWAYBILL_ITEM, :DESC' +
-        'RIPTION, :CERT_TYPE, :CERT_VALUE, :TABLE_FOR_VALUE, :FIELD_FOR_V' +
+        'RIPTION, :CERT_TYPE, :CERT_VALUE, :FIELD_FOR_VALUE, :TABLE_FOR_V' +
         'ALUE)')
     SQLDelete.Strings = (
       'DELETE FROM FLIGHT_AIRWAYBILL_ITEM_CERT'
@@ -3223,17 +3262,17 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         '  SERIAL_NUMBER = :SERIAL_NUMBER, CERT_CODE = :CERT_CODE, FK_FLI' +
         'GHT_AIRWAYBILL_ITEM = :FK_FLIGHT_AIRWAYBILL_ITEM, DESCRIPTION = ' +
         ':DESCRIPTION, CERT_TYPE = :CERT_TYPE, CERT_VALUE = :CERT_VALUE, ' +
-        'TABLE_FOR_VALUE = :TABLE_FOR_VALUE, FIELD_FOR_VALUE = :FIELD_FOR' +
+        'FIELD_FOR_VALUE = :FIELD_FOR_VALUE, TABLE_FOR_VALUE = :TABLE_FOR' +
         '_VALUE'
       'WHERE'
       '  SERIAL_NUMBER = :Old_SERIAL_NUMBER')
     SQLRefresh.Strings = (
       
         'SELECT SERIAL_NUMBER, CERT_CODE, FK_FLIGHT_AIRWAYBILL_ITEM, DESC' +
-        'RIPTION, CERT_TYPE, CERT_VALUE, TABLE_FOR_VALUE, FIELD_FOR_VALUE' +
+        'RIPTION, CERT_TYPE, CERT_VALUE, FIELD_FOR_VALUE, TABLE_FOR_VALUE' +
         ' FROM FLIGHT_AIRWAYBILL_ITEM_CERT'
       'WHERE'
-      '  SERIAL_NUMBER = :SERIAL_NUMBER')
+      '  SERIAL_NUMBER = :P_1_SERIAL_NUMBER')
     SQLLock.Strings = (
       'SELECT NULL FROM FLIGHT_AIRWAYBILL_ITEM_CERT'
       'WHERE'
@@ -3262,25 +3301,11 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         ParamType = ptInput
         Value = nil
       end>
-    object CertItemSQLCERT_TYPE: TStringField
-      DisplayLabel = 'Type'
-      DisplayWidth = 4
-      FieldName = 'CERT_TYPE'
-      FixedChar = True
-      Size = 2
-    end
     object CertItemSQLCERT_CODE: TStringField
       DisplayLabel = 'Code'
       DisplayWidth = 10
       FieldName = 'CERT_CODE'
       Size = 10
-    end
-    object CertItemSQLDESCRIPTION: TStringField
-      DisplayLabel = 'Desc'
-      DisplayWidth = 15
-      FieldName = 'DESCRIPTION'
-      FixedChar = True
-      Size = 30
     end
     object CertItemSQLCERT_VALUE: TStringField
       DisplayLabel = 'Value'
@@ -3288,6 +3313,21 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
       FieldName = 'CERT_VALUE'
       FixedChar = True
       Size = 30
+    end
+    object CertItemSQLDESCRIPTION: TStringField
+      DisplayLabel = 'Desc'
+      DisplayWidth = 17
+      FieldName = 'DESCRIPTION'
+      FixedChar = True
+      Size = 30
+    end
+    object CertItemSQLCERT_TYPE: TStringField
+      DisplayLabel = 'Type'
+      DisplayWidth = 4
+      FieldName = 'CERT_TYPE'
+      Visible = False
+      FixedChar = True
+      Size = 2
     end
     object CertItemSQLSERIAL_NUMBER: TIntegerField
       FieldName = 'SERIAL_NUMBER'
@@ -3298,12 +3338,14 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
       Required = True
       Visible = False
     end
-    object CertItemSQLTABLE_FOR_VALUE: TIntegerField
-      FieldName = 'TABLE_FOR_VALUE'
-      Visible = False
-    end
     object CertItemSQLFIELD_FOR_VALUE: TStringField
       FieldName = 'FIELD_FOR_VALUE'
+      Visible = False
+      FixedChar = True
+      Size = 30
+    end
+    object CertItemSQLTABLE_FOR_VALUE: TStringField
+      FieldName = 'TABLE_FOR_VALUE'
       Visible = False
       FixedChar = True
       Size = 30
