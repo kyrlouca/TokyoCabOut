@@ -244,11 +244,9 @@ procedure TM_CustomerNewFRM.AcceptBTNClick(Sender: TObject);
 Var
 TheBookMark:TBookMark;
 begin
-     if CustomerSQL.State in [dsEdit,dsInsert] then
-        CustomerSQL.Post;
-     OutCustomerCode:=CustomerSQL.FieldByName('code').AsInteger;
-     close;
-
+//     if CustomerSQL.State in [dsEdit,dsInsert] then
+//        CustomerSQL.Post;
+//
 //        GOutCustomerRecord.Code:=CustomerSQL.fieldByName('Code').AsInteger;
 //        GOutCustomerRecord.CustomerAccount:=CustomerSQL.fieldByName('Account_Number').AsInteger;
 //        GOutCustomerRecord.Name:=CustomerSQL.fieldByName('Name').AsString;

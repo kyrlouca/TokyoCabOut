@@ -365,6 +365,8 @@ Var
         CustomerRecord:TCustomerRecord;
    AirCDS:TDataset;
    AName:String;
+   CustomerSerial:Integer;
+   qr,AirQr:TksQuery;
 
 begin
         AirCDS:=FlightAirwayBillSQL;
@@ -373,11 +375,26 @@ begin
         S_SelectCustomerXFRM.NameFLD.Text:=aName;
         S_SelectCustomerXFRM.SelectCustomer(aName);
         S_SelectCustomerXFRM.ShowModal;
-        CustomerRecord:=S_SelectCustomerxFRM.GCustomerRecord;
 
-        if CustomerRecord.code>0 then begin
-                If AirCDS.State=dsbrowse then
-                        AirCDS.edit;
+
+
+
+        CustomerSerial:=S_SelectCustomerXFRM.OUT_Customer;
+
+        if CustomerSerial >0 then begin
+            qr:=TksQuery.Create(cn,'select * from customer where cu.code=: Customer');
+            airQr:=TksQuery.Create(cn,'select * from flight_airwaybill fa where fa.serial_number= :serial');
+
+            try
+              qr.ParamByName('customer').AsInteger= customerSerial;
+              qr.Open;
+              if (not qr.IsEmpty) then begin
+                ksExecSQLVar(cn,'update flight)
+
+              end;
+            finally
+              qr.Free;
+            end;
 
                 AirCDS.FieldByName('FK_SENDER_SERIAL').value:=CustomerRecord.code;
                 AirCDS.FieldByName('SENDER_ACCOUNT_NUMBER').value:=CustomerRecord.CustomerAccount;
@@ -609,7 +626,8 @@ end;
 
 procedure TH_FlightairwaybillFRM.SpeedButton1Click(Sender: TObject);
 begin
-SElectCustomer(self.SelectNameFLD.Text);
+  SElectCustomer(self.SelectNameFLD.Text);
+
 end;
 
 procedure TH_FlightairwaybillFRM.ParamGroupFLDCloseUp(Sender: TObject;

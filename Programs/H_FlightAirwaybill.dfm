@@ -1330,6 +1330,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
           Spacing = 4
           Transparent = False
           Caption = 'wwDBNavigator1Insert'
+          Enabled = False
           DisabledTextColors.ShadeColor = clGray
           DisabledTextColors.HighlightColor = clBtnHighlight
           OnClick = wwDBNavigator1InsertClick
@@ -1398,6 +1399,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
           Spacing = 4
           Transparent = False
           Caption = 'wwDBNavigator1Refresh'
+          Enabled = False
           DisabledTextColors.ShadeColor = clGray
           DisabledTextColors.HighlightColor = clBtnHighlight
           Index = 6
@@ -1515,6 +1517,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
           Spacing = 4
           Transparent = False
           Caption = 'wwDBNavigator1Insert'
+          Enabled = False
           DisabledTextColors.ShadeColor = clGray
           DisabledTextColors.HighlightColor = clBtnHighlight
           OnClick = wwDBNavigator1InsertClick
@@ -1583,6 +1586,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
           Spacing = 4
           Transparent = False
           Caption = 'wwDBNavigator1Refresh'
+          Enabled = False
           DisabledTextColors.ShadeColor = clGray
           DisabledTextColors.HighlightColor = clBtnHighlight
           Index = 6
@@ -1766,6 +1770,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
           Spacing = 4
           Transparent = False
           Caption = 'wwDBNavigator1Refresh'
+          Enabled = False
           DisabledTextColors.ShadeColor = clGray
           DisabledTextColors.HighlightColor = clBtnHighlight
           Index = 5
@@ -1887,7 +1892,6 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
     MasterFields = 'SERIAL_NUMBER'
     DetailFields = 'FK_FLIGHT_AIRWAYBILL'
     MasterSource = FlightAirwaybillCDS
-    Active = True
     OnPostError = FairwaybillCountrySQLPostError
     Left = 512
     Top = 217
@@ -1974,7 +1978,6 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
     SQL.Strings = (
       'Select * from Country')
     ReadOnly = True
-    Active = True
     Left = 1001
     Top = 234
     object CountrySQLCODE_2: TStringField
@@ -2003,7 +2006,6 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
     SQL.Strings = (
       'Select * from Itinerary')
     ReadOnly = True
-    Active = True
     Left = 824
     Top = 89
     object ItinerarySQLFLIGHT_NAME: TStringField
@@ -2068,7 +2070,6 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
     DetailFields = 'FK_ITINERARY_SERIAL'
     MasterSource = ItineraryCRC
     ReadOnly = True
-    Active = True
     Left = 696
     Top = 705
     ParamData = <
@@ -2207,7 +2208,6 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         'er')
     DetailFields = 'FK_FLIGHT_OUT_SERIAL'
     FetchAll = True
-    Active = True
     Left = 376
     Top = 129
     ParamData = <
@@ -2535,7 +2535,6 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
     MasterFields = 'SERIAL_NUMBER'
     DetailFields = 'FK_FA_SERIAL'
     MasterSource = FlightAirwaybillCDS
-    Active = True
     Left = 400
     Top = 721
     ParamData = <
@@ -2613,7 +2612,6 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
     SQL.Strings = (
       'Select * from Incoterms')
     ReadOnly = True
-    Active = True
     Left = 176
     Top = 17
     object IncotermsSQLCODE: TStringField
@@ -2642,7 +2640,6 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
     SQL.Strings = (
       'select * from service_code')
     ReadOnly = True
-    Active = True
     Left = 272
     Top = 25
     object ServiceCodeSQLCODE: TStringField
@@ -2738,7 +2735,6 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
     MasterFields = 'SERIAL_NUMBER'
     DetailFields = 'FK_FLIGHT_AIRWAYBILL'
     MasterSource = FlightAirwaybillCDS
-    Active = True
     Left = 1448
     Top = 241
     ParamData = <
@@ -2814,7 +2810,6 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
     SQL.Strings = (
       'Select * from param_fa_category_item pi')
     ReadOnly = True
-    Active = True
     Left = 1376
     Top = 153
     object ParamGroupItemSQLINFO_TYPE: TStringField
@@ -3174,7 +3169,6 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
     MasterFields = 'SERIAL_NUMBER'
     DetailFields = 'FK_FLIGHT_AIRWAYBILL_ITEM'
     MasterSource = FA_ItemSRC
-    Active = True
     Left = 944
     Top = 720
     ParamData = <

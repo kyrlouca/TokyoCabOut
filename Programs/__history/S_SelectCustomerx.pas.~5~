@@ -6,11 +6,12 @@ uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   StdCtrls, Mask,
   Vcl.Grids, vcl.wwdbigrd, vcl.wwdbgrid, vcl.Wwdbedit, Vcl.Buttons, Vcl.ExtCtrls,
-  Data.DB, MemDS, DBAccess, IBC,KyriacosTYpes, RzButton;
+  Data.DB, MemDS, DBAccess, IBC,KyriacosTYpes;
 type
   TS_SelectCustomerXFRM = class(TForm)
     Panel1: TPanel;
     Panel4: TPanel;
+    BitBtn2: TBitBtn;
     Panel2: TPanel;
     Panel3: TPanel;
     CustomerSRC: TDataSource;
@@ -34,12 +35,8 @@ type
     CustomerSQLPOST_CODE: TStringField;
     CustomerSQLD_DISTRICT_CODE: TStringField;
     CustomerSQLD_DESC: TStringField;
-    AddCert1BTN: TRzBitBtn;
-    EditBTN: TRzBitBtn;
-    AcceptBTN: TBitBtn;
-    CancelBTN: TBitBtn;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
-    procedure BitBtn1Click(Sender: TObject);
+    procedure BitBtn2Click(Sender: TObject);
     procedure CustomerSQLBeforeEdit(DataSet: TDataSet);
     procedure wwDBGrid1DblClick(Sender: TObject);
     procedure FormActivate(Sender: TObject);
@@ -51,15 +48,11 @@ type
       Shift: TShiftState);
     procedure CodeFLDKeyUp(Sender: TObject; var Key: Word;
       Shift: TShiftState);
-    procedure AddCert1BTNClick(Sender: TObject);
-    procedure AcceptBTNClick(Sender: TObject);
-    procedure CancelBTNClick(Sender: TObject);
   private
     { Private declarations }
   public
     { Public declarations }
         GCustomerRecord:TCustomerRecord;
-        OUT_Customer:Integer;
         procedure SelectCustomer(Const CustomerName:String);
     procedure SelectCustomerbyCode(Const CustomerSerial:Integer);
 
@@ -81,24 +74,9 @@ CustomerSQL.Close;
 
 end;
 
-procedure TS_SelectCustomerXFRM.AcceptBTNClick(Sender: TObject);
+procedure TS_SelectCustomerXFRM.BitBtn2Click(Sender: TObject);
 begin
-  OUT_Customer:=CustomerSQL.FieldByName('Code').AsInteger;
-  close;
-end;
-
-procedure TS_SelectCustomerXFRM.AddCert1BTNClick(Sender: TObject);
-begin
-
-  M_CustomerNewFRM.InAction:='INSERT';
-  M_CustomerNewFRM.InCustomerCode:=CustomerSQL.FieldByName('Code').AsInteger;
-  M_CustomerNewFRM.ShowModal;
-end;
-
-procedure TS_SelectCustomerXFRM.BitBtn1Click(Sender: TObject);
-begin
-  OUT_Customer:=0;
-  close;
+close;
 end;
 
 procedure TS_SelectCustomerXFRM.CustomerSQLBeforeEdit(
@@ -234,13 +212,6 @@ begin
         SelectCustomer(aName);
 
 //end;
-
-end;
-
-procedure TS_SelectCustomerXFRM.CancelBTNClick(Sender: TObject);
-begin
-  OUT_Customer:=0;
-  close;
 
 end;
 
