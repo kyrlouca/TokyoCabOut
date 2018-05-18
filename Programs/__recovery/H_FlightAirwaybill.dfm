@@ -106,6 +106,22 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
       TabOrder = 1
       OnClick = CancelBTNClick
     end
+    object wwButton2: TwwButton
+      Left = 227
+      Top = 16
+      Width = 75
+      Height = 25
+      Caption = 'wwButton2'
+      Color = clBtnFace
+      DitherColor = clWhite
+      DitherStyle = wwdsDither
+      NumGlyphs = 0
+      ShadeStyle = wwbsNormal
+      TabOrder = 2
+      TextOptions.Alignment = taCenter
+      TextOptions.VAlignment = vaVCenter
+      OnClick = wwButton2Click
+    end
   end
   object Panel3: TPanel
     Left = 0
@@ -528,8 +544,8 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
     end
     object GroupBox2: TGroupBox
       Left = 26
-      Top = 259
-      Width = 423
+      Top = 260
+      Width = 496
       Height = 242
       Caption = 'Sender'
       Font.Charset = DEFAULT_CHARSET
@@ -645,7 +661,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
       end
       object Label32: TLabel
         Left = 22
-        Top = 202
+        Top = 210
         Width = 37
         Height = 15
         Caption = 'Device'
@@ -672,6 +688,39 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         Font.Style = []
         ParentColor = False
         ParentFont = False
+      end
+      object SpeedButton4: TSpeedButton
+        Left = 414
+        Top = 20
+        Width = 21
+        Height = 20
+        Hint = 'Find Hawb in this Mawb'
+        Flat = True
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'arial'
+        Font.Style = [fsBold]
+        Glyph.Data = {
+          DE010000424DDE01000000000000760000002800000024000000120000000100
+          0400000000006801000000000000000000001000000000000000000000000000
+          80000080000000808000800000008000800080800000C0C0C000808080000000
+          FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
+          33333333333333333333333300003333333344C3333333333333337FF3333333
+          00003333333A224333333333333338733F33333300003333333A224333333333
+          333338733F33333300003333333A224333333333333338733F33333300003333
+          333A224333333333333338733F33333300003333333A22433333333333333873
+          3F33333300003344444422444444C3337FFF787337FFFFF300003A2222222222
+          22224338733333333333333F00003A222222222222224338733333333333333F
+          000033AAAAAA222AAAAA3338777777733377777700003333333A224333333337
+          888888733788888300003333333A224333333333333338733F33333300003333
+          333A224333333333333338733F33333300003333333A22433333333333333873
+          3F33333300003333333A2243333333333333387337333333000033333333AA33
+          3333333333333877733333330000333333333333333333333333338883333333
+          0000}
+        NumGlyphs = 2
+        ParentFont = False
+        OnClick = SpeedButton4Click
       end
       object sname: TwwDBEdit
         Left = 65
@@ -835,7 +884,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
       end
       object wwDBEdit4: TwwDBEdit
         Left = 65
-        Top = 199
+        Top = 205
         Width = 59
         Height = 23
         Color = clWhite
@@ -873,8 +922,8 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
       end
     end
     object GroupBox3: TGroupBox
-      Left = 468
-      Top = 259
+      Left = 542
+      Top = 260
       Width = 514
       Height = 242
       Caption = 'Consignee'
@@ -1258,6 +1307,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         TitleFont.Style = []
         TitleLines = 1
         TitleButtons = False
+        OnDblClick = wwDBGrid1DblClick
       end
       object wwDBNavigator2: TwwDBNavigator
         Left = 20
@@ -1313,6 +1363,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
           Spacing = 4
           Transparent = False
           Caption = 'wwDBNavigator1Insert'
+          Enabled = False
           DisabledTextColors.ShadeColor = clGray
           DisabledTextColors.HighlightColor = clBtnHighlight
           OnClick = wwDBNavigator1InsertClick
@@ -1381,6 +1432,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
           Spacing = 4
           Transparent = False
           Caption = 'wwDBNavigator1Refresh'
+          Enabled = False
           DisabledTextColors.ShadeColor = clGray
           DisabledTextColors.HighlightColor = clBtnHighlight
           Index = 6
@@ -1498,6 +1550,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
           Spacing = 4
           Transparent = False
           Caption = 'wwDBNavigator1Insert'
+          Enabled = False
           DisabledTextColors.ShadeColor = clGray
           DisabledTextColors.HighlightColor = clBtnHighlight
           OnClick = wwDBNavigator1InsertClick
@@ -1566,6 +1619,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
           Spacing = 4
           Transparent = False
           Caption = 'wwDBNavigator1Refresh'
+          Enabled = False
           DisabledTextColors.ShadeColor = clGray
           DisabledTextColors.HighlightColor = clBtnHighlight
           Index = 6
@@ -1749,6 +1803,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
           Spacing = 4
           Transparent = False
           Caption = 'wwDBNavigator1Refresh'
+          Enabled = False
           DisabledTextColors.ShadeColor = clGray
           DisabledTextColors.HighlightColor = clBtnHighlight
           Index = 5
@@ -1787,242 +1842,6 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         TitleButtons = False
       end
     end
-    object GroupBox7: TGroupBox
-      Left = 789
-      Top = 527
-      Width = 364
-      Height = 182
-      Caption = 'Item Certificates'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -13
-      Font.Name = 'Arial'
-      Font.Style = []
-      ParentFont = False
-      TabOrder = 6
-      object wwDBLookupCombo1: TwwDBLookupCombo
-        Left = 13
-        Top = 20
-        Width = 183
-        Height = 22
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'arial'
-        Font.Style = []
-        DropDownAlignment = taLeftJustify
-        Selected.Strings = (
-          'CODE'#9'10'#9'CODE'#9'F'#9
-          'DESCRIPTION'#9'60'#9'DESCRIPTION'#9'F'#9)
-        LookupTable = GroupCertificateSQL
-        LookupField = 'CODE'
-        ParentFont = False
-        TabOrder = 0
-        AutoDropDown = False
-        ShowButton = True
-        PreciseEditRegion = False
-        AllowClearKey = False
-        OnCloseUp = wwDBLookupCombo1CloseUp
-      end
-      object wwDBNavigator4: TwwDBNavigator
-        Left = 13
-        Top = 46
-        Width = 163
-        Height = 20
-        AutosizeStyle = asNone
-        DataSource = CertItemSRC
-        RepeatInterval.InitialDelay = 500
-        RepeatInterval.Interval = 100
-        object wwNavButton10: TwwNavButton
-          Left = 0
-          Top = 0
-          Width = 20
-          Height = 20
-          Hint = 'Move to prior record'
-          ImageIndex = -1
-          NumGlyphs = 2
-          Spacing = 4
-          Transparent = False
-          Caption = 'wwDBNavigator1Prior'
-          Enabled = False
-          DisabledTextColors.ShadeColor = clGray
-          DisabledTextColors.HighlightColor = clBtnHighlight
-          Index = 0
-          Style = nbsPrior
-        end
-        object wwNavButton15: TwwNavButton
-          Left = 20
-          Top = 0
-          Width = 21
-          Height = 20
-          Hint = 'Move to next record'
-          ImageIndex = -1
-          NumGlyphs = 2
-          Spacing = 4
-          Transparent = False
-          Caption = 'wwDBNavigator1Next'
-          Enabled = False
-          DisabledTextColors.ShadeColor = clGray
-          DisabledTextColors.HighlightColor = clBtnHighlight
-          Index = 1
-          Style = nbsNext
-        end
-        object wwNavButton16: TwwNavButton
-          Left = 41
-          Top = 0
-          Width = 20
-          Height = 20
-          Hint = 'Insert new record'
-          ImageIndex = -1
-          NumGlyphs = 2
-          Spacing = 4
-          Transparent = False
-          Caption = 'wwDBNavigator1Insert'
-          DisabledTextColors.ShadeColor = clGray
-          DisabledTextColors.HighlightColor = clBtnHighlight
-          OnClick = wwDBNavigator1InsertClick
-          Index = 2
-          Style = nbsInsert
-        end
-        object wwNavButton17: TwwNavButton
-          Left = 61
-          Top = 0
-          Width = 20
-          Height = 20
-          Hint = 'Delete current record'
-          ImageIndex = -1
-          NumGlyphs = 2
-          Spacing = 4
-          Transparent = False
-          Caption = 'wwDBNavigator1Delete'
-          Enabled = False
-          DisabledTextColors.ShadeColor = clGray
-          DisabledTextColors.HighlightColor = clBtnHighlight
-          Index = 3
-          Style = nbsDelete
-        end
-        object wwNavButton18: TwwNavButton
-          Left = 81
-          Top = 0
-          Width = 21
-          Height = 20
-          Hint = 'Post changes of current record'
-          ImageIndex = -1
-          NumGlyphs = 2
-          Spacing = 4
-          Transparent = False
-          Caption = 'wwDBNavigator1Post'
-          Enabled = False
-          DisabledTextColors.ShadeColor = clGray
-          DisabledTextColors.HighlightColor = clBtnHighlight
-          Index = 4
-          Style = nbsPost
-        end
-        object wwNavButton19: TwwNavButton
-          Left = 102
-          Top = 0
-          Width = 20
-          Height = 20
-          Hint = 'Cancel changes made to current record'
-          ImageIndex = -1
-          NumGlyphs = 2
-          Spacing = 4
-          Transparent = False
-          Caption = 'wwDBNavigator1Cancel'
-          Enabled = False
-          DisabledTextColors.ShadeColor = clGray
-          DisabledTextColors.HighlightColor = clBtnHighlight
-          Index = 5
-          Style = nbsCancel
-        end
-        object wwNavButton20: TwwNavButton
-          Left = 122
-          Top = 0
-          Width = 20
-          Height = 20
-          Hint = 'Refresh the contents of the dataset'
-          ImageIndex = -1
-          NumGlyphs = 2
-          Spacing = 4
-          Transparent = False
-          Caption = 'wwDBNavigator1Refresh'
-          DisabledTextColors.ShadeColor = clGray
-          DisabledTextColors.HighlightColor = clBtnHighlight
-          Index = 6
-          Style = nbsRefresh
-        end
-      end
-      object wwDBGrid3: TwwDBGrid
-        Left = 3
-        Top = 72
-        Width = 332
-        Height = 156
-        ControlType.Strings = (
-          'COUNTRY_CODE;CustomEdit;CountryLookupFLD'
-          'CERT_CODE;CustomEdit;Select2;F')
-        Selected.Strings = (
-          'CERT_CODE'#9'10'#9'Code'#9#9
-          'CERT_VALUE'#9'10'#9'Value'#9#9
-          'DESCRIPTION'#9'17'#9'Desc'#9#9)
-        IniAttributes.Delimiter = ';;'
-        IniAttributes.UnicodeIniFile = False
-        TitleColor = clBtnFace
-        FixedCols = 0
-        ShowHorzScrollBar = True
-        DataSource = CertItemSRC
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'arial'
-        Font.Style = []
-        Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgCancelOnExit, dgWordWrap]
-        ParentFont = False
-        TabOrder = 2
-        TitleAlignment = taLeftJustify
-        TitleFont.Charset = DEFAULT_CHARSET
-        TitleFont.Color = clWindowText
-        TitleFont.Height = -13
-        TitleFont.Name = 'arial'
-        TitleFont.Style = []
-        TitleLines = 1
-        TitleButtons = False
-        object wwDBComboBox1: TwwDBComboBox
-          Left = 190
-          Top = 131
-          Width = 121
-          Height = 22
-          ShowButton = True
-          Style = csDropDown
-          MapList = False
-          AllowClearKey = False
-          DropDownCount = 8
-          ItemHeight = 0
-          Sorted = False
-          TabOrder = 0
-          UnboundDataType = wwDefault
-        end
-      end
-      object Select2: TwwDBLookupCombo
-        Left = 202
-        Top = 25
-        Width = 121
-        Height = 21
-        DropDownAlignment = taLeftJustify
-        Selected.Strings = (
-          'CERT_CODE'#9'10'#9'CERT_CODE'#9#9
-          'DESCRIPTION'#9'30'#9'DESCRIPTION'#9#9)
-        DataField = 'CERT_CODE'
-        DataSource = CertItemSRC
-        LookupTable = SelectCertSQL
-        LookupField = 'CERT_CODE'
-        TabOrder = 3
-        AutoDropDown = False
-        ShowButton = True
-        PreciseEditRegion = False
-        AllowClearKey = False
-        OnCloseUp = Select2CloseUp
-      end
-    end
     object wwButton1: TwwButton
       Left = 1024
       Top = 496
@@ -2032,8 +1851,9 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
       Color = clBtnFace
       DitherColor = clWhite
       DitherStyle = wwdsDither
+      NumGlyphs = 0
       ShadeStyle = wwbsNormal
-      TabOrder = 7
+      TabOrder = 6
       TextOptions.Alignment = taCenter
       TextOptions.VAlignment = vaVCenter
       OnClick = wwButton1Click
@@ -2057,8 +1877,8 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
   end
   object FlightAirwaybillCDS: TIBCDataSource
     DataSet = FlightAirwaybillSQL
-    Left = 224
-    Top = 241
+    Left = 288
+    Top = 121
   end
   object FairwaybillCountrySQL: TIBCQuery
     SQLInsert.Strings = (
@@ -2105,7 +1925,6 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
     MasterFields = 'SERIAL_NUMBER'
     DetailFields = 'FK_FLIGHT_AIRWAYBILL'
     MasterSource = FlightAirwaybillCDS
-    Active = True
     OnPostError = FairwaybillCountrySQLPostError
     Left = 512
     Top = 217
@@ -2192,7 +2011,6 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
     SQL.Strings = (
       'Select * from Country')
     ReadOnly = True
-    Active = True
     Left = 1001
     Top = 234
     object CountrySQLCODE_2: TStringField
@@ -2221,7 +2039,6 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
     SQL.Strings = (
       'Select * from Itinerary')
     ReadOnly = True
-    Active = True
     Left = 824
     Top = 89
     object ItinerarySQLFLIGHT_NAME: TStringField
@@ -2286,7 +2103,6 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
     DetailFields = 'FK_ITINERARY_SERIAL'
     MasterSource = ItineraryCRC
     ReadOnly = True
-    Active = True
     Left = 696
     Top = 705
     ParamData = <
@@ -2425,9 +2241,8 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         'er')
     DetailFields = 'FK_FLIGHT_OUT_SERIAL'
     FetchAll = True
-    Active = True
-    Left = 432
-    Top = 121
+    Left = 376
+    Top = 129
     ParamData = <
       item
         DataType = ftInteger
@@ -2753,7 +2568,6 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
     MasterFields = 'SERIAL_NUMBER'
     DetailFields = 'FK_FA_SERIAL'
     MasterSource = FlightAirwaybillCDS
-    Active = True
     Left = 400
     Top = 721
     ParamData = <
@@ -2831,7 +2645,6 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
     SQL.Strings = (
       'Select * from Incoterms')
     ReadOnly = True
-    Active = True
     Left = 176
     Top = 17
     object IncotermsSQLCODE: TStringField
@@ -2860,7 +2673,6 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
     SQL.Strings = (
       'select * from service_code')
     ReadOnly = True
-    Active = True
     Left = 272
     Top = 25
     object ServiceCodeSQLCODE: TStringField
@@ -2956,7 +2768,6 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
     MasterFields = 'SERIAL_NUMBER'
     DetailFields = 'FK_FLIGHT_AIRWAYBILL'
     MasterSource = FlightAirwaybillCDS
-    Active = True
     Left = 1448
     Top = 241
     ParamData = <
@@ -3032,7 +2843,6 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
     SQL.Strings = (
       'Select * from param_fa_category_item pi')
     ReadOnly = True
-    Active = True
     Left = 1376
     Top = 153
     object ParamGroupItemSQLINFO_TYPE: TStringField
@@ -3169,180 +2979,6 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
     Left = 1360
     Top = 434
   end
-  object GroupCertificateSQL: TIBCQuery
-    SQLInsert.Strings = (
-      'INSERT INTO CERTIFICATE_GROUP'
-      '  (CODE, DESCRIPTION)'
-      'VALUES'
-      '  (:CODE, :DESCRIPTION)')
-    SQLDelete.Strings = (
-      'DELETE FROM CERTIFICATE_GROUP'
-      'WHERE'
-      '  CODE = :Old_CODE')
-    SQLUpdate.Strings = (
-      'UPDATE CERTIFICATE_GROUP'
-      'SET'
-      '  CODE = :CODE, DESCRIPTION = :DESCRIPTION'
-      'WHERE'
-      '  CODE = :Old_CODE')
-    SQLRefresh.Strings = (
-      'SELECT CODE, DESCRIPTION FROM CERTIFICATE_GROUP'
-      'WHERE'
-      '  CODE = :CODE')
-    SQLLock.Strings = (
-      'SELECT NULL FROM CERTIFICATE_GROUP'
-      'WHERE'
-      'CODE = :Old_CODE'
-      'FOR UPDATE WITH LOCK')
-    SQLRecCount.Strings = (
-      'SELECT COUNT(*) FROM ('
-      'SELECT 1 AS C  FROM CERTIFICATE_GROUP'
-      ''
-      ') q')
-    Connection = MainFormFRM.CabOutData
-    Transaction = MainFormFRM.UsedForReadOnlyTrans
-    UpdateTransaction = UpdateTransaction
-    SQL.Strings = (
-      'Select * from Certificate_group')
-    ReadOnly = True
-    Left = 824
-    Top = 601
-    object GroupCertificateSQLCODE: TStringField
-      DisplayWidth = 10
-      FieldName = 'CODE'
-      Required = True
-      Size = 10
-    end
-    object GroupCertificateSQLDESCRIPTION: TStringField
-      DisplayWidth = 60
-      FieldName = 'DESCRIPTION'
-      FixedChar = True
-      Size = 60
-    end
-  end
-  object GroupCertificateSRC: TIBCDataSource
-    DataSet = GroupCertificateSQL
-    Left = 880
-    Top = 617
-  end
-  object CertItemSRC: TIBCDataSource
-    DataSet = CertItemSQL
-    Left = 880
-    Top = 713
-  end
-  object CertItemSQL: TIBCQuery
-    KeyFields = 'serial_number'
-    KeyGenerator = 'FLIGHT_AIRWAYBILL_ITEM_CERT_GEN'
-    SQLInsert.Strings = (
-      'INSERT INTO FLIGHT_AIRWAYBILL_ITEM_CERT'
-      
-        '  (SERIAL_NUMBER, CERT_CODE, FK_FLIGHT_AIRWAYBILL_ITEM, DESCRIPT' +
-        'ION, CERT_TYPE, CERT_VALUE, FIELD_FOR_VALUE, TABLE_FOR_VALUE)'
-      'VALUES'
-      
-        '  (:SERIAL_NUMBER, :CERT_CODE, :FK_FLIGHT_AIRWAYBILL_ITEM, :DESC' +
-        'RIPTION, :CERT_TYPE, :CERT_VALUE, :FIELD_FOR_VALUE, :TABLE_FOR_V' +
-        'ALUE)')
-    SQLDelete.Strings = (
-      'DELETE FROM FLIGHT_AIRWAYBILL_ITEM_CERT'
-      'WHERE'
-      '  SERIAL_NUMBER = :Old_SERIAL_NUMBER')
-    SQLUpdate.Strings = (
-      'UPDATE FLIGHT_AIRWAYBILL_ITEM_CERT'
-      'SET'
-      
-        '  SERIAL_NUMBER = :SERIAL_NUMBER, CERT_CODE = :CERT_CODE, FK_FLI' +
-        'GHT_AIRWAYBILL_ITEM = :FK_FLIGHT_AIRWAYBILL_ITEM, DESCRIPTION = ' +
-        ':DESCRIPTION, CERT_TYPE = :CERT_TYPE, CERT_VALUE = :CERT_VALUE, ' +
-        'FIELD_FOR_VALUE = :FIELD_FOR_VALUE, TABLE_FOR_VALUE = :TABLE_FOR' +
-        '_VALUE'
-      'WHERE'
-      '  SERIAL_NUMBER = :Old_SERIAL_NUMBER')
-    SQLRefresh.Strings = (
-      
-        'SELECT SERIAL_NUMBER, CERT_CODE, FK_FLIGHT_AIRWAYBILL_ITEM, DESC' +
-        'RIPTION, CERT_TYPE, CERT_VALUE, FIELD_FOR_VALUE, TABLE_FOR_VALUE' +
-        ' FROM FLIGHT_AIRWAYBILL_ITEM_CERT'
-      'WHERE'
-      '  SERIAL_NUMBER = :P_1_SERIAL_NUMBER')
-    SQLLock.Strings = (
-      'SELECT NULL FROM FLIGHT_AIRWAYBILL_ITEM_CERT'
-      'WHERE'
-      'SERIAL_NUMBER = :Old_SERIAL_NUMBER'
-      'FOR UPDATE WITH LOCK')
-    SQLRecCount.Strings = (
-      'SELECT COUNT(*) FROM ('
-      'SELECT 1 AS C  FROM FLIGHT_AIRWAYBILL_ITEM_CERT'
-      ''
-      ') q')
-    Connection = MainFormFRM.CabOutData
-    Transaction = ReadTrans
-    UpdateTransaction = UpdateTransaction
-    SQL.Strings = (
-      'Select * from  FLIGHT_AIRWAYBILL_ITEM_CERT')
-    MasterFields = 'SERIAL_NUMBER'
-    DetailFields = 'FK_FLIGHT_AIRWAYBILL_ITEM'
-    MasterSource = FA_ItemSRC
-    Active = True
-    Left = 944
-    Top = 720
-    ParamData = <
-      item
-        DataType = ftInteger
-        Name = 'SERIAL_NUMBER'
-        ParamType = ptInput
-        Value = nil
-      end>
-    object CertItemSQLCERT_CODE: TStringField
-      DisplayLabel = 'Code'
-      DisplayWidth = 10
-      FieldName = 'CERT_CODE'
-      Size = 10
-    end
-    object CertItemSQLCERT_VALUE: TStringField
-      DisplayLabel = 'Value'
-      DisplayWidth = 10
-      FieldName = 'CERT_VALUE'
-      FixedChar = True
-      Size = 30
-    end
-    object CertItemSQLDESCRIPTION: TStringField
-      DisplayLabel = 'Desc'
-      DisplayWidth = 17
-      FieldName = 'DESCRIPTION'
-      FixedChar = True
-      Size = 30
-    end
-    object CertItemSQLCERT_TYPE: TStringField
-      DisplayLabel = 'Type'
-      DisplayWidth = 4
-      FieldName = 'CERT_TYPE'
-      Visible = False
-      FixedChar = True
-      Size = 2
-    end
-    object CertItemSQLSERIAL_NUMBER: TIntegerField
-      FieldName = 'SERIAL_NUMBER'
-      Visible = False
-    end
-    object CertItemSQLFK_FLIGHT_AIRWAYBILL_ITEM: TIntegerField
-      FieldName = 'FK_FLIGHT_AIRWAYBILL_ITEM'
-      Required = True
-      Visible = False
-    end
-    object CertItemSQLFIELD_FOR_VALUE: TStringField
-      FieldName = 'FIELD_FOR_VALUE'
-      Visible = False
-      FixedChar = True
-      Size = 30
-    end
-    object CertItemSQLTABLE_FOR_VALUE: TStringField
-      FieldName = 'TABLE_FOR_VALUE'
-      Visible = False
-      FixedChar = True
-      Size = 30
-    end
-  end
   object ReadTrans: TIBCTransaction
     DefaultConnection = MainFormFRM.CabOutData
     IsolationLevel = iblReadOnlyReadCommitted
@@ -3446,6 +3082,179 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
     end
     object SelectCertSQLTABLE_FOR_VALUE: TStringField
       DisplayWidth = 30
+      FieldName = 'TABLE_FOR_VALUE'
+      Visible = False
+      FixedChar = True
+      Size = 30
+    end
+  end
+  object GroupCertificateSQL: TIBCQuery
+    SQLInsert.Strings = (
+      'INSERT INTO CERTIFICATE_GROUP'
+      '  (CODE, DESCRIPTION)'
+      'VALUES'
+      '  (:CODE, :DESCRIPTION)')
+    SQLDelete.Strings = (
+      'DELETE FROM CERTIFICATE_GROUP'
+      'WHERE'
+      '  CODE = :Old_CODE')
+    SQLUpdate.Strings = (
+      'UPDATE CERTIFICATE_GROUP'
+      'SET'
+      '  CODE = :CODE, DESCRIPTION = :DESCRIPTION'
+      'WHERE'
+      '  CODE = :Old_CODE')
+    SQLRefresh.Strings = (
+      'SELECT CODE, DESCRIPTION FROM CERTIFICATE_GROUP'
+      'WHERE'
+      '  CODE = :CODE')
+    SQLLock.Strings = (
+      'SELECT NULL FROM CERTIFICATE_GROUP'
+      'WHERE'
+      'CODE = :Old_CODE'
+      'FOR UPDATE WITH LOCK')
+    SQLRecCount.Strings = (
+      'SELECT COUNT(*) FROM ('
+      'SELECT 1 AS C  FROM CERTIFICATE_GROUP'
+      ''
+      ') q')
+    Connection = MainFormFRM.CabOutData
+    Transaction = MainFormFRM.UsedForReadOnlyTrans
+    UpdateTransaction = UpdateTransaction
+    SQL.Strings = (
+      'Select * from Certificate_group')
+    ReadOnly = True
+    Left = 824
+    Top = 601
+    object GroupCertificateSQLCODE: TStringField
+      DisplayWidth = 10
+      FieldName = 'CODE'
+      Required = True
+      Size = 10
+    end
+    object GroupCertificateSQLDESCRIPTION: TStringField
+      DisplayWidth = 60
+      FieldName = 'DESCRIPTION'
+      FixedChar = True
+      Size = 60
+    end
+  end
+  object GroupCertificateSRC: TIBCDataSource
+    DataSet = GroupCertificateSQL
+    Left = 880
+    Top = 609
+  end
+  object CertItemSRC: TIBCDataSource
+    DataSet = CertItemSQL
+    Left = 880
+    Top = 713
+  end
+  object CertItemSQL: TIBCQuery
+    KeyFields = 'serial_number'
+    KeyGenerator = 'FLIGHT_AIRWAYBILL_ITEM_CERT_GEN'
+    SQLInsert.Strings = (
+      'INSERT INTO FLIGHT_AIRWAYBILL_ITEM_CERT'
+      
+        '  (SERIAL_NUMBER, CERT_CODE, FK_FLIGHT_AIRWAYBILL_ITEM, DESCRIPT' +
+        'ION, CERT_TYPE, CERT_VALUE, FIELD_FOR_VALUE, TABLE_FOR_VALUE)'
+      'VALUES'
+      
+        '  (:SERIAL_NUMBER, :CERT_CODE, :FK_FLIGHT_AIRWAYBILL_ITEM, :DESC' +
+        'RIPTION, :CERT_TYPE, :CERT_VALUE, :FIELD_FOR_VALUE, :TABLE_FOR_V' +
+        'ALUE)')
+    SQLDelete.Strings = (
+      'DELETE FROM FLIGHT_AIRWAYBILL_ITEM_CERT'
+      'WHERE'
+      '  SERIAL_NUMBER = :Old_SERIAL_NUMBER')
+    SQLUpdate.Strings = (
+      'UPDATE FLIGHT_AIRWAYBILL_ITEM_CERT'
+      'SET'
+      
+        '  SERIAL_NUMBER = :SERIAL_NUMBER, CERT_CODE = :CERT_CODE, FK_FLI' +
+        'GHT_AIRWAYBILL_ITEM = :FK_FLIGHT_AIRWAYBILL_ITEM, DESCRIPTION = ' +
+        ':DESCRIPTION, CERT_TYPE = :CERT_TYPE, CERT_VALUE = :CERT_VALUE, ' +
+        'FIELD_FOR_VALUE = :FIELD_FOR_VALUE, TABLE_FOR_VALUE = :TABLE_FOR' +
+        '_VALUE'
+      'WHERE'
+      '  SERIAL_NUMBER = :Old_SERIAL_NUMBER')
+    SQLRefresh.Strings = (
+      
+        'SELECT SERIAL_NUMBER, CERT_CODE, FK_FLIGHT_AIRWAYBILL_ITEM, DESC' +
+        'RIPTION, CERT_TYPE, CERT_VALUE, FIELD_FOR_VALUE, TABLE_FOR_VALUE' +
+        ' FROM FLIGHT_AIRWAYBILL_ITEM_CERT'
+      'WHERE'
+      '  SERIAL_NUMBER = :P_1_SERIAL_NUMBER')
+    SQLLock.Strings = (
+      'SELECT NULL FROM FLIGHT_AIRWAYBILL_ITEM_CERT'
+      'WHERE'
+      'SERIAL_NUMBER = :Old_SERIAL_NUMBER'
+      'FOR UPDATE WITH LOCK')
+    SQLRecCount.Strings = (
+      'SELECT COUNT(*) FROM ('
+      'SELECT 1 AS C  FROM FLIGHT_AIRWAYBILL_ITEM_CERT'
+      ''
+      ') q')
+    Connection = MainFormFRM.CabOutData
+    Transaction = ReadTrans
+    UpdateTransaction = UpdateTransaction
+    SQL.Strings = (
+      'Select * from  FLIGHT_AIRWAYBILL_ITEM_CERT')
+    MasterFields = 'SERIAL_NUMBER'
+    DetailFields = 'FK_FLIGHT_AIRWAYBILL_ITEM'
+    MasterSource = FA_ItemSRC
+    Left = 944
+    Top = 720
+    ParamData = <
+      item
+        DataType = ftInteger
+        Name = 'SERIAL_NUMBER'
+        ParamType = ptInput
+        Value = nil
+      end>
+    object CertItemSQLCERT_CODE: TStringField
+      DisplayLabel = 'Code'
+      DisplayWidth = 10
+      FieldName = 'CERT_CODE'
+      Size = 10
+    end
+    object CertItemSQLCERT_VALUE: TStringField
+      DisplayLabel = 'Value'
+      DisplayWidth = 10
+      FieldName = 'CERT_VALUE'
+      FixedChar = True
+      Size = 30
+    end
+    object CertItemSQLDESCRIPTION: TStringField
+      DisplayLabel = 'Desc'
+      DisplayWidth = 17
+      FieldName = 'DESCRIPTION'
+      FixedChar = True
+      Size = 30
+    end
+    object CertItemSQLCERT_TYPE: TStringField
+      DisplayLabel = 'Type'
+      DisplayWidth = 4
+      FieldName = 'CERT_TYPE'
+      Visible = False
+      FixedChar = True
+      Size = 2
+    end
+    object CertItemSQLSERIAL_NUMBER: TIntegerField
+      FieldName = 'SERIAL_NUMBER'
+      Visible = False
+    end
+    object CertItemSQLFK_FLIGHT_AIRWAYBILL_ITEM: TIntegerField
+      FieldName = 'FK_FLIGHT_AIRWAYBILL_ITEM'
+      Required = True
+      Visible = False
+    end
+    object CertItemSQLFIELD_FOR_VALUE: TStringField
+      FieldName = 'FIELD_FOR_VALUE'
+      Visible = False
+      FixedChar = True
+      Size = 30
+    end
+    object CertItemSQLTABLE_FOR_VALUE: TStringField
       FieldName = 'TABLE_FOR_VALUE'
       Visible = False
       FixedChar = True
