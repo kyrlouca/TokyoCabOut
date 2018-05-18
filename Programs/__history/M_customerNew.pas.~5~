@@ -99,10 +99,6 @@ type
     CustomerSQLPOST_CODE: TStringField;
     CustomerSQLD_DESC: TStringField;
     DBEdit1: TDBEdit;
-    Label17: TLabel;
-    DBEdit3: TDBEdit;
-    CustomerSQLADDRESS_CITY: TStringField;
-    CustomerSQLADDRESS_COUNTRY_CODE: TStringField;
     procedure CloseBTNClick(Sender: TObject);
     procedure FormActivate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);

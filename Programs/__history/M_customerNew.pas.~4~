@@ -37,6 +37,7 @@ type
     Label14: TLabel;
     WriteTrans: TIBCTransaction;
     CustomerSQL: TIBCQuery;
+    DistrictDLG: TwwDBLookupCombo;
     Addr1FLD: TDBEdit;
     Addr2FLD: TDBEdit;
     Addr3FLD: TDBEdit;
@@ -58,6 +59,7 @@ type
     StatusFLD: TwwDBComboBox;
     DistrictSQL: TIBCQuery;
     DistrictSQLDESCRIPTION: TStringField;
+    DBEdit1: TDBEdit;
     DistrictSQLCODE_X: TStringField;
     DistrictSQLSERIAL_NUMBER: TIntegerField;
     CustomerSQLNAME: TStringField;
@@ -98,11 +100,6 @@ type
     DBEdit2: TDBEdit;
     CustomerSQLPOST_CODE: TStringField;
     CustomerSQLD_DESC: TStringField;
-    DBEdit1: TDBEdit;
-    Label17: TLabel;
-    DBEdit3: TDBEdit;
-    CustomerSQLADDRESS_CITY: TStringField;
-    CustomerSQLADDRESS_COUNTRY_CODE: TStringField;
     procedure CloseBTNClick(Sender: TObject);
     procedure FormActivate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);

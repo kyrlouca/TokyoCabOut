@@ -366,10 +366,10 @@ Var
    AirCDS:TDataset;
    AName:String;
    CustomerSerial:Integer;
-   qr,AirQr:TksQuery;
+   AirSerial:Integer;
+   cuQr,AirQr:TksQuery;
 
 begin
-        AirCDS:=FlightAirwayBillSQL;
         aName:=Trim(CustomerName);
 
         S_SelectCustomerXFRM.NameFLD.Text:=aName;
@@ -379,33 +379,59 @@ begin
 
 
 
+        airSerial:=FlightAirwayBillSQL.FieldByName('serial_number').AsInteger;
         CustomerSerial:=S_SelectCustomerXFRM.OUT_Customer;
 
         if CustomerSerial >0 then begin
-            qr:=TksQuery.Create(cn,'select * from customer where cu.code=: Customer');
+            cuqr:=TksQuery.Create(cn,'select * from customer cu where cu.code= :code');
             airQr:=TksQuery.Create(cn,'select * from flight_airwaybill fa where fa.serial_number= :serial');
 
             try
-              qr.ParamByName('customer').AsInteger= customerSerial;
-              qr.Open;
-              if (not qr.IsEmpty) then begin
-                ksExecSQLVar(cn,'update flight)
+              cuQr.ParamByName('code').AsInteger := customerSerial;
+              cuQr.Open;
+              Airqr.ParamByName('serial').AsInteger := AirSerial;
+              Airqr.Open;
+
+              if (not cuQr.IsEmpty and not airqr.IsEmpty) then begin
+                AirQr.Edit;
+
+                Airqr.FieldByName('SENDER_ACCOUNT_NUMBER').value:=
+                cuQr.FieldByName('ACCOUNT_NUMBER').AsInteger;
+
+                Airqr.FieldByName('sender_NAME').value:=
+                  cuqr.FieldByName('NAME').AsString;
+
+                Airqr.FieldByName('sender_ADDRESS_1').value:=
+                cuqr.FieldByName('ADDRESS1').AsString;
+
+                Airqr.FieldByName('sender_ADDRESS_2').value:=
+                cuqr.FieldByName('ADDRESS2').AsString;
+
+                Airqr.FieldByName('sender_ADDRESS_3').value:=
+                cuqr.FieldByName('ADDRESS3').AsString;
+
+                Airqr.FieldByName('sender_POST_CODE').value:=
+                cuqr.FieldByName('POST_CODE').AsString;
+
+                Airqr.FieldByName('SENDER_CITY').value:=
+                cuqr.FieldByName('SENDER_CITY').AsString;
+
+                Airqr.FieldByName('SENDER_COUNTRY_CODE').value:=
+                cuqr.FieldByName('COUNTRY_CODE').AsString;
+
+                if airQr.State in [dsEdit] then begin
+                  showMessage('sh');
+                end;
+                airQr.Post;
+                FlightAirwaybillSQL.Refresh;
+
 
               end;
             finally
-              qr.Free;
+              cuqr.Free;
+              airQr.Free;
             end;
 
-                AirCDS.FieldByName('FK_SENDER_SERIAL').value:=CustomerRecord.code;
-                AirCDS.FieldByName('SENDER_ACCOUNT_NUMBER').value:=CustomerRecord.CustomerAccount;
-                AirCDS.FieldByName('sender_NAME').value:=UpperCase(CustomerRecord.Name);
-                AirCDS.FieldByName('sender_ADDRESS').value:=UpperCase(CustomerRecord.Address1);
-                AirCDS.FieldByName('sender_ADDRESS_1').value:=UpperCase(CustomerRecord.Address1);
-                AirCDS.FieldByName('sender_ADDRESS_2').value:=UpperCase(CustomerRecord.Address2);
-                AirCDS.FieldByName('sender_ADDRESS_3').value:=UpperCase(CustomerRecord.Address3);
-                AirCDS.FieldByName('sender_POST_CODE').value:=UpperCase(CustomerRecord.PostCode);
-                AirCDS.FieldByName('DISTRICT_CODE').value:=CustomerRecord.District;
-                AirCDS.FieldByName('SENDER_CITY').value:=CustomerRecord.DistrictName;
 
         end;
 

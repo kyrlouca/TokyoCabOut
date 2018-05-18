@@ -214,34 +214,8 @@ type
     MakeSQL: TIBCQuery;
     SelectTariffFLD: TwwDBEdit;
     SpeedButton2: TSpeedButton;
-    GroupBox7: TGroupBox;
-    wwDBLookupCombo1: TwwDBLookupCombo;
-    wwDBNavigator4: TwwDBNavigator;
-    wwNavButton10: TwwNavButton;
-    wwNavButton15: TwwNavButton;
-    wwNavButton16: TwwNavButton;
-    wwNavButton17: TwwNavButton;
-    wwNavButton18: TwwNavButton;
-    wwNavButton19: TwwNavButton;
-    wwNavButton20: TwwNavButton;
-    wwDBGrid3: TwwDBGrid;
-    GroupCertificateSQL: TIBCQuery;
-    GroupCertificateSQLCODE: TStringField;
-    GroupCertificateSQLDESCRIPTION: TStringField;
-    GroupCertificateSRC: TIBCDataSource;
-    CertItemSRC: TIBCDataSource;
-    CertItemSQL: TIBCQuery;
     ReadTrans: TIBCTransaction;
     wwButton1: TwwButton;
-    CertItemSQLSERIAL_NUMBER: TIntegerField;
-    CertItemSQLCERT_CODE: TStringField;
-    CertItemSQLFK_FLIGHT_AIRWAYBILL_ITEM: TIntegerField;
-    CertItemSQLDESCRIPTION: TStringField;
-    CertItemSQLCERT_TYPE: TStringField;
-    CertItemSQLCERT_VALUE: TStringField;
-    CertItemSQLFIELD_FOR_VALUE: TStringField;
-    CertItemSQLTABLE_FOR_VALUE: TStringField;
-    wwDBComboBox1: TwwDBComboBox;
     SelectCertSQL: TIBCQuery;
     SelectCertSQLSERIAL_NUMBER: TIntegerField;
     SelectCertSQLCERT_CODE: TStringField;
@@ -251,7 +225,21 @@ type
     SelectCertSQLFIELD_FOR_VALUE: TStringField;
     SelectCertSQLTABLE_FOR_VALUE: TStringField;
     SelectCertSQLDESCRIPTION: TStringField;
-    Select2: TwwDBLookupCombo;
+    wwButton2: TwwButton;
+    GroupCertificateSQL: TIBCQuery;
+    GroupCertificateSQLCODE: TStringField;
+    GroupCertificateSQLDESCRIPTION: TStringField;
+    GroupCertificateSRC: TIBCDataSource;
+    CertItemSRC: TIBCDataSource;
+    CertItemSQL: TIBCQuery;
+    CertItemSQLCERT_CODE: TStringField;
+    CertItemSQLCERT_VALUE: TStringField;
+    CertItemSQLDESCRIPTION: TStringField;
+    CertItemSQLCERT_TYPE: TStringField;
+    CertItemSQLSERIAL_NUMBER: TIntegerField;
+    CertItemSQLFK_FLIGHT_AIRWAYBILL_ITEM: TIntegerField;
+    CertItemSQLFIELD_FOR_VALUE: TStringField;
+    CertItemSQLTABLE_FOR_VALUE: TStringField;
     procedure FormActivate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure BitBtn2Click(Sender: TObject);
@@ -268,12 +256,13 @@ type
     procedure ParamGroupFLDCloseUp(Sender: TObject; LookupTable,
       FillTable: TDataSet; modified: Boolean);
     procedure wwButton1Click(Sender: TObject);
-    procedure wwDBLookupCombo1CloseUp(Sender: TObject; LookupTable,
-      FillTable: TDataSet; modified: Boolean);
+    
     procedure FormCreate(Sender: TObject);
     procedure SelectCertFLDCloseUp(Sender: TwwDBComboBox; Select: Boolean);
     procedure Select2CloseUp(Sender: TObject; LookupTable, FillTable: TDataSet;
       modified: Boolean);
+    procedure wwButton2Click(Sender: TObject);
+    procedure wwDBGrid1DblClick(Sender: TObject);
   private
     { Private declarations }
        cn:TIBCConnection;
@@ -294,7 +283,7 @@ var
 implementation
 
 uses MainForm,H_ScanAirwaybill, S_SelectCustomerx, S_SelectTariffY,
-  KyriacosTypes, G_KyrSQL, G_generalProcs;
+  KyriacosTypes, G_KyrSQL, G_generalProcs, H_FlightAirItem;
 
 {$R *.DFM}
 
@@ -376,6 +365,9 @@ Var
         CustomerRecord:TCustomerRecord;
    AirCDS:TDataset;
    AName:String;
+   CustomerSerial:Integer;
+   AirSerial:Integer;
+   qr,AirQr:TksQuery;
 
 begin
         AirCDS:=FlightAirwayBillSQL;
@@ -384,11 +376,30 @@ begin
         S_SelectCustomerXFRM.NameFLD.Text:=aName;
         S_SelectCustomerXFRM.SelectCustomer(aName);
         S_SelectCustomerXFRM.ShowModal;
-        CustomerRecord:=S_SelectCustomerxFRM.GCustomerRecord;
 
-        if CustomerRecord.code>0 then begin
-                If AirCDS.State=dsbrowse then
-                        AirCDS.edit;
+
+
+
+        CustomerSerial:=S_SelectCustomerXFRM.OUT_Customer;
+
+        if CustomerSerial >0 then begin
+            qr:=TksQuery.Create(cn,'select * from customer where cu.code=: Customer');
+            airQr:=TksQuery.Create(cn,'select * from flight_airwaybill fa where fa.serial_number= :serial');
+
+            try
+              qr.ParamByName('customer').AsInteger := customerSerial;
+              qr.Open;
+              Airqr.ParamByName('serial').AsInteger= AirSerial;
+              Airqr.Open;
+
+              if (not qr.IsEmpty and not airqr.IsEmpty) then begin
+
+
+              end;
+            finally
+              qr.Free;
+              airQr.Free;
+            end;
 
                 AirCDS.FieldByName('FK_SENDER_SERIAL').value:=CustomerRecord.code;
                 AirCDS.FieldByName('SENDER_ACCOUNT_NUMBER').value:=CustomerRecord.CustomerAccount;
@@ -485,58 +496,31 @@ CertItemSQL.Close;
 CertItemSQL.Open;
 end;
 
-procedure TH_FlightairwaybillFRM.wwDBLookupCombo1CloseUp(Sender: TObject;
-  LookupTable, FillTable: TDataSet; modified: Boolean);
-
-Var
-  GroupCode:String;
-  FaItem:Integer;
-  faCertSerial:Integer;
-  certItemSerial:Integer;
-  str:String;
-  qr:TksQuery;
-
+procedure TH_FlightairwaybillFRM.wwButton2Click(Sender: TObject);
 begin
-  GroupCode:=LookupTable.FieldByName('Code').AsString;
-  FaItem:=Fa_itemSQL.FieldByName('serial_Number').AsInteger;
+H_FlightAirItemFRM.ShowModal;
+end;
 
-
-
-
-  showMessage(intToStr(faItem));
-  Str:='delete from flight_airwaybill_item_cert fi where fi.fk_flight_airwaybill_item = :fa_item';
-  ksExecSQLVar(cn, str,[FaItem]);
-
-  str:=
-  '   insert into flight_airwaybill_item_cert'
-  +'      (serial_number, FK_FLIGHT_AIRWAYBILL_ITEM, cert_code, cert_type, description, cert_value, table_for_value, field_for_value)'
-  +'    select'
-  +'    :ItemCertSerial, :ItemCert_fk , ci.cert_code, ci.cert_type, ci.description, ci.cert_value, ci.table_for_value, ci.field_for_value'
-  +'    from certificate_item ci where ci.serial_number = :CertSerial';
-
-  try
-    //read all the certificate_items for the group  which will apply for the flight_airwaybill_item
-    qr:=TksQuery.Create(cn,'select serial_number from certificate_item where fk_certificate_group= :group');
-    qr.ParamByName('group').Value:=GroupCode;
-    qr.Open;
-    while (not qr.Eof) do begin
-      FaCertSerial:= ksGenerateSerial(cn,'FLIGHT_AIRWAYBILL_ITEM_CERT_GEN');
-      CertItemSerial:=qr.FieldByName('serial_number').AsInteger;
-      ksExecSQLVar(cn, str,[FaCertSerial,faItem,CertItemSerial]);
-      qr.Next;
-    end;
-  finally
-    qr.Free;
-  end;
-  CertItemSQL.Refresh;
-
-
+procedure TH_FlightairwaybillFRM.wwDBGrid1DblClick(Sender: TObject);
+begin
+  H_flightAirItemFRM.IN_ACTION:='EDIT';
+  H_flightAirItemFRM.in_SERIAL:=Fa_itemSQL.FieldByName('serial_number').AsInteger;
+  H_flightAirItemFRM.ShowModal;
+  FA_ItemSQL.Refresh;
 
 end;
 
+
 procedure TH_FlightairwaybillFRM.wwDBNavigator1InsertClick(Sender: TObject);
 begin
-CountryGRD.SetActiveField('ORDER_POSITION');
+//CountryGRD.SetActiveField('ORDER_POSITION');
+  H_flightAirItemFRM.IN_ACTION:='INSERT';
+  H_flightAirItemFRM.in_SERIAL:=FlightAirwaybillSQL.FieldByName('serial_number').AsInteger;
+  H_flightAirItemFRM.ShowModal;
+  FA_ItemSQL.Refresh;
+  abort;
+
+
 End;
 
 procedure TH_FlightairwaybillFRM.AirwayBillSQLAfterPost(DataSet: TDataSet);
@@ -647,7 +631,8 @@ end;
 
 procedure TH_FlightairwaybillFRM.SpeedButton1Click(Sender: TObject);
 begin
-SElectCustomer(self.SelectNameFLD.Text);
+  SElectCustomer(self.SelectNameFLD.Text);
+
 end;
 
 procedure TH_FlightairwaybillFRM.ParamGroupFLDCloseUp(Sender: TObject;

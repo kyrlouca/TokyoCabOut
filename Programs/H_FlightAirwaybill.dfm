@@ -115,7 +115,6 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
       Color = clBtnFace
       DitherColor = clWhite
       DitherStyle = wwdsDither
-      NumGlyphs = 0
       ShadeStyle = wwbsNormal
       TabOrder = 2
       TextOptions.Alignment = taCenter
@@ -661,7 +660,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
       end
       object Label32: TLabel
         Left = 22
-        Top = 202
+        Top = 210
         Width = 37
         Height = 15
         Caption = 'Device'
@@ -851,7 +850,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
       end
       object wwDBEdit4: TwwDBEdit
         Left = 65
-        Top = 199
+        Top = 205
         Width = 59
         Height = 23
         Color = clWhite
@@ -1818,7 +1817,6 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
       Color = clBtnFace
       DitherColor = clWhite
       DitherStyle = wwdsDither
-      NumGlyphs = 0
       ShadeStyle = wwbsNormal
       TabOrder = 6
       TextOptions.Alignment = taCenter
