@@ -426,12 +426,19 @@ var
     i:Integer;
 begin
 //    HeaderNode:= CreateXmlNodeNew(Fdoc,FatherNode,'AirwayBills','');
+  val:=
+  ' Select  fa.hawb_id, fa.payment_method,'
+  +'  fa.sender_name,fa.sender_address_1,fa.sender_address_2, fa.sender_address_3,'
+  +'  fa.sender_post_code,fa.sender_city,fa.sender_country_code,'
+  +'  it.* from'
+  +'  flight_airwaybill fa join'
+  +'  flight_airwaybill_item it on fa.serial_number=it.fk_fa_serial'
+  +'  where fa.fk_flight_out_serial= :flightSerial;';
 
-
-    Qr:=TksQuery.Create(cn,' select * from FLIGHT_AIRWAYBILL where FK_FLIGHT_OUT_SERIAL= :serial');
+      Qr:=TksQuery.Create(cn,val);
     try
       i:=0;
-      Qr.ParambyName('serial').Value:= FlightSerial;
+      Qr.ParambyName('FlightSerial').Value:= FlightSerial;
       Qr.Open;
 //      name="Msg615ProducedDocumentsCertif"
       while (not qr.eof) do begin
@@ -440,8 +447,7 @@ begin
        HeaderNode :=CreateXMLNodeNew(FDoc,FatherNode,'Msg615GoodsItem','',ntElement);
  //       TblCreateXMLNode(FDoc,HeaderNode,'City','',qr,'HAWB_ID',ntText);
 
-//       TblCreateXMLNode(FDoc,HeaderNode,'ItemNumber','',qr,'SEQUENCE_NUMBER',ntText);
-       CreateXMLNodeNew(FDoc,HeaderNode,'ItemNumber',intToStr(i),ntText);
+       TblCreateXMLNode(FDoc,HeaderNode,'ItemNumber','',qr,'SEQUENCE',ntText);
        TblCreateXMLNode(FDoc,HeaderNode,'GoodsDescription','',qr,'DESCRIPTION',ntText);
        CreateXMLNodeNew(FDoc,HeaderNode,'GoodsDescriptionLNG','EN',ntText);
        TblCreateXMLNode(FDoc,HeaderNode,'GrossMass','',qr,'WEIGHT',ntText);
