@@ -2,7 +2,7 @@ object MainFormFRM: TMainFormFRM
   Left = 140
   Top = 131
   Caption = 'MainFormFRM'
-  ClientHeight = 428
+  ClientHeight = 452
   ClientWidth = 804
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -19,7 +19,7 @@ object MainFormFRM: TMainFormFRM
   TextHeight = 13
   object Panel1: TPanel
     Left = 0
-    Top = 363
+    Top = 387
     Width = 804
     Height = 65
     Align = alBottom
@@ -117,7 +117,7 @@ object MainFormFRM: TMainFormFRM
     Left = 0
     Top = 41
     Width = 804
-    Height = 322
+    Height = 346
     Align = alClient
     TabOrder = 2
     object ScanBTN: TButton
@@ -424,6 +424,22 @@ object MainFormFRM: TMainFormFRM
         Caption = 'Additional Parameters'
         OnClick = AdditionalParameters1Click
       end
+      object DeclarationType1: TMenuItem
+        Caption = 'Declaration Type'
+        OnClick = DeclarationType1Click
+      end
+      object ypeOfDeclaration1: TMenuItem
+        Caption = 'Type Of Declaration'
+        OnClick = ypeOfDeclaration1Click
+      end
+      object SpecificCircumstance1: TMenuItem
+        Caption = 'Specific Circumstance'
+        OnClick = SpecificCircumstance1Click
+      end
+      object ProcedureRequest1: TMenuItem
+        Caption = 'Procedure Request'
+        OnClick = ProcedureRequest1Click
+      end
       object TMenuItem
       end
       object Flights1: TMenuItem
@@ -445,6 +461,14 @@ object MainFormFRM: TMainFormFRM
       object Currency1: TMenuItem
         Caption = 'Currency'
         OnClick = Currency1Click
+      end
+      object DangerGoods1: TMenuItem
+        Caption = 'Danger Goods'
+        OnClick = DangerGoods1Click
+      end
+      object Certificates1: TMenuItem
+        Caption = 'Certificates'
+        OnClick = Certificates1Click
       end
     end
     object System1: TMenuItem

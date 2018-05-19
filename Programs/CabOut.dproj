@@ -240,6 +240,10 @@
             <Form>M_declarationTypeFRM</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="M_PreviousProcedure.pas">
+            <Form>M_PreviousProcedureFRM</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <None Include="CabOut.todo">
             <ContainerId>ToDo</ContainerId>
         </None>
