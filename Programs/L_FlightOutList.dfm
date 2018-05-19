@@ -1,7 +1,7 @@
 object L_FlightOutListFRM: TL_FlightOutListFRM
   Left = 494
   Top = 178
-  ClientHeight = 591
+  ClientHeight = 667
   ClientWidth = 931
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -52,17 +52,15 @@ object L_FlightOutListFRM: TL_FlightOutListFRM
     Font.Style = []
     ParentFont = False
     TabOrder = 0
-    ExplicitWidth = 836
   end
   object Panel4: TPanel
     Left = 0
-    Top = 525
+    Top = 601
     Width = 931
     Height = 66
     Align = alBottom
     TabOrder = 1
-    ExplicitTop = 374
-    ExplicitWidth = 836
+    ExplicitTop = 525
     object BitBtn2: TBitBtn
       Left = 18
       Top = 6
@@ -140,11 +138,10 @@ object L_FlightOutListFRM: TL_FlightOutListFRM
     Left = 0
     Top = 65
     Width = 931
-    Height = 460
+    Height = 536
     Align = alClient
     TabOrder = 2
-    ExplicitWidth = 836
-    ExplicitHeight = 309
+    ExplicitHeight = 460
     object Panel2: TPanel
       Left = 1
       Top = 1
@@ -152,7 +149,6 @@ object L_FlightOutListFRM: TL_FlightOutListFRM
       Height = 72
       Align = alTop
       TabOrder = 0
-      ExplicitWidth = 834
       object Label1: TLabel
         Left = 17
         Top = 20
@@ -200,27 +196,24 @@ object L_FlightOutListFRM: TL_FlightOutListFRM
       Left = 1
       Top = 73
       Width = 929
-      Height = 386
+      Height = 462
       Align = alClient
       TabOrder = 1
-      ExplicitWidth = 834
-      ExplicitHeight = 235
+      ExplicitHeight = 386
       object Panel6: TPanel
         Left = 738
         Top = 1
         Width = 24
-        Height = 384
+        Height = 460
         Align = alLeft
         TabOrder = 0
-        ExplicitLeft = 744
-        ExplicitTop = 6
-        ExplicitHeight = 233
+        ExplicitHeight = 384
       end
       object FlightOutGRD: TwwDBGrid
         Left = 1
         Top = 1
         Width = 737
-        Height = 384
+        Height = 460
         ControlType.Strings = (
           'FK_FLIGHT_TABLE;CustomEdit;FlightTableFLD')
         Selected.Strings = (
@@ -259,7 +252,7 @@ object L_FlightOutListFRM: TL_FlightOutListFRM
         TitleLines = 1
         TitleButtons = False
         OnDblClick = FlightBTNClick
-        ExplicitHeight = 233
+        ExplicitHeight = 384
       end
       object InsertBTN: TRzBitBtn
         AlignWithMargins = True

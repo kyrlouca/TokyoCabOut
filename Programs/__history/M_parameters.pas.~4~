@@ -69,7 +69,7 @@ type
     Label1: TLabel;
     DBEdit2: TDBEdit;
     SystemParametersSQLSTR_4: TStringField;
-    ParamGRD: TwwDBGrid;
+    Grid1: TwwDBGrid;
     SystemParametersSQLINT_2: TIntegerField;
     SystemParametersSQLSTR_2: TStringField;
     SystemParametersSQLSTR_3: TStringField;

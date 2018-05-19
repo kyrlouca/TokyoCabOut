@@ -2,8 +2,8 @@ object M_ParametersFRM: TM_ParametersFRM
   Left = 304
   Top = 217
   Caption = 'M_ParametersFRM'
-  ClientHeight = 699
-  ClientWidth = 971
+  ClientHeight = 562
+  ClientWidth = 833
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -11,7 +11,6 @@ object M_ParametersFRM: TM_ParametersFRM
   Font.Name = 'arial'
   Font.Style = []
   OldCreateOrder = False
-  Position = poScreenCenter
   WindowState = wsMaximized
   OnActivate = FormActivate
   OnClose = FormClose
@@ -20,7 +19,7 @@ object M_ParametersFRM: TM_ParametersFRM
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 971
+    Width = 833
     Height = 65
     Align = alTop
     Caption = 'System Parameters'
@@ -31,17 +30,14 @@ object M_ParametersFRM: TM_ParametersFRM
     Font.Style = [fsBold]
     ParentFont = False
     TabOrder = 0
-    ExplicitWidth = 833
   end
   object Panel4: TPanel
     Left = 0
-    Top = 646
-    Width = 971
+    Top = 509
+    Width = 833
     Height = 53
     Align = alBottom
     TabOrder = 1
-    ExplicitTop = 509
-    ExplicitWidth = 833
     object BitBtn2: TBitBtn
       Left = 10
       Top = 5
@@ -118,11 +114,10 @@ object M_ParametersFRM: TM_ParametersFRM
   object Panel2: TPanel
     Left = 0
     Top = 65
-    Width = 971
+    Width = 833
     Height = 48
     Align = alTop
     TabOrder = 2
-    ExplicitWidth = 833
     object wwDBNavigator1: TwwDBNavigator
       Left = 1
       Top = 9
@@ -327,23 +322,18 @@ object M_ParametersFRM: TM_ParametersFRM
   object Panel3: TPanel
     Left = 0
     Top = 113
-    Width = 971
-    Height = 533
+    Width = 833
+    Height = 396
     Align = alClient
     TabOrder = 3
-    ExplicitWidth = 833
-    ExplicitHeight = 396
     object GroupBox1: TGroupBox
       Left = 1
       Top = 42
-      Width = 969
+      Width = 831
       Height = 287
       Align = alTop
       Caption = 'GroupBox1'
       TabOrder = 0
-      ExplicitLeft = 2
-      ExplicitTop = 36
-      ExplicitWidth = 831
       object idlbl: TLabel
         Left = 56
         Top = 54
@@ -504,64 +494,37 @@ object M_ParametersFRM: TM_ParametersFRM
     object Panel5: TPanel
       Left = 1
       Top = 1
-      Width = 969
+      Width = 831
       Height = 41
       Align = alTop
       BevelOuter = bvNone
       TabOrder = 1
-      ExplicitWidth = 831
     end
     object Panel6: TPanel
       Left = 1
       Top = 329
-      Width = 969
-      Height = 203
+      Width = 831
+      Height = 66
       Align = alClient
       BevelOuter = bvNone
       TabOrder = 2
-      ExplicitWidth = 831
-      ExplicitHeight = 66
-      object ParamGRD: TwwDBGrid
+      object ParamGRD: TCRDBGrid
         Left = 0
         Top = 0
-        Width = 969
-        Height = 203
-        ControlType.Strings = (
-          'IS_DEFAULT;CheckBox;Y;N')
-        Selected.Strings = (
-          'KEY_FIELD'#9'15'#9'Key'
-          'DESCRIPTION'#9'22'#9'Description'
-          'INT_1'#9'10'#9'INT_1'
-          'NUM_1'#9'10'#9'NUM_1'
-          'STR_1'#9'20'#9'STR_1'
-          'STR_4'#9'72'#9'STR_4')
-        IniAttributes.Delimiter = ';;'
-        IniAttributes.UnicodeIniFile = False
-        TitleColor = clBtnFace
-        FixedCols = 0
-        ShowHorzScrollBar = True
+        Width = 831
+        Height = 66
+        OptionsEx = [dgeEnableSort, dgeLocalFilter, dgeRecordCount]
         Align = alClient
-        Color = 12713983
+        BorderStyle = bsNone
         DataSource = SystemParametersCDS
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Arial'
-        Font.Style = []
-        KeyOptions = []
-        Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgWordWrap]
-        ParentFont = False
+        Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
         ReadOnly = True
         TabOrder = 0
-        TitleAlignment = taLeftJustify
         TitleFont.Charset = DEFAULT_CHARSET
         TitleFont.Color = clWindowText
-        TitleFont.Height = -15
-        TitleFont.Name = 'Arial'
+        TitleFont.Height = -13
+        TitleFont.Name = 'arial'
         TitleFont.Style = []
-        TitleLines = 1
-        TitleButtons = False
-        ExplicitWidth = 831
       end
     end
   end
@@ -628,28 +591,27 @@ object M_ParametersFRM: TM_ParametersFRM
         Name = 'Type'
         Value = nil
       end>
+    object SystemParametersSQLSERIAL_NUMBER: TIntegerField
+      DisplayWidth = 16
+      FieldName = 'SERIAL_NUMBER'
+    end
     object SystemParametersSQLKEY_FIELD: TStringField
-      DisplayLabel = 'Key'
       DisplayWidth = 15
       FieldName = 'KEY_FIELD'
       Required = True
       FixedChar = True
       Size = 35
     end
-    object SystemParametersSQLDESCRIPTION: TStringField
-      DisplayLabel = 'Description'
-      DisplayWidth = 22
-      FieldName = 'DESCRIPTION'
+    object SystemParametersSQLSYS_TYPE: TStringField
+      DisplayWidth = 10
+      FieldName = 'SYS_TYPE'
+      Required = True
       FixedChar = True
-      Size = 60
+      Size = 3
     end
     object SystemParametersSQLINT_1: TIntegerField
       DisplayWidth = 10
       FieldName = 'INT_1'
-    end
-    object SystemParametersSQLNUM_1: TFloatField
-      DisplayWidth = 10
-      FieldName = 'NUM_1'
     end
     object SystemParametersSQLSTR_1: TStringField
       DisplayWidth = 20
@@ -657,56 +619,24 @@ object M_ParametersFRM: TM_ParametersFRM
       FixedChar = True
       Size = 30
     end
-    object SystemParametersSQLSTR_4: TStringField
-      DisplayWidth = 72
-      FieldName = 'STR_4'
-      Size = 80
-    end
-    object SystemParametersSQLSERIAL_NUMBER: TIntegerField
-      DisplayWidth = 16
-      FieldName = 'SERIAL_NUMBER'
-      Visible = False
-    end
-    object SystemParametersSQLSYS_TYPE: TStringField
+    object SystemParametersSQLNUM_1: TFloatField
       DisplayWidth = 10
-      FieldName = 'SYS_TYPE'
-      Required = True
-      Visible = False
-      FixedChar = True
-      Size = 3
+      FieldName = 'NUM_1'
     end
     object SystemParametersSQLDATE_1: TDateTimeField
       DisplayWidth = 10
       FieldName = 'DATE_1'
-      Visible = False
     end
-    object SystemParametersSQLINT_2: TIntegerField
-      FieldName = 'INT_2'
-      Visible = False
-    end
-    object SystemParametersSQLSTR_2: TStringField
-      FieldName = 'STR_2'
-      Visible = False
+    object SystemParametersSQLDESCRIPTION: TStringField
+      DisplayWidth = 60
+      FieldName = 'DESCRIPTION'
       FixedChar = True
-      Size = 30
+      Size = 60
     end
-    object SystemParametersSQLSTR_3: TStringField
-      FieldName = 'STR_3'
-      Visible = False
+    object SystemParametersSQLSTR_4: TStringField
+      DisplayWidth = 80
+      FieldName = 'STR_4'
       Size = 80
-    end
-    object SystemParametersSQLSTR_5: TStringField
-      FieldName = 'STR_5'
-      Visible = False
-      Size = 80
-    end
-    object SystemParametersSQLNUM_2: TFloatField
-      FieldName = 'NUM_2'
-      Visible = False
-    end
-    object SystemParametersSQLDATE_2: TDateTimeField
-      FieldName = 'DATE_2'
-      Visible = False
     end
   end
   object UsedForUpdateTrans: TIBCTransaction

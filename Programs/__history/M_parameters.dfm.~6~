@@ -3,7 +3,7 @@ object M_ParametersFRM: TM_ParametersFRM
   Top = 217
   Caption = 'M_ParametersFRM'
   ClientHeight = 699
-  ClientWidth = 971
+  ClientWidth = 833
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -20,7 +20,7 @@ object M_ParametersFRM: TM_ParametersFRM
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 971
+    Width = 833
     Height = 65
     Align = alTop
     Caption = 'System Parameters'
@@ -31,17 +31,15 @@ object M_ParametersFRM: TM_ParametersFRM
     Font.Style = [fsBold]
     ParentFont = False
     TabOrder = 0
-    ExplicitWidth = 833
   end
   object Panel4: TPanel
     Left = 0
     Top = 646
-    Width = 971
+    Width = 833
     Height = 53
     Align = alBottom
     TabOrder = 1
     ExplicitTop = 509
-    ExplicitWidth = 833
     object BitBtn2: TBitBtn
       Left = 10
       Top = 5
@@ -118,11 +116,10 @@ object M_ParametersFRM: TM_ParametersFRM
   object Panel2: TPanel
     Left = 0
     Top = 65
-    Width = 971
+    Width = 833
     Height = 48
     Align = alTop
     TabOrder = 2
-    ExplicitWidth = 833
     object wwDBNavigator1: TwwDBNavigator
       Left = 1
       Top = 9
@@ -327,23 +324,21 @@ object M_ParametersFRM: TM_ParametersFRM
   object Panel3: TPanel
     Left = 0
     Top = 113
-    Width = 971
+    Width = 833
     Height = 533
     Align = alClient
     TabOrder = 3
-    ExplicitWidth = 833
     ExplicitHeight = 396
     object GroupBox1: TGroupBox
       Left = 1
       Top = 42
-      Width = 969
+      Width = 831
       Height = 287
       Align = alTop
       Caption = 'GroupBox1'
       TabOrder = 0
       ExplicitLeft = 2
       ExplicitTop = 36
-      ExplicitWidth = 831
       object idlbl: TLabel
         Left = 56
         Top = 54
@@ -504,37 +499,35 @@ object M_ParametersFRM: TM_ParametersFRM
     object Panel5: TPanel
       Left = 1
       Top = 1
-      Width = 969
+      Width = 831
       Height = 41
       Align = alTop
       BevelOuter = bvNone
       TabOrder = 1
-      ExplicitWidth = 831
     end
     object Panel6: TPanel
       Left = 1
       Top = 329
-      Width = 969
+      Width = 831
       Height = 203
       Align = alClient
       BevelOuter = bvNone
       TabOrder = 2
-      ExplicitWidth = 831
       ExplicitHeight = 66
-      object ParamGRD: TwwDBGrid
+      object Grid1: TwwDBGrid
         Left = 0
         Top = 0
-        Width = 969
+        Width = 831
         Height = 203
         ControlType.Strings = (
           'IS_DEFAULT;CheckBox;Y;N')
         Selected.Strings = (
           'KEY_FIELD'#9'15'#9'Key'
-          'DESCRIPTION'#9'22'#9'Description'
+          'DESCRIPTION'#9'30'#9'Description'
           'INT_1'#9'10'#9'INT_1'
           'NUM_1'#9'10'#9'NUM_1'
           'STR_1'#9'20'#9'STR_1'
-          'STR_4'#9'72'#9'STR_4')
+          'STR_4'#9'33'#9'STR_4')
         IniAttributes.Delimiter = ';;'
         IniAttributes.UnicodeIniFile = False
         TitleColor = clBtnFace
@@ -561,7 +554,6 @@ object M_ParametersFRM: TM_ParametersFRM
         TitleFont.Style = []
         TitleLines = 1
         TitleButtons = False
-        ExplicitWidth = 831
       end
     end
   end
@@ -638,7 +630,7 @@ object M_ParametersFRM: TM_ParametersFRM
     end
     object SystemParametersSQLDESCRIPTION: TStringField
       DisplayLabel = 'Description'
-      DisplayWidth = 22
+      DisplayWidth = 30
       FieldName = 'DESCRIPTION'
       FixedChar = True
       Size = 60
@@ -658,7 +650,7 @@ object M_ParametersFRM: TM_ParametersFRM
       Size = 30
     end
     object SystemParametersSQLSTR_4: TStringField
-      DisplayWidth = 72
+      DisplayWidth = 33
       FieldName = 'STR_4'
       Size = 80
     end

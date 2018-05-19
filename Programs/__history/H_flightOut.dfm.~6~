@@ -189,7 +189,7 @@ object H_FlightOutFRM: TH_FlightOutFRM
       end
       object Label6: TLabel
         Left = 18
-        Top = 129
+        Top = 126
         Width = 87
         Height = 16
         Caption = 'Departure Date'
@@ -266,7 +266,7 @@ object H_FlightOutFRM: TH_FlightOutFRM
         Font.Name = 'arial'
         Font.Style = []
         ParentFont = False
-        TabOrder = 5
+        TabOrder = 4
         UnboundDataType = wwDefault
         WantReturns = False
         WordWrap = False
@@ -285,7 +285,7 @@ object H_FlightOutFRM: TH_FlightOutFRM
         Font.Name = 'arial'
         Font.Style = []
         ParentFont = False
-        TabOrder = 4
+        TabOrder = 3
         UnboundDataType = wwDefault
         WantReturns = False
         WordWrap = False
@@ -366,7 +366,7 @@ object H_FlightOutFRM: TH_FlightOutFRM
         MaxDate = 43831.000000000000000000
         MinDate = 41275.000000000000000000
         ShowButton = True
-        TabOrder = 3
+        TabOrder = 5
         DisplayFormat = 'dd/mm/yyyy'
       end
     end

@@ -16,6 +16,28 @@ object H_FlightOutFRM: TH_FlightOutFRM
   OnCloseQuery = FormCloseQuery
   PixelsPerInch = 120
   TextHeight = 16
+  object Label5: TLabel
+    Left = 55
+    Top = 324
+    Width = 41
+    Height = 16
+    Caption = 'Weight'
+  end
+  object Label9: TLabel
+    Left = 201
+    Top = 356
+    Width = 40
+    Height = 16
+    Caption = 'Pieces'
+    Color = clBtnFace
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'arial'
+    Font.Style = []
+    ParentColor = False
+    ParentFont = False
+  end
   object TitlePNL: TPanel
     Left = 0
     Top = 0
@@ -40,15 +62,15 @@ object H_FlightOutFRM: TH_FlightOutFRM
     TabOrder = 1
     object AcceptBTN: TBitBtn
       Left = 22
-      Top = 14
+      Top = 8
       Width = 94
-      Height = 39
+      Height = 49
       Caption = 'Accept'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -15
       Font.Name = 'arial'
-      Font.Style = []
+      Font.Style = [fsBold]
       Glyph.Data = {
         DE010000424DDE01000000000000760000002800000024000000120000000100
         0400000000006801000000000000000000001000000000000000000000000000
@@ -73,16 +95,16 @@ object H_FlightOutFRM: TH_FlightOutFRM
     end
     object CancelBTN: TBitBtn
       Left = 138
-      Top = 16
+      Top = 8
       Width = 95
-      Height = 39
+      Height = 49
       Cancel = True
       Caption = 'Cancel'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -15
       Font.Name = 'arial'
-      Font.Style = []
+      Font.Style = [fsBold]
       Glyph.Data = {
         DE010000424DDE01000000000000760000002800000024000000120000000100
         0400000000006801000000000000000000001000000000000000000000000000
@@ -113,7 +135,6 @@ object H_FlightOutFRM: TH_FlightOutFRM
     Height = 453
     Align = alClient
     TabOrder = 2
-    ExplicitHeight = 461
     object GroupBox1: TGroupBox
       Left = 22
       Top = 56
@@ -143,8 +164,8 @@ object H_FlightOutFRM: TH_FlightOutFRM
         ParentFont = False
       end
       object Label2: TLabel
-        Left = 29
-        Top = 222
+        Left = 31
+        Top = 174
         Width = 76
         Height = 16
         Caption = 'Dest Country'
@@ -173,8 +194,8 @@ object H_FlightOutFRM: TH_FlightOutFRM
         ParentFont = False
       end
       object Label4: TLabel
-        Left = 10
-        Top = 196
+        Left = 8
+        Top = 148
         Width = 95
         Height = 16
         Caption = 'Destination Area'
@@ -188,8 +209,8 @@ object H_FlightOutFRM: TH_FlightOutFRM
         ParentFont = False
       end
       object Label6: TLabel
-        Left = 18
-        Top = 129
+        Left = 15
+        Top = 277
         Width = 87
         Height = 16
         Caption = 'Departure Date'
@@ -203,8 +224,8 @@ object H_FlightOutFRM: TH_FlightOutFRM
         ParentFont = False
       end
       object Label8: TLabel
-        Left = 53
-        Top = 286
+        Left = 52
+        Top = 238
         Width = 52
         Height = 16
         Caption = 'Remarks'
@@ -218,7 +239,7 @@ object H_FlightOutFRM: TH_FlightOutFRM
         ParentFont = False
       end
       object Label7: TLabel
-        Left = 73
+        Left = 71
         Top = 100
         Width = 32
         Height = 16
@@ -254,30 +275,11 @@ object H_FlightOutFRM: TH_FlightOutFRM
       end
       object DestCountryFLD: TwwDBEdit
         Left = 112
-        Top = 218
+        Top = 170
         Width = 73
         Height = 24
         Color = clWhite
         DataField = 'DESTINATION_COUNTRY'
-        DataSource = FlightOutSRC
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -13
-        Font.Name = 'arial'
-        Font.Style = []
-        ParentFont = False
-        TabOrder = 5
-        UnboundDataType = wwDefault
-        WantReturns = False
-        WordWrap = False
-      end
-      object DestAreaFLD: TwwDBEdit
-        Left = 112
-        Top = 192
-        Width = 73
-        Height = 24
-        Color = clWhite
-        DataField = 'DESTINATION_AREA'
         DataSource = FlightOutSRC
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -290,9 +292,28 @@ object H_FlightOutFRM: TH_FlightOutFRM
         WantReturns = False
         WordWrap = False
       end
+      object DestAreaFLD: TwwDBEdit
+        Left = 112
+        Top = 144
+        Width = 73
+        Height = 24
+        Color = clWhite
+        DataField = 'DESTINATION_AREA'
+        DataSource = FlightOutSRC
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'arial'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 3
+        UnboundDataType = wwDefault
+        WantReturns = False
+        WordWrap = False
+      end
       object RemarksFLD: TwwDBEdit
         Left = 112
-        Top = 282
+        Top = 234
         Width = 321
         Height = 24
         Color = clWhite
@@ -352,7 +373,7 @@ object H_FlightOutFRM: TH_FlightOutFRM
       end
       object wwDBDateTimePicker1: TwwDBDateTimePicker
         Left = 112
-        Top = 126
+        Top = 208
         Width = 121
         Height = 24
         CalendarAttributes.Font.Charset = DEFAULT_CHARSET
@@ -366,7 +387,7 @@ object H_FlightOutFRM: TH_FlightOutFRM
         MaxDate = 43831.000000000000000000
         MinDate = 41275.000000000000000000
         ShowButton = True
-        TabOrder = 3
+        TabOrder = 5
         DisplayFormat = 'dd/mm/yyyy'
       end
     end

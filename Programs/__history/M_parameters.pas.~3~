@@ -46,6 +46,7 @@ type
     DBEdit1: TDBEdit;
     Panel5: TPanel;
     Panel6: TPanel;
+    ParamGRD: TCRDBGrid;
     SystemParametersSQLSERIAL_NUMBER: TIntegerField;
     SystemParametersSQLKEY_FIELD: TStringField;
     SystemParametersSQLSYS_TYPE: TStringField;
@@ -69,13 +70,6 @@ type
     Label1: TLabel;
     DBEdit2: TDBEdit;
     SystemParametersSQLSTR_4: TStringField;
-    ParamGRD: TwwDBGrid;
-    SystemParametersSQLINT_2: TIntegerField;
-    SystemParametersSQLSTR_2: TStringField;
-    SystemParametersSQLSTR_3: TStringField;
-    SystemParametersSQLSTR_5: TStringField;
-    SystemParametersSQLNUM_2: TFloatField;
-    SystemParametersSQLDATE_2: TDateTimeField;
     procedure FormActivate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure BitBtn2Click(Sender: TObject);

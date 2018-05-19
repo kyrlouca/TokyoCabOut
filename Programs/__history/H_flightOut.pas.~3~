@@ -21,10 +21,12 @@ type
     Label3: TLabel;
     Label4: TLabel;
     Label6: TLabel;
+    Label5: TLabel;
     Label8: TLabel;
     RemarksFLD: TwwDBEdit;
     AcceptBTN: TBitBtn;
     CancelBTN: TBitBtn;
+    Label9: TLabel;
     MawbFLD: TwwDBEdit;
     FlightOutSRC: TIBCDataSource;
     FlightTableSQL: TIBCQuery;

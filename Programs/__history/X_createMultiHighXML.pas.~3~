@@ -217,7 +217,7 @@ begin
   +'  fo.serial_number, fo.mawb, fo.Date_depart, ft.flight_name'
   +'   from flight_out fo'
   +'   left outer join flight_table ft on fo.fk_flight_table=ft.serial_number'
-  +'   where fo.serial_number = :serial';
+  +'   where fo.serial_number >= :serial';
   Qr:=TksQuery.Create(cn,val);
 
   try
@@ -263,11 +263,7 @@ begin
      CreateXMLNodeNew(FDoc,x1node,'AgreedLocationOfGoodsLNG','EN',ntText); //here
      CreateXMLNodeNew(FDoc,x1node,'CountryOfDispatchexportCode','CY',ntText); //here
      CreateXMLNodeNew(FDoc,x1node,'TransportModeAtBorder','4',ntText); //here
-
-     //xxxx
      CreateXMLNodeNew(FDoc,x1node,'IdMeansOfTransAtDeparture','3V167C',ntText); //here
-
-
      CreateXMLNodeNew(FDoc,x1node,'IdMeansOfTransAtDepartureLNG','EN',ntText); //here
      CreateXMLNodeNew(FDoc,x1node,'IdMeansOfTransCrossBorder','3V17C',ntText); //here
      CreateXMLNodeNew(FDoc,x1node,'IdMeansOfTransCrossBorderLNG','EN',ntText); //here
@@ -282,6 +278,23 @@ begin
      CreateXMLNodeNew(FDoc,x1node,'DeclarationPlace','LARNACA',ntText);
      CreateXMLNodeNew(FDoc,x1node,'DeclarationPlaceLNG','EN',ntText);
      CreateXMLNodeNew(FDoc,x1node,'SpecificCircumstanceIndicator','A',ntText);
+
+
+
+
+//     Temp:=qr.FieldByName('Payment_method').AsString;
+//     If temp='A' then
+//        DString:='Y'
+//     else if temp='C' then
+//        Dstring:='D'
+//     else
+//        Dstring:='D';
+//     CreateXMLNodeNew(FDoc,x1node,'TranspChargesMethodOfPayment',Dstring,ntText);
+//     TblCreateXMLNode(FDoc,x1node,'CommercialReferenceNumber','',Dataset,'HAWB_ID',ntText);
+
+//     x1node:=CreateXMLNodeNew(FDoc,TheRoot,'Msg515Header','',ntElement);
+
+
 
      CreateXMLNodeNew(FDoc,x1node,'TypeOfDeclarationBox12','A',ntText); //here
 
