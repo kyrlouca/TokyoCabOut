@@ -20,7 +20,6 @@ uses
   M_District in 'M_District.pas' {M_DistrictFRM},
   H_ScanAirwaybillNew in 'H_ScanAirwaybillNew.pas' {H_ScanAirwaibillNewFRM},
   L_AIrwaybillHigh in 'L_AIrwaybillHigh.pas' {L_AirwaybillsHighFRM},
-  M_incoterms in 'M_incoterms.pas' {M_incotermsFRM},
   M_serviceCode in 'M_serviceCode.pas' {M_ServiceCodesFRM},
   M_Currency in 'M_Currency.pas' {M_CurrencyFRM},
   l_FlightAirwaybillParameters in 'l_FlightAirwaybillParameters.pas' {L_AdditionalParametersFRM},
@@ -42,7 +41,9 @@ uses
   M_FlightTable in 'M_FlightTable.pas' {M_FlightTableFRM},
   M_certificates in 'M_certificates.pas' {M_certificatesFRM},
   L_itinerary in 'L_itinerary.pas' {L_ItineraryFRM},
-  H_FlightAirItem in 'H_FlightAirItem.pas' {H_FlightAirItemFRM};
+  H_FlightAirItem in 'H_FlightAirItem.pas' {H_FlightAirItemFRM},
+  M_incoterms in 'M_incoterms.pas' {M_incotermsFRM},
+  m_DeclarationType in 'm_DeclarationType.pas' {M_declarationTypeFRM};
 
 {$R *.RES}
 
@@ -67,7 +68,7 @@ begin
   Application.CreateForm(TM_DistrictFRM, M_DistrictFRM);
   Application.CreateForm(TH_ScanAirwaibillNewFRM, H_ScanAirwaibillNewFRM);
   Application.CreateForm(TL_AirwaybillsHighFRM, L_AirwaybillsHighFRM);
-  Application.CreateForm(TM_incotermsFRM, M_incotermsFRM);
+  Application.CreateForm(TM_declarationTypeFRM, M_declarationTypeFRM);
   Application.CreateForm(TM_ServiceCodesFRM, M_ServiceCodesFRM);
   Application.CreateForm(TM_CurrencyFRM, M_CurrencyFRM);
   Application.CreateForm(TL_AdditionalParametersFRM, L_AdditionalParametersFRM);
@@ -83,5 +84,7 @@ begin
   Application.CreateForm(TM_certificatesFRM, M_certificatesFRM);
   Application.CreateForm(TL_ItineraryFRM, L_ItineraryFRM);
   Application.CreateForm(TH_FlightAirItemFRM, H_FlightAirItemFRM);
+  Application.CreateForm(TM_incotermsFRM, M_incotermsFRM);
+  Application.CreateForm(TM_declarationTypeFRM, M_declarationTypeFRM);
   Application.Run;
 end.

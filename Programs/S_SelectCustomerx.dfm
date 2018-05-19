@@ -316,10 +316,10 @@ object S_SelectCustomerXFRM: TS_SelectCustomerXFRM
       Width = 761
       Height = 462
       Selected.Strings = (
-        'CODE'#9'10'#9'Code'#9#9
-        'NAME'#9'20'#9'Name'#9#9
-        'VAT_ID'#9'10'#9'Vat'#9#9
-        'ADDRESS1'#9'25'#9'Address1'#9#9)
+        'CODE'#9'10'#9'Code'
+        'NAME'#9'20'#9'Name'
+        'VAT_ID'#9'10'#9'Vat'
+        'ADDRESS1'#9'25'#9'Address1')
       IniAttributes.Delimiter = ';;'
       IniAttributes.UnicodeIniFile = False
       TitleColor = clBtnFace

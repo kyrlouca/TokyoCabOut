@@ -50,6 +50,7 @@ type
     FlightsOutBTN: TRzBitBtn;
     DangerGoods1: TMenuItem;
     Certificates1: TMenuItem;
+    DeclarationType1: TMenuItem;
     procedure ProductInfo1Click(Sender: TObject);
     procedure BitBtn2Click(Sender: TObject);
     procedure fcShapeBtn2Click(Sender: TObject);
@@ -82,6 +83,7 @@ type
     procedure FlightsOutBTNClick(Sender: TObject);
     procedure DangerGoods1Click(Sender: TObject);
     procedure Certificates1Click(Sender: TObject);
+    procedure DeclarationType1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -104,7 +106,7 @@ uses  P_Deconsolidation,
    H_ScanAirwaybillNew, M_incoterms, M_serviceCode, M_Currency,
   l_FlightAirwaybillParameters,  M_additionalParameters, X_readFile,
   R_ReadALLXMLFiles, X_createOneXML, M_dangerGoods, M_certificates,
-  H_FlightAirwaybill;
+  H_FlightAirwaybill, m_DeclarationType;
 
 {$R *.DFM}
 
@@ -261,6 +263,11 @@ end;
 procedure TMainFormFRM.DangerGoods1Click(Sender: TObject);
 begin
 M_DangerGoodsFRM.ShowModal;
+end;
+
+procedure TMainFormFRM.DeclarationType1Click(Sender: TObject);
+begin
+M_declarationTypeFRM.ShowModal;
 end;
 
 procedure TMainFormFRM.Deconsolidation1Click(Sender: TObject);

@@ -661,13 +661,8 @@ M_CustomerNewFRM.ShowModal;
 end;
 
 procedure TH_FlightairwaybillFRM.SpeedButton1Click(Sender: TObject);
-var
-  CustName:String;
 begin
-  CustName:= trim(SelectNameFLD.Text);
-  if CustName='' then
-    custName:=Trim(sname.Text);
-  SElectCustomer(CustName);
+  SElectCustomer(self.SelectNameFLD.Text);
 
 end;
 

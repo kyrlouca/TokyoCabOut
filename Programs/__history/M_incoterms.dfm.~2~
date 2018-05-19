@@ -2,8 +2,8 @@ object M_incotermsFRM: TM_incotermsFRM
   Left = 483
   Top = 710
   Caption = 'Incoterms'
-  ClientHeight = 469
-  ClientWidth = 753
+  ClientHeight = 0
+  ClientWidth = 120
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -20,7 +20,7 @@ object M_incotermsFRM: TM_incotermsFRM
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 753
+    Width = 120
     Height = 53
     Align = alTop
     Caption = 'Incoterms'
@@ -31,17 +31,17 @@ object M_incotermsFRM: TM_incotermsFRM
     Font.Style = [fsBold]
     ParentFont = False
     TabOrder = 0
-    ExplicitWidth = 120
+    ExplicitWidth = 748
   end
   object Panel4: TPanel
     Left = 0
-    Top = 426
-    Width = 753
+    Top = -43
+    Width = 120
     Height = 43
     Align = alBottom
     TabOrder = 1
-    ExplicitTop = -43
-    ExplicitWidth = 120
+    ExplicitTop = 596
+    ExplicitWidth = 748
     object BitBtn3: TBitBtn
       Left = 7
       Top = 4
@@ -118,11 +118,11 @@ object M_incotermsFRM: TM_incotermsFRM
   object Panel2: TPanel
     Left = 0
     Top = 53
-    Width = 753
+    Width = 120
     Height = 39
     Align = alTop
     TabOrder = 2
-    ExplicitWidth = 120
+    ExplicitWidth = 748
     object Nav1: TwwDBNavigator
       Left = 1
       Top = 7
@@ -241,21 +241,19 @@ object M_incotermsFRM: TM_incotermsFRM
   object Panel3: TPanel
     Left = 0
     Top = 92
-    Width = 753
-    Height = 334
+    Width = 120
+    Height = 504
     Align = alClient
     TabOrder = 3
-    ExplicitWidth = 120
-    ExplicitHeight = 66
     object Panel5: TPanel
       Left = 1
       Top = 1
-      Width = 751
+      Width = 118
       Height = 169
       Align = alTop
       BevelOuter = bvNone
       TabOrder = 0
-      ExplicitWidth = 118
+      ExplicitWidth = 746
       object GroupBox1: TGroupBox
         Left = 16
         Top = 15
@@ -347,8 +345,8 @@ object M_incotermsFRM: TM_incotermsFRM
     object Grid1: TwwDBGrid
       Left = 1
       Top = 170
-      Width = 751
-      Height = 163
+      Width = 118
+      Height = 333
       Selected.Strings = (
         'CODE'#9'5'#9'Code'
         'DESCRIPTION'#9'56'#9'Description')
@@ -378,8 +376,6 @@ object M_incotermsFRM: TM_incotermsFRM
       TitleFont.Style = []
       TitleLines = 1
       TitleButtons = False
-      ExplicitWidth = 118
-      ExplicitHeight = 333
     end
   end
   object TableSRC: TDataSource

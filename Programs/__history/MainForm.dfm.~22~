@@ -2,7 +2,7 @@ object MainFormFRM: TMainFormFRM
   Left = 140
   Top = 131
   Caption = 'MainFormFRM'
-  ClientHeight = 452
+  ClientHeight = 428
   ClientWidth = 804
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -19,12 +19,11 @@ object MainFormFRM: TMainFormFRM
   TextHeight = 13
   object Panel1: TPanel
     Left = 0
-    Top = 387
+    Top = 363
     Width = 804
     Height = 65
     Align = alBottom
     TabOrder = 0
-    ExplicitTop = 363
     object BitBtn2: TBitBtn
       Left = 8
       Top = 13
@@ -118,10 +117,9 @@ object MainFormFRM: TMainFormFRM
     Left = 0
     Top = 41
     Width = 804
-    Height = 346
+    Height = 322
     Align = alClient
     TabOrder = 2
-    ExplicitHeight = 322
     object ScanBTN: TButton
       Left = 455
       Top = 357
@@ -425,10 +423,6 @@ object MainFormFRM: TMainFormFRM
       object AdditionalParameters1: TMenuItem
         Caption = 'Additional Parameters'
         OnClick = AdditionalParameters1Click
-      end
-      object DeclarationType1: TMenuItem
-        Caption = 'Declaration Type'
-        OnClick = DeclarationType1Click
       end
       object TMenuItem
       end

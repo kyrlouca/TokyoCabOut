@@ -116,7 +116,7 @@ type
   private
       { Private declarations }
       cn:TIBCConnection;
-    procedure AddCustomer(const AIrSerial:Integer);
+  function AddCustomer(const AIrSerial:Integer):Integer;
   procedure DisplayCustomer(Const CustomerSerial:Integer);
 
   public
@@ -148,12 +148,14 @@ uses  MainForm, G_KyrSQL;
 
 
 
-procedure TM_CustomerNewFRM.AddCustomer(const AIrSerial:Integer);
+function TM_CustomerNewFRM.AddCustomer(const AIrSerial:Integer):Integer;
 Var
    CustomerSerial:Integer;
    cuQr,AirQr:TksQuery;
+   senderName:string;
 
 begin
+            result:=0;
 
             cuqr:=TksQuery.Create(cn,'select * from customer cu where cu.code= :code');
             airQr:=TksQuery.Create(cn,'select * from flight_airwaybill fa where fa.serial_number= :serial');
@@ -164,40 +166,40 @@ begin
 
               Airqr.ParamByName('serial').AsInteger :=AirSerial;
               Airqr.Open;
+              SenderName:=Trim(airqr.FieldByName('sender_name').AsString);
 
-              if (not cuQr.IsEmpty and not airqr.IsEmpty) then begin
+              if (not airqr.IsEmpty AND not (SenderName ='') ) then begin
                 cuQr.Edit;
 
                 cuQr.FieldByName('CODE').Value:= CustomerSerial;
 
                 cuQr.FieldByName('ACCOUNT_NUMBER').Value:=
-                Airqr.FieldByName('SENDER_ACCOUNT_NUMBER').value;
+                Airqr.FieldByName('SENDER_ACCOUNT_NUMBER').AsInteger;
 
                cuqr.FieldByName('NAME').AsString:=
-                Airqr.FieldByName('sender_NAME').value;
+                Airqr.FieldByName('sender_NAME').AsString;
 
                 cuqr.FieldByName('ADDRESS1').AsString:=
-                Airqr.FieldByName('sender_ADDRESS_1').value;
+                Airqr.FieldByName('sender_ADDRESS_1').AsString;
 
                 cuqr.FieldByName('ADDRESS2').AsString :=
-                Airqr.FieldByName('sender_ADDRESS_2').value;
+                Airqr.FieldByName('sender_ADDRESS_2').AsString;
 
                 cuqr.FieldByName('ADDRESS3').AsString :=
-                Airqr.FieldByName('sender_ADDRESS_3').value;
+                Airqr.FieldByName('sender_ADDRESS_3').AsString;
 
                 cuqr.FieldByName('POST_CODE').AsString :=
-                Airqr.FieldByName('sender_POST_CODE').value;
+                Airqr.FieldByName('sender_POST_CODE').AsString;
 
                 cuqr.FieldByName('address_CITY').AsString :=
-                Airqr.FieldByName('SENDER_CITY').value;
+                Airqr.FieldByName('SENDER_CITY').AsString;
 
                 cuqr.FieldByName('address_COUNTRY_CODE').AsString:=
-                Airqr.FieldByName('SENDER_COUNTRY_CODE').value;
+                Airqr.FieldByName('SENDER_COUNTRY_CODE').AsString;
 
 
                 cuQr.Post;
-                DisplayCustomer(CustomerSerial);
-
+                result:=cuQR.FieldByName('code').AsInteger;
               end;
             finally
               cuqr.Free;
@@ -224,6 +226,7 @@ procedure TM_CustomerNewFRM.FormActivate(Sender: TObject);
 Var
 Dataset:TDataset;
 I:Integer;
+cust:integer;
 
 begin
 
@@ -241,7 +244,8 @@ begin
         CustomerSQL.FieldByName('Name').value:= InCustomerName;
         NameFLd.SelStart := Length(NameFLD.Text);
      end else If InAction='INSERT_CUSTOMER' then begin
-      AddCustomer(InCustomerCode);
+      cust:= AddCustomer(InAirSerial);
+      displayCustomer(cust);
 
      end else If InAction='DISPLAY' then begin
       displayCustomer(InCustomerCode);

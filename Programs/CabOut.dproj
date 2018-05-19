@@ -157,9 +157,6 @@
         <DCCReference Include="L_AIrwaybillHigh.pas">
             <Form>L_AirwaybillsHighFRM</Form>
         </DCCReference>
-        <DCCReference Include="M_incoterms.pas">
-            <Form>M_incotermsFRM</Form>
-        </DCCReference>
         <DCCReference Include="M_serviceCode.pas">
             <Form>M_ServiceCodesFRM</Form>
         </DCCReference>
@@ -221,6 +218,14 @@
         </DCCReference>
         <DCCReference Include="H_FlightAirItem.pas">
             <Form>H_FlightAirItemFRM</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="M_incoterms.pas">
+            <Form>M_incotermsFRM</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="m_DeclarationType.pas">
+            <Form>M_declarationTypeFRM</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <None Include="CabOut.todo">

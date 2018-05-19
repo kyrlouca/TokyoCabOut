@@ -56,9 +56,11 @@ type
     procedure CancelBTNClick(Sender: TObject);
   private
     { Private declarations }
+    procedure EditCustomer(const CustSerial:integer);
   public
     { Public declarations }
         GCustomerRecord:TCustomerRecord;
+        IN_SelectDbl:bOOLEAN;
         OUT_Customer:Integer;
         procedure SelectCustomer(Const CustomerName:String);
     procedure SelectCustomerbyCode(Const CustomerSerial:Integer);
@@ -148,22 +150,14 @@ procedure TS_SelectCustomerXFRM.wwDBGrid1DblClick(Sender: TObject);
 Var
         CustomerSerial:Integer;
 begin
-//        CUstomerSerial:=CustomerSQL.fieldByName('Code').AsInteger;
-//
-//        GCustomerRecord.Code:=CustomerSQL.fieldByName('Code').AsInteger;
-//        GCustomerRecord.CustomerAccount:=CustomerSQL.fieldByName('Account_Number').AsInteger;
-//        GCustomerRecord.Name:=CustomerSQL.fieldByName('Name').AsString;
-//        GCustomerRecord.Address1:=CustomerSQL.fieldByName('ADDRESS1').AsString;
-//        GCustomerRecord.Address2:=CustomerSQL.fieldByName('ADDRESS2').AsString;
-//        GCustomerRecord.Address3:=CustomerSQL.fieldByName('ADDRESS3').AsString;
-//        GCustomerRecord.PostCode:=CustomerSQL.fieldByName('post_code').AsString;
-//        GCustomerRecord.District_serial:=CustomerSQL.fieldByName('FK_DISTRICT').AsInteger;
-//        GCustomerRecord.District:=CustomerSQL.fieldByName('D_DISTRICT_CODE').AsString;
-//        GCustomerRecord.DistrictName:=CustomerSQL.fieldByName('D_Desc').AsString;
-//
-//
-        //ShowMessage(intToStr(GCustomerRecord.Code));
-        Close;
+  IF IN_SelectDbl THEN BEGIN
+    OUT_Customer:=CustomerSQL.FieldByName('Code').AsInteger;
+    Close;
+
+  end else begin
+   EditCustomer(OUT_Customer);
+
+  end;
 
 end;
 
@@ -212,16 +206,22 @@ end;
 
 //M_customerNewFRM.SHowModal;
 
+procedure TS_SelectCustomerXFRM.EditCustomer(const CustSerial:integer);
+begin
+  if CustSerial>0 then begin
+      M_customerNewFRM.InAction:='DISPLAY';
+      M_CustomerNewFRM.inCustomerCode:=CustSerial;
+      M_CustomerNewFRM.ShowModal;
+      CustomerSQL.Refresh;
+  end;
+
+
+end;
+
 
 procedure TS_SelectCustomerXFRM.EditBTNClick(Sender: TObject);
 begin
-M_customerNewFRM.InAction:='DISPLAY';
-If CustomerSQL.Active then begin
-        M_CustomerNewFRM.inCustomerCode:=CustomerSQL.fieldByName('Code').AsInteger;
-        M_CustomerNewFRM.ShowModal;
-end;
-CustomerSQL.Refresh;
-
+  EditCustomer(CustomerSQL.fieldByName('Code').AsInteger);
 end;
 
 procedure TS_SelectCustomerXFRM.NameFLDKeyUp(Sender: TObject; var Key: Word;
