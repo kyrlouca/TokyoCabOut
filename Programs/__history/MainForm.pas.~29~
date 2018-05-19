@@ -23,11 +23,9 @@ type
     Panel3: TPanel;
     BitBtn2: TBitBtn;
     Panel2: TPanel;
-    EditAirwaybill1: TMenuItem;
     ScanBTN: TButton;
     ListFlights1: TMenuItem;
     Files1: TMenuItem;
-    ScanAirwaybills1: TMenuItem;
     System1: TMenuItem;
     Parameters1: TMenuItem;
     CabOutData: TIBCConnection;
@@ -50,6 +48,9 @@ type
     ReadXmlBTN: TRzBitBtn;
     RzBitBtn1: TRzBitBtn;
     FlightsOutBTN: TRzBitBtn;
+    DangerGoods1: TMenuItem;
+    Certificates1: TMenuItem;
+    DeclarationType1: TMenuItem;
     procedure ProductInfo1Click(Sender: TObject);
     procedure BitBtn2Click(Sender: TObject);
     procedure fcShapeBtn2Click(Sender: TObject);
@@ -80,6 +81,9 @@ type
     procedure ReadXmlBTNClick(Sender: TObject);
     procedure RzBitBtn1Click(Sender: TObject);
     procedure FlightsOutBTNClick(Sender: TObject);
+    procedure DangerGoods1Click(Sender: TObject);
+    procedure Certificates1Click(Sender: TObject);
+    procedure DeclarationType1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -101,7 +105,8 @@ uses  P_Deconsolidation,
   S_SelectCustomerx, S_SelectTariffY, M_District, L_AIrwaybillHigh,
    H_ScanAirwaybillNew, M_incoterms, M_serviceCode, M_Currency,
   l_FlightAirwaybillParameters,  M_additionalParameters, X_readFile,
-  R_ReadALLXMLFiles, X_createOneXML;
+  R_ReadALLXMLFiles, X_createOneXML, M_dangerGoods, M_certificates,
+  H_FlightAirwaybill, m_DeclarationType;
 
 {$R *.DFM}
 
@@ -179,6 +184,11 @@ begin
 M_parametersFRM.ShowModal;
 end;
 
+procedure TMainFormFRM.Certificates1Click(Sender: TObject);
+begin
+M_certificatesFRM.showModal;
+end;
+
 procedure TMainFormFRM.ConnectToDatabase;
 Var
         InFile:TextFile;
@@ -221,7 +231,7 @@ procedure TMainFormFRM.Button1Click(Sender: TObject);
 begin
 //L_AirwaybillsHighFRM.ShowModal;
 //ReadFileFRM.Showmodal;
-X_CreateOneXmlFRM.ShowModal;
+H_FlightairwaybillFRM.ShowModal;
 end;
 
 procedure TMainFormFRM.Country1Click(Sender: TObject);
@@ -250,11 +260,22 @@ L_flightOUtListFRM.SHowMOdal;
 
 end;
 
+procedure TMainFormFRM.DangerGoods1Click(Sender: TObject);
+begin
+M_DangerGoodsFRM.ShowModal;
+end;
+
+procedure TMainFormFRM.DeclarationType1Click(Sender: TObject);
+begin
+M_declarationTypeFRM.ShowModal;
+end;
+
 procedure TMainFormFRM.Deconsolidation1Click(Sender: TObject);
 begin
 //I_readManifestFIleFRM.ShowModal;
 //ReadFileFRM.SHowModal;
 
+X_readFileFRM.SHowModal;
 end;
 
 procedure TMainFormFRM.EditAirwaybill1Click(Sender: TObject);

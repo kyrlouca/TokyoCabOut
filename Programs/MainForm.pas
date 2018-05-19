@@ -51,6 +51,9 @@ type
     DangerGoods1: TMenuItem;
     Certificates1: TMenuItem;
     DeclarationType1: TMenuItem;
+    ypeOfDeclaration1: TMenuItem;
+    SpecificCircumstance1: TMenuItem;
+    ProcedureRequest1: TMenuItem;
     procedure ProductInfo1Click(Sender: TObject);
     procedure BitBtn2Click(Sender: TObject);
     procedure fcShapeBtn2Click(Sender: TObject);
@@ -84,6 +87,9 @@ type
     procedure DangerGoods1Click(Sender: TObject);
     procedure Certificates1Click(Sender: TObject);
     procedure DeclarationType1Click(Sender: TObject);
+    procedure ypeOfDeclaration1Click(Sender: TObject);
+    procedure SpecificCircumstance1Click(Sender: TObject);
+    procedure ProcedureRequest1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -106,7 +112,8 @@ uses  P_Deconsolidation,
    H_ScanAirwaybillNew, M_incoterms, M_serviceCode, M_Currency,
   l_FlightAirwaybillParameters,  M_additionalParameters, X_readFile,
   R_ReadALLXMLFiles, X_createOneXML, M_dangerGoods, M_certificates,
-  H_FlightAirwaybill, m_DeclarationType;
+  H_FlightAirwaybill, m_DeclarationType, m_TypeOfDeclaration,
+  m_specificCircumstance, M_ProcedureRequest;
 
 {$R *.DFM}
 
@@ -146,6 +153,11 @@ end;
 
 
 
+procedure TMainFormFRM.ProcedureRequest1Click(Sender: TObject);
+begin
+M_ProcedureRequestFRM.ShowModal;
+end;
+
 procedure TMainFormFRM.ProductInfo1Click(Sender: TObject);
 begin
    ShowMessage('CabOut By LSimple. Version 2.0, Nov 17, 2014');
@@ -166,6 +178,11 @@ begin
 // P_DeconsolidationFRM.ShowModal;
 //         CreateOneXMLFile.CreateOneXMLFileFRM.CreateDeconsolidationDom('12');
 
+end;
+
+procedure TMainFormFRM.ypeOfDeclaration1Click(Sender: TObject);
+begin
+M_TypeOfDeclarationFRM.ShowModal;
 end;
 
 procedure TMainFormFRM.ScanBTNClick(Sender: TObject);
@@ -342,6 +359,11 @@ end;
 procedure TMainFormFRM.ServiceCodes1Click(Sender: TObject);
 begin
 M_ServiceCodesFRM.ShowModal;
+end;
+
+procedure TMainFormFRM.SpecificCircumstance1Click(Sender: TObject);
+begin
+M_SpecificCircumsatnceFRM.ShowModal;
 end;
 
 procedure TMainFormFRM.Currency1Click(Sender: TObject);

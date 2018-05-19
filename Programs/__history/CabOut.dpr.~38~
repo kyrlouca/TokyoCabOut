@@ -9,7 +9,6 @@ uses
   H_FlightAirwaybill in 'H_FlightAirwaybill.pas' {H_FlightairwaybillFRM},
   M_parameters in 'M_parameters.pas' {M_ParametersFRM},
   M_country in 'M_country.pas' {M_countryFRM},
-  L_itinerary in 'L_itinerary.pas' {L_ItineraryFRM},
   M_Itinerary in 'M_Itinerary.pas' {M_ItineraryFRM},
   H_scanAirwaybill in 'H_scanAirwaybill.pas' {H_ScanAirwaybillFRM},
   H_Airwaybill2 in 'H_Airwaybill2.pas' {H_airwaybill2FRM},
@@ -21,7 +20,6 @@ uses
   M_District in 'M_District.pas' {M_DistrictFRM},
   H_ScanAirwaybillNew in 'H_ScanAirwaybillNew.pas' {H_ScanAirwaibillNewFRM},
   L_AIrwaybillHigh in 'L_AIrwaybillHigh.pas' {L_AirwaybillsHighFRM},
-  M_incoterms in 'M_incoterms.pas' {M_incotermsFRM},
   M_serviceCode in 'M_serviceCode.pas' {M_ServiceCodesFRM},
   M_Currency in 'M_Currency.pas' {M_CurrencyFRM},
   l_FlightAirwaybillParameters in 'l_FlightAirwaybillParameters.pas' {L_AdditionalParametersFRM},
@@ -39,7 +37,14 @@ uses
   X_createOneXML in 'X_createOneXML.pas' {X_CreateOneXmlFRM},
   X_createMultiXML in 'X_createMultiXML.pas' {X_CreateMultiXmlFRM},
   X_createMultiHighXML in 'X_createMultiHighXML.pas' {X_CreateMultiHighXmlFRM},
-  M_dangerGoods in 'M_dangerGoods.pas' {M_DangerGoodsFRM};
+  M_dangerGoods in 'M_dangerGoods.pas' {M_DangerGoodsFRM},
+  M_FlightTable in 'M_FlightTable.pas' {M_FlightTableFRM},
+  M_certificates in 'M_certificates.pas' {M_certificatesFRM},
+  L_itinerary in 'L_itinerary.pas' {L_ItineraryFRM},
+  H_FlightAirItem in 'H_FlightAirItem.pas' {H_FlightAirItemFRM},
+  M_incoterms in 'M_incoterms.pas' {M_incotermsFRM},
+  m_DeclarationType in 'm_DeclarationType.pas' {M_declarationTypeFRM},
+  m_TypeOfDeclaration in 'm_TypeOfDeclaration.pas' {M_TypeOfDeclarationFRM};
 
 {$R *.RES}
 
@@ -47,43 +52,42 @@ uses
 begin
   Application.Initialize;
   Application.Title := 'CabOut';
+  //  Application.CreateForm(TL_ItineraryFRM1, L_ItineraryFRM1);
   Application.CreateForm(TMainFormFRM, MainFormFRM);
-  Application.CreateForm(TM_TariffNew2FRM, M_TariffNew2FRM);
-  Application.CreateForm(TM_CustomerNewFRM, M_CustomerNewFRM);
-  Application.CreateForm(TM_DangerGoodsFRM, M_DangerGoodsFRM);
-  Application.CreateForm(TM_ItineraryFRM, M_ItineraryFRM);
-  Application.CreateForm(TM_countryFRM, M_countryFRM);
-  Application.CreateForm(TM_ParametersFRM, M_ParametersFRM);
-  Application.CreateForm(TH_FlightOutFRM, H_FlightOutFRM);
   Application.CreateForm(TL_MawbsFRM, L_MawbsFRM);
+  Application.CreateForm(TH_FlightOutFRM, H_FlightOutFRM);
   Application.CreateForm(TH_FlightairwaybillFRM, H_FlightairwaybillFRM);
-  Application.CreateForm(TL_ItineraryFRM, L_ItineraryFRM);
+  Application.CreateForm(TM_ParametersFRM, M_ParametersFRM);
+  Application.CreateForm(TM_countryFRM, M_countryFRM);
+  Application.CreateForm(TM_ItineraryFRM, M_ItineraryFRM);
   Application.CreateForm(TH_ScanAirwaybillFRM, H_ScanAirwaybillFRM);
   Application.CreateForm(TH_airwaybill2FRM, H_airwaybill2FRM);
   Application.CreateForm(TL_FlightOutListFRM, L_FlightOutListFRM);
-  Application.CreateForm(TS_SelectCustomerXFRM, S_SelectCustomerXFRM);
+  Application.CreateForm(TM_CustomerNewFRM, M_CustomerNewFRM);
+  Application.CreateForm(TM_TariffNew2FRM, M_TariffNew2FRM);
   Application.CreateForm(TS_SelectTariffYFRM, S_SelectTariffYFRM);
   Application.CreateForm(TM_DistrictFRM, M_DistrictFRM);
   Application.CreateForm(TH_ScanAirwaibillNewFRM, H_ScanAirwaibillNewFRM);
   Application.CreateForm(TL_AirwaybillsHighFRM, L_AirwaybillsHighFRM);
-  Application.CreateForm(TM_incotermsFRM, M_incotermsFRM);
+  Application.CreateForm(TM_TypeOfDeclarationFRM, M_TypeOfDeclarationFRM);
   Application.CreateForm(TM_ServiceCodesFRM, M_ServiceCodesFRM);
   Application.CreateForm(TM_CurrencyFRM, M_CurrencyFRM);
   Application.CreateForm(TL_AdditionalParametersFRM, L_AdditionalParametersFRM);
-  Application.CreateForm(TR_ReadAllFilesFRM, R_ReadAllFilesFRM);
-  Application.CreateForm(TR_ReadAllFilesFRM, R_ReadAllFilesFRM);
-  Application.CreateForm(TR_ReadAllFilesFRM, R_ReadAllFilesFRM);
-  Application.CreateForm(TX_CreateMultiHighXmlFRM, X_CreateMultiHighXmlFRM);
-  Application.CreateForm(TX_CreateOneXmlFRM, X_CreateOneXmlFRM);
-  Application.CreateForm(TX_CreateOneXmlFRM, X_CreateOneXmlFRM);
-  Application.CreateForm(TX_CreateMultiXmlFRM, X_CreateMultiXmlFRM);
-  Application.CreateForm(TX_CreateMultiXmlFRM, X_CreateMultiXmlFRM);
-  Application.CreateForm(TX_CreateMultiHighXmlFRM, X_CreateMultiHighXmlFRM);
-  Application.CreateForm(TM_FlightTableFRM1, M_FlightTableFRM1);
-  //  Application.CreateForm(TX_CreateOneXmlFRM1, X_CreateOneXmlFRM1);
-  //  Application.CreateForm(TR_ReadAllFilesFRM, R_ReadAllFilesFRM);
   Application.CreateForm(TM_additionalParametersFRM, M_additionalParametersFRM);
   Application.CreateForm(TX_readFileFRM, X_readFileFRM);
   Application.CreateForm(TS_SelectCustomerXFRM, S_SelectCustomerXFRM);
+  Application.CreateForm(TR_ReadAllFilesFRM, R_ReadAllFilesFRM);
+  Application.CreateForm(TX_CreateOneXmlFRM, X_CreateOneXmlFRM);
+  Application.CreateForm(TX_CreateMultiXmlFRM, X_CreateMultiXmlFRM);
+  Application.CreateForm(TX_CreateMultiHighXmlFRM, X_CreateMultiHighXmlFRM);
+  Application.CreateForm(TM_DangerGoodsFRM, M_DangerGoodsFRM);
+  Application.CreateForm(TM_FlightTableFRM, M_FlightTableFRM);
+  Application.CreateForm(TM_certificatesFRM, M_certificatesFRM);
+  Application.CreateForm(TL_ItineraryFRM, L_ItineraryFRM);
+  Application.CreateForm(TH_FlightAirItemFRM, H_FlightAirItemFRM);
+  Application.CreateForm(TM_incotermsFRM, M_incotermsFRM);
+  Application.CreateForm(TM_declarationTypeFRM, M_declarationTypeFRM);
+  Application.CreateForm(TM_declarationTypeFRM, M_declarationTypeFRM);
+  Application.CreateForm(TM_TypeOfDeclarationFRM, M_TypeOfDeclarationFRM);
   Application.Run;
 end.

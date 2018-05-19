@@ -43,6 +43,9 @@ uses
   L_itinerary in 'L_itinerary.pas' {L_ItineraryFRM},
   H_FlightAirItem in 'H_FlightAirItem.pas' {H_FlightAirItemFRM},
   M_incoterms in 'M_incoterms.pas' {M_incotermsFRM},
+  m_TypeOfDeclaration in 'm_TypeOfDeclaration.pas' {M_TypeOfDeclarationFRM},
+  m_specificCircumstance in 'm_specificCircumstance.pas' {M_SpecificCircumsatnceFRM},
+  M_ProcedureRequest in 'M_ProcedureRequest.pas' {M_ProcedureRequestFRM},
   m_DeclarationType in 'm_DeclarationType.pas' {M_declarationTypeFRM};
 
 {$R *.RES}
@@ -68,7 +71,7 @@ begin
   Application.CreateForm(TM_DistrictFRM, M_DistrictFRM);
   Application.CreateForm(TH_ScanAirwaibillNewFRM, H_ScanAirwaibillNewFRM);
   Application.CreateForm(TL_AirwaybillsHighFRM, L_AirwaybillsHighFRM);
-  Application.CreateForm(TM_declarationTypeFRM, M_declarationTypeFRM);
+  Application.CreateForm(TM_TypeOfDeclarationFRM, M_TypeOfDeclarationFRM);
   Application.CreateForm(TM_ServiceCodesFRM, M_ServiceCodesFRM);
   Application.CreateForm(TM_CurrencyFRM, M_CurrencyFRM);
   Application.CreateForm(TL_AdditionalParametersFRM, L_AdditionalParametersFRM);
@@ -85,6 +88,12 @@ begin
   Application.CreateForm(TL_ItineraryFRM, L_ItineraryFRM);
   Application.CreateForm(TH_FlightAirItemFRM, H_FlightAirItemFRM);
   Application.CreateForm(TM_incotermsFRM, M_incotermsFRM);
+  Application.CreateForm(TM_SpecificCircumsatnceFRM, M_SpecificCircumsatnceFRM);
+  Application.CreateForm(TM_ProcedureRequestFRM, M_ProcedureRequestFRM);
+  Application.CreateForm(TM_TypeOfDeclarationFRM, M_TypeOfDeclarationFRM);
+  Application.CreateForm(TM_SpecificCircumsatnceFRM, M_SpecificCircumsatnceFRM);
+  Application.CreateForm(TM_declarationTypeFRM, M_declarationTypeFRM);
+  Application.CreateForm(TM_ProcedureRequestFRM, M_ProcedureRequestFRM);
   Application.CreateForm(TM_declarationTypeFRM, M_declarationTypeFRM);
   Application.Run;
 end.

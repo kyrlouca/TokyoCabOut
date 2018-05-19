@@ -432,14 +432,6 @@ object MainFormFRM: TMainFormFRM
         Caption = 'Type Of Declaration'
         OnClick = ypeOfDeclaration1Click
       end
-      object SpecificCircumstance1: TMenuItem
-        Caption = 'Specific Circumstance'
-        OnClick = SpecificCircumstance1Click
-      end
-      object ProcedureRequest1: TMenuItem
-        Caption = 'Procedure Request'
-        OnClick = ProcedureRequest1Click
-      end
       object TMenuItem
       end
       object Flights1: TMenuItem

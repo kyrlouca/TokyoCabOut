@@ -24,6 +24,7 @@ object MainFormFRM: TMainFormFRM
     Height = 65
     Align = alBottom
     TabOrder = 0
+    ExplicitTop = 363
     object BitBtn2: TBitBtn
       Left = 8
       Top = 13
@@ -120,6 +121,7 @@ object MainFormFRM: TMainFormFRM
     Height = 346
     Align = alClient
     TabOrder = 2
+    ExplicitHeight = 322
     object ScanBTN: TButton
       Left = 455
       Top = 357
@@ -427,18 +429,6 @@ object MainFormFRM: TMainFormFRM
       object DeclarationType1: TMenuItem
         Caption = 'Declaration Type'
         OnClick = DeclarationType1Click
-      end
-      object ypeOfDeclaration1: TMenuItem
-        Caption = 'Type Of Declaration'
-        OnClick = ypeOfDeclaration1Click
-      end
-      object SpecificCircumstance1: TMenuItem
-        Caption = 'Specific Circumstance'
-        OnClick = SpecificCircumstance1Click
-      end
-      object ProcedureRequest1: TMenuItem
-        Caption = 'Procedure Request'
-        OnClick = ProcedureRequest1Click
       end
       object TMenuItem
       end
