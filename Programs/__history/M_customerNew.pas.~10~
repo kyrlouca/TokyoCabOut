@@ -179,9 +179,6 @@ begin
                cuqr.FieldByName('NAME').AsString:=
                 Airqr.FieldByName('sender_NAME').AsString;
 
-               cuqr.FieldByName('vat_id').AsString:=
-                Airqr.FieldByName('Sender_vat').AsString;
-
                 cuqr.FieldByName('ADDRESS1').AsString:=
                 Airqr.FieldByName('sender_ADDRESS_1').AsString;
 

@@ -56,7 +56,9 @@ type
     ProcedureRequest1: TMenuItem;
     PreviousProcedure1: TMenuItem;
     ableParams1: TMenuItem;
-    ables1: TMenuItem;
+    KindOfPackages1: TMenuItem;
+    N1: TMenuItem;
+    N2: TMenuItem;
     procedure ProductInfo1Click(Sender: TObject);
     procedure BitBtn2Click(Sender: TObject);
     procedure fcShapeBtn2Click(Sender: TObject);
@@ -94,6 +96,7 @@ type
     procedure SpecificCircumstance1Click(Sender: TObject);
     procedure ProcedureRequest1Click(Sender: TObject);
     procedure PreviousProcedure1Click(Sender: TObject);
+    procedure KindOfPackages1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -117,7 +120,8 @@ uses  P_Deconsolidation,
   l_FlightAirwaybillParameters,  M_additionalParameters, X_readFile,
   R_ReadALLXMLFiles, X_createOneXML, M_dangerGoods, M_certificates,
   H_FlightAirwaybill, m_DeclarationType, m_TypeOfDeclaration,
-  m_specificCircumstance, M_ProcedureRequest, M_PreviousProcedure;
+  m_specificCircumstance, M_ProcedureRequest, M_PreviousProcedure,
+  m_KindOfPackages;
 
 {$R *.DFM}
 
@@ -268,6 +272,11 @@ end;
 procedure TMainFormFRM.Itinerary1Click(Sender: TObject);
 begin
 L_ItineraryFRM.ShowModal;
+end;
+
+procedure TMainFormFRM.KindOfPackages1Click(Sender: TObject);
+begin
+M_KIndOfPackagesFRM.ShowModal;
 end;
 
 procedure TMainFormFRM.ListFlights1Click(Sender: TObject);

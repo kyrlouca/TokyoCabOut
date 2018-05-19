@@ -407,17 +407,6 @@ object MainFormFRM: TMainFormFRM
         OnClick = ProductInfo1Click
       end
     end
-    object ables1: TMenuItem
-      Caption = 'Tables'
-      object Tariff1: TMenuItem
-        Caption = 'Tariff'
-        OnClick = Tariff1Click
-      end
-      object Customer1: TMenuItem
-        Caption = 'Customer'
-        OnClick = Customer1Click
-      end
-    end
     object System1: TMenuItem
       Caption = 'System'
       object Parameters1: TMenuItem
@@ -466,9 +455,24 @@ object MainFormFRM: TMainFormFRM
           Caption = 'Certificates'
           OnClick = Certificates1Click
         end
+        object KindOfPackages1: TMenuItem
+          Caption = 'Kind Of Packages'
+          OnClick = KindOfPackages1Click
+        end
       end
       object Tables1: TMenuItem
         Caption = 'Tables'
+        object Tariff1: TMenuItem
+          Caption = 'Tariff'
+          OnClick = Tariff1Click
+        end
+        object Customer1: TMenuItem
+          Caption = 'Customer'
+          OnClick = Customer1Click
+        end
+        object N2: TMenuItem
+          Caption = '-'
+        end
         object Flights1: TMenuItem
           Caption = 'Flights'
           OnClick = Flights1Click
@@ -488,6 +492,9 @@ object MainFormFRM: TMainFormFRM
         object Currency1: TMenuItem
           Caption = 'Currency'
           OnClick = Currency1Click
+        end
+        object N1: TMenuItem
+          Caption = '-'
         end
       end
     end

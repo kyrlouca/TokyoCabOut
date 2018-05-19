@@ -241,6 +241,15 @@ type
     CertItemSQLFIELD_FOR_VALUE: TStringField;
     CertItemSQLTABLE_FOR_VALUE: TStringField;
     SpeedButton4: TSpeedButton;
+    wwDBComboBox1: TwwDBComboBox;
+    Label5: TLabel;
+    wwDBEdit3: TwwDBEdit;
+    FlightAirwaybillSQLCONSIGNEE_PREFERRED_NAME: TStringField;
+    FlightAirwaybillSQLSENDER_VAT: TStringField;
+    FlightAirwaybillSQLCONSIGNEE_VAT: TStringField;
+    FlightAirwaybillSQLDECLARATION_TYPE: TStringField;
+    FlightAirwaybillSQLTYPE_OF_DECLARATION: TStringField;
+    FlightAirwaybillSQLSPECIFIC_CIRCUMSTANCE: TStringField;
     procedure FormActivate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure BitBtn2Click(Sender: TObject);
@@ -402,6 +411,10 @@ begin
 
                 Airqr.FieldByName('sender_NAME').value:=
                   cuqr.FieldByName('NAME').AsString;
+
+                Airqr.FieldByName('sender_VAT').value:=
+                  cuqr.FieldByName('VAT_Id').AsString;
+
 
                 Airqr.FieldByName('sender_ADDRESS_1').value:=
                 cuqr.FieldByName('ADDRESS1').AsString;
@@ -654,9 +667,12 @@ end;
 
 procedure TH_FlightairwaybillFRM.SpeedButton4Click(Sender: TObject);
 begin
-M_CustomerNewFRM.InAction:='INSERT_CUSTOMER';
-M_CustomerNewFRM.InAirSerial:= FlightAirwaybillSQL.FieldByName('SERIAL_NUMBER').AsInteger;
-M_CustomerNewFRM.ShowModal;
+  if FlightAirwaybillSQL.State in [dsInsert, dsEdit] then begin
+    FlightAirwaybillSQL.Post;
+  end;
+  M_CustomerNewFRM.InAction:='INSERT_CUSTOMER';
+  M_CustomerNewFRM.InAirSerial:= FlightAirwaybillSQL.FieldByName('SERIAL_NUMBER').AsInteger;
+  M_CustomerNewFRM.ShowModal;
 
 end;
 

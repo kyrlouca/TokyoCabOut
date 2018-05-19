@@ -124,7 +124,7 @@ object H_FlightOutFRM: TH_FlightOutFRM
       Font.Color = clWindowText
       Font.Height = -13
       Font.Name = 'arial'
-      Font.Style = [fsBold]
+      Font.Style = []
       ParentFont = False
       TabOrder = 0
       object Label1: TLabel
@@ -405,7 +405,7 @@ object H_FlightOutFRM: TH_FlightOutFRM
       Font.Color = clWindowText
       Font.Height = -13
       Font.Name = 'arial'
-      Font.Style = [fsBold]
+      Font.Style = []
       ParentFont = False
       TabOrder = 2
       object wwDBLookupCombo2: TwwDBLookupCombo

@@ -46,8 +46,9 @@ uses
   m_TypeOfDeclaration in 'm_TypeOfDeclaration.pas' {M_TypeOfDeclarationFRM},
   m_specificCircumstance in 'm_specificCircumstance.pas' {M_SpecificCircumsatnceFRM},
   M_ProcedureRequest in 'M_ProcedureRequest.pas' {M_ProcedureRequestFRM},
+  M_PreviousProcedure in 'M_PreviousProcedure.pas' {M_PreviousProcedureFRM},
   m_DeclarationType in 'm_DeclarationType.pas' {M_declarationTypeFRM},
-  M_PreviousProcedure in 'M_PreviousProcedure.pas' {M_PreviousProcedureFRM};
+  m_KindOfPackages in 'm_KindOfPackages.pas' {M_KIndOfPackagesFRM};
 
 {$R *.RES}
 
@@ -95,8 +96,10 @@ begin
   Application.CreateForm(TM_SpecificCircumsatnceFRM, M_SpecificCircumsatnceFRM);
   Application.CreateForm(TM_PreviousProcedureFRM, M_PreviousProcedureFRM);
   Application.CreateForm(TM_ProcedureRequestFRM, M_ProcedureRequestFRM);
-  Application.CreateForm(TM_declarationTypeFRM, M_declarationTypeFRM);
+  Application.CreateForm(TM_KIndOfPackagesFRM, M_KIndOfPackagesFRM);
   Application.CreateForm(TM_declarationTypeFRM, M_declarationTypeFRM);
   Application.CreateForm(TM_PreviousProcedureFRM, M_PreviousProcedureFRM);
+  Application.CreateForm(TM_declarationTypeFRM, M_declarationTypeFRM);
+  Application.CreateForm(TM_KIndOfPackagesFRM, M_KIndOfPackagesFRM);
   Application.Run;
 end.

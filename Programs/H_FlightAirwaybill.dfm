@@ -130,11 +130,12 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
     Height = 715
     Align = alClient
     TabOrder = 2
+    ExplicitTop = 85
     object GroupBox1: TGroupBox
       Left = 26
       Top = 6
       Width = 423
-      Height = 247
+      Height = 293
       Caption = 'Details'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -544,9 +545,9 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
     end
     object GroupBox2: TGroupBox
       Left = 26
-      Top = 260
-      Width = 496
-      Height = 242
+      Top = 305
+      Width = 455
+      Height = 265
       Caption = 'Sender'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -572,7 +573,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
       end
       object Label11: TLabel
         Left = 13
-        Top = 50
+        Top = 80
         Width = 46
         Height = 15
         Caption = 'Address'
@@ -587,7 +588,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
       end
       object Label12: TLabel
         Left = 1
-        Top = 128
+        Top = 158
         Width = 58
         Height = 15
         Caption = 'Post Code'
@@ -602,7 +603,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
       end
       object Label13: TLabel
         Left = 39
-        Top = 154
+        Top = 184
         Width = 20
         Height = 15
         Caption = 'City'
@@ -617,7 +618,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
       end
       object Label14: TLabel
         Left = 17
-        Top = 179
+        Top = 209
         Width = 42
         Height = 15
         Caption = 'Country'
@@ -661,7 +662,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
       end
       object Label32: TLabel
         Left = 22
-        Top = 210
+        Top = 240
         Width = 37
         Height = 15
         Caption = 'Device'
@@ -676,7 +677,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
       end
       object Label31: TLabel
         Left = 201
-        Top = 202
+        Top = 232
         Width = 32
         Height = 15
         Caption = 'Email'
@@ -722,6 +723,21 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         ParentFont = False
         OnClick = SpeedButton4Click
       end
+      object Label5: TLabel
+        Left = 37
+        Top = 48
+        Width = 22
+        Height = 15
+        Caption = 'VAT '
+        Color = clBtnFace
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'arial'
+        Font.Style = []
+        ParentColor = False
+        ParentFont = False
+      end
       object sname: TwwDBEdit
         Left = 65
         Top = 19
@@ -743,7 +759,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
       end
       object sadd1: TwwDBEdit
         Left = 65
-        Top = 46
+        Top = 76
         Width = 306
         Height = 23
         Color = clWhite
@@ -762,7 +778,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
       end
       object spost: TwwDBEdit
         Left = 65
-        Top = 124
+        Top = 154
         Width = 59
         Height = 23
         Color = clWhite
@@ -781,7 +797,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
       end
       object scity: TwwDBEdit
         Left = 65
-        Top = 150
+        Top = 180
         Width = 300
         Height = 23
         Color = clWhite
@@ -800,7 +816,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
       end
       object scountry: TwwDBLookupCombo
         Left = 65
-        Top = 176
+        Top = 206
         Width = 98
         Height = 23
         Font.Charset = DEFAULT_CHARSET
@@ -846,7 +862,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
       end
       object sadd2: TwwDBEdit
         Left = 65
-        Top = 72
+        Top = 102
         Width = 306
         Height = 23
         Color = clWhite
@@ -865,7 +881,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
       end
       object sadd3: TwwDBEdit
         Left = 65
-        Top = 98
+        Top = 128
         Width = 306
         Height = 23
         Color = clWhite
@@ -884,7 +900,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
       end
       object wwDBEdit4: TwwDBEdit
         Left = 65
-        Top = 205
+        Top = 235
         Width = 59
         Height = 23
         Color = clWhite
@@ -903,7 +919,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
       end
       object wwDBEdit5: TwwDBEdit
         Left = 247
-        Top = 199
+        Top = 229
         Width = 124
         Height = 23
         Color = clWhite
@@ -920,12 +936,31 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         WantReturns = False
         WordWrap = False
       end
+      object wwDBEdit3: TwwDBEdit
+        Left = 65
+        Top = 48
+        Width = 163
+        Height = 23
+        Color = clWhite
+        DataField = 'SENDER_VAT'
+        DataSource = FlightAirwaybillCDS
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'arial'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 10
+        UnboundDataType = wwDefault
+        WantReturns = False
+        WordWrap = False
+      end
     end
     object GroupBox3: TGroupBox
-      Left = 542
-      Top = 260
+      Left = 522
+      Top = 306
       Width = 514
-      Height = 242
+      Height = 294
       Caption = 'Consignee'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -935,7 +970,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
       ParentFont = False
       TabOrder = 2
       object Label15: TLabel
-        Left = 22
+        Left = 26
         Top = 24
         Width = 34
         Height = 15
@@ -950,8 +985,8 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         ParentFont = False
       end
       object Label16: TLabel
-        Left = 10
-        Top = 50
+        Left = 14
+        Top = 82
         Width = 46
         Height = 15
         Caption = 'Address'
@@ -965,8 +1000,8 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         ParentFont = False
       end
       object Label17: TLabel
-        Left = -2
-        Top = 128
+        Left = 2
+        Top = 160
         Width = 58
         Height = 15
         Caption = 'Post Code'
@@ -980,8 +1015,8 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         ParentFont = False
       end
       object Label18: TLabel
-        Left = 36
-        Top = 154
+        Left = 40
+        Top = 186
         Width = 20
         Height = 15
         Caption = 'City'
@@ -995,8 +1030,8 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         ParentFont = False
       end
       object Label19: TLabel
-        Left = 14
-        Top = 179
+        Left = 18
+        Top = 211
         Width = 42
         Height = 15
         Caption = 'Country'
@@ -1010,8 +1045,8 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         ParentFont = False
       end
       object Label27: TLabel
-        Left = 19
-        Top = 205
+        Left = 23
+        Top = 237
         Width = 37
         Height = 15
         Caption = 'Device'
@@ -1025,8 +1060,8 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         ParentFont = False
       end
       object Label28: TLabel
-        Left = 201
-        Top = 202
+        Left = 209
+        Top = 234
         Width = 32
         Height = 15
         Caption = 'Email'
@@ -1040,7 +1075,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         ParentFont = False
       end
       object namefld: TwwDBEdit
-        Left = 65
+        Left = 71
         Top = 20
         Width = 306
         Height = 23
@@ -1059,8 +1094,8 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         WordWrap = False
       end
       object cadd1: TwwDBEdit
-        Left = 65
-        Top = 46
+        Left = 71
+        Top = 78
         Width = 306
         Height = 23
         Color = clWhite
@@ -1078,8 +1113,8 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         WordWrap = False
       end
       object cpost: TwwDBEdit
-        Left = 65
-        Top = 124
+        Left = 71
+        Top = 156
         Width = 59
         Height = 23
         Color = clWhite
@@ -1097,8 +1132,8 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         WordWrap = False
       end
       object ccity: TwwDBEdit
-        Left = 65
-        Top = 150
+        Left = 71
+        Top = 182
         Width = 300
         Height = 23
         Color = clWhite
@@ -1116,8 +1151,8 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         WordWrap = False
       end
       object ccountry: TwwDBLookupCombo
-        Left = 65
-        Top = 176
+        Left = 71
+        Top = 208
         Width = 98
         Height = 23
         Font.Charset = DEFAULT_CHARSET
@@ -1143,8 +1178,8 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         ShowMatchText = True
       end
       object cadd2: TwwDBEdit
-        Left = 65
-        Top = 72
+        Left = 71
+        Top = 104
         Width = 306
         Height = 23
         Color = clWhite
@@ -1162,8 +1197,8 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         WordWrap = False
       end
       object cadd3: TwwDBEdit
-        Left = 65
-        Top = 98
+        Left = 71
+        Top = 130
         Width = 306
         Height = 23
         Color = clWhite
@@ -1181,8 +1216,8 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         WordWrap = False
       end
       object wwDBEdit1: TwwDBEdit
-        Left = 65
-        Top = 202
+        Left = 71
+        Top = 234
         Width = 59
         Height = 23
         Color = clWhite
@@ -1200,8 +1235,8 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         WordWrap = False
       end
       object wwDBEdit2: TwwDBEdit
-        Left = 247
-        Top = 199
+        Left = 255
+        Top = 231
         Width = 124
         Height = 23
         Color = clWhite
@@ -1220,8 +1255,8 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
       end
     end
     object GroupBox4: TGroupBox
-      Left = 40
-      Top = 527
+      Left = 47
+      Top = 566
       Width = 728
       Height = 182
       Caption = 'Items'
@@ -1269,8 +1304,8 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         OnClick = SpeedButton2Click
       end
       object wwDBGrid1: TwwDBGrid
-        Left = 3
-        Top = 39
+        Left = 117
+        Top = 40
         Width = 718
         Height = 145
         ControlType.Strings = (
@@ -1858,6 +1893,27 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
       TextOptions.VAlignment = vaVCenter
       OnClick = wwButton1Click
     end
+    object wwDBComboBox1: TwwDBComboBox
+      Left = 91
+      Top = 252
+      Width = 94
+      Height = 23
+      ShowButton = True
+      Style = csDropDown
+      MapList = False
+      AllowClearKey = False
+      DropDownCount = 8
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'arial'
+      Font.Style = []
+      ItemHeight = 0
+      ParentFont = False
+      Sorted = False
+      TabOrder = 7
+      UnboundDataType = wwDefault
+    end
   end
   object CurrencyFLD: TwwDBLookupCombo
     Left = 60
@@ -2149,7 +2205,9 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         'NUMBER, FK_SENDER_SERIAL, VALUE_TYPE, CONSIGNEE_ADDRESS_1, CONSI' +
         'GNEE_ADDRESS_2, CONSIGNEE_ADDRESS_3, CONSIGNEE_DEVICE_TYPE, CONS' +
         'IGNEE_DEVICE_DETAILS, DISTRICT_CODE, TARIFF_CODE, TARIFF_KEYWORD' +
-        ', IS_CLEARED, IS_HIGH, SERVICE_CODE, ACCOUNT_NUMBER, INCOTERMS)'
+        ', IS_CLEARED, IS_HIGH, SERVICE_CODE, ACCOUNT_NUMBER, INCOTERMS, ' +
+        'CONSIGNEE_PREFERRED_NAME, SENDER_VAT, CONSIGNEE_VAT, DECLARATION' +
+        '_TYPE, TYPE_OF_DECLARATION, SPECIFIC_CIRCUMSTANCE)'
       'VALUES'
       
         '  (:SERIAL_NUMBER, :SEQUENCE_NUMBER, :HAWB_ID, :SHIPMENT_ORIGIN_' +
@@ -2165,7 +2223,9 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         'UE_TYPE, :CONSIGNEE_ADDRESS_1, :CONSIGNEE_ADDRESS_2, :CONSIGNEE_' +
         'ADDRESS_3, :CONSIGNEE_DEVICE_TYPE, :CONSIGNEE_DEVICE_DETAILS, :D' +
         'ISTRICT_CODE, :TARIFF_CODE, :TARIFF_KEYWORD, :IS_CLEARED, :IS_HI' +
-        'GH, :SERVICE_CODE, :ACCOUNT_NUMBER, :INCOTERMS)')
+        'GH, :SERVICE_CODE, :ACCOUNT_NUMBER, :INCOTERMS, :CONSIGNEE_PREFE' +
+        'RRED_NAME, :SENDER_VAT, :CONSIGNEE_VAT, :DECLARATION_TYPE, :TYPE' +
+        '_OF_DECLARATION, :SPECIFIC_CIRCUMSTANCE)')
     SQLDelete.Strings = (
       'DELETE FROM FLIGHT_AIRWAYBILL'
       'WHERE'
@@ -2201,7 +2261,11 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         '_CODE = :DISTRICT_CODE, TARIFF_CODE = :TARIFF_CODE, TARIFF_KEYWO' +
         'RD = :TARIFF_KEYWORD, IS_CLEARED = :IS_CLEARED, IS_HIGH = :IS_HI' +
         'GH, SERVICE_CODE = :SERVICE_CODE, ACCOUNT_NUMBER = :ACCOUNT_NUMB' +
-        'ER, INCOTERMS = :INCOTERMS'
+        'ER, INCOTERMS = :INCOTERMS, CONSIGNEE_PREFERRED_NAME = :CONSIGNE' +
+        'E_PREFERRED_NAME, SENDER_VAT = :SENDER_VAT, CONSIGNEE_VAT = :CON' +
+        'SIGNEE_VAT, DECLARATION_TYPE = :DECLARATION_TYPE, TYPE_OF_DECLAR' +
+        'ATION = :TYPE_OF_DECLARATION, SPECIFIC_CIRCUMSTANCE = :SPECIFIC_' +
+        'CIRCUMSTANCE'
       'WHERE'
       '  SERIAL_NUMBER = :Old_SERIAL_NUMBER')
     SQLRefresh.Strings = (
@@ -2219,7 +2283,9 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         'ONSIGNEE_ADDRESS_2, CONSIGNEE_ADDRESS_3, CONSIGNEE_DEVICE_TYPE, ' +
         'CONSIGNEE_DEVICE_DETAILS, DISTRICT_CODE, TARIFF_CODE, TARIFF_KEY' +
         'WORD, IS_CLEARED, IS_HIGH, SERVICE_CODE, ACCOUNT_NUMBER, INCOTER' +
-        'MS FROM FLIGHT_AIRWAYBILL'
+        'MS, CONSIGNEE_PREFERRED_NAME, SENDER_VAT, CONSIGNEE_VAT, DECLARA' +
+        'TION_TYPE, TYPE_OF_DECLARATION, SPECIFIC_CIRCUMSTANCE FROM FLIGH' +
+        'T_AIRWAYBILL'
       'WHERE'
       '  SERIAL_NUMBER = :SERIAL_NUMBER')
     SQLLock.Strings = (
@@ -2514,6 +2580,33 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
       FieldName = 'INCOTERMS'
       FixedChar = True
       Size = 9
+    end
+    object FlightAirwaybillSQLCONSIGNEE_PREFERRED_NAME: TStringField
+      FieldName = 'CONSIGNEE_PREFERRED_NAME'
+      FixedChar = True
+      Size = 35
+    end
+    object FlightAirwaybillSQLSENDER_VAT: TStringField
+      FieldName = 'SENDER_VAT'
+      FixedChar = True
+      Size = 30
+    end
+    object FlightAirwaybillSQLCONSIGNEE_VAT: TStringField
+      FieldName = 'CONSIGNEE_VAT'
+      FixedChar = True
+      Size = 30
+    end
+    object FlightAirwaybillSQLDECLARATION_TYPE: TStringField
+      FieldName = 'DECLARATION_TYPE'
+      Size = 10
+    end
+    object FlightAirwaybillSQLTYPE_OF_DECLARATION: TStringField
+      FieldName = 'TYPE_OF_DECLARATION'
+      Size = 10
+    end
+    object FlightAirwaybillSQLSPECIFIC_CIRCUMSTANCE: TStringField
+      FieldName = 'SPECIFIC_CIRCUMSTANCE'
+      Size = 10
     end
   end
   object FA_ItemSQL: TIBCQuery

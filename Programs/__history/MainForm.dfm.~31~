@@ -2,7 +2,7 @@ object MainFormFRM: TMainFormFRM
   Left = 140
   Top = 131
   Caption = 'MainFormFRM'
-  ClientHeight = 428
+  ClientHeight = 452
   ClientWidth = 804
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -19,7 +19,7 @@ object MainFormFRM: TMainFormFRM
   TextHeight = 13
   object Panel1: TPanel
     Left = 0
-    Top = 363
+    Top = 387
     Width = 804
     Height = 65
     Align = alBottom
@@ -117,7 +117,7 @@ object MainFormFRM: TMainFormFRM
     Left = 0
     Top = 41
     Width = 804
-    Height = 322
+    Height = 346
     Align = alClient
     TabOrder = 2
     object ScanBTN: TButton
@@ -400,7 +400,14 @@ object MainFormFRM: TMainFormFRM
         OnClick = ListFlights1Click
       end
     end
-    object Tables1: TMenuItem
+    object About: TMenuItem
+      Caption = 'About'
+      object ProductInfo1: TMenuItem
+        Caption = 'Product Info'
+        OnClick = ProductInfo1Click
+      end
+    end
+    object ables1: TMenuItem
       Caption = 'Tables'
       object Tariff1: TMenuItem
         Caption = 'Tariff'
@@ -410,50 +417,6 @@ object MainFormFRM: TMainFormFRM
         Caption = 'Customer'
         OnClick = Customer1Click
       end
-      object TMenuItem
-      end
-      object ServiceCodes1: TMenuItem
-        Caption = 'ServiceCodes'
-        OnClick = ServiceCodes1Click
-      end
-      object Incoterms1: TMenuItem
-        Caption = 'Incoterms'
-        OnClick = Incoterms1Click
-      end
-      object AdditionalParameters1: TMenuItem
-        Caption = 'Additional Parameters'
-        OnClick = AdditionalParameters1Click
-      end
-      object TMenuItem
-      end
-      object Flights1: TMenuItem
-        Caption = 'Flights'
-        OnClick = Flights1Click
-      end
-      object Country1: TMenuItem
-        Caption = 'Country'
-        OnClick = Country1Click
-      end
-      object Itinerary1: TMenuItem
-        Caption = 'Itinerary'
-        OnClick = Itinerary1Click
-      end
-      object District1: TMenuItem
-        Caption = 'District'
-        OnClick = District1Click
-      end
-      object Currency1: TMenuItem
-        Caption = 'Currency'
-        OnClick = Currency1Click
-      end
-      object DangerGoods1: TMenuItem
-        Caption = 'Danger Goods'
-        OnClick = DangerGoods1Click
-      end
-      object Certificates1: TMenuItem
-        Caption = 'Certificates'
-        OnClick = Certificates1Click
-      end
     end
     object System1: TMenuItem
       Caption = 'System'
@@ -461,12 +424,71 @@ object MainFormFRM: TMainFormFRM
         Caption = 'Parameters'
         OnClick = Parameters1Click
       end
-    end
-    object About: TMenuItem
-      Caption = 'About'
-      object ProductInfo1: TMenuItem
-        Caption = 'Product Info'
-        OnClick = ProductInfo1Click
+      object ableParams1: TMenuItem
+        Caption = 'Table Params'
+        object DeclarationType1: TMenuItem
+          Caption = 'Declaration Type'
+          OnClick = DeclarationType1Click
+        end
+        object ypeOfDeclaration1: TMenuItem
+          Caption = 'Type Of Declaration'
+          OnClick = ypeOfDeclaration1Click
+        end
+        object PreviousProcedure1: TMenuItem
+          Caption = 'Previous Procedure'
+          OnClick = PreviousProcedure1Click
+        end
+        object SpecificCircumstance1: TMenuItem
+          Caption = 'Specific Circumstance'
+          OnClick = SpecificCircumstance1Click
+        end
+        object ProcedureRequest1: TMenuItem
+          Caption = 'Procedure Request'
+          OnClick = ProcedureRequest1Click
+        end
+        object Incoterms1: TMenuItem
+          Caption = 'Incoterms'
+          OnClick = Incoterms1Click
+        end
+        object ServiceCodes1: TMenuItem
+          Caption = 'ServiceCodes'
+          OnClick = ServiceCodes1Click
+        end
+        object AdditionalParameters1: TMenuItem
+          Caption = 'Additional Parameters'
+          OnClick = AdditionalParameters1Click
+        end
+        object DangerGoods1: TMenuItem
+          Caption = 'Danger Goods'
+          OnClick = DangerGoods1Click
+        end
+        object Certificates1: TMenuItem
+          Caption = 'Certificates'
+          OnClick = Certificates1Click
+        end
+      end
+      object Tables1: TMenuItem
+        Caption = 'Tables'
+        object Flights1: TMenuItem
+          Caption = 'Flights'
+          OnClick = Flights1Click
+        end
+        object Country1: TMenuItem
+          Caption = 'Country'
+          OnClick = Country1Click
+        end
+        object Itinerary1: TMenuItem
+          Caption = 'Itinerary'
+          OnClick = Itinerary1Click
+        end
+        object District1: TMenuItem
+          Caption = 'District'
+          OnClick = District1Click
+        end
+        object Currency1: TMenuItem
+          Caption = 'Currency'
+          OnClick = Currency1Click
+        end
       end
     end
   end

@@ -39,7 +39,6 @@ type
   public
     { Public declarations }
     IN_FlightSerial:Integer;
-    SameSender:boolean;
     procedure CreateOneAirwabillXML(Const SerialNumber:Integer);
   Function  CreateMultiXML(Const FlightOutSerial:Integer):Integer;
 
@@ -203,8 +202,8 @@ end;
 
 function TX_CreateMultiHighXmlFRM.CreateNodeOuter( Const FlightOutSerial:Integer; const Fdoc: IXMLDocument;FatherNode:IXMLNode):IXMLNode;
 var
-  qr,FirstAirQr:TksQuery;
-  HeaderNode,x1Node, x2Node:IXMLNode;
+  qr:TksQuery;
+  HeaderNode,x1Node:IXMLNode;
   val:String;
   addr:string;
   DString:String;
@@ -220,20 +219,11 @@ begin
   +'   where fo.serial_number = :serial';
   Qr:=TksQuery.Create(cn,val);
 
-  val:= 'select first 1 * from flight_airwaybill fa where fa.fk_flight_out_serial = :flightSerial';
-  FirstAirQR.Create(cn,val);
-
   try
       Qr.ParambyName('serial').Value:= FlightOutSerial;
       Qr.Open;
       if qr.IsEmpty then
         exit;
-
-      FirstAirQr.ParambyName('FlightSerial').Value:= FlightOutSerial;
-      FirstAir.Open;
-      if FirstAir.IsEmpty then
-        exit;
-
 
       MawbId:=Qr.FieldByName('Mawb').AsString;
       FlightName:=Qr.FieldByName('Flight_name').AsString;
@@ -256,46 +246,27 @@ begin
      //***Header***************************************
      createNodeHeader(FlightOutSerial,FDoc,FatherNode);
      //*************************************************
-     //Consignor
-     if (SameSender OR true) then begin
-       x2node:=CreateXMLNodeNew(FDoc,FatherNode,'Msg515Exporter','',ntElement);
-       TBLCreateXMLNode(FDoc,x2node,'TraderName','',FirstAirQr,'SENDER_NAME',ntText);
-       dString:=Trim(FirstAirQr.fieldbyName('SENDER_ADDRESS_1').AsString)+','+Trim(FirstAirQr.fieldbyName('SENDER_ADDRESS_2').AsString)+','+Trim(qr.fieldbyName('SENDER_ADDRESS_3').AsString);
-       dString:=Copy(dString,1,34);
-       CreateXMLNodeNew(FDoc,x2node,'StreetAndNumber',dString,ntText);
-       TblCreateXMLNode(FDoc,x2node,'PostalCode','',FirstAirQr,'SENDER_POST_CODE',ntText);
-       TblCreateXMLNode(FDoc,x2node,'City','',FirstAirQr,'SENDER_CITY',ntText);
-       TblCreateXMLNode(FDoc,x2node,'CountryCode','',FirstAirQr,'SENDER_COUNTRY_CODE',ntText);
-       CreateXMLNodeNew(FDoc,x2node,'NADLNG','EN',ntText);
-       TblCreateXMLNode(FDoc,x2node,'TIN','',FirstAirQr,'SENDER_VAT',ntText);
-     end;
+      <Msg515Exporter>
+      <Msg515ExportCustomsOffice>
+      <Msg515ExitCustomsOffice>
+      <Msg515StatusRepresentative>
 
-
-     x2Node:=CreateXMLNodeNew(FDoc,FatherNode,'Msg515ExportCustomsOffice','',ntElement);
-     CreateXMLNodeNew(FDoc,x2Node,'ReferenceNumber','CY000440',ntElement);
-
-     x2Node:=CreateXMLNodeNew(FDoc,FatherNode,'Msg515ExitCustomsOffice','',ntElement);
-     CreateXMLNodeNew(FDoc,x2Node,'ReferenceNumber','CY000440',ntElement);
-
-
-     //***GoodsItems*******************************************
-     CreateNodeAirwayBills(FlightOutSerial,Fdoc,FatherNode);
-     //** Itineraries******************************************
-     CreateNodeFlightCountries(FlightOutSerial,Fdoc,FatherNode);
-
-
+     //***GoodsItems***************************************
+     //** Itineraries
+     //
+     //***************************************************
      <Msg515DeclarantTrader>
      <Msg515TermsDelivery>
      <Msg515DataTransaction>
-      <Msg515StatusRepresentative>
 
+     CreateNodeAirwayBills(FlightOutSerial,Fdoc,FatherNode);
+     CreateNodeFlightCountries(FlightOutSerial,Fdoc,FatherNode);
 
 
 
       qr.Close;
     finally
       qr.Free;
-      FirstAirQr.Free;
     end;
 
 end;
@@ -426,8 +397,6 @@ begin
 
 
        //Consignor
-       if (not SameSender) then begin
-
        x2node:=CreateXMLNodeNew(FDoc,HeaderNode,'Msg615ConsignorTrader','',ntElement);
        TBLCreateXMLNode(FDoc,x2node,'TraderName','',qr,'SENDER_NAME',ntText);
        dString:=Trim(qr.fieldbyName('SENDER_ADDRESS_1').AsString)+','+Trim(qr.fieldbyName('SENDER_ADDRESS_2').AsString)+','+Trim(qr.fieldbyName('SENDER_ADDRESS_3').AsString);
@@ -437,7 +406,6 @@ begin
        TblCreateXMLNode(FDoc,x2node,'City','',qr,'SENDER_CITY',ntText);
        TblCreateXMLNode(FDoc,x2node,'CountryCode','',qr,'SENDER_COUNTRY_CODE',ntText);
        CreateXMLNodeNew(FDoc,x2node,'NADLNG','EN',ntText);
-       end;
 
        //Consignee
        x2node:=CreateXMLNodeNew(FDoc,HeaderNode,'Msg615Consignee','',ntElement);

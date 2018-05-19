@@ -29,6 +29,7 @@ type
     function TBLCreateXMLNode(XMLDoc:IXMLDocument;ElementFather:IXMLNode;ElementName:String;ElementValue:String; Dataset: TDataset; FieldName:String; ElementType: TNodeType =ntElement):IXMLNode;
 
 
+  function CreateNodeOuter( Const FlightOutSerial:Integer; const Fdoc: IXMLDocument;FatherNode:IXMLNode):IXMLNode;
   function CreateNodeHeader( Const FlightOutSerial:Integer; const Fdoc: IXMLDocument;FatherNode:IXMLNode):IXMLNode;
   function CreateNodeAirwayBills( Const FlightSerial:Integer; const Fdoc: IXMLDocument;FatherNode:IXMLNode):IXMLNode;
   function CreateNodeForItems( Const AirwaybillSerial:Integer; const Fdoc: IXMLDocument;FatherNode:IXMLNode):IXMLNode;
@@ -201,6 +202,66 @@ Begin
 
 end;
 
+function TX_CreateMultiHighXmlFRM.CreateNodeOuter( Const FlightOutSerial:Integer; const Fdoc: IXMLDocument;FatherNode:IXMLNode):IXMLNode;
+var
+  qr:TksQuery;
+  HeaderNode,x1Node:IXMLNode;
+  val:String;
+  addr:string;
+  DString:String;
+  MawbId:String;
+  FlightName:string;
+  DateDepart:Tdate;
+begin
+  val:=
+  '   select'
+  +'  fo.serial_number, fo.mawb, fo.Date_depart, ft.flight_name'
+  +'   from flight_out fo'
+  +'   left outer join flight_table ft on fo.fk_flight_table=ft.serial_number'
+  +'   where fo.serial_number = :serial';
+  Qr:=TksQuery.Create(cn,val);
+
+  try
+      Qr.ParambyName('serial').Value:= FlightOutSerial;
+      Qr.Open;
+      if qr.IsEmpty then
+        exit;
+
+      MawbId:=Qr.FieldByName('Mawb').AsString;
+      FlightName:=Qr.FieldByName('Flight_name').AsString;
+      DateDepart:=Qr.FieldByName('date_depart').AsDateTime;
+
+     CreateXMLNodeNew(FDoc,FatherNode,'SyntaxIdentifier','UNOC',ntText);
+     CreateXMLNodeNew(FDoc,FatherNode,'SyntaxVersionNumber','3',ntText);
+     CreateXMLNodeNew(FDoc,FatherNode,'MessageSender','CY10016129G',ntText);
+     CreateXMLNodeNew(FDoc,FatherNode,'SenderIdCodeQualifier','CY',ntText);
+     CreateXMLNodeNew(FDoc,FatherNode,'MessageRecipient','NECA.CY',ntText);
+     CreateXMLNodeNew(FDoc,FatherNode,'RecipientIdentifCodeQualifier','CY',ntText);
+     DString:=FormatDateTime('YYMMDD',now);
+     CreateXMLNodeNew(FDoc,FatherNode,'DateOfPreparation',DString,ntText);
+     DString:=FormatDateTime('HHMM',now);
+     CreateXMLNodeNew(FDoc,FatherNode,'TimeOfPreparation',DString,ntText);
+     CreateXMLNodeNew(FDoc,FatherNode,'InterchangeControlReference','CY823a7ac010e2',ntText);
+     CreateXMLNodeNew(FDoc,FatherNode,'MessageIdentification','CY823a7ac010e2',ntText);
+     CreateXMLNodeNew(FDoc,FatherNode,'MessageType','CC515A',ntText);
+
+     createNodeHeader(FlightOutSerial,FDoc,FatherNode)
+
+     CreateXMLNodeNew(FDoc,FatherNode,'BelowHEader','Below',ntText);
+
+/////////////////////////////////
+
+
+
+
+      qr.Close;
+    finally
+      qr.Free;
+    end;
+
+end;
+
+
 function TX_CreateMultiHighXmlFRM.CreateNodeHeader( Const FlightOutSerial:Integer; const Fdoc: IXMLDocument;FatherNode:IXMLNode):IXMLNode;
 var
   qr:TksQuery;
@@ -230,26 +291,6 @@ begin
       FlightName:=Qr.FieldByName('Flight_name').AsString;
       DateDepart:=Qr.FieldByName('date_depart').AsDateTime;
 
-
-
-
-     CreateXMLNodeNew(FDoc,FatherNode,'SyntaxIdentifier','UNOC',ntText);
-     CreateXMLNodeNew(FDoc,FatherNode,'SyntaxVersionNumber','3',ntText);
-     CreateXMLNodeNew(FDoc,FatherNode,'MessageSender','CY10016129G',ntText);
-     CreateXMLNodeNew(FDoc,FatherNode,'SenderIdCodeQualifier','CY',ntText);
-     CreateXMLNodeNew(FDoc,FatherNode,'MessageRecipient','NECA.CY',ntText);
-     CreateXMLNodeNew(FDoc,FatherNode,'RecipientIdentifCodeQualifier','CY',ntText);
-     DString:=FormatDateTime('YYMMDD',now);
-     CreateXMLNodeNew(FDoc,FatherNode,'DateOfPreparation',DString,ntText);
-     DString:=FormatDateTime('HHMM',now);
-     CreateXMLNodeNew(FDoc,FatherNode,'TimeOfPreparation',DString,ntText);
-     CreateXMLNodeNew(FDoc,FatherNode,'InterchangeControlReference','CY823a7ac010e2',ntText);
-     CreateXMLNodeNew(FDoc,FatherNode,'MessageIdentification','CY823a7ac010e2',ntText);
-     CreateXMLNodeNew(FDoc,FatherNode,'MessageType','CC515A',ntText);
-
-/////////////////////////////////
-
-
     //********************************************
      //Header515
      val:=MawbId+FormatDateTime('YYMMDDHHMMSS', now);
@@ -265,12 +306,12 @@ begin
      CreateXMLNodeNew(FDoc,x1node,'TransportModeAtBorder','4',ntText); //here
 
      //xxxx
-     DString:= flight_name + FormatDateTime('dd/mm/yyy',DateDepart)
-     CreateXMLNodeNew(FDoc,x1node,'IdMeansOfTransAtDeparture','3V167C',ntText); //here
+     DString:= flightName +' '+ FormatDateTime('dd/mm/yyy',DateDepart);
+     CreateXMLNodeNew(FDoc,x1node,'IdMeansOfTransAtDeparture',DString,ntText); //here
 
 
      CreateXMLNodeNew(FDoc,x1node,'IdMeansOfTransAtDepartureLNG','EN',ntText); //here
-     CreateXMLNodeNew(FDoc,x1node,'IdMeansOfTransCrossBorder','3V17C',ntText); //here
+     CreateXMLNodeNew(FDoc,x1node,'IdMeansOfTransCrossBorder',DString,ntText); //here
      CreateXMLNodeNew(FDoc,x1node,'IdMeansOfTransCrossBorderLNG','EN',ntText); //here
      CreateXMLNodeNew(FDoc,x1node,'NationOfMeansTransCrossBorder','BE',ntText); //here
      CreateXMLNodeNew(FDoc,x1node,'ContainerisedIndicator','0',ntText); //here
@@ -294,6 +335,7 @@ begin
     end;
 
 end;
+
 
 
 function TX_CreateMultiHighXmlFRM.CreateNodeAirwayBills( Const FlightSerial:Integer; const Fdoc: IXMLDocument;FatherNode:IXMLNode):IXMLNode;
