@@ -40,6 +40,7 @@ type
     { Public declarations }
     IN_FlightSerial:Integer;
     SameSender:boolean;
+    SameIncoterm:boolean;
     procedure CreateOneAirwabillXML(Const SerialNumber:Integer);
   Function  CreateMultiXML(Const FlightOutSerial:Integer):Integer;
 
@@ -221,7 +222,7 @@ begin
   Qr:=TksQuery.Create(cn,val);
 
   val:= 'select first 1 * from flight_airwaybill fa where fa.fk_flight_out_serial = :flightSerial';
-  FirstAirQR.Create(cn,val);
+  FirstAirQR:= TksQuery.Create(cn,val);
 
   try
       Qr.ParambyName('serial').Value:= FlightOutSerial;
@@ -230,8 +231,8 @@ begin
         exit;
 
       FirstAirQr.ParambyName('FlightSerial').Value:= FlightOutSerial;
-      FirstAir.Open;
-      if FirstAir.IsEmpty then
+      FirstAirQr.Open;
+      if FirstAirQr.IsEmpty then
         exit;
 
 
@@ -259,8 +260,9 @@ begin
      //Consignor
      if (SameSender OR true) then begin
        x2node:=CreateXMLNodeNew(FDoc,FatherNode,'Msg515Exporter','',ntElement);
-       TBLCreateXMLNode(FDoc,x2node,'TraderName','',FirstAirQr,'SENDER_NAME',ntText);
-       dString:=Trim(FirstAirQr.fieldbyName('SENDER_ADDRESS_1').AsString)+','+Trim(FirstAirQr.fieldbyName('SENDER_ADDRESS_2').AsString)+','+Trim(qr.fieldbyName('SENDER_ADDRESS_3').AsString);
+       //error
+        TBLCreateXMLNode(FDoc,x2node,'TraderName','',FirstAirQr,'SENDER_NAME',ntText);
+       dString:=Trim(FirstAirQr.fieldbyName('SENDER_ADDRESS_1').AsString)+','+Trim(FirstAirQr.fieldbyName('SENDER_ADDRESS_2').AsString)+','+Trim(FirstAirQr.fieldbyName('SENDER_ADDRESS_3').AsString);
        dString:=Copy(dString,1,34);
        CreateXMLNodeNew(FDoc,x2node,'StreetAndNumber',dString,ntText);
        TblCreateXMLNode(FDoc,x2node,'PostalCode','',FirstAirQr,'SENDER_POST_CODE',ntText);
@@ -283,14 +285,33 @@ begin
      //** Itineraries******************************************
      CreateNodeFlightCountries(FlightOutSerial,Fdoc,FatherNode);
 
+     //**** Declerant Trader
+     if (SameSender OR true) then begin
+       x2node:=CreateXMLNodeNew(FDoc,FatherNode,'Msg515DeclarantTrader','',ntElement);
+       TBLCreateXMLNode(FDoc,x2node,'TraderName','',FirstAirQr,'SENDER_NAME',ntText);
+       dString:=Trim(FirstAirQr.fieldbyName('SENDER_ADDRESS_1').AsString)+','+Trim(FirstAirQr.fieldbyName('SENDER_ADDRESS_2').AsString)+','+Trim(FirstAirQr.fieldbyName('SENDER_ADDRESS_3').AsString);
+       dString:=Copy(dString,1,34);
+       CreateXMLNodeNew(FDoc,x2node,'StreetAndNumber',dString,ntText);
+       TblCreateXMLNode(FDoc,x2node,'PostalCode','',FirstAirQr,'SENDER_POST_CODE',ntText);
+       TblCreateXMLNode(FDoc,x2node,'City','',FirstAirQr,'SENDER_CITY',ntText);
+       TblCreateXMLNode(FDoc,x2node,'CountryCode','',FirstAirQr,'SENDER_COUNTRY_CODE',ntText);
+       CreateXMLNodeNew(FDoc,x2node,'NADLNG','EN',ntText);
+       TblCreateXMLNode(FDoc,x2node,'TIN','',FirstAirQr,'SENDER_VAT',ntText);
+     end;
 
-     <Msg515DeclarantTrader>
-     <Msg515TermsDelivery>
-     <Msg515DataTransaction>
-      <Msg515StatusRepresentative>
+      if (SameIncoterm OR true) then begin
+        x2node:=CreateXMLNodeNew(FDoc,FatherNode,'Msg515TermsDelivery','',ntElement);
+        TBLCreateXMLNode(FDoc,x2node,'IncotermCode','',FirstAirQr,'INCOTERMS',ntText);
+        CreateXMLNodeNew(FDoc,x2node,'ComplementaryCode','XXX',ntText);
+        CreateXMLNodeNew(FDoc,x2node,'ComplementaryCode','XXX',ntText);
+        CreateXMLNodeNew(FDoc,x2node,'ComplementOfInfoLNG','XXX',ntText);
+      end;
 
+     x2node:=CreateXMLNodeNew(FDoc,FatherNode,'Msg515DataTransaction','',ntElement);
+     CreateXMLNodeNew(FDoc,x2node,'NatureOfTransactionCode','XXX',ntText);
 
-
+     x2node:=CreateXMLNodeNew(FDoc,FatherNode,'Msg515StatusRepresentative','',ntElement);
+     CreateXMLNodeNew(FDoc,x2node,'RepresentativeStatusCode','XXX',ntText);
 
       qr.Close;
     finally
@@ -303,7 +324,7 @@ end;
 
 function TX_CreateMultiHighXmlFRM.CreateNodeHeader( Const FlightOutSerial:Integer; const Fdoc: IXMLDocument;FatherNode:IXMLNode):IXMLNode;
 var
-  qr:TksQuery;
+  qr,TotalsQr:TksQuery;
   HeaderNode,x1Node:IXMLNode;
   val:String;
   addr:string;
@@ -320,10 +341,22 @@ begin
   +'   where fo.serial_number = :serial';
   Qr:=TksQuery.Create(cn,val);
 
+  val:=
+  '   Select count(it.serial_number) as Cnt , sum(it.weight)as TotalWeight, sum(it.pieces) as TotalPieces from'
+  +'    flight_airwaybill fa join'
+  +'    flight_airwaybill_item it on fa.serial_number=it.fk_fa_serial'
+  +'    where fa.fk_flight_out_serial= :flightSerial';
+  TotalsQr:=TksQuery.Create(cn,val);
+
   try
       Qr.ParambyName('serial').Value:= FlightOutSerial;
       Qr.Open;
       if qr.IsEmpty then
+        exit;
+
+      TotalsQr.ParambyName('FlightSerial').Value:= FlightOutSerial;
+      TotalsQr.Open;
+      if Totalsqr.IsEmpty then
         exit;
 
       MawbId:=Qr.FieldByName('Mawb').AsString;
@@ -355,9 +388,10 @@ begin
      CreateXMLNodeNew(FDoc,x1node,'ContainerisedIndicator','0',ntText); //here
      CreateXMLNodeNew(FDoc,x1node,'ECSAccompanyingDocLangCode','EN',ntText); //here
 
-      TotalNumberOfItems
-      TotalNumberOfPackages
-      TotalGrossMass
+     TblCreateXMLNode(FDoc,x1node,'TotalNumberOfItems','',TotalsQr,'Cnt',ntText);
+     TblCreateXMLNode(FDoc,x1node,'TotalNumberOfPackages','',TotalsQr,'TOTALPIECES',ntText);
+     TblCreateXMLNode(FDoc,x1node,'TotalGrossMass','',TotalsQr,'TOTALWEIGHT',ntText);
+
 
      DString:=FormatDateTime('YYYY-MM-DD"T00:00:00+03:00"',now);
      CreateXMLNodeNew(FDoc,x1node,'DeclarationDate',DString,ntText);
@@ -372,6 +406,7 @@ begin
       qr.Close;
     finally
       qr.Free;
+      TOtalsQr.Free;
     end;
 
 end;
