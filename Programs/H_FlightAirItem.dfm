@@ -2,7 +2,7 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
   Left = 365
   Top = 153
   Caption = '--'
-  ClientHeight = 530
+  ClientHeight = 641
   ClientWidth = 1092
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -48,11 +48,12 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
   end
   object Panel4: TPanel
     Left = 0
-    Top = 487
+    Top = 598
     Width = 1092
     Height = 43
     Align = alBottom
     TabOrder = 3
+    ExplicitTop = 487
     object RzPanel1: TRzPanel
       Left = 991
       Top = 1
@@ -294,17 +295,19 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
     Left = 0
     Top = 92
     Width = 1092
-    Height = 395
+    Height = 506
     Align = alClient
     TabOrder = 2
+    ExplicitHeight = 395
     object RzPanel2: TRzPanel
       Left = 1
       Top = 1
       Width = 24
-      Height = 393
+      Height = 504
       Align = alLeft
       BorderOuter = fsNone
       TabOrder = 0
+      ExplicitHeight = 393
       object RzPanel3: TRzPanel
         Left = 0
         Top = 0
@@ -319,16 +322,17 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
       Left = 25
       Top = 1
       Width = 1066
-      Height = 393
+      Height = 504
       Align = alClient
       BorderOuter = fsNone
       TabOrder = 1
       VisualStyle = vsClassic
+      ExplicitHeight = 393
       object GroupBox1: TGroupBox
-        Left = -18
+        Left = 33
         Top = 45
-        Width = 338
-        Height = 331
+        Width = 450
+        Height = 418
         Caption = 'Details'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -338,8 +342,8 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
         ParentFont = False
         TabOrder = 0
         object Label2: TLabel
-          Left = 50
-          Top = 131
+          Left = 72
+          Top = 167
           Width = 34
           Height = 14
           Caption = 'Pieces'
@@ -351,8 +355,8 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
           ParentFont = False
         end
         object Label3: TLabel
-          Left = 63
-          Top = 21
+          Left = 85
+          Top = 18
           Width = 21
           Height = 14
           Caption = #913'/'#913
@@ -364,8 +368,8 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
           ParentFont = False
         end
         object asf: TLabel
-          Left = 46
-          Top = 103
+          Left = 68
+          Top = 113
           Width = 38
           Height = 14
           Caption = 'weight'
@@ -377,8 +381,8 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
           ParentFont = False
         end
         object SerialFLD: TRzDBLabel
-          Left = 98
-          Top = 18
+          Left = 116
+          Top = 20
           Width = 82
           Height = 20
           Alignment = taRightJustify
@@ -388,8 +392,8 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
           DataSource = TableSRC
         end
         object Label14: TLabel
-          Left = 196
-          Top = 217
+          Left = 218
+          Top = 236
           Width = 48
           Height = 14
           Caption = 'Currency'
@@ -401,8 +405,8 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
           ParentFont = False
         end
         object Label15: TLabel
-          Left = 40
-          Top = 216
+          Left = 62
+          Top = 261
           Width = 44
           Height = 14
           Caption = 'Amount'
@@ -414,8 +418,8 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
           ParentFont = False
         end
         object Label16: TLabel
-          Left = 29
-          Top = 44
+          Left = 51
+          Top = 54
           Width = 55
           Height = 14
           Caption = 'Sequence'
@@ -427,8 +431,8 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
           ParentFont = False
         end
         object Label1: TLabel
-          Left = 24
-          Top = 78
+          Left = 46
+          Top = 79
           Width = 60
           Height = 14
           Caption = 'Description'
@@ -440,8 +444,8 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
           ParentFont = False
         end
         object Label5: TLabel
-          Left = 56
-          Top = 167
+          Left = 78
+          Top = 236
           Width = 28
           Height = 14
           Caption = 'Tariff'
@@ -452,9 +456,74 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
           Font.Style = []
           ParentFont = False
         end
+        object Label6: TLabel
+          Left = 21
+          Top = 303
+          Width = 85
+          Height = 14
+          Caption = 'Procedure Req.'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -12
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentFont = False
+        end
+        object Label7: TLabel
+          Left = 33
+          Top = 329
+          Width = 73
+          Height = 14
+          Caption = 'Previous Proc'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -12
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentFont = False
+        end
+        object Label8: TLabel
+          Left = 218
+          Top = 151
+          Width = 23
+          Height = 14
+          Caption = 'Kind'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -12
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentFont = False
+        end
+        object Label9: TLabel
+          Left = 42
+          Top = 138
+          Width = 64
+          Height = 14
+          Caption = 'Net Weight'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -12
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentFont = False
+        end
+        object Label10: TLabel
+          Left = 22
+          Top = 192
+          Width = 84
+          Height = 14
+          Caption = 'No of Packages'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -12
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentFont = False
+        end
         object FirstFLD: TwwDBEdit
-          Left = 98
-          Top = 47
+          Left = 116
+          Top = 50
           Width = 82
           Height = 22
           DataField = 'SEQUENCE'
@@ -465,8 +534,8 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
           WordWrap = False
         end
         object wwDBEdit1: TwwDBEdit
-          Left = 98
-          Top = 103
+          Left = 116
+          Top = 109
           Width = 82
           Height = 22
           DataField = 'WEIGHT'
@@ -477,59 +546,134 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
           WordWrap = False
         end
         object wwDBEdit2: TwwDBEdit
-          Left = 250
-          Top = 213
+          Left = 218
+          Top = 257
           Width = 52
           Height = 22
           DataField = 'CURRENCY'
+          DataSource = TableSRC
+          TabOrder = 9
+          UnboundDataType = wwDefault
+          WantReturns = False
+          WordWrap = False
+        end
+        object wwDBEdit12: TwwDBEdit
+          Left = 116
+          Top = 257
+          Width = 82
+          Height = 22
+          DataField = 'AMOUNT'
+          DataSource = TableSRC
+          TabOrder = 8
+          UnboundDataType = wwDefault
+          WantReturns = False
+          WordWrap = False
+        end
+        object wwDBEdit13: TwwDBEdit
+          Left = 116
+          Top = 171
+          Width = 82
+          Height = 22
+          DataField = 'PIECES'
           DataSource = TableSRC
           TabOrder = 4
           UnboundDataType = wwDefault
           WantReturns = False
           WordWrap = False
         end
-        object wwDBEdit12: TwwDBEdit
-          Left = 98
-          Top = 212
+        object wwDBEdit3: TwwDBEdit
+          Left = 116
+          Top = 75
           Width = 82
           Height = 22
-          DataField = 'AMOUNT'
-          DataSource = TableSRC
-          TabOrder = 3
-          UnboundDataType = wwDefault
-          WantReturns = False
-          WordWrap = False
-        end
-        object wwDBEdit13: TwwDBEdit
-          Left = 98
-          Top = 131
-          Width = 82
-          Height = 22
-          DataField = 'PIECES'
+          DataField = 'DESCRIPTION'
           DataSource = TableSRC
           TabOrder = 1
           UnboundDataType = wwDefault
           WantReturns = False
           WordWrap = False
         end
-        object wwDBEdit3: TwwDBEdit
-          Left = 98
-          Top = 75
+        object wwDBEdit4: TwwDBEdit
+          Left = 116
+          Top = 232
           Width = 82
           Height = 22
-          DataField = 'DESCRIPTION'
+          DataField = 'TARIFF_CODE'
           DataSource = TableSRC
-          TabOrder = 5
+          TabOrder = 7
           UnboundDataType = wwDefault
           WantReturns = False
           WordWrap = False
         end
-        object wwDBEdit4: TwwDBEdit
-          Left = 98
-          Top = 159
+        object ProcReqFLD: TwwDBComboBox
+          Left = 116
+          Top = 300
           Width = 82
           Height = 22
-          DataField = 'TARIFF_CODE'
+          ShowButton = True
+          Style = csDropDown
+          MapList = False
+          AllowClearKey = False
+          DataField = 'PROCEDURE_REQUESTED'
+          DataSource = TableSRC
+          DropDownCount = 8
+          ItemHeight = 0
+          Sorted = False
+          TabOrder = 10
+          UnboundDataType = wwDefault
+        end
+        object PreviousProcFLD: TwwDBComboBox
+          Left = 116
+          Top = 325
+          Width = 82
+          Height = 22
+          ShowButton = True
+          Style = csDropDown
+          MapList = False
+          AllowClearKey = False
+          DataField = 'PREVIOUS_PROCEDURE'
+          DataSource = TableSRC
+          DropDownCount = 8
+          ItemHeight = 0
+          Sorted = False
+          TabOrder = 11
+          UnboundDataType = wwDefault
+        end
+        object KIndOfPackFLD: TwwDBComboBox
+          Left = 218
+          Top = 171
+          Width = 82
+          Height = 22
+          ShowButton = True
+          Style = csDropDown
+          MapList = False
+          AllowClearKey = False
+          DataField = 'KIND_OF_PACKAGES'
+          DataSource = TableSRC
+          DropDownCount = 8
+          ItemHeight = 0
+          Sorted = False
+          TabOrder = 5
+          UnboundDataType = wwDefault
+        end
+        object wwDBEdit5: TwwDBEdit
+          Left = 116
+          Top = 134
+          Width = 82
+          Height = 22
+          DataField = 'WEIGHT_NET'
+          DataSource = TableSRC
+          TabOrder = 3
+          UnboundDataType = wwDefault
+          WantReturns = False
+          WordWrap = False
+        end
+        object wwDBEdit6: TwwDBEdit
+          Left = 116
+          Top = 196
+          Width = 82
+          Height = 22
+          DataField = 'NUMBER_OF_PACKAGES'
           DataSource = TableSRC
           TabOrder = 6
           UnboundDataType = wwDefault
@@ -545,11 +689,10 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
         Align = alTop
         BorderOuter = fsNone
         TabOrder = 1
-        ExplicitLeft = 6
       end
       object GroupBox2: TGroupBox
-        Left = 326
-        Top = 45
+        Left = 486
+        Top = 63
         Width = 364
         Height = 332
         Caption = 'Item Certificates'
@@ -745,7 +888,7 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
           Left = 16
           Top = 20
           Width = 129
-          Height = 21
+          Height = 24
           DropDownAlignment = taLeftJustify
           Selected.Strings = (
             'CODE'#9'10'#9'Code'#9'F'
@@ -785,11 +928,15 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
       'INSERT INTO FLIGHT_AIRWAYBILL_ITEM'
       
         '  (SERIAL_NUMBER, SEQUENCE, WEIGHT, PIECES, DESCRIPTION, TARIFF_' +
-        'CODE, AMOUNT, CURRENCY_RATE, CURRENCY, FK_FA_SERIAL)'
+        'CODE, AMOUNT, CURRENCY_RATE, CURRENCY, FK_FA_SERIAL, PROCEDURE_R' +
+        'EQUESTED, PREVIOUS_PROCEDURE, KIND_OF_PACKAGES, NUMBER_OF_PACKAG' +
+        'ES, WEIGHT_NET)'
       'VALUES'
       
         '  (:SERIAL_NUMBER, :SEQUENCE, :WEIGHT, :PIECES, :DESCRIPTION, :T' +
-        'ARIFF_CODE, :AMOUNT, :CURRENCY_RATE, :CURRENCY, :FK_FA_SERIAL)')
+        'ARIFF_CODE, :AMOUNT, :CURRENCY_RATE, :CURRENCY, :FK_FA_SERIAL, :' +
+        'PROCEDURE_REQUESTED, :PREVIOUS_PROCEDURE, :KIND_OF_PACKAGES, :NU' +
+        'MBER_OF_PACKAGES, :WEIGHT_NET)')
     SQLDelete.Strings = (
       'DELETE FROM FLIGHT_AIRWAYBILL_ITEM'
       'WHERE'
@@ -801,14 +948,18 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
         '  SERIAL_NUMBER = :SERIAL_NUMBER, SEQUENCE = :SEQUENCE, WEIGHT =' +
         ' :WEIGHT, PIECES = :PIECES, DESCRIPTION = :DESCRIPTION, TARIFF_C' +
         'ODE = :TARIFF_CODE, AMOUNT = :AMOUNT, CURRENCY_RATE = :CURRENCY_' +
-        'RATE, CURRENCY = :CURRENCY, FK_FA_SERIAL = :FK_FA_SERIAL'
+        'RATE, CURRENCY = :CURRENCY, FK_FA_SERIAL = :FK_FA_SERIAL, PROCED' +
+        'URE_REQUESTED = :PROCEDURE_REQUESTED, PREVIOUS_PROCEDURE = :PREV' +
+        'IOUS_PROCEDURE, KIND_OF_PACKAGES = :KIND_OF_PACKAGES, NUMBER_OF_' +
+        'PACKAGES = :NUMBER_OF_PACKAGES, WEIGHT_NET = :WEIGHT_NET'
       'WHERE'
       '  SERIAL_NUMBER = :Old_SERIAL_NUMBER')
     SQLRefresh.Strings = (
       
         'SELECT SERIAL_NUMBER, SEQUENCE, WEIGHT, PIECES, DESCRIPTION, TAR' +
-        'IFF_CODE, AMOUNT, CURRENCY_RATE, CURRENCY, FK_FA_SERIAL FROM FLI' +
-        'GHT_AIRWAYBILL_ITEM'
+        'IFF_CODE, AMOUNT, CURRENCY_RATE, CURRENCY, FK_FA_SERIAL, PROCEDU' +
+        'RE_REQUESTED, PREVIOUS_PROCEDURE, KIND_OF_PACKAGES, NUMBER_OF_PA' +
+        'CKAGES, WEIGHT_NET FROM FLIGHT_AIRWAYBILL_ITEM'
       'WHERE'
       '  SERIAL_NUMBER = :SERIAL_NUMBER')
     SQLLock.Strings = (
@@ -873,6 +1024,24 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
     object TableSQLFK_FA_SERIAL: TIntegerField
       FieldName = 'FK_FA_SERIAL'
       Required = True
+    end
+    object TableSQLPROCEDURE_REQUESTED: TStringField
+      FieldName = 'PROCEDURE_REQUESTED'
+      Size = 10
+    end
+    object TableSQLPREVIOUS_PROCEDURE: TStringField
+      FieldName = 'PREVIOUS_PROCEDURE'
+      Size = 10
+    end
+    object TableSQLKIND_OF_PACKAGES: TStringField
+      FieldName = 'KIND_OF_PACKAGES'
+      Size = 10
+    end
+    object TableSQLNUMBER_OF_PACKAGES: TIntegerField
+      FieldName = 'NUMBER_OF_PACKAGES'
+    end
+    object TableSQLWEIGHT_NET: TFloatField
+      FieldName = 'WEIGHT_NET'
     end
   end
   object GroupCertificateSQL: TIBCQuery

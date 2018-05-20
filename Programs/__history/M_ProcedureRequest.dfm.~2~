@@ -1,4 +1,4 @@
-object M_PreviousProcedureFRM: TM_PreviousProcedureFRM
+object M_ProcedureRequestFRM: TM_ProcedureRequestFRM
   Left = 483
   Top = 710
   Caption = 'Declaration Typ'
@@ -14,7 +14,6 @@ object M_PreviousProcedureFRM: TM_PreviousProcedureFRM
   OldCreateOrder = False
   WindowState = wsMaximized
   OnActivate = FormActivate
-  OnCloseQuery = FormCloseQuery
   OnKeyUp = FormKeyUp
   PixelsPerInch = 96
   TextHeight = 13
@@ -24,7 +23,7 @@ object M_PreviousProcedureFRM: TM_PreviousProcedureFRM
     Width = 753
     Height = 53
     Align = alTop
-    Caption = 'Previous Procedure'
+    Caption = 'Procedure Request'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBlue
     Font.Height = -27
@@ -162,6 +161,7 @@ object M_PreviousProcedureFRM: TM_PreviousProcedureFRM
         Spacing = 4
         Transparent = False
         Caption = 'Nav1Next'
+        Enabled = False
         DisabledTextColors.ShadeColor = clGray
         DisabledTextColors.HighlightColor = clBtnHighlight
         Index = 1
@@ -194,6 +194,7 @@ object M_PreviousProcedureFRM: TM_PreviousProcedureFRM
         Spacing = 4
         Transparent = False
         Caption = 'Nav1Delete'
+        Enabled = False
         DisabledTextColors.ShadeColor = clGray
         DisabledTextColors.HighlightColor = clBtnHighlight
         Index = 3
@@ -398,16 +399,16 @@ object M_PreviousProcedureFRM: TM_PreviousProcedureFRM
   end
   object TableSQL: TIBCQuery
     SQLInsert.Strings = (
-      'INSERT INTO AUX_PREVIOUS_PROCEDURE'
+      'INSERT INTO AUX_PROCEDURE_REQUEST'
       '  (IS_DEFAULT, DESCRIPTION, KEY)'
       'VALUES'
       '  (:IS_DEFAULT, :DESCRIPTION, :KEY)')
     SQLDelete.Strings = (
-      'DELETE FROM AUX_PREVIOUS_PROCEDURE'
+      'DELETE FROM AUX_PROCEDURE_REQUEST'
       'WHERE'
       '  KEY = :Old_KEY')
     SQLUpdate.Strings = (
-      'UPDATE AUX_PREVIOUS_PROCEDURE'
+      'UPDATE AUX_PROCEDURE_REQUEST'
       'SET'
       
         '  IS_DEFAULT = :IS_DEFAULT, DESCRIPTION = :DESCRIPTION, KEY = :K' +
@@ -415,17 +416,17 @@ object M_PreviousProcedureFRM: TM_PreviousProcedureFRM
       'WHERE'
       '  KEY = :Old_KEY')
     SQLRefresh.Strings = (
-      'SELECT IS_DEFAULT, DESCRIPTION, KEY FROM AUX_PREVIOUS_PROCEDURE'
+      'SELECT IS_DEFAULT, DESCRIPTION, KEY FROM AUX_PROCEDURE_REQUEST'
       'WHERE'
       '  KEY = :KEY')
     SQLLock.Strings = (
-      'SELECT NULL FROM AUX_PREVIOUS_PROCEDURE'
+      'SELECT NULL FROM AUX_PROCEDURE_REQUEST'
       'WHERE'
       'KEY = :Old_KEY'
       'FOR UPDATE WITH LOCK')
     SQLRecCount.Strings = (
       'SELECT COUNT(*) FROM ('
-      'SELECT 1 AS C  FROM AUX_PREVIOUS_PROCEDURE'
+      'SELECT 1 AS C  FROM AUX_PROCEDURE_REQUEST'
       ''
       ') q')
     Connection = MainFormFRM.CabOutData
@@ -435,7 +436,7 @@ object M_PreviousProcedureFRM: TM_PreviousProcedureFRM
       'SELECT'
       '*'
       'FROM'
-      '    aux_Previous_Procedure')
+      '    aux_procedure_request')
     Active = True
     AfterInsert = TableSQLAfterInsert
     Left = 329

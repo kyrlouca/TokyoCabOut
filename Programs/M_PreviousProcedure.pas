@@ -44,6 +44,7 @@ type
     procedure FormKeyUp(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure TableSQLAfterInsert(DataSet: TDataSet);
+    procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
   private
     { Private declarations }
   public
@@ -66,6 +67,13 @@ begin
 TableSQL.close;
 TableSQL.Open;
 //SearchFieldFLD.SetFocus;
+end;
+
+procedure TM_PreviousProcedureFRM.FormCloseQuery(Sender: TObject;
+  var CanClose: Boolean);
+begin
+If TableSQL.State in [dsInsert, dsEdit] then
+  tableSQL.Post;
 end;
 
 procedure TM_PreviousProcedureFRM.BitBtn2Click(Sender: TObject);

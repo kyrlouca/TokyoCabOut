@@ -14,6 +14,7 @@ object M_SpecificCircumsatnceFRM: TM_SpecificCircumsatnceFRM
   OldCreateOrder = False
   WindowState = wsMaximized
   OnActivate = FormActivate
+  OnCloseQuery = FormCloseQuery
   OnKeyUp = FormKeyUp
   PixelsPerInch = 96
   TextHeight = 13
@@ -161,7 +162,6 @@ object M_SpecificCircumsatnceFRM: TM_SpecificCircumsatnceFRM
         Spacing = 4
         Transparent = False
         Caption = 'Nav1Next'
-        Enabled = False
         DisabledTextColors.ShadeColor = clGray
         DisabledTextColors.HighlightColor = clBtnHighlight
         Index = 1
@@ -194,7 +194,6 @@ object M_SpecificCircumsatnceFRM: TM_SpecificCircumsatnceFRM
         Spacing = 4
         Transparent = False
         Caption = 'Nav1Delete'
-        Enabled = False
         DisabledTextColors.ShadeColor = clGray
         DisabledTextColors.HighlightColor = clBtnHighlight
         Index = 3

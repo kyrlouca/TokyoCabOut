@@ -302,16 +302,16 @@ begin
       if (SameIncoterm OR true) then begin
         x2node:=CreateXMLNodeNew(FDoc,FatherNode,'Msg515TermsDelivery','',ntElement);
         TBLCreateXMLNode(FDoc,x2node,'IncotermCode','',FirstAirQr,'INCOTERMS',ntText);
-        CreateXMLNodeNew(FDoc,x2node,'ComplementaryCode','XXX',ntText);
-        CreateXMLNodeNew(FDoc,x2node,'ComplementaryCode','XXX',ntText);
-        CreateXMLNodeNew(FDoc,x2node,'ComplementOfInfoLNG','XXX',ntText);
+//        CreateXMLNodeNew(FDoc,x2node,'ComplementaryCode','XXX',ntText);
+        TBLCreateXMLNode(FDoc,x2node,'ComplementOfInfo','',FirstAirQr,'INCOTERMS',ntText);
+        CreateXMLNodeNew(FDoc,x2node,'ComplementOfInfoLNG','EN',ntText);
       end;
 
      x2node:=CreateXMLNodeNew(FDoc,FatherNode,'Msg515DataTransaction','',ntElement);
-     CreateXMLNodeNew(FDoc,x2node,'NatureOfTransactionCode','XXX',ntText);
+     CreateXMLNodeNew(FDoc,x2node,'NatureOfTransactionCode','99',ntText);
 
      x2node:=CreateXMLNodeNew(FDoc,FatherNode,'Msg515StatusRepresentative','',ntElement);
-     CreateXMLNodeNew(FDoc,x2node,'RepresentativeStatusCode','XXX',ntText);
+     CreateXMLNodeNew(FDoc,x2node,'RepresentativeStatusCode','1',ntText);
 
       qr.Close;
     finally
@@ -421,11 +421,47 @@ var
   addr:string;
   DString:String;
   AirSerial:Integer;
+  qr:TksQuery;
   qrItem, qrAir: TksQuery;
   qrCert:TksQuery;
   ItemSerial:Integer;
-    i:Integer;
+   i:Integer;
+   DefaultProcedureRequested:String;
+   DefaultPreviousProcedure:String;
+   DefaultKindOfPackages:String;
 begin
+
+  qr:=TksQuery.Create(cn,'select * from AUX_PROCEDURE_REQUEST pr where pr.is_default =''Y'' ');
+  try
+    qr.Open;
+     DefaultProcedureRequested :=qr.FieldByName('key').AsString;
+     if DefaultProcedureRequested='' then
+      DefaultProcedureRequested :='ENTER DEFAULT VALUE IN TABLE';
+  finally
+    qr.Free;
+  end;
+
+  qr:=TksQuery.Create(cn,'select * from AUX_PREVIOUS_PROCEDURE pr where pr.is_default =''Y'' ');
+  try
+    qr.Open;
+     DefaultPreviousProcedure :=qr.FieldByName('key').AsString;
+     if DefaultPreviousProcedure='' then
+      DefaultPreviousProcedure :='ENTER DEFAULT VALUE IN TABLE';
+  finally
+    qr.Free;
+  end;
+
+  qr:=TksQuery.Create(cn,'select * from AUX_KIND_OF_PACKAGES pr where pr.is_default =''Y'' ');
+  try
+    qr.Open;
+     DefaultKindOfPackages :=qr.FieldByName('key').AsString;
+     if DefaultKindOfPackages='' then
+      DefaultKindOfPackages :='ENTER DEFAULT VALUE IN TABLE';
+  finally
+    qr.Free;
+  end;
+
+
 
   val:=
   ' Select  fa.serial_number as AirSerial, '
@@ -469,8 +505,13 @@ begin
         else  Dstring:='D';
        CreateXMLNodeNew(FDoc,HeaderNode,'TranspChargesMethodOfPayment',Temp,ntText);
 
-       TblCreateXMLNode(FDoc,HeaderNode,'ProcedureRequested','',qrItem,'CURRENCY',ntText);
-       TblCreateXMLNode(FDoc,HeaderNode,'PreviousProcedure','',qrItem,'CURRENCY',ntText);
+       temp:=trim(qrItem.FieldByName('PROCEDURE_REQUESTED').AsString);
+       If temp='' then  temp:= DefaultProcedureRequested;
+       CreateXMLNodeNew(FDoc,HeaderNode,'ProcedureRequested',Temp,ntText);
+
+       temp:=trim(qrItem.FieldByName('previous_procedure').AsString);
+       If temp='' then  temp:= DefaultPreviousProcedure;
+       CreateXMLNodeNew(FDoc,HeaderNode,'PreviousProcedure',Temp,ntText);
 
        TblCreateXMLNode(FDoc,HeaderNode,'StatisticalValueCurrency','',qrItem,'CURRENCY',ntText);
        TblCreateXMLNode(FDoc,HeaderNode,'StatisticalValueAmount','',qrItem,'AMOUNT',ntText);
@@ -498,7 +539,7 @@ begin
 
        ///////////////// Tariff
 
-       x2Node:=CreateXMLNodeNew(FDoc,HeaderNode,'Msg515CodeCommodity',Temp,ntText);
+       x2Node:=CreateXMLNodeNew(FDoc,HeaderNode,'Msg515CodeCommodity','',ntElement);
        DString := StringReplace(QrItem.fieldByName('TARIFF_CODE').asString, ' ', '', [rfReplaceAll]); //Remove spaces
 
        CreateXMLNodeNew(FDoc,x2node,'CombinedNomenclature',copy(DString,1,8),ntText);
@@ -521,6 +562,7 @@ begin
        TblCreateXMLNode(FDoc,x2node,'City','',qrAir,'SENDER_CITY',ntText);
        TblCreateXMLNode(FDoc,x2node,'CountryCode','',qrAir,'SENDER_COUNTRY_CODE',ntText);
        CreateXMLNodeNew(FDoc,x2node,'NADLNG','EN',ntText);
+       TblCreateXMLNode(FDoc,x2node,'TIN','',qrAir,'SENDER_VAT',ntText);
        end;
 
        //Consignee
@@ -534,11 +576,13 @@ begin
        TblCreateXMLNode(FDoc,x2node,'CountryCode','',qrAir,'CONSIGNEE_COUNTRY_cODE',ntText);
        CreateXMLNodeNew(FDoc,x2node,'NADLNG','EN',ntText);
 
-///////////////////////////////////////////////////
-       x2Node:=CreateXMLNodeNew(FDoc,HeaderNode,'Msg515Packages',Temp,ntText);
+//////////packages
+       x2Node:=CreateXMLNodeNew(FDoc,HeaderNode,'Msg515Packages','',ntElement);
        TblCreateXMLNode(FDoc,x2Node,'MarksNumbersOfPackages','',qrAir,'HAWB_ID',ntText);
        CreateXMLNodeNew(FDoc,x2node,'MarksNumbersOfPackagesLNG','EN',ntText);
-       CreateXMLNodeNew(FDoc,x2node,'KindOfPackages','PC',ntText);
+       temp:=trim(qrAir.FieldByName('kind_of_packages').AsString);
+       if temp='' then temp:=DefaultKindOfPackages;
+       CreateXMLNodeNew(FDoc,x2node,'KindOfPackages',temp,ntText);
        TblCreateXMLNode(FDoc,x2Node,'NumberOfPackages','',qrItem,'PIECES',ntText);
 ///////////////////////////////////////
 
@@ -608,7 +652,7 @@ val:=
     Qr.ParambyName('serial').Value:= FlightOutSerial;
     Qr.Open;
     while (not qr.eof) do begin
-      x2Node:=CreateXMLNodeNew(FDoc,FatherNOde,'Msg615Itinerary','',ntElement);
+      x2Node:=CreateXMLNodeNew(FDoc,FatherNOde,'Msg515Itinerary','',ntElement);
       TblCreateXMLNode(FDoc,x2Node, 'CountryOfRoutingCode', '',qr, 'Country_code',ntText);
       result:= HeaderNode;
       qr.next;

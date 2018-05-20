@@ -1,4 +1,4 @@
-unit m_specificCircumstance;
+unit M_PreviousProcedure;
 
 interface
 
@@ -9,7 +9,7 @@ uses
   DBAccess, IBC, MemDS, Wwdbigrd, Wwdbgrid, wwdbedit, RzButton, RzRadChk,
   RzDBChk;
 type
-  TM_SpecificCircumsatnceFRM = class(TForm)
+  TM_PreviousProcedureFRM = class(TForm)
     Panel1: TPanel;
     Panel4: TPanel;
     Panel2: TPanel;
@@ -44,7 +44,6 @@ type
     procedure FormKeyUp(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure TableSQLAfterInsert(DataSet: TDataSet);
-    procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
   private
     { Private declarations }
   public
@@ -53,7 +52,7 @@ type
   end;
 
 var
-  M_SpecificCircumsatnceFRM: TM_SpecificCircumsatnceFRM;
+  M_PreviousProcedureFRM: TM_PreviousProcedureFRM;
 
 implementation
 
@@ -62,33 +61,26 @@ uses MainForm;
 
 {$R *.DFM}
 
-procedure TM_SpecificCircumsatnceFRM.FormActivate(Sender: TObject);
+procedure TM_PreviousProcedureFRM.FormActivate(Sender: TObject);
 begin
 TableSQL.close;
 TableSQL.Open;
 //SearchFieldFLD.SetFocus;
 end;
 
-procedure TM_SpecificCircumsatnceFRM.FormCloseQuery(Sender: TObject;
-  var CanClose: Boolean);
-begin
-If TableSQL.State in [dsInsert, dsEdit] then
-  tableSQL.Post;
-end;
-
-procedure TM_SpecificCircumsatnceFRM.BitBtn2Click(Sender: TObject);
+procedure TM_PreviousProcedureFRM.BitBtn2Click(Sender: TObject);
 begin
 close;
 end;
 
-procedure TM_SpecificCircumsatnceFRM.TableSQLBeforeEdit(
+procedure TM_PreviousProcedureFRM.TableSQLBeforeEdit(
   DataSet: TDataSet);
 begin
 //   Dataset.FieldByName('Serial_number').ReadOnly:=true;
 end;
 
 
-procedure TM_SpecificCircumsatnceFRM.TableSRCStateChange(Sender: TObject);
+procedure TM_PreviousProcedureFRM.TableSRCStateChange(Sender: TObject);
 begin
 
 
@@ -108,7 +100,7 @@ end;//with
 
 end;
 
-procedure TM_SpecificCircumsatnceFRM.FormKeyUp(Sender: TObject; var Key: Word;
+procedure TM_PreviousProcedureFRM.FormKeyUp(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
 if ((ssCtrl in shift) and (key=vk_return)) then begin
@@ -126,7 +118,7 @@ end;
 
 end;
 
-procedure TM_SpecificCircumsatnceFRM.TableSQLAfterInsert(DataSet: TDataSet);
+procedure TM_PreviousProcedureFRM.TableSQLAfterInsert(DataSet: TDataSet);
 begin
    NameFLD.SetFocus;
 

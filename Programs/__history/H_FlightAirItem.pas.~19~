@@ -100,12 +100,6 @@ type
     TableSQLKIND_OF_PACKAGES: TStringField;
     Label8: TLabel;
     KIndOfPackFLD: TwwDBComboBox;
-    Label9: TLabel;
-    wwDBEdit5: TwwDBEdit;
-    TableSQLNUMBER_OF_PACKAGES: TIntegerField;
-    TableSQLWEIGHT_NET: TFloatField;
-    Label10: TLabel;
-    wwDBEdit6: TwwDBEdit;
     procedure BitBtn2Click(Sender: TObject);
     procedure TableSQLBeforeEdit(DataSet: TDataSet);
     procedure FormActivate(Sender: TObject);
