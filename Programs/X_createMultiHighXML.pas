@@ -422,6 +422,7 @@ var
   DString:String;
   AirSerial:Integer;
   qrItem, qrAir: TksQuery;
+  qrCert:TksQuery;
   ItemSerial:Integer;
     i:Integer;
 begin
@@ -457,12 +458,49 @@ begin
        CreateXMLNodeNew(FDoc,HeaderNode,'GoodsDescriptionLNG','EN',ntText);
        TblCreateXMLNode(FDoc,HeaderNode,'GrossMass','',qrItem,'WEIGHT',ntText);
 
+       TblCreateXMLNode(FDoc,HeaderNode,'CountryOfDestinationCode','',qrAir,'CONSIGNEE_COUNTRY_CODE',ntText);
+
        Temp:=qrAir.FieldByName('Payment_method').AsString;
         If temp='A'       then DString:='Y'
         else  if temp='C' then Dstring:='D'
         else  Dstring:='D';
-
        CreateXMLNodeNew(FDoc,HeaderNode,'TranspChargesMethodOfPayment',Temp,ntText);
+
+//       TblCreateXMLNode(FDoc,HeaderNode,'ProcedureRequested','',qrItem,'CURRENCY',ntText);
+//       TblCreateXMLNode(FDoc,HeaderNode,'PreviousProcedure','',qrItem,'CURRENCY',ntText);
+
+       TblCreateXMLNode(FDoc,HeaderNode,'StatisticalValueCurrency','',qrItem,'CURRENCY',ntText);
+       TblCreateXMLNode(FDoc,HeaderNode,'StatisticalValueAmount','',qrItem,'AMOUNT',ntText);
+       TblCreateXMLNode(FDoc,HeaderNode,'SupplementaryUnits','',qrItem,'PIECES',ntText);
+
+
+      ///***** Certificates
+      val:='Select * from  FLIGHT_AIRWAYBILL_ITEM_CERT fc where fc.fk_flight_airwaybill_item= :ItemSerial';
+      qrCert:=TksQuery.Create(cn,val);
+      try
+        qrCert.Open;
+        if not qrCert.IsEmpty then begin
+           x2Node:=CreateXMLNodeNew(FDoc,HeaderNode,'Msg515ProducedDocumentsCertif','',ntElement);
+        end;
+        while (not qrCert.Eof ) do begin
+          TblCreateXMLNode(FDoc,x2Node,'DocumentType','',qrCert,'cert_code',ntText);
+          TblCreateXMLNode(FDoc,x2Node,'DocumentType','',qrCert,'cert_value',ntText);
+          CreateXMLNodeNew(FDoc,x2node,'DocumentReferenceLNG','EN',ntText);
+          qrCert.Next;
+        end;
+      finally
+        qrCert.Free;
+      end;
+       /////////////////
+
+       x2Node:=CreateXMLNodeNew(FDoc,HeaderNode,'Msg515CodeCommodity',Temp,ntText);
+       DString := StringReplace(ItemQr.fieldByName('TARIFF_CODE').asString, ' ', '', [rfReplaceAll]); //Remove spaces
+
+       CreateXMLNodeNew(FDoc,x2node,'CombinedNomenclature',copy(DString,1,8),ntText);
+       CreateXMLNodeNew(FDoc,x2node,'TARICCode',copy(DString,8,2),ntText);
+       CreateXMLNodeNew(FDoc,x2node,'TARICFirstAdditionalCode','0000',ntText);
+       CreateXMLNodeNew(FDoc,x2node,'TARICSecondAdditionalCode','0000',ntText);
+
        TblCreateXMLNode(FDoc,HeaderNode,'CommercialReferenceNumber','',qrAir,'HAWB_ID',ntText);
        CreateXMLNodeNew(FDoc,HeaderNode,'UNDangerousGoodsCode','1',ntText);
 
@@ -470,6 +508,7 @@ begin
        CreateXMLNodeNew(FDoc,x2node,'DocumentType','N741',ntText);
        TblCreateXMLNode(FDoc,x2node,'CommercialReferenceNumber','',qrAir,'HAWB_ID',ntText);
 
+       <CountryOfOrigin>CN</CountryOfOrigin>  nEED COUNTRY ON ITEM
 
        //Consignor
        if (not SameSender) then begin
@@ -497,6 +536,11 @@ begin
        CreateXMLNodeNew(FDoc,x2node,'NADLNG','EN',ntText);
 
 
+       <Msg515Packages>
+        <<MarksNumbersOfPackages>1234567890</MarksNumbersOfPackages>
+        <<MarksNumbersOfPackagesLNG>EN</MarksNumbersOfPackagesLNG>
+        <<KindOfPackages>PC</KindOfPackages>
+        <<NumberOfPackages>1</NumberOfPackages>
 //       CreateNodeFlightCountries(AirSerial,Fdoc,HeaderNode);
 //       CreateNodeForItems(AirSerial,Fdoc,HeaderNode);
 

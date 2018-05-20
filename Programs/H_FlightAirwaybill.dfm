@@ -115,7 +115,6 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
       Color = clBtnFace
       DitherColor = clWhite
       DitherStyle = wwdsDither
-      NumGlyphs = 0
       ShadeStyle = wwbsNormal
       TabOrder = 2
       TextOptions.Alignment = taCenter
@@ -130,7 +129,6 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
     Height = 715
     Align = alClient
     TabOrder = 2
-    ExplicitTop = 85
     object GroupBox1: TGroupBox
       Left = 26
       Top = 6
@@ -1255,8 +1253,8 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
       end
     end
     object GroupBox4: TGroupBox
-      Left = 47
-      Top = 566
+      Left = 27
+      Top = 576
       Width = 728
       Height = 182
       Caption = 'Items'
@@ -1886,7 +1884,6 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
       Color = clBtnFace
       DitherColor = clWhite
       DitherStyle = wwdsDither
-      NumGlyphs = 0
       ShadeStyle = wwbsNormal
       TabOrder = 6
       TextOptions.Alignment = taCenter
