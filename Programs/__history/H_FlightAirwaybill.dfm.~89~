@@ -130,10 +130,10 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
     Align = alClient
     TabOrder = 2
     object GroupBox1: TGroupBox
-      Left = 26
+      Left = 18
       Top = 6
-      Width = 423
-      Height = 293
+      Width = 454
+      Height = 331
       Caption = 'Details'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -293,11 +293,56 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         ParentFont = False
       end
       object Label26: TLabel
-        Left = 268
-        Top = 245
+        Left = 241
+        Top = 23
         Width = 43
         Height = 15
         Caption = 'Account'
+        Color = clBtnFace
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'arial'
+        Font.Style = []
+        ParentColor = False
+        ParentFont = False
+      end
+      object Label6: TLabel
+        Left = 3
+        Top = 284
+        Width = 63
+        Height = 15
+        Caption = 'Declaration'
+        Color = clBtnFace
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'arial'
+        Font.Style = []
+        ParentColor = False
+        ParentFont = False
+      end
+      object Label9: TLabel
+        Left = 255
+        Top = 284
+        Width = 77
+        Height = 15
+        Caption = 'Circumstance'
+        Color = clBtnFace
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'arial'
+        Font.Style = []
+        ParentColor = False
+        ParentFont = False
+      end
+      object Label21: TLabel
+        Left = 137
+        Top = 284
+        Width = 63
+        Height = 15
+        Caption = 'Declaration'
         Color = clBtnFace
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -361,7 +406,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         Font.Name = 'arial'
         Font.Style = []
         ParentFont = False
-        TabOrder = 4
+        TabOrder = 5
         UnboundDataType = wwDefault
         WantReturns = False
         WordWrap = False
@@ -380,7 +425,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         Font.Name = 'arial'
         Font.Style = []
         ParentFont = False
-        TabOrder = 5
+        TabOrder = 6
         UnboundDataType = wwDefault
         WantReturns = False
         WordWrap = False
@@ -399,7 +444,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         Font.Name = 'arial'
         Font.Style = []
         ParentFont = False
-        TabOrder = 3
+        TabOrder = 4
         UnboundDataType = wwDefault
         WantReturns = False
         WordWrap = False
@@ -418,27 +463,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         Font.Name = 'arial'
         Font.Style = []
         ParentFont = False
-        TabOrder = 2
-        UnboundDataType = wwDefault
-        WantReturns = False
-        WordWrap = False
-      end
-      object PaymentFLD: TwwDBEdit
-        Left = 72
-        Top = 216
-        Width = 66
-        Height = 23
-        CharCase = ecUpperCase
-        Color = clWhite
-        DataField = 'PAYMENT_METHOD'
-        DataSource = FlightAirwaybillCDS
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -12
-        Font.Name = 'arial'
-        Font.Style = []
-        ParentFont = False
-        TabOrder = 6
+        TabOrder = 3
         UnboundDataType = wwDefault
         WantReturns = False
         WordWrap = False
@@ -469,7 +494,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         ItemIndex = 3
         ParentFont = False
         Sorted = False
-        TabOrder = 7
+        TabOrder = 2
         UnboundDataType = wwDefault
       end
       object IncotermsFLD: TwwDBLookupCombo
@@ -525,8 +550,8 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         AllowClearKey = False
       end
       object AccountNumbFD: TwwDBEdit
-        Left = 313
-        Top = 241
+        Left = 305
+        Top = 19
         Width = 85
         Height = 23
         DataField = 'ACCOUNT_NUMBER'
@@ -542,10 +567,118 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         WantReturns = False
         WordWrap = False
       end
+      object wwDBComboBox1: TwwDBComboBox
+        Left = 73
+        Top = 216
+        Width = 97
+        Height = 23
+        ShowButton = True
+        Style = csDropDownList
+        MapList = True
+        AllowClearKey = False
+        DataField = 'PAYMENT_METHOD'
+        DataSource = FlightAirwaybillCDS
+        DropDownCount = 8
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Arial'
+        Font.Style = []
+        ItemHeight = 0
+        Items.Strings = (
+          'A'#9'A'
+          'C'#9'C')
+        ItemIndex = 3
+        ParentFont = False
+        Sorted = False
+        TabOrder = 7
+        UnboundDataType = wwDefault
+      end
+      object wwDBComboBox2: TwwDBComboBox
+        Left = 3
+        Top = 305
+        Width = 97
+        Height = 23
+        ShowButton = True
+        Style = csDropDownList
+        MapList = True
+        AllowClearKey = False
+        DataField = 'PAYMENT_METHOD'
+        DataSource = FlightAirwaybillCDS
+        DropDownCount = 8
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Arial'
+        Font.Style = []
+        ItemHeight = 0
+        Items.Strings = (
+          'A'#9'A'
+          'C'#9'C')
+        ItemIndex = 3
+        ParentFont = False
+        Sorted = False
+        TabOrder = 11
+        UnboundDataType = wwDefault
+      end
+      object wwDBComboBox3: TwwDBComboBox
+        Left = 137
+        Top = 305
+        Width = 97
+        Height = 23
+        ShowButton = True
+        Style = csDropDownList
+        MapList = True
+        AllowClearKey = False
+        DataField = 'PAYMENT_METHOD'
+        DataSource = FlightAirwaybillCDS
+        DropDownCount = 8
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Arial'
+        Font.Style = []
+        ItemHeight = 0
+        Items.Strings = (
+          'A'#9'A'
+          'C'#9'C')
+        ItemIndex = 3
+        ParentFont = False
+        Sorted = False
+        TabOrder = 12
+        UnboundDataType = wwDefault
+      end
+      object wwDBComboBox4: TwwDBComboBox
+        Left = 255
+        Top = 305
+        Width = 97
+        Height = 23
+        ShowButton = True
+        Style = csDropDownList
+        MapList = True
+        AllowClearKey = False
+        DataField = 'PAYMENT_METHOD'
+        DataSource = FlightAirwaybillCDS
+        DropDownCount = 8
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Arial'
+        Font.Style = []
+        ItemHeight = 0
+        Items.Strings = (
+          'A'#9'A'
+          'C'#9'C')
+        ItemIndex = 3
+        ParentFont = False
+        Sorted = False
+        TabOrder = 13
+        UnboundDataType = wwDefault
+      end
     end
     object GroupBox2: TGroupBox
-      Left = 26
-      Top = 305
+      Left = 49
+      Top = 363
       Width = 455
       Height = 265
       Caption = 'Sender'
@@ -958,8 +1091,8 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
       end
     end
     object GroupBox3: TGroupBox
-      Left = 522
-      Top = 306
+      Left = 510
+      Top = 305
       Width = 514
       Height = 294
       Caption = 'Consignee'
@@ -1257,11 +1390,17 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
       end
     end
     object GroupBox4: TGroupBox
-      Left = 27
-      Top = 576
+      Left = 131
+      Top = 558
       Width = 728
       Height = 182
       Caption = 'Items'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'arial'
+      Font.Style = []
+      ParentFont = False
       TabOrder = 3
       object Label24: TLabel
         Left = 624
@@ -1306,8 +1445,8 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         OnClick = SpeedButton2Click
       end
       object wwDBGrid1: TwwDBGrid
-        Left = 117
-        Top = 40
+        Left = 24
+        Top = 48
         Width = 718
         Height = 145
         ControlType.Strings = (
@@ -1498,8 +1637,8 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
       end
     end
     object GroupBox5: TGroupBox
-      Left = 468
-      Top = 7
+      Left = 1052
+      Top = 28
       Width = 254
       Height = 247
       Caption = 'Flight Countries'
@@ -1510,6 +1649,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
       Font.Style = [fsBold]
       ParentFont = False
       TabOrder = 4
+      Visible = False
       object ItineraryFLD: TwwDBLookupCombo
         Left = 13
         Top = 20
@@ -1698,10 +1838,10 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
       end
     end
     object GroupBox6: TGroupBox
-      Left = 735
-      Top = 7
+      Left = 510
+      Top = 6
       Width = 245
-      Height = 247
+      Height = 293
       Caption = 'Additional Parameters'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -1913,8 +2053,8 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
   end
   object FlightAirwaybillCDS: TIBCDataSource
     DataSet = FlightAirwaybillSQL
-    Left = 288
-    Top = 121
+    Left = 416
+    Top = 153
   end
   object FairwaybillCountrySQL: TIBCQuery
     SQLInsert.Strings = (
@@ -1962,8 +2102,8 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
     DetailFields = 'FK_FLIGHT_AIRWAYBILL'
     MasterSource = FlightAirwaybillCDS
     OnPostError = FairwaybillCountrySQLPostError
-    Left = 512
-    Top = 217
+    Left = 552
+    Top = 225
     ParamData = <
       item
         DataType = ftInteger
@@ -2287,8 +2427,8 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         'er')
     DetailFields = 'FK_FLIGHT_OUT_SERIAL'
     FetchAll = True
-    Left = 376
-    Top = 129
+    Left = 328
+    Top = 153
     ParamData = <
       item
         DataType = ftInteger

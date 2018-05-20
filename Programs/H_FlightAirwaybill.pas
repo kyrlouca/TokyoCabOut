@@ -249,6 +249,12 @@ type
     FlightAirwaybillSQLTYPE_OF_DECLARATION: TStringField;
     FlightAirwaybillSQLSPECIFIC_CIRCUMSTANCE: TStringField;
     wwDBComboBox1: TwwDBComboBox;
+    Label6: TLabel;
+    Label9: TLabel;
+    Label21: TLabel;
+    DeclarationFLD: TwwDBComboBox;
+    TypeOfDeclarationFLD: TwwDBComboBox;
+    CircFLD: TwwDBComboBox;
     procedure FormActivate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure BitBtn2Click(Sender: TObject);
@@ -466,22 +472,11 @@ Var
 
 Begin
 
-//ksfillComboF1(cn,SelectCertFLD, 'Certificate_item','cert_CODE','CERT_CODE','DESCRIPTION',true);
+ksfillComboF1(cn,DeclarationFLD,'AUX_DECLARATION_TYPE','KEY','KEY','KEY',false,false);
+ksfillComboF1(cn,TypeOfDeclarationFLD, 'AUX_TYPE_OF_DECLARATION','KEY','KEY','KEY',false,false);
+ksfillComboF1(cn,CircFLD,'AUX_SPECIFIC_CIRCUMSTANCE','KEY','KEY','KEY',false,false);
 
-for i := 0 to (Self as TForm).ComponentCount-1 do begin
-if (Self as TForm).Components[i] is TDataset then begin
-        Dataset:= TDataset(Tform(Self).Components[i]);
-
-        If not Dataset.Active then
-                Dataset.Open
-        else
-                Dataset.Refresh;
-
-        end;
-
-ksOpenTables([GroupCertificateSQL,CertItemSQL,SelectCertSQL]);
-
-end;
+ksOpenTables([ItinerarySQL,IncotermsSQL, GroupCertificateSQL,CertItemSQL,SelectCertSQL,Fa_ItemSQL]);
 
 
 ItineraryFLD.Text:='';

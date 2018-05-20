@@ -20,6 +20,7 @@ type
   private
     { Private declarations }
         cn:TIBCConnection;
+    function GetTableDefaultValue( Const TableName:String):String;
     Function TestOne(Const HawbSerial:Integer):String;
 
     Function  AddNodeAtr(FatherNode:IXMLNode;NodeName:String; NodeText:String):IXMLNode;overload;
@@ -322,6 +323,8 @@ begin
 end;
 
 
+
+
 function TX_CreateMultiHighXmlFRM.CreateNodeHeader( Const FlightOutSerial:Integer; const Fdoc: IXMLDocument;FatherNode:IXMLNode):IXMLNode;
 var
   qr,TotalsQr:TksQuery;
@@ -332,7 +335,13 @@ var
   MawbId:String;
   FlightName:string;
   DateDepart:Tdate;
+  DefaultDeclarationType, DefaultTypeOfDeclaration, DefaultCirc:String;
 begin
+
+  DefaultDeclarationType := GetTableDefaultValue('AUX_DECLARATION_TYPE');
+  DefaultTypeOfDeclaration := GetTableDefaultValue('AUX_TYPE_OF_DECLARATION');
+  DefaultCirc := GetTableDefaultValue('AUX_SPECIFIC_CIRCUMSTANCE');
+
   val:=
   '   select'
   +'  fo.serial_number, fo.mawb, fo.Date_depart, ft.flight_name'
@@ -368,7 +377,11 @@ begin
      val:=MawbId+FormatDateTime('YYMMDDHHMMSS', now);
      x1node:=CreateXMLNodeNew(FDoc,FatherNode,'Msg515Header','',ntElement);
      CreateXMLNodeNew(FDoc,x1node,'ReferenceNumber',val,ntText);
-     CreateXMLNodeNew(FDoc,x1node,'TypeOfDeclaration','EX',ntText);
+
+     val:=qr.FieldByName('declaration_type').AsString;
+     if val='' then
+      val:=DefaultDeclarationType;
+     CreateXMLNodeNew(FDoc,x1node,'TypeOfDeclaration',val,ntText);
 
      CreateXMLNodeNew(FDoc,x1node,'CountryOfDestinationCode','TR',ntText); //here
      CreateXMLNodeNew(FDoc,x1node,'AgreedLocationOfGoodsCode','LCA',ntText); //here
@@ -398,9 +411,16 @@ begin
 
      CreateXMLNodeNew(FDoc,x1node,'DeclarationPlace','LARNACA',ntText);
      CreateXMLNodeNew(FDoc,x1node,'DeclarationPlaceLNG','EN',ntText);
-     CreateXMLNodeNew(FDoc,x1node,'SpecificCircumstanceIndicator','A',ntText);
-     CreateXMLNodeNew(FDoc,x1node,'TypeOfDeclarationBox12','A',ntText); //here
 
+     val:=qr.FieldByName('SPECIFIC_CIRCUMSTANCE').AsString;
+     if val='' then
+      val:=DefaultCirc;
+     CreateXMLNodeNew(FDoc,x1node,'SpecificCircumstanceIndicator',val,ntText);
+
+     val:=qr.FieldByName('type_of_declaration').AsString;
+     if val='' then
+      val:=DefaultTypeOfDeclaration;
+     CreateXMLNodeNew(FDoc,x1node,'TypeOfDeclarationBox12',val,ntText);
 
 
       qr.Close;
@@ -432,36 +452,9 @@ var
    TempInt:Integer;
 begin
 
-  qr:=TksQuery.Create(cn,'select * from AUX_PROCEDURE_REQUEST pr where pr.is_default =''Y'' ');
-  try
-    qr.Open;
-     DefaultProcedureRequested :=qr.FieldByName('key').AsString;
-     if DefaultProcedureRequested='' then
-      DefaultProcedureRequested :='ENTER DEFAULT VALUE IN TABLE';
-  finally
-    qr.Free;
-  end;
-
-  qr:=TksQuery.Create(cn,'select * from AUX_PREVIOUS_PROCEDURE pr where pr.is_default =''Y'' ');
-  try
-    qr.Open;
-     DefaultPreviousProcedure :=qr.FieldByName('key').AsString;
-     if DefaultPreviousProcedure='' then
-      DefaultPreviousProcedure :='ENTER DEFAULT VALUE IN TABLE';
-  finally
-    qr.Free;
-  end;
-
-  qr:=TksQuery.Create(cn,'select * from AUX_KIND_OF_PACKAGES pr where pr.is_default =''Y'' ');
-  try
-    qr.Open;
-     DefaultKindOfPackages :=qr.FieldByName('key').AsString;
-     if DefaultKindOfPackages='' then
-      DefaultKindOfPackages :='ENTER DEFAULT VALUE IN TABLE';
-  finally
-    qr.Free;
-  end;
-
+  DefaultProcedureRequested:=GetTableDefaultValue('AUX_PROCEDURE_REQUEST');
+  DefaultPreviousProcedure:=GetTableDefaultValue('AUX_PREVIOUS_PROCEDURE');
+  DefaultKindOfPackages:=GetTableDefaultValue('AUX_KIND_OF_PACKAGES');
 
 
   val:=
@@ -674,6 +667,26 @@ val:=
 end;
 
 
+function TX_CreateMultiHighXmlFRM.GetTableDefaultValue( Const TableName:String):String;
+var
+  qr:TksQuery;
+  DefaultVal:String;
+  str:string;
+begin
+
+  str:='select Key from '+ tableName + ' where is_default =''Y'' ';
+  qr:=TksQuery.Create(cn, str);
+  try
+    qr.Open;
+     DefaultVal :=qr.FieldByName('key').AsString;
+     if DefaultVal='' then
+      DefaultVal :='ENTER DEFAULT VALUE IN TABLE';
+     result:=DefaultVal;
+  finally
+    qr.Free;
+  end;
+
+end;
 
 
 
