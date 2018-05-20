@@ -41,15 +41,6 @@ type
     Label16: TLabel;
     wwDBEdit13: TwwDBEdit;
     Panel6: TRzPanel;
-    Nav1: TwwDBNavigator;
-    Nav1Button: TwwNavButton;
-    Nav1Prior: TwwNavButton;
-    Nav1Next: TwwNavButton;
-    Nav1Button1: TwwNavButton;
-    Nav1Insert: TwwNavButton;
-    Nav1Delete: TwwNavButton;
-    Nav1Post: TwwNavButton;
-    Nav1Cancel: TwwNavButton;
     TableSQLSERIAL_NUMBER: TIntegerField;
     TableSQLSEQUENCE: TIntegerField;
     TableSQLWEIGHT: TFloatField;
@@ -95,8 +86,32 @@ type
     wwDBGrid1: TwwDBGrid;
 //    wwDBComboBox1: TwwDBComboBox;
     Select2: TwwDBLookupCombo;
-    IBCDataSource1: TIBCDataSource;
     SelGroupFLD: TwwDBLookupCombo;
+    Label1: TLabel;
+    wwDBEdit3: TwwDBEdit;
+    Label5: TLabel;
+    wwDBEdit4: TwwDBEdit;
+    ProcReqFLD: TwwDBComboBox;
+    Label6: TLabel;
+    TableSQLPROCEDURE_REQUESTED: TStringField;
+    Label7: TLabel;
+    PreviousProcFLD: TwwDBComboBox;
+    TableSQLPREVIOUS_PROCEDURE: TStringField;
+    TableSQLKIND_OF_PACKAGES: TStringField;
+    Label8: TLabel;
+    KIndOfPackFLD: TwwDBComboBox;
+    Label9: TLabel;
+    wwDBEdit5: TwwDBEdit;
+    TableSQLNUMBER_OF_PACKAGES: TIntegerField;
+    TableSQLWEIGHT_NET: TFloatField;
+    Label10: TLabel;
+    wwDBEdit6: TwwDBEdit;
+    scountry: TwwDBLookupCombo;
+    CountrySQL: TIBCQuery;
+    CountrySQLCODE_2: TStringField;
+    CountrySQLNAME: TStringField;
+    TableSQLCOUNTRY_OF_ORIGIN: TStringField;
+    Label11: TLabel;
     procedure BitBtn2Click(Sender: TObject);
     procedure TableSQLBeforeEdit(DataSet: TDataSet);
     procedure FormActivate(Sender: TObject);
@@ -107,13 +122,16 @@ type
     procedure Nav1InsertClick(Sender: TObject);
     procedure TableSQLNewRecord(DataSet: TDataSet);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
-    procedure SelectGroupFLDCloseUp(Sender: TObject; LookupTable,
+    procedure SelGroupFLDCloseUp(Sender: TObject; LookupTable,
       FillTable: TDataSet; modified: Boolean);
+    procedure Select2CloseUp(Sender: TObject; LookupTable, FillTable: TDataSet;
+      modified: Boolean);
   private
     { Private declarations }
     cn:TIBCConnection;
   public
     { Public declarations }
+
 
     IN_ACTION:String;
     in_SERIAL:Integer;
@@ -156,8 +174,66 @@ begin
 close;
 end;
 
+procedure TH_FlightAirItemFRM.Select2CloseUp(Sender: TObject; LookupTable,
+  FillTable: TDataSet; modified: Boolean);
+begin
+  FillTable.FieldByName('description').Value:= LookupTable.FieldByName('Description').AsString;
+  FillTable.FieldByName('Cert_value').Value:= LookupTable.FieldByName('Cert_value').AsString;
+
+end;
+
+procedure TH_FlightAirItemFRM.SelGroupFLDCloseUp(Sender: TObject; LookupTable,
+  FillTable: TDataSet; modified: Boolean);
+Var
+  GroupCode:String;
+  FaItem:Integer;
+  faCertSerial:Integer;
+  certItemSerial:Integer;
+  str:String;
+  qr:TksQuery;
+
+begin
+  GroupCode:=LookupTable.FieldByName('Code').AsString;
+  FaItem:=TableSQL.FieldByName('serial_Number').AsInteger;
+
+
+
+
+  showMessage(intToStr(faItem));
+  Str:='delete from flight_airwaybill_item_cert fi where fi.fk_flight_airwaybill_item = :fa_item';
+  ksExecSQLVar(cn, str,[FaItem]);
+
+  str:=
+  '   insert into flight_airwaybill_item_cert'
+  +'      (serial_number, FK_FLIGHT_AIRWAYBILL_ITEM, cert_code, cert_type, description, cert_value, table_for_value, field_for_value)'
+  +'    select'
+  +'    :ItemCertSerial, :ItemCert_fk , ci.cert_code, ci.cert_type, ci.description, ci.cert_value, ci.table_for_value, ci.field_for_value'
+  +'    from certificate_item ci where ci.serial_number = :CertSerial';
+
+  try
+    //read all the certificate_items for the group  which will apply for the flight_airwaybill_item
+    qr:=TksQuery.Create(cn,'select serial_number from certificate_item where fk_certificate_group= :group');
+    qr.ParamByName('group').Value:=GroupCode;
+    qr.Open;
+    while (not qr.Eof) do begin
+      FaCertSerial:= ksGenerateSerial(cn,'FLIGHT_AIRWAYBILL_ITEM_CERT_GEN');
+      CertItemSerial:=qr.FieldByName('serial_number').AsInteger;
+      ksExecSQLVar(cn, str,[FaCertSerial,faItem,CertItemSerial]);
+      qr.Next;
+    end;
+  finally
+    qr.Free;
+  end;
+  CertItemSQL.Refresh;
+
+end;
+
 procedure TH_FlightAirItemFRM.FormActivate(Sender: TObject);
 begin
+ksOpenTables([GroupCertificateSQL,SelectCertSQL,CertItemSQL]);
+ksfillComboF1(cn,ProcReqFLD,'aux_procedure_request','key','key','key',false,false);
+ksfillComboF1(cn,PreviousProcFLD,'aux_previous_procedure','key','key','key',false,false);
+ksfillComboF1(cn,KindOfPackFLD,'aux_previous_procedure','key','key','key',false,false);
 if IN_ACTION='INSERT' then begin
 //   ksOpenTables([TableSQL]);
    TableSQL.Close;

@@ -429,6 +429,7 @@ var
    DefaultProcedureRequested:String;
    DefaultPreviousProcedure:String;
    DefaultKindOfPackages:String;
+   TempInt:Integer;
 begin
 
   qr:=TksQuery.Create(cn,'select * from AUX_PROCEDURE_REQUEST pr where pr.is_default =''Y'' ');
@@ -500,9 +501,12 @@ begin
        TblCreateXMLNode(FDoc,HeaderNode,'CountryOfDestinationCode','',qrAir,'CONSIGNEE_COUNTRY_CODE',ntText);
 
        Temp:=qrAir.FieldByName('Payment_method').AsString;
-        If temp='A'       then DString:='Y'
-        else  if temp='C' then Dstring:='D'
-        else  Dstring:='D';
+        If temp='A'       then
+          DString:='Y'
+        else  if temp='C' then
+          Dstring:='D'
+        else
+          Dstring:='D';
        CreateXMLNodeNew(FDoc,HeaderNode,'TranspChargesMethodOfPayment',Temp,ntText);
 
        temp:=trim(qrItem.FieldByName('PROCEDURE_REQUESTED').AsString);
@@ -580,10 +584,16 @@ begin
        x2Node:=CreateXMLNodeNew(FDoc,HeaderNode,'Msg515Packages','',ntElement);
        TblCreateXMLNode(FDoc,x2Node,'MarksNumbersOfPackages','',qrAir,'HAWB_ID',ntText);
        CreateXMLNodeNew(FDoc,x2node,'MarksNumbersOfPackagesLNG','EN',ntText);
-       temp:=trim(qrAir.FieldByName('kind_of_packages').AsString);
+
+       temp:=trim(qrItem.FieldByName('kind_of_packages').AsString);
        if temp='' then temp:=DefaultKindOfPackages;
        CreateXMLNodeNew(FDoc,x2node,'KindOfPackages',temp,ntText);
-       TblCreateXMLNode(FDoc,x2Node,'NumberOfPackages','',qrItem,'PIECES',ntText);
+
+        tempInt:=qrItem.FieldByName('NUMBER_OF_PACKAGES').AsInteger;
+        if TempInt=0 then
+          tempInt:=1;
+       CreateXMLNodeNew(FDoc,x2node,'NumberOfPackages',IntToStr(TempInt),ntText);
+
 ///////////////////////////////////////
 
        qrItem.Next;

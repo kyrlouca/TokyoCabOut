@@ -84,7 +84,6 @@ type
     DescriptionFLD: TwwDBEdit;
     PiecesFLD: TwwDBEdit;
     ItemsFLD: TwwDBEdit;
-    PaymentFLD: TwwDBEdit;
     GroupBox2: TGroupBox;
     Label10: TLabel;
     Label11: TLabel;
@@ -241,7 +240,6 @@ type
     CertItemSQLFIELD_FOR_VALUE: TStringField;
     CertItemSQLTABLE_FOR_VALUE: TStringField;
     SpeedButton4: TSpeedButton;
-    wwDBComboBox1: TwwDBComboBox;
     Label5: TLabel;
     wwDBEdit3: TwwDBEdit;
     FlightAirwaybillSQLCONSIGNEE_PREFERRED_NAME: TStringField;
@@ -250,6 +248,7 @@ type
     FlightAirwaybillSQLDECLARATION_TYPE: TStringField;
     FlightAirwaybillSQLTYPE_OF_DECLARATION: TStringField;
     FlightAirwaybillSQLSPECIFIC_CIRCUMSTANCE: TStringField;
+    wwDBComboBox1: TwwDBComboBox;
     procedure FormActivate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure BitBtn2Click(Sender: TObject);

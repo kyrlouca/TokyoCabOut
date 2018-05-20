@@ -115,7 +115,6 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
       Color = clBtnFace
       DitherColor = clWhite
       DitherStyle = wwdsDither
-      NumGlyphs = 0
       ShadeStyle = wwbsNormal
       TabOrder = 2
       TextOptions.Alignment = taCenter
@@ -130,7 +129,6 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
     Height = 715
     Align = alClient
     TabOrder = 2
-    ExplicitTop = 85
     object GroupBox1: TGroupBox
       Left = 26
       Top = 6
@@ -546,7 +544,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
     object GroupBox2: TGroupBox
       Left = 26
       Top = 305
-      Width = 496
+      Width = 455
       Height = 265
       Caption = 'Sender'
       Font.Charset = DEFAULT_CHARSET
@@ -957,8 +955,8 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
       end
     end
     object GroupBox3: TGroupBox
-      Left = 542
-      Top = 305
+      Left = 522
+      Top = 306
       Width = 514
       Height = 294
       Caption = 'Consignee'
@@ -970,7 +968,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
       ParentFont = False
       TabOrder = 2
       object Label15: TLabel
-        Left = 22
+        Left = 26
         Top = 24
         Width = 34
         Height = 15
@@ -985,7 +983,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         ParentFont = False
       end
       object Label16: TLabel
-        Left = 18
+        Left = 14
         Top = 82
         Width = 46
         Height = 15
@@ -1000,7 +998,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         ParentFont = False
       end
       object Label17: TLabel
-        Left = 6
+        Left = 2
         Top = 160
         Width = 58
         Height = 15
@@ -1015,7 +1013,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         ParentFont = False
       end
       object Label18: TLabel
-        Left = 44
+        Left = 40
         Top = 186
         Width = 20
         Height = 15
@@ -1030,7 +1028,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         ParentFont = False
       end
       object Label19: TLabel
-        Left = 22
+        Left = 18
         Top = 211
         Width = 42
         Height = 15
@@ -1045,7 +1043,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         ParentFont = False
       end
       object Label27: TLabel
-        Left = 27
+        Left = 23
         Top = 237
         Width = 37
         Height = 15
@@ -1074,23 +1072,8 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         ParentColor = False
         ParentFont = False
       end
-      object Label6: TLabel
-        Left = 45
-        Top = 49
-        Width = 22
-        Height = 15
-        Caption = 'VAT '
-        Color = clBtnFace
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -12
-        Font.Name = 'arial'
-        Font.Style = []
-        ParentColor = False
-        ParentFont = False
-      end
       object namefld: TwwDBEdit
-        Left = 65
+        Left = 71
         Top = 20
         Width = 306
         Height = 23
@@ -1109,7 +1092,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         WordWrap = False
       end
       object cadd1: TwwDBEdit
-        Left = 73
+        Left = 71
         Top = 78
         Width = 306
         Height = 23
@@ -1128,7 +1111,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         WordWrap = False
       end
       object cpost: TwwDBEdit
-        Left = 73
+        Left = 71
         Top = 156
         Width = 59
         Height = 23
@@ -1147,7 +1130,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         WordWrap = False
       end
       object ccity: TwwDBEdit
-        Left = 73
+        Left = 71
         Top = 182
         Width = 300
         Height = 23
@@ -1166,7 +1149,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         WordWrap = False
       end
       object ccountry: TwwDBLookupCombo
-        Left = 73
+        Left = 71
         Top = 208
         Width = 98
         Height = 23
@@ -1193,7 +1176,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         ShowMatchText = True
       end
       object cadd2: TwwDBEdit
-        Left = 73
+        Left = 71
         Top = 104
         Width = 306
         Height = 23
@@ -1212,7 +1195,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         WordWrap = False
       end
       object cadd3: TwwDBEdit
-        Left = 73
+        Left = 71
         Top = 130
         Width = 306
         Height = 23
@@ -1231,7 +1214,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         WordWrap = False
       end
       object wwDBEdit1: TwwDBEdit
-        Left = 73
+        Left = 71
         Top = 234
         Width = 59
         Height = 23
@@ -1268,29 +1251,10 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         WantReturns = False
         WordWrap = False
       end
-      object wwDBEdit6: TwwDBEdit
-        Left = 73
-        Top = 49
-        Width = 163
-        Height = 23
-        Color = clWhite
-        DataField = 'CONSIGNEE_VAT'
-        DataSource = FlightAirwaybillCDS
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -12
-        Font.Name = 'arial'
-        Font.Style = []
-        ParentFont = False
-        TabOrder = 9
-        UnboundDataType = wwDefault
-        WantReturns = False
-        WordWrap = False
-      end
     end
     object GroupBox4: TGroupBox
-      Left = 47
-      Top = 566
+      Left = 27
+      Top = 576
       Width = 728
       Height = 182
       Caption = 'Items'
@@ -1338,8 +1302,8 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         OnClick = SpeedButton2Click
       end
       object wwDBGrid1: TwwDBGrid
-        Left = 3
-        Top = 39
+        Left = 117
+        Top = 40
         Width = 718
         Height = 145
         ControlType.Strings = (
@@ -1920,7 +1884,6 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
       Color = clBtnFace
       DitherColor = clWhite
       DitherStyle = wwdsDither
-      NumGlyphs = 0
       ShadeStyle = wwbsNormal
       TabOrder = 6
       TextOptions.Alignment = taCenter
@@ -2691,7 +2654,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
     Transaction = MainFormFRM.UsedForReadOnlyTrans
     UpdateTransaction = UpdateTransaction
     SQL.Strings = (
-      'Select * from FLIGHT_AIRWAYBILL_ITEM')
+      'Select * from FLIGHT_AIRWAYBILL_ITEM order by sequence')
     MasterFields = 'SERIAL_NUMBER'
     DetailFields = 'FK_FA_SERIAL'
     MasterSource = FlightAirwaybillCDS

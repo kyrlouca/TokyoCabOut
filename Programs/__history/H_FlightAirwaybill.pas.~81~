@@ -240,6 +240,16 @@ type
     CertItemSQLFK_FLIGHT_AIRWAYBILL_ITEM: TIntegerField;
     CertItemSQLFIELD_FOR_VALUE: TStringField;
     CertItemSQLTABLE_FOR_VALUE: TStringField;
+    SpeedButton4: TSpeedButton;
+    wwDBComboBox1: TwwDBComboBox;
+    Label5: TLabel;
+    wwDBEdit3: TwwDBEdit;
+    FlightAirwaybillSQLCONSIGNEE_PREFERRED_NAME: TStringField;
+    FlightAirwaybillSQLSENDER_VAT: TStringField;
+    FlightAirwaybillSQLCONSIGNEE_VAT: TStringField;
+    FlightAirwaybillSQLDECLARATION_TYPE: TStringField;
+    FlightAirwaybillSQLTYPE_OF_DECLARATION: TStringField;
+    FlightAirwaybillSQLSPECIFIC_CIRCUMSTANCE: TStringField;
     procedure FormActivate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure BitBtn2Click(Sender: TObject);
@@ -263,6 +273,7 @@ type
       modified: Boolean);
     procedure wwButton2Click(Sender: TObject);
     procedure wwDBGrid1DblClick(Sender: TObject);
+    procedure SpeedButton4Click(Sender: TObject);
   private
     { Private declarations }
        cn:TIBCConnection;
@@ -283,7 +294,7 @@ var
 implementation
 
 uses MainForm,H_ScanAirwaybill, S_SelectCustomerx, S_SelectTariffY,
-  KyriacosTypes, G_KyrSQL, G_generalProcs, H_FlightAirItem;
+  KyriacosTypes, G_KyrSQL, G_generalProcs, H_FlightAirItem, M_customerNew;
 
 {$R *.DFM}
 
@@ -401,30 +412,31 @@ begin
                 Airqr.FieldByName('sender_NAME').value:=
                   cuqr.FieldByName('NAME').AsString;
 
-                Airqr.FieldByName('sender_ADDRESS').value:=
-                  Cuqr.FieldByName('ADDRESS').AsString;
+                Airqr.FieldByName('sender_VAT').value:=
+                  cuqr.FieldByName('VAT_Id').AsString;
+
 
                 Airqr.FieldByName('sender_ADDRESS_1').value:=
-                Airqr.FieldByName('ADDRESS_1').AsString;
+                cuqr.FieldByName('ADDRESS1').AsString;
 
                 Airqr.FieldByName('sender_ADDRESS_2').value:=
-                cuqr.FieldByName('ADDRESS_2').AsString;
+                cuqr.FieldByName('ADDRESS2').AsString;
 
                 Airqr.FieldByName('sender_ADDRESS_3').value:=
-                cuqr.FieldByName('ADDRESS_3').AsString;
+                cuqr.FieldByName('ADDRESS3').AsString;
 
                 Airqr.FieldByName('sender_POST_CODE').value:=
                 cuqr.FieldByName('POST_CODE').AsString;
 
-                Airqr.FieldByName('DISTRICT_CODE').value:=
-                cuqr.FieldByName('DISTRICT_CODE').AsString;
-
                 Airqr.FieldByName('SENDER_CITY').value:=
-                cuqr.FieldByName('SENDER_CITY').AsString;
+                cuqr.FieldByName('address_CITY').AsString;
 
                 Airqr.FieldByName('SENDER_COUNTRY_CODE').value:=
-                cuqr.FieldByName('COUNTRY_CODE').AsString;
+                cuqr.FieldByName('address_COUNTRY_CODE').AsString;
 
+                if airQr.State in [dsEdit] then begin
+                  showMessage('sh');
+                end;
                 airQr.Post;
                 FlightAirwaybillSQL.Refresh;
 
@@ -653,9 +665,25 @@ begin
 
 end;
 
-procedure TH_FlightairwaybillFRM.SpeedButton1Click(Sender: TObject);
+procedure TH_FlightairwaybillFRM.SpeedButton4Click(Sender: TObject);
 begin
-  SElectCustomer(self.SelectNameFLD.Text);
+  if FlightAirwaybillSQL.State in [dsInsert, dsEdit] then begin
+    FlightAirwaybillSQL.Post;
+  end;
+  M_CustomerNewFRM.InAction:='INSERT_CUSTOMER';
+  M_CustomerNewFRM.InAirSerial:= FlightAirwaybillSQL.FieldByName('SERIAL_NUMBER').AsInteger;
+  M_CustomerNewFRM.ShowModal;
+
+end;
+
+procedure TH_FlightairwaybillFRM.SpeedButton1Click(Sender: TObject);
+var
+  CustName:String;
+begin
+  CustName:= trim(SelectNameFLD.Text);
+  if CustName='' then
+    custName:=Trim(sname.Text);
+  SElectCustomer(CustName);
 
 end;
 

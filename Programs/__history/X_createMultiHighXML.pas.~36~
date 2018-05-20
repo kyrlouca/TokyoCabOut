@@ -581,12 +581,16 @@ begin
        x2Node:=CreateXMLNodeNew(FDoc,HeaderNode,'Msg515Packages','',ntElement);
        TblCreateXMLNode(FDoc,x2Node,'MarksNumbersOfPackages','',qrAir,'HAWB_ID',ntText);
        CreateXMLNodeNew(FDoc,x2node,'MarksNumbersOfPackagesLNG','EN',ntText);
-       temp:=trim(qrAir.FieldByName('kind_of_packages').AsString);
+
+       temp:=trim(qrItem.FieldByName('kind_of_packages').AsString);
        if temp='' then temp:=DefaultKindOfPackages;
        CreateXMLNodeNew(FDoc,x2node,'KindOfPackages',temp,ntText);
 
-       if qrItem.
-       TblCreateXMLNode(FDoc,x2Node,'NumberOfPackages','',qrItem,'PIECES',ntText);
+        tempInt:=qrItem.FieldByName('NUMBER_OF_PACKAGES').AsInteger;
+        if TempInt=0 then
+          tempInt:=1;
+       CreateXMLNodeNew(FDoc,x2node,'NumberOfPackages',IntToStr(TempInt),ntText);
+
 ///////////////////////////////////////
 
        qrItem.Next;

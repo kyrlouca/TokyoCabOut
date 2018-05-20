@@ -106,6 +106,12 @@ type
     TableSQLWEIGHT_NET: TFloatField;
     Label10: TLabel;
     wwDBEdit6: TwwDBEdit;
+    scountry: TwwDBLookupCombo;
+    CountrySQL: TIBCQuery;
+    CountrySQLCODE_2: TStringField;
+    CountrySQLNAME: TStringField;
+    TableSQLCOUNTRY_OF_ORIGIN: TStringField;
+    Label11: TLabel;
     procedure BitBtn2Click(Sender: TObject);
     procedure TableSQLBeforeEdit(DataSet: TDataSet);
     procedure FormActivate(Sender: TObject);
@@ -224,7 +230,7 @@ end;
 
 procedure TH_FlightAirItemFRM.FormActivate(Sender: TObject);
 begin
-ksOpenTables([GroupCertificateSQL,SelectCertSQL,CertItemSQL]);
+ksOpenTables([GroupCertificateSQL,SelectCertSQL,CertItemSQL,CountrySQL]);
 ksfillComboF1(cn,ProcReqFLD,'aux_procedure_request','key','key','key',false,false);
 ksfillComboF1(cn,PreviousProcFLD,'aux_previous_procedure','key','key','key',false,false);
 ksfillComboF1(cn,KindOfPackFLD,'aux_previous_procedure','key','key','key',false,false);
