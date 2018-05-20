@@ -450,7 +450,7 @@ begin
        qrAir.ParamByName('airSerial').Value:=AirSerial;
        qrAIr.Open;
 
-       HeaderNode :=CreateXMLNodeNew(FDoc,FatherNode,'Msg615GoodsItem','',ntElement);
+       HeaderNode :=CreateXMLNodeNew(FDoc,FatherNode,'<Msg515GoodsItem>','',ntElement);
  //       TblCreateXMLNode(FDoc,HeaderNode,'City','',qrItem,'HAWB_ID',ntText);
 
        TblCreateXMLNode(FDoc,HeaderNode,'ItemNumber','',qrItem,'SEQUENCE',ntText);
@@ -506,20 +506,12 @@ begin
        CreateXMLNodeNew(FDoc,x2node,'TARICSecondAdditionalCode','0000',ntText);
        /////////////////
 
-       TblCreateXMLNode(FDoc,HeaderNode,'CommercialReferenceNumber','',qrAir,'HAWB_ID',ntText);
-
-       CreateXMLNodeNew(FDoc,HeaderNode,'UNDangerousGoodsCode','1',ntText);
-
-       x2Node:=CreateXMLNodeNew(FDoc,HeaderNode,'Msg615ProducedDocumentsCertif',Temp,ntText);
-       CreateXMLNodeNew(FDoc,x2node,'DocumentType','N741',ntText);
-       TblCreateXMLNode(FDoc,x2node,'CommercialReferenceNumber','',qrAir,'HAWB_ID',ntText);
-
 //       <CountryOfOrigin>CN</CountryOfOrigin>  nEED COUNTRY ON ITEM
 
        //Consignor
        if (not SameSender) then begin
 
-       x2node:=CreateXMLNodeNew(FDoc,HeaderNode,'Msg615ConsignorTrader','',ntElement);
+       x2node:=CreateXMLNodeNew(FDoc,HeaderNode,'Msg515ExporterTrader','',ntElement);
        TBLCreateXMLNode(FDoc,x2node,'TraderName','',qrAir,'SENDER_NAME',ntText);
        dString:=Trim(qrAir.fieldbyName('SENDER_ADDRESS_1').AsString)+','+Trim(qrAir.fieldbyName('SENDER_ADDRESS_2').AsString)+','+Trim(qrAir.fieldbyName('SENDER_ADDRESS_3').AsString);
        dString:=Copy(dString,1,34);
@@ -531,7 +523,7 @@ begin
        end;
 
        //Consignee
-       x2node:=CreateXMLNodeNew(FDoc,HeaderNode,'Msg615Consignee','',ntElement);
+       x2node:=CreateXMLNodeNew(FDoc,HeaderNode,'<Msg515ConsigneeTrader>','',ntElement);
        TblCreateXMLNode(FDoc,x2node,'TraderName','',qrAir,'CONSIGNEE_NAME',ntText);
        dString:=Trim(qrAir.fieldbyName('CONSIGNEE_ADDRESS_1').AsString)+','+Trim(qrAir.fieldbyName('CONSIGNEE_ADDRESS_2').AsString)+','+Trim(qrAir.fieldbyName('CONSIGNEE_ADDRESS_3').AsString);
        dString:=Copy(dString,1,34);
