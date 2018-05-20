@@ -422,10 +422,11 @@ var
   DString:String;
   AirSerial:Integer;
   qrItem, qrAir: TksQuery;
+  qrCert:TksQuery;
   ItemSerial:Integer;
     i:Integer;
 begin
-//    HeaderNode:= CreateXmlNodeNew(Fdoc,FatherNode,'AirwayBills','');
+
   val:=
   ' Select  fa.serial_number as AirSerial, '
   +'  it.* from'
@@ -434,6 +435,7 @@ begin
   +'  where fa.fk_flight_out_serial= :flightSerial;';
   qrItem:=TksQuery.Create(cn,val);
 
+  //I did not use a Join to avoid namespace collision between item and air
   val:='select * from flight_airwaybill fa where fa.serial_number= :airserial';
   qrAir:=TksQuery.Create(cn,val);
 
@@ -448,56 +450,96 @@ begin
        qrAir.ParamByName('airSerial').Value:=AirSerial;
        qrAIr.Open;
 
-       HeaderNode :=CreateXMLNodeNew(FDoc,FatherNode,'Msg615GoodsItem','',ntElement);
+       HeaderNode :=CreateXMLNodeNew(FDoc,FatherNode,'Msg515GoodsItem','',ntElement);
  //       TblCreateXMLNode(FDoc,HeaderNode,'City','',qrItem,'HAWB_ID',ntText);
 
        TblCreateXMLNode(FDoc,HeaderNode,'ItemNumber','',qrItem,'SEQUENCE',ntText);
        TblCreateXMLNode(FDoc,HeaderNode,'GoodsDescription','',qrItem,'DESCRIPTION',ntText);
        CreateXMLNodeNew(FDoc,HeaderNode,'GoodsDescriptionLNG','EN',ntText);
        TblCreateXMLNode(FDoc,HeaderNode,'GrossMass','',qrItem,'WEIGHT',ntText);
+       TblCreateXMLNode(FDoc,HeaderNode,'NetMass','',qrItem,'WEIGHT',ntText);
 
-       Temp:=qrItem.FieldByName('Payment_method').AsString;
+       TblCreateXMLNode(FDoc,HeaderNode,'CountryOfDestinationCode','',qrAir,'CONSIGNEE_COUNTRY_CODE',ntText);
+
+       Temp:=qrAir.FieldByName('Payment_method').AsString;
         If temp='A'       then DString:='Y'
         else  if temp='C' then Dstring:='D'
         else  Dstring:='D';
-
        CreateXMLNodeNew(FDoc,HeaderNode,'TranspChargesMethodOfPayment',Temp,ntText);
-       TblCreateXMLNode(FDoc,HeaderNode,'CommercialReferenceNumber','',qrItem,'HAWB_ID',ntText);
-       CreateXMLNodeNew(FDoc,HeaderNode,'UNDangerousGoodsCode','1',ntText);
 
-       x2Node:=CreateXMLNodeNew(FDoc,HeaderNode,'Msg615ProducedDocumentsCertif',Temp,ntText);
-       CreateXMLNodeNew(FDoc,x2node,'DocumentType','N741',ntText);
-       TblCreateXMLNode(FDoc,x2node,'CommercialReferenceNumber','',qrItem,'HAWB_ID',ntText);
+       TblCreateXMLNode(FDoc,HeaderNode,'ProcedureRequested','',qrItem,'CURRENCY',ntText);
+       TblCreateXMLNode(FDoc,HeaderNode,'PreviousProcedure','',qrItem,'CURRENCY',ntText);
 
+       TblCreateXMLNode(FDoc,HeaderNode,'StatisticalValueCurrency','',qrItem,'CURRENCY',ntText);
+       TblCreateXMLNode(FDoc,HeaderNode,'StatisticalValueAmount','',qrItem,'AMOUNT',ntText);
+       TblCreateXMLNode(FDoc,HeaderNode,'CountryOfOrigin','',qrAir,'SENDER_CITY',ntText);
+       TblCreateXMLNode(FDoc,HeaderNode,'SupplementaryUnits','',qrItem,'PIECES',ntText);
+
+
+      ///***** Certificates
+      val:='Select * from  FLIGHT_AIRWAYBILL_ITEM_CERT fc where fc.fk_flight_airwaybill_item= :ItemSerial';
+      qrCert:=TksQuery.Create(cn,val);
+      try
+        qrCert.Open;
+        if not qrCert.IsEmpty then begin
+           x2Node:=CreateXMLNodeNew(FDoc,HeaderNode,'Msg515ProducedDocumentsCertif','',ntElement);
+        end;
+        while (not qrCert.Eof ) do begin
+          TblCreateXMLNode(FDoc,x2Node,'DocumentType','',qrCert,'cert_code',ntText);
+          TblCreateXMLNode(FDoc,x2Node,'DocumentType','',qrCert,'cert_value',ntText);
+          CreateXMLNodeNew(FDoc,x2node,'DocumentReferenceLNG','EN',ntText);
+          qrCert.Next;
+        end;
+      finally
+        qrCert.Free;
+      end;
+
+
+       ///////////////// Tariff
+
+       x2Node:=CreateXMLNodeNew(FDoc,HeaderNode,'Msg515CodeCommodity',Temp,ntText);
+       DString := StringReplace(QrItem.fieldByName('TARIFF_CODE').asString, ' ', '', [rfReplaceAll]); //Remove spaces
+
+       CreateXMLNodeNew(FDoc,x2node,'CombinedNomenclature',copy(DString,1,8),ntText);
+       CreateXMLNodeNew(FDoc,x2node,'TARICCode',copy(DString,8,2),ntText);
+       CreateXMLNodeNew(FDoc,x2node,'TARICFirstAdditionalCode','0000',ntText);
+       CreateXMLNodeNew(FDoc,x2node,'TARICSecondAdditionalCode','0000',ntText);
+       /////////////////
+
+//       <CountryOfOrigin>CN</CountryOfOrigin>  nEED COUNTRY ON ITEM
 
        //Consignor
        if (not SameSender) then begin
 
-       x2node:=CreateXMLNodeNew(FDoc,HeaderNode,'Msg615ConsignorTrader','',ntElement);
-       TBLCreateXMLNode(FDoc,x2node,'TraderName','',qrItem,'SENDER_NAME',ntText);
-       dString:=Trim(qrItem.fieldbyName('SENDER_ADDRESS_1').AsString)+','+Trim(qrItem.fieldbyName('SENDER_ADDRESS_2').AsString)+','+Trim(qrItem.fieldbyName('SENDER_ADDRESS_3').AsString);
+       x2node:=CreateXMLNodeNew(FDoc,HeaderNode,'Msg515ExporterTrader','',ntElement);
+       TBLCreateXMLNode(FDoc,x2node,'TraderName','',qrAir,'SENDER_NAME',ntText);
+       dString:=Trim(qrAir.fieldbyName('SENDER_ADDRESS_1').AsString)+','+Trim(qrAir.fieldbyName('SENDER_ADDRESS_2').AsString)+','+Trim(qrAir.fieldbyName('SENDER_ADDRESS_3').AsString);
        dString:=Copy(dString,1,34);
        CreateXMLNodeNew(FDoc,x2node,'StreetAndNumber',dString,ntText);
-       TblCreateXMLNode(FDoc,x2node,'PostalCode','',qrItem,'SENDER_POST_CODE',ntText);
-       TblCreateXMLNode(FDoc,x2node,'City','',qrItem,'SENDER_CITY',ntText);
-       TblCreateXMLNode(FDoc,x2node,'CountryCode','',qrItem,'SENDER_COUNTRY_CODE',ntText);
+       TblCreateXMLNode(FDoc,x2node,'PostalCode','',qrAir,'SENDER_POST_CODE',ntText);
+       TblCreateXMLNode(FDoc,x2node,'City','',qrAir,'SENDER_CITY',ntText);
+       TblCreateXMLNode(FDoc,x2node,'CountryCode','',qrAir,'SENDER_COUNTRY_CODE',ntText);
        CreateXMLNodeNew(FDoc,x2node,'NADLNG','EN',ntText);
        end;
 
        //Consignee
-       x2node:=CreateXMLNodeNew(FDoc,HeaderNode,'Msg615Consignee','',ntElement);
-       TblCreateXMLNode(FDoc,x2node,'TraderName','',qrItem,'CONSIGNEE_NAME',ntText);
-       dString:=Trim(qrItem.fieldbyName('CONSIGNEE_ADDRESS_1').AsString)+','+Trim(qrItem.fieldbyName('CONSIGNEE_ADDRESS_2').AsString)+','+Trim(qrItem.fieldbyName('CONSIGNEE_ADDRESS_3').AsString);
+       x2node:=CreateXMLNodeNew(FDoc,HeaderNode,'Msg515ConsigneeTrader','',ntElement);
+       TblCreateXMLNode(FDoc,x2node,'TraderName','',qrAir,'CONSIGNEE_NAME',ntText);
+       dString:=Trim(qrAir.fieldbyName('CONSIGNEE_ADDRESS_1').AsString)+','+Trim(qrAir.fieldbyName('CONSIGNEE_ADDRESS_2').AsString)+','+Trim(qrAir.fieldbyName('CONSIGNEE_ADDRESS_3').AsString);
        dString:=Copy(dString,1,34);
        CreateXMLNodeNew(FDoc,x2node,'StreetAndNumber',dString,ntText);
-       TblCreateXMLNode(FDoc,x2node,'PostalCode','',qrItem,'CONSIGNEE_POST_CODE',ntText);
-       TblCreateXMLNode(FDoc,x2node,'City','',qrItem,'CONSIGNEE_CITY',ntText);
-       TblCreateXMLNode(FDoc,x2node,'CountryCode','',qrItem,'CONSIGNEE_COUNTRY_cODE',ntText);
+       TblCreateXMLNode(FDoc,x2node,'PostalCode','',qrAir,'CONSIGNEE_POST_CODE',ntText);
+       TblCreateXMLNode(FDoc,x2node,'City','',qrAir,'CONSIGNEE_CITY',ntText);
+       TblCreateXMLNode(FDoc,x2node,'CountryCode','',qrAir,'CONSIGNEE_COUNTRY_cODE',ntText);
        CreateXMLNodeNew(FDoc,x2node,'NADLNG','EN',ntText);
 
-
-//       CreateNodeFlightCountries(AirSerial,Fdoc,HeaderNode);
-//       CreateNodeForItems(AirSerial,Fdoc,HeaderNode);
+///////////////////////////////////////////////////
+       x2Node:=CreateXMLNodeNew(FDoc,HeaderNode,'Msg515Packages',Temp,ntText);
+       TblCreateXMLNode(FDoc,x2Node,'MarksNumbersOfPackages','',qrAir,'HAWB_ID',ntText);
+       CreateXMLNodeNew(FDoc,x2node,'MarksNumbersOfPackagesLNG','EN',ntText);
+       CreateXMLNodeNew(FDoc,x2node,'KindOfPackages','PC',ntText);
+       TblCreateXMLNode(FDoc,x2Node,'NumberOfPackages','',qrItem,'PIECES',ntText);
+///////////////////////////////////////
 
        qrItem.Next;
       end;

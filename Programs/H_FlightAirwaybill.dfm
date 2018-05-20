@@ -2654,7 +2654,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
     Transaction = MainFormFRM.UsedForReadOnlyTrans
     UpdateTransaction = UpdateTransaction
     SQL.Strings = (
-      'Select * from FLIGHT_AIRWAYBILL_ITEM')
+      'Select * from FLIGHT_AIRWAYBILL_ITEM order by sequence')
     MasterFields = 'SERIAL_NUMBER'
     DetailFields = 'FK_FA_SERIAL'
     MasterSource = FlightAirwaybillCDS

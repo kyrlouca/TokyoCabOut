@@ -432,7 +432,8 @@ begin
   +'  it.* from'
   +'  flight_airwaybill fa join'
   +'  flight_airwaybill_item it on fa.serial_number=it.fk_fa_serial'
-  +'  where fa.fk_flight_out_serial= :flightSerial;';
+  +'  where fa.fk_flight_out_serial= :flightSerial '
+  +'  order by fa.hawb_id, sequence';
   qrItem:=TksQuery.Create(cn,val);
 
   //I did not use a Join to avoid namespace collision between item and air
@@ -450,7 +451,7 @@ begin
        qrAir.ParamByName('airSerial').Value:=AirSerial;
        qrAIr.Open;
 
-       HeaderNode :=CreateXMLNodeNew(FDoc,FatherNode,'<Msg515GoodsItem>','',ntElement);
+       HeaderNode :=CreateXMLNodeNew(FDoc,FatherNode,'Msg515GoodsItem','',ntElement);
  //       TblCreateXMLNode(FDoc,HeaderNode,'City','',qrItem,'HAWB_ID',ntText);
 
        TblCreateXMLNode(FDoc,HeaderNode,'ItemNumber','',qrItem,'SEQUENCE',ntText);
@@ -480,6 +481,7 @@ begin
       val:='Select * from  FLIGHT_AIRWAYBILL_ITEM_CERT fc where fc.fk_flight_airwaybill_item= :ItemSerial';
       qrCert:=TksQuery.Create(cn,val);
       try
+        qrCert.ParamByName('itemSerial').Value:=
         qrCert.Open;
         if not qrCert.IsEmpty then begin
            x2Node:=CreateXMLNodeNew(FDoc,HeaderNode,'Msg515ProducedDocumentsCertif','',ntElement);
@@ -523,7 +525,7 @@ begin
        end;
 
        //Consignee
-       x2node:=CreateXMLNodeNew(FDoc,HeaderNode,'<Msg515ConsigneeTrader>','',ntElement);
+       x2node:=CreateXMLNodeNew(FDoc,HeaderNode,'Msg515ConsigneeTrader','',ntElement);
        TblCreateXMLNode(FDoc,x2node,'TraderName','',qrAir,'CONSIGNEE_NAME',ntText);
        dString:=Trim(qrAir.fieldbyName('CONSIGNEE_ADDRESS_1').AsString)+','+Trim(qrAir.fieldbyName('CONSIGNEE_ADDRESS_2').AsString)+','+Trim(qrAir.fieldbyName('CONSIGNEE_ADDRESS_3').AsString);
        dString:=Copy(dString,1,34);
