@@ -466,8 +466,8 @@ begin
         else  Dstring:='D';
        CreateXMLNodeNew(FDoc,HeaderNode,'TranspChargesMethodOfPayment',Temp,ntText);
 
-//       TblCreateXMLNode(FDoc,HeaderNode,'ProcedureRequested','',qrItem,'CURRENCY',ntText);
-//       TblCreateXMLNode(FDoc,HeaderNode,'PreviousProcedure','',qrItem,'CURRENCY',ntText);
+       TblCreateXMLNode(FDoc,HeaderNode,'ProcedureRequested','',qrItem,'CURRENCY',ntText);
+       TblCreateXMLNode(FDoc,HeaderNode,'PreviousProcedure','',qrItem,'CURRENCY',ntText);
 
        TblCreateXMLNode(FDoc,HeaderNode,'StatisticalValueCurrency','',qrItem,'CURRENCY',ntText);
        TblCreateXMLNode(FDoc,HeaderNode,'StatisticalValueAmount','',qrItem,'AMOUNT',ntText);
@@ -494,7 +494,7 @@ begin
        /////////////////
 
        x2Node:=CreateXMLNodeNew(FDoc,HeaderNode,'Msg515CodeCommodity',Temp,ntText);
-       DString := StringReplace(ItemQr.fieldByName('TARIFF_CODE').asString, ' ', '', [rfReplaceAll]); //Remove spaces
+       DString := StringReplace(QrItem.fieldByName('TARIFF_CODE').asString, ' ', '', [rfReplaceAll]); //Remove spaces
 
        CreateXMLNodeNew(FDoc,x2node,'CombinedNomenclature',copy(DString,1,8),ntText);
        CreateXMLNodeNew(FDoc,x2node,'TARICCode',copy(DString,8,2),ntText);
@@ -508,7 +508,7 @@ begin
        CreateXMLNodeNew(FDoc,x2node,'DocumentType','N741',ntText);
        TblCreateXMLNode(FDoc,x2node,'CommercialReferenceNumber','',qrAir,'HAWB_ID',ntText);
 
-       <CountryOfOrigin>CN</CountryOfOrigin>  nEED COUNTRY ON ITEM
+//       <CountryOfOrigin>CN</CountryOfOrigin>  nEED COUNTRY ON ITEM
 
        //Consignor
        if (not SameSender) then begin
@@ -535,14 +535,13 @@ begin
        TblCreateXMLNode(FDoc,x2node,'CountryCode','',qrAir,'CONSIGNEE_COUNTRY_cODE',ntText);
        CreateXMLNodeNew(FDoc,x2node,'NADLNG','EN',ntText);
 
-
-       <Msg515Packages>
-        <<MarksNumbersOfPackages>1234567890</MarksNumbersOfPackages>
-        <<MarksNumbersOfPackagesLNG>EN</MarksNumbersOfPackagesLNG>
-        <<KindOfPackages>PC</KindOfPackages>
-        <<NumberOfPackages>1</NumberOfPackages>
-//       CreateNodeFlightCountries(AirSerial,Fdoc,HeaderNode);
-//       CreateNodeForItems(AirSerial,Fdoc,HeaderNode);
+///////////////////////////////////////////////////
+       x2Node:=CreateXMLNodeNew(FDoc,HeaderNode,'Msg515Packages',Temp,ntText);
+       TblCreateXMLNode(FDoc,x2Node,'MarksNumbersOfPackages','',qrAir,'HAWB_ID',ntText);
+       CreateXMLNodeNew(FDoc,x2node,'MarksNumbersOfPackagesLNG','EN',ntText);
+       CreateXMLNodeNew(FDoc,x2node,'KindOfPackages','PC',ntText);
+       TblCreateXMLNode(FDoc,x2Node,'NumberOfPackages','',qrItem,'PIECES',ntText);
+///////////////////////////////////////
 
        qrItem.Next;
       end;
