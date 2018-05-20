@@ -448,6 +448,7 @@ begin
       while (not qrItem.eof) do begin
        inc(i);
        airSerial:=qrItem.FieldByName('AirSerial').AsInteger;
+       itemSerial:=qrItem.FieldByName('serial_number').AsInteger;
        qrAir.ParamByName('airSerial').Value:=AirSerial;
        qrAIr.Open;
 
@@ -481,13 +482,12 @@ begin
       val:='Select * from  FLIGHT_AIRWAYBILL_ITEM_CERT fc where fc.fk_flight_airwaybill_item= :ItemSerial';
       qrCert:=TksQuery.Create(cn,val);
       try
+        qrCert.ParamByName('itemSerial').Value:= ItemSerial;
         qrCert.Open;
-        if not qrCert.IsEmpty then begin
-           x2Node:=CreateXMLNodeNew(FDoc,HeaderNode,'Msg515ProducedDocumentsCertif','',ntElement);
-        end;
         while (not qrCert.Eof ) do begin
+          x2Node:=CreateXMLNodeNew(FDoc,HeaderNode,'Msg515ProducedDocumentsCertif','',ntElement);
           TblCreateXMLNode(FDoc,x2Node,'DocumentType','',qrCert,'cert_code',ntText);
-          TblCreateXMLNode(FDoc,x2Node,'DocumentType','',qrCert,'cert_value',ntText);
+          TblCreateXMLNode(FDoc,x2Node,'DocumentReference','',qrCert,'cert_value',ntText);
           CreateXMLNodeNew(FDoc,x2node,'DocumentReferenceLNG','EN',ntText);
           qrCert.Next;
         end;

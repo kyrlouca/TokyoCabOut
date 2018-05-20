@@ -1283,7 +1283,7 @@ object H_ScanAirwaibillNewFRM: TH_ScanAirwaibillNewFRM
       'Select * from Flight_airwaybill  '
       'where '
       '  fk_flight_out_serial= :serial_number '
-      'order by serial_number Desc')
+      'order by hawb_id')
     MasterFields = 'SERIAL_NUMBER'
     DetailFields = 'FK_FLIGHT_OUT_SERIAL'
     MasterSource = FlightOutCDS

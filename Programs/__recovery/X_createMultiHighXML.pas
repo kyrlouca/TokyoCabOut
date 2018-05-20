@@ -304,14 +304,14 @@ begin
         TBLCreateXMLNode(FDoc,x2node,'IncotermCode','',FirstAirQr,'INCOTERMS',ntText);
         CreateXMLNodeNew(FDoc,x2node,'ComplementaryCode','XXX',ntText);
         CreateXMLNodeNew(FDoc,x2node,'ComplementaryCode','XXX',ntText);
-        CreateXMLNodeNew(FDoc,x2node,'ComplementOfInfoLNG','XXX',ntText);
+        CreateXMLNodeNew(FDoc,x2node,'ComplementOfInfoLNG','EN',ntText);
       end;
 
      x2node:=CreateXMLNodeNew(FDoc,FatherNode,'Msg515DataTransaction','',ntElement);
      CreateXMLNodeNew(FDoc,x2node,'NatureOfTransactionCode','XXX',ntText);
 
      x2node:=CreateXMLNodeNew(FDoc,FatherNode,'Msg515StatusRepresentative','',ntElement);
-     CreateXMLNodeNew(FDoc,x2node,'RepresentativeStatusCode','XXX',ntText);
+     CreateXMLNodeNew(FDoc,x2node,'RepresentativeStatusCode','1',ntText);
 
       qr.Close;
     finally
@@ -448,6 +448,7 @@ begin
       while (not qrItem.eof) do begin
        inc(i);
        airSerial:=qrItem.FieldByName('AirSerial').AsInteger;
+       itemSerial:=qrItem.FieldByName('serial_number').AsInteger;
        qrAir.ParamByName('airSerial').Value:=AirSerial;
        qrAIr.Open;
 
@@ -481,14 +482,12 @@ begin
       val:='Select * from  FLIGHT_AIRWAYBILL_ITEM_CERT fc where fc.fk_flight_airwaybill_item= :ItemSerial';
       qrCert:=TksQuery.Create(cn,val);
       try
-        qrCert.ParamByName('itemSerial').Value:=
+        qrCert.ParamByName('itemSerial').Value:= ItemSerial;
         qrCert.Open;
-        if not qrCert.IsEmpty then begin
-           x2Node:=CreateXMLNodeNew(FDoc,HeaderNode,'Msg515ProducedDocumentsCertif','',ntElement);
-        end;
         while (not qrCert.Eof ) do begin
+          x2Node:=CreateXMLNodeNew(FDoc,HeaderNode,'Msg515ProducedDocumentsCertif','',ntElement);
           TblCreateXMLNode(FDoc,x2Node,'DocumentType','',qrCert,'cert_code',ntText);
-          TblCreateXMLNode(FDoc,x2Node,'DocumentType','',qrCert,'cert_value',ntText);
+          TblCreateXMLNode(FDoc,x2Node,'DocumentReference','',qrCert,'cert_value',ntText);
           CreateXMLNodeNew(FDoc,x2node,'DocumentReferenceLNG','EN',ntText);
           qrCert.Next;
         end;
@@ -522,6 +521,7 @@ begin
        TblCreateXMLNode(FDoc,x2node,'City','',qrAir,'SENDER_CITY',ntText);
        TblCreateXMLNode(FDoc,x2node,'CountryCode','',qrAir,'SENDER_COUNTRY_CODE',ntText);
        CreateXMLNodeNew(FDoc,x2node,'NADLNG','EN',ntText);
+       TblCreateXMLNode(FDoc,x2node,'TIN','',qrAir,'SENDER_VAT',ntText);
        end;
 
        //Consignee
