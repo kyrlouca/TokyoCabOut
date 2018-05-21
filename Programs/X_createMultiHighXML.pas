@@ -215,7 +215,7 @@ var
   GroupQr, Flightqr,FirstAirQr:TksQuery;
   MawbId:String;
   FlightName:string;
-  DeclarationType,TypeDeclaration,Circumstance:String;
+//  DeclarationType,TypeDeclaration,Circumstance:String;
   DefaultDir:String;
   val:String;
 
@@ -279,7 +279,8 @@ begin
      /////////////////////////////////////////////////////////////////////////
       strXML := StringReplace(FDoc.XML.Text, ' xmlns=""', '', [rfReplaceAll]);
       FDoc := LoadXMLData(strXML);
-      FileName:= DefaultDir+'\'+ MawbId+'_'+DeclarationType+'_'+TypeDeclaration+'_'+Circumstance+'_'+'.xml';
+      FileName:= DefaultDir+'\'+ MawbId+'_'+
+      criteria.DeclarationType+'_'+Criteria.TypeOfDeclaration+'_'+Criteria.Circumstance+'_'+'.xml';
 
       FDoc.SaveToFile(FileName);
 
@@ -428,12 +429,20 @@ var
   MawbId:String;
   FlightName:string;
   DateDepart:Tdate;
-  DefaultDeclarationType, DefaultTypeOfDeclaration, DefaultCirc:String;
+  CommonDeclarationType, CommonTypeOfDeclaration, CommonCirc:String;
 begin
 
-  DefaultDeclarationType := GetTableDefaultValue('AUX_DECLARATION_TYPE');
-  DefaultTypeOfDeclaration := GetTableDefaultValue('AUX_TYPE_OF_DECLARATION');
-  DefaultCirc := GetTableDefaultValue('AUX_SPECIFIC_CIRCUMSTANCE');
+  CommonDeclarationType := Criteria.DeclarationType;
+  if CommonDeclarationType='' then
+    CommonDeclarationType := GetTableDefaultValue('AUX_DECLARATION_TYPE');
+
+  CommonTypeOfDeclaration:= Criteria.TypeOfDeclaration;
+  if CommonTypeOfDeclaration='' then
+    CommonTypeOfDeclaration := GetTableDefaultValue('AUX_TYPE_OF_DECLARATION');
+
+  CommonCirc:= Criteria.Circumstance;
+  if CommonCirc='' then
+    CommonCirc := GetTableDefaultValue('AUX_SPECIFIC_CIRCUMSTANCE');
 
   val:=
   '   select'
@@ -472,7 +481,7 @@ begin
      CreateXMLNodeNew(FDoc,x1node,'ReferenceNumber',val,ntText);
 
 
-     CreateXMLNodeNew(FDoc,x1node,'TypeOfDeclaration',Criteria.DeclarationType,ntText);
+     CreateXMLNodeNew(FDoc,x1node,'TypeOfDeclaration',CommonDeclarationType,ntText);
 
      CreateXMLNodeNew(FDoc,x1node,'CountryOfDestinationCode','TR',ntText); //here
      CreateXMLNodeNew(FDoc,x1node,'AgreedLocationOfGoodsCode','LCA',ntText); //here
@@ -503,9 +512,8 @@ begin
      CreateXMLNodeNew(FDoc,x1node,'DeclarationPlace','LARNACA',ntText);
      CreateXMLNodeNew(FDoc,x1node,'DeclarationPlaceLNG','EN',ntText);
 
-     CreateXMLNodeNew(FDoc,x1node,'SpecificCircumstanceIndicator',Criteria.Circumstance,ntText);
-
-     CreateXMLNodeNew(FDoc,x1node,'TypeOfDeclarationBox12',Criteria.TypeOfDeclaration,ntText);
+     CreateXMLNodeNew(FDoc,x1node,'SpecificCircumstanceIndicator',CommonTypeOfDeclaration,ntText);
+     CreateXMLNodeNew(FDoc,x1node,'TypeOfDeclarationBox12',CommonTypeOfDeclaration,ntText);
 
 
       qr.Close;
