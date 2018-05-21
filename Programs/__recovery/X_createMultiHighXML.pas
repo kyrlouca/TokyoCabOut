@@ -461,12 +461,25 @@ begin
 
   Qr:=TksQuery.Create(cn,val);
 
-  val:=
-  '   Select count(it.serial_number) as Cnt , sum(it.weight)as TotalWeight, sum(it.pieces) as TotalPieces from'
-  +'    flight_airwaybill fa join'
-  +'    flight_airwaybill_item it on fa.serial_number=it.fk_fa_serial and '
-  +'    fa.declaration_type = :decType and fa.type_of_declaration = :typeDec and fa.specific_circumstance = :circ'
-  +'    where fa.fk_flight_out_serial= :flightSerial';
+//  val:=
+//  '   Select count(it.serial_number) as Cnt , sum(it.weight)as TotalWeight, sum(it.pieces) as TotalPieces from'
+//  +'    flight_airwaybill fa join'
+//  +'    flight_airwaybill_item it on fa.serial_number=it.fk_fa_serial and '
+//  +'    fa.declaration_type = :decType and fa.type_of_declaration = :typeDec and fa.specific_circumstance = :circ'
+//  +'    where fa.fk_flight_out_serial= :flightSerial'
+
+val:=
+'   Select'
+  +'    count(serial) as Cnt , sum(weight)as TotalWeight, sum(pieces) as TotalPieces from'
+  +'    (select  first 100 it.serial_number as serial, it.weight as weight, it.pieces as pieces from'
+  +'      flight_airwaybill fa join'
+  +'      flight_airwaybill_item it on fa.serial_number=it.fk_fa_serial'
+  +'      where fa.fk_flight_out_serial= :flightSerial and '
+  +'      fa.declaration_type = :decType and fa.type_of_declaration = :typeDec and fa.specific_circumstance = :circ '
+  +'          order by fa.hawb_id'
+  +'    )';
+
+
   TotalsQr:=TksQuery.Create(cn,val);
 
   try
