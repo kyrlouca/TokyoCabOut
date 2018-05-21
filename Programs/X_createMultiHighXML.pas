@@ -317,7 +317,10 @@ begin
   +'   where fo.serial_number = :serial';
   Qr:=TksQuery.Create(cn,val);
 
-  val:= 'select first 1 * from flight_airwaybill fa where fa.fk_flight_out_serial = :flightSerial';
+  val:=
+  ' select first 1 * from flight_airwaybill fa where '
+  +' fa.fk_flight_out_serial = :flightSerial and '
+  +' fa.declaration_type = :decType and fa.type_of_declaration = :typeDec and fa.specific_circumstance = :circ';
   FirstAirQR:= TksQuery.Create(cn,val);
 
   try
@@ -327,6 +330,10 @@ begin
         exit;
 
       FirstAirQr.ParambyName('FlightSerial').Value:= FlightOutSerial;
+      FirstAirQr.ParambyName('decType').Value:= Criteria.DeclarationType;
+      FirstAirQr.ParambyName('TypeDec').Value:= Criteria.TypeOfDeclaration;
+      FirstAirQr.ParambyName('Circ').Value:= Criteria.Circumstance;
+
       FirstAirQr.Open;
       if FirstAirQr.IsEmpty then
         exit;
@@ -450,12 +457,15 @@ begin
   +'   from flight_out fo'
   +'   left outer join flight_table ft on fo.fk_flight_table=ft.serial_number'
   +'   where fo.serial_number = :serial';
+
+
   Qr:=TksQuery.Create(cn,val);
 
   val:=
   '   Select count(it.serial_number) as Cnt , sum(it.weight)as TotalWeight, sum(it.pieces) as TotalPieces from'
   +'    flight_airwaybill fa join'
-  +'    flight_airwaybill_item it on fa.serial_number=it.fk_fa_serial'
+  +'    flight_airwaybill_item it on fa.serial_number=it.fk_fa_serial and '
+  +'    fa.declaration_type = :decType and fa.type_of_declaration = :typeDec and fa.specific_circumstance = :circ'
   +'    where fa.fk_flight_out_serial= :flightSerial';
   TotalsQr:=TksQuery.Create(cn,val);
 
@@ -466,6 +476,11 @@ begin
         exit;
 
       TotalsQr.ParambyName('FlightSerial').Value:= FlightOutSerial;
+
+      TotalsQr.ParambyName('decType').Value:= Criteria.DeclarationType;
+      TotalsQr.ParambyName('TypeDec').Value:= Criteria.TypeOfDeclaration;
+      TotalsQr.ParambyName('Circ').Value:= Criteria.Circumstance;
+
       TotalsQr.Open;
       if Totalsqr.IsEmpty then
         exit;
@@ -551,13 +566,14 @@ begin
 
 
   val:=
-  ' Select  fa.serial_number as AirSerial, '
-  +'  it.* from'
-  +'  flight_airwaybill fa join'
-  +'  flight_airwaybill_item it on fa.serial_number=it.fk_fa_serial'
-  +'  where fa.fk_flight_out_serial= :flightSerial '
-  +'  order by fa.hawb_id, sequence';
-  qrItem:=TksQuery.Create(cn,val);
+  '   Select  fa.serial_number as AirSerial,'
+  +'    it.* from'
+  +'    flight_airwaybill fa join'
+  +'    flight_airwaybill_item it on fa.serial_number=it.fk_fa_serial'
+  +'    where fa.fk_flight_out_serial= :flightSerial'
+  +'    and fa.declaration_type = :decType and fa.type_of_declaration = :typeDec and fa.specific_circumstance = :circ'
+  +'    order by fa.hawb_id, sequence';
+
 
   //I did not use a Join to avoid namespace collision between item and air
   val:='select * from flight_airwaybill fa where fa.serial_number= :airserial';
@@ -566,12 +582,18 @@ begin
     try
       i:=0;
       qrItem.ParambyName('FlightSerial').Value:= FlightSerial;
+      qrItem.ParambyName('decType').Value:= Criteria.DeclarationType;
+      qrItem.ParambyName('TypeDec').Value:= Criteria.TypeOfDeclaration;
+      qrItem.ParambyName('Circ').Value:= Criteria.Circumstance;
+
       qrItem.Open;
 //      name="Msg615ProducedDocumentsCertif"
       while (not qrItem.eof) do begin
        inc(i);
        airSerial:=qrItem.FieldByName('AirSerial').AsInteger;
        itemSerial:=qrItem.FieldByName('serial_number').AsInteger;
+
+       qrAir.Close;
        qrAir.ParamByName('airSerial').Value:=AirSerial;
        qrAIr.Open;
 
