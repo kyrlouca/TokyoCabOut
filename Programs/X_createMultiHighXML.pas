@@ -279,7 +279,7 @@ begin
      /////////////////////////////////////////////////////////////////////////
       strXML := StringReplace(FDoc.XML.Text, ' xmlns=""', '', [rfReplaceAll]);
       FDoc := LoadXMLData(strXML);
-      FileName:= DefaultDir+'\'+ MawbId+'_'+
+      FileName:= DefaultDir+'\'+ MawbId+'_'+ FormatDateTime('yyyymmddhhmmss',now)+'_'+
       criteria.DeclarationType+'_'+Criteria.TypeOfDeclaration+'_'+Criteria.Circumstance+'_'+'.xml';
 
       FDoc.SaveToFile(FileName);
@@ -311,16 +311,18 @@ var
 begin
   val:=
   '   select'
-  +'  fo.serial_number, fo.mawb, fo.Date_depart, ft.flight_name'
-  +'   from flight_out fo'
-  +'   left outer join flight_table ft on fo.fk_flight_table=ft.serial_number'
+  +'  fo.serial_number, fo.mawb, fo.Date_depart, ft.flight_name from '
+  +'   flight_out fo  left outer join '
+  +'   flight_table ft on fo.fk_flight_table=ft.serial_number'
   +'   where fo.serial_number = :serial';
   Qr:=TksQuery.Create(cn,val);
 
+  //to get the flight details of the first airbill for the header since they are all the same
   val:=
   ' select first 1 * from flight_airwaybill fa where '
   +' fa.fk_flight_out_serial = :flightSerial and '
-  +' fa.declaration_type = :decType and fa.type_of_declaration = :typeDec and fa.specific_circumstance = :circ';
+  +' fa.declaration_type = :decType and fa.type_of_declaration = :typeDec and fa.specific_circumstance = :circ and '
+  +' (fa.is_included_xml = ''N''  or fa.is_included_xml is null)';
   FirstAirQR:= TksQuery.Create(cn,val);
 
   try
@@ -461,12 +463,26 @@ begin
 
   Qr:=TksQuery.Create(cn,val);
 
-  val:=
-  '   Select count(it.serial_number) as Cnt , sum(it.weight)as TotalWeight, sum(it.pieces) as TotalPieces from'
-  +'    flight_airwaybill fa join'
-  +'    flight_airwaybill_item it on fa.serial_number=it.fk_fa_serial and '
-  +'    fa.declaration_type = :decType and fa.type_of_declaration = :typeDec and fa.specific_circumstance = :circ'
-  +'    where fa.fk_flight_out_serial= :flightSerial';
+//  val:=
+//  '   Select count(it.serial_number) as Cnt , sum(it.weight)as TotalWeight, sum(it.pieces) as TotalPieces from'
+//  +'    flight_airwaybill fa join'
+//  +'    flight_airwaybill_item it on fa.serial_number=it.fk_fa_serial and '
+//  +'    fa.declaration_type = :decType and fa.type_of_declaration = :typeDec and fa.specific_circumstance = :circ'
+//  +'    where fa.fk_flight_out_serial= :flightSerial'
+
+//99
+val:=
+'   Select'
+  +'    count(serial) as Cnt , sum(weight)as TotalWeight, sum(pieces) as TotalPieces from'
+  +'    (select  first 2 it.serial_number as serial, it.weight as weight, it.pieces as pieces from'
+  +'      flight_airwaybill fa join'
+  +'      flight_airwaybill_item it on fa.serial_number=it.fk_fa_serial'
+  +'      where fa.fk_flight_out_serial= :flightSerial and '
+  +'      fa.declaration_type = :decType and fa.type_of_declaration = :typeDec and fa.specific_circumstance = :circ '
+  +'          order by fa.hawb_id'
+  +'    )';
+
+
   TotalsQr:=TksQuery.Create(cn,val);
 
   try
@@ -527,7 +543,7 @@ begin
      CreateXMLNodeNew(FDoc,x1node,'DeclarationPlace','LARNACA',ntText);
      CreateXMLNodeNew(FDoc,x1node,'DeclarationPlaceLNG','EN',ntText);
 
-     CreateXMLNodeNew(FDoc,x1node,'SpecificCircumstanceIndicator',CommonTypeOfDeclaration,ntText);
+     CreateXMLNodeNew(FDoc,x1node,'SpecificCircumstanceIndicator',CommonCirc,ntText);
      CreateXMLNodeNew(FDoc,x1node,'TypeOfDeclarationBox12',CommonTypeOfDeclaration,ntText);
 
 
@@ -553,34 +569,38 @@ var
   qrItem, qrAir: TksQuery;
   qrCert:TksQuery;
   ItemSerial:Integer;
-   i:Integer;
+
    DefaultProcedureRequested:String;
    DefaultPreviousProcedure:String;
    DefaultKindOfPackages:String;
    TempInt:Integer;
+   Counter:integer;
 begin
 
+  Counter:=0;
   DefaultProcedureRequested:=GetTableDefaultValue('AUX_PROCEDURE_REQUEST');
   DefaultPreviousProcedure:=GetTableDefaultValue('AUX_PREVIOUS_PROCEDURE');
   DefaultKindOfPackages:=GetTableDefaultValue('AUX_KIND_OF_PACKAGES');
 
+  //99
 
   val:=
-  '   Select  fa.serial_number as AirSerial,'
+  '   Select first 2  fa.serial_number as AirSerial,'
   +'    it.* from'
   +'    flight_airwaybill fa join'
   +'    flight_airwaybill_item it on fa.serial_number=it.fk_fa_serial'
   +'    where fa.fk_flight_out_serial= :flightSerial'
-  +'    and fa.declaration_type = :decType and fa.type_of_declaration = :typeDec and fa.specific_circumstance = :circ'
+  +'    and fa.declaration_type = :decType and fa.type_of_declaration = :typeDec and fa.specific_circumstance = :circ and '
+  +'   ( fa.is_included_xml = ''N''  or fa.is_included_xml is null)'
   +'    order by fa.hawb_id, sequence';
-
+  qrItem:=TksQuery.Create(cn,Val);
 
   //I did not use a Join to avoid namespace collision between item and air
   val:='select * from flight_airwaybill fa where fa.serial_number= :airserial';
   qrAir:=TksQuery.Create(cn,val);
 
     try
-      i:=0;
+      Counter:=0;
       qrItem.ParambyName('FlightSerial').Value:= FlightSerial;
       qrItem.ParambyName('decType').Value:= Criteria.DeclarationType;
       qrItem.ParambyName('TypeDec').Value:= Criteria.TypeOfDeclaration;
@@ -589,7 +609,7 @@ begin
       qrItem.Open;
 //      name="Msg615ProducedDocumentsCertif"
       while (not qrItem.eof) do begin
-       inc(i);
+       inc(Counter);
        airSerial:=qrItem.FieldByName('AirSerial').AsInteger;
        itemSerial:=qrItem.FieldByName('serial_number').AsInteger;
 
@@ -703,7 +723,7 @@ begin
        CreateXMLNodeNew(FDoc,x2node,'NumberOfPackages',IntToStr(TempInt),ntText);
 
 ///////////////////////////////////////
-
+       ksExecSQLVar(cn,'update flight_airwaybill  set is_included_xml= ''Y'' WHERE serial_number = :SerialNumber',[airSerial]);
        qrItem.Next;
       end;
       result:= FatherNOde;

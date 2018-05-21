@@ -224,6 +224,13 @@ type
     EditAirBTN: TBitBtn;
     DeleteAirBTN: TBitBtn;
     MultiHighBTN: TRzBitBtn;
+    FlightAirwaybillSQLCONSIGNEE_PREFERRED_NAME: TStringField;
+    FlightAirwaybillSQLSENDER_VAT: TStringField;
+    FlightAirwaybillSQLCONSIGNEE_VAT: TStringField;
+    FlightAirwaybillSQLTYPE_OF_DECLARATION: TStringField;
+    FlightAirwaybillSQLSPECIFIC_CIRCUMSTANCE: TStringField;
+    FlightAirwaybillSQLDECLARATION_TYPE: TStringField;
+    FlightAirwaybillSQLIS_INCLUDED_XML: TStringField;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure BitBtn1Click(Sender: TObject);
     procedure AirwayBillSQLAfterPost(DataSet: TDataSet);

@@ -656,9 +656,11 @@ object H_ScanAirwaibillNewFRM: TH_ScanAirwaibillNewFRM
         Width = 841
         Height = 250
         ControlType.Strings = (
-          'VALUE_TYPE;CustomEdit;ValueFLD')
+          'VALUE_TYPE;CustomEdit;ValueFLD'
+          'IS_INCLUDED_XML;CheckBox;Y;N')
         Selected.Strings = (
           'SERIAL_NUMBER'#9'4'#9'S/N'
+          'IS_INCLUDED_XML'#9'1'#9'XML'#9'F'
           'VALUE_TYPE'#9'5'#9'Value'
           'HAWB_ID'#9'10'#9'Hawb Id'
           'SENDER_NAME'#9'12'#9'Sender Name'
@@ -667,8 +669,7 @@ object H_ScanAirwaibillNewFRM: TH_ScanAirwaibillNewFRM
           'ITEMS_COUNT'#9'7'#9'Items'
           'PIECES'#9'6'#9'Pieces'
           'CONSIGNEE_NAME'#9'18'#9'Consignee'
-          'WEIGHT'#9'6'#9'Weight'
-          'INCOTERMS'#9'10'#9'INCOTERMS')
+          'WEIGHT'#9'6'#9'Weight')
         IniAttributes.Delimiter = ';;'
         IniAttributes.UnicodeIniFile = False
         TitleColor = clBtnFace
@@ -1191,7 +1192,9 @@ object H_ScanAirwaibillNewFRM: TH_ScanAirwaibillNewFRM
         'GNEE_ADDRESS_2, CONSIGNEE_ADDRESS_3, CONSIGNEE_DEVICE_TYPE, CONS' +
         'IGNEE_DEVICE_DETAILS, DISTRICT_CODE, TARIFF_CODE, TARIFF_KEYWORD' +
         ', IS_CLEARED, IS_HIGH, SERVICE_CODE, ACCOUNT_NUMBER, INCOTERMS, ' +
-        'CONSIGNEE_PREFERRED_NAME)'
+        'CONSIGNEE_PREFERRED_NAME, SENDER_VAT, CONSIGNEE_VAT, TYPE_OF_DEC' +
+        'LARATION, SPECIFIC_CIRCUMSTANCE, DECLARATION_TYPE, IS_INCLUDED_X' +
+        'ML)'
       'VALUES'
       
         '  (:SERIAL_NUMBER, :SEQUENCE_NUMBER, :HAWB_ID, :SHIPMENT_ORIGIN_' +
@@ -1208,7 +1211,8 @@ object H_ScanAirwaibillNewFRM: TH_ScanAirwaibillNewFRM
         'ADDRESS_3, :CONSIGNEE_DEVICE_TYPE, :CONSIGNEE_DEVICE_DETAILS, :D' +
         'ISTRICT_CODE, :TARIFF_CODE, :TARIFF_KEYWORD, :IS_CLEARED, :IS_HI' +
         'GH, :SERVICE_CODE, :ACCOUNT_NUMBER, :INCOTERMS, :CONSIGNEE_PREFE' +
-        'RRED_NAME)')
+        'RRED_NAME, :SENDER_VAT, :CONSIGNEE_VAT, :TYPE_OF_DECLARATION, :S' +
+        'PECIFIC_CIRCUMSTANCE, :DECLARATION_TYPE, :IS_INCLUDED_XML)')
     SQLDelete.Strings = (
       'DELETE FROM FLIGHT_AIRWAYBILL'
       'WHERE'
@@ -1245,7 +1249,10 @@ object H_ScanAirwaibillNewFRM: TH_ScanAirwaibillNewFRM
         'RD = :TARIFF_KEYWORD, IS_CLEARED = :IS_CLEARED, IS_HIGH = :IS_HI' +
         'GH, SERVICE_CODE = :SERVICE_CODE, ACCOUNT_NUMBER = :ACCOUNT_NUMB' +
         'ER, INCOTERMS = :INCOTERMS, CONSIGNEE_PREFERRED_NAME = :CONSIGNE' +
-        'E_PREFERRED_NAME'
+        'E_PREFERRED_NAME, SENDER_VAT = :SENDER_VAT, CONSIGNEE_VAT = :CON' +
+        'SIGNEE_VAT, TYPE_OF_DECLARATION = :TYPE_OF_DECLARATION, SPECIFIC' +
+        '_CIRCUMSTANCE = :SPECIFIC_CIRCUMSTANCE, DECLARATION_TYPE = :DECL' +
+        'ARATION_TYPE, IS_INCLUDED_XML = :IS_INCLUDED_XML'
       'WHERE'
       '  SERIAL_NUMBER = :Old_SERIAL_NUMBER')
     SQLRefresh.Strings = (
@@ -1263,7 +1270,9 @@ object H_ScanAirwaibillNewFRM: TH_ScanAirwaibillNewFRM
         'ONSIGNEE_ADDRESS_2, CONSIGNEE_ADDRESS_3, CONSIGNEE_DEVICE_TYPE, ' +
         'CONSIGNEE_DEVICE_DETAILS, DISTRICT_CODE, TARIFF_CODE, TARIFF_KEY' +
         'WORD, IS_CLEARED, IS_HIGH, SERVICE_CODE, ACCOUNT_NUMBER, INCOTER' +
-        'MS, CONSIGNEE_PREFERRED_NAME FROM FLIGHT_AIRWAYBILL'
+        'MS, CONSIGNEE_PREFERRED_NAME, SENDER_VAT, CONSIGNEE_VAT, TYPE_OF' +
+        '_DECLARATION, SPECIFIC_CIRCUMSTANCE, DECLARATION_TYPE, IS_INCLUD' +
+        'ED_XML FROM FLIGHT_AIRWAYBILL'
       'WHERE'
       '  SERIAL_NUMBER = :SERIAL_NUMBER')
     SQLLock.Strings = (
@@ -1309,6 +1318,13 @@ object H_ScanAirwaibillNewFRM: TH_ScanAirwaibillNewFRM
       DisplayWidth = 4
       FieldName = 'SERIAL_NUMBER'
       Origin = 'CABOUTDATA.FLIGHT_AIRWAYBILL.SERIAL_NUMBER'
+    end
+    object FlightAirwaybillSQLIS_INCLUDED_XML: TStringField
+      DisplayLabel = 'XML'
+      DisplayWidth = 1
+      FieldName = 'IS_INCLUDED_XML'
+      FixedChar = True
+      Size = 1
     end
     object FlightAirwaybillSQLVALUE_TYPE: TStringField
       DisplayLabel = 'Value'
@@ -1374,6 +1390,7 @@ object H_ScanAirwaibillNewFRM: TH_ScanAirwaibillNewFRM
     object FlightAirwaybillSQLINCOTERMS: TStringField
       DisplayWidth = 10
       FieldName = 'INCOTERMS'
+      Visible = False
       FixedChar = True
       Size = 9
     end
@@ -1623,6 +1640,39 @@ object H_ScanAirwaibillNewFRM: TH_ScanAirwaibillNewFRM
       Visible = False
       FixedChar = True
       Size = 35
+    end
+    object FlightAirwaybillSQLCONSIGNEE_PREFERRED_NAME: TStringField
+      FieldName = 'CONSIGNEE_PREFERRED_NAME'
+      Visible = False
+      FixedChar = True
+      Size = 35
+    end
+    object FlightAirwaybillSQLSENDER_VAT: TStringField
+      FieldName = 'SENDER_VAT'
+      Visible = False
+      FixedChar = True
+      Size = 30
+    end
+    object FlightAirwaybillSQLCONSIGNEE_VAT: TStringField
+      FieldName = 'CONSIGNEE_VAT'
+      Visible = False
+      FixedChar = True
+      Size = 30
+    end
+    object FlightAirwaybillSQLTYPE_OF_DECLARATION: TStringField
+      FieldName = 'TYPE_OF_DECLARATION'
+      Visible = False
+      Size = 10
+    end
+    object FlightAirwaybillSQLSPECIFIC_CIRCUMSTANCE: TStringField
+      FieldName = 'SPECIFIC_CIRCUMSTANCE'
+      Visible = False
+      Size = 10
+    end
+    object FlightAirwaybillSQLDECLARATION_TYPE: TStringField
+      FieldName = 'DECLARATION_TYPE'
+      Visible = False
+      Size = 10
     end
   end
   object FlightOutSQL: TIBCQuery
