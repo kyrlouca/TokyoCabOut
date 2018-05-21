@@ -422,7 +422,8 @@ var
   fserial:Integer;
 begin
 Fserial:=FlightOutSQL.FieldByName('serial_number').AsInteger;
-X_CreateMultiHighXmlFRM.TestMultiXML(Fserial);
+X_CreateMultiHighXmlFRM.LoopMultiXML(Fserial);
+//X_CreateMultiHighXmlFRM.TestMultiXML(Fserial);
 //X_CreateMultiHighXmlFRM.CreateMultiXML(Fserial)
 end;
 

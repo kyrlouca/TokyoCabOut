@@ -36,11 +36,12 @@ type
     function TBLCreateXMLNode(XMLDoc:IXMLDocument;ElementFather:IXMLNode;ElementName:String;ElementValue:String; Dataset: TDataset; FieldName:String; ElementType: TNodeType =ntElement):IXMLNode;
 
 
-  function CreateNodeOuter( Const FlightOutSerial:Integer; const Fdoc: IXMLDocument;FatherNode:IXMLNode;Criteria:TCriteriaParams):IXMLNode;
+  function CreateNodeOuter( Const FlightOutSerial:Integer; const Fdoc: IXMLDocument;FatherNode:IXMLNode;Criteria:TCriteriaParams):Integer;
   function CreateNodeHeader( Const FlightOutSerial:Integer; const Fdoc: IXMLDocument;FatherNode:IXMLNode;Criteria:TCriteriaParams):IXMLNode;
-  function CreateNodeAirwayBills( Const FlightSerial:Integer; const Fdoc: IXMLDocument;FatherNode:IXMLNode;Criteria:TCriteriaParams):IXMLNode;
+  function CreateNodeAirwayBills( Const FlightSerial:Integer; const Fdoc: IXMLDocument;FatherNode:IXMLNode;Criteria:TCriteriaParams):Integer;
   function CreateNodeForItems( Const AirwaybillSerial:Integer; const Fdoc: IXMLDocument;FatherNode:IXMLNode):IXMLNode;
   function CreateNodeFlightCountries( Const FlightOutSerial:Integer; const Fdoc: IXMLDocument;FatherNode:IXMLNode):IXMLNode;
+  Function CheckDoneFlight(Const FlightOutSerial:Integer):Integer;
 
 
   public
@@ -49,6 +50,8 @@ type
     SameSender:boolean;
     SameIncoterm:boolean;
     procedure CreateOneAirwabillXML(Const SerialNumber:Integer);
+
+  Function LoopMultiXML(Const FlightOutSerial:Integer):integer;
   Function  CreateMultiXML(Const FlightOutSerial:Integer):Integer;
   Function TestMultiXML(Const FlightOutSerial:Integer):integer;
 
@@ -210,6 +213,44 @@ Begin
 end;
 
 
+Function TX_CreateMultiHighXmlFRM.CheckDoneFlight(Const FlightOutSerial:Integer):Integer;
+var
+  fqr:TksQuery;
+  str:String;
+  Count:Integer;
+begin
+ str:=
+    '      Select count(it.serial_number) as Cnt'
+    +'        from'
+    +'        flight_airwaybill fa join'
+    +'        flight_airwaybill_item it on fa.serial_number=it.fk_fa_serial'
+    +'        where fa.fk_flight_out_serial= :flightSerial and'
+    +'          ( fa.is_included_xml = ''N''  or fa.is_included_xml is null)';
+
+  fQr:=TksQuery.Create(cn,str);
+  try
+    fQr.ParambyName('FlightSerial').Value:= FlightOutSerial;
+    fQr.Open;
+    Result:=fqr.fieldbyName('Cnt').AsInteger;
+  finally
+    fQr.Free;
+  end;
+
+end;
+
+
+Function TX_CreateMultiHighXmlFRM.LoopMultiXML(Const FlightOutSerial:Integer):integer;
+var
+count:Integer;
+begin
+    repeat
+      count:= TestMultiXML(FlightOutSerial);
+    until (Count =0)
+
+
+end;
+
+
 Function TX_CreateMultiHighXmlFRM.TestMultiXML(Const FlightOutSerial:Integer):integer;
 var
   GroupQr, Flightqr,FirstAirQr:TksQuery;
@@ -226,12 +267,15 @@ var
   strXMl:String;
   FileName:String;
   Criteria:TCriteriaParams;
+  CountCreated:Integer;
 
 begin
   DefaultDir:= GN_GetTheSystemParameter(cn, 'S01').P_String4;
    If DefaultDir='' then begin
       MessageDlg('Menu ->System->Params-> System Parameters. Then Add record with Code=S01 string_4 =Path', mtWarning, [mbOK], 0);
   end;
+
+
 
 
   FlightQr:=TksQuery.Create(cn,' select *  from Flight_out where serial_number= :Serial');
@@ -275,14 +319,17 @@ begin
       TBLCreateXMLNode(FDoc,TheRoot,'Declaration','',GroupQr,'DECLARATION_TYPE',ntText);
 
      /////////////////////////////////////////////////////////////////////////
-      CreateNodeOuter(FlightOutSerial,Fdoc,TheRoot,Criteria);
+      result := CreateNodeOuter(FlightOutSerial,Fdoc,TheRoot,Criteria);
      /////////////////////////////////////////////////////////////////////////
       strXML := StringReplace(FDoc.XML.Text, ' xmlns=""', '', [rfReplaceAll]);
       FDoc := LoadXMLData(strXML);
       FileName:= DefaultDir+'\'+ MawbId+'_'+ FormatDateTime('yyyymmddhhmmss',now)+'_'+
       criteria.DeclarationType+'_'+Criteria.TypeOfDeclaration+'_'+Criteria.Circumstance+'_'+'.xml';
 
-      FDoc.SaveToFile(FileName);
+      if Result>0 then begin
+        FDoc.SaveToFile(FileName);
+      end;
+
 
       GroupQr.Next;
     end;
@@ -298,7 +345,7 @@ end;
 
 
 
-function TX_CreateMultiHighXmlFRM.CreateNodeOuter( Const FlightOutSerial:Integer; const Fdoc: IXMLDocument;FatherNode:IXMLNode;Criteria:TCriteriaParams):IXMLNode;
+function TX_CreateMultiHighXmlFRM.CreateNodeOuter( Const FlightOutSerial:Integer; const Fdoc: IXMLDocument;FatherNode:IXMLNode;Criteria:TCriteriaParams):Integer;
 var
   qr,FirstAirQr:TksQuery;
   HeaderNode,x1Node, x2Node:IXMLNode;
@@ -308,6 +355,7 @@ var
   MawbId:String;
   FlightName:string;
   DateDepart:Tdate;
+  CountCreated:Integer;
 begin
   val:=
   '   select'
@@ -386,7 +434,7 @@ begin
 
 
      //***GoodsItems*******************************************
-     CreateNodeAirwayBills(FlightOutSerial,Fdoc,FatherNode,Criteria);
+     result := CreateNodeAirwayBills(FlightOutSerial,Fdoc,FatherNode,Criteria);
      //** Itineraries******************************************
      CreateNodeFlightCountries(FlightOutSerial,Fdoc,FatherNode);
 
@@ -557,7 +605,7 @@ end;
 
 
 
-function TX_CreateMultiHighXmlFRM.CreateNodeAirwayBills( Const FlightSerial:Integer; const Fdoc: IXMLDocument;FatherNode:IXMLNode;Criteria:TCriteriaParams):IXMLNode;
+function TX_CreateMultiHighXmlFRM.CreateNodeAirwayBills( Const FlightSerial:Integer; const Fdoc: IXMLDocument;FatherNode:IXMLNode;Criteria:TCriteriaParams):INteger;
 var
   HeaderNode:IXMLNode;
   x2Node:IXMLNode;
@@ -726,7 +774,7 @@ begin
        ksExecSQLVar(cn,'update flight_airwaybill  set is_included_xml= ''Y'' WHERE serial_number = :SerialNumber',[airSerial]);
        qrItem.Next;
       end;
-      result:= FatherNOde;
+      result:= Counter;
     finally
       qrItem.Free;
       qrAIr.Open;
