@@ -41,7 +41,6 @@ type
   function CreateNodeAirwayBills( Const FlightSerial:Integer; const Fdoc: IXMLDocument;FatherNode:IXMLNode;Criteria:TCriteriaParams):Integer;
   function CreateNodeForItems( Const AirwaybillSerial:Integer; const Fdoc: IXMLDocument;FatherNode:IXMLNode):IXMLNode;
   function CreateNodeFlightCountries( Const FlightOutSerial:Integer; const Fdoc: IXMLDocument;FatherNode:IXMLNode):IXMLNode;
-  Function CheckDoneFlight(Const FlightOutSerial:Integer):Integer;
 
 
   public
@@ -52,7 +51,7 @@ type
     procedure CreateOneAirwabillXML(Const SerialNumber:Integer);
 
   Function LoopMultiXML(Const FlightOutSerial:Integer):integer;
-  Function  CreateMultiXML(Const FlightOutSerial:Integer):Integer;
+//  Function  CreateMultiXML(Const FlightOutSerial:Integer):Integer;
   Function TestMultiXML(Const FlightOutSerial:Integer):integer;
 
   end;
@@ -69,7 +68,7 @@ uses MainForm, GeneralParametersNew, G_KyrSQL, G_generalProcs;
 procedure TX_CreateMultiHighXmlFRM.Button1Click(Sender: TObject);
 begin
 
-CreateMultiXML(IN_FlightSerial);
+TestMultiXML(IN_FlightSerial);
 
 end;
 
@@ -162,80 +161,6 @@ Function TX_CreateMultiHighXmlFRM.AddAtrribute(HeaderNode:IXMLNode; AttributeNam
 Begin
   HeaderNode.Attributes[AttributeName]:=AttributeText;
   result:=HeaderNode;
-end;
-
-
-
-Function TX_CreateMultiHighXmlFRM.CreateMultiXML(Const FlightOutSerial:Integer):integer;
-var
-  FDoc:IXMLDocument;
-  TheRoot:IXMLNode;
-  HeaderNode:IXMLNode;
-  strXMl:String;
-  FileName:String;
-
-  temp:String;
-  FQr: TksQuery;
-  Mawb:String;
-  flightSerial:Integer;
-
-Begin
-  fQr:=TksQuery.Create(cn,' select *  from Flight_out where serial_number= :Serial');
-  try
-    fQr.ParambyName('serial').Value:= FlightOutSerial;
-    fQr.Open;
-    Mawb:=fQr.FieldByName('Mawb').AsString;
-    ShowMessage(Mawb);
-
-    FDoc:=XMLDocNew;
-    FDoc.active:=false;
-    Fdoc.XML.Text:='';
-    FDoc.Active := True;
-    FDoc.Version := '1.0';
-    FDoc.Encoding := 'UTF-8';
-
-    TheRoot := FDoc.AddChild('CC515A');
-    TheRoot.SetAttributeNS('xmlns', '', 'http://www.eurodyn.com' );
-     /////////////////////////////////////////////////////////////////////////
-//    CreateNodeOuter(FlightOutSerial,Fdoc,TheRoot);
-     /////////////////////////////////////////////////////////////////////////
-    strXML := StringReplace(FDoc.XML.Text, ' xmlns=""', '', [rfReplaceAll]);
-    FDoc := LoadXMLData(strXML);
-//     FileName:= DefaultDir+'\'+ Trim(OneFlightAirwaybillSQL.FieldByName('hawb_id').AsString)+'.xml';
-    FileName:= 'C:\Data\DelphiProjects\TokyoCabOut\XML\OutputXML\High22.xml';
-    FDoc.SaveToFile(FileName);
-
-  finally
-    fQr.Free;
-  end;
-
-
-end;
-
-
-Function TX_CreateMultiHighXmlFRM.CheckDoneFlight(Const FlightOutSerial:Integer):Integer;
-var
-  fqr:TksQuery;
-  str:String;
-  Count:Integer;
-begin
- str:=
-    '      Select count(it.serial_number) as Cnt'
-    +'        from'
-    +'        flight_airwaybill fa join'
-    +'        flight_airwaybill_item it on fa.serial_number=it.fk_fa_serial'
-    +'        where fa.fk_flight_out_serial= :flightSerial and'
-    +'          ( fa.is_included_xml = ''N''  or fa.is_included_xml is null)';
-
-  fQr:=TksQuery.Create(cn,str);
-  try
-    fQr.ParambyName('FlightSerial').Value:= FlightOutSerial;
-    fQr.Open;
-    Result:=fqr.fieldbyName('Cnt').AsInteger;
-  finally
-    fQr.Free;
-  end;
-
 end;
 
 
