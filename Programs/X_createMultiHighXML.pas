@@ -51,8 +51,8 @@ type
     procedure CreateOneAirwabillXML(Const SerialNumber:Integer);
 
   Function LoopMultiXML(Const FlightOutSerial:Integer):integer;
-//  Function  CreateMultiXML(Const FlightOutSerial:Integer):Integer;
-  Function TestMultiXML(Const FlightOutSerial:Integer):integer;
+
+  Function CreateFlightXML(Const FlightOutSerial:Integer):integer;
 
   end;
 
@@ -68,7 +68,7 @@ uses MainForm, GeneralParametersNew, G_KyrSQL, G_generalProcs;
 procedure TX_CreateMultiHighXmlFRM.Button1Click(Sender: TObject);
 begin
 
-TestMultiXML(IN_FlightSerial);
+CreateFlightXML(IN_FlightSerial);
 
 end;
 
@@ -169,14 +169,14 @@ var
 count:Integer;
 begin
     repeat
-      count:= TestMultiXML(FlightOutSerial);
+      count:= CreateFlightXML(FlightOutSerial);
     until (Count =0)
 
 
 end;
 
 
-Function TX_CreateMultiHighXmlFRM.TestMultiXML(Const FlightOutSerial:Integer):integer;
+Function TX_CreateMultiHighXmlFRM.CreateFlightXML(Const FlightOutSerial:Integer):integer;
 var
   GroupQr, Flightqr,FirstAirQr:TksQuery;
   MawbId:String;
@@ -443,11 +443,11 @@ begin
 //  +'    fa.declaration_type = :decType and fa.type_of_declaration = :typeDec and fa.specific_circumstance = :circ'
 //  +'    where fa.fk_flight_out_serial= :flightSerial'
 
-//99
+//89
 val:=
 '   Select'
   +'    count(serial) as Cnt , sum(weight)as TotalWeight, sum(pieces) as TotalPieces from'
-  +'    (select  first 2 it.serial_number as serial, it.weight as weight, it.pieces as pieces from'
+  +'    (select  first 89 it.serial_number as serial, it.weight as weight, it.pieces as pieces from'
   +'      flight_airwaybill fa join'
   +'      flight_airwaybill_item it on fa.serial_number=it.fk_fa_serial'
   +'      where fa.fk_flight_out_serial= :flightSerial and '
@@ -555,10 +555,10 @@ begin
   DefaultPreviousProcedure:=GetTableDefaultValue('AUX_PREVIOUS_PROCEDURE');
   DefaultKindOfPackages:=GetTableDefaultValue('AUX_KIND_OF_PACKAGES');
 
-  //99
+  //89
 
   val:=
-  '   Select first 2  fa.serial_number as AirSerial,'
+  '   Select first 89  fa.serial_number as AirSerial,'
   +'    it.* from'
   +'    flight_airwaybill fa join'
   +'    flight_airwaybill_item it on fa.serial_number=it.fk_fa_serial'
