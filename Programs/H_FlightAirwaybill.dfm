@@ -134,7 +134,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
       Left = 10
       Top = 13
       Width = 304
-      Height = 338
+      Height = 355
       Caption = 'Details'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -205,7 +205,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
       end
       object Label4: TLabel
         Left = 4
-        Top = 195
+        Top = 191
         Width = 63
         Height = 15
         Caption = 'Description'
@@ -220,7 +220,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
       end
       object Label8: TLabel
         Left = 14
-        Top = 220
+        Top = 215
         Width = 53
         Height = 15
         Caption = 'Pay (A, C)'
@@ -265,7 +265,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
       end
       object Label20: TLabel
         Left = 3
-        Top = 241
+        Top = 255
         Width = 48
         Height = 15
         Caption = 'Incoterm'
@@ -279,8 +279,8 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         ParentFont = False
       end
       object Label25: TLabel
-        Left = 110
-        Top = 245
+        Left = 105
+        Top = 255
         Width = 43
         Height = 15
         Caption = 'Service '
@@ -310,7 +310,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
       end
       object Label6: TLabel
         Left = 3
-        Top = 284
+        Top = 301
         Width = 63
         Height = 15
         Caption = 'Declaration'
@@ -325,7 +325,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
       end
       object Label9: TLabel
         Left = 203
-        Top = 284
+        Top = 301
         Width = 77
         Height = 15
         Caption = 'Circumstance'
@@ -340,7 +340,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
       end
       object Label21: TLabel
         Left = 106
-        Top = 284
+        Top = 301
         Width = 80
         Height = 15
         Caption = 'Declaration 12'
@@ -413,8 +413,8 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         WordWrap = False
       end
       object DescriptionFLD: TwwDBEdit
-        Left = 73
-        Top = 195
+        Left = 72
+        Top = 191
         Width = 188
         Height = 23
         Color = clWhite
@@ -452,7 +452,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
       end
       object ItemsFLD: TwwDBEdit
         Left = 72
-        Top = 117
+        Top = 116
         Width = 59
         Height = 23
         Color = clWhite
@@ -500,7 +500,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
       end
       object IncotermsFLD: TwwDBLookupCombo
         Left = 3
-        Top = 255
+        Top = 272
         Width = 72
         Height = 23
         Font.Charset = DEFAULT_CHARSET
@@ -526,7 +526,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
       end
       object ServiceCodeFLD: TwwDBLookupCombo
         Left = 104
-        Top = 255
+        Top = 272
         Width = 67
         Height = 23
         Font.Charset = DEFAULT_CHARSET
@@ -569,7 +569,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         WordWrap = False
       end
       object wwDBComboBox1: TwwDBComboBox
-        Left = 73
+        Left = 72
         Top = 216
         Width = 97
         Height = 23
@@ -597,7 +597,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
       end
       object DeclarationFLD: TwwDBComboBox
         Left = 3
-        Top = 305
+        Top = 318
         Width = 97
         Height = 23
         ShowButton = True
@@ -624,7 +624,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
       end
       object TypeOfDeclarationFLD: TwwDBComboBox
         Left = 106
-        Top = 305
+        Top = 318
         Width = 63
         Height = 23
         ShowButton = True
@@ -651,7 +651,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
       end
       object CircFLD: TwwDBComboBox
         Left = 203
-        Top = 305
+        Top = 318
         Width = 64
         Height = 23
         ShowButton = True

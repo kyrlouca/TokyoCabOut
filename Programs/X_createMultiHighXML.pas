@@ -3,7 +3,7 @@
 //**  CreateOneAirwabillXML ??
 //**  LoopMultiXML    calls
 //**  CreateFlightXML   -- create xml for all unflagged airs on the flight
-//**     -- creates the groups (declarationType, TypeOfDeclaration, Circumstance)
+//**     -- creates the groups (declarationType, TypeOfDeclaration, Circumstance,Incoterm)
 //**
 //**
 //** CreateNodeOuter   -- Fdoc, calls the Create header and Create airway bills
@@ -22,13 +22,14 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Xml.xmldom, Xml.XMLIntf,
   Xml.adomxmldom, Xml.XMLDoc, vcl.wwbutton, Xml.Win.msxmldom, Data.DB, MemDS,
-  DBAccess, IBC, RzLabel;
+  DBAccess, IBC, RzLabel,clipbrd;
 
 type
   TCriteriaParams= record
     DeclarationType:String;
     TypeOfDeclaration:String;
     Circumstance:String;
+    Incoterms:String;
   end;
 
   TX_CreateMultiHighXmlFRM = class(TForm)
@@ -195,7 +196,6 @@ var
   GroupQr, Flightqr,FirstAirQr:TksQuery;
   MawbId:String;
   FlightName:string;
-//  DeclarationType,TypeDeclaration,Circumstance:String;
   DefaultDir:String;
   val:String;
 
@@ -229,12 +229,12 @@ begin
   //grouping  includes processed airs but no problem if empty groups
   val:=
   '  Select'
-  +'    fa.declaration_type, fa.type_of_declaration, fa.specific_circumstance'
+  +'    fa.declaration_type, fa.type_of_declaration, fa.specific_circumstance, fa.incoterms'
   +'   from'
   +'    flight_airwaybill fa join'
   +'    flight_airwaybill_item it on fa.serial_number=it.fk_fa_serial'
   +'   where fa.fk_flight_out_serial= :flightSerial'
-  +'  group by     fa.declaration_type, fa.type_of_declaration, fa.specific_circumstance';
+  +'  group by     fa.declaration_type, fa.type_of_declaration, fa.specific_circumstance, fa.incoterms';
   GroupQr:=TksQuery.Create(cn,val);
 
   try
@@ -250,7 +250,7 @@ begin
       Criteria.DeclarationType:= GroupQr.FieldByName('Declaration_type').AsString;
       Criteria.TypeOfDeclaration:= GroupQr.FieldByName('Type_of_Declaration').AsString;
       Criteria.Circumstance:= GroupQr.FieldByName('specific_circumstance').AsString;
-//      ShowMessage(TypeDeclaration +' '+DeclarationType +' '+Circumstance);
+      Criteria.Incoterms:= GroupQr.FieldByName('Incoterms').AsString;
 
       FDoc:=XMLDocNew;
       FDoc.active:=false;
@@ -269,7 +269,7 @@ begin
       strXML := StringReplace(FDoc.XML.Text, ' xmlns=""', '', [rfReplaceAll]);
       FDoc := LoadXMLData(strXML);
       FileName:= DefaultDir+'\'+ MawbId+'_'+ FormatDateTime('yyyymmddhhmmss',now)+'_'+
-      criteria.DeclarationType+'_'+Criteria.TypeOfDeclaration+'_'+Criteria.Circumstance+'_'+'.xml';
+      criteria.Incoterms+'_'+ criteria.DeclarationType+'_'+Criteria.TypeOfDeclaration+'_'+Criteria.Circumstance+'_'+'.xml';
 
       if Result>0 then begin
         FDoc.SaveToFile(FileName);
@@ -312,7 +312,7 @@ begin
   val:=
   ' select first 1 * from flight_airwaybill fa where '
   +' fa.fk_flight_out_serial = :flightSerial and '
-  +' fa.declaration_type = :decType and fa.type_of_declaration = :typeDec and fa.specific_circumstance = :circ ';
+  +' fa.declaration_type = :decType and fa.type_of_declaration = :typeDec and fa.specific_circumstance = :circ  and fa.incoterms = :incoterms';
   FirstAirQR:= TksQuery.Create(cn,val);
 
   try
@@ -325,6 +325,7 @@ begin
       FirstAirQr.ParambyName('decType').Value:= Criteria.DeclarationType;
       FirstAirQr.ParambyName('TypeDec').Value:= Criteria.TypeOfDeclaration;
       FirstAirQr.ParambyName('Circ').Value:= Criteria.Circumstance;
+      FirstAirQr.ParambyName('Incoterms').Value:= Criteria.Incoterms;
       if airSerial>0 then begin
         FirstAirQr.AddWhere('fa.serial_number = :AirSerial');
         FirstAirQr.ParamByName('AirSerial').Value:=AirSerial;
@@ -433,7 +434,7 @@ var
   MawbId:String;
   FlightName:string;
   DateDepart:Tdate;
-  CommonDeclarationType, CommonTypeOfDeclaration, CommonCirc:String;
+  CommonDeclarationType, CommonTypeOfDeclaration, CommonCirc, CommonIncoterm:String;
 begin
 
   CommonDeclarationType := Criteria.DeclarationType;
@@ -447,6 +448,11 @@ begin
   CommonCirc:= Criteria.Circumstance;
   if CommonCirc='' then
     CommonCirc := GetTableDefaultValue('AUX_SPECIFIC_CIRCUMSTANCE');
+
+  CommonIncoterm:= Criteria.Circumstance;
+   if CommonCirc='' then
+    CommonCirc := 'XXX';
+
 
   val:=
   '   select'
@@ -468,7 +474,7 @@ begin
     +'      flight_airwaybill_item it on fa.serial_number=it.fk_fa_serial'
     +'      where fa.fk_flight_out_serial= :flightSerial and '
     +'      (fa.is_included_xml = ''N''  or fa.is_included_xml is null) and '
-    +'      fa.declaration_type = :decType and fa.type_of_declaration = :typeDec and fa.specific_circumstance = :circ '
+    +'      fa.declaration_type = :decType and fa.type_of_declaration = :typeDec and fa.specific_circumstance = :circ and Fa.incoterms= :Incoterms'
     +'          order by fa.hawb_id'
     +'    )';
 
@@ -481,7 +487,7 @@ begin
     +'      flight_airwaybill_item it on fa.serial_number=it.fk_fa_serial'
     +'      where fa.fk_flight_out_serial= :flightSerial and '
     +'      fa.serial_number= :AirSerial and'
-    +'      fa.declaration_type = :decType and fa.type_of_declaration = :typeDec and fa.specific_circumstance = :circ '
+    +'      fa.declaration_type = :decType and fa.type_of_declaration = :typeDec and fa.specific_circumstance = :circ and fa.incoterms= :Incoterms'
     +'          order by fa.hawb_id'
     +'    )';
 
@@ -501,6 +507,7 @@ begin
       TotalsQr.ParambyName('decType').Value:= Criteria.DeclarationType;
       TotalsQr.ParambyName('TypeDec').Value:= Criteria.TypeOfDeclaration;
       TotalsQr.ParambyName('Circ').Value:= Criteria.Circumstance;
+      TotalsQr.ParambyName('Incoterms').Value:= Criteria.Incoterms;
       if AirSerial>0 then begin
         TotalsQr.ParambyName('AirSerial').Value:= AirSerial;
       end else begin
@@ -600,7 +607,7 @@ begin
   +'    flight_airwaybill fa join'
   +'    flight_airwaybill_item it on fa.serial_number=it.fk_fa_serial'
   +'    where fa.fk_flight_out_serial= :flightSerial'
-  +'    and fa.declaration_type = :decType and fa.type_of_declaration = :typeDec and fa.specific_circumstance = :circ '
+  +'    and fa.declaration_type = :decType and fa.type_of_declaration = :typeDec and fa.specific_circumstance = :circ and fa.incoterms= :incoterms'
   +'    order by fa.hawb_id, sequence';
   qrItem:=TksQuery.Create(cn,Val);
 
@@ -614,6 +621,7 @@ begin
       qrItem.ParambyName('decType').Value:= Criteria.DeclarationType;
       qrItem.ParambyName('TypeDec').Value:= Criteria.TypeOfDeclaration;
       qrItem.ParambyName('Circ').Value:= Criteria.Circumstance;
+      qrItem.ParambyName('incoterms').Value:= Criteria.Incoterms;
       if airSerial>0 then begin
         qrItem.AddWhere('fa.serial_number = :AirSerial');
         qrItem.ParamByName('AirSerial').Value:=AirSerial;
@@ -621,10 +629,11 @@ begin
         qrItem.AddWhere(' (fa.is_included_xml = ''N''  or fa.is_included_xml is null)');
       end;
 
+      Clipboard.AsText:=qrItem.FinalSQL;
+
 
       qrItem.Open;
 
-//      name="Msg615ProducedDocumentsCertif"
       while (not qrItem.eof) do begin
        inc(Counter);
        CurrentAirSerial:=qrItem.FieldByName('AirSerial').AsInteger;

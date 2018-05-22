@@ -425,8 +425,8 @@ object H_ScanAirwaibillNewFRM: TH_ScanAirwaibillNewFRM
         ParentFont = False
       end
       object DetailsPNL: TGroupBox
-        Left = 641
-        Top = 258
+        Left = 732
+        Top = 242
         Width = 288
         Height = 203
         Caption = 'Details'
@@ -516,8 +516,8 @@ object H_ScanAirwaibillNewFRM: TH_ScanAirwaibillNewFRM
           ParentFont = False
         end
         object wwDBEdit1: TwwDBEdit
-          Left = 215
-          Top = 26
+          Left = 159
+          Top = 74
           Width = 59
           Height = 22
           Color = clBtnFace
