@@ -431,6 +431,8 @@ object H_ScanAirwaibillNewFRM: TH_ScanAirwaibillNewFRM
       Height = 453
       Align = alClient
       TabOrder = 1
+      ExplicitLeft = 2
+      ExplicitTop = 173
       object Label2: TLabel
         Left = 13
         Top = 20
@@ -900,14 +902,14 @@ object H_ScanAirwaibillNewFRM: TH_ScanAirwaibillNewFRM
         AlignWithMargins = True
         Left = 856
         Top = 204
-        Width = 147
+        Width = 169
         Height = 48
         Margins.Left = 12
         Alignment = taLeftJustify
         Cancel = True
         ShowDownPattern = False
         BiDiMode = bdLeftToRight
-        Caption = 'Create Single File'
+        Caption = 'Create Selected XML'
         DoubleBuffered = True
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -1090,14 +1092,14 @@ object H_ScanAirwaibillNewFRM: TH_ScanAirwaibillNewFRM
         AlignWithMargins = True
         Left = 856
         Top = 258
-        Width = 147
+        Width = 169
         Height = 48
         Margins.Left = 12
         Alignment = taLeftJustify
         Cancel = True
         ShowDownPattern = False
         BiDiMode = bdLeftToRight
-        Caption = 'Create Single High'
+        Caption = 'Create All XM'
         DoubleBuffered = True
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText

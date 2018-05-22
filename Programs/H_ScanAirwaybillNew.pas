@@ -421,10 +421,8 @@ procedure TH_ScanAirwaibillNewFRM.MultiHighBTNClick(Sender: TObject);
 var
   fserial:Integer;
 begin
-Fserial:=FlightOutSQL.FieldByName('serial_number').AsInteger;
-X_CreateMultiHighXmlFRM.LoopMultiXML(Fserial);
-//X_CreateMultiHighXmlFRM.TestMultiXML(Fserial);
-//X_CreateMultiHighXmlFRM.CreateMultiXML(Fserial)
+  Fserial:=FlightOutSQL.FieldByName('serial_number').AsInteger;
+  X_CreateMultiHighXmlFRM.LoopMultiXML(Fserial);
 end;
 
 procedure TH_ScanAirwaibillNewFRM.DeleteFlightAirwaybill(Var SerialNumber:Integer);
@@ -627,9 +625,11 @@ End;
 procedure TH_ScanAirwaibillNewFRM.RzBitBtn1Click(Sender: TObject);
 var
   Fserial:integer;
+  AirSerial:Integer;
 begin
-Fserial:=FlightOutSQL.FieldByName('serial_number').AsInteger;
-X_CreateMultiXmlFRM.CreateMultiXML(Fserial)
+  Fserial:=FlightOutSQL.FieldByName('serial_number').AsInteger;
+  Airserial:=FlightAirwaybillSQL.FieldByName('serial_number').AsInteger;
+  X_CreateMultiHighXmlFRM.CreateFlightXML(Fserial,AirSerial);
 end;
 
 procedure TH_ScanAirwaibillNewFRM.FlightAirwaybillGRDDblClick(Sender: TObject);
