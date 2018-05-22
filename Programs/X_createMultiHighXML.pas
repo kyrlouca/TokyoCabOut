@@ -36,9 +36,9 @@ type
     function TBLCreateXMLNode(XMLDoc:IXMLDocument;ElementFather:IXMLNode;ElementName:String;ElementValue:String; Dataset: TDataset; FieldName:String; ElementType: TNodeType =ntElement):IXMLNode;
 
 
-  function CreateNodeOuter( Const FlightOutSerial:Integer; const Fdoc: IXMLDocument;FatherNode:IXMLNode;Criteria:TCriteriaParams):Integer;
+  function CreateNodeOuter( Const FlightOutSerial:Integer; AirSerial:integer;const Fdoc: IXMLDocument;FatherNode:IXMLNode;Criteria:TCriteriaParams):Integer;
   function CreateNodeHeader( Const FlightOutSerial:Integer; const Fdoc: IXMLDocument;FatherNode:IXMLNode;Criteria:TCriteriaParams):IXMLNode;
-  function CreateNodeAirwayBills( Const FlightSerial:Integer; const Fdoc: IXMLDocument;FatherNode:IXMLNode;Criteria:TCriteriaParams):Integer;
+  function CreateNodeAirwayBills( Const FlightSerial:Integer;  AirSerial: Integer;const Fdoc: IXMLDocument;FatherNode:IXMLNode;Criteria:TCriteriaParams):Integer;
   function CreateNodeForItems( Const AirwaybillSerial:Integer; const Fdoc: IXMLDocument;FatherNode:IXMLNode):IXMLNode;
   function CreateNodeFlightCountries( Const FlightOutSerial:Integer; const Fdoc: IXMLDocument;FatherNode:IXMLNode):IXMLNode;
 
@@ -52,7 +52,7 @@ type
 
   Function LoopMultiXML(Const FlightOutSerial:Integer):integer;
 
-  Function CreateFlightXML(Const FlightOutSerial:Integer):integer;
+  Function CreateFlightXML(Const FlightOutSerial,AirSerial:Integer):integer;
 
   end;
 
@@ -68,7 +68,7 @@ uses MainForm, GeneralParametersNew, G_KyrSQL, G_generalProcs;
 procedure TX_CreateMultiHighXmlFRM.Button1Click(Sender: TObject);
 begin
 
-CreateFlightXML(IN_FlightSerial);
+CreateFlightXML(IN_FlightSerial,0);
 
 end;
 
@@ -169,14 +169,14 @@ var
 count:Integer;
 begin
     repeat
-      count:= CreateFlightXML(FlightOutSerial);
+      count:= CreateFlightXML(FlightOutSerial,0);
     until (Count =0)
 
 
 end;
 
 
-Function TX_CreateMultiHighXmlFRM.CreateFlightXML(Const FlightOutSerial:Integer):integer;
+Function TX_CreateMultiHighXmlFRM.CreateFlightXML(Const FlightOutSerial,AIrSerial:Integer):integer;
 var
   GroupQr, Flightqr,FirstAirQr:TksQuery;
   MawbId:String;
@@ -244,7 +244,7 @@ begin
       TBLCreateXMLNode(FDoc,TheRoot,'Declaration','',GroupQr,'DECLARATION_TYPE',ntText);
 
      /////////////////////////////////////////////////////////////////////////
-      result := CreateNodeOuter(FlightOutSerial,Fdoc,TheRoot,Criteria);
+      result := CreateNodeOuter(FlightOutSerial,AirSerial,Fdoc,TheRoot,Criteria);
      /////////////////////////////////////////////////////////////////////////
       strXML := StringReplace(FDoc.XML.Text, ' xmlns=""', '', [rfReplaceAll]);
       FDoc := LoadXMLData(strXML);
@@ -270,7 +270,7 @@ end;
 
 
 
-function TX_CreateMultiHighXmlFRM.CreateNodeOuter( Const FlightOutSerial:Integer; const Fdoc: IXMLDocument;FatherNode:IXMLNode;Criteria:TCriteriaParams):Integer;
+function TX_CreateMultiHighXmlFRM.CreateNodeOuter( Const FlightOutSerial:Integer; AirSerial:integer; const Fdoc: IXMLDocument;FatherNode:IXMLNode;Criteria:TCriteriaParams):Integer;
 var
   qr,FirstAirQr:TksQuery;
   HeaderNode,x1Node, x2Node:IXMLNode;
@@ -359,7 +359,7 @@ begin
 
 
      //***GoodsItems*******************************************
-     result := CreateNodeAirwayBills(FlightOutSerial,Fdoc,FatherNode,Criteria);
+     result := CreateNodeAirwayBills(FlightOutSerial,AirSerial,Fdoc,FatherNode,Criteria);
      //** Itineraries******************************************
      CreateNodeFlightCountries(FlightOutSerial,Fdoc,FatherNode);
 
@@ -530,14 +530,14 @@ end;
 
 
 
-function TX_CreateMultiHighXmlFRM.CreateNodeAirwayBills( Const FlightSerial:Integer; const Fdoc: IXMLDocument;FatherNode:IXMLNode;Criteria:TCriteriaParams):INteger;
+function TX_CreateMultiHighXmlFRM.CreateNodeAirwayBills( Const FlightSerial:Integer; AirSerial: Integer; const Fdoc: IXMLDocument;FatherNode:IXMLNode;Criteria:TCriteriaParams):INteger;
 var
   HeaderNode:IXMLNode;
   x2Node:IXMLNode;
   val,temp:String;
   addr:string;
   DString:String;
-  AirSerial:Integer;
+  CurrentAirSerial:Integer;
   qr:TksQuery;
   qrItem, qrAir: TksQuery;
   qrCert:TksQuery;
@@ -583,11 +583,11 @@ begin
 //      name="Msg615ProducedDocumentsCertif"
       while (not qrItem.eof) do begin
        inc(Counter);
-       airSerial:=qrItem.FieldByName('AirSerial').AsInteger;
+       CurrentAirSerial:=qrItem.FieldByName('AirSerial').AsInteger;
        itemSerial:=qrItem.FieldByName('serial_number').AsInteger;
 
        qrAir.Close;
-       qrAir.ParamByName('airSerial').Value:=AirSerial;
+       qrAir.ParamByName('airSerial').Value:=CurrentAirSerial;
        qrAIr.Open;
 
        HeaderNode :=CreateXMLNodeNew(FDoc,FatherNode,'Msg515GoodsItem','',ntElement);
