@@ -656,10 +656,21 @@ end;
 
 procedure TH_ScanAirwaibillNewFRM.FlightAirwaybillGRDKeyPress(Sender: TObject;
   var Key: Char);
+var
+  AirSerial:Integer;
+  Flag, NewFlag:String;
 begin
- if  (Key in [VK_SPACE]) then begin
-   ShowMessage('Only numbers !');
+ if  (Key = #32) then begin
 
+  AirSerial:=FlightAirwaybillSQL.FieldByName('serial_number').AsInteger;
+   Flag:=FlightAirwaybillSQL.FieldByName('IS_INCLUDED_XML').AsString;
+   if Flag='Y' then
+    NewFlag:='N'
+   else
+    NewFlag:='Y';
+
+   ksExecSQLVar(cn,'update flight_airwaybill fa set is_included_xml= :flag where fa.serial_number = :Serial',[NewFlag, AirSerial]);
+   FlightAirwaybillSQL.Refresh;
  end;
 end;
 

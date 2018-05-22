@@ -1079,7 +1079,7 @@ object H_ScanAirwaibillNewFRM: TH_ScanAirwaibillNewFRM
         Cancel = True
         ShowDownPattern = False
         BiDiMode = bdLeftToRight
-        Caption = 'Create All XM'
+        Caption = 'Create XML'
         DoubleBuffered = True
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
