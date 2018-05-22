@@ -16,8 +16,6 @@ type
     BottomPNL: TPanel;
     Panel3: TPanel;
     FlightAirwaybillSQL: TIBCQuery;
-    Label5: TLabel;
-    Label9: TLabel;
     HeaderPNL: TPanel;
     FlightAirwaybillSQLSERIAL_NUMBER: TIntegerField;
     FlightAirwaybillSQLSEQUENCE_NUMBER: TIntegerField;
@@ -218,11 +216,19 @@ type
     AirwaybillOriginalSQLSERVICE_CODE: TStringField;
     AirwaybillOriginalSQLACCOUNT_NUMBER: TStringField;
     BitBtn1: TBitBtn;
-    DeleteAirBTN: TBitBtn;
-    EditAirBTN: TBitBtn;
-    CreateOneBTN: TRzBitBtn;
-    DeleteBTN: TRzBitBtn;
+    FlagBTN: TRzBitBtn;
+    UnflagBTN: TRzBitBtn;
     RzBitBtn1: TRzBitBtn;
+    EditAirBTN: TBitBtn;
+    DeleteAirBTN: TBitBtn;
+    MultiHighBTN: TRzBitBtn;
+    FlightAirwaybillSQLCONSIGNEE_PREFERRED_NAME: TStringField;
+    FlightAirwaybillSQLSENDER_VAT: TStringField;
+    FlightAirwaybillSQLCONSIGNEE_VAT: TStringField;
+    FlightAirwaybillSQLTYPE_OF_DECLARATION: TStringField;
+    FlightAirwaybillSQLSPECIFIC_CIRCUMSTANCE: TStringField;
+    FlightAirwaybillSQLDECLARATION_TYPE: TStringField;
+    FlightAirwaybillSQLIS_INCLUDED_XML: TStringField;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure BitBtn1Click(Sender: TObject);
     procedure AirwayBillSQLAfterPost(DataSet: TDataSet);
@@ -245,9 +251,14 @@ type
     procedure SelectRGPClick(Sender: TObject);
     procedure DeleteAirBTNClick(Sender: TObject);
     procedure EditAirBTNClick(Sender: TObject);
-    procedure CreateOneBTNClick(Sender: TObject);
+    procedure FlagBTNClick(Sender: TObject);
+    procedure RzBitBtn1Click(Sender: TObject);
+    procedure MultiHighBTNClick(Sender: TObject);
+    procedure UnflagBTNClick(Sender: TObject);
+    procedure FlightAirwaybillGRDKeyPress(Sender: TObject; var Key: Char);
   private
     { Private declarations }
+    cn:TIBCConnection;
         procedure UpdateHawbStatus(HawbSerial:Integer;IsHigh:String);
   public
     { Public declarations }
@@ -266,7 +277,8 @@ var
 
 implementation
 
-uses MainForm, H_FlightAirwaybill, H_flightOut, X_createOneXML;
+uses MainForm, H_FlightAirwaybill, H_flightOut, X_createOneXML,
+  X_createMultiXML, X_createMultiHighXML, G_KyrSQL;
 
 {$R *.DFM}
 
@@ -405,6 +417,14 @@ end;
 End;
 
 
+
+procedure TH_ScanAirwaibillNewFRM.MultiHighBTNClick(Sender: TObject);
+var
+  fserial:Integer;
+begin
+  Fserial:=FlightOutSQL.FieldByName('serial_number').AsInteger;
+  X_CreateMultiHighXmlFRM.LoopMultiXML(Fserial);
+end;
 
 procedure TH_ScanAirwaibillNewFRM.DeleteFlightAirwaybill(Var SerialNumber:Integer);
 begin
@@ -603,6 +623,16 @@ End;
 
 
 
+procedure TH_ScanAirwaibillNewFRM.RzBitBtn1Click(Sender: TObject);
+var
+  Fserial:integer;
+  AirSerial:Integer;
+begin
+  Fserial:=FlightOutSQL.FieldByName('serial_number').AsInteger;
+  Airserial:=FlightAirwaybillSQL.FieldByName('serial_number').AsInteger;
+  X_CreateMultiHighXmlFRM.CreateFlightXML(Fserial,AirSerial);
+end;
+
 procedure TH_ScanAirwaibillNewFRM.FlightAirwaybillGRDDblClick(Sender: TObject);
 Var
         Serial:Integer;
@@ -622,6 +652,19 @@ begin
         FlightAIrwaybillSQL.Refresh;
         FlightAIrwaybillSQL.Locate('SERIAL_NUMBER',Serial,[]);
         DetailsPNL.Visible:=False;
+end;
+
+procedure TH_ScanAirwaibillNewFRM.FlightAirwaybillGRDKeyPress(Sender: TObject;
+  var Key: Char);
+var
+  AirSerial:Integer;
+  Flag, NewFlag:String;
+begin
+ if  (Key = #32) then begin
+
+  AirSerial:=FlightAirwaybillSQL.FieldByName('serial_number').AsInteger;
+       ksExecSQLVar(cn,'update flight_airwaybill fa set is_included_xml= ''Y'' where fa.fk_flight_out_serial = :Serial',[AirSerial]);
+ end;
 end;
 
 procedure TH_ScanAirwaibillNewFRM.HawbInputFLDKeyPress(Sender: TObject;
@@ -667,6 +710,8 @@ Var
 Dataset:TDataset;
 I:Integer;
 begin
+  cn:= MainFormFRM.CabOutData;
+
 for i := 0 to (Self as TForm).ComponentCount-1 do begin
 if (Self as TForm).Components[i] is TDataset then begin
         Dataset:= TDataset(Tform(Self).Components[i]);
@@ -706,19 +751,15 @@ begin
 
 end;
 
-procedure TH_ScanAirwaibillNewFRM.CreateOneBTNClick(Sender: TObject);
-Var
-        SerialNumber:Integer;
-        Mawb:String;
+procedure TH_ScanAirwaibillNewFRM.FlagBTNClick(Sender: TObject);
+var
+ FlightSerial:Integer;
 begin
-  iF FlightAirwaybillCDS.DataSet.State=dsEdit then
-        FlightAirwaybillCDS.DataSet.Post;
-
-  SerialNumber:=FLightAirwaybillSQL.FieldByName('serial_number').AsInteger;
-  Mawb:= FlightOutSQL.FieldbyName('Mawb').AsString;
-
-  X_CreateOneXmlFRM.CreateOneAirwabillXML(SerialNumber);
-
+  FlightSerial:= FLightOutSQL.FieldByName('serial_number').AsInteger;
+  If FlightSerial>0 then begin
+       ksExecSQLVar(cn,'update flight_airwaybill fa set is_included_xml= ''Y'' where fa.fk_flight_out_serial = :Serial',[FlightSerial]);
+  end;
+  FlightAirwaybillSQL.Refresh;
 end;
 
 procedure TH_ScanAirwaibillNewFRM.FlightOutCDSStateChange(Sender: TObject);
@@ -778,6 +819,17 @@ begin
         FlightAirwaybillSQL.AutoCommit:=true;
         DetailsPNL.Visible:=False;
 
+end;
+
+procedure TH_ScanAirwaibillNewFRM.UnflagBTNClick(Sender: TObject);
+var
+ FlightSerial:Integer;
+begin
+  FlightSerial:= FLightOutSQL.FieldByName('serial_number').AsInteger;
+  If FlightSerial>0 then begin
+       ksExecSQLVar(cn,'update flight_airwaybill fa set is_included_xml= ''N'' where fa.fk_flight_out_serial = :Serial',[FlightSerial]);
+  end;
+  FlightAirwaybillSQL.Refresh;
 end;
 
 procedure TH_ScanAirwaibillNewFRM.UpdateHawbStatus(HawbSerial:Integer;IsHigh:String);

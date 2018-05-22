@@ -223,6 +223,14 @@ type
     RzBitBtn1: TRzBitBtn;
     EditAirBTN: TBitBtn;
     DeleteAirBTN: TBitBtn;
+    MultiHighBTN: TRzBitBtn;
+    FlightAirwaybillSQLCONSIGNEE_PREFERRED_NAME: TStringField;
+    FlightAirwaybillSQLSENDER_VAT: TStringField;
+    FlightAirwaybillSQLCONSIGNEE_VAT: TStringField;
+    FlightAirwaybillSQLTYPE_OF_DECLARATION: TStringField;
+    FlightAirwaybillSQLSPECIFIC_CIRCUMSTANCE: TStringField;
+    FlightAirwaybillSQLDECLARATION_TYPE: TStringField;
+    FlightAirwaybillSQLIS_INCLUDED_XML: TStringField;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure BitBtn1Click(Sender: TObject);
     procedure AirwayBillSQLAfterPost(DataSet: TDataSet);
@@ -246,6 +254,8 @@ type
     procedure DeleteAirBTNClick(Sender: TObject);
     procedure EditAirBTNClick(Sender: TObject);
     procedure CreateOneBTNClick(Sender: TObject);
+    procedure RzBitBtn1Click(Sender: TObject);
+    procedure MultiHighBTNClick(Sender: TObject);
   private
     { Private declarations }
         procedure UpdateHawbStatus(HawbSerial:Integer;IsHigh:String);
@@ -266,7 +276,8 @@ var
 
 implementation
 
-uses MainForm, H_FlightAirwaybill, H_flightOut, X_createOneXML;
+uses MainForm, H_FlightAirwaybill, H_flightOut, X_createOneXML,
+  X_createMultiXML, X_createMultiHighXML;
 
 {$R *.DFM}
 
@@ -405,6 +416,14 @@ end;
 End;
 
 
+
+procedure TH_ScanAirwaibillNewFRM.MultiHighBTNClick(Sender: TObject);
+var
+  fserial:Integer;
+begin
+  Fserial:=FlightOutSQL.FieldByName('serial_number').AsInteger;
+  X_CreateMultiHighXmlFRM.LoopMultiXML(Fserial);
+end;
 
 procedure TH_ScanAirwaibillNewFRM.DeleteFlightAirwaybill(Var SerialNumber:Integer);
 begin
@@ -602,6 +621,16 @@ end;
 End;
 
 
+
+procedure TH_ScanAirwaibillNewFRM.RzBitBtn1Click(Sender: TObject);
+var
+  Fserial:integer;
+  AirSerial:Integer;
+begin
+  Fserial:=FlightOutSQL.FieldByName('serial_number').AsInteger;
+  Airserial:=FlightAirwaybillSQL.FieldByName('serial_number').AsInteger;
+  X_CreateMultiHighXmlFRM.CreateFlightXML(Fserial,AirSerial);
+end;
 
 procedure TH_ScanAirwaibillNewFRM.FlightAirwaybillGRDDblClick(Sender: TObject);
 Var

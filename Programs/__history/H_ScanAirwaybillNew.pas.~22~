@@ -255,7 +255,6 @@ type
     procedure RzBitBtn1Click(Sender: TObject);
     procedure MultiHighBTNClick(Sender: TObject);
     procedure UnflagBTNClick(Sender: TObject);
-    procedure FlightAirwaybillGRDKeyPress(Sender: TObject; var Key: Char);
   private
     { Private declarations }
     cn:TIBCConnection;
@@ -652,15 +651,6 @@ begin
         FlightAIrwaybillSQL.Refresh;
         FlightAIrwaybillSQL.Locate('SERIAL_NUMBER',Serial,[]);
         DetailsPNL.Visible:=False;
-end;
-
-procedure TH_ScanAirwaibillNewFRM.FlightAirwaybillGRDKeyPress(Sender: TObject;
-  var Key: Char);
-begin
- if  (Key in [VK_SPACE]) then begin
-   ShowMessage('Only numbers !');
-
- end;
 end;
 
 procedure TH_ScanAirwaibillNewFRM.HawbInputFLDKeyPress(Sender: TObject;
