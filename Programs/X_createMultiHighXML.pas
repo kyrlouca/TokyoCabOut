@@ -425,7 +425,7 @@ end;
 
 function TX_CreateMultiHighXmlFRM.CreateNodeHeader( Const FlightOutSerial,AirSerial:Integer; const Fdoc: IXMLDocument;FatherNode:IXMLNode;Criteria:TCriteriaParams):IXMLNode;
 var
-  qr,TotalsQr:TksQuery;
+  Flightqr,TotalsQr:TksQuery;
   HeaderNode,x1Node:IXMLNode;
   val:String;
   addr:string;
@@ -454,16 +454,7 @@ begin
   +'   from flight_out fo'
   +'   left outer join flight_table ft on fo.fk_flight_table=ft.serial_number'
   +'   where fo.serial_number = :serial';
-
-
-  Qr:=TksQuery.Create(cn,val);
-
-//  val:=
-//  '   Select count(it.serial_number) as Cnt , sum(it.weight)as TotalWeight, sum(it.pieces) as TotalPieces from'
-//  +'    flight_airwaybill fa join'
-//  +'    flight_airwaybill_item it on fa.serial_number=it.fk_fa_serial and '
-//  +'    fa.declaration_type = :decType and fa.type_of_declaration = :typeDec and fa.specific_circumstance = :circ'
-//  +'    where fa.fk_flight_out_serial= :flightSerial'
+  FlightQr:=TksQuery.Create(cn,val);
 
 //89
   if (airSerial=0) then begin
@@ -481,7 +472,7 @@ begin
     +'          order by fa.hawb_id'
     +'    )';
 
-  end else if (AirSerial>0) then begin
+  end else begin
     val:=
     '   Select'
     +'    count(serial) as Cnt , sum(weight)as TotalWeight, sum(pieces) as TotalPieces from'
@@ -498,30 +489,32 @@ begin
 
 
   TotalsQr:=TksQuery.Create(cn,val);
-
   try
-      Qr.ParambyName('serial').Value:= FlightOutSerial;
-      if AirSerial>0 then begin
-        Qr.ParambyName('AirSerial').Value:= AirSerial;
-      end;
-
-      Qr.Open;
-      if qr.IsEmpty then
+      FlightQr.ParamByName('serial').Value:=FlightOutSerial;
+      FlightQr.Open;
+      if Flightqr.IsEmpty then
         exit;
 
-      TotalsQr.ParambyName('FlightSerial').Value:= FlightOutSerial;
 
+
+      TotalsQr.ParambyName('FlightSerial').Value:= FlightOutSerial;
       TotalsQr.ParambyName('decType').Value:= Criteria.DeclarationType;
       TotalsQr.ParambyName('TypeDec').Value:= Criteria.TypeOfDeclaration;
       TotalsQr.ParambyName('Circ').Value:= Criteria.Circumstance;
+      if AirSerial>0 then begin
+        TotalsQr.ParambyName('AirSerial').Value:= AirSerial;
+      end else begin
+         //no airserial, since different SQL above
+      end;
 
       TotalsQr.Open;
+
       if Totalsqr.IsEmpty then
         exit;
 
-      MawbId:=Qr.FieldByName('Mawb').AsString;
-      FlightName:=Qr.FieldByName('Flight_name').AsString;
-      DateDepart:=Qr.FieldByName('date_depart').AsDateTime;
+      MawbId:=FlightQr.FieldByName('Mawb').AsString;
+      FlightName:=FlightQr.FieldByName('Flight_name').AsString;
+      DateDepart:=FlightQr.FieldByName('date_depart').AsDateTime;
 
     //********************************************
      //Header515
@@ -564,10 +557,8 @@ begin
      CreateXMLNodeNew(FDoc,x1node,'SpecificCircumstanceIndicator',CommonCirc,ntText);
      CreateXMLNodeNew(FDoc,x1node,'TypeOfDeclarationBox12',CommonTypeOfDeclaration,ntText);
 
-
-      qr.Close;
     finally
-      qr.Free;
+      Flightqr.Free;
       TOtalsQr.Free;
     end;
 

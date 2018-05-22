@@ -1,3 +1,19 @@
+//////////////////////
+//**
+//**  CreateOneAirwabillXML ??
+//**  LoopMultiXML    calls
+//**  CreateFlightXML   -- create xml for all unflagged airs on the flight
+//**     -- creates the groups (declarationType, TypeOfDeclaration, Circumstance)
+//**
+//**
+//** CreateNodeOuter   -- Fdoc, calls the Create header and Create airway bills
+//** CreateNodeHeader  -- just the header - has the totals
+//** CreateNodeAirwayBills --
+//** CreateNodeFlightCountries -- itinerary with countries on the Flight
+//** CreateNodeForItems ??
+//**
+//////////////////////
+
 unit X_createMultiHighXML;
 
 interface
@@ -37,7 +53,7 @@ type
 
 
   function CreateNodeOuter( Const FlightOutSerial:Integer; AirSerial:integer;const Fdoc: IXMLDocument;FatherNode:IXMLNode;Criteria:TCriteriaParams):Integer;
-  function CreateNodeHeader( Const FlightOutSerial:Integer; const Fdoc: IXMLDocument;FatherNode:IXMLNode;Criteria:TCriteriaParams):IXMLNode;
+  function CreateNodeHeader( Const FlightOutSerial,AirSerial:Integer; const Fdoc: IXMLDocument;FatherNode:IXMLNode;Criteria:TCriteriaParams):IXMLNode;
   function CreateNodeAirwayBills( Const FlightSerial:Integer;  AirSerial: Integer;const Fdoc: IXMLDocument;FatherNode:IXMLNode;Criteria:TCriteriaParams):Integer;
   function CreateNodeForItems( Const AirwaybillSerial:Integer; const Fdoc: IXMLDocument;FatherNode:IXMLNode):IXMLNode;
   function CreateNodeFlightCountries( Const FlightOutSerial:Integer; const Fdoc: IXMLDocument;FatherNode:IXMLNode):IXMLNode;
@@ -171,8 +187,6 @@ begin
     repeat
       count:= CreateFlightXML(FlightOutSerial,0);
     until (Count =0)
-
-
 end;
 
 
@@ -200,9 +214,6 @@ begin
       MessageDlg('Menu ->System->Params-> System Parameters. Then Add record with Code=S01 string_4 =Path', mtWarning, [mbOK], 0);
   end;
 
-
-
-
   FlightQr:=TksQuery.Create(cn,' select *  from Flight_out where serial_number= :Serial');
   try
     FlightQr.ParambyName('serial').Value:= FlightOutSerial;
@@ -213,6 +224,9 @@ begin
     FlightQr.free;
   end;
 
+
+  //change groupSql  below if just for one airwaybill
+  //grouping  includes processed airs but no problem if empty groups
   val:=
   '  Select'
   +'    fa.declaration_type, fa.type_of_declaration, fa.specific_circumstance'
@@ -224,7 +238,13 @@ begin
   GroupQr:=TksQuery.Create(cn,val);
 
   try
-    FlightQr.ParambyName('Flightserial').Value:= FlightOutSerial;
+//    FlightQr.ParambyName('Flightserial').Value:= FlightOutSerial;
+    GroupQr.ParamByName('FlightSerial').Value:=FlightOutSerial;
+    if airSerial>0 then begin
+      GroupQr.AddWhere('fa.serial_number = :AirSerial');
+      GroupQr.ParamByName('AirSerial').Value:=AirSerial;
+    end;
+
     GroupQr.Open;
     while (not GroupQr.Eof) do begin
       Criteria.DeclarationType:= GroupQr.FieldByName('Declaration_type').AsString;
@@ -263,16 +283,13 @@ begin
     GroupQr.Free;
   end;
 
-
-
-
 end;
 
 
 
 function TX_CreateMultiHighXmlFRM.CreateNodeOuter( Const FlightOutSerial:Integer; AirSerial:integer; const Fdoc: IXMLDocument;FatherNode:IXMLNode;Criteria:TCriteriaParams):Integer;
 var
-  qr,FirstAirQr:TksQuery;
+  Flightqr,FirstAirQr:TksQuery;
   HeaderNode,x1Node, x2Node:IXMLNode;
   val:String;
   addr:string;
@@ -288,35 +305,40 @@ begin
   +'   flight_out fo  left outer join '
   +'   flight_table ft on fo.fk_flight_table=ft.serial_number'
   +'   where fo.serial_number = :serial';
-  Qr:=TksQuery.Create(cn,val);
+  FlightQr:=TksQuery.Create(cn,val);
 
-  //to get the flight details of the first airbill for the header since they are all the same
+  //get the flight details of the first airbill for the header since they are all the same
+  //for single air change the SQL below
   val:=
   ' select first 1 * from flight_airwaybill fa where '
   +' fa.fk_flight_out_serial = :flightSerial and '
-  +' fa.declaration_type = :decType and fa.type_of_declaration = :typeDec and fa.specific_circumstance = :circ and '
-  +' (fa.is_included_xml = ''N''  or fa.is_included_xml is null)';
+  +' fa.declaration_type = :decType and fa.type_of_declaration = :typeDec and fa.specific_circumstance = :circ ';
   FirstAirQR:= TksQuery.Create(cn,val);
 
   try
-      Qr.ParambyName('serial').Value:= FlightOutSerial;
-      Qr.Open;
-      if qr.IsEmpty then
+      FlightQr.ParambyName('serial').Value:= FlightOutSerial;
+      FlightQr.Open;
+      if Flightqr.IsEmpty then
         exit;
 
       FirstAirQr.ParambyName('FlightSerial').Value:= FlightOutSerial;
       FirstAirQr.ParambyName('decType').Value:= Criteria.DeclarationType;
       FirstAirQr.ParambyName('TypeDec').Value:= Criteria.TypeOfDeclaration;
       FirstAirQr.ParambyName('Circ').Value:= Criteria.Circumstance;
+      if airSerial>0 then begin
+        FirstAirQr.AddWhere('fa.serial_number = :AirSerial');
+        FirstAirQr.ParamByName('AirSerial').Value:=AirSerial;
+      end else begin
+        FirstAirQr.AddWhere('fa.is_included_xml = ''N''  or fa.is_included_xml is null');
+      end;
 
       FirstAirQr.Open;
       if FirstAirQr.IsEmpty then
         exit;
 
-
-      MawbId:=Qr.FieldByName('Mawb').AsString;
-      FlightName:=Qr.FieldByName('Flight_name').AsString;
-      DateDepart:=Qr.FieldByName('date_depart').AsDateTime;
+      MawbId:=FlightQr.FieldByName('Mawb').AsString;
+      FlightName:=FlightQr.FieldByName('Flight_name').AsString;
+      DateDepart:=FlightQr.FieldByName('date_depart').AsDateTime;
 
      CreateXMLNodeNew(FDoc,FatherNode,'SyntaxIdentifier','UNOC',ntText);
      CreateXMLNodeNew(FDoc,FatherNode,'SyntaxVersionNumber','3',ntText);
@@ -333,7 +355,7 @@ begin
      CreateXMLNodeNew(FDoc,FatherNode,'MessageType','CC515A',ntText);
 
      //***Header***************************************
-     createNodeHeader(FlightOutSerial,FDoc,FatherNode,Criteria);
+     createNodeHeader(FlightOutSerial,AirSerial,FDoc,FatherNode,Criteria);
      //*************************************************
      //Consignor
      if (SameSender OR true) then begin
@@ -391,9 +413,9 @@ begin
      x2node:=CreateXMLNodeNew(FDoc,FatherNode,'Msg515StatusRepresentative','',ntElement);
      CreateXMLNodeNew(FDoc,x2node,'RepresentativeStatusCode','1',ntText);
 
-      qr.Close;
+      Flightqr.Close;
     finally
-      qr.Free;
+      Flightqr.Free;
       FirstAirQr.Free;
     end;
 
@@ -401,7 +423,7 @@ end;
 
 
 
-function TX_CreateMultiHighXmlFRM.CreateNodeHeader( Const FlightOutSerial:Integer; const Fdoc: IXMLDocument;FatherNode:IXMLNode;Criteria:TCriteriaParams):IXMLNode;
+function TX_CreateMultiHighXmlFRM.CreateNodeHeader( Const FlightOutSerial,AirSerial:Integer; const Fdoc: IXMLDocument;FatherNode:IXMLNode;Criteria:TCriteriaParams):IXMLNode;
 var
   qr,TotalsQr:TksQuery;
   HeaderNode,x1Node:IXMLNode;
@@ -444,22 +466,45 @@ begin
 //  +'    where fa.fk_flight_out_serial= :flightSerial'
 
 //89
-val:=
-'   Select'
-  +'    count(serial) as Cnt , sum(weight)as TotalWeight, sum(pieces) as TotalPieces from'
-  +'    (select  first 89 it.serial_number as serial, it.weight as weight, it.pieces as pieces from'
-  +'      flight_airwaybill fa join'
-  +'      flight_airwaybill_item it on fa.serial_number=it.fk_fa_serial'
-  +'      where fa.fk_flight_out_serial= :flightSerial and '
-  +'      fa.declaration_type = :decType and fa.type_of_declaration = :typeDec and fa.specific_circumstance = :circ '
-  +'          order by fa.hawb_id'
-  +'    )';
+  if (airSerial=0) then begin
+
+  val:=
+
+    '   Select'
+    +'    count(serial) as Cnt , sum(weight)as TotalWeight, sum(pieces) as TotalPieces from'
+    +'    (select  first 89 it.serial_number as serial, it.weight as weight, it.pieces as pieces from'
+    +'      flight_airwaybill fa join'
+    +'      flight_airwaybill_item it on fa.serial_number=it.fk_fa_serial'
+    +'      where fa.fk_flight_out_serial= :flightSerial and '
+    +'      (fa.is_included_xml = ''N''  or fa.is_included_xml is null) and '
+    +'      fa.declaration_type = :decType and fa.type_of_declaration = :typeDec and fa.specific_circumstance = :circ '
+    +'          order by fa.hawb_id'
+    +'    )';
+
+  end else if (AirSerial>0) then begin
+    val:=
+    '   Select'
+    +'    count(serial) as Cnt , sum(weight)as TotalWeight, sum(pieces) as TotalPieces from'
+    +'    (select  first 89 it.serial_number as serial, it.weight as weight, it.pieces as pieces from'
+    +'      flight_airwaybill fa join'
+    +'      flight_airwaybill_item it on fa.serial_number=it.fk_fa_serial'
+    +'      where fa.fk_flight_out_serial= :flightSerial and '
+    +'      fa.serial_number= :AirSerial and'
+    +'      fa.declaration_type = :decType and fa.type_of_declaration = :typeDec and fa.specific_circumstance = :circ '
+    +'          order by fa.hawb_id'
+    +'    )';
+
+  end;
 
 
   TotalsQr:=TksQuery.Create(cn,val);
 
   try
       Qr.ParambyName('serial').Value:= FlightOutSerial;
+      if AirSerial>0 then begin
+        Qr.ParambyName('AirSerial').Value:= AirSerial;
+      end;
+
       Qr.Open;
       if qr.IsEmpty then
         exit;
@@ -557,14 +602,14 @@ begin
 
   //89
 
+  //SQL will change below for single Air
   val:=
   '   Select first 89  fa.serial_number as AirSerial,'
   +'    it.* from'
   +'    flight_airwaybill fa join'
   +'    flight_airwaybill_item it on fa.serial_number=it.fk_fa_serial'
   +'    where fa.fk_flight_out_serial= :flightSerial'
-  +'    and fa.declaration_type = :decType and fa.type_of_declaration = :typeDec and fa.specific_circumstance = :circ and '
-  +'   ( fa.is_included_xml = ''N''  or fa.is_included_xml is null)'
+  +'    and fa.declaration_type = :decType and fa.type_of_declaration = :typeDec and fa.specific_circumstance = :circ '
   +'    order by fa.hawb_id, sequence';
   qrItem:=TksQuery.Create(cn,Val);
 
@@ -578,8 +623,16 @@ begin
       qrItem.ParambyName('decType').Value:= Criteria.DeclarationType;
       qrItem.ParambyName('TypeDec').Value:= Criteria.TypeOfDeclaration;
       qrItem.ParambyName('Circ').Value:= Criteria.Circumstance;
+      if airSerial>0 then begin
+        qrItem.AddWhere('fa.serial_number = :AirSerial');
+        qrItem.ParamByName('AirSerial').Value:=AirSerial;
+      end else begin
+        qrItem.AddWhere(' (fa.is_included_xml = ''N''  or fa.is_included_xml is null)');
+      end;
+
 
       qrItem.Open;
+
 //      name="Msg615ProducedDocumentsCertif"
       while (not qrItem.eof) do begin
        inc(Counter);
@@ -696,7 +749,7 @@ begin
        CreateXMLNodeNew(FDoc,x2node,'NumberOfPackages',IntToStr(TempInt),ntText);
 
 ///////////////////////////////////////
-       ksExecSQLVar(cn,'update flight_airwaybill  set is_included_xml= ''Y'' WHERE serial_number = :SerialNumber',[airSerial]);
+       ksExecSQLVar(cn,'update flight_airwaybill  set is_included_xml= ''Y'' WHERE serial_number = :SerialNumber',[CurrentAirSerial]);
        qrItem.Next;
       end;
       result:= Counter;
