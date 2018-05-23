@@ -114,6 +114,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
       Color = clBtnFace
       DitherColor = clWhite
       DitherStyle = wwdsDither
+      NumGlyphs = 0
       ShadeStyle = wwbsNormal
       TabOrder = 2
       TextOptions.Alignment = taCenter
@@ -2028,6 +2029,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
       Color = clBtnFace
       DitherColor = clWhite
       DitherStyle = wwdsDither
+      NumGlyphs = 0
       ShadeStyle = wwbsNormal
       TabOrder = 6
       TextOptions.Alignment = taCenter

@@ -2,7 +2,7 @@ object L_ItineraryFRM: TL_ItineraryFRM
   Left = 285
   Top = 102
   ClientHeight = 621
-  ClientWidth = 503
+  ClientWidth = 625
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -40,7 +40,7 @@ object L_ItineraryFRM: TL_ItineraryFRM
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 503
+    Width = 625
     Height = 65
     Align = alTop
     Caption = 'List Itineraries'
@@ -51,16 +51,14 @@ object L_ItineraryFRM: TL_ItineraryFRM
     Font.Style = [fsBold]
     ParentFont = False
     TabOrder = 0
-    ExplicitWidth = 625
   end
   object Panel4: TPanel
     Left = 0
     Top = 555
-    Width = 503
+    Width = 625
     Height = 66
     Align = alBottom
     TabOrder = 1
-    ExplicitWidth = 625
     object BitBtn2: TBitBtn
       Left = 8
       Top = 13
@@ -137,30 +135,27 @@ object L_ItineraryFRM: TL_ItineraryFRM
   object Panel3: TPanel
     Left = 0
     Top = 65
-    Width = 503
+    Width = 625
     Height = 490
     Align = alClient
     TabOrder = 2
-    ExplicitWidth = 625
     object Panel2: TPanel
       Left = 1
       Top = 1
-      Width = 501
+      Width = 623
       Height = 64
       Align = alTop
       BevelOuter = bvNone
       TabOrder = 0
-      ExplicitWidth = 623
     end
     object Panel5: TPanel
       Left = 1
       Top = 65
-      Width = 501
+      Width = 623
       Height = 424
       Align = alClient
       BevelOuter = bvNone
       TabOrder = 1
-      ExplicitWidth = 623
       object Panel6: TPanel
         Left = 0
         Top = 0
@@ -410,6 +405,9 @@ object L_ItineraryFRM: TL_ItineraryFRM
           TitleLines = 1
           TitleButtons = False
           OnDblClick = FlightOutGRDDblClick
+          ExplicitLeft = 3
+          ExplicitTop = 89
+          ExplicitHeight = 182
         end
         object wwDBNavigator2: TwwDBNavigator
           Left = 2
@@ -421,6 +419,7 @@ object L_ItineraryFRM: TL_ItineraryFRM
           RepeatInterval.InitialDelay = 500
           RepeatInterval.Interval = 100
           Align = alTop
+          ExplicitTop = 3
           object wwNavButton1: TwwNavButton
             Left = 0
             Top = 0
@@ -631,7 +630,6 @@ object L_ItineraryFRM: TL_ItineraryFRM
             Caption = 'wwDBNavigator1Insert'
             DisabledTextColors.ShadeColor = clGray
             DisabledTextColors.HighlightColor = clBtnHighlight
-            OnClick = wwDBNavigator1InsertClick
             Index = 2
             Style = nbsInsert
           end

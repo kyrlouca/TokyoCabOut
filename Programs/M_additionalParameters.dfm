@@ -2,8 +2,8 @@ object M_additionalParametersFRM: TM_additionalParametersFRM
   Left = 317
   Top = 126
   Caption = 'Additional Params'
-  ClientHeight = 0
-  ClientWidth = 120
+  ClientHeight = 434
+  ClientWidth = 730
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -12,6 +12,7 @@ object M_additionalParametersFRM: TM_additionalParametersFRM
   Font.Style = []
   KeyPreview = True
   OldCreateOrder = False
+  Position = poScreenCenter
   WindowState = wsMaximized
   OnActivate = FormActivate
   OnKeyUp = FormKeyUp
@@ -20,7 +21,7 @@ object M_additionalParametersFRM: TM_additionalParametersFRM
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 120
+    Width = 730
     Height = 53
     Align = alTop
     Caption = 'Additional Parameters'
@@ -31,17 +32,17 @@ object M_additionalParametersFRM: TM_additionalParametersFRM
     Font.Style = [fsBold]
     ParentFont = False
     TabOrder = 0
-    ExplicitWidth = 748
+    ExplicitWidth = 120
   end
   object Panel4: TPanel
     Left = 0
-    Top = -43
-    Width = 120
+    Top = 391
+    Width = 730
     Height = 43
     Align = alBottom
     TabOrder = 1
-    ExplicitTop = 596
-    ExplicitWidth = 748
+    ExplicitTop = -43
+    ExplicitWidth = 120
     object BitBtn3: TBitBtn
       Left = 7
       Top = 4
@@ -118,11 +119,11 @@ object M_additionalParametersFRM: TM_additionalParametersFRM
   object Panel2: TPanel
     Left = 0
     Top = 53
-    Width = 120
+    Width = 730
     Height = 39
     Align = alTop
     TabOrder = 2
-    ExplicitWidth = 748
+    ExplicitWidth = 120
     object Nav1: TwwDBNavigator
       Left = 1
       Top = 7
@@ -241,19 +242,21 @@ object M_additionalParametersFRM: TM_additionalParametersFRM
   object Panel3: TPanel
     Left = 0
     Top = 92
-    Width = 120
-    Height = 504
+    Width = 730
+    Height = 299
     Align = alClient
     TabOrder = 3
+    ExplicitWidth = 120
+    ExplicitHeight = 66
     object Panel5: TPanel
       Left = 1
       Top = 1
-      Width = 118
+      Width = 728
       Height = 169
       Align = alTop
       BevelOuter = bvNone
       TabOrder = 0
-      ExplicitWidth = 746
+      ExplicitWidth = 118
       object GroupBox1: TGroupBox
         Left = 16
         Top = 15
@@ -345,8 +348,8 @@ object M_additionalParametersFRM: TM_additionalParametersFRM
     object Grid1: TwwDBGrid
       Left = 1
       Top = 170
-      Width = 118
-      Height = 333
+      Width = 728
+      Height = 128
       Selected.Strings = (
         'SERIAL_NUMBER'#9'5'#9'S/N'
         'INFO_TYPE'#9'12'#9'Parameter'
@@ -377,6 +380,8 @@ object M_additionalParametersFRM: TM_additionalParametersFRM
       TitleFont.Style = []
       TitleLines = 1
       TitleButtons = False
+      ExplicitWidth = 118
+      ExplicitHeight = 333
     end
   end
   object TableSRC: TDataSource

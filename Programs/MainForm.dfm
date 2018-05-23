@@ -400,13 +400,6 @@ object MainFormFRM: TMainFormFRM
         OnClick = ListFlights1Click
       end
     end
-    object About: TMenuItem
-      Caption = 'About'
-      object ProductInfo1: TMenuItem
-        Caption = 'Product Info'
-        OnClick = ProductInfo1Click
-      end
-    end
     object System1: TMenuItem
       Caption = 'System'
       object Parameters1: TMenuItem
@@ -496,6 +489,13 @@ object MainFormFRM: TMainFormFRM
         object N1: TMenuItem
           Caption = '-'
         end
+      end
+    end
+    object About: TMenuItem
+      Caption = 'About'
+      object ProductInfo1: TMenuItem
+        Caption = 'Product Info'
+        OnClick = ProductInfo1Click
       end
     end
   end

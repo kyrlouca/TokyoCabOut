@@ -65,7 +65,6 @@ type
     procedure BitBtn1Click(Sender: TObject);
     procedure DeleteSelectedBTNClick(Sender: TObject);
     procedure FormActivate(Sender: TObject);
-    procedure wwDBNavigator1InsertClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -120,13 +119,6 @@ end;
 }
 End;
 
-
-procedure TL_ItineraryFRM.wwDBNavigator1InsertClick(Sender: TObject);
-begin
-IF (ItinerarySQL.State in [dsEdit, dsInsert]) then
-  ItinerarySQL.Post;
-
-end;
 
 procedure TL_ItineraryFRM.FlightOutGRDDblClick(Sender: TObject);
 Var

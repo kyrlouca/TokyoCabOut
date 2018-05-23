@@ -1,2 +1,0 @@
-localhost
-E:\All\Databases\CABOUT\CABOUTDATA.FDB

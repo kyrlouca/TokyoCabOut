@@ -1,9 +1,9 @@
-object M_ServiceCodesFRM: TM_ServiceCodesFRM
-  Left = 435
-  Top = 238
-  Caption = 'Service Codes'
-  ClientHeight = 509
-  ClientWidth = 631
+object M_additionalParametersFRM: TM_additionalParametersFRM
+  Left = 317
+  Top = 126
+  Caption = 'Additional Params'
+  ClientHeight = 0
+  ClientWidth = 120
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -12,7 +12,6 @@ object M_ServiceCodesFRM: TM_ServiceCodesFRM
   Font.Style = []
   KeyPreview = True
   OldCreateOrder = False
-  Position = poScreenCenter
   WindowState = wsMaximized
   OnActivate = FormActivate
   OnKeyUp = FormKeyUp
@@ -21,10 +20,10 @@ object M_ServiceCodesFRM: TM_ServiceCodesFRM
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 631
+    Width = 120
     Height = 53
     Align = alTop
-    Caption = 'Service Codes'
+    Caption = 'Additional Parameters'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBlue
     Font.Height = -27
@@ -32,15 +31,17 @@ object M_ServiceCodesFRM: TM_ServiceCodesFRM
     Font.Style = [fsBold]
     ParentFont = False
     TabOrder = 0
+    ExplicitWidth = 748
   end
   object Panel4: TPanel
     Left = 0
-    Top = 466
-    Width = 631
+    Top = -43
+    Width = 120
     Height = 43
     Align = alBottom
     TabOrder = 1
-    ExplicitTop = 233
+    ExplicitTop = 596
+    ExplicitWidth = 748
     object BitBtn3: TBitBtn
       Left = 7
       Top = 4
@@ -117,10 +118,11 @@ object M_ServiceCodesFRM: TM_ServiceCodesFRM
   object Panel2: TPanel
     Left = 0
     Top = 53
-    Width = 631
+    Width = 120
     Height = 39
     Align = alTop
     TabOrder = 2
+    ExplicitWidth = 748
     object Nav1: TwwDBNavigator
       Left = 1
       Top = 7
@@ -239,19 +241,19 @@ object M_ServiceCodesFRM: TM_ServiceCodesFRM
   object Panel3: TPanel
     Left = 0
     Top = 92
-    Width = 631
-    Height = 374
+    Width = 120
+    Height = 504
     Align = alClient
     TabOrder = 3
-    ExplicitHeight = 141
     object Panel5: TPanel
       Left = 1
       Top = 1
-      Width = 629
+      Width = 118
       Height = 169
       Align = alTop
       BevelOuter = bvNone
       TabOrder = 0
+      ExplicitWidth = 746
       object GroupBox1: TGroupBox
         Left = 16
         Top = 15
@@ -298,7 +300,7 @@ object M_ServiceCodesFRM: TM_ServiceCodesFRM
           Height = 21
           BorderStyle = bsNone
           CharCase = ecUpperCase
-          DataField = 'CODE'
+          DataField = 'INFO_TYPE'
           DataSource = TableSRC
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
@@ -321,7 +323,7 @@ object M_ServiceCodesFRM: TM_ServiceCodesFRM
           Width = 369
           Height = 21
           BorderStyle = bsNone
-          DataField = 'DESCRIPTION'
+          DataField = 'INFO_VALUE'
           DataSource = TableSRC
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
@@ -343,11 +345,12 @@ object M_ServiceCodesFRM: TM_ServiceCodesFRM
     object Grid1: TwwDBGrid
       Left = 1
       Top = 170
-      Width = 629
-      Height = 203
+      Width = 118
+      Height = 333
       Selected.Strings = (
-        'CODE'#9'5'#9'Code'
-        'DESCRIPTION'#9'56'#9'Description')
+        'SERIAL_NUMBER'#9'5'#9'S/N'
+        'INFO_TYPE'#9'12'#9'Parameter'
+        'INFO_VALUE'#9'30'#9'Value')
       IniAttributes.Delimiter = ';;'
       IniAttributes.UnicodeIniFile = False
       TitleColor = clBtnFace
@@ -374,7 +377,6 @@ object M_ServiceCodesFRM: TM_ServiceCodesFRM
       TitleFont.Style = []
       TitleLines = 1
       TitleButtons = False
-      ExplicitHeight = 333
     end
   end
   object TableSRC: TDataSource
@@ -385,36 +387,38 @@ object M_ServiceCodesFRM: TM_ServiceCodesFRM
   end
   object ServiceCodeSQL: TIBCQuery
     KeyFields = 'SERIAL_NUMBER'
-    KeyGenerator = 'INCOTERMS_GENERATOR'
+    KeyGenerator = 'PARAM_FA_CATEGORY_ITEM_GEN'
     SQLInsert.Strings = (
-      'INSERT INTO SERVICE_CODE'
-      '  (SERIAL_NUMBER, CODE, DESCRIPTION)'
+      'INSERT INTO PARAM_FA_CATEGORY_ITEM'
+      '  (SERIAL_NUMBER, INFO_TYPE, INFO_VALUE)'
       'VALUES'
-      '  (:SERIAL_NUMBER, :CODE, :DESCRIPTION)')
+      '  (:SERIAL_NUMBER, :INFO_TYPE, :INFO_VALUE)')
     SQLDelete.Strings = (
-      'DELETE FROM SERVICE_CODE'
+      'DELETE FROM PARAM_FA_CATEGORY_ITEM'
       'WHERE'
       '  SERIAL_NUMBER = :Old_SERIAL_NUMBER')
     SQLUpdate.Strings = (
-      'UPDATE SERVICE_CODE'
+      'UPDATE PARAM_FA_CATEGORY_ITEM'
       'SET'
       
-        '  SERIAL_NUMBER = :SERIAL_NUMBER, CODE = :CODE, DESCRIPTION = :D' +
-        'ESCRIPTION'
+        '  SERIAL_NUMBER = :SERIAL_NUMBER, INFO_TYPE = :INFO_TYPE, INFO_V' +
+        'ALUE = :INFO_VALUE'
       'WHERE'
       '  SERIAL_NUMBER = :Old_SERIAL_NUMBER')
     SQLRefresh.Strings = (
-      'SELECT SERIAL_NUMBER, CODE, DESCRIPTION FROM SERVICE_CODE'
+      
+        'SELECT SERIAL_NUMBER, INFO_TYPE, INFO_VALUE FROM PARAM_FA_CATEGO' +
+        'RY_ITEM'
       'WHERE'
       '  SERIAL_NUMBER = :SERIAL_NUMBER')
     SQLLock.Strings = (
-      'SELECT NULL FROM SERVICE_CODE'
+      'SELECT NULL FROM PARAM_FA_CATEGORY_ITEM'
       'WHERE'
       'SERIAL_NUMBER = :Old_SERIAL_NUMBER'
       'FOR UPDATE WITH LOCK')
     SQLRecCount.Strings = (
       'SELECT COUNT(*) FROM ('
-      'SELECT 1 AS C  FROM SERVICE_CODE'
+      'SELECT 1 AS C  FROM PARAM_FA_CATEGORY_ITEM'
       ''
       ') q')
     Connection = MainFormFRM.CabOutData
@@ -424,29 +428,29 @@ object M_ServiceCodesFRM: TM_ServiceCodesFRM
       'SELECT'
       '*'
       'FROM'
-      '  service_code')
+      'PARAM_FA_CATEGORY_ITEM')
     Active = True
     AfterInsert = ServiceCodeSQLAfterInsert
     Left = 537
     Top = 117
-    object ServiceCodeSQLCODE: TStringField
-      DisplayLabel = 'Code'
+    object ServiceCodeSQLSERIAL_NUMBER: TIntegerField
+      DisplayLabel = 'S/N'
       DisplayWidth = 5
-      FieldName = 'CODE'
-      FixedChar = True
-      Size = 5
+      FieldName = 'SERIAL_NUMBER'
     end
-    object ServiceCodeSQLDESCRIPTION: TStringField
-      DisplayLabel = 'Description'
-      DisplayWidth = 56
-      FieldName = 'DESCRIPTION'
+    object ServiceCodeSQLINFO_TYPE: TStringField
+      DisplayLabel = 'Parameter'
+      DisplayWidth = 12
+      FieldName = 'INFO_TYPE'
       FixedChar = True
       Size = 30
     end
-    object ServiceCodeSQLSERIAL_NUMBER: TIntegerField
-      DisplayWidth = 10
-      FieldName = 'SERIAL_NUMBER'
-      Visible = False
+    object ServiceCodeSQLINFO_VALUE: TStringField
+      DisplayLabel = 'Value'
+      DisplayWidth = 30
+      FieldName = 'INFO_VALUE'
+      FixedChar = True
+      Size = 30
     end
   end
   object WriteTrans: TIBCTransaction

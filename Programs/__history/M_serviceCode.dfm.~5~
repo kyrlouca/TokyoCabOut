@@ -12,7 +12,6 @@ object M_ServiceCodesFRM: TM_ServiceCodesFRM
   Font.Style = []
   KeyPreview = True
   OldCreateOrder = False
-  Position = poScreenCenter
   WindowState = wsMaximized
   OnActivate = FormActivate
   OnKeyUp = FormKeyUp

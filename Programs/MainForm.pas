@@ -173,7 +173,8 @@ end;
 
 procedure TMainFormFRM.ProductInfo1Click(Sender: TObject);
 begin
-   ShowMessage('CabOut By LSimple. Version 2.0, Nov 17, 2014');
+//   ShowMessage('CabOut By LSimple. Version 2.0, Nov 17, 2014');
+   ShowMessage('CabOut Tokyo By LSimple. Version 1.0, May 26, 2018');
 end;
 
 procedure TMainFormFRM.BitBtn2Click(Sender: TObject);
