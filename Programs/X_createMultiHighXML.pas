@@ -376,7 +376,8 @@ begin
        TblCreateXMLNode(FDoc,x2node,'City','',FirstAirQr,'SENDER_CITY',ntText);
        TblCreateXMLNode(FDoc,x2node,'CountryCode','',FirstAirQr,'SENDER_COUNTRY_CODE',ntText);
        CreateXMLNodeNew(FDoc,x2node,'NADLNG','EN',ntText);
-       TblCreateXMLNode(FDoc,x2node,'TIN','',FirstAirQr,'SENDER_VAT',ntText);
+       if FirstAirQr.FieldByName('SENDER_vat').AsString>'' then
+         TblCreateXMLNode(FDoc,x2node,'TIN','',FirstAirQr,'SENDER_VAT',ntText);
      end;
 
      //*************************************************
@@ -392,7 +393,9 @@ begin
        TblCreateXMLNode(FDoc,x2node,'City','',FirstAirQr,'CONSIGNEE_CITY',ntText);
        TblCreateXMLNode(FDoc,x2node,'CountryCode','',FirstAirQr,'CONSIGNEE_COUNTRY_CODE',ntText);
        CreateXMLNodeNew(FDoc,x2node,'NADLNG','EN',ntText);
-       TblCreateXMLNode(FDoc,x2node,'TIN','',FirstAirQr,'CONSIGNEE_VAT',ntText);
+
+       if FirstAirQr.FieldByName('CONSIGNEE_VAT').AsString>'' then
+        TblCreateXMLNode(FDoc,x2node,'TIN','',FirstAirQr,'CONSIGNEE_VAT',ntText);
      end;
 
      x2Node:=CreateXMLNodeNew(FDoc,FatherNode,'Msg515ExportCustomsOffice','',ntElement);
@@ -420,7 +423,9 @@ begin
        TblCreateXMLNode(FDoc,x2node,'City','',DeclarantQr,'ADDRESS_CITY',ntText);
        TblCreateXMLNode(FDoc,x2node,'CountryCode','',DeclarantQr,'ADDRESS_COUNTRY_CODE',ntText);
        CreateXMLNodeNew(FDoc,x2node,'NADLNG','EN',ntText);
-       TblCreateXMLNode(FDoc,x2node,'TIN','',DeclarantQr,'VAT_ID',ntText);
+
+       if DeclarantQr.FieldByName('VAT_ID').AsString>'' then
+         TblCreateXMLNode(FDoc,x2node,'TIN','',DeclarantQr,'VAT_ID',ntText);
 
      finally
        DeclarantQr.Free;
@@ -708,7 +713,7 @@ begin
 
        TblCreateXMLNode(FDoc,HeaderNode,'StatisticalValueCurrency','',qrItem,'CURRENCY',ntText);
        TblCreateXMLNode(FDoc,HeaderNode,'StatisticalValueAmount','',qrItem,'AMOUNT',ntText);
-       TblCreateXMLNode(FDoc,HeaderNode,'CountryOfOrigin','',qrAir,'COUNTRY_OF_ORIGIN',ntText);
+       TblCreateXMLNode(FDoc,HeaderNode,'CountryOfOrigin','',qrItem,'COUNTRY_OF_ORIGIN',ntText);
        TblCreateXMLNode(FDoc,HeaderNode,'SupplementaryUnits','',qrItem,'PIECES',ntText);
 
 
@@ -755,7 +760,9 @@ begin
        TblCreateXMLNode(FDoc,x2node,'City','',qrAir,'SENDER_CITY',ntText);
        TblCreateXMLNode(FDoc,x2node,'CountryCode','',qrAir,'SENDER_COUNTRY_CODE',ntText);
        CreateXMLNodeNew(FDoc,x2node,'NADLNG','EN',ntText);
-       TblCreateXMLNode(FDoc,x2node,'TIN','',qrAir,'SENDER_VAT',ntText);
+
+       if qrAir.FieldByName('SENDER_VAT').AsString>'' then
+         TblCreateXMLNode(FDoc,x2node,'TIN','',qrAir,'SENDER_VAT',ntText);
        end;
 
        //Consignee
@@ -769,6 +776,10 @@ begin
        TblCreateXMLNode(FDoc,x2node,'City','',qrAir,'CONSIGNEE_CITY',ntText);
        TblCreateXMLNode(FDoc,x2node,'CountryCode','',qrAir,'CONSIGNEE_COUNTRY_cODE',ntText);
        CreateXMLNodeNew(FDoc,x2node,'NADLNG','EN',ntText);
+
+       if qrAir.FieldByName('consignee_VAT').AsString>'' then
+         TblCreateXMLNode(FDoc,x2node,'TIN','',qrAir,'consigneee_VAT',ntText);
+
        end;
 
 //////////packages
@@ -921,9 +932,12 @@ begin
 
   qr:=TksQuery.Create(cn, str3);
   try
+
+       qr.ParamByName('FLightSerial').Value:=FlightSerial;
       if AirSerial>0 then
         qr.ParamByName('AirSerial').Value := AirSerial;
       qr.Open;
+      Clipboard.AsText:=qr.FinalSQL;
       result:= qr.RecordCount =1 ;
   finally
     qr.Free;
@@ -941,22 +955,22 @@ var
 begin
 
   str1:=
-' select count(*), consignee_vat from'
+' select count(*), consignee_vat, consignee_name, consignee_address_1 from'
   +'  ('
-  +'   select first 89 fa.consignee_vat from flight_airwaybill fa'
+  +'   select first 89 fa.consignee_vat, fa.consignee_name, fa.consignee_address_1 from flight_airwaybill fa'
   +'   where fk_flight_out_serial= :flightSerial and'
   +'    (fa.is_included_xml = ''N''  or fa.is_included_xml is null)'
   +'   order by fa.hawb_id'
-  +'   )group by consignee_vat';
+  +'   )group by consignee_vat, consignee_name, consignee_address_1';
 
   str2:=
-  ' select count(*), consignee_vat from'
+  ' select count(*), consignee_vat,consignee_name, consignee_address_1 from'
   +'  ('
-  +'   select first 89 fa.consignee_vat from flight_airwaybill fa'
+  +'   select first 89 fa.consignee_vat,consignee_name,consignee_address_1 from flight_airwaybill fa'
   +'   where fk_flight_out_serial= :flightSerial and'
   +'    fa.serial_number= :airSerial'
   +'   order by fa.hawb_id'
-  +'   )group by consignee_vat';
+  +'   )group by consignee_vat, consignee_name. consignee_address_1';
 
   if AirSerial=0 then begin
     str3:=str1
@@ -966,9 +980,11 @@ begin
 
   qr:=TksQuery.Create(cn, str3);
   try
+      qr.ParamByName('FLightSerial').Value:=FlightSerial;
       if AirSerial>0 then
         qr.ParamByName('AirSerial').Value := AirSerial;
       qr.Open;
+      Clipboard.AsText:=qr.FinalSQL;
       result:= qr.RecordCount =1 ;
   finally
     qr.Free;
