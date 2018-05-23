@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   StdCtrls, Mask,  wwSpeedButton, wwDBNavigator,
   wwclearpanel, Buttons, ExtCtrls, wwdbedit, Grids, Wwdbigrd, Wwdbgrid,
-  DBAccess, IBC, Data.DB, MemDS, vcl.wwdblook, RzButton, RzRadChk, RzDBChk;
+  DBAccess, IBC, Data.DB, MemDS, vcl.wwdblook;
 
 type
   TM_DangerGoodsFRM = class(TForm)
@@ -40,10 +40,6 @@ type
     CountrySQLNAME: TStringField;
     wwDBEdit1: TwwDBEdit;
     readTrans: TIBCTransaction;
-    TableSQLIS_DEFAULT: TStringField;
-    TableSQLDESCRIPTION: TStringField;
-    TableSQLKEY: TStringField;
-    RzDBCheckBox1: TRzDBCheckBox;
     procedure BitBtn2Click(Sender: TObject);
     procedure wwDBNavigator1InsertClick(Sender: TObject);
     procedure AcceptBTNClick(Sender: TObject);

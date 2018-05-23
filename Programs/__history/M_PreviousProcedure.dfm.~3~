@@ -378,22 +378,16 @@ object M_PreviousProcedureFRM: TM_PreviousProcedureFRM
     end
   end
   object RzDBCheckBox1: TRzDBCheckBox
-    Left = 44
+    Left = 49
     Top = 185
-    Width = 58
-    Height = 17
+    Width = 53
+    Height = 15
     DataField = 'IS_DEFAULT'
     DataSource = TableSRC
     ValueChecked = 'Y'
     ValueUnchecked = 'N'
     Alignment = taLeftJustify
     Caption = 'Default'
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -12
-    Font.Name = 'arIAL'
-    Font.Style = []
-    ParentFont = False
     TabOrder = 4
   end
   object TableSRC: TDataSource

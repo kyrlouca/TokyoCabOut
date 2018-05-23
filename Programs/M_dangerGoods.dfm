@@ -138,7 +138,7 @@ object M_DangerGoodsFRM: TM_DangerGoodsFRM
       Left = 24
       Top = 55
       Width = 369
-      Height = 106
+      Height = 122
       Caption = 'Details'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -184,7 +184,7 @@ object M_DangerGoodsFRM: TM_DangerGoodsFRM
         Height = 24
         CharCase = ecUpperCase
         Color = clWhite
-        DataField = 'CODE'
+        DataField = 'KEY'
         DataSource = TableSRC
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -216,15 +216,37 @@ object M_DangerGoodsFRM: TM_DangerGoodsFRM
         WantReturns = False
         WordWrap = False
       end
+      object RzDBCheckBox1: TRzDBCheckBox
+        Left = 34
+        Top = 86
+        Width = 58
+        Height = 17
+        DataField = 'IS_DEFAULT'
+        DataSource = TableSRC
+        ValueChecked = 'Y'
+        ValueUnchecked = 'N'
+        Alignment = taLeftJustify
+        Caption = 'Default'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'arIAL'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 2
+      end
     end
     object wwDBGrid1: TwwDBGrid
       Left = 24
-      Top = 176
+      Top = 200
       Width = 449
       Height = 225
+      ControlType.Strings = (
+        'IS_DEFAULT;CheckBox;Y;N')
       Selected.Strings = (
-        'CODE'#9'10'#9'CODE'
-        'DESCRIPTION'#9'30'#9'DESCRIPTION')
+        'KEY'#9'10'#9'Code'#9'F'
+        'DESCRIPTION'#9'30'#9'DESCRIPTION'
+        'IS_DEFAULT'#9'1'#9'Default')
       IniAttributes.Delimiter = ';;'
       IniAttributes.UnicodeIniFile = False
       TitleColor = clBtnFace
@@ -411,41 +433,63 @@ object M_DangerGoodsFRM: TM_DangerGoodsFRM
   object TableSQL: TIBCQuery
     GeneratorMode = gmInsert
     SQLInsert.Strings = (
-      'INSERT INTO DANGEROUS_GOODS'
-      '  (DESCRIPTION, CODE)'
+      'INSERT INTO AUX_DANGEROUS_GOODS'
+      '  (IS_DEFAULT, DESCRIPTION, KEY)'
       'VALUES'
-      '  (:DESCRIPTION, :CODE)')
+      '  (:IS_DEFAULT, :DESCRIPTION, :KEY)')
     SQLDelete.Strings = (
-      'DELETE FROM DANGEROUS_GOODS'
+      'DELETE FROM AUX_DANGEROUS_GOODS'
       'WHERE'
-      '  CODE = :Old_CODE')
+      '  KEY = :Old_KEY')
     SQLUpdate.Strings = (
-      'UPDATE DANGEROUS_GOODS'
+      'UPDATE AUX_DANGEROUS_GOODS'
       'SET'
-      '  DESCRIPTION = :DESCRIPTION, CODE = :CODE'
+      
+        '  IS_DEFAULT = :IS_DEFAULT, DESCRIPTION = :DESCRIPTION, KEY = :K' +
+        'EY'
       'WHERE'
-      '  CODE = :Old_CODE')
+      '  KEY = :Old_KEY')
     SQLRefresh.Strings = (
-      'SELECT DESCRIPTION, CODE FROM DANGEROUS_GOODS'
+      'SELECT IS_DEFAULT, DESCRIPTION, KEY FROM AUX_DANGEROUS_GOODS'
       'WHERE'
-      '  CODE = :CODE')
+      '  KEY = :KEY')
     SQLLock.Strings = (
-      'SELECT NULL FROM DANGEROUS_GOODS'
+      'SELECT NULL FROM AUX_DANGEROUS_GOODS'
       'WHERE'
-      'CODE = :Old_CODE'
+      'KEY = :Old_KEY'
       'FOR UPDATE WITH LOCK')
     SQLRecCount.Strings = (
       'SELECT COUNT(*) FROM ('
-      'SELECT 1 AS C  FROM DANGEROUS_GOODS'
+      'SELECT 1 AS C  FROM AUX_DANGEROUS_GOODS'
       ''
       ') q')
     Connection = MainFormFRM.CabOutData
     UpdateTransaction = UsedForUpdateTrans
     SQL.Strings = (
-      'select * from dangerous_goods')
+      'select * from Aux_dangerous_goods')
     Active = True
     Left = 80
     Top = 25
+    object TableSQLKEY: TStringField
+      DisplayLabel = 'Code'
+      DisplayWidth = 10
+      FieldName = 'KEY'
+      Required = True
+      Size = 10
+    end
+    object TableSQLDESCRIPTION: TStringField
+      DisplayWidth = 30
+      FieldName = 'DESCRIPTION'
+      FixedChar = True
+      Size = 30
+    end
+    object TableSQLIS_DEFAULT: TStringField
+      DisplayLabel = 'Default'
+      DisplayWidth = 1
+      FieldName = 'IS_DEFAULT'
+      FixedChar = True
+      Size = 1
+    end
   end
   object TableSRC: TIBCDataSource
     DataSet = TableSQL

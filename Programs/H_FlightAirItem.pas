@@ -112,6 +112,9 @@ type
     CountrySQLNAME: TStringField;
     TableSQLCOUNTRY_OF_ORIGIN: TStringField;
     Label11: TLabel;
+    Label12: TLabel;
+    DangerousFLD: TwwDBComboBox;
+    TableSQLDANGEROUS_GOODS: TStringField;
     procedure BitBtn2Click(Sender: TObject);
     procedure TableSQLBeforeEdit(DataSet: TDataSet);
     procedure FormActivate(Sender: TObject);
@@ -234,6 +237,8 @@ ksOpenTables([GroupCertificateSQL,SelectCertSQL,CertItemSQL,CountrySQL]);
 ksfillComboF1(cn,ProcReqFLD,'aux_procedure_request','key','key','key',false,false);
 ksfillComboF1(cn,PreviousProcFLD,'aux_previous_procedure','key','key','key',false,false);
 ksfillComboF1(cn,KindOfPackFLD,'aux_previous_procedure','key','key','key',false,false);
+ksfillComboF1(cn,DangerousFLD,'AUX_DANGEROUS_GOODS','key','key','key',false,false);
+
 if IN_ACTION='INSERT' then begin
 //   ksOpenTables([TableSQL]);
    TableSQL.Close;

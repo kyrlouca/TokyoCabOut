@@ -53,7 +53,6 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
     Height = 43
     Align = alBottom
     TabOrder = 3
-    ExplicitTop = 487
     object RzPanel1: TRzPanel
       Left = 991
       Top = 1
@@ -298,7 +297,6 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
     Height = 506
     Align = alClient
     TabOrder = 2
-    ExplicitHeight = 395
     object RzPanel2: TRzPanel
       Left = 1
       Top = 1
@@ -307,7 +305,6 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
       Align = alLeft
       BorderOuter = fsNone
       TabOrder = 0
-      ExplicitHeight = 393
       object RzPanel3: TRzPanel
         Left = 0
         Top = 0
@@ -327,7 +324,6 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
       BorderOuter = fsNone
       TabOrder = 1
       VisualStyle = vsClassic
-      ExplicitHeight = 393
       object GroupBox1: TGroupBox
         Left = 14
         Top = 45
@@ -534,6 +530,21 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
           Font.Style = []
           ParentFont = False
         end
+        object Label12: TLabel
+          Left = 32
+          Top = 384
+          Width = 69
+          Height = 15
+          Caption = 'Dangerours '
+          Color = clBtnFace
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -12
+          Font.Name = 'arial'
+          Font.Style = []
+          ParentColor = False
+          ParentFont = False
+        end
         object FirstFLD: TwwDBEdit
           Left = 116
           Top = 50
@@ -637,7 +648,7 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
         end
         object PreviousProcFLD: TwwDBComboBox
           Left = 116
-          Top = 349
+          Top = 352
           Width = 82
           Height = 22
           ShowButton = True
@@ -721,6 +732,33 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
           AllowClearKey = False
           ShowMatchText = True
         end
+        object DangerousFLD: TwwDBComboBox
+          Left = 116
+          Top = 380
+          Width = 82
+          Height = 23
+          ShowButton = True
+          Style = csDropDownList
+          MapList = True
+          AllowClearKey = False
+          DataField = 'DANGEROUS_GOODS'
+          DataSource = TableSRC
+          DropDownCount = 8
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -12
+          Font.Name = 'Arial'
+          Font.Style = []
+          ItemHeight = 0
+          Items.Strings = (
+            'A'#9'A'
+            'C'#9'C')
+          ItemIndex = 3
+          ParentFont = False
+          Sorted = False
+          TabOrder = 13
+          UnboundDataType = wwDefault
+        end
       end
       object Panel6: TRzPanel
         Left = 0
@@ -733,7 +771,7 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
       end
       object GroupBox2: TGroupBox
         Left = 486
-        Top = 63
+        Top = 45
         Width = 364
         Height = 332
         Caption = 'Item Certificates'
@@ -872,7 +910,7 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
           end
         end
         object wwDBGrid1: TwwDBGrid
-          Left = 3
+          Left = 11
           Top = 72
           Width = 332
           Height = 156
@@ -971,13 +1009,14 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
         '  (SERIAL_NUMBER, SEQUENCE, WEIGHT, PIECES, DESCRIPTION, TARIFF_' +
         'CODE, AMOUNT, CURRENCY_RATE, CURRENCY, FK_FA_SERIAL, PROCEDURE_R' +
         'EQUESTED, PREVIOUS_PROCEDURE, KIND_OF_PACKAGES, NUMBER_OF_PACKAG' +
-        'ES, WEIGHT_NET, COUNTRY_OF_ORIGIN)'
+        'ES, WEIGHT_NET, COUNTRY_OF_ORIGIN, DANGEROUS_GOODS)'
       'VALUES'
       
         '  (:SERIAL_NUMBER, :SEQUENCE, :WEIGHT, :PIECES, :DESCRIPTION, :T' +
         'ARIFF_CODE, :AMOUNT, :CURRENCY_RATE, :CURRENCY, :FK_FA_SERIAL, :' +
         'PROCEDURE_REQUESTED, :PREVIOUS_PROCEDURE, :KIND_OF_PACKAGES, :NU' +
-        'MBER_OF_PACKAGES, :WEIGHT_NET, :COUNTRY_OF_ORIGIN)')
+        'MBER_OF_PACKAGES, :WEIGHT_NET, :COUNTRY_OF_ORIGIN, :DANGEROUS_GO' +
+        'ODS)')
     SQLDelete.Strings = (
       'DELETE FROM FLIGHT_AIRWAYBILL_ITEM'
       'WHERE'
@@ -993,7 +1032,8 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
         'URE_REQUESTED = :PROCEDURE_REQUESTED, PREVIOUS_PROCEDURE = :PREV' +
         'IOUS_PROCEDURE, KIND_OF_PACKAGES = :KIND_OF_PACKAGES, NUMBER_OF_' +
         'PACKAGES = :NUMBER_OF_PACKAGES, WEIGHT_NET = :WEIGHT_NET, COUNTR' +
-        'Y_OF_ORIGIN = :COUNTRY_OF_ORIGIN'
+        'Y_OF_ORIGIN = :COUNTRY_OF_ORIGIN, DANGEROUS_GOODS = :DANGEROUS_G' +
+        'OODS'
       'WHERE'
       '  SERIAL_NUMBER = :Old_SERIAL_NUMBER')
     SQLRefresh.Strings = (
@@ -1001,8 +1041,8 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
         'SELECT SERIAL_NUMBER, SEQUENCE, WEIGHT, PIECES, DESCRIPTION, TAR' +
         'IFF_CODE, AMOUNT, CURRENCY_RATE, CURRENCY, FK_FA_SERIAL, PROCEDU' +
         'RE_REQUESTED, PREVIOUS_PROCEDURE, KIND_OF_PACKAGES, NUMBER_OF_PA' +
-        'CKAGES, WEIGHT_NET, COUNTRY_OF_ORIGIN FROM FLIGHT_AIRWAYBILL_ITE' +
-        'M'
+        'CKAGES, WEIGHT_NET, COUNTRY_OF_ORIGIN, DANGEROUS_GOODS FROM FLIG' +
+        'HT_AIRWAYBILL_ITEM'
       'WHERE'
       '  SERIAL_NUMBER = :SERIAL_NUMBER')
     SQLLock.Strings = (
@@ -1090,6 +1130,10 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
       FieldName = 'COUNTRY_OF_ORIGIN'
       FixedChar = True
       Size = 2
+    end
+    object TableSQLDANGEROUS_GOODS: TStringField
+      FieldName = 'DANGEROUS_GOODS'
+      Size = 10
     end
   end
   object GroupCertificateSQL: TIBCQuery

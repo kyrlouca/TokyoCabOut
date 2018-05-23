@@ -13,7 +13,6 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
   Position = poDesktopCenter
   OnActivate = FormActivate
   OnClose = FormClose
-  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   object Panel1: TPanel
@@ -129,7 +128,6 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
     Height = 715
     Align = alClient
     TabOrder = 2
-    ExplicitTop = 54
     object GroupBox1: TGroupBox
       Left = 10
       Top = 13
@@ -687,7 +685,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
       Font.Color = clWindowText
       Font.Height = -15
       Font.Name = 'Arial'
-      Font.Style = [fsBold]
+      Font.Style = []
       ParentFont = False
       TabOrder = 1
       object Label10: TLabel
@@ -1101,7 +1099,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
       Font.Color = clWindowText
       Font.Height = -15
       Font.Name = 'Arial'
-      Font.Style = [fsBold]
+      Font.Style = []
       ParentFont = False
       TabOrder = 2
       object Label15: TLabel
@@ -1540,6 +1538,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
           Spacing = 4
           Transparent = False
           Caption = 'wwDBNavigator1Insert'
+          Enabled = False
           DisabledTextColors.ShadeColor = clGray
           DisabledTextColors.HighlightColor = clBtnHighlight
           OnClick = wwDBNavigator1InsertClick
@@ -1608,6 +1607,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
           Spacing = 4
           Transparent = False
           Caption = 'wwDBNavigator1Refresh'
+          Enabled = False
           DisabledTextColors.ShadeColor = clGray
           DisabledTextColors.HighlightColor = clBtnHighlight
           Index = 6
@@ -1636,8 +1636,8 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
       end
     end
     object GroupBox5: TGroupBox
-      Left = 1172
-      Top = 39
+      Left = 1140
+      Top = 25
       Width = 189
       Height = 78
       Caption = 'Flight Countries'
@@ -1849,6 +1849,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
       Font.Style = [fsBold]
       ParentFont = False
       TabOrder = 5
+      Visible = False
       object ParamGroupFLD: TwwDBLookupCombo
         Left = 13
         Top = 20
@@ -2780,7 +2781,6 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
     MasterFields = 'SERIAL_NUMBER'
     DetailFields = 'FK_FA_SERIAL'
     MasterSource = FlightAirwaybillCDS
-    Active = True
     Left = 400
     Top = 721
     ParamData = <

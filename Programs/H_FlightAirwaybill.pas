@@ -271,8 +271,6 @@ type
     procedure ParamGroupFLDCloseUp(Sender: TObject; LookupTable,
       FillTable: TDataSet; modified: Boolean);
     procedure wwButton1Click(Sender: TObject);
-    
-    procedure FormCreate(Sender: TObject);
     procedure SelectCertFLDCloseUp(Sender: TwwDBComboBox; Select: Boolean);
     procedure Select2CloseUp(Sender: TObject; LookupTable, FillTable: TDataSet;
       modified: Boolean);
@@ -471,6 +469,7 @@ Var
         I:Integer;
 
 Begin
+  cn:= MainFormFRM.CabOutData;
 
 ksfillComboF1(cn,DeclarationFLD,'AUX_DECLARATION_TYPE','KEY','KEY','KEY',false,false);
 ksfillComboF1(cn,TypeOfDeclarationFLD, 'AUX_TYPE_OF_DECLARATION','KEY','KEY','KEY',false,false);
@@ -507,11 +506,6 @@ if FlightAirwaybillSQL.State in [dsEdit,dsInsert] then begin
         self.CancelBTN.click;
 end;
 
-end;
-
-procedure TH_FlightairwaybillFRM.FormCreate(Sender: TObject);
-begin
-  cn:= MainFormFRM.CabOutData;
 end;
 
 procedure TH_FlightairwaybillFRM.BitBtn2Click(Sender: TObject);

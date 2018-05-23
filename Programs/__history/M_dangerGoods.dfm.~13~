@@ -43,7 +43,7 @@ object M_DangerGoodsFRM: TM_DangerGoodsFRM
     Width = 740
     Height = 65
     Align = alTop
-    Caption = 'Danger Goods'
+    Caption = 'Dangerous Goods'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBlue
     Font.Height = -33
@@ -138,7 +138,7 @@ object M_DangerGoodsFRM: TM_DangerGoodsFRM
       Left = 24
       Top = 55
       Width = 369
-      Height = 177
+      Height = 106
       Caption = 'Details'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -163,11 +163,11 @@ object M_DangerGoodsFRM: TM_DangerGoodsFRM
         ParentFont = False
       end
       object Label4: TLabel
-        Left = 16
+        Left = 11
         Top = 60
         Width = 65
         Height = 16
-        Caption = 'Destination'
+        Caption = 'Description'
         Color = clBtnFace
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -178,12 +178,13 @@ object M_DangerGoodsFRM: TM_DangerGoodsFRM
         ParentFont = False
       end
       object NameFLD: TwwDBEdit
-        Left = 88
+        Left = 82
         Top = 26
         Width = 121
         Height = 24
+        CharCase = ecUpperCase
         Color = clWhite
-        DataField = 'CODE'
+        DataField = 'KEY'
         DataSource = TableSRC
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -197,7 +198,7 @@ object M_DangerGoodsFRM: TM_DangerGoodsFRM
         WordWrap = False
       end
       object wwDBEdit1: TwwDBEdit
-        Left = 87
+        Left = 82
         Top = 56
         Width = 250
         Height = 24
@@ -218,13 +219,12 @@ object M_DangerGoodsFRM: TM_DangerGoodsFRM
     end
     object wwDBGrid1: TwwDBGrid
       Left = 24
-      Top = 256
+      Top = 176
       Width = 449
       Height = 225
       Selected.Strings = (
-        'SERIAL_NUMBER'#9'6'#9'S/N'
-        'FLIGHT_NAME'#9'32'#9'Flight Name'
-        'DESTINATION_COUNTRY_CODE'#9'10'#9'Destination ')
+        'CODE'#9'10'#9'CODE'
+        'DESCRIPTION'#9'30'#9'DESCRIPTION')
       IniAttributes.Delimiter = ';;'
       IniAttributes.UnicodeIniFile = False
       TitleColor = clBtnFace
@@ -412,31 +412,27 @@ object M_DangerGoodsFRM: TM_DangerGoodsFRM
     GeneratorMode = gmInsert
     SQLInsert.Strings = (
       'INSERT INTO DANGEROUS_GOODS'
-      '  (CODE, DESCRIPTION)'
+      '  (DESCRIPTION, CODE)'
       'VALUES'
-      '  (:CODE, :DESCRIPTION)')
+      '  (:DESCRIPTION, :CODE)')
     SQLDelete.Strings = (
-      'DELETE FROM FLIGHT_TABLE'
+      'DELETE FROM DANGEROUS_GOODS'
       'WHERE'
-      '  SERIAL_NUMBER = :Old_SERIAL_NUMBER')
+      '  CODE = :Old_CODE')
     SQLUpdate.Strings = (
-      'UPDATE FLIGHT_TABLE'
+      'UPDATE DANGEROUS_GOODS'
       'SET'
-      
-        '  SERIAL_NUMBER = :SERIAL_NUMBER, FLIGHT_NAME = :FLIGHT_NAME, DE' +
-        'STINATION_COUNTRY_CODE = :DESTINATION_COUNTRY_CODE'
+      '  DESCRIPTION = :DESCRIPTION, CODE = :CODE'
       'WHERE'
-      '  SERIAL_NUMBER = :Old_SERIAL_NUMBER')
+      '  CODE = :Old_CODE')
     SQLRefresh.Strings = (
-      
-        'SELECT SERIAL_NUMBER, FLIGHT_NAME, DESTINATION_COUNTRY_CODE FROM' +
-        ' FLIGHT_TABLE'
+      'SELECT DESCRIPTION, CODE FROM DANGEROUS_GOODS'
       'WHERE'
-      '  SERIAL_NUMBER = :SERIAL_NUMBER')
+      '  CODE = :CODE')
     SQLLock.Strings = (
-      'SELECT NULL FROM FLIGHT_TABLE'
+      'SELECT NULL FROM DANGEROUS_GOODS'
       'WHERE'
-      'SERIAL_NUMBER = :Old_SERIAL_NUMBER'
+      'CODE = :Old_CODE'
       'FOR UPDATE WITH LOCK')
     SQLRecCount.Strings = (
       'SELECT COUNT(*) FROM ('
@@ -446,10 +442,28 @@ object M_DangerGoodsFRM: TM_DangerGoodsFRM
     Connection = MainFormFRM.CabOutData
     UpdateTransaction = UsedForUpdateTrans
     SQL.Strings = (
-      'select * from dangerous_goods')
+      'select * from Aux_dangerous_goods')
     Active = True
     Left = 80
     Top = 25
+    object TableSQLIS_DEFAULT: TStringField
+      FieldName = 'IS_DEFAULT'
+      Visible = False
+      FixedChar = True
+      Size = 1
+    end
+    object TableSQLDESCRIPTION: TStringField
+      DisplayWidth = 30
+      FieldName = 'DESCRIPTION'
+      FixedChar = True
+      Size = 30
+    end
+    object TableSQLKEY: TStringField
+      FieldName = 'KEY'
+      Required = True
+      Visible = False
+      Size = 10
+    end
   end
   object TableSRC: TIBCDataSource
     DataSet = TableSQL
@@ -459,15 +473,14 @@ object M_DangerGoodsFRM: TM_DangerGoodsFRM
   object UsedForUpdateTrans: TIBCTransaction
     DefaultConnection = MainFormFRM.CabOutData
     DefaultCloseAction = taCommit
-    Left = 216
-    Top = 33
+    Left = 232
+    Top = 57
   end
   object CountrySQL: TIBCQuery
     Connection = MainFormFRM.CabOutData
     SQL.Strings = (
       'select * from country')
     ReadOnly = True
-    Active = True
     Left = 720
     Top = 225
     object CountrySQLCODE_2: TStringField
@@ -484,5 +497,12 @@ object M_DangerGoodsFRM: TM_DangerGoodsFRM
       FixedChar = True
       Size = 60
     end
+  end
+  object readTrans: TIBCTransaction
+    DefaultConnection = MainFormFRM.CabOutData
+    DefaultCloseAction = taCommit
+    IsolationLevel = iblReadOnlyReadCommitted
+    Left = 456
+    Top = 137
   end
 end
