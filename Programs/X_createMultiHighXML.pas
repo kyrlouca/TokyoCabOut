@@ -11,6 +11,7 @@
 //** CreateNodeAirwayBills --
 //** CreateNodeFlightCountries -- itinerary with countries on the Flight
 //** CreateNodeForItems ??
+//** Remember that MAX airwaybills = 89 and affects grouping!!
 //**
 //////////////////////
 
@@ -46,6 +47,9 @@ type
     function GetTableDefaultValue( Const TableName:String):String;
     Function TestOne(Const HawbSerial:Integer):String;
 
+    function CheckSameSender( Const FlightSerial, AirSerial :Integer):Boolean;
+    function CheckSameConsignee( Const FlightSerial, AirSerial :Integer):Boolean;
+
     Function  AddNodeAtr(FatherNode:IXMLNode;NodeName:String; NodeText:String):IXMLNode;overload;
     Function  AddNodeAtr(FatherNode:IXMLNode;NodeName:String; AttributeName:String;AttributeText:String):IXMLNode; overload;
     Function  AddAtrribute(HeaderNode:IXMLNode; AttributeName:String;AttributeText:String):IXMLNode;
@@ -63,7 +67,7 @@ type
   public
     { Public declarations }
     IN_FlightSerial:Integer;
-    SameSender:boolean;
+
     SameIncoterm:boolean;
     procedure CreateOneAirwabillXML(Const SerialNumber:Integer);
 
@@ -360,8 +364,8 @@ begin
      //***Header***************************************
      createNodeHeader(FlightOutSerial,AirSerial,FDoc,FatherNode,Criteria);
      //*************************************************
-     //Consignor
-     if (SameSender OR true) then begin
+     //Exporter/Consignor
+     if CheckSameSender(FlightOutSerial,AirSerial) then begin
        x2node:=CreateXMLNodeNew(FDoc,FatherNode,'Msg515Exporter','',ntElement);
        //error
         TBLCreateXMLNode(FDoc,x2node,'TraderName','',FirstAirQr,'SENDER_NAME',ntText);
@@ -375,6 +379,21 @@ begin
        TblCreateXMLNode(FDoc,x2node,'TIN','',FirstAirQr,'SENDER_VAT',ntText);
      end;
 
+     //*************************************************
+     //Consignee
+     if CheckSameConsignee(FlightOutSerial,AirSerial) then begin
+       x2node:=CreateXMLNodeNew(FDoc,FatherNode,'Msg515Consignee','',ntElement);
+       //error
+        TBLCreateXMLNode(FDoc,x2node,'TraderName','',FirstAirQr,'CONSIGNEE_NAME',ntText);
+       dString:=Trim(FirstAirQr.fieldbyName('CONSIGNEE_ADDRESS_1').AsString)+','+Trim(FirstAirQr.fieldbyName('CONSIGNEE_ADDRESS_2').AsString)+','+Trim(FirstAirQr.fieldbyName('CONSIGNEE_ADDRESS_3').AsString);
+       dString:=Copy(dString,1,34);
+       CreateXMLNodeNew(FDoc,x2node,'StreetAndNumber',dString,ntText);
+       TblCreateXMLNode(FDoc,x2node,'PostalCode','',FirstAirQr,'CONSIGNEE_POST_CODE',ntText);
+       TblCreateXMLNode(FDoc,x2node,'City','',FirstAirQr,'CONSIGNEE_CITY',ntText);
+       TblCreateXMLNode(FDoc,x2node,'CountryCode','',FirstAirQr,'CONSIGNEE_COUNTRY_CODE',ntText);
+       CreateXMLNodeNew(FDoc,x2node,'NADLNG','EN',ntText);
+       TblCreateXMLNode(FDoc,x2node,'TIN','',FirstAirQr,'CONSIGNEE_VAT',ntText);
+     end;
 
      x2Node:=CreateXMLNodeNew(FDoc,FatherNode,'Msg515ExportCustomsOffice','',ntElement);
      CreateXMLNodeNew(FDoc,x2Node,'ReferenceNumber','CY000440',ntElement);
@@ -409,23 +428,6 @@ begin
      end;
 
 
-{*
-    Consignor
-       x2node:=CreateXMLNodeNew(FDoc,FatherNode,'Msg515DeclarantTrader','',ntElement);
-       TBLCreateXMLNode(FDoc,x2node,'TraderName','',DeclarantQr,'SENDER_NAME',ntText);
-       dString:=Trim(DeclarantQr.fieldbyName('SENDER_ADDRESS_1').AsString)+','+Trim(DeclarantQr.fieldbyName('SENDER_ADDRESS_2').AsString)+','+Trim(DeclarantQr.fieldbyName('SENDER_ADDRESS_3').AsString);
-       dString:=Copy(dString,1,34);
-       CreateXMLNodeNew(FDoc,x2node,'StreetAndNumber',dString,ntText);
-       TblCreateXMLNode(FDoc,x2node,'PostalCode','',DeclarantQr,'SENDER_POST_CODE',ntText);
-       TblCreateXMLNode(FDoc,x2node,'City','',DeclarantQr,'SENDER_CITY',ntText);
-       TblCreateXMLNode(FDoc,x2node,'CountryCode','',DeclarantQr,'SENDER_COUNTRY_CODE',ntText);
-       CreateXMLNodeNew(FDoc,x2node,'NADLNG','EN',ntText);
-       TblCreateXMLNode(FDoc,x2node,'TIN','',DeclarantQr,'SENDER_VAT',ntText);
-}
-
-     //**** Consignee
-     if (SameSender OR true) then begin
-     end;
 
       if (SameIncoterm OR true) then begin
         x2node:=CreateXMLNodeNew(FDoc,FatherNode,'Msg515TermsDelivery','',ntElement);
@@ -448,6 +450,8 @@ begin
     end;
 
 end;
+
+
 
 
 
@@ -618,6 +622,8 @@ var
    DefaultKindOfPackages:String;
    TempInt:Integer;
    Counter:integer;
+   SameSender:Boolean;
+   SameConsignee:Boolean;
 begin
 
   Counter:=0;
@@ -656,8 +662,10 @@ begin
         qrItem.AddWhere(' (fa.is_included_xml = ''N''  or fa.is_included_xml is null)');
       end;
 
-      Clipboard.AsText:=qrItem.FinalSQL;
+//      Clipboard.AsText:=qrItem.FinalSQL;
 
+        sameSender:=CheckSameSender(FLightSerial,AirSerial);
+        SameConsignee:=CheckSameConsignee(FLightSerial,AirSerial);
 
       qrItem.Open;
 
@@ -700,7 +708,7 @@ begin
 
        TblCreateXMLNode(FDoc,HeaderNode,'StatisticalValueCurrency','',qrItem,'CURRENCY',ntText);
        TblCreateXMLNode(FDoc,HeaderNode,'StatisticalValueAmount','',qrItem,'AMOUNT',ntText);
-       TblCreateXMLNode(FDoc,HeaderNode,'CountryOfOrigin','',qrAir,'SENDER_CITY',ntText);
+       TblCreateXMLNode(FDoc,HeaderNode,'CountryOfOrigin','',qrAir,'COUNTRY_OF_ORIGIN',ntText);
        TblCreateXMLNode(FDoc,HeaderNode,'SupplementaryUnits','',qrItem,'PIECES',ntText);
 
 
@@ -751,6 +759,7 @@ begin
        end;
 
        //Consignee
+       if (not SameConsignee) then begin
        x2node:=CreateXMLNodeNew(FDoc,HeaderNode,'Msg515ConsigneeTrader','',ntElement);
        TblCreateXMLNode(FDoc,x2node,'TraderName','',qrAir,'CONSIGNEE_NAME',ntText);
        dString:=Trim(qrAir.fieldbyName('CONSIGNEE_ADDRESS_1').AsString)+','+Trim(qrAir.fieldbyName('CONSIGNEE_ADDRESS_2').AsString)+','+Trim(qrAir.fieldbyName('CONSIGNEE_ADDRESS_3').AsString);
@@ -760,6 +769,7 @@ begin
        TblCreateXMLNode(FDoc,x2node,'City','',qrAir,'CONSIGNEE_CITY',ntText);
        TblCreateXMLNode(FDoc,x2node,'CountryCode','',qrAir,'CONSIGNEE_COUNTRY_cODE',ntText);
        CreateXMLNodeNew(FDoc,x2node,'NADLNG','EN',ntText);
+       end;
 
 //////////packages
        x2Node:=CreateXMLNodeNew(FDoc,HeaderNode,'Msg515Packages','',ntElement);
@@ -870,6 +880,96 @@ begin
      if DefaultVal='' then
       DefaultVal :='ENTER DEFAULT VALUE IN TABLE';
      result:=DefaultVal;
+  finally
+    qr.Free;
+  end;
+
+end;
+
+
+
+function TX_CreateMultiHighXmlFRM.CheckSameSender( Const FlightSerial, AirSerial :Integer):Boolean;
+var
+  qr:TksQuery;
+  DefaultVal:String;
+  str1,str2,str3:string;
+begin
+
+  str1:=
+' select count(*), sender_vat from'
+  +'  ('
+  +'   select first 89 fa.sender_vat from flight_airwaybill fa'
+  +'   where fk_flight_out_serial= :flightSerial and'
+  +'    (fa.is_included_xml = ''N''  or fa.is_included_xml is null)'
+  +'   order by fa.hawb_id'
+  +'   )group by sender_vat';
+
+  str2:=
+  ' select count(*), sender_vat from'
+  +'  ('
+  +'   select first 89 fa.sender_vat from flight_airwaybill fa'
+  +'   where fk_flight_out_serial= :flightSerial and'
+  +'    fa.serial_number= :airSerial'
+  +'   order by fa.hawb_id'
+  +'   )group by sender_vat';
+
+  if AirSerial=0 then begin
+    str3:=str1
+  end else begin
+    str3:=str2;
+  end;
+
+  qr:=TksQuery.Create(cn, str3);
+  try
+      if AirSerial>0 then
+        qr.ParamByName('AirSerial').Value := AirSerial;
+      qr.Open;
+      result:= qr.RecordCount =1 ;
+  finally
+    qr.Free;
+  end;
+
+end;
+
+
+
+function TX_CreateMultiHighXmlFRM.CheckSameConsignee( Const FlightSerial, AirSerial :Integer):Boolean;
+var
+  qr:TksQuery;
+  DefaultVal:String;
+  str1,str2,str3:string;
+begin
+
+  str1:=
+' select count(*), consignee_vat from'
+  +'  ('
+  +'   select first 89 fa.consignee_vat from flight_airwaybill fa'
+  +'   where fk_flight_out_serial= :flightSerial and'
+  +'    (fa.is_included_xml = ''N''  or fa.is_included_xml is null)'
+  +'   order by fa.hawb_id'
+  +'   )group by consignee_vat';
+
+  str2:=
+  ' select count(*), consignee_vat from'
+  +'  ('
+  +'   select first 89 fa.consignee_vat from flight_airwaybill fa'
+  +'   where fk_flight_out_serial= :flightSerial and'
+  +'    fa.serial_number= :airSerial'
+  +'   order by fa.hawb_id'
+  +'   )group by consignee_vat';
+
+  if AirSerial=0 then begin
+    str3:=str1
+  end else begin
+    str3:=str2;
+  end;
+
+  qr:=TksQuery.Create(cn, str3);
+  try
+      if AirSerial>0 then
+        qr.ParamByName('AirSerial').Value := AirSerial;
+      qr.Open;
+      result:= qr.RecordCount =1 ;
   finally
     qr.Free;
   end;

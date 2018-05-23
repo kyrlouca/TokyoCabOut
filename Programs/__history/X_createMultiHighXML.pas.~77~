@@ -22,7 +22,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Xml.xmldom, Xml.XMLIntf,
   Xml.adomxmldom, Xml.XMLDoc, vcl.wwbutton, Xml.Win.msxmldom, Data.DB, MemDS,
-  DBAccess, IBC, RzLabel;
+  DBAccess, IBC, RzLabel,clipbrd;
 
 type
   TCriteriaParams= record
@@ -234,7 +234,7 @@ begin
   +'    flight_airwaybill fa join'
   +'    flight_airwaybill_item it on fa.serial_number=it.fk_fa_serial'
   +'   where fa.fk_flight_out_serial= :flightSerial'
-  +'  group by     fa.declaration_type, fa.type_of_declaration, fa.specific_circumstance';
+  +'  group by     fa.declaration_type, fa.type_of_declaration, fa.specific_circumstance, fa.incoterms';
   GroupQr:=TksQuery.Create(cn,val);
 
   try
@@ -251,7 +251,6 @@ begin
       Criteria.TypeOfDeclaration:= GroupQr.FieldByName('Type_of_Declaration').AsString;
       Criteria.Circumstance:= GroupQr.FieldByName('specific_circumstance').AsString;
       Criteria.Incoterms:= GroupQr.FieldByName('Incoterms').AsString;
-//      ShowMessage(TypeDeclaration +' '+DeclarationType +' '+Circumstance);
 
       FDoc:=XMLDocNew;
       FDoc.active:=false;
@@ -291,7 +290,9 @@ end;
 function TX_CreateMultiHighXmlFRM.CreateNodeOuter( Const FlightOutSerial:Integer; AirSerial:integer; const Fdoc: IXMLDocument;FatherNode:IXMLNode;Criteria:TCriteriaParams):Integer;
 var
   Flightqr,FirstAirQr:TksQuery;
+  DeclarantQr:TksQuery;
   HeaderNode,x1Node, x2Node:IXMLNode;
+
   val:String;
   addr:string;
   DString:String;
@@ -388,17 +389,42 @@ begin
      CreateNodeFlightCountries(FlightOutSerial,Fdoc,FatherNode);
 
      //**** Declerant Trader
-     if (SameSender OR true) then begin
+     DeclarantQr:=TksQuery.Create(cn,'select first 1 * from customer cu where cu.is_dhl = ''Y'' ');
+     try
+       DeclarantQr.Open;
        x2node:=CreateXMLNodeNew(FDoc,FatherNode,'Msg515DeclarantTrader','',ntElement);
-       TBLCreateXMLNode(FDoc,x2node,'TraderName','',FirstAirQr,'SENDER_NAME',ntText);
-       dString:=Trim(FirstAirQr.fieldbyName('SENDER_ADDRESS_1').AsString)+','+Trim(FirstAirQr.fieldbyName('SENDER_ADDRESS_2').AsString)+','+Trim(FirstAirQr.fieldbyName('SENDER_ADDRESS_3').AsString);
+       TBLCreateXMLNode(FDoc,x2node,'TraderName','',DeclarantQr,'NAME',ntText);
+       dString:=Trim(DeclarantQr.fieldbyName('ADDRESS1').AsString)+','+Trim(DeclarantQr.fieldbyName('ADDRESS2').AsString)+','+Trim(DeclarantQr.fieldbyName('ADDRESS3').AsString);
        dString:=Copy(dString,1,34);
        CreateXMLNodeNew(FDoc,x2node,'StreetAndNumber',dString,ntText);
-       TblCreateXMLNode(FDoc,x2node,'PostalCode','',FirstAirQr,'SENDER_POST_CODE',ntText);
-       TblCreateXMLNode(FDoc,x2node,'City','',FirstAirQr,'SENDER_CITY',ntText);
-       TblCreateXMLNode(FDoc,x2node,'CountryCode','',FirstAirQr,'SENDER_COUNTRY_CODE',ntText);
+       TblCreateXMLNode(FDoc,x2node,'PostalCode','',DeclarantQr,'POST_CODE',ntText);
+       TblCreateXMLNode(FDoc,x2node,'City','',DeclarantQr,'ADDRESS_CITY',ntText);
+       TblCreateXMLNode(FDoc,x2node,'CountryCode','',DeclarantQr,'ADDRESS_COUNTRY_CODE',ntText);
        CreateXMLNodeNew(FDoc,x2node,'NADLNG','EN',ntText);
-       TblCreateXMLNode(FDoc,x2node,'TIN','',FirstAirQr,'SENDER_VAT',ntText);
+       TblCreateXMLNode(FDoc,x2node,'TIN','',DeclarantQr,'VAT_ID',ntText);
+
+     finally
+       DeclarantQr.Free;
+
+     end;
+
+
+{*
+    Consignor
+       x2node:=CreateXMLNodeNew(FDoc,FatherNode,'Msg515DeclarantTrader','',ntElement);
+       TBLCreateXMLNode(FDoc,x2node,'TraderName','',DeclarantQr,'SENDER_NAME',ntText);
+       dString:=Trim(DeclarantQr.fieldbyName('SENDER_ADDRESS_1').AsString)+','+Trim(DeclarantQr.fieldbyName('SENDER_ADDRESS_2').AsString)+','+Trim(DeclarantQr.fieldbyName('SENDER_ADDRESS_3').AsString);
+       dString:=Copy(dString,1,34);
+       CreateXMLNodeNew(FDoc,x2node,'StreetAndNumber',dString,ntText);
+       TblCreateXMLNode(FDoc,x2node,'PostalCode','',DeclarantQr,'SENDER_POST_CODE',ntText);
+       TblCreateXMLNode(FDoc,x2node,'City','',DeclarantQr,'SENDER_CITY',ntText);
+       TblCreateXMLNode(FDoc,x2node,'CountryCode','',DeclarantQr,'SENDER_COUNTRY_CODE',ntText);
+       CreateXMLNodeNew(FDoc,x2node,'NADLNG','EN',ntText);
+       TblCreateXMLNode(FDoc,x2node,'TIN','',DeclarantQr,'SENDER_VAT',ntText);
+}
+
+     //**** Consignee
+     if (SameSender OR true) then begin
      end;
 
       if (SameIncoterm OR true) then begin
@@ -435,7 +461,7 @@ var
   MawbId:String;
   FlightName:string;
   DateDepart:Tdate;
-  CommonDeclarationType, CommonTypeOfDeclaration, CommonCirc:String, CommonIncoterm:String;
+  CommonDeclarationType, CommonTypeOfDeclaration, CommonCirc, CommonIncoterm:String;
 begin
 
   CommonDeclarationType := Criteria.DeclarationType;
@@ -449,6 +475,10 @@ begin
   CommonCirc:= Criteria.Circumstance;
   if CommonCirc='' then
     CommonCirc := GetTableDefaultValue('AUX_SPECIFIC_CIRCUMSTANCE');
+
+  CommonIncoterm:= Criteria.Circumstance;
+   if CommonCirc='' then
+    CommonCirc := 'XXX';
 
 
   val:=
@@ -604,7 +634,7 @@ begin
   +'    flight_airwaybill fa join'
   +'    flight_airwaybill_item it on fa.serial_number=it.fk_fa_serial'
   +'    where fa.fk_flight_out_serial= :flightSerial'
-  +'    and fa.declaration_type = :decType and fa.type_of_declaration = :typeDec and fa.specific_circumstance = :circ '
+  +'    and fa.declaration_type = :decType and fa.type_of_declaration = :typeDec and fa.specific_circumstance = :circ and fa.incoterms= :incoterms'
   +'    order by fa.hawb_id, sequence';
   qrItem:=TksQuery.Create(cn,Val);
 
@@ -618,6 +648,7 @@ begin
       qrItem.ParambyName('decType').Value:= Criteria.DeclarationType;
       qrItem.ParambyName('TypeDec').Value:= Criteria.TypeOfDeclaration;
       qrItem.ParambyName('Circ').Value:= Criteria.Circumstance;
+      qrItem.ParambyName('incoterms').Value:= Criteria.Incoterms;
       if airSerial>0 then begin
         qrItem.AddWhere('fa.serial_number = :AirSerial');
         qrItem.ParamByName('AirSerial').Value:=AirSerial;
@@ -625,10 +656,11 @@ begin
         qrItem.AddWhere(' (fa.is_included_xml = ''N''  or fa.is_included_xml is null)');
       end;
 
+      Clipboard.AsText:=qrItem.FinalSQL;
+
 
       qrItem.Open;
 
-//      name="Msg615ProducedDocumentsCertif"
       while (not qrItem.eof) do begin
        inc(Counter);
        CurrentAirSerial:=qrItem.FieldByName('AirSerial').AsInteger;
@@ -668,7 +700,7 @@ begin
 
        TblCreateXMLNode(FDoc,HeaderNode,'StatisticalValueCurrency','',qrItem,'CURRENCY',ntText);
        TblCreateXMLNode(FDoc,HeaderNode,'StatisticalValueAmount','',qrItem,'AMOUNT',ntText);
-       TblCreateXMLNode(FDoc,HeaderNode,'CountryOfOrigin','',qrAir,'SENDER_CITY',ntText);
+       TblCreateXMLNode(FDoc,HeaderNode,'CountryOfOrigin','',qrAir,'COUNTRY_OF_ORIGIN',ntText);
        TblCreateXMLNode(FDoc,HeaderNode,'SupplementaryUnits','',qrItem,'PIECES',ntText);
 
 
