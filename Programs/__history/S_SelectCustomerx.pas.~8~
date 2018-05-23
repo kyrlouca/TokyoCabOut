@@ -95,7 +95,6 @@ begin
   M_CustomerNewFRM.InAction:='INSERT';
   M_CustomerNewFRM.InCustomerCode:=CustomerSQL.FieldByName('Code').AsInteger;
   M_CustomerNewFRM.ShowModal;
-  CustomerSQL.Refresh;
 end;
 
 procedure TS_SelectCustomerXFRM.BitBtn1Click(Sender: TObject);
@@ -223,7 +222,6 @@ end;
 procedure TS_SelectCustomerXFRM.EditBTNClick(Sender: TObject);
 begin
   EditCustomer(CustomerSQL.fieldByName('Code').AsInteger);
-    CustomerSQL.Refresh;
 end;
 
 procedure TS_SelectCustomerXFRM.NameFLDKeyUp(Sender: TObject; var Key: Word;

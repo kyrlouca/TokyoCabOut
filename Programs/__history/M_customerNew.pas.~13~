@@ -6,7 +6,8 @@ uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   StdCtrls, Buttons, ExtCtrls, wwSpeedButton, wwDBNavigator, Db, Wwdatsrc,
    DBAccess, IBC, MemDS, IBCError, Grids, Wwdbigrd, Wwdbgrid, Wwkeycb, wwDialog, wwidlg,
-  Mask, wwdbedit, vcl.wwdblook, Vcl.DBCtrls, vcl.Wwdotdot, vcl.Wwdbcomb;
+  Mask, wwdbedit, vcl.wwdblook, Vcl.DBCtrls, vcl.Wwdotdot, vcl.Wwdbcomb,
+  vcl.wwcheckbox, RzButton;
 
 type
   TM_CustomerNewFRM = class(TForm)
@@ -101,10 +102,13 @@ type
     DBEdit1: TDBEdit;
     Label17: TLabel;
     DBEdit3: TDBEdit;
+    CustomerSQLADDRESS_CITY: TStringField;
+    CustomerSQLADDRESS_COUNTRY_CODE: TStringField;
+    DHLFld: TwwCheckBox;
+    BitBtn1: TRzBitBtn;
     procedure CloseBTNClick(Sender: TObject);
     procedure FormActivate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
-    procedure CustomerTBLBeforePost(DataSet: TDataSet);
     procedure StatusFLDCloseUp(Sender: TwwDBComboBox; Select: Boolean);
     procedure AcceptBTNClick(Sender: TObject);
     procedure CancelBTNClick(Sender: TObject);
@@ -113,12 +117,17 @@ type
     procedure DistrictDLGNotInList(Sender: TObject; LookupTable: TDataSet;
       NewValue: String; var Accept: Boolean);
   private
-    { Private declarations }
+      { Private declarations }
+      cn:TIBCConnection;
+  function AddCustomer(const AIrSerial:Integer):Integer;
+  procedure DisplayCustomer(Const CustomerSerial:Integer);
+
   public
     { Public declarations }
     InAction:string;
     InCustomerName:String;
     InCustomerCode:Integer;
+    InAirSerial: Integer;
 
 //    GOutCustomerRecord:TCustomerRecord;
     OutCustomerCode:Integer;
@@ -134,11 +143,79 @@ var
 
 implementation
 
-uses  MainForm;
+uses  MainForm, G_KyrSQL;
 
 
 
 {$R *.DFM}
+
+
+
+function TM_CustomerNewFRM.AddCustomer(const AIrSerial:Integer):Integer;
+Var
+   CustomerSerial:Integer;
+   cuQr,AirQr:TksQuery;
+   senderName:string;
+
+begin
+            result:=0;
+
+            cuqr:=TksQuery.Create(cn,'select * from customer cu where cu.code= :code');
+            airQr:=TksQuery.Create(cn,'select * from flight_airwaybill fa where fa.serial_number= :serial');
+            customerSerial:=ksGenerateSerial(cn,'CUSTOMER_GENERATOR');
+            try
+              cuQr.ParamByName('code').AsInteger := -1;
+              cuQr.Open;
+
+              Airqr.ParamByName('serial').AsInteger :=AirSerial;
+              Airqr.Open;
+              SenderName:=Trim(airqr.FieldByName('sender_name').AsString);
+
+              if (not airqr.IsEmpty AND not (SenderName ='') ) then begin
+                cuQr.Edit;
+
+                cuQr.FieldByName('CODE').Value:= CustomerSerial;
+
+                cuQr.FieldByName('ACCOUNT_NUMBER').Value:=
+                Airqr.FieldByName('SENDER_ACCOUNT_NUMBER').AsInteger;
+
+               cuqr.FieldByName('NAME').AsString:=
+                Airqr.FieldByName('sender_NAME').AsString;
+
+               cuqr.FieldByName('vat_id').AsString:=
+                Airqr.FieldByName('Sender_vat').AsString;
+
+                cuqr.FieldByName('ADDRESS1').AsString:=
+                Airqr.FieldByName('sender_ADDRESS_1').AsString;
+
+                cuqr.FieldByName('ADDRESS2').AsString :=
+                Airqr.FieldByName('sender_ADDRESS_2').AsString;
+
+                cuqr.FieldByName('ADDRESS3').AsString :=
+                Airqr.FieldByName('sender_ADDRESS_3').AsString;
+
+                cuqr.FieldByName('POST_CODE').AsString :=
+                Airqr.FieldByName('sender_POST_CODE').AsString;
+
+                cuqr.FieldByName('address_CITY').AsString :=
+                Airqr.FieldByName('SENDER_CITY').AsString;
+
+                cuqr.FieldByName('address_COUNTRY_CODE').AsString:=
+                Airqr.FieldByName('SENDER_COUNTRY_CODE').AsString;
+
+
+                cuQr.Post;
+                result:=cuQR.FieldByName('code').AsInteger;
+              end;
+            finally
+              cuqr.Free;
+              airQr.Free;
+            end;
+
+
+
+End;
+
 
 procedure TM_CustomerNewFRM.SetCustomerPanel(IsCompany :Boolean);
 begin
@@ -155,18 +232,12 @@ procedure TM_CustomerNewFRM.FormActivate(Sender: TObject);
 Var
 Dataset:TDataset;
 I:Integer;
+cust:integer;
 
 begin
 
-{
-for i := 0 to (Self as TForm).ComponentCount-1 do begin
-if (Self as TForm).Components[i] is TDataset then begin
-        Dataset:= TDataset(Tform(Self).Components[i]);
-        If not Dataset.Active then
-                Dataset.Open
-        end;
-end;
- }
+ cn:= MainFormFRM.CabOutData;
+
 
  DistrictSQL.Close;
  DistrictSQL.Open;
@@ -178,13 +249,12 @@ end;
         CustomerSQL.Insert;
         CustomerSQL.FieldByName('Name').value:= InCustomerName;
         NameFLd.SelStart := Length(NameFLD.Text);
+     end else If InAction='INSERT_CUSTOMER' then begin
+      cust:= AddCustomer(InAirSerial);
+      displayCustomer(cust);
 
      end else If InAction='DISPLAY' then begin
-        With CustomerSQL do begin
-                Close;
-                CustomerSQL.ParambyName('CustomerSErial').Value:= InCustomerCode;
-                Open;
-        end;
+      displayCustomer(InCustomerCode);
         //CustomerTBL.Locate('Code',InCustomerCode,[]);
      end;
 
@@ -205,32 +275,6 @@ begin
 
 end;
 
-procedure TM_CustomerNewFRM.CustomerTBLBeforePost(DataSet: TDataSet);
-begin
-end;
-{
-TheAccount:=Dataset.fieldbyName('account_number').AsInteger;
-TheCustomer:=Dataset.fieldbyName('code').AsInteger;
-If TheAccount > 0 then begin
-   with FindCustomerOtherAccountSQL do begin
-         close;
-         if not prepared then prepare;
-         paramByname('AccountCode').value :=TheAccount;
-         paramByname('CustomerCode').value :=TheCustomer;
-         Open;
-         OtherCustomerName:=FieldByName('Name').AsString;
-
-         If not isempty then begin
-                 MessageDlg('Account Number '+ IntToStr(OtherCustomerCode)+ ' already assigned for customer '+
-                 OtherCustomerName, mtError,   [mbOk], 0);
-                 abort;
-         end;
-         close;
-   end;
-end;
-}
-
-
 procedure TM_CustomerNewFRM.StatusFLDCloseUp(Sender: TwwDBComboBox;
   Select: Boolean);
 begin
@@ -249,13 +293,6 @@ begin
         CustomerSQL.Post;
      OutCustomerCode:=CustomerSQL.FieldByName('code').AsInteger;
      close;
-
-//        GOutCustomerRecord.Code:=CustomerSQL.fieldByName('Code').AsInteger;
-//        GOutCustomerRecord.CustomerAccount:=CustomerSQL.fieldByName('Account_Number').AsInteger;
-//        GOutCustomerRecord.Name:=CustomerSQL.fieldByName('Name').AsString;
-//        GOutCustomerRecord.District:=CustomerSQL.fieldByName('D_DISTRICT_CODE').AsString;
-//        GOutCustomerRecord.District_serial:=CustomerSQL.fieldByName('FK_DISTRICT').AsInteger;
-//        GOutCustomerRecord.DistrictName:=CustomerSQL.fieldByName('D_Desc').AsString;
 
 end;
 
@@ -281,6 +318,14 @@ If NameFLD.CanFocus then
    NameFLD.SetFocus;
 end;
 
+procedure TM_CustomerNewFRM.DisplayCustomer(Const CustomerSerial:Integer);
+begin
+        With CustomerSQL do begin
+                Close;
+                CustomerSQL.ParambyName('CustomerSErial').Value:= CustomerSerial;
+                Open;
+        end;
+end;
 
 
 procedure TM_CustomerNewFRM.DistrictDLGNotInList(Sender: TObject;
@@ -288,6 +333,7 @@ procedure TM_CustomerNewFRM.DistrictDLGNotInList(Sender: TObject;
 begin
 Accept:=false;
 end;
+
 
 
 

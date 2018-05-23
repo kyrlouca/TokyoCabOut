@@ -6,7 +6,8 @@ uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   StdCtrls, Buttons, ExtCtrls, wwSpeedButton, wwDBNavigator, Db, Wwdatsrc,
    DBAccess, IBC, MemDS, IBCError, Grids, Wwdbigrd, Wwdbgrid, Wwkeycb, wwDialog, wwidlg,
-  Mask, wwdbedit, vcl.wwdblook, Vcl.DBCtrls, vcl.Wwdotdot, vcl.Wwdbcomb;
+  Mask, wwdbedit, vcl.wwdblook, Vcl.DBCtrls, vcl.Wwdotdot, vcl.Wwdbcomb,
+  vcl.wwcheckbox, RzButton;
 
 type
   TM_CustomerNewFRM = class(TForm)
@@ -26,13 +27,6 @@ type
     AuthFLD: TDBEdit;
     Label6: TLabel;
     CommentsFLD: TDBEdit;
-    NotifyGRP: TGroupBox;
-    Label3: TLabel;
-    EmailLBL: TDBEdit;
-    SMSlbl: TDBEdit;
-    Label4: TLabel;
-    Label9: TLabel;
-    NotifyCustomerFLD: TDBCheckBox;
     DBEdit4: TDBEdit;
     Label14: TLabel;
     WriteTrans: TIBCTransaction;
@@ -103,6 +97,9 @@ type
     DBEdit3: TDBEdit;
     CustomerSQLADDRESS_CITY: TStringField;
     CustomerSQLADDRESS_COUNTRY_CODE: TStringField;
+    DHLFld: TwwCheckBox;
+    MakeDhlBTN: TRzBitBtn;
+    CustomerSQLIS_DHL: TStringField;
     procedure CloseBTNClick(Sender: TObject);
     procedure FormActivate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -113,6 +110,7 @@ type
     procedure wwDBNavigator1InsertClick(Sender: TObject);
     procedure DistrictDLGNotInList(Sender: TObject; LookupTable: TDataSet;
       NewValue: String; var Accept: Boolean);
+    procedure MakeDhlBTNClick(Sender: TObject);
   private
       { Private declarations }
       cn:TIBCConnection;
@@ -269,6 +267,20 @@ begin
 
         //  CustomerSQL.Post;
 //     ModalResult:= mrNone;
+
+end;
+
+
+
+procedure TM_CustomerNewFRM.MakeDhlBTNClick(Sender: TObject);
+Var
+  Serial:Integer;
+begin
+Serial:=CustomerSQL.FieldByName('code').AsInteger;
+ksExecSQLVar(cn,'update customer cu set  cu.is_dhl=''N'' ',[]);
+
+ksExecSQLVar(cn,'update customer cu set  cu.is_dhl= ''Y'' where cu.code= :Seial',[Serial] );
+CustomerSQL.Refresh;
 
 end;
 
