@@ -46,6 +46,8 @@ type
     cn:TIBCConnection;
     function GetTableDefaultValue( Const TableName:String):String;
     Function TestOne(Const HawbSerial:Integer):String;
+    function FindCertValue(Const CertSerial,ItemSerial:Integer):String;
+
 
     function CheckSameSender( Const FlightSerial, AirSerial :Integer):Boolean;
     function CheckSameConsignee( Const FlightSerial, AirSerial :Integer):Boolean;
@@ -738,7 +740,9 @@ begin
         while (not qrCert.Eof ) do begin
           x2Node:=CreateXMLNodeNew(FDoc,HeaderNode,'Msg515ProducedDocumentsCertif','',ntElement);
           TblCreateXMLNode(FDoc,x2Node,'DocumentType','',qrCert,'cert_code',ntText);
-          TblCreateXMLNode(FDoc,x2Node,'DocumentReference','',qrCert,'cert_value',ntText);
+//          TblCreateXMLNode(FDoc,x2Node,'DocumentReference','',qrCert,'cert_value',ntText);
+          temp:= FindCertValue( qrCert.FieldByName('serial_number').AsInteger,qrItem.FieldByName('serial_number').AsInteger);
+          CreateXMLNodeNew(FDoc,x2node,'DocumentReference',temp,ntText);
           CreateXMLNodeNew(FDoc,x2node,'DocumentReferenceLNG','EN',ntText);
           qrCert.Next;
         end;
@@ -1050,6 +1054,80 @@ begin
   finally
     qr.Free;
   end;
+
+end;
+
+function TX_CreateMultiHighXmlFRM.FindCertValue(Const CertSerial,ItemSerial:Integer):String;
+var
+  qr,tblQr:TksQuery;
+  temp:String;
+  tblName,tblField:String;
+  SqlStr:String;
+  AirSerial,FlightSerial,TableSerial:Integer;
+begin
+  qr:=TksQuery.Create(cn, 'select * from FLIGHT_AIRWAYBILL_ITEM_CERT where serial_number = :Serial');
+  try
+   qr.ParamByName('Serial').Value:=CertSerial;
+   qr.Open;
+   tblName:=qr.FieldByName('table_for_value').AsString;
+   tblField:=qr.FieldByName('field_for_value').AsString;
+   if qr.FieldByName('cert_type').Value <> 'T' then begin
+      result:= qr.FieldByName('cert_value').AsString;
+      ///  exit now
+      exit;
+   end;
+  finally
+    qr.Free;
+  end;
+
+  //find the serials of all related tables
+  temp:=
+          '      select'
+          +'        fa.serial_number as AirSerial, fo.serial_number as FLightSerial  from'
+          +'        flight_airwaybill_item fi join'
+          +'        flight_airwaybill fa on fi.fk_fa_serial= fa.serial_number join'
+          +'        flight_out fo on fo.serial_number=fa.fk_flight_out_serial'
+          +'        where'
+          +'            fi.serial_number = :itemSerial';
+
+     tblQr:=TksQuery.Create(cn,temp);
+      try
+        tblQr.ParamByName('itemSerial').Value:=ItemSerial;
+        tblQr.Open;
+        AirSerial:=tblQR.FieldByName('AirSerial').AsInteger;
+        FlightSerial:=tblQR.FieldByName('FlightSerial').AsInteger;
+     finally
+      tblQr.Free;
+     end;
+
+
+     if UpperCase(TblName)='FLIGHT_AIRWAYBILL_ITEM' then begin
+        TableSerial:=itemSerial;
+     end else if UpperCase(TblName)='FLIGHT_AIRWAYBILL' then begin
+        TableSerial:=AirSerial;
+     end else if UpperCase(TblName)='FLIGHT_OUT' then begin
+        TableSerial:=FlightSerial;
+     end else begin
+      TableSerial:=0;
+     end;
+
+  try
+
+    sqlStr:= 'Select ' + tblField + ' from '+tblName+' where serial_number= :serial';
+    tblQr:= TksQuery.Create(cn,sqlStr);
+    try
+     tblQr.ParamByName('serial').Value:=TableSerial;
+     tblQR.Open;
+     result:= tblQr.FieldByName(tblField).AsString;
+    except
+      result:='ERROR  Table:' + tblName + ' field:' + tblField;
+    end;
+
+  finally
+    qr.Free;
+    tblQR.free;
+  end;
+
 
 end;
 

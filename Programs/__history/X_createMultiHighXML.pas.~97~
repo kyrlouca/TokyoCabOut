@@ -46,9 +46,11 @@ type
     cn:TIBCConnection;
     function GetTableDefaultValue( Const TableName:String):String;
     Function TestOne(Const HawbSerial:Integer):String;
+    function FindCertValue(Const CertSerial,TableASerial:Integer):String;
 
     function CheckSameSender( Const FlightSerial, AirSerial :Integer):Boolean;
     function CheckSameConsignee( Const FlightSerial, AirSerial :Integer):Boolean;
+    function CheckSameDestination( Const FlightSerial, AirSerial :Integer):Boolean;
 
     Function  AddNodeAtr(FatherNode:IXMLNode;NodeName:String; NodeText:String):IXMLNode;overload;
     Function  AddNodeAtr(FatherNode:IXMLNode;NodeName:String; AttributeName:String;AttributeText:String):IXMLNode; overload;
@@ -568,7 +570,10 @@ begin
 
      CreateXMLNodeNew(FDoc,x1node,'TypeOfDeclaration',CommonDeclarationType,ntText);
 
-     CreateXMLNodeNew(FDoc,x1node,'CountryOfDestinationCode','TR',ntText); //here
+//     if CheckSameDestination(FlightOutSerial,AirSerial) then
+//         TblCreateXMLNode(FDoc,HeaderNode,'CountryOfDestinationCode',qrAir,'CONSIGNEE_COUNTRY_CODE',ntText);
+
+
      CreateXMLNodeNew(FDoc,x1node,'AgreedLocationOfGoodsCode','LCA',ntText); //here
      CreateXMLNodeNew(FDoc,x1node,'AgreedLocationOfGoods','ARADIPPOU',ntText); //here
      CreateXMLNodeNew(FDoc,x1node,'AgreedLocationOfGoodsLNG','EN',ntText); //here
@@ -625,6 +630,7 @@ var
    DefaultProcedureRequested:String;
    DefaultPreviousProcedure:String;
    DefaultKindOfPackages:String;
+   DefaultDangerous:String;
    TempInt:Integer;
    Counter:integer;
    SameSender:Boolean;
@@ -635,6 +641,7 @@ begin
   DefaultProcedureRequested:=GetTableDefaultValue('AUX_PROCEDURE_REQUEST');
   DefaultPreviousProcedure:=GetTableDefaultValue('AUX_PREVIOUS_PROCEDURE');
   DefaultKindOfPackages:=GetTableDefaultValue('AUX_KIND_OF_PACKAGES');
+  DefaultDangerous:=GetTableDefaultValue('AUX_DANGEROUS_GOODS');
 
   //89
 
@@ -692,7 +699,8 @@ begin
        TblCreateXMLNode(FDoc,HeaderNode,'GrossMass','',qrItem,'WEIGHT',ntText);
        TblCreateXMLNode(FDoc,HeaderNode,'NetMass','',qrItem,'WEIGHT',ntText);
 
-       TblCreateXMLNode(FDoc,HeaderNode,'CountryOfDestinationCode','',qrAir,'CONSIGNEE_COUNTRY_CODE',ntText);
+//      if CheckSameDestination(FlightSerial,AirSerial) then
+             TblCreateXMLNode(FDoc,HeaderNode,'CountryOfDestinationCode','',qrAir,'CONSIGNEE_COUNTRY_CODE',ntText);
 
        Temp:=qrAir.FieldByName('Payment_method').AsString;
         If temp='A'       then
@@ -716,6 +724,11 @@ begin
        TblCreateXMLNode(FDoc,HeaderNode,'CountryOfOrigin','',qrItem,'COUNTRY_OF_ORIGIN',ntText);
        TblCreateXMLNode(FDoc,HeaderNode,'SupplementaryUnits','',qrItem,'PIECES',ntText);
 
+       temp:=trim(qrItem.FieldByName('DANGEROUS_GOODS').AsString);
+       If temp='' then  temp:= DefaultDangerous;
+       CreateXMLNodeNew(FDoc,HeaderNode,'UNDangerousGoodsCode',Temp,ntText);
+
+
 
       ///***** Certificates
       val:='Select * from  FLIGHT_AIRWAYBILL_ITEM_CERT fc where fc.fk_flight_airwaybill_item= :ItemSerial';
@@ -726,7 +739,9 @@ begin
         while (not qrCert.Eof ) do begin
           x2Node:=CreateXMLNodeNew(FDoc,HeaderNode,'Msg515ProducedDocumentsCertif','',ntElement);
           TblCreateXMLNode(FDoc,x2Node,'DocumentType','',qrCert,'cert_code',ntText);
-          TblCreateXMLNode(FDoc,x2Node,'DocumentReference','',qrCert,'cert_value',ntText);
+//          TblCreateXMLNode(FDoc,x2Node,'DocumentReference','',qrCert,'cert_value',ntText);
+          temp:= FindCertValue( qrCert.FieldByName('serial_number').AsInteger,qrItem.FieldByName('serial_number').AsInteger);
+          CreateXMLNodeNew(FDoc,x2node,'DocumentReference',temp,ntText);
           CreateXMLNodeNew(FDoc,x2node,'DocumentReferenceLNG','EN',ntText);
           qrCert.Next;
         end;
@@ -955,22 +970,22 @@ var
 begin
 
   str1:=
-' select count(*), consignee_vat from'
+' select count(*), consignee_vat, consignee_name, consignee_address_1 from'
   +'  ('
-  +'   select first 89 fa.consignee_vat from flight_airwaybill fa'
+  +'   select first 89 fa.consignee_vat, fa.consignee_name, fa.consignee_address_1 from flight_airwaybill fa'
   +'   where fk_flight_out_serial= :flightSerial and'
   +'    (fa.is_included_xml = ''N''  or fa.is_included_xml is null)'
   +'   order by fa.hawb_id'
-  +'   )group by consignee_vat';
+  +'   )group by consignee_vat, consignee_name, consignee_address_1';
 
   str2:=
-  ' select count(*), consignee_vat from'
+  ' select count(*), consignee_vat,consignee_name, consignee_address_1 from'
   +'  ('
-  +'   select first 89 fa.consignee_vat from flight_airwaybill fa'
+  +'   select first 89 fa.consignee_vat,consignee_name,consignee_address_1 from flight_airwaybill fa'
   +'   where fk_flight_out_serial= :flightSerial and'
   +'    fa.serial_number= :airSerial'
   +'   order by fa.hawb_id'
-  +'   )group by consignee_vat';
+  +'   )group by consignee_vat, consignee_name, consignee_address_1';
 
   if AirSerial=0 then begin
     str3:=str1
@@ -989,6 +1004,126 @@ begin
   finally
     qr.Free;
   end;
+
+end;
+
+
+
+
+function TX_CreateMultiHighXmlFRM.CheckSameDestination( Const FlightSerial, AirSerial :Integer):Boolean;
+var
+  qr:TksQuery;
+  DefaultVal:String;
+  str1,str2,str3:string;
+begin
+
+  str1:=
+' select count(*), CONSIGNEE_COUNTRY_CODE from'
+  +'  ('
+  +'   select first 89 fa.CONSIGNEE_COUNTRY_CODE '
+  +'   where fk_flight_out_serial= :flightSerial and'
+  +'    (fa.is_included_xml = ''N''  or fa.is_included_xml is null)'
+  +'   order by fa.hawb_id'
+  +'   )group by sender_vat';
+
+  str2:=
+  ' select count(*), CONSIGNEE_COUNTRY_CODE from'
+  +'  ('
+  +'   select first 89 fa.CONSIGNEE_COUNTRY_CODE from flight_airwaybill fa'
+  +'   where fk_flight_out_serial= :flightSerial and'
+  +'    fa.serial_number= :airSerial'
+  +'   order by fa.hawb_id'
+  +'   )group by CONSIGNEE_COUNTRY_CODE';
+
+  if AirSerial=0 then begin
+    str3:=str1
+  end else begin
+    str3:=str2;
+  end;
+
+  qr:=TksQuery.Create(cn, str3);
+  try
+
+       qr.ParamByName('FLightSerial').Value:=FlightSerial;
+      if AirSerial>0 then
+        qr.ParamByName('AirSerial').Value := AirSerial;
+      qr.Open;
+      Clipboard.AsText:=qr.FinalSQL;
+      result:= qr.RecordCount =1 ;
+  finally
+    qr.Free;
+  end;
+
+end;
+
+function TX_CreateMultiHighXmlFRM.FindCertValue(Const CertSerial,ItemSerial:Integer):String;
+var
+  qr,tblQr:TksQuery;
+  temp:String;
+  tblName,tblField:String;
+  SqlStr:String;
+  AirSerial,FlightSerial,TableSerial:Integer;
+begin
+
+  qr:=TksQuery.Create(cn, 'select * from FLIGHT_AIRWAYBILL_ITEM_CERT where serial_number = :Serial');
+  try
+   qr.ParamByName('Serial').Value:=CertSerial;
+   qr.Open;
+   if qr.FieldByName('cert_type').Value <> 'T' then begin
+      result:= qr.FieldByName('cert_value').AsString;
+   end else begin
+
+
+     temp:=
+          '      select'
+          +'        fa.serial_number as AirSerial, fo.serial_number as FLightSerial  from'
+          +'        flight_airwaybill_item fi join'
+          +'        flight_airwaybill fa on fi.fk_fa_serial= fa.serial_number join'
+          +'        flight_out fo on fo.serial_number=fa.fk_flight_out_serial'
+          +'        where'
+          +'            fi.serial_number = :itemSerial';
+
+     tblQr:=TksQuery.Create(cn,temp);
+  +  try
+        tblQr.ParamByName('itemSerial').Value:=ItemSerial;
+        tblQr.Open;
+        sdfassd
+        AirSerial:=tblQR.FieldByName('AirSerial').AsInteger;
+        FlightSerial:=tblQR.FieldByName('FlightSerial').AsInteger;
+
+
+     finally
+      tblQr.Free;
+     end;
+
+     tblName:=qr.FieldByName('table_for_value').AsString;
+     tblField:=qr.FieldByName('field_for_value').AsString;
+     if UpperCase(TblName)='FLIGHT_AIRWAYBILL_ITEM' then begin
+
+     end else if UpperCase(TblName)='FLIGHT_AIRWAYBILL' then begin
+
+     end else if else if UpperCase(TblName)='FLIGHT_OUT' then begin
+
+     end else begin
+
+     end;
+
+     sqlStr:= 'Select ' + tblField + ' from '+tblName+' where serial_number= :serial';
+     tblQr:= TksQuery.Create(cn,sqlStr);
+    try
+     tblQr.ParamByName('serial').Value:=
+    except
+
+    end;
+
+
+   end;
+
+  finally
+    qr.Free;
+    tblQR.free;
+  end;
+
 
 end;
 
