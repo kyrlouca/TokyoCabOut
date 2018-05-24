@@ -351,12 +351,9 @@ object M_certificatesFRM: TM_certificatesFRM
           Top = 61
           Width = 439
           Height = 178
-          ControlType.Strings = (
-            'IS_DEFAULT;CheckBox;Y;N')
           Selected.Strings = (
             'CODE'#9'10'#9'CODE'
-            'DESCRIPTION'#9'41'#9'DESCRIPTION'
-            'IS_DEFAULT'#9'1'#9'Default')
+            'DESCRIPTION'#9'41'#9'DESCRIPTION')
           IniAttributes.Delimiter = ';;'
           IniAttributes.UnicodeIniFile = False
           TitleColor = clBtnFace
@@ -386,7 +383,7 @@ object M_certificatesFRM: TM_certificatesFRM
           TitleLines = 1
           TitleButtons = False
           OnDblClick = FlightOutGRDDblClick
-          ExplicitLeft = 0
+          ExplicitLeft = 3
           ExplicitTop = 67
         end
         object wwDBNavigator2: TwwDBNavigator
@@ -584,7 +581,6 @@ object M_certificatesFRM: TM_certificatesFRM
             Spacing = 4
             Transparent = False
             Caption = 'wwDBNavigator1Insert'
-            Enabled = False
             DisabledTextColors.ShadeColor = clGray
             DisabledTextColors.HighlightColor = clBtnHighlight
             Index = 2
@@ -652,7 +648,6 @@ object M_certificatesFRM: TM_certificatesFRM
             Spacing = 4
             Transparent = False
             Caption = 'wwDBNavigator1Refresh'
-            Enabled = False
             DisabledTextColors.ShadeColor = clGray
             DisabledTextColors.HighlightColor = clBtnHighlight
             Index = 6
@@ -707,6 +702,8 @@ object M_certificatesFRM: TM_certificatesFRM
           TitleLines = 1
           TitleButtons = False
           OnDblClick = FlightOutGRDDblClick
+          ExplicitLeft = 80
+          ExplicitTop = 86
         end
       end
     end
@@ -716,11 +713,11 @@ object M_certificatesFRM: TM_certificatesFRM
     DMLRefresh = True
     SQLInsert.Strings = (
       'INSERT INTO CERTIFICATE_GROUP'
-      '  (CODE, DESCRIPTION, IS_DEFAULT)'
+      '  (CODE, DESCRIPTION)'
       'VALUES'
-      '  (:CODE, :DESCRIPTION, :IS_DEFAULT)'
+      '  (:CODE, :DESCRIPTION)'
       'RETURNING '
-      '  CODE, DESCRIPTION, IS_DEFAULT')
+      '  CODE, DESCRIPTION')
     SQLDelete.Strings = (
       'DELETE FROM CERTIFICATE_GROUP'
       'WHERE'
@@ -728,13 +725,11 @@ object M_certificatesFRM: TM_certificatesFRM
     SQLUpdate.Strings = (
       'UPDATE CERTIFICATE_GROUP'
       'SET'
-      
-        '  CODE = :CODE, DESCRIPTION = :DESCRIPTION, IS_DEFAULT = :IS_DEF' +
-        'AULT'
+      '  CODE = :CODE, DESCRIPTION = :DESCRIPTION'
       'WHERE'
       '  CODE = :Old_CODE')
     SQLRefresh.Strings = (
-      'SELECT CODE, DESCRIPTION, IS_DEFAULT FROM CERTIFICATE_GROUP'
+      'SELECT CODE, DESCRIPTION FROM CERTIFICATE_GROUP'
       'WHERE'
       '  CODE = :CODE')
     SQLLock.Strings = (
@@ -766,13 +761,6 @@ object M_certificatesFRM: TM_certificatesFRM
       FieldName = 'DESCRIPTION'
       FixedChar = True
       Size = 60
-    end
-    object ItinerarySQLIS_DEFAULT: TStringField
-      DisplayLabel = 'Default'
-      DisplayWidth = 1
-      FieldName = 'IS_DEFAULT'
-      FixedChar = True
-      Size = 1
     end
   end
   object UsedForUpdateTrans: TIBCTransaction
@@ -837,6 +825,7 @@ object M_certificatesFRM: TM_certificatesFRM
     MasterFields = 'CODE'
     DetailFields = 'FK_CERTIFICATE_GROUP'
     MasterSource = ItinerarySRC
+    Active = True
     OnNewRecord = ItineraryCountrySQLNewRecord
     Left = 200
     Top = 417
@@ -845,7 +834,7 @@ object M_certificatesFRM: TM_certificatesFRM
         DataType = ftString
         Name = 'CODE'
         ParamType = ptInput
-        Value = 'Default'
+        Value = '3'
       end>
     object ItineraryCountrySQLSERIAL_NUMBER: TIntegerField
       DisplayLabel = 'S/N'

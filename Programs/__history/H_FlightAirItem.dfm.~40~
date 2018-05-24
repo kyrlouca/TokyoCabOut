@@ -326,7 +326,7 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
       VisualStyle = vsClassic
       object GroupBox1: TGroupBox
         Left = 6
-        Top = 37
+        Top = 29
         Width = 450
         Height = 418
         Caption = 'Details'
@@ -636,6 +636,7 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
           Sorted = False
           TabOrder = 9
           UnboundDataType = wwDefault
+          TwoColumnDisplay = True
         end
         object PreviousProcFLD: TwwDBComboBox
           Left = 116
@@ -655,6 +656,7 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
           Sorted = False
           TabOrder = 10
           UnboundDataType = wwDefault
+          TwoColumnDisplay = True
         end
         object wwDBEdit5: TwwDBEdit
           Left = 116
@@ -736,6 +738,7 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
           Sorted = False
           TabOrder = 11
           UnboundDataType = wwDefault
+          TwoColumnDisplay = True
         end
         object KindOfPackFLD: TwwDBComboBox
           Left = 234

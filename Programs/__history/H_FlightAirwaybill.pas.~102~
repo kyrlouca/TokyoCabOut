@@ -277,7 +277,6 @@ type
     procedure ItemsGRDDblClick(Sender: TObject);
     procedure SpeedButton4Click(Sender: TObject);
     procedure ItemsGRDTitleButtonClick(Sender: TObject; AFieldName: string);
-    procedure wwNavButton4Click(Sender: TObject);
   private
     { Private declarations }
        cn:TIBCConnection;
@@ -529,26 +528,11 @@ begin
 end;
 
 procedure TH_FlightairwaybillFRM.ItemsGRDDblClick(Sender: TObject);
-var
-  Serial:Integer;
 begin
-  Serial:=FA_ItemSQL.FieldByName('Serial_number').AsInteger;
-  if Serial=0 then begin
-    H_flightAirItemFRM.IN_ACTION:='INSERT';
-    H_flightAirItemFRM.in_SERIAL:=FlightAirwaybillSQL.FieldByName('serial_number').AsInteger;
-    H_flightAirItemFRM.ShowModal;
-    FA_ItemSQL.Refresh;
-
-
-  end else begin
-    H_flightAirItemFRM.IN_ACTION:='EDIT';
-    H_flightAirItemFRM.in_SERIAL:=Fa_itemSQL.FieldByName('serial_number').AsInteger;
-    H_flightAirItemFRM.ShowModal;
-    FA_ItemSQL.Refresh;
-
-  end;
-
-
+  H_flightAirItemFRM.IN_ACTION:='EDIT';
+  H_flightAirItemFRM.in_SERIAL:=Fa_itemSQL.FieldByName('serial_number').AsInteger;
+  H_flightAirItemFRM.ShowModal;
+  FA_ItemSQL.Refresh;
 
 end;
 
@@ -581,19 +565,6 @@ begin
 
 
 End;
-
-procedure TH_FlightairwaybillFRM.wwNavButton4Click(Sender: TObject);
-var
-  ItemSerial:integer;
-begin
-  ItemSerial:=Fa_ItemSQL.FieldByName('serial_number').AsInteger;
-  if ItemSerial>0 then begin
-    ksExecSQLVar(cn, 'delete from FLIGHT_AIRWAYBILL_ITEM_CERT where FK_FLIGHT_AIRWAYBILL_ITEM= :item',[ItemSerial]);
-    ksExecSQLVar(cn, 'delete from FLIGHT_AIRWAYBILL_ITEM where serial_number = :item',[ItemSerial]);
-  end;
-  fa_ItemSQL.Refresh;
-  abort;
-end;
 
 procedure TH_FlightairwaybillFRM.AirwayBillSQLAfterPost(DataSet: TDataSet);
 Var

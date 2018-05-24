@@ -249,7 +249,6 @@ procedure TH_FlightAirItemFRM.FormActivate(Sender: TObject);
 var
   DefaultGroupCode:String;
   qr:TksQuery;
-  FaItem:integer;
 begin
 ksOpenTables([GroupCertificateSQL,SelectCertSQL,CertItemSQL,CountrySQL]);
 ksfillComboF1(cn,ProcReqFLD,'aux_procedure_request','key','key','key',false,false);
@@ -280,7 +279,7 @@ if IN_ACTION='INSERT' then begin
   If DefaultGroupCode>'' then begin
     TableSQL.Post;
     FaItem:=TableSQL.FieldByName('serial_Number').AsInteger;
-    InsertCertificates(FaItem,DefaultGroupCode);
+    InsertCertificates(FaItem,GroupCode);
     CertItemSQL.Refresh;
   end;
 

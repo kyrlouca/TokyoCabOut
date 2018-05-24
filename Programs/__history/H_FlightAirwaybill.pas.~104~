@@ -589,9 +589,7 @@ begin
   ItemSerial:=Fa_ItemSQL.FieldByName('serial_number').AsInteger;
   if ItemSerial>0 then begin
     ksExecSQLVar(cn, 'delete from FLIGHT_AIRWAYBILL_ITEM_CERT where FK_FLIGHT_AIRWAYBILL_ITEM= :item',[ItemSerial]);
-    ksExecSQLVar(cn, 'delete from FLIGHT_AIRWAYBILL_ITEM where serial_number = :item',[ItemSerial]);
   end;
-  fa_ItemSQL.Refresh;
   abort;
 end;
 

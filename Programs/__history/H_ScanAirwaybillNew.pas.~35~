@@ -312,7 +312,6 @@ Var
         Serial:Integer;
         FlightOutSerial:Integer;
         AirSerial:Integer;
-        str:string;
 begin
 
         Serial:=FlightAirwaybillGRD.DataSource.DataSet.fieldbyName('serial_number').AsInteger;
@@ -331,10 +330,7 @@ begin
 
         end;
 
-        str:= 'delete from flight_airwaybill_item_cert fac where fac.fk_flight_airwaybill_item in '
-        +' (select fi.serial_number from flight_airwaybill_item fi where fi.fk_fa_serial= :AirSerial)';
-       ksExecSQLVar(cn,str,[serial]);
-
+//       ksExecSQLVar()
 
         With UpdateTableSQL do begin
                 SQL.Clear;

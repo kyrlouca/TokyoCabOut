@@ -250,10 +250,10 @@ type
     Label9: TLabel;
     Label21: TLabel;
     DeclarationFLD: TwwDBComboBox;
-    ItemsGRDIButton: TwwIButton;
-    ServiceFLD: TwwDBComboBox;
     TypeOfDeclarationFLD: TwwDBComboBox;
     CircFLD: TwwDBComboBox;
+    ItemsGRDIButton: TwwIButton;
+    ServiceFLD: TwwDBComboBox;
     procedure FormActivate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure BitBtn2Click(Sender: TObject);
@@ -277,7 +277,6 @@ type
     procedure ItemsGRDDblClick(Sender: TObject);
     procedure SpeedButton4Click(Sender: TObject);
     procedure ItemsGRDTitleButtonClick(Sender: TObject; AFieldName: string);
-    procedure wwNavButton4Click(Sender: TObject);
   private
     { Private declarations }
        cn:TIBCConnection;
@@ -476,7 +475,7 @@ Begin
 ksfillComboF1(cn,DeclarationFLD,'AUX_DECLARATION_TYPE','KEY','KEY','KEY',false,false);
 ksfillComboF1(cn,TypeOfDeclarationFLD, 'AUX_TYPE_OF_DECLARATION','KEY','KEY','KEY',false,false);
 ksfillComboF1(cn,CircFLD,'AUX_SPECIFIC_CIRCUMSTANCE','KEY','KEY','KEY',false,false);
-ksfillComboF1(cn,ServiceFLD,'service_code','Code','Code','Code',false,false);
+ksfillComboF1(cn,CircFLD,'service_code','Code','Code','Code',false,false);
 
 ksOpenTables([currencySQL,ItinerarySQL,IncotermsSQL, GroupCertificateSQL,CertItemSQL,SelectCertSQL,Fa_ItemSQL]);
 
@@ -529,26 +528,11 @@ begin
 end;
 
 procedure TH_FlightairwaybillFRM.ItemsGRDDblClick(Sender: TObject);
-var
-  Serial:Integer;
 begin
-  Serial:=FA_ItemSQL.FieldByName('Serial_number').AsInteger;
-  if Serial=0 then begin
-    H_flightAirItemFRM.IN_ACTION:='INSERT';
-    H_flightAirItemFRM.in_SERIAL:=FlightAirwaybillSQL.FieldByName('serial_number').AsInteger;
-    H_flightAirItemFRM.ShowModal;
-    FA_ItemSQL.Refresh;
-
-
-  end else begin
-    H_flightAirItemFRM.IN_ACTION:='EDIT';
-    H_flightAirItemFRM.in_SERIAL:=Fa_itemSQL.FieldByName('serial_number').AsInteger;
-    H_flightAirItemFRM.ShowModal;
-    FA_ItemSQL.Refresh;
-
-  end;
-
-
+  H_flightAirItemFRM.IN_ACTION:='EDIT';
+  H_flightAirItemFRM.in_SERIAL:=Fa_itemSQL.FieldByName('serial_number').AsInteger;
+  H_flightAirItemFRM.ShowModal;
+  FA_ItemSQL.Refresh;
 
 end;
 
@@ -581,19 +565,6 @@ begin
 
 
 End;
-
-procedure TH_FlightairwaybillFRM.wwNavButton4Click(Sender: TObject);
-var
-  ItemSerial:integer;
-begin
-  ItemSerial:=Fa_ItemSQL.FieldByName('serial_number').AsInteger;
-  if ItemSerial>0 then begin
-    ksExecSQLVar(cn, 'delete from FLIGHT_AIRWAYBILL_ITEM_CERT where FK_FLIGHT_AIRWAYBILL_ITEM= :item',[ItemSerial]);
-    ksExecSQLVar(cn, 'delete from FLIGHT_AIRWAYBILL_ITEM where serial_number = :item',[ItemSerial]);
-  end;
-  fa_ItemSQL.Refresh;
-  abort;
-end;
 
 procedure TH_FlightairwaybillFRM.AirwayBillSQLAfterPost(DataSet: TDataSet);
 Var

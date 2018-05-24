@@ -59,7 +59,6 @@ type
     ItineraryCountrySQLFIELD_FOR_VALUE: TStringField;
     ItineraryCountrySQLTABLE_FOR_VALUE: TStringField;
     ItineraryCountrySQLDESCRIPTION: TStringField;
-    ItinerarySQLIS_DEFAULT: TStringField;
     procedure BitBtn2Click(Sender: TObject);
     procedure FlightOutGRDDblClick(Sender: TObject);
     procedure InsertBTNClick(Sender: TObject);

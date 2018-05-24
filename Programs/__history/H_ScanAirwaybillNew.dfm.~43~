@@ -23,7 +23,7 @@ object H_ScanAirwaibillNewFRM: TH_ScanAirwaibillNewFRM
     Width = 1068
     Height = 53
     Align = alTop
-    Caption = 'Scan Airwaybill x'
+    Caption = 'SCAN New'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBlue
     Font.Height = -27
@@ -31,7 +31,6 @@ object H_ScanAirwaibillNewFRM: TH_ScanAirwaibillNewFRM
     Font.Style = []
     ParentFont = False
     TabOrder = 0
-    ExplicitTop = -5
     object Panel5: TPanel
       Left = 916
       Top = 1
@@ -410,14 +409,12 @@ object H_ScanAirwaibillNewFRM: TH_ScanAirwaibillNewFRM
       Height = 453
       Align = alClient
       TabOrder = 1
-      ExplicitLeft = 18
-      ExplicitTop = 173
       object Label2: TLabel
         Left = 13
         Top = 12
-        Width = 80
+        Width = 66
         Height = 16
-        Caption = 'Scan Hawb id'
+        Caption = 'Scan Hawb'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -13
@@ -434,8 +431,8 @@ object H_ScanAirwaibillNewFRM: TH_ScanAirwaibillNewFRM
           'VALUE_TYPE;CustomEdit;ValueFLD'
           'IS_INCLUDED_XML;CheckBox;Y;N')
         Selected.Strings = (
-          'SERIAL_NUMBER'#9'7'#9'S/N'
-          'IS_INCLUDED_XML'#9'3'#9'XML'
+          'SERIAL_NUMBER'#9'4'#9'S/N'
+          'IS_INCLUDED_XML'#9'1'#9'XML'
           'VALUE_TYPE'#9'5'#9'Value'
           'HAWB_ID'#9'10'#9'Hawb Id'
           'SENDER_NAME'#9'12'#9'Sender Name'
@@ -562,7 +559,7 @@ object H_ScanAirwaibillNewFRM: TH_ScanAirwaibillNewFRM
         UnboundDataType = wwDefault
       end
       object HawbInputFLD: TwwDBEdit
-        Left = 100
+        Left = 85
         Top = 12
         Width = 124
         Height = 21
@@ -1363,13 +1360,13 @@ object H_ScanAirwaibillNewFRM: TH_ScanAirwaibillNewFRM
       end>
     object FlightAirwaybillSQLSERIAL_NUMBER: TIntegerField
       DisplayLabel = 'S/N'
-      DisplayWidth = 7
+      DisplayWidth = 4
       FieldName = 'SERIAL_NUMBER'
       Origin = 'CABOUTDATA.FLIGHT_AIRWAYBILL.SERIAL_NUMBER'
     end
     object FlightAirwaybillSQLIS_INCLUDED_XML: TStringField
       DisplayLabel = 'XML'
-      DisplayWidth = 3
+      DisplayWidth = 1
       FieldName = 'IS_INCLUDED_XML'
       FixedChar = True
       Size = 1

@@ -325,8 +325,8 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
       TabOrder = 1
       VisualStyle = vsClassic
       object GroupBox1: TGroupBox
-        Left = 6
-        Top = 37
+        Left = 14
+        Top = 45
         Width = 450
         Height = 418
         Caption = 'Details'
@@ -388,8 +388,8 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
           DataSource = TableSRC
         end
         object Label14: TLabel
-          Left = 234
-          Top = 236
+          Left = 218
+          Top = 260
           Width = 48
           Height = 14
           Caption = 'Currency'
@@ -479,7 +479,7 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
           ParentFont = False
         end
         object Label8: TLabel
-          Left = 234
+          Left = 218
           Top = 175
           Width = 23
           Height = 14
@@ -518,7 +518,7 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
           ParentFont = False
         end
         object Label11: TLabel
-          Left = 28
+          Left = 32
           Top = 103
           Width = 78
           Height = 14
@@ -531,7 +531,7 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
           ParentFont = False
         end
         object Label12: TLabel
-          Left = 37
+          Left = 32
           Top = 384
           Width = 69
           Height = 15
@@ -547,7 +547,7 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
         end
         object FirstFLD: TwwDBEdit
           Left = 116
-          Top = 46
+          Top = 50
           Width = 82
           Height = 22
           DataField = 'SEQUENCE'
@@ -576,7 +576,7 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
           Height = 22
           DataField = 'AMOUNT'
           DataSource = TableSRC
-          TabOrder = 8
+          TabOrder = 9
           UnboundDataType = wwDefault
           WantReturns = False
           WordWrap = False
@@ -595,8 +595,8 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
         end
         object wwDBEdit3: TwwDBEdit
           Left = 116
-          Top = 74
-          Width = 305
+          Top = 75
+          Width = 82
           Height = 22
           DataField = 'DESCRIPTION'
           DataSource = TableSRC
@@ -608,12 +608,13 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
         object wwDBEdit4: TwwDBEdit
           Left = 116
           Top = 256
-          Width = 112
+          Width = 82
           Height = 22
           DataField = 'TARIFF_CODE'
           DataSource = TableSRC
           Picture.PictureMask = '####  ## ## ##'
-          TabOrder = 7
+          Picture.AutoFill = False
+          TabOrder = 8
           UnboundDataType = wwDefault
           WantReturns = False
           WordWrap = False
@@ -627,14 +628,12 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
           Style = csDropDownList
           MapList = False
           AllowClearKey = False
-          AutoDropDown = True
-          ShowMatchText = True
           DataField = 'PROCEDURE_REQUESTED'
           DataSource = TableSRC
           DropDownCount = 8
           ItemHeight = 0
           Sorted = False
-          TabOrder = 9
+          TabOrder = 10
           UnboundDataType = wwDefault
         end
         object PreviousProcFLD: TwwDBComboBox
@@ -646,14 +645,29 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
           Style = csDropDownList
           MapList = False
           AllowClearKey = False
-          AutoDropDown = True
-          ShowMatchText = True
           DataField = 'PREVIOUS_PROCEDURE'
           DataSource = TableSRC
           DropDownCount = 8
           ItemHeight = 0
           Sorted = False
-          TabOrder = 10
+          TabOrder = 11
+          UnboundDataType = wwDefault
+        end
+        object KIndOfPackFLD: TwwDBComboBox
+          Left = 218
+          Top = 195
+          Width = 82
+          Height = 22
+          ShowButton = True
+          Style = csDropDownList
+          MapList = False
+          AllowClearKey = False
+          DataField = 'KIND_OF_PACKAGES'
+          DataSource = TableSRC
+          DropDownCount = 8
+          ItemHeight = 0
+          Sorted = False
+          TabOrder = 6
           UnboundDataType = wwDefault
         end
         object wwDBEdit5: TwwDBEdit
@@ -675,7 +689,7 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
           Height = 22
           DataField = 'NUMBER_OF_PACKAGES'
           DataSource = TableSRC
-          TabOrder = 6
+          TabOrder = 7
           UnboundDataType = wwDefault
           WantReturns = False
           WordWrap = False
@@ -717,8 +731,6 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
           Style = csDropDownList
           MapList = True
           AllowClearKey = False
-          AutoDropDown = True
-          ShowMatchText = True
           DataField = 'DANGEROUS_GOODS'
           DataSource = TableSRC
           DropDownCount = 8
@@ -734,64 +746,24 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
           ItemIndex = 3
           ParentFont = False
           Sorted = False
-          TabOrder = 11
-          UnboundDataType = wwDefault
-        end
-        object KindOfPackFLD: TwwDBComboBox
-          Left = 234
-          Top = 195
-          Width = 71
-          Height = 23
-          ShowButton = True
-          Style = csDropDownList
-          MapList = True
-          AllowClearKey = False
-          AutoDropDown = True
-          ShowMatchText = True
-          Column1Width = 150
-          DataField = 'KIND_OF_PACKAGES'
-          DataSource = TableSRC
-          DropDownCount = 8
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -12
-          Font.Name = 'Arial'
-          Font.Style = []
-          ItemHeight = 0
-          Items.Strings = (
-            'A'#9'A'
-            'C'#9'C')
-          ParentFont = False
-          Sorted = True
           TabOrder = 12
           UnboundDataType = wwDefault
         end
         object CurrencyFLD: TwwDBComboBox
-          Left = 234
+          Left = 272
           Top = 256
-          Width = 71
-          Height = 23
+          Width = 82
+          Height = 22
           ShowButton = True
           Style = csDropDownList
-          MapList = True
+          MapList = False
           AllowClearKey = False
-          AutoDropDown = True
-          ShowMatchText = True
-          Column1Width = 150
+          CharCase = ecUpperCase
           DataField = 'CURRENCY'
           DataSource = TableSRC
           DropDownCount = 8
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -12
-          Font.Name = 'Arial'
-          Font.Style = []
           ItemHeight = 0
-          Items.Strings = (
-            'A'#9'A'
-            'C'#9'C')
-          ParentFont = False
-          Sorted = True
+          Sorted = False
           TabOrder = 13
           UnboundDataType = wwDefault
         end
@@ -1487,8 +1459,8 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
     SQL.Strings = (
       'Select * from Country')
     ReadOnly = True
-    Left = 289
-    Top = 490
+    Left = 281
+    Top = 450
     object CountrySQLCODE_2: TStringField
       DisplayLabel = 'Code'
       DisplayWidth = 5

@@ -120,6 +120,7 @@ object MainFormFRM: TMainFormFRM
     Height = 346
     Align = alClient
     TabOrder = 2
+    ExplicitTop = 35
     object ScanBTN: TButton
       Left = 455
       Top = 357
@@ -500,7 +501,7 @@ object MainFormFRM: TMainFormFRM
     end
   end
   object CabOutData: TIBCConnection
-    Database = 'C:\Data\DelphiProjects\Databases\Cabout\OriginalDropbox.FDB'
+    Database = 'C:\Data\DelphiProjects\Databases\Cabout\T1.FDB'
     Options.KeepDesignConnected = False
     DefaultTransaction = UsedForReadOnlyTrans
     SQLDialect = 1

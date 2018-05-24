@@ -302,10 +302,10 @@ object L_FlightOutListFRM: TL_FlightOutListFRM
         Width = 737
         Height = 476
         ControlType.Strings = (
-          'FK_FLIGHT_TABLE;CustomEdit;FlightTableFLD;F')
+          'FK_FLIGHT_TABLE;CustomEdit;FlightTableFLD')
         Selected.Strings = (
           'SERIAL_NUMBER'#9'10'#9'S/N'
-          'MAWB'#9'14'#9'Mawb'#9'F'
+          'MAWB'#9'14'#9'Name'
           'FK_FLIGHT_TABLE'#9'10'#9'Flight'
           'DATE_DEPART'#9'14'#9'Departure Date'
           'REMARKS'#9'16'#9'Remarks'
@@ -326,7 +326,7 @@ object L_FlightOutListFRM: TL_FlightOutListFRM
         Font.Name = 'Arial'
         Font.Style = []
         KeyOptions = []
-        Options = [dgEditing, dgAlwaysShowEditor, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgWordWrap]
+        Options = [dgAlwaysShowEditor, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgWordWrap]
         ParentFont = False
         ReadOnly = True
         TabOrder = 1
@@ -340,8 +340,6 @@ object L_FlightOutListFRM: TL_FlightOutListFRM
         TitleButtons = True
         OnTitleButtonClick = FlightOutGRDTitleButtonClick
         OnDblClick = FlightBTNClick
-        ExplicitLeft = -5
-        ExplicitTop = 3
         object FlightOutGRDIButton: TwwIButton
           Left = 0
           Top = 0
@@ -720,7 +718,7 @@ object L_FlightOutListFRM: TL_FlightOutListFRM
       Origin = 'CABOUTDATA.FLIGHT_OUT.SERIAL_NUMBER'
     end
     object FlightOutSQLMAWB: TStringField
-      DisplayLabel = 'Mawb'
+      DisplayLabel = 'Name'
       DisplayWidth = 14
       FieldName = 'MAWB'
       Origin = 'CABOUTDATA.FLIGHT_OUT.MAWB'

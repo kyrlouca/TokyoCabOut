@@ -98,6 +98,7 @@ type
     TableSQLPREVIOUS_PROCEDURE: TStringField;
     TableSQLKIND_OF_PACKAGES: TStringField;
     Label8: TLabel;
+    KIndOfPackFLD: TwwDBComboBox;
     Label9: TLabel;
     wwDBEdit5: TwwDBEdit;
     TableSQLNUMBER_OF_PACKAGES: TIntegerField;
@@ -113,7 +114,6 @@ type
     Label12: TLabel;
     DangerousFLD: TwwDBComboBox;
     TableSQLDANGEROUS_GOODS: TStringField;
-    KindOfPackFLD: TwwDBComboBox;
     CurrencyFLD: TwwDBComboBox;
     procedure BitBtn2Click(Sender: TObject);
     procedure TableSQLBeforeEdit(DataSet: TDataSet);
@@ -132,8 +132,6 @@ type
   private
     { Private declarations }
     cn:TIBCConnection;
-  procedure InsertCertificates(const ItemSerial:Integer;Const GroupCode:String);
-
   public
     { Public declarations }
 
@@ -192,33 +190,21 @@ procedure TH_FlightAirItemFRM.SelGroupFLDCloseUp(Sender: TObject; LookupTable,
 Var
   GroupCode:String;
   FaItem:Integer;
-
-begin
- If tableSQL.State in [dsEdit,dsInsert] then
-  TableSql.post;
-
-  if TableSQL.FieldByName('Serial_number').AsInteger=0 then
-    exit;
-
-  GroupCode:=LookupTable.FieldByName('Code').AsString;
-  FaItem:=TableSQL.FieldByName('serial_Number').AsInteger;
-  InsertCertificates(FaItem,GroupCode);
-  CertItemSQL.Refresh;
-
-end;
-
-
-procedure TH_FlightAirItemFRM.InsertCertificates(const ItemSerial:Integer;Const GroupCode:String);
-Var
   faCertSerial:Integer;
   certItemSerial:Integer;
   str:String;
   qr:TksQuery;
 
 begin
+  GroupCode:=LookupTable.FieldByName('Code').AsString;
+  FaItem:=TableSQL.FieldByName('serial_Number').AsInteger;
 
+
+
+
+  showMessage(intToStr(faItem));
   Str:='delete from flight_airwaybill_item_cert fi where fi.fk_flight_airwaybill_item = :fa_item';
-  ksExecSQLVar(cn, str,[ItemSerial]);
+  ksExecSQLVar(cn, str,[FaItem]);
 
   str:=
   '   insert into flight_airwaybill_item_cert'
@@ -235,28 +221,23 @@ begin
     while (not qr.Eof) do begin
       FaCertSerial:= ksGenerateSerial(cn,'FLIGHT_AIRWAYBILL_ITEM_CERT_GEN');
       CertItemSerial:=qr.FieldByName('serial_number').AsInteger;
-      ksExecSQLVar(cn, str,[FaCertSerial,ItemSerial,CertItemSerial]);
+      ksExecSQLVar(cn, str,[FaCertSerial,faItem,CertItemSerial]);
       qr.Next;
     end;
   finally
     qr.Free;
   end;
+  CertItemSQL.Refresh;
+
 end;
 
-
-
 procedure TH_FlightAirItemFRM.FormActivate(Sender: TObject);
-var
-  DefaultGroupCode:String;
-  qr:TksQuery;
-  FaItem:integer;
 begin
 ksOpenTables([GroupCertificateSQL,SelectCertSQL,CertItemSQL,CountrySQL]);
 ksfillComboF1(cn,ProcReqFLD,'aux_procedure_request','key','key','key',false,false);
 ksfillComboF1(cn,PreviousProcFLD,'aux_previous_procedure','key','key','key',false,false);
 ksfillComboF1(cn,KindOfPackFLD,'aux_previous_procedure','key','key','key',false,false);
 ksfillComboF1(cn,DangerousFLD,'AUX_DANGEROUS_GOODS','key','key','key',false,false);
-ksfillComboF1(cn,CurrencyFLD,'Currency','Currency_code','Currency_code','Currency_code',false,false);
 
 if IN_ACTION='INSERT' then begin
 //   ksOpenTables([TableSQL]);
@@ -268,22 +249,6 @@ if IN_ACTION='INSERT' then begin
 
    TableSQL.Insert;
    TableSQL.FieldByName('fk_FA_serial').Value:=in_SERIAL;
-
-   qr:=TksQuery.Create(cn,'select * from certificate_group where is_default=''Y'' ');
-   try
-     qr.Open;
-     DefaultGroupCode:=qr.FieldByName('code').AsString;
-   finally
-    qr.Free;
-   end;
-
-  If DefaultGroupCode>'' then begin
-    TableSQL.Post;
-    FaItem:=TableSQL.FieldByName('serial_Number').AsInteger;
-    InsertCertificates(FaItem,DefaultGroupCode);
-    CertItemSQL.Refresh;
-  end;
-
       If FirstFLD.CanFocus then
    FirstFLD.SetFocus;
 

@@ -326,7 +326,7 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
       VisualStyle = vsClassic
       object GroupBox1: TGroupBox
         Left = 6
-        Top = 37
+        Top = 29
         Width = 450
         Height = 418
         Caption = 'Details'
@@ -619,7 +619,7 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
           WordWrap = False
         end
         object ProcReqFLD: TwwDBComboBox
-          Left = 116
+          Left = 112
           Top = 324
           Width = 82
           Height = 22

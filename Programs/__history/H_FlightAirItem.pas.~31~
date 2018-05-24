@@ -192,6 +192,10 @@ procedure TH_FlightAirItemFRM.SelGroupFLDCloseUp(Sender: TObject; LookupTable,
 Var
   GroupCode:String;
   FaItem:Integer;
+  faCertSerial:Integer;
+  certItemSerial:Integer;
+  str:String;
+  qr:TksQuery;
 
 begin
  If tableSQL.State in [dsEdit,dsInsert] then
@@ -203,6 +207,10 @@ begin
   GroupCode:=LookupTable.FieldByName('Code').AsString;
   FaItem:=TableSQL.FieldByName('serial_Number').AsInteger;
   InsertCertificates(FaItem,GroupCode);
+
+
+
+
   CertItemSQL.Refresh;
 
 end;
@@ -246,10 +254,6 @@ end;
 
 
 procedure TH_FlightAirItemFRM.FormActivate(Sender: TObject);
-var
-  DefaultGroupCode:String;
-  qr:TksQuery;
-  FaItem:integer;
 begin
 ksOpenTables([GroupCertificateSQL,SelectCertSQL,CertItemSQL,CountrySQL]);
 ksfillComboF1(cn,ProcReqFLD,'aux_procedure_request','key','key','key',false,false);
@@ -268,22 +272,6 @@ if IN_ACTION='INSERT' then begin
 
    TableSQL.Insert;
    TableSQL.FieldByName('fk_FA_serial').Value:=in_SERIAL;
-
-   qr:=TksQuery.Create(cn,'select * from certificate_group where is_default=''Y'' ');
-   try
-     qr.Open;
-     DefaultGroupCode:=qr.FieldByName('code').AsString;
-   finally
-    qr.Free;
-   end;
-
-  If DefaultGroupCode>'' then begin
-    TableSQL.Post;
-    FaItem:=TableSQL.FieldByName('serial_Number').AsInteger;
-    InsertCertificates(FaItem,DefaultGroupCode);
-    CertItemSQL.Refresh;
-  end;
-
       If FirstFLD.CanFocus then
    FirstFLD.SetFocus;
 

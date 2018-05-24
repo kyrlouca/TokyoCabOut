@@ -1446,14 +1446,14 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         PictureMasks.Strings = (
           'TARIFF_CODE'#9'####  ## ## ##'#9'T'#9'T')
         Selected.Strings = (
-          'SERIAL_NUMBER'#9'6'#9'S/N'
-          'SEQUENCE'#9'8'#9'Sequence'
-          'DESCRIPTION'#9'19'#9'Description'
-          'WEIGHT'#9'10'#9'Weight'
-          'PIECES'#9'10'#9'Pieces'
-          'TARIFF_CODE'#9'17'#9'Tariff'
-          'AMOUNT'#9'10'#9'Amount'
-          'CURRENCY'#9'10'#9'Currency')
+          'SERIAL_NUMBER'#9'6'#9'S/N'#9#9
+          'SEQUENCE'#9'8'#9'Sequence'#9#9
+          'DESCRIPTION'#9'19'#9'Description'#9#9
+          'WEIGHT'#9'10'#9'Weight'#9#9
+          'PIECES'#9'10'#9'Pieces'#9#9
+          'TARIFF_CODE'#9'17'#9'Tariff'#9#9
+          'AMOUNT'#9'10'#9'Amount'#9#9
+          'CURRENCY'#9'10'#9'Currency'#9#9)
         IniAttributes.Delimiter = ';;'
         IniAttributes.UnicodeIniFile = False
         TitleColor = clBtnFace
@@ -1545,7 +1545,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
       end
       object wwDBNavigator2: TwwDBNavigator
         Left = 20
-        Top = 15
+        Top = 14
         Width = 163
         Height = 19
         AutosizeStyle = asNone
@@ -1617,7 +1617,6 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
           Enabled = False
           DisabledTextColors.ShadeColor = clGray
           DisabledTextColors.HighlightColor = clBtnHighlight
-          OnClick = wwNavButton4Click
           Index = 3
           Style = nbsDelete
         end
