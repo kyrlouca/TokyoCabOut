@@ -7,7 +7,7 @@ uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   StdCtrls, Mask,  IBC, MemDS, IBCError, wwSpeedButton, wwDBNavigator,
   System.ImageList, Vcl.ImgList, Data.DB, DBAccess, vcl.wwdbigrd, Vcl.Grids,
-  vcl.wwdbgrid, vcl.wwclearpanel, vcl.Wwdbedit, Vcl.Buttons, Vcl.ExtCtrls,G_kyriacosTypes;
+  vcl.wwdbgrid, vcl.wwclearpanel, vcl.Wwdbedit, Vcl.Buttons, Vcl.ExtCtrls;
 
 type
   TL_AirwaybillsHighFRM = class(TForm)
@@ -97,7 +97,7 @@ var
 
 implementation
 
-uses MainForm, H_Airwaybill, H_Airwaybill2,  G_generalProcs;
+uses MainForm, H_Airwaybill, H_Airwaybill2;
 
 {$R *.DFM}
 
@@ -252,19 +252,60 @@ end;
 
 procedure TL_AirwaybillsHighFRM.AirGRDTitleButtonClick(Sender: TObject;
   AFieldName: String);
-
-var
-       sortInfoHawb:TSortInfo;
-       Serial:integer;
+Var
         HawbDS:TIBCQUery;
-
+        Bm:TBookMark;
+        AscOrderPOs:integer;
+        DescOrderPOs:integer;
+        CurrentSortField:String;
+        NewSOrt:String;
+        ImageIndex: Integer;
+        Bmp: TBitmap;
 begin
-        HawbDS:=TIBCQUery(AirGRD.DataSource.DataSet);
-        Serial:=HawbDS.FieldByName('Serial_number').AsInteger;
 
-        SortInfoHawb.Table:=HawbDS;
-        G_GeneralProcs.SortGrid(HawbDs,AFieldName,SOrtInfoHawb);
-        HawbDs.First;
+
+        HawbDS:=TIBCQUery(AirGRD.DataSource.DataSet);
+        Bm:=HawbDS.GetBookmark;
+        HawbDs.ControlsDisabled;
+        HawbDS.close;
+
+        If AfieldName=PreviousSortedField then begin
+                AscOrderPos:=Pos('ASC',HawbDS.GetOrderBy);
+                DescOrderPos:=Pos('DESC',HawbDS.GetOrderBy);
+                iF (AscOrderPos>0) then begin
+                        CurrentSortField:=Trim(Copy(HawbDS.GetOrderBy, 1, Length(HawbDS.getorderBy)-3));
+                        NewSOrt:=AFieldName + ' DESC';
+                        ImageIndex := 1;
+                end else if (DescOrderPos>0) then begin
+                        CurrentSortField:=Trim(Copy(HawbDS.GetOrderBy, 1, Length(HawbDS.getorderBy)-4));
+                        NewSort:= AFieldName +' ASC';
+                        ImageIndex := 0;
+                end else begin
+                        CurrentSOrtField:=Trim(HawbDS.GetOrderBy);
+                        NewSOrt:= AFieldName +' ASC';
+                        ImageIndex := 0;
+               end;
+        end else begin
+                NewSOrt:=AFieldName +' ASC';
+                CurrentSOrtField:=AFieldName;
+                ImageIndex := 0;
+        end;
+
+        Bmp:=TBitmap.Create;
+        ImageList1.GetBitmap(ImageIndex, Bmp);
+        AirGRD.IndicatorButton.Glyph.Assign(Bmp);
+        Bmp.Free;
+                //ShowMessage(CurrentSortField+'new' + NewSort);
+
+        HawbDS.SetOrderBy(NewSOrt);
+        PreviousSortedField:=CurrentSortField;
+
+        HawbDS.open;
+        HawbDs.EnableControls;
+        //if Hawbds.BookmarkValid(bm) then
+                HawbDS.GotoBookmark(Bm);
+
+        AIrGRD.SelectRecord;
 
 end;
 

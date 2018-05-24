@@ -1,0 +1,2 @@
+localhost
+C:\Data\DELPHI~1\DATABA~1\Cabout\ORIGIN~2.FDB

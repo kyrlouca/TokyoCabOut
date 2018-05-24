@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   StdCtrls, Mask,  IBC, MemDS, IBCError, wwSpeedButton, wwDBNavigator,
   wwclearpanel, Buttons, ExtCtrls, wwdbedit, Grids, Wwdbigrd, Wwdbgrid,
-  DBAccess, Data.DB, vcl.Wwkeycb, vcl.wwdblook, RzButton, G_generalProcs;
+  DBAccess, Data.DB, vcl.Wwkeycb, vcl.wwdblook, RzButton;
 
 type
   TL_FlightOutListFRM = class(TForm)
@@ -44,13 +44,6 @@ type
     BitBtn1: TRzBitBtn;
     DeleteBTN: TRzBitBtn;
     ScanBTN: TRzBitBtn;
-    FlightOutGRDIButton: TwwIButton;
-    wwDBNavigator1: TwwDBNavigator;
-    wwDBNavigator1First: TwwNavButton;
-    wwDBNavigator1Prior: TwwNavButton;
-    wwDBNavigator1Next: TwwNavButton;
-    wwDBNavigator1Last: TwwNavButton;
-    wwDBNavigator1Refresh: TwwNavButton;
     procedure FormActivate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure BitBtn2Click(Sender: TObject);
@@ -63,7 +56,6 @@ type
       var Action: TDataAction);
     procedure DeleteBTNClick(Sender: TObject);
     procedure ScanBTNClick(Sender: TObject);
-    procedure FlightOutGRDTitleButtonClick(Sender: TObject; AFieldName: string);
   private
     { Private declarations }
   public
@@ -84,7 +76,7 @@ var
 implementation
 
 uses MainForm, H_flightOut, H_scanAirwaybill,
-  H_ScanAirwaybillNew, G_kyriacosTypes;
+  H_ScanAirwaybillNew;
 
 {$R *.DFM}
 
@@ -167,27 +159,6 @@ begin
         FlightOutSQL.Close;
         FlightOutSQL.Open;
         FlightOutSQL.Locate('SERIAL_NUMBER',FlightSerial,[]);
-
-end;
-
-procedure TL_FlightOutListFRM.FlightOutGRDTitleButtonClick(Sender: TObject;
-  AFieldName: string);
-var
-       sortInfoHawb:TSortInfo;
-       Serial:integer;
-        HawbDS:TIBCQUery;
-
-begin
-
-        HawbDS:=TIBCQuery(FLightOutGRD.DataSource.DataSet);
-        Serial:=HawbDS.FieldByName('Serial_number').AsInteger;
-
-        SortInfoHawb.Table:=HawbDS;
-        G_GeneralProcs.SortGrid(HawbDs,AFieldName,SOrtInfoHawb);
-        HawbDs.First;
-
-//        hawbDs.LocateEx('Serial_number',Serial,[]);
-
 
 end;
 

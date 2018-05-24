@@ -45,12 +45,6 @@ type
     DeleteBTN: TRzBitBtn;
     ScanBTN: TRzBitBtn;
     FlightOutGRDIButton: TwwIButton;
-    wwDBNavigator1: TwwDBNavigator;
-    wwDBNavigator1First: TwwNavButton;
-    wwDBNavigator1Prior: TwwNavButton;
-    wwDBNavigator1Next: TwwNavButton;
-    wwDBNavigator1Last: TwwNavButton;
-    wwDBNavigator1Refresh: TwwNavButton;
     procedure FormActivate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure BitBtn2Click(Sender: TObject);
@@ -184,10 +178,9 @@ begin
 
         SortInfoHawb.Table:=HawbDS;
         G_GeneralProcs.SortGrid(HawbDs,AFieldName,SOrtInfoHawb);
-        HawbDs.First;
 
-//        hawbDs.LocateEx('Serial_number',Serial,[]);
-
+        hawbDs.LocateEx('Serial_number',Serial,[]);
+//        LowGRD.SelectRecord;
 
 end;
 

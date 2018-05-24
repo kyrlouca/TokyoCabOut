@@ -60,7 +60,6 @@ object L_FlightOutListFRM: TL_FlightOutListFRM
     Height = 66
     Align = alBottom
     TabOrder = 1
-    ExplicitTop = 525
     object BitBtn2: TBitBtn
       Left = 18
       Top = 6
@@ -141,12 +140,11 @@ object L_FlightOutListFRM: TL_FlightOutListFRM
     Height = 536
     Align = alClient
     TabOrder = 2
-    ExplicitHeight = 460
     object Panel2: TPanel
       Left = 1
       Top = 1
       Width = 929
-      Height = 72
+      Height = 56
       Align = alTop
       TabOrder = 0
       object Label1: TLabel
@@ -163,7 +161,7 @@ object L_FlightOutListFRM: TL_FlightOutListFRM
         ParentFont = False
       end
       object FlightTableFLD: TwwDBLookupCombo
-        Left = 249
+        Left = 233
         Top = 18
         Width = 121
         Height = 24
@@ -191,29 +189,119 @@ object L_FlightOutListFRM: TL_FlightOutListFRM
         CharCase = ecUpperCase
         TabOrder = 1
       end
+      object wwDBNavigator1: TwwDBNavigator
+        Left = 388
+        Top = 18
+        Width = 102
+        Height = 20
+        DataSource = FlightOutCDS
+        RepeatInterval.InitialDelay = 500
+        RepeatInterval.Interval = 100
+        object wwDBNavigator1First: TwwNavButton
+          Left = 0
+          Top = 0
+          Width = 20
+          Height = 20
+          Hint = 'Move to first record'
+          ImageIndex = -1
+          NumGlyphs = 2
+          Spacing = 4
+          Transparent = False
+          Caption = 'wwDBNavigator1First'
+          DisabledTextColors.ShadeColor = clGray
+          DisabledTextColors.HighlightColor = clBtnHighlight
+          Index = 0
+          Style = nbsFirst
+        end
+        object wwDBNavigator1Prior: TwwNavButton
+          Left = 20
+          Top = 0
+          Width = 21
+          Height = 20
+          Hint = 'Move to prior record'
+          ImageIndex = -1
+          NumGlyphs = 2
+          Spacing = 4
+          Transparent = False
+          Caption = 'wwDBNavigator1Prior'
+          DisabledTextColors.ShadeColor = clGray
+          DisabledTextColors.HighlightColor = clBtnHighlight
+          Index = 1
+          Style = nbsPrior
+        end
+        object wwDBNavigator1Next: TwwNavButton
+          Left = 41
+          Top = 0
+          Width = 20
+          Height = 20
+          Hint = 'Move to next record'
+          ImageIndex = -1
+          NumGlyphs = 2
+          Spacing = 4
+          Transparent = False
+          Caption = 'wwDBNavigator1Next'
+          DisabledTextColors.ShadeColor = clGray
+          DisabledTextColors.HighlightColor = clBtnHighlight
+          Index = 2
+          Style = nbsNext
+        end
+        object wwDBNavigator1Last: TwwNavButton
+          Left = 61
+          Top = 0
+          Width = 20
+          Height = 20
+          Hint = 'Move to last record'
+          ImageIndex = -1
+          NumGlyphs = 2
+          Spacing = 4
+          Transparent = False
+          Caption = 'wwDBNavigator1Last'
+          DisabledTextColors.ShadeColor = clGray
+          DisabledTextColors.HighlightColor = clBtnHighlight
+          Index = 3
+          Style = nbsLast
+        end
+        object wwDBNavigator1Refresh: TwwNavButton
+          Left = 81
+          Top = 0
+          Width = 21
+          Height = 20
+          Hint = 'Refresh the contents of the dataset'
+          ImageIndex = -1
+          NumGlyphs = 2
+          Spacing = 4
+          Transparent = False
+          Caption = 'wwDBNavigator1Refresh'
+          DisabledTextColors.ShadeColor = clGray
+          DisabledTextColors.HighlightColor = clBtnHighlight
+          Index = 4
+          Style = nbsRefresh
+        end
+      end
     end
     object Panel5: TPanel
       Left = 1
-      Top = 73
+      Top = 57
       Width = 929
-      Height = 462
+      Height = 478
       Align = alClient
       TabOrder = 1
-      ExplicitHeight = 386
+      ExplicitTop = 73
+      ExplicitHeight = 462
       object Panel6: TPanel
         Left = 738
         Top = 1
         Width = 24
-        Height = 460
+        Height = 476
         Align = alLeft
         TabOrder = 0
-        ExplicitHeight = 384
+        ExplicitHeight = 460
       end
       object FlightOutGRD: TwwDBGrid
         Left = 1
         Top = 1
         Width = 737
-        Height = 460
+        Height = 476
         ControlType.Strings = (
           'FK_FLIGHT_TABLE;CustomEdit;FlightTableFLD')
         Selected.Strings = (
@@ -246,13 +334,79 @@ object L_FlightOutListFRM: TL_FlightOutListFRM
         TitleAlignment = taLeftJustify
         TitleFont.Charset = DEFAULT_CHARSET
         TitleFont.Color = clWindowText
-        TitleFont.Height = -13
-        TitleFont.Name = 'arial'
+        TitleFont.Height = -12
+        TitleFont.Name = 'Arial'
         TitleFont.Style = []
         TitleLines = 1
-        TitleButtons = False
+        TitleButtons = True
+        OnTitleButtonClick = FlightOutGRDTitleButtonClick
         OnDblClick = FlightBTNClick
-        ExplicitHeight = 384
+        ExplicitLeft = 0
+        ExplicitTop = 3
+        object FlightOutGRDIButton: TwwIButton
+          Left = 0
+          Top = 0
+          Width = 33
+          Height = 33
+          AllowAllUp = True
+          Glyph.Data = {
+            F6060000424DF606000000000000360000002800000018000000180000000100
+            180000000000C006000000000000000000000000000000000000FFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFF176B1D176B1DFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFF196D1FBEF1D95ACD99196D1FFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFF1B6F22B8EFD55ED09D5ED09D59CC971B6F22FF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF1E7126AFECD063D19F63D19F63D1
+            9F63D19F58C9931E7126FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF217329A4E9C967D2A2
+            67D2A267D2A267D2A267D2A267D2A257C690217329FFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF24762D98
+            E6C26DD4A66DD4A66DD4A66DD4A66DD4A66DD4A66DD4A66DD4A658C38E24762D
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FF2779328DE3BB73D5A973D5A973D5A973D5A973D5A973D5A973D5A973D5A973
+            D5A973D5A958BF89277932FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFF2B7C3684E0B67AD7AD7AD7AD7AD7AD7AD7AD7AD7AD7AD7AD7AD7
+            AD7AD7AD7AD7AD7AD7AD7AD7AD7AD7AD58BA842B7C36FBFCFCFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFF2F803B2F803B2F803B2F803B2F803B80D9B1
+            80D9B180D9B180D9B180D9B168CD9D2F803B2F803B2F803B2F803B2F803BEBEE
+            EDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFF36854388DBB688DBB688DBB688DBB688DBB66FCFA1338340FFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFF3989488FDDBA8FDDBA8FDDBA8FDDBA8FDDBA75D0A336
+            8745FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF3E8C4E94DDBD96DEBE96DEBE96DE
+            BE96DEBE7AD0A63B8A4BFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF41905398DEBF
+            9DE0C29DE0C29DE0C29DE0C280D1A93E8E50FFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFF4593579ADFC0A5E2C7A5E2C7A5E2C7A5E2C787D1AC429155FFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFF49975C99DEC0ABE4CBABE4CBABE4CBABE4CB8CD2AE46
+            955AFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF4D9A6097DDBEB2E6CFB2E6CFB2E6
+            CFB2E6CF91D3B14A985EFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF509D6592DBBA
+            B8E7D2B8E7D2B8E7D2B8E7D296D3B24D9B63FFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFF53A0698CD8B6BEE9D6BEE9D6BEE9D6BEE9D69BD4B5509E67FFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFF56A26C84D5B1C2EAD9C2EAD9C2EAD9C2EAD99ED5B753
+            A06AFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF58A37085BD9D85BD9D85BD9D85BD
+            9D85BD9D85BD9D56A26EFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF58A47158A471
+            58A47158A47158A47158A47158A47158A471FFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
+        end
       end
       object InsertBTN: TRzBitBtn
         AlignWithMargins = True

@@ -409,7 +409,7 @@ object L_AirwaybillsHighFRM: TL_AirwaybillsHighFRM
           TitleFont.Charset = DEFAULT_CHARSET
           TitleFont.Color = clWindowText
           TitleFont.Height = -12
-          TitleFont.Name = 'Arial'
+          TitleFont.Name = 'arial'
           TitleFont.Style = []
           TitleLines = 2
           TitleButtons = True
