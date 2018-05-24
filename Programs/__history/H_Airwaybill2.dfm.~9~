@@ -1287,8 +1287,8 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
       AllowClearKey = False
     end
     object wwDBNavigator1: TwwDBNavigator
-      Left = 676
-      Top = 211
+      Left = 18
+      Top = 301
       Width = 142
       Height = 20
       DataSource = AirItemSRC

@@ -417,8 +417,6 @@ object L_AirwaybillsHighFRM: TL_AirwaybillsHighFRM
           OnDblClick = AirGRDDblClick
           ImageList = ImageList1
           TitleImageList = ImageList1
-          ExplicitLeft = 6
-          ExplicitTop = -1
           object AirGRDIButton: TwwIButton
             Left = 0
             Top = 0

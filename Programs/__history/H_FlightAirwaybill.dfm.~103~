@@ -130,8 +130,8 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
     TabOrder = 2
     ExplicitTop = 54
     object GroupBox1: TGroupBox
-      Left = 18
-      Top = 6
+      Left = 10
+      Top = 13
       Width = 304
       Height = 355
       Caption = 'Details'
@@ -523,6 +523,30 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         PreciseEditRegion = False
         AllowClearKey = False
       end
+      object ServiceCodeFLD: TwwDBLookupCombo
+        Left = 104
+        Top = 272
+        Width = 67
+        Height = 23
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'arial'
+        Font.Style = []
+        DropDownAlignment = taLeftJustify
+        Selected.Strings = (
+          'CODE'#9'5'#9'Code'#9'F'
+          'DESCRIPTION'#9'30'#9'Description'#9'F')
+        DataField = 'SERVICE_CODE'
+        DataSource = FlightAirwaybillCDS
+        Style = csDropDownList
+        ParentFont = False
+        TabOrder = 9
+        AutoDropDown = False
+        ShowButton = True
+        PreciseEditRegion = False
+        AllowClearKey = False
+      end
       object AccountNumbFD: TwwDBEdit
         Left = 186
         Top = 19
@@ -536,7 +560,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         Font.Name = 'arial'
         Font.Style = []
         ParentFont = False
-        TabOrder = 9
+        TabOrder = 10
         UnboundDataType = wwDefault
         WantReturns = False
         WordWrap = False
@@ -590,7 +614,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
           'C'#9'C')
         ParentFont = False
         Sorted = False
-        TabOrder = 10
+        TabOrder = 11
         UnboundDataType = wwDefault
       end
       object TypeOfDeclarationFLD: TwwDBComboBox
@@ -616,7 +640,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
           'C'#9'C')
         ParentFont = False
         Sorted = False
-        TabOrder = 11
+        TabOrder = 12
         UnboundDataType = wwDefault
       end
       object CircFLD: TwwDBComboBox
@@ -629,32 +653,6 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         MapList = True
         AllowClearKey = False
         DataField = 'SPECIFIC_CIRCUMSTANCE'
-        DataSource = FlightAirwaybillCDS
-        DropDownCount = 8
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -12
-        Font.Name = 'Arial'
-        Font.Style = []
-        ItemHeight = 0
-        Items.Strings = (
-          'A'#9'A'
-          'C'#9'C')
-        ParentFont = False
-        Sorted = False
-        TabOrder = 12
-        UnboundDataType = wwDefault
-      end
-      object ServiceFLD: TwwDBComboBox
-        Left = 105
-        Top = 272
-        Width = 63
-        Height = 23
-        ShowButton = True
-        Style = csDropDownList
-        MapList = True
-        AllowClearKey = False
-        DataField = 'SERVICE_CODE'
         DataSource = FlightAirwaybillCDS
         DropDownCount = 8
         Font.Charset = DEFAULT_CHARSET

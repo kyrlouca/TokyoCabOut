@@ -222,7 +222,7 @@ end;
 
 procedure TH_airwaybill2FRM.SelectCustomer(CustomerName:String);
 Var
-        CustomerRecord:TktCustomerRecord;
+        CustomerRecord:TCustomerRecord;
    AirCDS:TDataset;
    AName:String;
 

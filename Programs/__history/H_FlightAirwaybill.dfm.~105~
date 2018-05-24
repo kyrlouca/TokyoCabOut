@@ -645,31 +645,29 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         TabOrder = 12
         UnboundDataType = wwDefault
       end
-      object ServiceFLD: TwwDBComboBox
-        Left = 105
+      object ServiceFLD: TwwDBLookupCombo
+        Left = 106
         Top = 272
-        Width = 63
+        Width = 72
         Height = 23
-        ShowButton = True
-        Style = csDropDownList
-        MapList = True
-        AllowClearKey = False
-        DataField = 'SERVICE_CODE'
-        DataSource = FlightAirwaybillCDS
-        DropDownCount = 8
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -12
-        Font.Name = 'Arial'
+        Font.Name = 'arial'
         Font.Style = []
-        ItemHeight = 0
-        Items.Strings = (
-          'A'#9'A'
-          'C'#9'C')
+        DropDownAlignment = taLeftJustify
+        Selected.Strings = (
+          'CODE'#9'5'#9'Code'#9'F'
+          'DESCRIPTION'#9'15'#9'DESCRIPTION'#9'F')
+        DataField = 'SERVICE_CODE'
+        DataSource = FlightAirwaybillCDS
+        Style = csDropDownList
         ParentFont = False
-        Sorted = False
         TabOrder = 13
-        UnboundDataType = wwDefault
+        AutoDropDown = False
+        ShowButton = True
+        PreciseEditRegion = False
+        AllowClearKey = False
       end
     end
     object GroupBox2: TGroupBox

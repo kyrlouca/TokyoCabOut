@@ -78,7 +78,7 @@ type
     InTariffKey:String;
     InTariffCode:String;
     OutTariffCode:String;
-    GOutTariffRecord:TktTariffRecord;
+    GOutTariffRecord:TTariffRecord;
   end;
 
 var

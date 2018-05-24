@@ -156,6 +156,7 @@ type
     ServiceCodeSQLDESCRIPTION: TStringField;
     ServiceCodeSQLSERIAL_NUMBER: TIntegerField;
     IncotermsFLD: TwwDBLookupCombo;
+    ServiceCodeFLD: TwwDBLookupCombo;
     AccountNumbFD: TwwDBEdit;
     FlightAirwaybillSQLIS_HIGH: TStringField;
     FlightAirwaybillSQLSERVICE_CODE: TStringField;
@@ -255,7 +256,6 @@ type
     TypeOfDeclarationFLD: TwwDBComboBox;
     CircFLD: TwwDBComboBox;
     ItemsGRDIButton: TwwIButton;
-    ServiceFLD: TwwDBComboBox;
     procedure FormActivate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure BitBtn2Click(Sender: TObject);

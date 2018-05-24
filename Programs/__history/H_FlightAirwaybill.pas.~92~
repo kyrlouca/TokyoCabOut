@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   StdCtrls, Mask, IBC, MemDS, IBCError, wwSpeedButton, wwDBNavigator,
   wwclearpanel, Buttons, ExtCtrls, wwdbedit, Grids, Wwdbigrd, Wwdbgrid,
-  Wwdbcomb, Data.DB, DBAccess, vcl.wwdblook, vcl.Wwdotdot, vcl.wwbutton,kyriacosTypes,G_kyriacosTypes;
+  Wwdbcomb, Data.DB, DBAccess, vcl.wwdblook, vcl.Wwdotdot, vcl.wwbutton;
 
 type
   TH_FlightairwaybillFRM = class(TForm)
@@ -126,7 +126,7 @@ type
     Label23: TLabel;
     GroupBox4: TGroupBox;
     FA_ItemSQL: TIBCQuery;
-    ItemsGRD: TwwDBGrid;
+    wwDBGrid1: TwwDBGrid;
     FA_ItemSRC: TIBCDataSource;
     wwDBNavigator2: TwwDBNavigator;
     wwNavButton1: TwwNavButton;
@@ -156,6 +156,7 @@ type
     ServiceCodeSQLDESCRIPTION: TStringField;
     ServiceCodeSQLSERIAL_NUMBER: TIntegerField;
     IncotermsFLD: TwwDBLookupCombo;
+    ServiceCodeFLD: TwwDBLookupCombo;
     AccountNumbFD: TwwDBEdit;
     FlightAirwaybillSQLIS_HIGH: TStringField;
     FlightAirwaybillSQLSERVICE_CODE: TStringField;
@@ -254,8 +255,6 @@ type
     DeclarationFLD: TwwDBComboBox;
     TypeOfDeclarationFLD: TwwDBComboBox;
     CircFLD: TwwDBComboBox;
-    ItemsGRDIButton: TwwIButton;
-    ServiceFLD: TwwDBComboBox;
     procedure FormActivate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure BitBtn2Click(Sender: TObject);
@@ -276,9 +275,8 @@ type
     procedure Select2CloseUp(Sender: TObject; LookupTable, FillTable: TDataSet;
       modified: Boolean);
     procedure wwButton2Click(Sender: TObject);
-    procedure ItemsGRDDblClick(Sender: TObject);
+    procedure wwDBGrid1DblClick(Sender: TObject);
     procedure SpeedButton4Click(Sender: TObject);
-    procedure ItemsGRDTitleButtonClick(Sender: TObject; AFieldName: string);
   private
     { Private declarations }
        cn:TIBCConnection;
@@ -299,8 +297,7 @@ var
 implementation
 
 uses MainForm,H_ScanAirwaybill, S_SelectCustomerx, S_SelectTariffY,
-   G_KyrSQL, G_generalProcs, H_FlightAirItem, M_customerNew;
-
+  KyriacosTypes, G_KyrSQL, G_generalProcs, H_FlightAirItem, M_customerNew;
 
 {$R *.DFM}
 
@@ -308,7 +305,7 @@ uses MainForm,H_ScanAirwaybill, S_SelectCustomerx, S_SelectTariffY,
 Function TH_FlightairwaybillFRM.SelectTariff(TariffCode:String):boolean;
 Var
    ItemData:TIBCQuery;
-   TariffRecord:TktTariffRecord;
+   TariffRecord:TTariffRecord;
 
 begin
 
@@ -529,7 +526,7 @@ begin
 H_FlightAirItemFRM.ShowModal;
 end;
 
-procedure TH_FlightairwaybillFRM.ItemsGRDDblClick(Sender: TObject);
+procedure TH_FlightairwaybillFRM.wwDBGrid1DblClick(Sender: TObject);
 begin
   H_flightAirItemFRM.IN_ACTION:='EDIT';
   H_flightAirItemFRM.in_SERIAL:=Fa_itemSQL.FieldByName('serial_number').AsInteger;
@@ -538,23 +535,6 @@ begin
 
 end;
 
-
-procedure TH_FlightairwaybillFRM.ItemsGRDTitleButtonClick(Sender: TObject;
-  AFieldName: string);
-var
-       sortInfoHawb:TSortInfo;
-       Serial:integer;
-        HawbDS:TIBCQUery;
-
-begin
-        HawbDS:=TIBCQUery(ItemsGRD.DataSource.DataSet);
-        Serial:=HawbDS.FieldByName('Serial_number').AsInteger;
-
-        SortInfoHawb.Table:=HawbDS;
-        G_GeneralProcs.SortGrid(HawbDs,AFieldName,SOrtInfoHawb);
-        HawbDs.First;
-
-end;
 
 procedure TH_FlightairwaybillFRM.wwDBNavigator1InsertClick(Sender: TObject);
 begin

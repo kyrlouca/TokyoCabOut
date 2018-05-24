@@ -473,8 +473,8 @@ object H_ScanAirwaibillNewFRM: TH_ScanAirwaibillNewFRM
         object FlightAirwaybillGRDIButton: TwwIButton
           Left = 0
           Top = 0
-          Width = 33
-          Height = 33
+          Width = 17
+          Height = 22
           AllowAllUp = True
           Glyph.Data = {
             F6060000424DF606000000000000360000002800000018000000180000000100

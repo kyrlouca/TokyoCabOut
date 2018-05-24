@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   StdCtrls, Mask, IBC, MemDS, IBCError, wwSpeedButton, wwDBNavigator,
   wwclearpanel, Buttons, ExtCtrls, wwdbedit, Grids, Wwdbigrd, Wwdbgrid,
-  DBAccess, Data.DB, vcl.Wwdotdot, vcl.Wwdbcomb, vcl.wwdblook, RzButton, G_kyriacosTypes;
+  DBAccess, Data.DB, vcl.Wwdotdot, vcl.Wwdbcomb, vcl.wwdblook, RzButton;
 
 
 
@@ -229,14 +229,6 @@ type
     wwDBEdit6: TwwDBEdit;
     wwDBEdit7: TwwDBEdit;
     wwDBEdit4: TwwDBEdit;
-    FA_ItemSQLPROCEDURE_REQUESTED: TStringField;
-    FA_ItemSQLPREVIOUS_PROCEDURE: TStringField;
-    FA_ItemSQLKIND_OF_PACKAGES: TStringField;
-    FA_ItemSQLNUMBER_OF_PACKAGES: TIntegerField;
-    FA_ItemSQLWEIGHT_NET: TFloatField;
-    FA_ItemSQLCOUNTRY_OF_ORIGIN: TStringField;
-    FA_ItemSQLDANGEROUS_GOODS: TStringField;
-    FlightAirwaybillGRDIButton: TwwIButton;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure BitBtn1Click(Sender: TObject);
     procedure AirwayBillSQLAfterPost(DataSet: TDataSet);
@@ -264,8 +256,6 @@ type
     procedure MultiHighBTNClick(Sender: TObject);
     procedure UnflagBTNClick(Sender: TObject);
     procedure FlightAirwaybillGRDKeyPress(Sender: TObject; var Key: Char);
-    procedure FlightAirwaybillGRDTitleButtonClick(Sender: TObject;
-      AFieldName: string);
   private
     { Private declarations }
     cn:TIBCConnection;
@@ -290,7 +280,7 @@ var
 implementation
 
 uses MainForm, H_FlightAirwaybill, H_flightOut, X_createOneXML,
-  X_createMultiXML, X_createMultiHighXML, G_KyrSQL, G_generalProcs;
+  X_createMultiXML, X_createMultiHighXML, G_KyrSQL;
 
 {$R *.DFM}
 
@@ -450,16 +440,21 @@ Var
         FaSerial:Integer;
         ValueType:String;
 
-//   DefaultProcedureRequested:String;
-//   DefaultPreviousProcedure:String;
-//   DefaultKindOfPackages:String;
-//   DefaultDangerous:String;
+   DefaultProcedureRequested:String;
+   DefaultPreviousProcedure:String;
+   DefaultKindOfPackages:String;
+   DefaultDangerous:String;
 
 
 begin
 
 
 //xxx
+  DefaultProcedureRequested:=GetTableDefaultValue('AUX_PROCEDURE_REQUEST');
+  DefaultPreviousProcedure:=GetTableDefaultValue('AUX_PREVIOUS_PROCEDURE');
+  DefaultKindOfPackages:=GetTableDefaultValue('AUX_KIND_OF_PACKAGES');
+  DefaultDangerous:=GetTableDefaultValue('AUX_DANGEROUS_GOODS');
+
 
 
     with FindAirwaybillSQL do begin   //cannot find original airwaybill
@@ -557,7 +552,7 @@ begin
 
                 FlightAirwaybillSQL.fieldbyname('DECLARATION_TYPE').value:=GetTableDefaultValue('AUX_DECLARATION_TYPE');
                 FlightAirwaybillSQL.fieldbyname('TYPE_OF_DECLARATION').value:=GetTableDefaultValue('AUX_TYPE_OF_DECLARATION');
-                FlightAirwaybillSQL.fieldbyname('SPECIFIC_CIRCUMSTANCE').value:=GetTableDefaultValue('AUX_SPECIFIC_CIRCUMSTANCE');
+                FlightAirwaybillSQL.fieldbyname('CONSIGNEE_DESPECIFIC_CIRCUMSTANCE').value:=GetTableDefaultValue('AUX_SPECIFIC_CIRCUMSTANCE');
 
 
                 //xxx add default
@@ -588,13 +583,6 @@ begin
                                 FA_ItemSQL.FieldByName('AMOUNT').value:=AirwaybillItemSQL.FieldByName('AMOUNT').AsFloat;
                                 FA_ItemSQL.FieldByName('SEQUENCE').value:=AirwaybillItemSQL.FieldByName('SEQUENCE').AsInteger;
                                 FA_ItemSQL.FieldByName('currency').value:=AirwaybillItemSQL.FieldByName('currency').AsString;
-
-
-                                FA_ItemSQL.FieldByName('PROCEDURE_REQUESTED').value:=GetTableDefaultValue('AUX_PROCEDURE_REQUEST');
-                                FA_ItemSQL.FieldByName('PREVIOUS_PROCEDURE').value:=GetTableDefaultValue('AUX_PREVIOUS_PROCEDURE');
-                                FA_ItemSQL.FieldByName('KIND_OF_PACKAGES').value:=GetTableDefaultValue('AUX_KIND_OF_PACKAGES');
-                                FA_ItemSQL.FieldByName('DANGEROUS_GOODS').value:=GetTableDefaultValue('AUX_DANGEROUS_GOODS');
-
                                 FA_ItemSQL.Post;
                                 AirwaybillItemSQL.next;
                         end;
@@ -706,23 +694,6 @@ begin
    ksExecSQLVar(cn,'update flight_airwaybill fa set is_included_xml= :flag where fa.serial_number = :Serial',[NewFlag, AirSerial]);
    FlightAirwaybillSQL.Refresh;
  end;
-end;
-
-procedure TH_ScanAirwaibillNewFRM.FlightAirwaybillGRDTitleButtonClick(
-  Sender: TObject; AFieldName: string);
-var
-       sortInfoHawb:TSortInfo;
-       Serial:integer;
-        HawbDS:TIBCQUery;
-
-begin
-
-        HawbDS:=TIBCQuery(FlightAirwaybillGRD.DataSource.DataSet);
-        Serial:=HawbDS.FieldByName('Serial_number').AsInteger;
-
-        SortInfoHawb.Table:=HawbDS;
-        G_GeneralProcs.SortGrid(HawbDs,AFieldName,SOrtInfoHawb);
-        HawbDs.First;
 end;
 
 procedure TH_ScanAirwaibillNewFRM.HawbInputFLDKeyPress(Sender: TObject;

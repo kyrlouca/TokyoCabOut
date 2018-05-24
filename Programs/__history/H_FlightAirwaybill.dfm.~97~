@@ -114,6 +114,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
       Color = clBtnFace
       DitherColor = clWhite
       DitherStyle = wwdsDither
+      NumGlyphs = 0
       ShadeStyle = wwbsNormal
       TabOrder = 2
       TextOptions.Alignment = taCenter
@@ -128,10 +129,9 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
     Height = 715
     Align = alClient
     TabOrder = 2
-    ExplicitTop = 54
     object GroupBox1: TGroupBox
-      Left = 18
-      Top = 6
+      Left = 10
+      Top = 13
       Width = 304
       Height = 355
       Caption = 'Details'
@@ -523,6 +523,32 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         PreciseEditRegion = False
         AllowClearKey = False
       end
+      object ServiceCodeFLD: TwwDBLookupCombo
+        Left = 104
+        Top = 272
+        Width = 67
+        Height = 23
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'arial'
+        Font.Style = []
+        DropDownAlignment = taLeftJustify
+        Selected.Strings = (
+          'CODE'#9'5'#9'Code'#9'F'
+          'DESCRIPTION'#9'30'#9'Description'#9'F')
+        DataField = 'SERVICE_CODE'
+        DataSource = FlightAirwaybillCDS
+        LookupTable = ServiceCodeSQL
+        LookupField = 'CODE'
+        Style = csDropDownList
+        ParentFont = False
+        TabOrder = 9
+        AutoDropDown = False
+        ShowButton = True
+        PreciseEditRegion = False
+        AllowClearKey = False
+      end
       object AccountNumbFD: TwwDBEdit
         Left = 186
         Top = 19
@@ -536,7 +562,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         Font.Name = 'arial'
         Font.Style = []
         ParentFont = False
-        TabOrder = 9
+        TabOrder = 10
         UnboundDataType = wwDefault
         WantReturns = False
         WordWrap = False
@@ -562,6 +588,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         Items.Strings = (
           'A'#9'A'
           'C'#9'C')
+        ItemIndex = 3
         ParentFont = False
         Sorted = False
         TabOrder = 7
@@ -588,9 +615,10 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         Items.Strings = (
           'A'#9'A'
           'C'#9'C')
+        ItemIndex = 3
         ParentFont = False
         Sorted = False
-        TabOrder = 10
+        TabOrder = 11
         UnboundDataType = wwDefault
       end
       object TypeOfDeclarationFLD: TwwDBComboBox
@@ -614,9 +642,10 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         Items.Strings = (
           'A'#9'A'
           'C'#9'C')
+        ItemIndex = 3
         ParentFont = False
         Sorted = False
-        TabOrder = 11
+        TabOrder = 12
         UnboundDataType = wwDefault
       end
       object CircFLD: TwwDBComboBox
@@ -640,32 +669,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         Items.Strings = (
           'A'#9'A'
           'C'#9'C')
-        ParentFont = False
-        Sorted = False
-        TabOrder = 12
-        UnboundDataType = wwDefault
-      end
-      object ServiceFLD: TwwDBComboBox
-        Left = 105
-        Top = 272
-        Width = 63
-        Height = 23
-        ShowButton = True
-        Style = csDropDownList
-        MapList = True
-        AllowClearKey = False
-        DataField = 'SERVICE_CODE'
-        DataSource = FlightAirwaybillCDS
-        DropDownCount = 8
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -12
-        Font.Name = 'Arial'
-        Font.Style = []
-        ItemHeight = 0
-        Items.Strings = (
-          'A'#9'A'
-          'C'#9'C')
+        ItemIndex = 3
         ParentFont = False
         Sorted = False
         TabOrder = 13
@@ -1386,8 +1390,8 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
       end
     end
     object GroupBox4: TGroupBox
-      Left = 24
-      Top = 446
+      Left = 10
+      Top = 374
       Width = 879
       Height = 182
       Caption = 'Items'
@@ -1440,7 +1444,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         ParentFont = False
         OnClick = SpeedButton2Click
       end
-      object ItemsGRD: TwwDBGrid
+      object wwDBGrid1: TwwDBGrid
         Left = 3
         Top = 40
         Width = 718
@@ -1469,7 +1473,6 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         Font.Height = -12
         Font.Name = 'arial'
         Font.Style = []
-        Options = [dgAlwaysShowEditor, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgWordWrap]
         ParentFont = False
         TabOrder = 0
         TitleAlignment = taLeftJustify
@@ -1479,73 +1482,8 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         TitleFont.Name = 'arial'
         TitleFont.Style = []
         TitleLines = 1
-        TitleButtons = True
-        OnTitleButtonClick = ItemsGRDTitleButtonClick
-        OnDblClick = ItemsGRDDblClick
-        object ItemsGRDIButton: TwwIButton
-          Left = 0
-          Top = 0
-          Width = 32
-          Height = 33
-          AllowAllUp = True
-          Glyph.Data = {
-            F6060000424DF606000000000000360000002800000018000000180000000100
-            180000000000C006000000000000000000000000000000000000FFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFF176B1D176B1DFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFFF196D1FBEF1D95ACD99196D1FFFFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFFF1B6F22B8EFD55ED09D5ED09D59CC971B6F22FF
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF1E7126AFECD063D19F63D19F63D1
-            9F63D19F58C9931E7126FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF217329A4E9C967D2A2
-            67D2A267D2A267D2A267D2A267D2A257C690217329FFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF24762D98
-            E6C26DD4A66DD4A66DD4A66DD4A66DD4A66DD4A66DD4A66DD4A658C38E24762D
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-            FF2779328DE3BB73D5A973D5A973D5A973D5A973D5A973D5A973D5A973D5A973
-            D5A973D5A958BF89277932FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFF2B7C3684E0B67AD7AD7AD7AD7AD7AD7AD7AD7AD7AD7AD7AD7AD7
-            AD7AD7AD7AD7AD7AD7AD7AD7AD7AD7AD58BA842B7C36FBFCFCFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFF2F803B2F803B2F803B2F803B2F803B80D9B1
-            80D9B180D9B180D9B180D9B168CD9D2F803B2F803B2F803B2F803B2F803BEBEE
-            EDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-            FFFF36854388DBB688DBB688DBB688DBB688DBB66FCFA1338340FFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFF3989488FDDBA8FDDBA8FDDBA8FDDBA8FDDBA75D0A336
-            8745FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF3E8C4E94DDBD96DEBE96DEBE96DE
-            BE96DEBE7AD0A63B8A4BFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF41905398DEBF
-            9DE0C29DE0C29DE0C29DE0C280D1A93E8E50FFFFFFFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-            FFFF4593579ADFC0A5E2C7A5E2C7A5E2C7A5E2C787D1AC429155FFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFF49975C99DEC0ABE4CBABE4CBABE4CBABE4CB8CD2AE46
-            955AFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF4D9A6097DDBEB2E6CFB2E6CFB2E6
-            CFB2E6CF91D3B14A985EFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF509D6592DBBA
-            B8E7D2B8E7D2B8E7D2B8E7D296D3B24D9B63FFFFFFFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-            FFFF53A0698CD8B6BEE9D6BEE9D6BEE9D6BEE9D69BD4B5509E67FFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFF56A26C84D5B1C2EAD9C2EAD9C2EAD9C2EAD99ED5B753
-            A06AFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF58A37085BD9D85BD9D85BD9D85BD
-            9D85BD9D85BD9D56A26EFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF58A47158A471
-            58A47158A47158A47158A47158A47158A471FFFFFFFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
-        end
+        TitleButtons = False
+        OnDblClick = wwDBGrid1DblClick
       end
       object wwDBNavigator2: TwwDBNavigator
         Left = 20
@@ -1601,6 +1539,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
           Spacing = 4
           Transparent = False
           Caption = 'wwDBNavigator1Insert'
+          Enabled = False
           DisabledTextColors.ShadeColor = clGray
           DisabledTextColors.HighlightColor = clBtnHighlight
           OnClick = wwDBNavigator1InsertClick
@@ -1669,6 +1608,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
           Spacing = 4
           Transparent = False
           Caption = 'wwDBNavigator1Refresh'
+          Enabled = False
           DisabledTextColors.ShadeColor = clGray
           DisabledTextColors.HighlightColor = clBtnHighlight
           Index = 6
@@ -1787,6 +1727,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
           Spacing = 4
           Transparent = False
           Caption = 'wwDBNavigator1Insert'
+          Enabled = False
           DisabledTextColors.ShadeColor = clGray
           DisabledTextColors.HighlightColor = clBtnHighlight
           OnClick = wwDBNavigator1InsertClick
@@ -1855,6 +1796,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
           Spacing = 4
           Transparent = False
           Caption = 'wwDBNavigator1Refresh'
+          Enabled = False
           DisabledTextColors.ShadeColor = clGray
           DisabledTextColors.HighlightColor = clBtnHighlight
           Index = 6
@@ -2087,6 +2029,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
       Color = clBtnFace
       DitherColor = clWhite
       DitherStyle = wwdsDither
+      NumGlyphs = 0
       ShadeStyle = wwbsNormal
       TabOrder = 6
       TextOptions.Alignment = taCenter
@@ -2160,7 +2103,6 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
     MasterFields = 'SERIAL_NUMBER'
     DetailFields = 'FK_FLIGHT_AIRWAYBILL'
     MasterSource = FlightAirwaybillCDS
-    Active = True
     OnPostError = FairwaybillCountrySQLPostError
     Left = 376
     Top = 225
@@ -2247,7 +2189,6 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
     SQL.Strings = (
       'Select * from Country')
     ReadOnly = True
-    Active = True
     Left = 1001
     Top = 234
     object CountrySQLCODE_2: TStringField
@@ -2488,7 +2429,6 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         'er')
     DetailFields = 'FK_FLIGHT_OUT_SERIAL'
     FetchAll = True
-    Active = True
     Left = 328
     Top = 153
     ParamData = <
@@ -2843,9 +2783,8 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
     MasterFields = 'SERIAL_NUMBER'
     DetailFields = 'FK_FA_SERIAL'
     MasterSource = FlightAirwaybillCDS
-    Active = True
-    Left = 160
-    Top = 441
+    Left = 400
+    Top = 721
     ParamData = <
       item
         DataType = ftInteger
@@ -2912,8 +2851,8 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
   end
   object FA_ItemSRC: TIBCDataSource
     DataSet = FA_ItemSQL
-    Left = 224
-    Top = 449
+    Left = 488
+    Top = 713
   end
   object IncotermsSQL: TIBCQuery
     Connection = MainFormFRM.CabOutData
@@ -3417,8 +3356,8 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
   end
   object GroupCertificateSRC: TIBCDataSource
     DataSet = GroupCertificateSQL
-    Left = 776
-    Top = 633
+    Left = 880
+    Top = 609
   end
   object CertItemSRC: TIBCDataSource
     DataSet = CertItemSQL

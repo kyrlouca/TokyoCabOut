@@ -72,7 +72,7 @@ type
     InAction:String;
     InTariffCode:String;
     OutIsSelect:Boolean;
-        GTariffRecord:TKtTariffRecord;
+        GTariffRecord:TTariffRecord;
     procedure SelectTariff(Const TariffName:String);
     procedure SelectTariffbyCode(Const TariffCode:String);
 

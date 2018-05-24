@@ -59,7 +59,7 @@ type
     procedure EditCustomer(const CustSerial:integer);
   public
     { Public declarations }
-        GCustomerRecord:TKtCustomerRecord;
+        GCustomerRecord:TCustomerRecord;
         IN_SelectDbl:bOOLEAN;
         OUT_Customer:Integer;
         procedure SelectCustomer(Const CustomerName:String);

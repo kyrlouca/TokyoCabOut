@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   StdCtrls, Mask, IBC, MemDS, IBCError, wwSpeedButton, wwDBNavigator,
   wwclearpanel, Buttons, ExtCtrls, wwdbedit, Grids, Wwdbigrd, Wwdbgrid,
-  Wwdbcomb, Data.DB, DBAccess, vcl.wwdblook, vcl.Wwdotdot, vcl.wwbutton,kyriacosTypes,G_kyriacosTypes;
+  Wwdbcomb, Data.DB, DBAccess, vcl.wwdblook, vcl.Wwdotdot, vcl.wwbutton;
 
 type
   TH_FlightairwaybillFRM = class(TForm)
@@ -156,6 +156,7 @@ type
     ServiceCodeSQLDESCRIPTION: TStringField;
     ServiceCodeSQLSERIAL_NUMBER: TIntegerField;
     IncotermsFLD: TwwDBLookupCombo;
+    ServiceCodeFLD: TwwDBLookupCombo;
     AccountNumbFD: TwwDBEdit;
     FlightAirwaybillSQLIS_HIGH: TStringField;
     FlightAirwaybillSQLSERVICE_CODE: TStringField;
@@ -255,7 +256,6 @@ type
     TypeOfDeclarationFLD: TwwDBComboBox;
     CircFLD: TwwDBComboBox;
     ItemsGRDIButton: TwwIButton;
-    ServiceFLD: TwwDBComboBox;
     procedure FormActivate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure BitBtn2Click(Sender: TObject);
@@ -299,8 +299,7 @@ var
 implementation
 
 uses MainForm,H_ScanAirwaybill, S_SelectCustomerx, S_SelectTariffY,
-   G_KyrSQL, G_generalProcs, H_FlightAirItem, M_customerNew;
-
+  KyriacosTypes, G_KyrSQL, G_generalProcs, H_FlightAirItem, M_customerNew;
 
 {$R *.DFM}
 
@@ -308,7 +307,7 @@ uses MainForm,H_ScanAirwaybill, S_SelectCustomerx, S_SelectTariffY,
 Function TH_FlightairwaybillFRM.SelectTariff(TariffCode:String):boolean;
 Var
    ItemData:TIBCQuery;
-   TariffRecord:TktTariffRecord;
+   TariffRecord:TTariffRecord;
 
 begin
 

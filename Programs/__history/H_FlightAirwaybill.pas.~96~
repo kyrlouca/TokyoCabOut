@@ -255,7 +255,7 @@ type
     TypeOfDeclarationFLD: TwwDBComboBox;
     CircFLD: TwwDBComboBox;
     ItemsGRDIButton: TwwIButton;
-    ServiceFLD: TwwDBComboBox;
+    ServiceFLD: TwwDBLookupCombo;
     procedure FormActivate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure BitBtn2Click(Sender: TObject);

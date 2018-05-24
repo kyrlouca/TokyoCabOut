@@ -2,7 +2,7 @@ unit KyriacosTypes;
 
 interface
 Type
-TKtCustomerRecord= Record
+TCustomerRecord= Record
         Code :Integer;
         Name:string ;
         District:String;
@@ -11,7 +11,7 @@ TKtCustomerRecord= Record
         CustomerAccount:Integer;
         IsPrivate:String;
         AUTHORITY_TO_AGENT :String;
-        AUTHORITY_TO_DHL :String;
+        AUTHORITY_TO_DHL :String;        
         Comments:String;
         Telephone:String;
         Address1:String;
@@ -19,7 +19,7 @@ TKtCustomerRecord= Record
         Address3:String;
         PostCode:String;
 End;
-TKtTariffRecord= Record
+TTariffRecord= Record
         UserKeyword:string ;
         Code :String;
         Description:String;
