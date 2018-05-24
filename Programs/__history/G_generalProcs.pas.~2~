@@ -46,7 +46,6 @@ Function ConvertDate(Const TheString:String):Tdate;
 Function MyFormatDotFloat(Const DotAmount1 :String):double;
 function gpFloatToStr(Const num:double;Const Digits:Integer):string;
 Procedure ksfillComboF1(Const connection: TIBCConnection; ComboBox: TwwDbComboBox;Const tableName,fieldstored,fieldShown:String; orderBy:String='';ShowEmpty:Boolean =false;ShowAll:boolean=false );
-Procedure ksfillComboF2(Const connection: TIBCConnection; ComboBox: TwwDbComboBox;Const tableName,fieldstored,fieldShown:String; orderBy:String='';ShowEmpty:Boolean =false;ShowAll:boolean=false );
 
 function ksfillRadioGroup(Const connection: TIBCConnection; RadioGroup:TrzDBRadioGroup;Const tableName,fieldValue,fieldShow:String;Const AllOption:Boolean ):TStrings;
 Function ConvertDecimalF(StrNum:String):double;
@@ -380,69 +379,8 @@ begin
   tableSQL.Free;
  end;
 
- end;
-
-
-Procedure ksfillComboF2(Const connection: TIBCConnection; ComboBox: TwwDbComboBox;Const tableName,fieldstored,fieldShown:String; orderBy:String='';ShowEmpty:Boolean =false;ShowAll:boolean=false );
-//ShowEmpty useful to force user make a choice but have the option to select empty (none)
-//ShowEmpty and ShowEmpty options are usefull when printing reports and user has to select an option
-// fieldshown will show field different than the one stored
- var
-  tableSQL: TksQUery;
-  str:String;
-  val:String;
-  MyFIeldShown:String;
-begin
- try
-  ComboBox.Items.Clear;
-  myFieldShown:=Trim(FieldShown);
-
-  //stored and shown the same
-  if( myfieldShown = Trim(FieldStored) )then begin
-      myfieldShown:='';
-  end;
-
-  ComboBox.MapList:=Trim(myFieldShown)>'';
-  if (trim(myfieldShown)>'') then begin
-    str:='select '+ fieldStored+ ', '+myFieldShown+ ' from '+tableName;
-  end else begin
-    str:='select '+ fieldStored+ ' from '+tableName;
-  end;
-
-  if (trim(orderBy)>'') then begin
-    str :=Str + ' order by '+orderBy;
-  end;
-
-
-  if ShowEmpty then begin
-    ComboBox.Items.Add('None');
-  end;
-
-  if ShowAll then begin
-    ComboBox.Items.Add('All');
-  end;
-
-  tableSQL:=TksQuery.Create(connection,str);
-  With TableSQL do begin
-    Open;
-    While ( NOT TableSQL.Eof)do begin
-                val:=TableSQL.fieldbyName(fieldStored).AsString;
-                if Trim(myFieldShown)>'' then begin
-                  val:=TableSQL.fieldbyName(MyfieldShown).AsString+#9+val;
-                end;
-                ComboBox.Items.add(val);
-                TableSQL.Next;
-    end;
-    close;
-  end;
- finally
-  tableSQL.Free;
- end;
-
 
  end;
-
-
 
 
 Function ConvertDateF(Const DateStr:String):Tdate;

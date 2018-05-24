@@ -120,6 +120,7 @@ object MainFormFRM: TMainFormFRM
     Height = 346
     Align = alClient
     TabOrder = 2
+    ExplicitTop = 35
     object ScanBTN: TButton
       Left = 455
       Top = 357

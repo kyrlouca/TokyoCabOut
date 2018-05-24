@@ -91,6 +91,30 @@ type
     wwDBEdit3: TwwDBEdit;
     Label5: TLabel;
     wwDBEdit4: TwwDBEdit;
+    ProcReqFLD: TwwDBComboBox;
+    Label6: TLabel;
+    TableSQLPROCEDURE_REQUESTED: TStringField;
+    Label7: TLabel;
+    PreviousProcFLD: TwwDBComboBox;
+    TableSQLPREVIOUS_PROCEDURE: TStringField;
+    TableSQLKIND_OF_PACKAGES: TStringField;
+    Label8: TLabel;
+    KIndOfPackFLD: TwwDBComboBox;
+    Label9: TLabel;
+    wwDBEdit5: TwwDBEdit;
+    TableSQLNUMBER_OF_PACKAGES: TIntegerField;
+    TableSQLWEIGHT_NET: TFloatField;
+    Label10: TLabel;
+    wwDBEdit6: TwwDBEdit;
+    scountry: TwwDBLookupCombo;
+    CountrySQL: TIBCQuery;
+    CountrySQLCODE_2: TStringField;
+    CountrySQLNAME: TStringField;
+    TableSQLCOUNTRY_OF_ORIGIN: TStringField;
+    Label11: TLabel;
+    Label12: TLabel;
+    DangerousFLD: TwwDBComboBox;
+    TableSQLDANGEROUS_GOODS: TStringField;
     procedure BitBtn2Click(Sender: TObject);
     procedure TableSQLBeforeEdit(DataSet: TDataSet);
     procedure FormActivate(Sender: TObject);
@@ -103,11 +127,14 @@ type
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure SelGroupFLDCloseUp(Sender: TObject; LookupTable,
       FillTable: TDataSet; modified: Boolean);
+    procedure Select2CloseUp(Sender: TObject; LookupTable, FillTable: TDataSet;
+      modified: Boolean);
   private
     { Private declarations }
     cn:TIBCConnection;
   public
     { Public declarations }
+
 
     IN_ACTION:String;
     in_SERIAL:Integer;
@@ -148,6 +175,14 @@ end;
 procedure TH_FlightAirItemFRM.RzBitBtn1Click(Sender: TObject);
 begin
 close;
+end;
+
+procedure TH_FlightAirItemFRM.Select2CloseUp(Sender: TObject; LookupTable,
+  FillTable: TDataSet; modified: Boolean);
+begin
+  FillTable.FieldByName('description').Value:= LookupTable.FieldByName('Description').AsString;
+  FillTable.FieldByName('Cert_value').Value:= LookupTable.FieldByName('Cert_value').AsString;
+
 end;
 
 procedure TH_FlightAirItemFRM.SelGroupFLDCloseUp(Sender: TObject; LookupTable,
@@ -198,7 +233,12 @@ end;
 
 procedure TH_FlightAirItemFRM.FormActivate(Sender: TObject);
 begin
-ksOpenTables([GroupCertificateSQL,SelectCertSQL,CertItemSQL]);
+ksOpenTables([GroupCertificateSQL,SelectCertSQL,CertItemSQL,CountrySQL]);
+ksfillComboF1(cn,ProcReqFLD,'aux_procedure_request','key','key','key',false,false);
+ksfillComboF1(cn,PreviousProcFLD,'aux_previous_procedure','key','key','key',false,false);
+ksfillComboF1(cn,KindOfPackFLD,'aux_previous_procedure','key','key','key',false,false);
+ksfillComboF1(cn,DangerousFLD,'AUX_DANGEROUS_GOODS','key','key','key',false,false);
+
 if IN_ACTION='INSERT' then begin
 //   ksOpenTables([TableSQL]);
    TableSQL.Close;

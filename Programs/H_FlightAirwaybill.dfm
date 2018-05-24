@@ -105,21 +105,6 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
       TabOrder = 1
       OnClick = CancelBTNClick
     end
-    object wwButton2: TwwButton
-      Left = 227
-      Top = 16
-      Width = 75
-      Height = 25
-      Caption = 'wwButton2'
-      Color = clBtnFace
-      DitherColor = clWhite
-      DitherStyle = wwdsDither
-      ShadeStyle = wwbsNormal
-      TabOrder = 2
-      TextOptions.Alignment = taCenter
-      TextOptions.VAlignment = vaVCenter
-      OnClick = wwButton2Click
-    end
   end
   object Panel3: TPanel
     Left = 0
@@ -128,7 +113,6 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
     Height = 715
     Align = alClient
     TabOrder = 2
-    ExplicitTop = 54
     object GroupBox1: TGroupBox
       Left = 18
       Top = 6
@@ -676,7 +660,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
       Left = 342
       Top = 6
       Width = 337
-      Height = 345
+      Height = 355
       Caption = 'Sender'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -1090,7 +1074,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
       Left = 685
       Top = 6
       Width = 404
-      Height = 345
+      Height = 355
       Caption = 'Consignee'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -2077,21 +2061,6 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         TitleLines = 1
         TitleButtons = False
       end
-    end
-    object wwButton1: TwwButton
-      Left = 1024
-      Top = 496
-      Width = 75
-      Height = 25
-      Caption = 'wwButton1'
-      Color = clBtnFace
-      DitherColor = clWhite
-      DitherStyle = wwdsDither
-      ShadeStyle = wwbsNormal
-      TabOrder = 6
-      TextOptions.Alignment = taCenter
-      TextOptions.VAlignment = vaVCenter
-      OnClick = wwButton1Click
     end
   end
   object CurrencyFLD: TwwDBLookupCombo

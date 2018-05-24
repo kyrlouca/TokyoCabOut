@@ -249,6 +249,9 @@ if IN_ACTION='INSERT' then begin
 
    TableSQL.Insert;
    TableSQL.FieldByName('fk_FA_serial').Value:=in_SERIAL;
+      If FirstFLD.CanFocus then
+   FirstFLD.SetFocus;
+
 
 end else if IN_ACTION='EDIT' then begin
    TableSQL.Close;
@@ -257,17 +260,26 @@ end else if IN_ACTION='EDIT' then begin
    TableSQL.ParamByName('SerialNumber').Value:=in_SERIAL;
    TableSQL.ReadOnly:=false;
    TableSQL.Open;
+   If FirstFLD.CanFocus then
+   FirstFLD.SetFocus;
+
 end else if IN_ACTION='DISPLAY' then begin
    TableSQL.Close;
    TableSQL.RestoreSQL;
    tABLESQL.AddWhere('serial_Number = :serialNumber');
    TableSQL.ReadOnly:=true;
    TableSQL.Open;
+      If FirstFLD.CanFocus then
+   FirstFLD.SetFocus;
+
 end else begin
    TableSQL.Close;
    TableSQL.RestoreSQL;
    TableSQL.ReadOnly:=False;
    TableSQL.Open;
+      If FirstFLD.CanFocus then
+   FirstFLD.SetFocus;
+
 end;
 
 end;

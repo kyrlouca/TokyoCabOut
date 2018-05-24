@@ -213,7 +213,6 @@ type
     SelectTariffFLD: TwwDBEdit;
     SpeedButton2: TSpeedButton;
     ReadTrans: TIBCTransaction;
-    wwButton1: TwwButton;
     SelectCertSQL: TIBCQuery;
     SelectCertSQLSERIAL_NUMBER: TIntegerField;
     SelectCertSQLCERT_CODE: TStringField;
@@ -223,7 +222,6 @@ type
     SelectCertSQLFIELD_FOR_VALUE: TStringField;
     SelectCertSQLTABLE_FOR_VALUE: TStringField;
     SelectCertSQLDESCRIPTION: TStringField;
-    wwButton2: TwwButton;
     GroupCertificateSQL: TIBCQuery;
     GroupCertificateSQLCODE: TStringField;
     GroupCertificateSQLDESCRIPTION: TStringField;
@@ -526,7 +524,7 @@ end;
 
 procedure TH_FlightairwaybillFRM.wwButton2Click(Sender: TObject);
 begin
-H_FlightAirItemFRM.ShowModal;
+//H_FlightAirItemFRM.ShowModal;
 end;
 
 procedure TH_FlightairwaybillFRM.ItemsGRDDblClick(Sender: TObject);

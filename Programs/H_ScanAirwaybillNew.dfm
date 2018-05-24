@@ -411,7 +411,7 @@ object H_ScanAirwaibillNewFRM: TH_ScanAirwaibillNewFRM
       TabOrder = 1
       object Label2: TLabel
         Left = 13
-        Top = 20
+        Top = 12
         Width = 66
         Height = 16
         Caption = 'Scan Hawb'
@@ -560,7 +560,7 @@ object H_ScanAirwaibillNewFRM: TH_ScanAirwaibillNewFRM
       end
       object HawbInputFLD: TwwDBEdit
         Left = 85
-        Top = 6
+        Top = 12
         Width = 124
         Height = 21
         TabOrder = 2
