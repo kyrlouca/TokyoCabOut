@@ -2,7 +2,7 @@ object M_certificatesFRM: TM_certificatesFRM
   Left = 285
   Top = 102
   ClientHeight = 621
-  ClientWidth = 750
+  ClientWidth = 775
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -18,7 +18,7 @@ object M_certificatesFRM: TM_certificatesFRM
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 750
+    Width = 775
     Height = 65
     Align = alTop
     Caption = 'Certificates'
@@ -33,7 +33,7 @@ object M_certificatesFRM: TM_certificatesFRM
   object Panel4: TPanel
     Left = 0
     Top = 555
-    Width = 750
+    Width = 775
     Height = 66
     Align = alBottom
     TabOrder = 1
@@ -113,14 +113,14 @@ object M_certificatesFRM: TM_certificatesFRM
   object Panel3: TPanel
     Left = 0
     Top = 65
-    Width = 750
+    Width = 775
     Height = 490
     Align = alClient
     TabOrder = 2
     object Panel2: TPanel
       Left = 1
       Top = 1
-      Width = 748
+      Width = 773
       Height = 24
       Align = alTop
       BevelOuter = bvNone
@@ -129,7 +129,7 @@ object M_certificatesFRM: TM_certificatesFRM
     object Panel5: TPanel
       Left = 1
       Top = 25
-      Width = 748
+      Width = 773
       Height = 464
       Align = alClient
       BevelOuter = bvNone
@@ -144,8 +144,8 @@ object M_certificatesFRM: TM_certificatesFRM
         TabOrder = 0
       end
       object DeleteSelectedBTN: TBitBtn
-        Left = 712
-        Top = 89
+        Left = 584
+        Top = 85
         Width = 137
         Height = 32
         BiDiMode = bdRightToLeft
@@ -181,8 +181,8 @@ object M_certificatesFRM: TM_certificatesFRM
         OnClick = DeleteSelectedBTNClick
       end
       object InsertBTN: TBitBtn
-        Left = 696
-        Top = 1
+        Left = 592
+        Top = 6
         Width = 137
         Height = 40
         BiDiMode = bdLeftToRight
@@ -219,8 +219,8 @@ object M_certificatesFRM: TM_certificatesFRM
         OnClick = InsertBTNClick
       end
       object BitBtn1: TBitBtn
-        Left = 720
-        Top = 49
+        Left = 592
+        Top = 47
         Width = 137
         Height = 32
         BiDiMode = bdLeftToRight
@@ -296,8 +296,8 @@ object M_certificatesFRM: TM_certificatesFRM
         OnClick = BitBtn1Click
       end
       object BitBtn3: TBitBtn
-        Left = 712
-        Top = 153
+        Left = 576
+        Top = 161
         Width = 137
         Height = 40
         BiDiMode = bdLeftToRight
@@ -351,13 +351,16 @@ object M_certificatesFRM: TM_certificatesFRM
           Top = 61
           Width = 439
           Height = 178
+          ControlType.Strings = (
+            'IS_DEFAULT;CheckBox;Y;N')
           Selected.Strings = (
-            'SERIAL_NUMBER'#9'5'#9'S/N'#9#9
-            'FLIGHT_NAME'#9'33'#9'Name'#9#9)
+            'CODE'#9'10'#9'CODE'
+            'DESCRIPTION'#9'41'#9'DESCRIPTION'
+            'IS_DEFAULT'#9'1'#9'Default')
           IniAttributes.Delimiter = ';;'
           IniAttributes.UnicodeIniFile = False
           TitleColor = clBtnFace
-          FixedCols = 1
+          FixedCols = 0
           ShowHorzScrollBar = True
           BiDiMode = bdLeftToRight
           ParentBiDiMode = False
@@ -422,7 +425,6 @@ object M_certificatesFRM: TM_certificatesFRM
             Spacing = 4
             Transparent = False
             Caption = 'wwDBNavigator1Next'
-            Enabled = False
             DisabledTextColors.ShadeColor = clGray
             DisabledTextColors.HighlightColor = clBtnHighlight
             Index = 1
@@ -439,7 +441,6 @@ object M_certificatesFRM: TM_certificatesFRM
             Spacing = 4
             Transparent = False
             Caption = 'wwDBNavigator1Insert'
-            Enabled = False
             DisabledTextColors.ShadeColor = clGray
             DisabledTextColors.HighlightColor = clBtnHighlight
             Index = 2
@@ -456,7 +457,6 @@ object M_certificatesFRM: TM_certificatesFRM
             Spacing = 4
             Transparent = False
             Caption = 'wwDBNavigator1Delete'
-            Enabled = False
             DisabledTextColors.ShadeColor = clGray
             DisabledTextColors.HighlightColor = clBtnHighlight
             Index = 3
@@ -507,7 +507,6 @@ object M_certificatesFRM: TM_certificatesFRM
             Spacing = 4
             Transparent = False
             Caption = 'wwDBNavigator1Refresh'
-            Enabled = False
             DisabledTextColors.ShadeColor = clGray
             DisabledTextColors.HighlightColor = clBtnHighlight
             Index = 6
@@ -515,34 +514,10 @@ object M_certificatesFRM: TM_certificatesFRM
           end
         end
       end
-      object wwDBLookupCombo3: TwwDBLookupCombo
-        Left = 88
-        Top = 516
-        Width = 209
-        Height = 24
-        Ctl3D = True
-        CharCase = ecUpperCase
-        DropDownAlignment = taLeftJustify
-        Selected.Strings = (
-          'CODE_2'#9'8'#9'Code2'#9'F'
-          'NAME'#9'60'#9'NAME'#9'F')
-        DataField = 'COUNTRY_CODE'
-        DataSource = itineraryCountrySRC
-        LookupTable = CountrySQL
-        LookupField = 'CODE_2'
-        Options = [loColLines]
-        ParentCtl3D = False
-        TabOrder = 6
-        AutoDropDown = False
-        ShowButton = True
-        PreciseEditRegion = False
-        AllowClearKey = False
-        ShowMatchText = True
-      end
       object GroupBox2: TGroupBox
         Left = 30
         Top = 269
-        Width = 385
+        Width = 723
         Height = 217
         Caption = 'Certificate'
         Font.Charset = DEFAULT_CHARSET
@@ -551,11 +526,11 @@ object M_certificatesFRM: TM_certificatesFRM
         Font.Name = 'Arial'
         Font.Style = []
         ParentFont = False
-        TabOrder = 7
+        TabOrder = 6
         object wwDBNavigator1: TwwDBNavigator
           Left = 2
           Top = 18
-          Width = 381
+          Width = 719
           Height = 36
           AutosizeStyle = asNone
           DataSource = itineraryCountrySRC
@@ -590,7 +565,6 @@ object M_certificatesFRM: TM_certificatesFRM
             Spacing = 4
             Transparent = False
             Caption = 'wwDBNavigator1Next'
-            Enabled = False
             DisabledTextColors.ShadeColor = clGray
             DisabledTextColors.HighlightColor = clBtnHighlight
             Index = 1
@@ -607,7 +581,6 @@ object M_certificatesFRM: TM_certificatesFRM
             Spacing = 4
             Transparent = False
             Caption = 'wwDBNavigator1Insert'
-            Enabled = False
             DisabledTextColors.ShadeColor = clGray
             DisabledTextColors.HighlightColor = clBtnHighlight
             Index = 2
@@ -624,7 +597,6 @@ object M_certificatesFRM: TM_certificatesFRM
             Spacing = 4
             Transparent = False
             Caption = 'wwDBNavigator1Delete'
-            Enabled = False
             DisabledTextColors.ShadeColor = clGray
             DisabledTextColors.HighlightColor = clBtnHighlight
             Index = 3
@@ -675,7 +647,6 @@ object M_certificatesFRM: TM_certificatesFRM
             Spacing = 4
             Transparent = False
             Caption = 'wwDBNavigator1Refresh'
-            Enabled = False
             DisabledTextColors.ShadeColor = clGray
             DisabledTextColors.HighlightColor = clBtnHighlight
             Index = 6
@@ -685,18 +656,23 @@ object M_certificatesFRM: TM_certificatesFRM
         object wwDBGrid1: TwwDBGrid
           Left = 2
           Top = 54
-          Width = 335
+          Width = 703
           Height = 161
           ControlType.Strings = (
-            'COUNTRY_CODE;CustomEdit;wwDBLookupCombo3')
+            'COUNTRY_CODE;CustomEdit;wwDBLookupCombo3'
+            'CERT_TYPE;CheckBox;T;N')
           Selected.Strings = (
-            'ORDER_POSITION'#9'5'#9'Pos'
-            'COUNTRY_CODE'#9'9'#9'Country'
-            'CountryName'#9'25'#9'CountryName')
+            'SERIAL_NUMBER'#9'7'#9'S/N'
+            'CERT_CODE'#9'10'#9'Code'
+            'DESCRIPTION'#9'22'#9'Description'
+            'CERT_VALUE'#9'10'#9'Value'
+            'CERT_TYPE'#9'9'#9'Use Table'
+            'TABLE_FOR_VALUE'#9'22'#9'Table'
+            'FIELD_FOR_VALUE'#9'30'#9'Field')
           IniAttributes.Delimiter = ';;'
           IniAttributes.UnicodeIniFile = False
           TitleColor = clBtnFace
-          FixedCols = 0
+          FixedCols = 1
           ShowHorzScrollBar = False
           ShowVertScrollBar = False
           BiDiMode = bdLeftToRight
@@ -712,7 +688,7 @@ object M_certificatesFRM: TM_certificatesFRM
           Font.Name = 'Arial'
           Font.Style = []
           KeyOptions = [dgEnterToTab, dgAllowDelete, dgAllowInsert]
-          Options = [dgEditing, dgTitles, dgColumnResize, dgRowLines, dgTabs, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgWordWrap]
+          Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgWordWrap]
           ParentCtl3D = False
           ParentFont = False
           TabOrder = 1
@@ -734,11 +710,11 @@ object M_certificatesFRM: TM_certificatesFRM
     DMLRefresh = True
     SQLInsert.Strings = (
       'INSERT INTO CERTIFICATE_GROUP'
-      '  (CODE, DESCRIPTION)'
+      '  (CODE, DESCRIPTION, IS_DEFAULT)'
       'VALUES'
-      '  (:CODE, :DESCRIPTION)'
+      '  (:CODE, :DESCRIPTION, :IS_DEFAULT)'
       'RETURNING '
-      '  CODE, DESCRIPTION')
+      '  CODE, DESCRIPTION, IS_DEFAULT')
     SQLDelete.Strings = (
       'DELETE FROM CERTIFICATE_GROUP'
       'WHERE'
@@ -746,11 +722,13 @@ object M_certificatesFRM: TM_certificatesFRM
     SQLUpdate.Strings = (
       'UPDATE CERTIFICATE_GROUP'
       'SET'
-      '  CODE = :CODE, DESCRIPTION = :DESCRIPTION'
+      
+        '  CODE = :CODE, DESCRIPTION = :DESCRIPTION, IS_DEFAULT = :IS_DEF' +
+        'AULT'
       'WHERE'
       '  CODE = :Old_CODE')
     SQLRefresh.Strings = (
-      'SELECT CODE, DESCRIPTION FROM CERTIFICATE_GROUP'
+      'SELECT CODE, DESCRIPTION, IS_DEFAULT FROM CERTIFICATE_GROUP'
       'WHERE'
       '  CODE = :CODE')
     SQLLock.Strings = (
@@ -768,17 +746,27 @@ object M_certificatesFRM: TM_certificatesFRM
     UpdateTransaction = UsedForUpdateTrans
     SQL.Strings = (
       'Select * from certificate_group')
+    Active = True
     Left = 80
     Top = 25
     object ItinerarySQLCODE: TStringField
+      DisplayWidth = 10
       FieldName = 'CODE'
       Required = True
       Size = 10
     end
     object ItinerarySQLDESCRIPTION: TStringField
+      DisplayWidth = 41
       FieldName = 'DESCRIPTION'
       FixedChar = True
       Size = 60
+    end
+    object ItinerarySQLIS_DEFAULT: TStringField
+      DisplayLabel = 'Default'
+      DisplayWidth = 1
+      FieldName = 'IS_DEFAULT'
+      FixedChar = True
+      Size = 1
     end
   end
   object UsedForUpdateTrans: TIBCTransaction
@@ -796,87 +784,120 @@ object M_certificatesFRM: TM_certificatesFRM
     KeyFields = 'serial_number'
     KeyGenerator = 'CERTIFICATE_ITEM_GEN'
     SQLInsert.Strings = (
-      'INSERT INTO ITINERARY_COUNTRY'
+      'INSERT INTO CERTIFICATE_ITEM'
       
-        '  (SERIAL_NUMBER, FK_ITINERARY_SERIAL, COUNTRY_CODE, ORDER_POSIT' +
-        'ION)'
+        '  (SERIAL_NUMBER, CERT_CODE, FK_CERTIFICATE_GROUP, CERT_TYPE, CE' +
+        'RT_VALUE, FIELD_FOR_VALUE, TABLE_FOR_VALUE, DESCRIPTION)'
       'VALUES'
       
-        '  (:SERIAL_NUMBER, :FK_ITINERARY_SERIAL, :COUNTRY_CODE, :ORDER_P' +
-        'OSITION)')
+        '  (:SERIAL_NUMBER, :CERT_CODE, :FK_CERTIFICATE_GROUP, :CERT_TYPE' +
+        ', :CERT_VALUE, :FIELD_FOR_VALUE, :TABLE_FOR_VALUE, :DESCRIPTION)')
     SQLDelete.Strings = (
-      'DELETE FROM ITINERARY_COUNTRY'
+      'DELETE FROM CERTIFICATE_ITEM'
       'WHERE'
       '  SERIAL_NUMBER = :Old_SERIAL_NUMBER')
     SQLUpdate.Strings = (
-      'UPDATE ITINERARY_COUNTRY'
+      'UPDATE CERTIFICATE_ITEM'
       'SET'
       
-        '  SERIAL_NUMBER = :SERIAL_NUMBER, FK_ITINERARY_SERIAL = :FK_ITIN' +
-        'ERARY_SERIAL, COUNTRY_CODE = :COUNTRY_CODE, ORDER_POSITION = :OR' +
-        'DER_POSITION'
+        '  SERIAL_NUMBER = :SERIAL_NUMBER, CERT_CODE = :CERT_CODE, FK_CER' +
+        'TIFICATE_GROUP = :FK_CERTIFICATE_GROUP, CERT_TYPE = :CERT_TYPE, ' +
+        'CERT_VALUE = :CERT_VALUE, FIELD_FOR_VALUE = :FIELD_FOR_VALUE, TA' +
+        'BLE_FOR_VALUE = :TABLE_FOR_VALUE, DESCRIPTION = :DESCRIPTION'
       'WHERE'
       '  SERIAL_NUMBER = :Old_SERIAL_NUMBER')
     SQLRefresh.Strings = (
       
-        'SELECT SERIAL_NUMBER, FK_ITINERARY_SERIAL, COUNTRY_CODE, ORDER_P' +
-        'OSITION FROM ITINERARY_COUNTRY'
+        'SELECT SERIAL_NUMBER, CERT_CODE, FK_CERTIFICATE_GROUP, CERT_TYPE' +
+        ', CERT_VALUE, FIELD_FOR_VALUE, TABLE_FOR_VALUE, DESCRIPTION FROM' +
+        ' CERTIFICATE_ITEM'
       'WHERE'
-      '  SERIAL_NUMBER = :P_1_SERIAL_NUMBER')
+      '  SERIAL_NUMBER = :SERIAL_NUMBER')
     SQLLock.Strings = (
-      'SELECT NULL FROM ITINERARY_COUNTRY'
+      'SELECT NULL FROM CERTIFICATE_ITEM'
       'WHERE'
       'SERIAL_NUMBER = :Old_SERIAL_NUMBER'
       'FOR UPDATE WITH LOCK')
+    SQLRecCount.Strings = (
+      'SELECT COUNT(*) FROM ('
+      'SELECT 1 AS C  FROM CERTIFICATE_ITEM'
+      ''
+      ') q')
     Connection = MainFormFRM.CabOutData
     Transaction = MainFormFRM.UsedForReadOnlyTrans
     UpdateTransaction = UsedForUpdateTrans
     SQL.Strings = (
       'Select * from certificate_item')
-    MasterFields = 'SERIAL_NUMBER'
+    MasterFields = 'CODE'
+    DetailFields = 'FK_CERTIFICATE_GROUP'
     MasterSource = ItinerarySRC
-    Left = 256
-    Top = 97
-    object ItineraryCountrySQLORDER_POSITION: TIntegerField
-      DisplayLabel = 'Pos'
-      DisplayWidth = 5
-      FieldName = 'ORDER_POSITION'
+    Active = True
+    OnNewRecord = ItineraryCountrySQLNewRecord
+    Left = 200
+    Top = 417
+    ParamData = <
+      item
+        DataType = ftString
+        Name = 'CODE'
+        ParamType = ptInput
+        Value = 'Group1'
+      end>
+    object ItineraryCountrySQLSERIAL_NUMBER: TIntegerField
+      DisplayLabel = 'S/N'
+      DisplayWidth = 7
+      FieldName = 'SERIAL_NUMBER'
     end
-    object ItineraryCountrySQLCOUNTRY_CODE: TStringField
-      DisplayLabel = 'Country'
-      DisplayWidth = 9
-      FieldName = 'COUNTRY_CODE'
+    object ItineraryCountrySQLCERT_CODE: TStringField
+      DisplayLabel = 'Code'
+      DisplayWidth = 10
+      FieldName = 'CERT_CODE'
       Required = True
+      Size = 10
+    end
+    object ItineraryCountrySQLDESCRIPTION: TStringField
+      DisplayLabel = 'Description'
+      DisplayWidth = 22
+      FieldName = 'DESCRIPTION'
+      FixedChar = True
+      Size = 30
+    end
+    object ItineraryCountrySQLCERT_VALUE: TStringField
+      DisplayLabel = 'Value'
+      DisplayWidth = 10
+      FieldName = 'CERT_VALUE'
+      Size = 10
+    end
+    object ItineraryCountrySQLCERT_TYPE: TStringField
+      DisplayLabel = 'Use Table'
+      DisplayWidth = 9
+      FieldName = 'CERT_TYPE'
       FixedChar = True
       Size = 2
     end
-    object ItineraryCountrySQLCountryName: TStringField
-      DisplayWidth = 25
-      FieldKind = fkLookup
-      FieldName = 'CountryName'
-      LookupDataSet = CountrySQL
-      LookupKeyFields = 'CODE_2'
-      LookupResultField = 'NAME'
-      KeyFields = 'COUNTRY_CODE'
-      Lookup = True
+    object ItineraryCountrySQLTABLE_FOR_VALUE: TStringField
+      DisplayLabel = 'Table'
+      DisplayWidth = 22
+      FieldName = 'TABLE_FOR_VALUE'
+      FixedChar = True
+      Size = 30
     end
-    object ItineraryCountrySQLSERIAL_NUMBER: TIntegerField
-      DisplayLabel = 'S/N'
-      DisplayWidth = 10
-      FieldName = 'SERIAL_NUMBER'
-      Visible = False
+    object ItineraryCountrySQLFIELD_FOR_VALUE: TStringField
+      DisplayLabel = 'Field'
+      DisplayWidth = 30
+      FieldName = 'FIELD_FOR_VALUE'
+      FixedChar = True
+      Size = 30
     end
-    object ItineraryCountrySQLFK_ITINERARY_SERIAL: TIntegerField
-      DisplayWidth = 10
-      FieldName = 'FK_ITINERARY_SERIAL'
-      Required = True
+    object ItineraryCountrySQLFK_CERTIFICATE_GROUP: TStringField
+      FieldName = 'FK_CERTIFICATE_GROUP'
       Visible = False
+      Size = 10
     end
   end
   object itineraryCountrySRC: TIBCDataSource
     DataSet = ItineraryCountrySQL
-    Left = 361
-    Top = 202
+    Left = 257
+    Top = 410
   end
   object CountrySQL: TIBCQuery
     SQLInsert.Strings = (

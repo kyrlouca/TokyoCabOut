@@ -808,7 +808,7 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
       object GroupBox2: TGroupBox
         Left = 486
         Top = 45
-        Width = 364
+        Width = 411
         Height = 332
         Caption = 'Item Certificates'
         Font.Charset = DEFAULT_CHARSET
@@ -948,19 +948,21 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
         object wwDBGrid1: TwwDBGrid
           Left = 11
           Top = 72
-          Width = 332
+          Width = 382
           Height = 156
           ControlType.Strings = (
             'COUNTRY_CODE;CustomEdit;CountryLookupFLD'
-            'CERT_CODE;CustomEdit;Select2;F')
+            'CERT_CODE;CustomEdit;Select2;F'
+            'CERT_TYPE;CheckBox;T;')
           Selected.Strings = (
-            'CERT_CODE'#9'10'#9'Code'
-            'CERT_VALUE'#9'10'#9'Value'
-            'DESCRIPTION'#9'21'#9'Desc')
+            'CERT_TYPE'#9'4'#9'Type'
+            'CERT_CODE'#9'10'#9'Doc Type'
+            'CERT_VALUE'#9'12'#9'Doc Ref'
+            'DESCRIPTION'#9'21'#9'DescrIption'#9'F')
           IniAttributes.Delimiter = ';;'
           IniAttributes.UnicodeIniFile = False
           TitleColor = clBtnFace
-          FixedCols = 0
+          FixedCols = 1
           ShowHorzScrollBar = True
           DataSource = CertItemSRC
           Font.Charset = DEFAULT_CHARSET
@@ -1398,33 +1400,32 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
         Name = 'SERIAL_NUMBER'
         Value = nil
       end>
+    object CertItemSQLCERT_TYPE: TStringField
+      DisplayLabel = 'Type'
+      DisplayWidth = 4
+      FieldName = 'CERT_TYPE'
+      FixedChar = True
+      Size = 2
+    end
     object CertItemSQLCERT_CODE: TStringField
-      DisplayLabel = 'Code'
+      DisplayLabel = 'Doc Type'
       DisplayWidth = 10
       FieldName = 'CERT_CODE'
       Size = 10
     end
     object CertItemSQLCERT_VALUE: TStringField
-      DisplayLabel = 'Value'
-      DisplayWidth = 10
+      DisplayLabel = 'Doc Ref'
+      DisplayWidth = 12
       FieldName = 'CERT_VALUE'
       FixedChar = True
       Size = 30
     end
     object CertItemSQLDESCRIPTION: TStringField
-      DisplayLabel = 'Desc'
+      DisplayLabel = 'DescrIption'
       DisplayWidth = 21
       FieldName = 'DESCRIPTION'
       FixedChar = True
       Size = 30
-    end
-    object CertItemSQLCERT_TYPE: TStringField
-      DisplayLabel = 'Type'
-      DisplayWidth = 4
-      FieldName = 'CERT_TYPE'
-      Visible = False
-      FixedChar = True
-      Size = 2
     end
     object CertItemSQLSERIAL_NUMBER: TIntegerField
       FieldName = 'SERIAL_NUMBER'

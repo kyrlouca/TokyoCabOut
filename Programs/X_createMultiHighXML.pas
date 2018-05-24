@@ -1109,24 +1109,45 @@ begin
         TableSerial:=FlightSerial;
      end else begin
       TableSerial:=0;
+      result:= 'Table '+tblName+ ' NOT FOUND';
+      ///  exit now
+      exit;
+
      end;
 
+    temp:=
+  '   SELECT'
+  +'      RDB$RELATION_FIELDS.RDB$FIELD_NAME as FieldName'
+  +'    FROM'
+  +'      RDB$RELATION_FIELDS'
+  +'    WHERE'
+  +'      RDB$RELATION_FIELDS.RDB$RELATION_NAME = UPPER(:TABLE_NAME)'
+  +'      AND RDB$RELATION_FIELDS.RDB$FIELD_NAME = UPPER(:FIELD_NAME)';
+
+  qr:=TksQuery.Create(cn,temp);
   try
+    qr.ParamByName('TABLE_NAME').Value:=tblName;
+    qr.ParamByName('FIELD_NAME').Value:= tblField;
+    qr.Open;
+    if qr.FieldByName('FieldName').AsString='' then begin
+      result:= 'Field '+ tblField + ' NOT Found';
+      ///  exit now
+      exit;
+    end;
+  finally
+      qr.Free;
+  end;
 
     sqlStr:= 'Select ' + tblField + ' from '+tblName+' where serial_number= :serial';
-    tblQr:= TksQuery.Create(cn,sqlStr);
     try
+     tblQr:= TksQuery.Create(cn,sqlStr);
      tblQr.ParamByName('serial').Value:=TableSerial;
      tblQR.Open;
      result:= tblQr.FieldByName(tblField).AsString;
-    except
-      result:='ERROR  Table:' + tblName + ' field:' + tblField;
-    end;
 
-  finally
-    qr.Free;
-    tblQR.free;
-  end;
+    finally
+      tblQR.Free;
+    end;
 
 
 end;

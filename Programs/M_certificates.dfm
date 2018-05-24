@@ -386,8 +386,6 @@ object M_certificatesFRM: TM_certificatesFRM
           TitleLines = 1
           TitleButtons = False
           OnDblClick = FlightOutGRDDblClick
-          ExplicitLeft = 0
-          ExplicitTop = 67
         end
         object wwDBNavigator2: TwwDBNavigator
           Left = 2
@@ -410,7 +408,6 @@ object M_certificatesFRM: TM_certificatesFRM
             Spacing = 4
             Transparent = False
             Caption = 'wwDBNavigator1Prior'
-            Enabled = False
             DisabledTextColors.ShadeColor = clGray
             DisabledTextColors.HighlightColor = clBtnHighlight
             Index = 0
@@ -427,6 +424,7 @@ object M_certificatesFRM: TM_certificatesFRM
             Spacing = 4
             Transparent = False
             Caption = 'wwDBNavigator1Next'
+            Enabled = False
             DisabledTextColors.ShadeColor = clGray
             DisabledTextColors.HighlightColor = clBtnHighlight
             Index = 1
@@ -567,7 +565,6 @@ object M_certificatesFRM: TM_certificatesFRM
             Spacing = 4
             Transparent = False
             Caption = 'wwDBNavigator1Next'
-            Enabled = False
             DisabledTextColors.ShadeColor = clGray
             DisabledTextColors.HighlightColor = clBtnHighlight
             Index = 1
@@ -584,7 +581,6 @@ object M_certificatesFRM: TM_certificatesFRM
             Spacing = 4
             Transparent = False
             Caption = 'wwDBNavigator1Insert'
-            Enabled = False
             DisabledTextColors.ShadeColor = clGray
             DisabledTextColors.HighlightColor = clBtnHighlight
             Index = 2
@@ -601,7 +597,6 @@ object M_certificatesFRM: TM_certificatesFRM
             Spacing = 4
             Transparent = False
             Caption = 'wwDBNavigator1Delete'
-            Enabled = False
             DisabledTextColors.ShadeColor = clGray
             DisabledTextColors.HighlightColor = clBtnHighlight
             Index = 3
@@ -652,7 +647,6 @@ object M_certificatesFRM: TM_certificatesFRM
             Spacing = 4
             Transparent = False
             Caption = 'wwDBNavigator1Refresh'
-            Enabled = False
             DisabledTextColors.ShadeColor = clGray
             DisabledTextColors.HighlightColor = clBtnHighlight
             Index = 6
@@ -669,12 +663,12 @@ object M_certificatesFRM: TM_certificatesFRM
             'CERT_TYPE;CheckBox;T;N')
           Selected.Strings = (
             'SERIAL_NUMBER'#9'7'#9'S/N'
-            'CERT_CODE'#9'10'#9'Code'
-            'DESCRIPTION'#9'22'#9'Description'
-            'CERT_VALUE'#9'10'#9'Value'
-            'CERT_TYPE'#9'9'#9'Use Table'
+            'CERT_CODE'#9'10'#9'Doc Type'
+            'CERT_VALUE'#9'10'#9'Doc Reference'
+            'CERT_TYPE'#9'9'#9'Is Table'
             'TABLE_FOR_VALUE'#9'22'#9'Table'
-            'FIELD_FOR_VALUE'#9'30'#9'Field')
+            'FIELD_FOR_VALUE'#9'30'#9'Field'
+            'DESCRIPTION'#9'22'#9'Description')
           IniAttributes.Delimiter = ';;'
           IniAttributes.UnicodeIniFile = False
           TitleColor = clBtnFace
@@ -837,15 +831,16 @@ object M_certificatesFRM: TM_certificatesFRM
     MasterFields = 'CODE'
     DetailFields = 'FK_CERTIFICATE_GROUP'
     MasterSource = ItinerarySRC
+    Active = True
     OnNewRecord = ItineraryCountrySQLNewRecord
-    Left = 200
-    Top = 417
+    Left = 184
+    Top = 497
     ParamData = <
       item
         DataType = ftString
         Name = 'CODE'
         ParamType = ptInput
-        Value = 'Default'
+        Value = 'Group1'
       end>
     object ItineraryCountrySQLSERIAL_NUMBER: TIntegerField
       DisplayLabel = 'S/N'
@@ -853,27 +848,20 @@ object M_certificatesFRM: TM_certificatesFRM
       FieldName = 'SERIAL_NUMBER'
     end
     object ItineraryCountrySQLCERT_CODE: TStringField
-      DisplayLabel = 'Code'
+      DisplayLabel = 'Doc Type'
       DisplayWidth = 10
       FieldName = 'CERT_CODE'
       Required = True
       Size = 10
     end
-    object ItineraryCountrySQLDESCRIPTION: TStringField
-      DisplayLabel = 'Description'
-      DisplayWidth = 22
-      FieldName = 'DESCRIPTION'
-      FixedChar = True
-      Size = 30
-    end
     object ItineraryCountrySQLCERT_VALUE: TStringField
-      DisplayLabel = 'Value'
+      DisplayLabel = 'Doc Reference'
       DisplayWidth = 10
       FieldName = 'CERT_VALUE'
       Size = 10
     end
     object ItineraryCountrySQLCERT_TYPE: TStringField
-      DisplayLabel = 'Use Table'
+      DisplayLabel = 'Is Table'
       DisplayWidth = 9
       FieldName = 'CERT_TYPE'
       FixedChar = True
@@ -893,6 +881,13 @@ object M_certificatesFRM: TM_certificatesFRM
       FixedChar = True
       Size = 30
     end
+    object ItineraryCountrySQLDESCRIPTION: TStringField
+      DisplayLabel = 'Description'
+      DisplayWidth = 22
+      FieldName = 'DESCRIPTION'
+      FixedChar = True
+      Size = 30
+    end
     object ItineraryCountrySQLFK_CERTIFICATE_GROUP: TStringField
       FieldName = 'FK_CERTIFICATE_GROUP'
       Visible = False
@@ -902,7 +897,7 @@ object M_certificatesFRM: TM_certificatesFRM
   object itineraryCountrySRC: TIBCDataSource
     DataSet = ItineraryCountrySQL
     Left = 257
-    Top = 410
+    Top = 490
   end
   object CountrySQL: TIBCQuery
     SQLInsert.Strings = (
