@@ -241,6 +241,7 @@ type
     UnflagBTN: TRzBitBtn;
     RzBitBtn1: TRzBitBtn;
     MultiHighBTN: TRzBitBtn;
+    CreateLowBTN: TRzBitBtn;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure BitBtn1Click(Sender: TObject);
     procedure AirwayBillSQLAfterPost(DataSet: TDataSet);

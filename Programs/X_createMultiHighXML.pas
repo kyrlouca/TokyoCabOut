@@ -240,7 +240,7 @@ begin
   +'   from'
   +'    flight_airwaybill fa join'
   +'    flight_airwaybill_item it on fa.serial_number=it.fk_fa_serial'
-  +'   where fa.fk_flight_out_serial= :flightSerial'
+  +'   where fa.fk_flight_out_serial= :flightSerial and fa.value_type= ''H'' '
   +'  group by     fa.declaration_type, fa.type_of_declaration, fa.specific_circumstance, fa.incoterms';
   GroupQr:=TksQuery.Create(cn,val);
 
@@ -321,7 +321,8 @@ begin
   val:=
   ' select first 1 * from flight_airwaybill fa where '
   +' fa.fk_flight_out_serial = :flightSerial and '
-  +' fa.declaration_type = :decType and fa.type_of_declaration = :typeDec and fa.specific_circumstance = :circ  and fa.incoterms = :incoterms';
+  +' fa.declaration_type = :decType and fa.type_of_declaration = :typeDec and fa.specific_circumstance = :circ  and fa.incoterms = :incoterms and '
+  +' value_type= ''H'' ';
   FirstAirQR:= TksQuery.Create(cn,val);
 
   try
@@ -513,7 +514,8 @@ begin
     +'      flight_airwaybill_item it on fa.serial_number=it.fk_fa_serial'
     +'      where fa.fk_flight_out_serial= :flightSerial and '
     +'      (fa.is_included_xml = ''N''  or fa.is_included_xml is null) and '
-    +'      fa.declaration_type = :decType and fa.type_of_declaration = :typeDec and fa.specific_circumstance = :circ and Fa.incoterms= :Incoterms'
+    +'      fa.declaration_type = :decType and fa.type_of_declaration = :typeDec and fa.specific_circumstance = :circ and Fa.incoterms= :Incoterms and '
+    +'       value_type= ''H'' '
     +'          order by fa.hawb_id'
     +'    )';
 
@@ -526,7 +528,8 @@ begin
     +'      flight_airwaybill_item it on fa.serial_number=it.fk_fa_serial'
     +'      where fa.fk_flight_out_serial= :flightSerial and '
     +'      fa.serial_number= :AirSerial and'
-    +'      fa.declaration_type = :decType and fa.type_of_declaration = :typeDec and fa.specific_circumstance = :circ and fa.incoterms= :Incoterms'
+    +'      fa.declaration_type = :decType and fa.type_of_declaration = :typeDec and fa.specific_circumstance = :circ and fa.incoterms= :Incoterms and '
+    +'      value_type= ''H'' '
     +'          order by fa.hawb_id'
     +'    )';
 
@@ -539,7 +542,6 @@ begin
       FlightQr.Open;
       if Flightqr.IsEmpty then
         exit;
-
 
 
       TotalsQr.ParambyName('FlightSerial').Value:= FlightOutSerial;
@@ -653,7 +655,8 @@ begin
   +'    flight_airwaybill fa join'
   +'    flight_airwaybill_item it on fa.serial_number=it.fk_fa_serial'
   +'    where fa.fk_flight_out_serial= :flightSerial'
-  +'    and fa.declaration_type = :decType and fa.type_of_declaration = :typeDec and fa.specific_circumstance = :circ and fa.incoterms= :incoterms'
+  +'    and fa.declaration_type = :decType and fa.type_of_declaration = :typeDec and fa.specific_circumstance = :circ and fa.incoterms= :incoterms and '
+  +'    value_type= ''H'' '
   +'    order by fa.hawb_id, sequence';
   qrItem:=TksQuery.Create(cn,Val);
 
@@ -927,7 +930,8 @@ begin
   +'  ('
   +'   select first 89 fa.sender_vat from flight_airwaybill fa'
   +'   where fk_flight_out_serial= :flightSerial and'
-  +'    (fa.is_included_xml = ''N''  or fa.is_included_xml is null)'
+  +'    (fa.is_included_xml = ''N''  or fa.is_included_xml is null) and '
+  +'    fa.value_type= ''H'' '
   +'   order by fa.hawb_id'
   +'   )group by sender_vat';
 
@@ -937,6 +941,7 @@ begin
   +'   select first 89 fa.sender_vat from flight_airwaybill fa'
   +'   where fk_flight_out_serial= :flightSerial and'
   +'    fa.serial_number= :airSerial'
+  +'    fa.value_type= ''H'' '
   +'   order by fa.hawb_id'
   +'   )group by sender_vat';
 
@@ -975,7 +980,8 @@ begin
   +'  ('
   +'   select first 89 fa.consignee_vat, fa.consignee_name, fa.consignee_address_1 from flight_airwaybill fa'
   +'   where fk_flight_out_serial= :flightSerial and'
-  +'    (fa.is_included_xml = ''N''  or fa.is_included_xml is null)'
+  +'    (fa.is_included_xml = ''N''  or fa.is_included_xml is null) and '
+  +'    value_type= ''H'' '
   +'   order by fa.hawb_id'
   +'   )group by consignee_vat, consignee_name, consignee_address_1';
 
@@ -984,7 +990,8 @@ begin
   +'  ('
   +'   select first 89 fa.consignee_vat,consignee_name,consignee_address_1 from flight_airwaybill fa'
   +'   where fk_flight_out_serial= :flightSerial and'
-  +'    fa.serial_number= :airSerial'
+  +'    fa.serial_number= :airSerial and '
+  +'    value_type= ''H'' '
   +'   order by fa.hawb_id'
   +'   )group by consignee_vat, consignee_name, consignee_address_1';
 
@@ -1023,7 +1030,8 @@ begin
   +'  ('
   +'   select first 89 fa.CONSIGNEE_COUNTRY_CODE '
   +'   where fk_flight_out_serial= :flightSerial and'
-  +'    (fa.is_included_xml = ''N''  or fa.is_included_xml is null)'
+  +'    (fa.is_included_xml = ''N''  or fa.is_included_xml is null) and '
+  +'    value_type= ''H'' '
   +'   order by fa.hawb_id'
   +'   )group by sender_vat';
 
@@ -1032,7 +1040,8 @@ begin
   +'  ('
   +'   select first 89 fa.CONSIGNEE_COUNTRY_CODE from flight_airwaybill fa'
   +'   where fk_flight_out_serial= :flightSerial and'
-  +'    fa.serial_number= :airSerial'
+  +'    fa.serial_number= :airSerial and'
+  +'    value_type= ''H'' '
   +'   order by fa.hawb_id'
   +'   )group by CONSIGNEE_COUNTRY_CODE';
 
