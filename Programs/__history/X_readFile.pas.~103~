@@ -246,7 +246,8 @@ THawbAge=(haNotFound, haSame, haPartial, haOld, haDuplicate);
     { Public declarations }
     temp:integer;
     function ReadOneXML(Const FileName:String) :Boolean;
-    procedure ReadXFiles(Const FromDir, ToDir:String; Const Pattern:String);
+//    procedure ReadXFiles(Const FromDir, ToDir:String; Const Pattern:String);
+    procedure SelectXMLFiles(Const FromDir, ToDir:String; Const Pattern:String);
   end;
 
 var
@@ -305,7 +306,7 @@ begin
   FromFolder:=TPath.GetDirectoryName(filename);
   ToFolder:=FromFolder;
   FileNameOnly:= TPath.GetFileName(FIleName);
-  ReadXFiles(FromFolder,ToFolder,FileNameOnly);
+  SelectXmlFiles(FromFolder,ToFolder,FileNameOnly);
   MessagesMemo.lines.Add('----------------------------------------------------');
 //  MessagesMemo.lines.Add('Finish:    '+FileName);
   self.ModalResult:=mrNone;
@@ -617,8 +618,8 @@ End;
 procedure TX_readFileFRM.Button2Click(Sender: TObject);
 begin
 
-  ksExecSQLVar(cn,'Delete from airwaybill_item ai where ai.serial_number > :Serial',[50000]);
-  ksExecSQLVar(cn,'Delete from airwaybill ab where ab.serial_number >= :Serial',[50000]);
+//  ksExecSQLVar(cn,'Delete from airwaybill_item ai where ai.serial_number > :Serial',[50000]);
+//  ksExecSQLVar(cn,'Delete from airwaybill ab where ab.serial_number > :Serial',[50000]);
 
 end;
 
@@ -642,7 +643,7 @@ End;
 
 
 
-procedure TX_readFileFRM.ReadXFiles(Const FromDir, ToDir:String; Const Pattern:String);
+procedure TX_readFileFRM.SelectXMLFiles(Const FromDir, ToDir:String; Const Pattern:String);
  var
    strFiles: TStringDynArray;
    i: integer;
@@ -651,6 +652,8 @@ procedure TX_readFileFRM.ReadXFiles(Const FromDir, ToDir:String; Const Pattern:S
    MovedFile:string;
    Ext:String;
    IsOnlyWithoutExtention:boolean;
+   CleanString:String;
+     strings:TstringList;
 
 begin
 
@@ -679,13 +682,23 @@ begin
         WorkingFile:=TPath.GetDirectoryName(fileName)+'\'+TPath.GetFileNameWithoutExtension(filename)+'.xyz';
         if Tfile.Exists(WorkingFile)then
           Tfile.Delete(WorkingFile);
-        Tfile.Move(FileName,WorkingFile);
+
+       try
+        //Convert to utf to strip control chars
+        CleanString:=trim(system.IOutils.Tfile.ReadAllText(filename));
+        strings:=TStringList.Create();
+        strings.Add(CleanString);
+        strings.SaveToFile(WorkingFile,TEncoding.UTF8);
+        Tfile.Delete(FileName);
+       finally
+        strings.Free;
+       end;
 
         ////To The Job
          X_readFileFRM.ReadOneXML(WorkingFile);
 
         ///Move the file to new directory with extension xxx
-           MovedFile:=ToDir+'\'+TPath.GetFileNameWithoutExtension(filename)+'.xxx';
+        MovedFile:=ToDir+'\'+TPath.GetFileNameWithoutExtension(filename)+'.xxx';
         if Tfile.Exists(MovedFile)then
           Tfile.Delete(MovedFile);
         Tfile.Move(WorkingFile,MovedFile);

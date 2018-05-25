@@ -618,8 +618,8 @@ End;
 procedure TX_readFileFRM.Button2Click(Sender: TObject);
 begin
 
-//  ksExecSQLVar(cn,'Delete from airwaybill_item ai where ai.serial_number > :Serial',[50000]);
-//  ksExecSQLVar(cn,'Delete from airwaybill ab where ab.serial_number > :Serial',[50000]);
+  ksExecSQLVar(cn,'Delete from airwaybill_item ai where ai.serial_number > :Serial',[00000]);
+  ksExecSQLVar(cn,'Delete from airwaybill ab where ab.serial_number > :Serial',[00000]);
 
 end;
 

@@ -248,6 +248,7 @@
             <Form>M_KIndOfPackagesFRM</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="H_commonProcs.pas"/>
         <None Include="CabOut.todo">
             <ContainerId>ToDo</ContainerId>
         </None>

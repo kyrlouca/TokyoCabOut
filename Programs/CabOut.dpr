@@ -48,7 +48,8 @@ uses
   M_ProcedureRequest in 'M_ProcedureRequest.pas' {M_ProcedureRequestFRM},
   M_PreviousProcedure in 'M_PreviousProcedure.pas' {M_PreviousProcedureFRM},
   m_DeclarationType in 'm_DeclarationType.pas' {M_declarationTypeFRM},
-  m_KindOfPackages in 'm_KindOfPackages.pas' {M_KIndOfPackagesFRM};
+  m_KindOfPackages in 'm_KindOfPackages.pas' {M_KIndOfPackagesFRM},
+  H_commonProcs in 'H_commonProcs.pas';
 
 {$R *.RES}
 

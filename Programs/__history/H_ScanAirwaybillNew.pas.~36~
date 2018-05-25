@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   StdCtrls, Mask, IBC, MemDS, IBCError, wwSpeedButton, wwDBNavigator,
   wwclearpanel, Buttons, ExtCtrls, wwdbedit, Grids, Wwdbigrd, Wwdbgrid,
-  DBAccess, Data.DB, vcl.Wwdotdot, vcl.Wwdbcomb, vcl.wwdblook, RzButton;
+  DBAccess, Data.DB, vcl.Wwdotdot, vcl.Wwdbcomb, vcl.wwdblook, RzButton, G_kyriacosTypes;
 
 
 
@@ -236,6 +236,7 @@ type
     FA_ItemSQLWEIGHT_NET: TFloatField;
     FA_ItemSQLCOUNTRY_OF_ORIGIN: TStringField;
     FA_ItemSQLDANGEROUS_GOODS: TStringField;
+    FlightAirwaybillGRDIButton: TwwIButton;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure BitBtn1Click(Sender: TObject);
     procedure AirwayBillSQLAfterPost(DataSet: TDataSet);
@@ -263,6 +264,8 @@ type
     procedure MultiHighBTNClick(Sender: TObject);
     procedure UnflagBTNClick(Sender: TObject);
     procedure FlightAirwaybillGRDKeyPress(Sender: TObject; var Key: Char);
+    procedure FlightAirwaybillGRDTitleButtonClick(Sender: TObject;
+      AFieldName: string);
   private
     { Private declarations }
     cn:TIBCConnection;
@@ -287,7 +290,7 @@ var
 implementation
 
 uses MainForm, H_FlightAirwaybill, H_flightOut, X_createOneXML,
-  X_createMultiXML, X_createMultiHighXML, G_KyrSQL;
+  X_createMultiXML, X_createMultiHighXML, G_KyrSQL, G_generalProcs;
 
 {$R *.DFM}
 
@@ -309,6 +312,7 @@ Var
         Serial:Integer;
         FlightOutSerial:Integer;
         AirSerial:Integer;
+        str:string;
 begin
 
         Serial:=FlightAirwaybillGRD.DataSource.DataSet.fieldbyName('serial_number').AsInteger;
@@ -326,6 +330,11 @@ begin
                 Execute;
 
         end;
+
+        str:= 'delete from flight_airwaybill_item_cert fac where fac.fk_flight_airwaybill_item in '
+        +' (select fi.serial_number from flight_airwaybill_item fi where fi.fk_fa_serial= :AirSerial)';
+       ksExecSQLVar(cn,str,[serial]);
+
 
         With UpdateTableSQL do begin
                 SQL.Clear;
@@ -554,7 +563,7 @@ begin
 
                 FlightAirwaybillSQL.fieldbyname('DECLARATION_TYPE').value:=GetTableDefaultValue('AUX_DECLARATION_TYPE');
                 FlightAirwaybillSQL.fieldbyname('TYPE_OF_DECLARATION').value:=GetTableDefaultValue('AUX_TYPE_OF_DECLARATION');
-                FlightAirwaybillSQL.fieldbyname('CONSIGNEE_SPECIFIC_CIRCUMSTANCE').value:=GetTableDefaultValue('AUX_SPECIFIC_CIRCUMSTANCE');
+                FlightAirwaybillSQL.fieldbyname('SPECIFIC_CIRCUMSTANCE').value:=GetTableDefaultValue('AUX_SPECIFIC_CIRCUMSTANCE');
 
 
                 //xxx add default
@@ -703,6 +712,23 @@ begin
    ksExecSQLVar(cn,'update flight_airwaybill fa set is_included_xml= :flag where fa.serial_number = :Serial',[NewFlag, AirSerial]);
    FlightAirwaybillSQL.Refresh;
  end;
+end;
+
+procedure TH_ScanAirwaibillNewFRM.FlightAirwaybillGRDTitleButtonClick(
+  Sender: TObject; AFieldName: string);
+var
+       sortInfoHawb:TSortInfo;
+       Serial:integer;
+        HawbDS:TIBCQUery;
+
+begin
+
+        HawbDS:=TIBCQuery(FlightAirwaybillGRD.DataSource.DataSet);
+        Serial:=HawbDS.FieldByName('Serial_number').AsInteger;
+
+        SortInfoHawb.Table:=HawbDS;
+        G_GeneralProcs.SortGrid(HawbDs,AFieldName,SOrtInfoHawb);
+        HawbDs.First;
 end;
 
 procedure TH_ScanAirwaibillNewFRM.HawbInputFLDKeyPress(Sender: TObject;

@@ -307,7 +307,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         ParentFont = False
       end
       object Label9: TLabel
-        Left = 203
+        Left = 209
         Top = 301
         Width = 77
         Height = 15
@@ -351,7 +351,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         Font.Style = []
         ParentFont = False
         ReadOnly = True
-        TabOrder = 0
+        TabOrder = 1
         UnboundDataType = wwDefault
         WantReturns = False
         WordWrap = False
@@ -371,7 +371,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         Font.Style = []
         ParentFont = False
         ReadOnly = True
-        TabOrder = 1
+        TabOrder = 2
         UnboundDataType = wwDefault
         WantReturns = False
         WordWrap = False
@@ -390,7 +390,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         Font.Name = 'arial'
         Font.Style = []
         ParentFont = False
-        TabOrder = 5
+        TabOrder = 6
         UnboundDataType = wwDefault
         WantReturns = False
         WordWrap = False
@@ -409,7 +409,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         Font.Name = 'arial'
         Font.Style = []
         ParentFont = False
-        TabOrder = 6
+        TabOrder = 7
         UnboundDataType = wwDefault
         WantReturns = False
         WordWrap = False
@@ -428,7 +428,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         Font.Name = 'arial'
         Font.Style = []
         ParentFont = False
-        TabOrder = 4
+        TabOrder = 5
         UnboundDataType = wwDefault
         WantReturns = False
         WordWrap = False
@@ -447,7 +447,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         Font.Name = 'arial'
         Font.Style = []
         ParentFont = False
-        TabOrder = 3
+        TabOrder = 4
         UnboundDataType = wwDefault
         WantReturns = False
         WordWrap = False
@@ -478,7 +478,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         ItemIndex = 3
         ParentFont = False
         Sorted = False
-        TabOrder = 2
+        TabOrder = 3
         UnboundDataType = wwDefault
       end
       object IncotermsFLD: TwwDBLookupCombo
@@ -501,8 +501,8 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         LookupField = 'CODE'
         Style = csDropDownList
         ParentFont = False
-        TabOrder = 8
-        AutoDropDown = False
+        TabOrder = 9
+        AutoDropDown = True
         ShowButton = True
         PreciseEditRegion = False
         AllowClearKey = False
@@ -520,13 +520,13 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         Font.Name = 'arial'
         Font.Style = []
         ParentFont = False
-        TabOrder = 9
+        TabOrder = 0
         UnboundDataType = wwDefault
         WantReturns = False
         WordWrap = False
       end
       object wwDBComboBox1: TwwDBComboBox
-        Left = 72
+        Left = 73
         Top = 216
         Width = 97
         Height = 23
@@ -548,19 +548,50 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
           'C'#9'C')
         ParentFont = False
         Sorted = False
-        TabOrder = 7
+        TabOrder = 8
         UnboundDataType = wwDefault
       end
       object DeclarationFLD: TwwDBComboBox
         Left = 3
-        Top = 318
+        Top = 322
         Width = 97
         Height = 23
         ShowButton = True
         Style = csDropDownList
         MapList = True
         AllowClearKey = False
+        AutoDropDown = True
+        ShowMatchText = True
+        Column1Width = 150
         DataField = 'DECLARATION_TYPE'
+        DataSource = FlightAirwaybillCDS
+        DropDownCount = 8
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Arial'
+        Font.Style = []
+        ItemHeight = 0
+        Items.Strings = (
+          'A'#9'A'
+          'C'#9'C')
+        ParentFont = False
+        Sorted = True
+        TabOrder = 11
+        UnboundDataType = wwDefault
+      end
+      object ServiceFLD: TwwDBComboBox
+        Left = 106
+        Top = 272
+        Width = 63
+        Height = 23
+        DisableThemes = True
+        ShowButton = True
+        Style = csDropDownList
+        MapList = True
+        AllowClearKey = False
+        AutoDropDown = True
+        DataField = 'SERVICE_CODE'
         DataSource = FlightAirwaybillCDS
         DropDownCount = 8
         Font.Charset = DEFAULT_CHARSET
@@ -576,16 +607,20 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         Sorted = False
         TabOrder = 10
         UnboundDataType = wwDefault
+        TwoColumnDisplay = True
       end
       object TypeOfDeclarationFLD: TwwDBComboBox
         Left = 106
-        Top = 318
-        Width = 63
+        Top = 322
+        Width = 97
         Height = 23
         ShowButton = True
         Style = csDropDownList
         MapList = True
         AllowClearKey = False
+        AutoDropDown = True
+        ShowMatchText = True
+        Column1Width = 150
         DataField = 'TYPE_OF_DECLARATION'
         DataSource = FlightAirwaybillCDS
         DropDownCount = 8
@@ -599,19 +634,22 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
           'A'#9'A'
           'C'#9'C')
         ParentFont = False
-        Sorted = False
-        TabOrder = 11
+        Sorted = True
+        TabOrder = 12
         UnboundDataType = wwDefault
       end
       object CircFLD: TwwDBComboBox
-        Left = 203
-        Top = 318
-        Width = 64
+        Left = 209
+        Top = 322
+        Width = 71
         Height = 23
         ShowButton = True
         Style = csDropDownList
         MapList = True
         AllowClearKey = False
+        AutoDropDown = True
+        ShowMatchText = True
+        Column1Width = 150
         DataField = 'SPECIFIC_CIRCUMSTANCE'
         DataSource = FlightAirwaybillCDS
         DropDownCount = 8
@@ -625,33 +663,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
           'A'#9'A'
           'C'#9'C')
         ParentFont = False
-        Sorted = False
-        TabOrder = 12
-        UnboundDataType = wwDefault
-      end
-      object ServiceFLD: TwwDBComboBox
-        Left = 105
-        Top = 272
-        Width = 63
-        Height = 23
-        ShowButton = True
-        Style = csDropDownList
-        MapList = True
-        AllowClearKey = False
-        DataField = 'SERVICE_CODE'
-        DataSource = FlightAirwaybillCDS
-        DropDownCount = 8
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -12
-        Font.Name = 'Arial'
-        Font.Style = []
-        ItemHeight = 0
-        Items.Strings = (
-          'A'#9'A'
-          'C'#9'C')
-        ParentFont = False
-        Sorted = False
+        Sorted = True
         TabOrder = 13
         UnboundDataType = wwDefault
       end
@@ -1370,10 +1382,10 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
       end
     end
     object GroupBox4: TGroupBox
-      Left = 24
-      Top = 446
+      Left = 21
+      Top = 367
       Width = 879
-      Height = 182
+      Height = 226
       Caption = 'Items'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -1434,14 +1446,14 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         PictureMasks.Strings = (
           'TARIFF_CODE'#9'####  ## ## ##'#9'T'#9'T')
         Selected.Strings = (
-          'SERIAL_NUMBER'#9'6'#9'S/N'#9#9
-          'SEQUENCE'#9'8'#9'Sequence'#9#9
-          'DESCRIPTION'#9'19'#9'Description'#9#9
-          'WEIGHT'#9'10'#9'Weight'#9#9
-          'PIECES'#9'10'#9'Pieces'#9#9
-          'TARIFF_CODE'#9'17'#9'Tariff'#9#9
-          'AMOUNT'#9'10'#9'Amount'#9#9
-          'CURRENCY'#9'10'#9'Currency'#9#9)
+          'SERIAL_NUMBER'#9'6'#9'S/N'
+          'SEQUENCE'#9'8'#9'Sequence'
+          'DESCRIPTION'#9'19'#9'Description'
+          'WEIGHT'#9'10'#9'Weight'
+          'PIECES'#9'10'#9'Pieces'
+          'TARIFF_CODE'#9'17'#9'Tariff'
+          'AMOUNT'#9'10'#9'Amount'
+          'CURRENCY'#9'10'#9'Currency')
         IniAttributes.Delimiter = ';;'
         IniAttributes.UnicodeIniFile = False
         TitleColor = clBtnFace
@@ -1533,7 +1545,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
       end
       object wwDBNavigator2: TwwDBNavigator
         Left = 20
-        Top = 14
+        Top = 15
         Width = 163
         Height = 19
         AutosizeStyle = asNone
@@ -1605,6 +1617,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
           Enabled = False
           DisabledTextColors.ShadeColor = clGray
           DisabledTextColors.HighlightColor = clBtnHighlight
+          OnClick = wwNavButton4Click
           Index = 3
           Style = nbsDelete
         end

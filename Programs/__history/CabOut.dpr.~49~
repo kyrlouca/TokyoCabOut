@@ -44,7 +44,11 @@ uses
   H_FlightAirItem in 'H_FlightAirItem.pas' {H_FlightAirItemFRM},
   M_incoterms in 'M_incoterms.pas' {M_incotermsFRM},
   m_TypeOfDeclaration in 'm_TypeOfDeclaration.pas' {M_TypeOfDeclarationFRM},
-  m_specificCircumstance in 'm_specificCircumstance.pas' {M_SpecificCircumsatnceFRM};
+  m_specificCircumstance in 'm_specificCircumstance.pas' {M_SpecificCircumsatnceFRM},
+  M_ProcedureRequest in 'M_ProcedureRequest.pas' {M_ProcedureRequestFRM},
+  M_PreviousProcedure in 'M_PreviousProcedure.pas' {M_PreviousProcedureFRM},
+  m_DeclarationType in 'm_DeclarationType.pas' {M_declarationTypeFRM},
+  m_KindOfPackages in 'm_KindOfPackages.pas' {M_KIndOfPackagesFRM};
 
 {$R *.RES}
 
@@ -87,9 +91,15 @@ begin
   Application.CreateForm(TH_FlightAirItemFRM, H_FlightAirItemFRM);
   Application.CreateForm(TM_incotermsFRM, M_incotermsFRM);
   Application.CreateForm(TM_SpecificCircumsatnceFRM, M_SpecificCircumsatnceFRM);
-  Application.CreateForm(TM_declarationTypeFRM, M_declarationTypeFRM);
+  Application.CreateForm(TM_ProcedureRequestFRM, M_ProcedureRequestFRM);
   Application.CreateForm(TM_TypeOfDeclarationFRM, M_TypeOfDeclarationFRM);
-  Application.CreateForm(TM_declarationTypeFRM1, M_declarationTypeFRM1);
   Application.CreateForm(TM_SpecificCircumsatnceFRM, M_SpecificCircumsatnceFRM);
+  Application.CreateForm(TM_PreviousProcedureFRM, M_PreviousProcedureFRM);
+  Application.CreateForm(TM_ProcedureRequestFRM, M_ProcedureRequestFRM);
+  Application.CreateForm(TM_KIndOfPackagesFRM, M_KIndOfPackagesFRM);
+  Application.CreateForm(TM_declarationTypeFRM, M_declarationTypeFRM);
+  Application.CreateForm(TM_PreviousProcedureFRM, M_PreviousProcedureFRM);
+  Application.CreateForm(TM_declarationTypeFRM, M_declarationTypeFRM);
+  Application.CreateForm(TM_KIndOfPackagesFRM, M_KIndOfPackagesFRM);
   Application.Run;
 end.
