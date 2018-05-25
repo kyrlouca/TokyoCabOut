@@ -1,16 +1,17 @@
 object L_AirwaybillsHighFRM: TL_AirwaybillsHighFRM
   Left = -87
   Top = 84
-  Width = 1364
-  Height = 850
   Caption = 'L_AirwaybillsHighFRM'
+  ClientHeight = 568
+  ClientWidth = 1273
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -10
-  Font.Name = 'MS Sans Serif'
+  Font.Name = 'arial'
   Font.Style = []
   OldCreateOrder = False
+  Position = poScreenCenter
   WindowState = wsMaximized
   OnActivate = FormActivate
   PixelsPerInch = 96
@@ -18,7 +19,7 @@ object L_AirwaybillsHighFRM: TL_AirwaybillsHighFRM
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 1348
+    Width = 1273
     Height = 53
     Align = alTop
     Caption = 'List Airwaybills NOT Scanned'
@@ -26,62 +27,111 @@ object L_AirwaybillsHighFRM: TL_AirwaybillsHighFRM
     Font.Color = clBlue
     Font.Height = -27
     Font.Name = 'Arial'
-    Font.Style = [fsBold]
+    Font.Style = []
     ParentFont = False
     TabOrder = 0
+    ExplicitWidth = 930
   end
   object Panel4: TPanel
     Left = 0
-    Top = 768
-    Width = 1348
+    Top = 525
+    Width = 1273
     Height = 43
     Align = alBottom
     TabOrder = 1
-    object BitBtn2: TBitBtn
-      Left = 7
-      Top = 7
-      Width = 72
-      Height = 33
+    ExplicitTop = 414
+    ExplicitWidth = 930
+    object BitBtn1: TBitBtn
+      Left = 8
+      Top = 3
+      Width = 97
+      Height = 37
       Caption = 'Close'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
-      Font.Height = -15
-      Font.Name = 'MS Sans Serif'
-      Font.Style = [fsBold]
+      Font.Height = -13
+      Font.Name = 'Arial'
+      Font.Style = []
+      Glyph.Data = {
+        F6060000424DF606000000000000360000002800000018000000180000000100
+        180000000000C006000000000000000000000000000000000000FFFFFFFFFFFF
+        FFFFFF0004450004450004450004450004450004450004450004450004450004
+        45000445000445000445000445000445000445000445000445FFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFF000A4D3461A53F70B44B7DC15789CE5F91D66396DB
+        6396DB6396DB6598DD6295DA6295DA5D90D55688CD4C7EC24374B83765A9000A
+        4DFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0011563B6DB14174B84B7EC256
+        89CE5E91D66396DB6396DB6396DB6598DD6295DA6295DA5D90D55689CE4D80C4
+        4477BB3E70B4001156FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0018613869
+        AE3366A72B5EA22B5EA22B5EA22B5EA22B5EA2497CCE6396DB3164A52B5EA22B
+        5EA22B5EA22B5EA22D60A43869AE001861FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFF001F6A3A6CB02C5FA32B5EA22B5EA22B5EA22B5EA22B5EA24779CA6093
+        D8295CA02B5EA22B5EA22B5EA22B5EA22E61A53A6CB0001F6AFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFF00226D3B6DB128579B2B5EA22B5EA22B5EA22B5EA2
+        2B5EA24274C45B8ED42554982B5EA22B5EA22B5EA22B5EA22E61A53B6DB10022
+        6DFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0024703D6FB42451952B5EA22B
+        5EA22B5EA22B5EA22B5EA23F70BE578ACF214E922B5EA22B5EA22B5EA22B5EA2
+        2E61A53D6FB4002470FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0026723E70
+        B51E498E2A5CA02B5EA22B5EA22B5EA22B5EA23B6BB95285CB1D478C2A5CA02B
+        5EA22B5EA22B5EA22D60A43E70B5002672FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFF0028754072B7183F842451962B5EA22B5EA22B5EA22B5EA23766B44E81
+        C7173D812451962B5EA22B5EA22B5EA22D60A44072B7002875FFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFF002A784274B9133479193F84224F9328599D2B5EA2
+        2B5EA23463AF4A7DC2113176193F84224F9328599D2B5EA22E61A54274B9002A
+        78FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF002C7A4376BB0C296F0F307415
+        3A7E1A43871D488C214F933261AD487BC00B276B0F3074153A7E1A43871D488C
+        2451964376BB002C7AFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF002E7D4578
+        BD477ABF477ABF477ABF477ABF477ABF477ABF477ABF477ABF477ABF477ABF47
+        7ABF477ABF477ABF142669142669002E7DFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFF002F7F477ABF3260AC3260AC3160AC325FAB325FAC3160AB3463AE477A
+        BF3260AC3260AC3160AB325FAC3160AB3166B45287D1002F7FFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFF003182497CC13265A6285B9F285B9F285B9F285B9F
+        285B9F3462AF4A7DC22E61A2285B9F285B9F285B9F285B9F70A3EB84B7FC0031
+        82FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0033844B7EC3295CA0275A9E27
+        5A9E275A9E275A9E275A9E3A6AB85184CA26589C275A9E275A9E275A9E275A9E
+        2B5EA24B7EC3003384FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0035864D80
+        C525549826599D26599D26599D26599D26599D4172C2598CD2214F9326599D26
+        599D26599D26599D2B5EA24D80C5003586FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFF0036894E81C7204D9125589C25589C25589C25589C25589C497BCE6295
+        DB1D488C25589C25589C25589C25589C2A5DA14E81C7003689FFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFF00388B5083C91C458A23559924579B24579B24579B
+        24579B5286DC6C9FE518418423559924579B24579B24579B295CA05083C90038
+        8BFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00398C5084CA163C7F1D4A8D23
+        569A23569A23569A23569A5B90E675A8ED1337791D4A8D23569A23569A23569A
+        295CA05084CA00398CFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF003B8E5286
+        CC0F2F7213397A1A478A1F5094225599225599629AF17DB0F50C2A6B13397A1A
+        478A1F5094225599285B9F5286CC003B8EFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFF003C905387CD0A266A0C2869123576153D7F1942851C488B67A0F882B5
+        FA0722620C2A6B123576153D7F174083214E925387CD003C90FFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFF003D91598DD25F92D7699CE174A7EC7DB0F584B7FC
+        84B7FC84B7FC82B5FA82B5FA82B5FA7CAFF473A6EB6A9DE26194D95B8FD4003D
+        91FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF003E935085CC5D91D7689CE173
+        A6EC7EB1F684B7FC84B7FC84B7FC82B5FA82B5FA82B5FA7BAEF373A6EC699DE2
+        6093D95388CF003E93FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF003F94003F
+        94003F94003F94003F94003F94003F94003F94003F94003F94003F94003F9400
+        3F94003F94003F94003F94003F94003F94FFFFFFFFFFFFFFFFFF}
       ParentFont = False
       TabOrder = 0
       OnClick = BitBtn2Click
-      Glyph.Data = {
-        76010000424D7601000000000000760000002800000020000000100000000100
-        04000000000000010000120B0000120B00001000000000000000000000000000
-        800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
-        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00330000000000
-        03333377777777777F333301111111110333337F333333337F33330111111111
-        0333337F333333337F333301111111110333337F333333337F33330111111111
-        0333337F333333337F333301111111110333337F333333337F33330111111111
-        0333337F3333333F7F333301111111B10333337F333333737F33330111111111
-        0333337F333333337F333301111111110333337F33FFFFF37F3333011EEEEE11
-        0333337F377777F37F3333011EEEEE110333337F37FFF7F37F3333011EEEEE11
-        0333337F377777337F333301111111110333337F333333337F33330111111111
-        0333337FFFFFFFFF7F3333000000000003333377777777777333}
-      NumGlyphs = 2
     end
   end
   object Panel3: TPanel
     Left = 0
     Top = 53
-    Width = 1348
-    Height = 715
+    Width = 1273
+    Height = 472
     Align = alClient
     TabOrder = 2
+    ExplicitWidth = 930
+    ExplicitHeight = 361
     object Panel5: TPanel
       Left = 1
       Top = 1
       Width = 39
-      Height = 713
+      Height = 470
       Align = alLeft
       BevelOuter = bvNone
       TabOrder = 0
+      ExplicitHeight = 359
       object Panel2: TPanel
         Left = 0
         Top = 0
@@ -100,7 +150,7 @@ object L_AirwaybillsHighFRM: TL_AirwaybillsHighFRM
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -12
-          Font.Name = 'MS Sans Serif'
+          Font.Name = 'arial'
           Font.Style = [fsBold]
           Glyph.Data = {
             76010000424D7601000000000000760000002800000020000000100000000100
@@ -132,72 +182,35 @@ object L_AirwaybillsHighFRM: TL_AirwaybillsHighFRM
     object Panel6: TPanel
       Left = 40
       Top = 1
-      Width = 1307
-      Height = 713
+      Width = 1232
+      Height = 470
       Align = alClient
       BevelOuter = bvNone
       Caption = 'Panel6'
       TabOrder = 2
+      ExplicitWidth = 889
+      ExplicitHeight = 359
       object Panel7: TPanel
         Left = 0
         Top = 0
-        Width = 1307
+        Width = 1232
         Height = 79
         Align = alTop
         BevelOuter = bvNone
         TabOrder = 0
+        ExplicitWidth = 889
         object Label1: TLabel
           Left = 1
-          Top = 16
-          Width = 74
-          Height = 18
+          Top = 19
+          Width = 69
+          Height = 17
           Caption = 'Find Hawb'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -15
           Font.Name = 'Arial'
-          Font.Style = [fsBold]
+          Font.Style = []
           ParentFont = False
-        end
-        object SpeedButton1: TSpeedButton
-          Left = 224
-          Top = 10
-          Width = 21
-          Height = 18
-          Hint = 'Find Hawb in this Mawb'
-          Flat = True
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -12
-          Font.Name = 'MS Sans Serif'
-          Font.Style = [fsBold]
-          Glyph.Data = {
-            76010000424D7601000000000000760000002800000020000000100000000100
-            04000000000000010000130B0000130B00001000000000000000000000000000
-            800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
-            FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
-            33033333333333333F7F3333333333333000333333333333F777333333333333
-            000333333333333F777333333333333000333333333333F77733333333333300
-            033333333FFF3F777333333700073B703333333F7773F77733333307777700B3
-            33333377333777733333307F8F8F7033333337F333F337F3333377F8F9F8F773
-            3333373337F3373F3333078F898F870333337F33F7FFF37F333307F99999F703
-            33337F377777337F3333078F898F8703333373F337F33373333377F8F9F8F773
-            333337F3373337F33333307F8F8F70333333373FF333F7333333330777770333
-            333333773FF77333333333370007333333333333777333333333}
-          NumGlyphs = 2
-          ParentFont = False
-          OnClick = SpeedButton1Click
-        end
-        object HawbIdFLD: TwwDBEdit
-          Left = 98
-          Top = 13
-          Width = 98
-          Height = 24
-          Color = 8454143
-          TabOrder = 0
-          UnboundDataType = wwDefault
-          WantReturns = False
-          WordWrap = False
         end
         object wwDBNavigator1: TwwDBNavigator
           Left = 0
@@ -218,7 +231,6 @@ object L_AirwaybillsHighFRM: TL_AirwaybillsHighFRM
             Spacing = 4
             Transparent = False
             Caption = 'wwDBNavigator1First'
-            Enabled = False
             DisabledTextColors.ShadeColor = clGray
             DisabledTextColors.HighlightColor = clBtnHighlight
             Index = 0
@@ -235,7 +247,6 @@ object L_AirwaybillsHighFRM: TL_AirwaybillsHighFRM
             Spacing = 4
             Transparent = False
             Caption = 'wwDBNavigator1Prior'
-            Enabled = False
             DisabledTextColors.ShadeColor = clGray
             DisabledTextColors.HighlightColor = clBtnHighlight
             Index = 1
@@ -292,11 +303,12 @@ object L_AirwaybillsHighFRM: TL_AirwaybillsHighFRM
         end
         object Button2: TButton
           Left = 943
-          Top = 2
+          Top = 0
           Width = 124
           Height = 33
           Caption = 'Update to Hide Old'
-          TabOrder = 2
+          TabOrder = 1
+          Visible = False
           OnClick = Button2Click
         end
         object Button3: TButton
@@ -305,66 +317,77 @@ object L_AirwaybillsHighFRM: TL_AirwaybillsHighFRM
           Width = 125
           Height = 33
           Caption = 'Update to Show Old'
-          TabOrder = 3
+          TabOrder = 2
+          Visible = False
           OnClick = Button3Click
         end
       end
       object Panel8: TPanel
         Left = 0
         Top = 79
-        Width = 1307
-        Height = 634
+        Width = 1232
+        Height = 391
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 1
+        ExplicitWidth = 889
+        ExplicitHeight = 280
       end
       object Panel9: TPanel
         Left = 0
         Top = 79
-        Width = 1307
-        Height = 634
+        Width = 1232
+        Height = 391
         Align = alClient
         BevelOuter = bvNone
         Caption = 'Panel9'
         TabOrder = 2
+        ExplicitWidth = 889
+        ExplicitHeight = 280
         object AirGRD: TwwDBGrid
           Left = 0
           Top = 0
-          Width = 911
-          Height = 629
+          Width = 1121
+          Height = 380
           Selected.Strings = (
             'SERIAL_NUMBER'#9'9'#9'SN'
             'SEQUENCE_NUMBER'#9'3'#9'Seq'
             'HAWB_ID'#9'15'#9'Hawb'
             'DESCRIPTION'#9'28'#9'Description'
-            'SENDER_NAME'#9'20'#9'Sender'
+            'SENDER_NAME'#9'14'#9'Sender'
             'ITEMS_COUNT'#9'4'#9'Items'
             'SHIPMENT_ORIGIN_COUNTRY'#9'6'#9'Origin~Country'
             'PIECES'#9'6'#9'Pieces'
             'WEIGHT'#9'6'#9'Weight'
-            'CONSIGNEE_NAME'#9'27'#9'Consignee'
-            'IS_SCANNED'#9'12'#9'Scanned')
+            'CONSIGNEE_NAME'#9'22'#9'Consignee'
+            'IS_SCANNED'#9'7'#9'Scanned')
           IniAttributes.Delimiter = ';;'
+          IniAttributes.UnicodeIniFile = False
           TitleColor = clBtnFace
           FixedCols = 0
           ShowHorzScrollBar = True
           Align = alLeft
           DataSource = AirwaybillCDS
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -12
+          Font.Name = 'arial'
+          Font.Style = []
           KeyOptions = []
           MultiSelectOptions = [msoAutoUnselect, msoShiftSelect]
-          Options = [dgAlwaysShowEditor, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgWordWrap, dgPerfectRowFit, dgMultiSelect]
+          Options = [dgEditing, dgAlwaysShowEditor, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgWordWrap, dgPerfectRowFit, dgMultiSelect]
+          ParentFont = False
           TabOrder = 0
           TitleAlignment = taLeftJustify
           TitleFont.Charset = DEFAULT_CHARSET
           TitleFont.Color = clWindowText
-          TitleFont.Height = -10
-          TitleFont.Name = 'MS Sans Serif'
+          TitleFont.Height = -12
+          TitleFont.Name = 'Arial'
           TitleFont.Style = []
           TitleLines = 2
           TitleButtons = True
           OnTitleButtonClick = AirGRDTitleButtonClick
           OnDblClick = AirGRDDblClick
-          IndicatorColor = icBlack
           ImageList = ImageList1
           TitleImageList = ImageList1
           object AirGRDIButton: TwwIButton
@@ -432,18 +455,21 @@ object L_AirwaybillsHighFRM: TL_AirwaybillsHighFRM
               FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
           end
         end
-        object DeleteSelectedBTN: TBitBtn
-          Left = 936
-          Top = 105
-          Width = 118
+        object DeleteSelectedBTN: TRzBitBtn
+          Left = 1127
+          Top = 99
+          Width = 132
           Height = 45
+          Alignment = taLeftJustify
           Cancel = True
           Caption = 'Delete Selected'
+          DoubleBuffered = True
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -12
-          Font.Name = 'MS Sans Serif'
-          Font.Style = [fsBold]
+          Font.Name = 'arial'
+          Font.Style = []
+          ParentDoubleBuffered = False
           ParentFont = False
           TabOrder = 1
           OnClick = DeleteSelectedBTNClick
@@ -464,20 +490,25 @@ object L_AirwaybillsHighFRM: TL_AirwaybillsHighFRM
             3333333300003333333333333333333333333333333333330000333333333333
             3333333333333333333333330000333333333333333333333333333333333333
             0000}
+          Margin = -1
           NumGlyphs = 2
+          Spacing = 8
         end
-        object InsertBTN: TBitBtn
-          Left = 936
+        object InsertBTN: TRzBitBtn
+          Left = 1127
           Top = 150
-          Width = 118
+          Width = 131
           Height = 46
+          Alignment = taLeftJustify
           Cancel = True
           Caption = 'Add Airwaybill'
+          DoubleBuffered = True
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -12
-          Font.Name = 'MS Sans Serif'
-          Font.Style = [fsBold]
+          Font.Name = 'arial'
+          Font.Style = []
+          ParentDoubleBuffered = False
           ParentFont = False
           TabOrder = 2
           OnClick = InsertBTNClick
@@ -498,10 +529,26 @@ object L_AirwaybillsHighFRM: TL_AirwaybillsHighFRM
             3F33333300003333333A2243333333333333387337333333000033333333AA33
             3333333333333877733333330000333333333333333333333333338883333333
             0000}
+          Margin = -1
           NumGlyphs = 2
-          Style = bsNew
+          Spacing = 8
         end
       end
+    end
+    object wwIncrementalSearch1: TwwIncrementalSearch
+      Left = 121
+      Top = 19
+      Width = 121
+      Height = 23
+      DataSource = AirwaybillCDS
+      SearchField = 'Hawb_id'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'arial'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 3
     end
   end
   object AirwayBillSQL: TIBCQuery
@@ -611,7 +658,7 @@ object L_AirwaybillsHighFRM: TL_AirwaybillsHighFRM
     end
     object AirwayBillSQLSENDER_NAME: TStringField
       DisplayLabel = 'Sender'
-      DisplayWidth = 20
+      DisplayWidth = 14
       FieldName = 'SENDER_NAME'
       FixedChar = True
       Size = 35
@@ -644,14 +691,14 @@ object L_AirwaybillsHighFRM: TL_AirwaybillsHighFRM
     end
     object AirwayBillSQLCONSIGNEE_NAME: TStringField
       DisplayLabel = 'Consignee'
-      DisplayWidth = 27
+      DisplayWidth = 22
       FieldName = 'CONSIGNEE_NAME'
       FixedChar = True
       Size = 35
     end
     object AirwayBillSQLIS_SCANNED: TStringField
       DisplayLabel = 'Scanned'
-      DisplayWidth = 12
+      DisplayWidth = 7
       FieldName = 'IS_SCANNED'
       FixedChar = True
       Size = 1
@@ -793,6 +840,7 @@ object L_AirwaybillsHighFRM: TL_AirwaybillsHighFRM
         DataType = ftInteger
         Name = 'AirwaybillSerial'
         ParamType = ptInput
+        Value = nil
       end>
   end
   object AirwaybillCDS: TIBCDataSource
@@ -804,7 +852,7 @@ object L_AirwaybillsHighFRM: TL_AirwaybillsHighFRM
     Left = 1081
     Top = 363
     Bitmap = {
-      494C010102000400040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C0101020004001C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

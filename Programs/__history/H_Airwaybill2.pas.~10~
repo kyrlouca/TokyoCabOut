@@ -328,16 +328,10 @@ end;
 procedure TH_airwaybill2FRM.wwDBNavigator1InsertClick(
   Sender: TObject);
 begin
-  if AirwayBillSQL.State in [dsInsert,dsEdit] then begin
-    AirwayBillSQL.Post;
-    if AirwayBillSQL.IsEmpty then
-      abort;
-  end;
-
-//  If CodeFLD.CanFocus then
-//   CodeFLD.SetFocus;
-//  end;
-
+{If CodeFLD.CanFocus then
+   CodeFLD.SetFocus;
+end;
+}
 End;
 
 procedure TH_airwaybill2FRM.AcceptBTNClick(Sender: TObject);

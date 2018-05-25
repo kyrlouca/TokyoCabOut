@@ -6,7 +6,8 @@ uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   StdCtrls, Mask,  IBC, MemDS, IBCError, wwSpeedButton, wwDBNavigator,
   wwclearpanel, Buttons, ExtCtrls, wwdbedit, Grids, Wwdbigrd, Wwdbgrid,
-  DBAccess, Data.DB, vcl.Wwkeycb, vcl.wwdblook, RzButton, G_generalProcs;
+  DBAccess, Data.DB, vcl.Wwkeycb, vcl.wwdblook, RzButton, G_generalProcs,
+  RzPanel;
 
 type
   TL_FlightOutListFRM = class(TForm)
@@ -26,7 +27,6 @@ type
     FlightOutSQLDESTINATION_COUNTRY: TStringField;
     Panel2: TPanel;
     Panel5: TPanel;
-    Panel6: TPanel;
     FlightOutGRD: TwwDBGrid;
     Label1: TLabel;
     FlightOutCDS: TIBCDataSource;
@@ -40,10 +40,6 @@ type
     DeleteFlightCountrySQL: TIBCQuery;
     wwIncrementalSearch1: TwwIncrementalSearch;
     BitBtn2: TBitBtn;
-    InsertBTN: TRzBitBtn;
-    BitBtn1: TRzBitBtn;
-    DeleteBTN: TRzBitBtn;
-    ScanBTN: TRzBitBtn;
     FlightOutGRDIButton: TwwIButton;
     wwDBNavigator1: TwwDBNavigator;
     wwDBNavigator1First: TwwNavButton;
@@ -51,6 +47,13 @@ type
     wwDBNavigator1Next: TwwNavButton;
     wwDBNavigator1Last: TwwNavButton;
     wwDBNavigator1Refresh: TwwNavButton;
+    RzPanel1: TRzPanel;
+    RzPanel2: TRzPanel;
+    ScanBTN: TRzBitBtn;
+    InsertBTN: TRzBitBtn;
+    DeleteBTN: TRzBitBtn;
+    BitBtn1: TRzBitBtn;
+    Panel6: TRzPanel;
     procedure FormActivate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure BitBtn2Click(Sender: TObject);

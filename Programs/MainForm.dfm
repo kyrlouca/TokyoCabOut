@@ -144,6 +144,7 @@ object MainFormFRM: TMainFormFRM
       Height = 20
       Caption = 'Button1'
       TabOrder = 1
+      Visible = False
       OnClick = Button1Click
     end
     object Button2: TButton
@@ -157,8 +158,8 @@ object MainFormFRM: TMainFormFRM
       OnClick = Button2Click
     end
     object ReadXmlBTN: TRzBitBtn
-      Left = 16
-      Top = 21
+      Left = 8
+      Top = 256
       Width = 185
       Height = 65
       Alignment = taLeftJustify
@@ -231,8 +232,8 @@ object MainFormFRM: TMainFormFRM
       Margin = 6
     end
     object RzBitBtn1: TRzBitBtn
-      Left = 16
-      Top = 92
+      Left = 8
+      Top = 44
       Width = 185
       Height = 65
       Alignment = taLeftJustify
@@ -305,8 +306,8 @@ object MainFormFRM: TMainFormFRM
       Margin = 6
     end
     object FlightsOutBTN: TRzBitBtn
-      Left = 16
-      Top = 189
+      Left = 8
+      Top = 115
       Width = 185
       Height = 65
       Alignment = taLeftJustify

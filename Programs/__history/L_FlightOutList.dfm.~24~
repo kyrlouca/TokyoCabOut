@@ -335,8 +335,6 @@ object L_FlightOutListFRM: TL_FlightOutListFRM
         TitleButtons = True
         OnTitleButtonClick = FlightOutGRDTitleButtonClick
         OnDblClick = FlightBTNClick
-        ExplicitLeft = -5
-        ExplicitTop = 3
         object FlightOutGRDIButton: TwwIButton
           Left = 0
           Top = 0
@@ -410,12 +408,12 @@ object L_FlightOutListFRM: TL_FlightOutListFRM
         end
       end
       object RzPanel2: TRzPanel
-        Left = 841
+        Left = 892
         Top = 1
         Width = 263
         Height = 476
         Align = alLeft
-        BorderOuter = fsNone
+        BorderOuter = fsFlat
         TabOrder = 2
         ExplicitLeft = 744
         object ScanBTN: TRzBitBtn
@@ -675,7 +673,7 @@ object L_FlightOutListFRM: TL_FlightOutListFRM
       object Panel6: TRzPanel
         Left = 817
         Top = 1
-        Width = 24
+        Width = 75
         Height = 476
         Align = alLeft
         Alignment = taLeftJustify

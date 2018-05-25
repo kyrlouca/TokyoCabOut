@@ -144,7 +144,7 @@ object L_FlightOutListFRM: TL_FlightOutListFRM
       Left = 1
       Top = 1
       Width = 929
-      Height = 72
+      Height = 56
       Align = alTop
       TabOrder = 0
       object Label1: TLabel
@@ -161,7 +161,7 @@ object L_FlightOutListFRM: TL_FlightOutListFRM
         ParentFont = False
       end
       object FlightTableFLD: TwwDBLookupCombo
-        Left = 249
+        Left = 233
         Top = 18
         Width = 121
         Height = 24
@@ -189,19 +189,110 @@ object L_FlightOutListFRM: TL_FlightOutListFRM
         CharCase = ecUpperCase
         TabOrder = 1
       end
+      object wwDBNavigator1: TwwDBNavigator
+        Left = 388
+        Top = 18
+        Width = 102
+        Height = 20
+        DataSource = FlightOutCDS
+        RepeatInterval.InitialDelay = 500
+        RepeatInterval.Interval = 100
+        object wwDBNavigator1First: TwwNavButton
+          Left = 0
+          Top = 0
+          Width = 20
+          Height = 20
+          Hint = 'Move to first record'
+          ImageIndex = -1
+          NumGlyphs = 2
+          Spacing = 4
+          Transparent = False
+          Caption = 'wwDBNavigator1First'
+          Enabled = False
+          DisabledTextColors.ShadeColor = clGray
+          DisabledTextColors.HighlightColor = clBtnHighlight
+          Index = 0
+          Style = nbsFirst
+        end
+        object wwDBNavigator1Prior: TwwNavButton
+          Left = 20
+          Top = 0
+          Width = 21
+          Height = 20
+          Hint = 'Move to prior record'
+          ImageIndex = -1
+          NumGlyphs = 2
+          Spacing = 4
+          Transparent = False
+          Caption = 'wwDBNavigator1Prior'
+          Enabled = False
+          DisabledTextColors.ShadeColor = clGray
+          DisabledTextColors.HighlightColor = clBtnHighlight
+          Index = 1
+          Style = nbsPrior
+        end
+        object wwDBNavigator1Next: TwwNavButton
+          Left = 41
+          Top = 0
+          Width = 20
+          Height = 20
+          Hint = 'Move to next record'
+          ImageIndex = -1
+          NumGlyphs = 2
+          Spacing = 4
+          Transparent = False
+          Caption = 'wwDBNavigator1Next'
+          DisabledTextColors.ShadeColor = clGray
+          DisabledTextColors.HighlightColor = clBtnHighlight
+          Index = 2
+          Style = nbsNext
+        end
+        object wwDBNavigator1Last: TwwNavButton
+          Left = 61
+          Top = 0
+          Width = 20
+          Height = 20
+          Hint = 'Move to last record'
+          ImageIndex = -1
+          NumGlyphs = 2
+          Spacing = 4
+          Transparent = False
+          Caption = 'wwDBNavigator1Last'
+          DisabledTextColors.ShadeColor = clGray
+          DisabledTextColors.HighlightColor = clBtnHighlight
+          Index = 3
+          Style = nbsLast
+        end
+        object wwDBNavigator1Refresh: TwwNavButton
+          Left = 81
+          Top = 0
+          Width = 21
+          Height = 20
+          Hint = 'Refresh the contents of the dataset'
+          ImageIndex = -1
+          NumGlyphs = 2
+          Spacing = 4
+          Transparent = False
+          Caption = 'wwDBNavigator1Refresh'
+          DisabledTextColors.ShadeColor = clGray
+          DisabledTextColors.HighlightColor = clBtnHighlight
+          Index = 4
+          Style = nbsRefresh
+        end
+      end
     end
     object Panel5: TPanel
       Left = 1
-      Top = 73
+      Top = 57
       Width = 929
-      Height = 462
+      Height = 478
       Align = alClient
       TabOrder = 1
       object Panel6: TPanel
         Left = 738
         Top = 1
         Width = 24
-        Height = 460
+        Height = 476
         Align = alLeft
         TabOrder = 0
       end
@@ -209,17 +300,17 @@ object L_FlightOutListFRM: TL_FlightOutListFRM
         Left = 1
         Top = 1
         Width = 737
-        Height = 460
+        Height = 476
         ControlType.Strings = (
-          'FK_FLIGHT_TABLE;CustomEdit;FlightTableFLD')
+          'FK_FLIGHT_TABLE;CustomEdit;FlightTableFLD;F')
         Selected.Strings = (
-          'SERIAL_NUMBER'#9'10'#9'S/N'
-          'MAWB'#9'14'#9'Name'
-          'FK_FLIGHT_TABLE'#9'10'#9'Flight'
-          'DATE_DEPART'#9'14'#9'Departure Date'
-          'REMARKS'#9'16'#9'Remarks'
-          'DESTINATION_AREA'#9'16'#9'Destination Area'
-          'DESTINATION_COUNTRY'#9'14'#9'Destination')
+          'SERIAL_NUMBER'#9'10'#9'S/N'#9#9
+          'MAWB'#9'14'#9'Mawb'#9#9
+          'FK_FLIGHT_TABLE'#9'10'#9'Flight'#9#9
+          'DATE_DEPART'#9'14'#9'Departure Date'#9#9
+          'REMARKS'#9'16'#9'Remarks'#9#9
+          'DESTINATION_AREA'#9'16'#9'Destination Area'#9#9
+          'DESTINATION_COUNTRY'#9'14'#9'Destination'#9#9)
         IniAttributes.Delimiter = ';;'
         IniAttributes.UnicodeIniFile = False
         TitleColor = clBtnFace
@@ -235,7 +326,7 @@ object L_FlightOutListFRM: TL_FlightOutListFRM
         Font.Name = 'Arial'
         Font.Style = []
         KeyOptions = []
-        Options = [dgAlwaysShowEditor, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgWordWrap]
+        Options = [dgEditing, dgAlwaysShowEditor, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgWordWrap]
         ParentFont = False
         ReadOnly = True
         TabOrder = 1
@@ -243,12 +334,14 @@ object L_FlightOutListFRM: TL_FlightOutListFRM
         TitleFont.Charset = DEFAULT_CHARSET
         TitleFont.Color = clWindowText
         TitleFont.Height = -13
-        TitleFont.Name = 'arial'
+        TitleFont.Name = 'Arial'
         TitleFont.Style = []
         TitleLines = 1
         TitleButtons = True
         OnTitleButtonClick = FlightOutGRDTitleButtonClick
         OnDblClick = FlightBTNClick
+        ExplicitLeft = -5
+        ExplicitTop = 3
         object FlightOutGRDIButton: TwwIButton
           Left = 0
           Top = 0
@@ -627,7 +720,7 @@ object L_FlightOutListFRM: TL_FlightOutListFRM
       Origin = 'CABOUTDATA.FLIGHT_OUT.SERIAL_NUMBER'
     end
     object FlightOutSQLMAWB: TStringField
-      DisplayLabel = 'Name'
+      DisplayLabel = 'Mawb'
       DisplayWidth = 14
       FieldName = 'MAWB'
       Origin = 'CABOUTDATA.FLIGHT_OUT.MAWB'

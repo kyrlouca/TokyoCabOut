@@ -8,7 +8,7 @@ uses
   StdCtrls, Mask,  IBC, MemDS, IBCError, wwSpeedButton, wwDBNavigator,
   System.ImageList, Vcl.ImgList, Data.DB, DBAccess, vcl.wwdbigrd, Vcl.Grids,
   vcl.wwdbgrid, vcl.wwclearpanel, vcl.Wwdbedit, Vcl.Buttons, Vcl.ExtCtrls,G_kyriacosTypes,
-  vcl.Wwkeycb, RzButton;
+  vcl.Wwkeycb;
 
 type
   TL_AirwaybillsHighFRM = class(TForm)
@@ -35,7 +35,9 @@ type
     Panel8: TPanel;
     Panel9: TPanel;
     AirGRD: TwwDBGrid;
+    DeleteSelectedBTN: TBitBtn;
     AirwayBillSQLPIECES_S: TStringField;
+    InsertBTN: TBitBtn;
     UpdateTRans: TIBCTransaction;
     ReadTrans: TIBCTransaction;
     DeleteAirwaybillItemsSQL: TIBCSQL;
@@ -70,8 +72,6 @@ type
     Button3: TButton;
     BitBtn1: TBitBtn;
     wwIncrementalSearch1: TwwIncrementalSearch;
-    DeleteSelectedBTN: TRzBitBtn;
-    InsertBTN: TRzBitBtn;
     procedure FormActivate(Sender: TObject);
     procedure BitBtn2Click(Sender: TObject);
     procedure MovementSQLBeforeEdit(DataSet: TDataSet);

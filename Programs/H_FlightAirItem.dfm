@@ -804,6 +804,7 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
         Align = alTop
         BorderOuter = fsNone
         TabOrder = 1
+        ExplicitTop = 5
       end
       object GroupBox2: TGroupBox
         Left = 486

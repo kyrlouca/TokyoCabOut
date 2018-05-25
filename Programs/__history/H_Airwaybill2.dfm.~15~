@@ -1240,7 +1240,6 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
             Caption = 'wwDBNavigator1Insert'
             DisabledTextColors.ShadeColor = clGray
             DisabledTextColors.HighlightColor = clBtnHighlight
-            OnClick = wwDBNavigator1InsertClick
             Index = 2
             Style = nbsInsert
           end

@@ -12,8 +12,11 @@ uses
 type
   TH_airwaybill2FRM = class(TForm)
     TitlePNL: TPanel;
+    Panel4: TPanel;
     Panel3: TPanel;
     AirwaybillCDS: TIBCDataSource;
+    AcceptBTN: TBitBtn;
+    CancelBTN: TBitBtn;
     AirwayBillSQL: TIBCQuery;
     UpdateTrans: TIBCTransaction;
     AirwayBillSQLSERIAL_NUMBER: TIntegerField;
@@ -72,6 +75,7 @@ type
     AirItemSQLCURRENCY: TStringField;
     AirItemSQLUNIT_OF_MEASURE: TStringField;
     AirItemSRC: TIBCDataSource;
+    wwDBGrid1: TwwDBGrid;
     IncotermsSQL: TIBCQuery;
     IncotermsSQLSERIAL_NUMBER: TIntegerField;
     IncotermsSQLCODE: TStringField;
@@ -87,6 +91,15 @@ type
     CurrencySQLCURRENCY_CODE: TStringField;
     CurrencySQLCOUNTRY_CODE: TIntegerField;
     CurrencySQLXML_CURRENCY: TStringField;
+    CurrencyFLD: TwwDBLookupCombo;
+    wwDBNavigator1: TwwDBNavigator;
+    wwDBNavigator1Prior: TwwNavButton;
+    wwDBNavigator1Next: TwwNavButton;
+    wwDBNavigator1Insert: TwwNavButton;
+    wwDBNavigator1Delete: TwwNavButton;
+    wwDBNavigator1Post: TwwNavButton;
+    wwDBNavigator1Cancel: TwwNavButton;
+    wwDBNavigator1Refresh: TwwNavButton;
     RzPanel1: TRzPanel;
     GroupBox1: TGroupBox;
     Label1: TLabel;
@@ -152,21 +165,6 @@ type
     CCountryFLD: TwwDBEdit;
     wwDBEdit6: TwwDBEdit;
     wwDBEdit7: TwwDBEdit;
-    RzPanel2: TRzPanel;
-    RzPanel3: TRzPanel;
-    wwDBNavigator1: TwwDBNavigator;
-    wwDBNavigator1Prior: TwwNavButton;
-    wwDBNavigator1Next: TwwNavButton;
-    wwDBNavigator1Insert: TwwNavButton;
-    wwDBNavigator1Delete: TwwNavButton;
-    wwDBNavigator1Post: TwwNavButton;
-    wwDBNavigator1Cancel: TwwNavButton;
-    wwDBNavigator1Refresh: TwwNavButton;
-    wwDBGrid1: TwwDBGrid;
-    CurrencyFLD: TwwDBLookupCombo;
-    Panel4: TRzPanel;
-    AcceptBTN: TBitBtn;
-    CancelBTN: TBitBtn;
     procedure FormActivate(Sender: TObject);
     procedure BitBtn2Click(Sender: TObject);
     procedure wwDBNavigator1InsertClick(Sender: TObject);
@@ -328,16 +326,10 @@ end;
 procedure TH_airwaybill2FRM.wwDBNavigator1InsertClick(
   Sender: TObject);
 begin
-  if AirwayBillSQL.State in [dsInsert,dsEdit] then begin
-    AirwayBillSQL.Post;
-    if AirwayBillSQL.IsEmpty then
-      abort;
-  end;
-
-//  If CodeFLD.CanFocus then
-//   CodeFLD.SetFocus;
-//  end;
-
+{If CodeFLD.CanFocus then
+   CodeFLD.SetFocus;
+end;
+}
 End;
 
 procedure TH_airwaybill2FRM.AcceptBTNClick(Sender: TObject);

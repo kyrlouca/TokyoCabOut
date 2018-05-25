@@ -3,7 +3,7 @@ object L_AirwaybillsHighFRM: TL_AirwaybillsHighFRM
   Top = 84
   Caption = 'L_AirwaybillsHighFRM'
   ClientHeight = 568
-  ClientWidth = 1273
+  ClientWidth = 1095
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -19,7 +19,7 @@ object L_AirwaybillsHighFRM: TL_AirwaybillsHighFRM
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 1273
+    Width = 1095
     Height = 53
     Align = alTop
     Caption = 'List Airwaybills NOT Scanned'
@@ -35,7 +35,7 @@ object L_AirwaybillsHighFRM: TL_AirwaybillsHighFRM
   object Panel4: TPanel
     Left = 0
     Top = 525
-    Width = 1273
+    Width = 1095
     Height = 43
     Align = alBottom
     TabOrder = 1
@@ -49,7 +49,7 @@ object L_AirwaybillsHighFRM: TL_AirwaybillsHighFRM
       Caption = 'Close'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
-      Font.Height = -13
+      Font.Height = -16
       Font.Name = 'Arial'
       Font.Style = []
       Glyph.Data = {
@@ -117,7 +117,7 @@ object L_AirwaybillsHighFRM: TL_AirwaybillsHighFRM
   object Panel3: TPanel
     Left = 0
     Top = 53
-    Width = 1273
+    Width = 1095
     Height = 472
     Align = alClient
     TabOrder = 2
@@ -182,7 +182,7 @@ object L_AirwaybillsHighFRM: TL_AirwaybillsHighFRM
     object Panel6: TPanel
       Left = 40
       Top = 1
-      Width = 1232
+      Width = 1054
       Height = 470
       Align = alClient
       BevelOuter = bvNone
@@ -193,7 +193,7 @@ object L_AirwaybillsHighFRM: TL_AirwaybillsHighFRM
       object Panel7: TPanel
         Left = 0
         Top = 0
-        Width = 1232
+        Width = 1054
         Height = 79
         Align = alTop
         BevelOuter = bvNone
@@ -308,7 +308,6 @@ object L_AirwaybillsHighFRM: TL_AirwaybillsHighFRM
           Height = 33
           Caption = 'Update to Hide Old'
           TabOrder = 1
-          Visible = False
           OnClick = Button2Click
         end
         object Button3: TButton
@@ -318,14 +317,13 @@ object L_AirwaybillsHighFRM: TL_AirwaybillsHighFRM
           Height = 33
           Caption = 'Update to Show Old'
           TabOrder = 2
-          Visible = False
           OnClick = Button3Click
         end
       end
       object Panel8: TPanel
         Left = 0
         Top = 79
-        Width = 1232
+        Width = 1054
         Height = 391
         Align = alClient
         BevelOuter = bvNone
@@ -336,7 +334,7 @@ object L_AirwaybillsHighFRM: TL_AirwaybillsHighFRM
       object Panel9: TPanel
         Left = 0
         Top = 79
-        Width = 1232
+        Width = 1054
         Height = 391
         Align = alClient
         BevelOuter = bvNone
@@ -347,20 +345,20 @@ object L_AirwaybillsHighFRM: TL_AirwaybillsHighFRM
         object AirGRD: TwwDBGrid
           Left = 0
           Top = 0
-          Width = 1121
-          Height = 380
+          Width = 911
+          Height = 391
           Selected.Strings = (
             'SERIAL_NUMBER'#9'9'#9'SN'
             'SEQUENCE_NUMBER'#9'3'#9'Seq'
             'HAWB_ID'#9'15'#9'Hawb'
             'DESCRIPTION'#9'28'#9'Description'
-            'SENDER_NAME'#9'14'#9'Sender'
+            'SENDER_NAME'#9'20'#9'Sender'
             'ITEMS_COUNT'#9'4'#9'Items'
             'SHIPMENT_ORIGIN_COUNTRY'#9'6'#9'Origin~Country'
             'PIECES'#9'6'#9'Pieces'
             'WEIGHT'#9'6'#9'Weight'
-            'CONSIGNEE_NAME'#9'22'#9'Consignee'
-            'IS_SCANNED'#9'7'#9'Scanned')
+            'CONSIGNEE_NAME'#9'27'#9'Consignee'
+            'IS_SCANNED'#9'12'#9'Scanned')
           IniAttributes.Delimiter = ';;'
           IniAttributes.UnicodeIniFile = False
           TitleColor = clBtnFace
@@ -390,6 +388,8 @@ object L_AirwaybillsHighFRM: TL_AirwaybillsHighFRM
           OnDblClick = AirGRDDblClick
           ImageList = ImageList1
           TitleImageList = ImageList1
+          ExplicitLeft = 6
+          ExplicitTop = -1
           object AirGRDIButton: TwwIButton
             Left = 0
             Top = 0
@@ -455,24 +455,18 @@ object L_AirwaybillsHighFRM: TL_AirwaybillsHighFRM
               FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
           end
         end
-        object DeleteSelectedBTN: TRzBitBtn
-          Left = 1127
-          Top = 99
-          Width = 132
+        object DeleteSelectedBTN: TBitBtn
+          Left = 936
+          Top = 105
+          Width = 118
           Height = 45
-          Alignment = taLeftJustify
           Cancel = True
           Caption = 'Delete Selected'
-          DoubleBuffered = True
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -12
           Font.Name = 'arial'
-          Font.Style = []
-          ParentDoubleBuffered = False
-          ParentFont = False
-          TabOrder = 1
-          OnClick = DeleteSelectedBTNClick
+          Font.Style = [fsBold]
           Glyph.Data = {
             DE010000424DDE01000000000000760000002800000024000000120000000100
             0400000000006801000000000000000000001000000000000000000000000000
@@ -490,28 +484,23 @@ object L_AirwaybillsHighFRM: TL_AirwaybillsHighFRM
             3333333300003333333333333333333333333333333333330000333333333333
             3333333333333333333333330000333333333333333333333333333333333333
             0000}
-          Margin = -1
           NumGlyphs = 2
-          Spacing = 8
+          ParentFont = False
+          TabOrder = 1
+          OnClick = DeleteSelectedBTNClick
         end
-        object InsertBTN: TRzBitBtn
-          Left = 1127
+        object InsertBTN: TBitBtn
+          Left = 936
           Top = 150
-          Width = 131
+          Width = 118
           Height = 46
-          Alignment = taLeftJustify
           Cancel = True
           Caption = 'Add Airwaybill'
-          DoubleBuffered = True
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -12
           Font.Name = 'arial'
-          Font.Style = []
-          ParentDoubleBuffered = False
-          ParentFont = False
-          TabOrder = 2
-          OnClick = InsertBTNClick
+          Font.Style = [fsBold]
           Glyph.Data = {
             DE010000424DDE01000000000000760000002800000024000000120000000100
             0400000000006801000000000000000000001000000000000000000000000000
@@ -529,9 +518,11 @@ object L_AirwaybillsHighFRM: TL_AirwaybillsHighFRM
             3F33333300003333333A2243333333333333387337333333000033333333AA33
             3333333333333877733333330000333333333333333333333333338883333333
             0000}
-          Margin = -1
           NumGlyphs = 2
-          Spacing = 8
+          ParentFont = False
+          Style = bsNew
+          TabOrder = 2
+          OnClick = InsertBTNClick
         end
       end
     end
@@ -658,7 +649,7 @@ object L_AirwaybillsHighFRM: TL_AirwaybillsHighFRM
     end
     object AirwayBillSQLSENDER_NAME: TStringField
       DisplayLabel = 'Sender'
-      DisplayWidth = 14
+      DisplayWidth = 20
       FieldName = 'SENDER_NAME'
       FixedChar = True
       Size = 35
@@ -691,14 +682,14 @@ object L_AirwaybillsHighFRM: TL_AirwaybillsHighFRM
     end
     object AirwayBillSQLCONSIGNEE_NAME: TStringField
       DisplayLabel = 'Consignee'
-      DisplayWidth = 22
+      DisplayWidth = 27
       FieldName = 'CONSIGNEE_NAME'
       FixedChar = True
       Size = 35
     end
     object AirwayBillSQLIS_SCANNED: TStringField
       DisplayLabel = 'Scanned'
-      DisplayWidth = 7
+      DisplayWidth = 12
       FieldName = 'IS_SCANNED'
       FixedChar = True
       Size = 1

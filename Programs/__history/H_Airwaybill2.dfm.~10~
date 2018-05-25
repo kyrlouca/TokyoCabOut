@@ -1,116 +1,19 @@
 object H_airwaybill2FRM: TH_airwaybill2FRM
   Left = 70
   Top = -8
-  Width = 1282
-  Height = 856
+  ClientHeight = 821
+  ClientWidth = 1266
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -10
-  Font.Name = 'MS Sans Serif'
+  Font.Name = 'arial'
   Font.Style = []
   OldCreateOrder = False
   Position = poDesktopCenter
   OnActivate = FormActivate
   PixelsPerInch = 96
   TextHeight = 13
-  object Label5: TLabel
-    Left = 45
-    Top = 263
-    Width = 34
-    Height = 13
-    Caption = 'Weight'
-  end
-  object Label9: TLabel
-    Left = 163
-    Top = 289
-    Width = 32
-    Height = 13
-    Caption = 'Pieces'
-    Color = clBtnFace
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -11
-    Font.Name = 'MS Sans Serif'
-    Font.Style = []
-    ParentColor = False
-    ParentFont = False
-  end
-  object Label15: TLabel
-    Left = 19
-    Top = 258
-    Width = 28
-    Height = 13
-    Caption = 'Name'
-    Color = clBtnFace
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -11
-    Font.Name = 'MS Sans Serif'
-    Font.Style = []
-    ParentColor = False
-    ParentFont = False
-  end
-  object Label16: TLabel
-    Left = 7
-    Top = 284
-    Width = 38
-    Height = 13
-    Caption = 'Address'
-    Color = clBtnFace
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -11
-    Font.Name = 'MS Sans Serif'
-    Font.Style = []
-    ParentColor = False
-    ParentFont = False
-  end
-  object Label17: TLabel
-    Left = -2
-    Top = 310
-    Width = 49
-    Height = 13
-    Caption = 'Post Code'
-    Color = clBtnFace
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -11
-    Font.Name = 'MS Sans Serif'
-    Font.Style = []
-    ParentColor = False
-    ParentFont = False
-  end
-  object Label18: TLabel
-    Left = 31
-    Top = 336
-    Width = 17
-    Height = 13
-    Caption = 'City'
-    Color = clBtnFace
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -11
-    Font.Name = 'MS Sans Serif'
-    Font.Style = []
-    ParentColor = False
-    ParentFont = False
-  end
-  object Label19: TLabel
-    Left = 12
-    Top = 362
-    Width = 36
-    Height = 13
-    Caption = 'Country'
-    Color = clBtnFace
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -11
-    Font.Name = 'MS Sans Serif'
-    Font.Style = []
-    ParentColor = False
-    ParentFont = False
-  end
   object TitlePNL: TPanel
     Left = 0
     Top = 0
@@ -122,13 +25,13 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
     Font.Color = clBlue
     Font.Height = -27
     Font.Name = 'Arial'
-    Font.Style = [fsBold]
+    Font.Style = []
     ParentFont = False
     TabOrder = 0
   end
   object Panel4: TPanel
     Left = 0
-    Top = 763
+    Top = 767
     Width = 1266
     Height = 54
     Align = alBottom
@@ -136,17 +39,14 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
     object AcceptBTN: TBitBtn
       Left = 18
       Top = 7
-      Width = 76
+      Width = 81
       Height = 39
       Caption = 'Accept'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
-      Font.Height = -12
-      Font.Name = 'MS Sans Serif'
-      Font.Style = [fsBold]
-      ParentFont = False
-      TabOrder = 0
-      OnClick = AcceptBTNClick
+      Font.Height = -15
+      Font.Name = 'arial'
+      Font.Style = []
       Glyph.Data = {
         DE010000424DDE01000000000000760000002800000024000000120000000100
         0400000000006801000000000000000000001000000000000000000000000000
@@ -165,22 +65,22 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
         333A333333333333333338330000333333333333333333333333333333333333
         0000}
       NumGlyphs = 2
+      ParentFont = False
+      TabOrder = 0
+      OnClick = AcceptBTNClick
     end
     object CancelBTN: TBitBtn
-      Left = 112
-      Top = 7
-      Width = 77
+      Left = 120
+      Top = 6
+      Width = 87
       Height = 39
       Cancel = True
       Caption = 'Cancel'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
-      Font.Height = -12
-      Font.Name = 'MS Sans Serif'
-      Font.Style = [fsBold]
-      ParentFont = False
-      TabOrder = 1
-      OnClick = CancelBTNClick
+      Font.Height = -15
+      Font.Name = 'arial'
+      Font.Style = []
       Glyph.Data = {
         DE010000424DDE01000000000000760000002800000024000000120000000100
         0400000000006801000000000000000000001000000000000000000000000000
@@ -199,39 +99,42 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
         3333333333333333333888330000333333333333333333333333333333333333
         0000}
       NumGlyphs = 2
+      ParentFont = False
+      TabOrder = 1
+      OnClick = CancelBTNClick
     end
   end
   object Panel3: TPanel
     Left = 0
     Top = 46
     Width = 1266
-    Height = 717
+    Height = 721
     Align = alClient
     TabOrder = 2
     object GroupBox1: TGroupBox
-      Left = 26
-      Top = 7
-      Width = 397
+      Left = 18
+      Top = 6
+      Width = 303
       Height = 289
       Caption = 'Details'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'MS Sans Serif'
-      Font.Style = [fsBold]
+      Font.Height = -12
+      Font.Name = 'arial'
+      Font.Style = []
       ParentFont = False
       TabOrder = 0
       object Label1: TLabel
         Left = 33
         Top = 24
-        Width = 26
-        Height = 13
+        Width = 27
+        Height = 14
         Caption = 'Serial'
         Color = clBtnFace
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
-        Font.Name = 'MS Sans Serif'
+        Font.Name = 'arial'
         Font.Style = []
         ParentColor = False
         ParentFont = False
@@ -239,14 +142,14 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
       object Label2: TLabel
         Left = 33
         Top = 80
-        Width = 28
-        Height = 13
+        Width = 29
+        Height = 14
         Caption = 'Hawb'
         Color = clBtnFace
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
-        Font.Name = 'MS Sans Serif'
+        Font.Name = 'arial'
         Font.Style = []
         ParentColor = False
         ParentFont = False
@@ -255,13 +158,13 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
         Left = 27
         Top = 197
         Width = 32
-        Height = 13
+        Height = 14
         Caption = 'Pieces'
         Color = clBtnFace
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
-        Font.Name = 'MS Sans Serif'
+        Font.Name = 'arial'
         Font.Style = []
         ParentColor = False
         ParentFont = False
@@ -270,13 +173,13 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
         Left = 11
         Top = 59
         Width = 49
-        Height = 13
+        Height = 14
         Caption = 'Sequence'
         Color = clBtnFace
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
-        Font.Name = 'MS Sans Serif'
+        Font.Name = 'arial'
         Font.Style = []
         ParentColor = False
         ParentFont = False
@@ -284,14 +187,14 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
       object Label6: TLabel
         Left = 33
         Top = 126
-        Width = 27
-        Height = 13
+        Width = 28
+        Height = 14
         Caption = 'Origin'
         Color = clBtnFace
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
-        Font.Name = 'MS Sans Serif'
+        Font.Name = 'arial'
         Font.Style = []
         ParentColor = False
         ParentFont = False
@@ -299,14 +202,14 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
       object Label7: TLabel
         Left = 27
         Top = 219
-        Width = 34
-        Height = 13
+        Width = 33
+        Height = 14
         Caption = 'Weight'
         Color = clBtnFace
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
-        Font.Name = 'MS Sans Serif'
+        Font.Name = 'arial'
         Font.Style = []
         ParentColor = False
         ParentFont = False
@@ -314,14 +217,14 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
       object Label8: TLabel
         Left = 6
         Top = 147
-        Width = 53
-        Height = 13
+        Width = 54
+        Height = 14
         Caption = 'Description'
         Color = clBtnFace
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
-        Font.Name = 'MS Sans Serif'
+        Font.Name = 'arial'
         Font.Style = []
         ParentColor = False
         ParentFont = False
@@ -330,13 +233,13 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
         Left = 35
         Top = 174
         Width = 25
-        Height = 13
+        Height = 14
         Caption = 'Items'
         Color = clBtnFace
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
-        Font.Name = 'MS Sans Serif'
+        Font.Name = 'arial'
         Font.Style = []
         ParentColor = False
         ParentFont = False
@@ -345,13 +248,13 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
         Left = 33
         Top = 102
         Width = 27
-        Height = 13
+        Height = 14
         Caption = 'Value'
         Color = clBtnFace
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
-        Font.Name = 'MS Sans Serif'
+        Font.Name = 'arial'
         Font.Style = []
         ParentColor = False
         ParentFont = False
@@ -360,43 +263,43 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
         Left = 20
         Top = 262
         Width = 41
-        Height = 13
+        Height = 14
         Caption = 'Incoterm'
         Color = clBtnFace
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
-        Font.Name = 'MS Sans Serif'
+        Font.Name = 'arial'
         Font.Style = []
         ParentColor = False
         ParentFont = False
       end
       object Label21: TLabel
-        Left = 131
-        Top = 262
-        Width = 64
-        Height = 13
+        Left = 148
+        Top = 240
+        Width = 65
+        Height = 14
         Caption = 'Service Code'
         Color = clBtnFace
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
-        Font.Name = 'MS Sans Serif'
+        Font.Name = 'arial'
         Font.Style = []
         ParentColor = False
         ParentFont = False
       end
       object Label22: TLabel
-        Left = 277
-        Top = 262
-        Width = 43
-        Height = 13
+        Left = 218
+        Top = 240
+        Width = 44
+        Height = 14
         Caption = 'Account '
         Color = clBtnFace
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
-        Font.Name = 'MS Sans Serif'
+        Font.Name = 'arial'
         Font.Style = []
         ParentColor = False
         ParentFont = False
@@ -404,14 +307,14 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
       object Label24: TLabel
         Left = 2
         Top = 245
-        Width = 57
-        Height = 13
+        Width = 56
+        Height = 14
         Caption = 'Pay Method'
         Color = clBtnFace
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
-        Font.Name = 'MS Sans Serif'
+        Font.Name = 'arial'
         Font.Style = []
         ParentColor = False
         ParentFont = False
@@ -420,14 +323,14 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
         Left = 65
         Top = 24
         Width = 59
-        Height = 24
+        Height = 22
         Color = clBtnFace
         DataField = 'SERIAL_NUMBER'
         DataSource = AirwaybillCDS
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
-        Font.Name = 'MS Sans Serif'
+        Font.Name = 'arial'
         Font.Style = []
         ParentFont = False
         ReadOnly = True
@@ -440,14 +343,14 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
         Left = 65
         Top = 77
         Width = 98
-        Height = 24
+        Height = 22
         Color = clWhite
         DataField = 'HAWB_ID'
         DataSource = AirwaybillCDS
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
-        Font.Name = 'MS Sans Serif'
+        Font.Name = 'arial'
         Font.Style = []
         ParentFont = False
         TabOrder = 2
@@ -459,14 +362,14 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
         Left = 65
         Top = 193
         Width = 59
-        Height = 24
+        Height = 22
         Color = clWhite
         DataField = 'PIECES'
         DataSource = AirwaybillCDS
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
-        Font.Name = 'MS Sans Serif'
+        Font.Name = 'arial'
         Font.Style = []
         ParentFont = False
         TabOrder = 6
@@ -478,14 +381,14 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
         Left = 65
         Top = 56
         Width = 59
-        Height = 24
+        Height = 22
         Color = clWhite
         DataField = 'SEQUENCE_NUMBER'
         DataSource = AirwaybillCDS
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
-        Font.Name = 'MS Sans Serif'
+        Font.Name = 'arial'
         Font.Style = []
         ParentFont = False
         TabOrder = 1
@@ -497,14 +400,14 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
         Left = 65
         Top = 123
         Width = 98
-        Height = 24
+        Height = 22
         Color = clWhite
         DataField = 'SHIPMENT_ORIGIN_COUNTRY'
         DataSource = AirwaybillCDS
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
-        Font.Name = 'MS Sans Serif'
+        Font.Name = 'arial'
         Font.Style = []
         ParentFont = False
         TabOrder = 3
@@ -516,14 +419,14 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
         Left = 65
         Top = 216
         Width = 59
-        Height = 24
+        Height = 22
         Color = clWhite
         DataField = 'WEIGHT'
         DataSource = AirwaybillCDS
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
-        Font.Name = 'MS Sans Serif'
+        Font.Name = 'arial'
         Font.Style = []
         ParentFont = False
         TabOrder = 8
@@ -533,16 +436,16 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
       end
       object DescriptionFLD: TwwDBEdit
         Left = 65
-        Top = 144
-        Width = 261
-        Height = 24
+        Top = 150
+        Width = 222
+        Height = 22
         Color = clWhite
         DataField = 'DESCRIPTION'
         DataSource = AirwaybillCDS
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
-        Font.Name = 'MS Sans Serif'
+        Font.Name = 'arial'
         Font.Style = []
         ParentFont = False
         TabOrder = 4
@@ -554,14 +457,14 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
         Left = 130
         Top = 193
         Width = 59
-        Height = 24
+        Height = 22
         Color = clWhite
         DataField = 'PIECES_S'
         DataSource = AirwaybillCDS
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
-        Font.Name = 'MS Sans Serif'
+        Font.Name = 'arial'
         Font.Style = []
         ParentFont = False
         TabOrder = 5
@@ -573,13 +476,13 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
         Left = 65
         Top = 171
         Width = 59
-        Height = 24
+        Height = 22
         DataField = 'ITEMS_COUNT'
         DataSource = AirwaybillCDS
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
-        Font.Name = 'MS Sans Serif'
+        Font.Name = 'arial'
         Font.Style = []
         ParentFont = False
         TabOrder = 7
@@ -590,8 +493,8 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
       object wwDBEdit14: TwwDBEdit
         Left = 65
         Top = 236
-        Width = 98
-        Height = 24
+        Width = 77
+        Height = 23
         DataField = 'PAYMENT_METHOD'
         DataSource = AirwaybillCDS
         TabOrder = 9
@@ -603,7 +506,7 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
         Left = 65
         Top = 98
         Width = 98
-        Height = 24
+        Height = 22
         ShowButton = True
         Style = csDropDown
         MapList = True
@@ -614,7 +517,7 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
-        Font.Name = 'MS Sans Serif'
+        Font.Name = 'arial'
         Font.Style = []
         ItemHeight = 0
         Items.Strings = (
@@ -632,11 +535,11 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
         Left = 65
         Top = 259
         Width = 59
-        Height = 24
+        Height = 22
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
-        Font.Name = 'MS Sans Serif'
+        Font.Name = 'arial'
         Font.Style = []
         DropDownAlignment = taLeftJustify
         Selected.Strings = (
@@ -650,17 +553,18 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
         TabOrder = 11
         AutoDropDown = False
         ShowButton = True
+        PreciseEditRegion = False
         AllowClearKey = False
       end
       object wwDBLookupCombo3: TwwDBLookupCombo
-        Left = 206
+        Left = 148
         Top = 259
         Width = 61
-        Height = 24
+        Height = 22
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
-        Font.Name = 'MS Sans Serif'
+        Font.Name = 'arial'
         Font.Style = []
         DropDownAlignment = taLeftJustify
         Selected.Strings = (
@@ -674,19 +578,20 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
         TabOrder = 12
         AutoDropDown = False
         ShowButton = True
+        PreciseEditRegion = False
         AllowClearKey = False
       end
       object wwDBEdit2: TwwDBEdit
-        Left = 319
+        Left = 215
         Top = 259
         Width = 72
-        Height = 24
+        Height = 22
         DataField = 'ACCOUNT_NUMBER'
         DataSource = AirwaybillCDS
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
-        Font.Name = 'MS Sans Serif'
+        Font.Name = 'arial'
         Font.Style = []
         ParentFont = False
         TabOrder = 13
@@ -696,24 +601,30 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
       end
     end
     object GroupBox4: TGroupBox
-      Left = 26
-      Top = 305
-      Width = 397
-      Height = 242
+      Left = 327
+      Top = 6
+      Width = 306
+      Height = 289
       Caption = 'Sender'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'arial'
+      Font.Style = []
+      ParentFont = False
       TabOrder = 1
       OnClick = GroupBox4Click
       object Label26: TLabel
         Left = 32
         Top = 18
-        Width = 28
-        Height = 13
+        Width = 27
+        Height = 14
         Caption = 'Name'
         Color = clBtnFace
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
-        Font.Name = 'MS Sans Serif'
+        Font.Name = 'arial'
         Font.Style = []
         ParentColor = False
         ParentFont = False
@@ -721,14 +632,14 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
       object Label27: TLabel
         Left = 20
         Top = 50
-        Width = 38
-        Height = 13
+        Width = 42
+        Height = 14
         Caption = 'Address'
         Color = clBtnFace
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
-        Font.Name = 'MS Sans Serif'
+        Font.Name = 'arial'
         Font.Style = []
         ParentColor = False
         ParentFont = False
@@ -737,13 +648,13 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
         Left = 11
         Top = 128
         Width = 49
-        Height = 13
+        Height = 14
         Caption = 'Post Code'
         Color = clBtnFace
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
-        Font.Name = 'MS Sans Serif'
+        Font.Name = 'arial'
         Font.Style = []
         ParentColor = False
         ParentFont = False
@@ -751,14 +662,14 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
       object Label29: TLabel
         Left = 44
         Top = 154
-        Width = 17
-        Height = 13
+        Width = 18
+        Height = 14
         Caption = 'City'
         Color = clBtnFace
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
-        Font.Name = 'MS Sans Serif'
+        Font.Name = 'arial'
         Font.Style = []
         ParentColor = False
         ParentFont = False
@@ -766,21 +677,21 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
       object Label30: TLabel
         Left = 25
         Top = 180
-        Width = 36
-        Height = 13
+        Width = 38
+        Height = 14
         Caption = 'Country'
         Color = clBtnFace
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
-        Font.Name = 'MS Sans Serif'
+        Font.Name = 'arial'
         Font.Style = []
         ParentColor = False
         ParentFont = False
       end
       object SpeedButton1: TSpeedButton
-        Left = 367
-        Top = 17
+        Left = 308
+        Top = 22
         Width = 21
         Height = 16
         Hint = 'Find Hawb in this Mawb'
@@ -788,7 +699,7 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -12
-        Font.Name = 'MS Sans Serif'
+        Font.Name = 'arial'
         Font.Style = [fsBold]
         Glyph.Data = {
           76010000424D7601000000000000760000002800000020000000100000000100
@@ -808,16 +719,16 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
         OnClick = SpeedButton1Click
       end
       object Label31: TLabel
-        Left = 201
-        Top = 202
-        Width = 25
-        Height = 13
+        Left = 142
+        Top = 203
+        Width = 24
+        Height = 14
         Caption = 'Email'
         Color = clBtnFace
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
-        Font.Name = 'MS Sans Serif'
+        Font.Name = 'arial'
         Font.Style = []
         ParentColor = False
         ParentFont = False
@@ -825,14 +736,14 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
       object Label32: TLabel
         Left = 25
         Top = 202
-        Width = 34
-        Height = 13
+        Width = 33
+        Height = 14
         Caption = 'Device'
         Color = clBtnFace
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
-        Font.Name = 'MS Sans Serif'
+        Font.Name = 'arial'
         Font.Style = []
         ParentColor = False
         ParentFont = False
@@ -840,15 +751,15 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
       object wwDBEdit15: TwwDBEdit
         Left = 65
         Top = 15
-        Width = 176
-        Height = 24
+        Width = 136
+        Height = 22
         Color = clWhite
         DataField = 'SENDER_NAME'
         DataSource = AirwaybillCDS
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
-        Font.Name = 'MS Sans Serif'
+        Font.Name = 'arial'
         Font.Style = []
         ParentFont = False
         TabOrder = 0
@@ -859,15 +770,15 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
       object wwDBEdit16: TwwDBEdit
         Left = 65
         Top = 44
-        Width = 306
-        Height = 24
+        Width = 237
+        Height = 22
         Color = clWhite
         DataField = 'SENDER_ADDRESS_1'
         DataSource = AirwaybillCDS
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
-        Font.Name = 'MS Sans Serif'
+        Font.Name = 'arial'
         Font.Style = []
         ParentFont = False
         TabOrder = 1
@@ -879,14 +790,14 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
         Left = 65
         Top = 122
         Width = 59
-        Height = 24
+        Height = 22
         Color = clWhite
         DataField = 'SENDER_POST_CODE'
         DataSource = AirwaybillCDS
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
-        Font.Name = 'MS Sans Serif'
+        Font.Name = 'arial'
         Font.Style = []
         ParentFont = False
         TabOrder = 2
@@ -897,15 +808,15 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
       object wwDBEdit18: TwwDBEdit
         Left = 65
         Top = 148
-        Width = 300
-        Height = 24
+        Width = 237
+        Height = 22
         Color = clWhite
         DataField = 'SENDER_CITY'
         DataSource = AirwaybillCDS
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
-        Font.Name = 'MS Sans Serif'
+        Font.Name = 'arial'
         Font.Style = []
         ParentFont = False
         TabOrder = 3
@@ -917,7 +828,7 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
         Left = 65
         Top = 173
         Width = 98
-        Height = 24
+        Height = 23
         CharCase = ecUpperCase
         DropDownAlignment = taLeftJustify
         Selected.Strings = (
@@ -930,21 +841,22 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
         TabOrder = 4
         AutoDropDown = True
         ShowButton = True
+        PreciseEditRegion = False
         AllowClearKey = False
         ShowMatchText = True
       end
       object wwDBEdit19: TwwDBEdit
         Left = 65
         Top = 70
-        Width = 306
-        Height = 24
+        Width = 237
+        Height = 22
         Color = clWhite
         DataField = 'SENDER_ADDRESS_2'
         DataSource = AirwaybillCDS
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
-        Font.Name = 'MS Sans Serif'
+        Font.Name = 'arial'
         Font.Style = []
         ParentFont = False
         TabOrder = 5
@@ -955,15 +867,15 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
       object wwDBEdit20: TwwDBEdit
         Left = 65
         Top = 96
-        Width = 306
-        Height = 24
+        Width = 237
+        Height = 22
         Color = clWhite
         DataField = 'SENDER_ADDRESS_3'
         DataSource = AirwaybillCDS
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
-        Font.Name = 'MS Sans Serif'
+        Font.Name = 'arial'
         Font.Style = []
         ParentFont = False
         TabOrder = 6
@@ -972,16 +884,16 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
         WordWrap = False
       end
       object SelectNameFLD: TwwDBEdit
-        Left = 247
-        Top = 15
-        Width = 111
-        Height = 24
+        Left = 207
+        Top = 17
+        Width = 95
+        Height = 23
         CharCase = ecUpperCase
         Color = 12319739
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -12
-        Font.Name = 'MS Sans Serif'
+        Font.Name = 'arial'
         Font.Style = []
         ParentFont = False
         TabOrder = 7
@@ -990,17 +902,17 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
         WordWrap = False
       end
       object wwDBEdit4: TwwDBEdit
-        Left = 65
-        Top = 199
+        Left = 67
+        Top = 200
         Width = 59
-        Height = 24
+        Height = 22
         Color = clWhite
         DataField = 'SENDER_DEVICE_TYPE'
         DataSource = AirwaybillCDS
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
-        Font.Name = 'MS Sans Serif'
+        Font.Name = 'arial'
         Font.Style = []
         ParentFont = False
         TabOrder = 8
@@ -1009,17 +921,17 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
         WordWrap = False
       end
       object wwDBEdit5: TwwDBEdit
-        Left = 247
+        Left = 178
         Top = 199
         Width = 124
-        Height = 24
+        Height = 22
         Color = clWhite
         DataField = 'SENDER_DEVICE_DETAILS'
         DataSource = AirwaybillCDS
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
-        Font.Name = 'MS Sans Serif'
+        Font.Name = 'arial'
         Font.Style = []
         ParentFont = False
         TabOrder = 9
@@ -1029,23 +941,29 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
       end
     end
     object GroupBox3: TGroupBox
-      Left = 449
-      Top = 312
-      Width = 397
-      Height = 235
+      Left = 639
+      Top = 6
+      Width = 314
+      Height = 289
       Caption = 'Consignee'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'arial'
+      Font.Style = []
+      ParentFont = False
       TabOrder = 2
       object Label10: TLabel
         Left = 32
         Top = 18
-        Width = 28
-        Height = 13
+        Width = 27
+        Height = 14
         Caption = 'Name'
         Color = clBtnFace
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
-        Font.Name = 'MS Sans Serif'
+        Font.Name = 'arial'
         Font.Style = []
         ParentColor = False
         ParentFont = False
@@ -1053,14 +971,14 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
       object Label11: TLabel
         Left = 20
         Top = 50
-        Width = 38
-        Height = 13
+        Width = 42
+        Height = 14
         Caption = 'Address'
         Color = clBtnFace
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
-        Font.Name = 'MS Sans Serif'
+        Font.Name = 'arial'
         Font.Style = []
         ParentColor = False
         ParentFont = False
@@ -1069,13 +987,13 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
         Left = 11
         Top = 128
         Width = 49
-        Height = 13
+        Height = 14
         Caption = 'Post Code'
         Color = clBtnFace
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
-        Font.Name = 'MS Sans Serif'
+        Font.Name = 'arial'
         Font.Style = []
         ParentColor = False
         ParentFont = False
@@ -1083,14 +1001,14 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
       object Label13: TLabel
         Left = 44
         Top = 154
-        Width = 17
-        Height = 13
+        Width = 18
+        Height = 14
         Caption = 'City'
         Color = clBtnFace
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
-        Font.Name = 'MS Sans Serif'
+        Font.Name = 'arial'
         Font.Style = []
         ParentColor = False
         ParentFont = False
@@ -1098,44 +1016,44 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
       object Label14: TLabel
         Left = 25
         Top = 180
-        Width = 36
-        Height = 13
+        Width = 38
+        Height = 14
         Caption = 'Country'
         Color = clBtnFace
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
-        Font.Name = 'MS Sans Serif'
+        Font.Name = 'arial'
         Font.Style = []
         ParentColor = False
         ParentFont = False
       end
       object Label33: TLabel
         Left = 25
-        Top = 202
-        Width = 34
-        Height = 13
+        Top = 208
+        Width = 33
+        Height = 14
         Caption = 'Device'
         Color = clBtnFace
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
-        Font.Name = 'MS Sans Serif'
+        Font.Name = 'arial'
         Font.Style = []
         ParentColor = False
         ParentFont = False
       end
       object Label34: TLabel
-        Left = 201
-        Top = 202
-        Width = 25
-        Height = 13
+        Left = 130
+        Top = 208
+        Width = 24
+        Height = 14
         Caption = 'Email'
         Color = clBtnFace
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
-        Font.Name = 'MS Sans Serif'
+        Font.Name = 'arial'
         Font.Style = []
         ParentColor = False
         ParentFont = False
@@ -1143,15 +1061,15 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
       object CnameFLD: TwwDBEdit
         Left = 65
         Top = 18
-        Width = 306
-        Height = 24
+        Width = 234
+        Height = 22
         Color = clWhite
         DataField = 'CONSIGNEE_NAME'
         DataSource = AirwaybillCDS
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
-        Font.Name = 'MS Sans Serif'
+        Font.Name = 'arial'
         Font.Style = []
         ParentFont = False
         TabOrder = 0
@@ -1162,15 +1080,15 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
       object Cadd1FLD: TwwDBEdit
         Left = 65
         Top = 44
-        Width = 306
-        Height = 24
+        Width = 234
+        Height = 22
         Color = clWhite
         DataField = 'CONSIGNEE_ADDRESS_1'
         DataSource = AirwaybillCDS
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
-        Font.Name = 'MS Sans Serif'
+        Font.Name = 'arial'
         Font.Style = []
         ParentFont = False
         TabOrder = 1
@@ -1182,14 +1100,14 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
         Left = 65
         Top = 122
         Width = 59
-        Height = 24
+        Height = 22
         Color = clWhite
         DataField = 'CONSIGNEE_POST_CODE'
         DataSource = AirwaybillCDS
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
-        Font.Name = 'MS Sans Serif'
+        Font.Name = 'arial'
         Font.Style = []
         ParentFont = False
         TabOrder = 4
@@ -1200,15 +1118,15 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
       object CCityFLD: TwwDBEdit
         Left = 65
         Top = 148
-        Width = 300
-        Height = 24
+        Width = 234
+        Height = 22
         Color = clWhite
         DataField = 'CONSIGNEE_CITY'
         DataSource = AirwaybillCDS
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
-        Font.Name = 'MS Sans Serif'
+        Font.Name = 'arial'
         Font.Style = []
         ParentFont = False
         TabOrder = 5
@@ -1219,15 +1137,15 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
       object CAdd2FLd: TwwDBEdit
         Left = 65
         Top = 70
-        Width = 306
-        Height = 24
+        Width = 234
+        Height = 22
         Color = clWhite
         DataField = 'CONSIGNEE_ADDRESS_2'
         DataSource = AirwaybillCDS
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
-        Font.Name = 'MS Sans Serif'
+        Font.Name = 'arial'
         Font.Style = []
         ParentFont = False
         TabOrder = 2
@@ -1238,15 +1156,15 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
       object CAdd3FLD: TwwDBEdit
         Left = 65
         Top = 96
-        Width = 306
-        Height = 24
+        Width = 234
+        Height = 22
         Color = clWhite
         DataField = 'CONSIGNEE_ADDRESS_3'
         DataSource = AirwaybillCDS
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
-        Font.Name = 'MS Sans Serif'
+        Font.Name = 'arial'
         Font.Style = []
         ParentFont = False
         TabOrder = 3
@@ -1258,14 +1176,14 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
         Left = 65
         Top = 177
         Width = 59
-        Height = 24
+        Height = 22
         Color = clWhite
         DataField = 'CONSIGNEE_COUNTRY_CODE'
         DataSource = AirwaybillCDS
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
-        Font.Name = 'MS Sans Serif'
+        Font.Name = 'arial'
         Font.Style = []
         ParentFont = False
         TabOrder = 6
@@ -1275,16 +1193,16 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
       end
       object wwDBEdit6: TwwDBEdit
         Left = 65
-        Top = 199
+        Top = 204
         Width = 59
-        Height = 24
+        Height = 22
         Color = clWhite
         DataField = 'CONSIGNEE_DEVICE_TYPE'
         DataSource = AirwaybillCDS
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
-        Font.Name = 'MS Sans Serif'
+        Font.Name = 'arial'
         Font.Style = []
         ParentFont = False
         TabOrder = 7
@@ -1293,17 +1211,17 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
         WordWrap = False
       end
       object wwDBEdit7: TwwDBEdit
-        Left = 247
-        Top = 199
+        Left = 175
+        Top = 204
         Width = 124
-        Height = 24
+        Height = 22
         Color = clWhite
         DataField = 'CONSIGNEE_DEVICE_DETAILS'
         DataSource = AirwaybillCDS
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
-        Font.Name = 'MS Sans Serif'
+        Font.Name = 'arial'
         Font.Style = []
         ParentFont = False
         TabOrder = 8
@@ -1313,9 +1231,9 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
       end
     end
     object wwDBGrid1: TwwDBGrid
-      Left = 26
-      Top = 585
-      Width = 813
+      Left = 18
+      Top = 353
+      Width = 807
       Height = 98
       ControlType.Strings = (
         'CURRENCY;CustomEdit;CurrencyFLD')
@@ -1331,24 +1249,46 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
         'CURRENCY_RATE'#9'10'#9'Rate'
         'UNIT_OF_MEASURE'#9'8'#9'KG')
       IniAttributes.Delimiter = ';;'
+      IniAttributes.UnicodeIniFile = False
       TitleColor = clBtnFace
       FixedCols = 0
       ShowHorzScrollBar = True
       DataSource = AirItemSRC
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -10
+      Font.Name = 'arial'
+      Font.Style = []
+      ParentFont = False
       TabOrder = 3
       TitleAlignment = taLeftJustify
-      TitleFont.Charset = DEFAULT_CHARSET
+      TitleFont.Charset = GREEK_CHARSET
       TitleFont.Color = clWindowText
-      TitleFont.Height = -10
-      TitleFont.Name = 'MS Sans Serif'
+      TitleFont.Height = -13
+      TitleFont.Name = 'Arial'
       TitleFont.Style = []
       TitleLines = 1
       TitleButtons = False
-      IndicatorColor = icBlack
+    end
+    object CurrencyFLD: TwwDBLookupCombo
+      Left = 676
+      Top = 637
+      Width = 98
+      Height = 21
+      DropDownAlignment = taLeftJustify
+      DataField = 'CURRENCY'
+      DataSource = AirItemSRC
+      LookupTable = CurrencySQL
+      LookupField = 'CURRENCY_CODE'
+      TabOrder = 4
+      AutoDropDown = False
+      ShowButton = True
+      PreciseEditRegion = False
+      AllowClearKey = False
     end
     object wwDBNavigator1: TwwDBNavigator
-      Left = 26
-      Top = 553
+      Left = 676
+      Top = 211
       Width = 142
       Height = 20
       DataSource = AirItemSRC
@@ -1471,21 +1411,6 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
         Index = 6
         Style = nbsRefresh
       end
-    end
-    object CurrencyFLD: TwwDBLookupCombo
-      Left = 676
-      Top = 637
-      Width = 98
-      Height = 24
-      DropDownAlignment = taLeftJustify
-      DataField = 'CURRENCY'
-      DataSource = AirItemSRC
-      LookupTable = CurrencySQL
-      LookupField = 'CURRENCY_CODE'
-      TabOrder = 5
-      AutoDropDown = False
-      ShowButton = True
-      AllowClearKey = False
     end
   end
   object AirwaybillCDS: TIBCDataSource
@@ -1621,6 +1546,7 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
         DataType = ftInteger
         Name = 'SerialNumber'
         ParamType = ptInput
+        Value = nil
       end>
     object AirwayBillSQLSERIAL_NUMBER: TIntegerField
       FieldName = 'SERIAL_NUMBER'
@@ -1935,11 +1861,7 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
         DataType = ftInteger
         Name = 'SERIAL_NUMBER'
         ParamType = ptInput
-      end
-      item
-        DataType = ftInteger
-        Name = 'SERIAL_NUMBER'
-        ParamType = ptInput
+        Value = nil
       end>
     object AirItemSQLSERIAL_NUMBER: TIntegerField
       DisplayLabel = 'S/N'
