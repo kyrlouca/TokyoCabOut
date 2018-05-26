@@ -20,7 +20,7 @@ unit X_createMultiHighXML;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes,system.dateUtils, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Xml.xmldom, Xml.XMLIntf,
   Xml.adomxmldom, Xml.XMLDoc, vcl.wwbutton, Xml.Win.msxmldom, Data.DB, MemDS,
   DBAccess, IBC, RzLabel,clipbrd;
@@ -47,6 +47,7 @@ type
     function GetTableDefaultValue( Const TableName:String):String;
     Function TestOne(Const HawbSerial:Integer):String;
     function FindCertValue(Const CertSerial,ItemSerial:Integer):String;
+    function MarkSelectedAirwayBills(Const FlightSErial, AIrSerial:Integer; Criteria:TCriteriaParams):TDateTime;
 
 
     function CheckSameSender( Const FlightSerial, AirSerial :Integer):Boolean;
@@ -60,7 +61,7 @@ type
     function TBLCreateXMLNode(XMLDoc:IXMLDocument;ElementFather:IXMLNode;ElementName:String;ElementValue:String; Dataset: TDataset; FieldName:String; ElementType: TNodeType =ntElement):IXMLNode;
 
 
-  function CreateNodeOuter( Const FlightOutSerial:Integer; AirSerial:integer;const Fdoc: IXMLDocument;FatherNode:IXMLNode;Criteria:TCriteriaParams):Integer;
+  function CreateNodeOuter( Const FlightOutSerial:Integer; TimeXML:TDateTime;const Fdoc: IXMLDocument;FatherNode:IXMLNode):Integer;
   function CreateNodeHeader( Const FlightOutSerial,AirSerial:Integer; const Fdoc: IXMLDocument;FatherNode:IXMLNode;Criteria:TCriteriaParams):IXMLNode;
   function CreateNodeAirwayBills( Const FlightSerial:Integer;  AirSerial: Integer;const Fdoc: IXMLDocument;FatherNode:IXMLNode;Criteria:TCriteriaParams):Integer;
   function CreateNodeForItems( Const AirwaybillSerial:Integer; const Fdoc: IXMLDocument;FatherNode:IXMLNode):IXMLNode;
@@ -72,7 +73,6 @@ type
     IN_FlightSerial:Integer;
 
     SameIncoterm:boolean;
-    procedure CreateOneAirwabillXML(Const SerialNumber:Integer);
 
   Function LoopMultiXML(Const FlightOutSerial:Integer):integer;
 
@@ -115,15 +115,6 @@ var
 begin
 
 end;
-
-procedure TX_CreateMultiHighXmlFRM.CreateOneAirwabillXML(Const SerialNumber:Integer);
-
-begin
-
-end;
-
-
-
 
 function TX_CreateMultiHighXmlFRM.CreateXmlNodeNew(XMLDoc:IXMLDocument;ElementFather:IXMLNode;ElementName:String;ElementValue:String; ElementType: TNodeType =ntElement):IXMLNode;
 Var
@@ -214,6 +205,8 @@ var
   FileName:String;
   Criteria:TCriteriaParams;
   CountCreated:Integer;
+  XMLTime:TDateTime;
+  TimeXML:TDateTime;
 
 begin
   DefaultDir:= GN_GetTheSystemParameter(cn, 'S01').P_String4;
@@ -231,6 +224,12 @@ begin
     FlightQr.free;
   end;
 
+  timeXML := MarkSelectedAirwayBills(FlightOutSerial,AirSerial,Criteria);
+  if timeXML < DateOF(timeXML) then begin
+    //no airwaybills were marked and it returned 1999,0,0
+    result:=0;
+    exit;
+  end;
 
   //change groupSql  below if just for one airwaybill
   //grouping  includes processed airs but no problem if empty groups
@@ -240,17 +239,16 @@ begin
   +'   from'
   +'    flight_airwaybill fa join'
   +'    flight_airwaybill_item it on fa.serial_number=it.fk_fa_serial'
-  +'   where fa.fk_flight_out_serial= :flightSerial'
+  +'   where'
+  +'     fa.fk_flight_out_serial= :FlightSerial and '
+  +'     fa.timestamp_xml = :TheTIme '
   +'  group by     fa.declaration_type, fa.type_of_declaration, fa.specific_circumstance, fa.incoterms';
   GroupQr:=TksQuery.Create(cn,val);
 
   try
 //    FlightQr.ParambyName('Flightserial').Value:= FlightOutSerial;
     GroupQr.ParamByName('FlightSerial').Value:=FlightOutSerial;
-    if airSerial>0 then begin
-      GroupQr.AddWhere('fa.serial_number = :AirSerial');
-      GroupQr.ParamByName('AirSerial').Value:=AirSerial;
-    end;
+    GroupQr.ParamByName('TheTIme').Value:=TimeXML;
 
     GroupQr.Open;
     while (not GroupQr.Eof) do begin
@@ -270,8 +268,9 @@ begin
       TheRoot.SetAttributeNS('xmlns', '', 'http://www.eurodyn.com' );
       TBLCreateXMLNode(FDoc,TheRoot,'Declaration','',GroupQr,'DECLARATION_TYPE',ntText);
 
+
      /////////////////////////////////////////////////////////////////////////
-      result := CreateNodeOuter(FlightOutSerial,AirSerial,Fdoc,TheRoot,Criteria);
+      result := CreateNodeOuter(FlightOutSerial,TImeXML,Fdoc,TheRoot);
      /////////////////////////////////////////////////////////////////////////
       strXML := StringReplace(FDoc.XML.Text, ' xmlns=""', '', [rfReplaceAll]);
       FDoc := LoadXMLData(strXML);
@@ -294,7 +293,8 @@ end;
 
 
 
-function TX_CreateMultiHighXmlFRM.CreateNodeOuter( Const FlightOutSerial:Integer; AirSerial:integer; const Fdoc: IXMLDocument;FatherNode:IXMLNode;Criteria:TCriteriaParams):Integer;
+//function TX_CreateMultiHighXmlFRM.CreateNodeOuter( Const FlightOutSerial:Integer; AirSerial:integer; const Fdoc: IXMLDocument;FatherNode:IXMLNode;Criteria:TCriteriaParams):Integer;
+function TX_CreateMultiHighXmlFRM.CreateNodeOuter( Const FlightOutSerial:Integer; TimeXML:TDateTime;const Fdoc: IXMLDocument;FatherNode:IXMLNode):Integer;
 var
   Flightqr,FirstAirQr:TksQuery;
   DeclarantQr:TksQuery;
@@ -321,7 +321,8 @@ begin
   val:=
   ' select first 1 * from flight_airwaybill fa where '
   +' fa.fk_flight_out_serial = :flightSerial and '
-  +' fa.declaration_type = :decType and fa.type_of_declaration = :typeDec and fa.specific_circumstance = :circ  and fa.incoterms = :incoterms';
+  +' fa.declaration_type = :decType and fa.type_of_declaration = :typeDec and fa.specific_circumstance = :circ  and fa.incoterms = :incoterms and '
+  +' value_type= ''H'' ';
   FirstAirQR:= TksQuery.Create(cn,val);
 
   try
@@ -513,7 +514,8 @@ begin
     +'      flight_airwaybill_item it on fa.serial_number=it.fk_fa_serial'
     +'      where fa.fk_flight_out_serial= :flightSerial and '
     +'      (fa.is_included_xml = ''N''  or fa.is_included_xml is null) and '
-    +'      fa.declaration_type = :decType and fa.type_of_declaration = :typeDec and fa.specific_circumstance = :circ and Fa.incoterms= :Incoterms'
+    +'      fa.declaration_type = :decType and fa.type_of_declaration = :typeDec and fa.specific_circumstance = :circ and Fa.incoterms= :Incoterms and '
+    +'       value_type= ''H'' '
     +'          order by fa.hawb_id'
     +'    )';
 
@@ -526,7 +528,8 @@ begin
     +'      flight_airwaybill_item it on fa.serial_number=it.fk_fa_serial'
     +'      where fa.fk_flight_out_serial= :flightSerial and '
     +'      fa.serial_number= :AirSerial and'
-    +'      fa.declaration_type = :decType and fa.type_of_declaration = :typeDec and fa.specific_circumstance = :circ and fa.incoterms= :Incoterms'
+    +'      fa.declaration_type = :decType and fa.type_of_declaration = :typeDec and fa.specific_circumstance = :circ and fa.incoterms= :Incoterms and '
+    +'      value_type= ''H'' '
     +'          order by fa.hawb_id'
     +'    )';
 
@@ -539,7 +542,6 @@ begin
       FlightQr.Open;
       if Flightqr.IsEmpty then
         exit;
-
 
 
       TotalsQr.ParambyName('FlightSerial').Value:= FlightOutSerial;
@@ -653,7 +655,8 @@ begin
   +'    flight_airwaybill fa join'
   +'    flight_airwaybill_item it on fa.serial_number=it.fk_fa_serial'
   +'    where fa.fk_flight_out_serial= :flightSerial'
-  +'    and fa.declaration_type = :decType and fa.type_of_declaration = :typeDec and fa.specific_circumstance = :circ and fa.incoterms= :incoterms'
+  +'    and fa.declaration_type = :decType and fa.type_of_declaration = :typeDec and fa.specific_circumstance = :circ and fa.incoterms= :incoterms and '
+  +'    value_type= ''H'' '
   +'    order by fa.hawb_id, sequence';
   qrItem:=TksQuery.Create(cn,Val);
 
@@ -927,7 +930,8 @@ begin
   +'  ('
   +'   select first 89 fa.sender_vat from flight_airwaybill fa'
   +'   where fk_flight_out_serial= :flightSerial and'
-  +'    (fa.is_included_xml = ''N''  or fa.is_included_xml is null)'
+  +'    (fa.is_included_xml = ''N''  or fa.is_included_xml is null) and '
+  +'    fa.value_type= ''H'' '
   +'   order by fa.hawb_id'
   +'   )group by sender_vat';
 
@@ -937,6 +941,7 @@ begin
   +'   select first 89 fa.sender_vat from flight_airwaybill fa'
   +'   where fk_flight_out_serial= :flightSerial and'
   +'    fa.serial_number= :airSerial'
+  +'    fa.value_type= ''H'' '
   +'   order by fa.hawb_id'
   +'   )group by sender_vat';
 
@@ -975,7 +980,8 @@ begin
   +'  ('
   +'   select first 89 fa.consignee_vat, fa.consignee_name, fa.consignee_address_1 from flight_airwaybill fa'
   +'   where fk_flight_out_serial= :flightSerial and'
-  +'    (fa.is_included_xml = ''N''  or fa.is_included_xml is null)'
+  +'    (fa.is_included_xml = ''N''  or fa.is_included_xml is null) and '
+  +'    value_type= ''H'' '
   +'   order by fa.hawb_id'
   +'   )group by consignee_vat, consignee_name, consignee_address_1';
 
@@ -984,7 +990,8 @@ begin
   +'  ('
   +'   select first 89 fa.consignee_vat,consignee_name,consignee_address_1 from flight_airwaybill fa'
   +'   where fk_flight_out_serial= :flightSerial and'
-  +'    fa.serial_number= :airSerial'
+  +'    fa.serial_number= :airSerial and '
+  +'    value_type= ''H'' '
   +'   order by fa.hawb_id'
   +'   )group by consignee_vat, consignee_name, consignee_address_1';
 
@@ -1023,7 +1030,8 @@ begin
   +'  ('
   +'   select first 89 fa.CONSIGNEE_COUNTRY_CODE '
   +'   where fk_flight_out_serial= :flightSerial and'
-  +'    (fa.is_included_xml = ''N''  or fa.is_included_xml is null)'
+  +'    (fa.is_included_xml = ''N''  or fa.is_included_xml is null) and '
+  +'    value_type= ''H'' '
   +'   order by fa.hawb_id'
   +'   )group by sender_vat';
 
@@ -1032,7 +1040,8 @@ begin
   +'  ('
   +'   select first 89 fa.CONSIGNEE_COUNTRY_CODE from flight_airwaybill fa'
   +'   where fk_flight_out_serial= :flightSerial and'
-  +'    fa.serial_number= :airSerial'
+  +'    fa.serial_number= :airSerial and'
+  +'    value_type= ''H'' '
   +'   order by fa.hawb_id'
   +'   )group by CONSIGNEE_COUNTRY_CODE';
 
@@ -1069,11 +1078,10 @@ begin
   try
    qr.ParamByName('Serial').Value:=CertSerial;
    qr.Open;
+   tblName:=qr.FieldByName('table_for_value').AsString;
+   tblField:=qr.FieldByName('field_for_value').AsString;
    if qr.FieldByName('cert_type').Value <> 'T' then begin
-      tblName:=qr.FieldByName('table_for_value').AsString;
-      tblField:=qr.FieldByName('field_for_value').AsString;
       result:= qr.FieldByName('cert_value').AsString;
-      /////////////////////////
       ///  exit now
       exit;
    end;
@@ -1110,28 +1118,95 @@ begin
         TableSerial:=FlightSerial;
      end else begin
       TableSerial:=0;
+      result:= 'Table '+tblName+ ' NOT FOUND';
+      ///  exit now
+      exit;
+
      end;
 
+    temp:=
+  '   SELECT'
+  +'      RDB$RELATION_FIELDS.RDB$FIELD_NAME as FieldName'
+  +'    FROM'
+  +'      RDB$RELATION_FIELDS'
+  +'    WHERE'
+  +'      RDB$RELATION_FIELDS.RDB$RELATION_NAME = UPPER(:TABLE_NAME)'
+  +'      AND RDB$RELATION_FIELDS.RDB$FIELD_NAME = UPPER(:FIELD_NAME)';
+
+  qr:=TksQuery.Create(cn,temp);
   try
+    qr.ParamByName('TABLE_NAME').Value:=tblName;
+    qr.ParamByName('FIELD_NAME').Value:= tblField;
+    qr.Open;
+    if qr.FieldByName('FieldName').AsString='' then begin
+      result:= 'Field '+ tblField + ' NOT Found';
+      ///  exit now
+      exit;
+    end;
+  finally
+      qr.Free;
+  end;
 
     sqlStr:= 'Select ' + tblField + ' from '+tblName+' where serial_number= :serial';
-    tblQr:= TksQuery.Create(cn,sqlStr);
     try
+     tblQr:= TksQuery.Create(cn,sqlStr);
      tblQr.ParamByName('serial').Value:=TableSerial;
      tblQR.Open;
      result:= tblQr.FieldByName(tblField).AsString;
-    except
-      result:='ERROR  Table:' + tblName + ' field:' +tblFiedl;
-    end;
 
-  finally
-    qr.Free;
-    tblQR.free;
-  end;
+    finally
+      tblQR.Free;
+    end;
 
 
 end;
 
+
+
+function TX_CreateMultiHighXmlFRM.MarkSelectedAirwayBills(Const FlightSErial, AIrSerial:Integer; Criteria:TCriteriaParams):TDateTime;
+var
+  sqlStr, str1,str2:String;
+  qr:TksQuery;
+  TheTime:TDateTime;
+  cnt:Integer;
+begin
+  str1:=
+  '     update  flight_airwaybill outfa'
+  +'      set outfa.timestamp_xml = :theTime'
+  +'    where  outfa.serial_number in  ('
+  +'      select first 89 fa.serial_number from'
+  +'         flight_airwaybill fa left outer join'
+  +'         flight_airwaybill_item it on fa.serial_number=it.fk_fa_serial'
+  +'      where fa.fk_flight_out_serial= :flightSerial and'
+  +'         value_type= ''H'' and'
+  +'         (fa.is_included_xml = ''N''  or fa.is_included_xml is null) and'
+  +'         fa.declaration_type = :decType and fa.type_of_declaration = :typeDec and'
+  +'         fa.specific_circumstance = :circ and Fa.incoterms= :Incoterms'
+  +'      order by fa.hawb_id'
+  +')';
+
+str2:=
+'   update flight_airwaybill outfa'
+  +'         set outfa.timestamp_xml = :theTime'
+  +'    where outfa.serial_number= :AirSerial';
+
+  TheTime :=now;
+    if AIrSerial>0 then    begin
+      sqlStr:= str2;
+        cnt:=ksExecSQLVar(cn,sqlStr,[theTime,FlightSerial,Criteria.DeclarationType,Criteria.TypeOfDeclaration,Criteria.Circumstance, Criteria.Incoterms]);
+    end else begin
+      sqlStr:= Str1;
+      cnt:=ksExecSQLVar(cn,sqlStr,[theTime,airSerial]);
+    end;
+
+    if cnt=0 then begin
+      result:=  EncodeDateTime(1999, 01, 01, 00, 00, 00, 0000);
+    end else begin
+      result:= TheTIme;
+
+    end;
+
+end;
 
 
 end.
