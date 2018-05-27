@@ -47,7 +47,6 @@ type
     wwDBNavigator1Next: TwwNavButton;
     wwDBNavigator1Last: TwwNavButton;
     wwDBNavigator1Refresh: TwwNavButton;
-    RzPanel1: TRzPanel;
     RzPanel2: TRzPanel;
     ScanBTN: TRzBitBtn;
     InsertBTN: TRzBitBtn;

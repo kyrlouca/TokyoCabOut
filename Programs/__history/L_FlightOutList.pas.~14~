@@ -6,7 +6,8 @@ uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   StdCtrls, Mask,  IBC, MemDS, IBCError, wwSpeedButton, wwDBNavigator,
   wwclearpanel, Buttons, ExtCtrls, wwdbedit, Grids, Wwdbigrd, Wwdbgrid,
-  DBAccess, Data.DB, vcl.Wwkeycb, vcl.wwdblook;
+  DBAccess, Data.DB, vcl.Wwkeycb, vcl.wwdblook, RzButton, G_generalProcs,
+  RzPanel;
 
 type
   TL_FlightOutListFRM = class(TForm)
@@ -26,11 +27,7 @@ type
     FlightOutSQLDESTINATION_COUNTRY: TStringField;
     Panel2: TPanel;
     Panel5: TPanel;
-    Panel6: TPanel;
     FlightOutGRD: TwwDBGrid;
-    DeleteSelectedBTN: TBitBtn;
-    InsertBTN: TBitBtn;
-    BitBtn1: TBitBtn;
     Label1: TLabel;
     FlightOutCDS: TIBCDataSource;
     FlightTableSQL: TIBCQuery;
@@ -43,6 +40,20 @@ type
     DeleteFlightCountrySQL: TIBCQuery;
     wwIncrementalSearch1: TwwIncrementalSearch;
     BitBtn2: TBitBtn;
+    FlightOutGRDIButton: TwwIButton;
+    wwDBNavigator1: TwwDBNavigator;
+    wwDBNavigator1First: TwwNavButton;
+    wwDBNavigator1Prior: TwwNavButton;
+    wwDBNavigator1Next: TwwNavButton;
+    wwDBNavigator1Last: TwwNavButton;
+    wwDBNavigator1Refresh: TwwNavButton;
+    RzPanel1: TRzPanel;
+    RzPanel2: TRzPanel;
+    ScanBTN: TRzBitBtn;
+    InsertBTN: TRzBitBtn;
+    DeleteBTN: TRzBitBtn;
+    BitBtn1: TRzBitBtn;
+    Panel6: TRzPanel;
     procedure FormActivate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure BitBtn2Click(Sender: TObject);
@@ -50,10 +61,12 @@ type
     procedure InsertBTNClick(Sender: TObject);
     procedure FlightBTNClick(Sender: TObject);
     procedure BitBtn1Click(Sender: TObject);
-    procedure DeleteSelectedBTNClick(Sender: TObject);
     procedure Button1Click(Sender: TObject);
     procedure FlightOutSQLDeleteError(DataSet: TDataSet; E: EDatabaseError;
       var Action: TDataAction);
+    procedure DeleteBTNClick(Sender: TObject);
+    procedure ScanBTNClick(Sender: TObject);
+    procedure FlightOutGRDTitleButtonClick(Sender: TObject; AFieldName: string);
   private
     { Private declarations }
   public
@@ -74,7 +87,7 @@ var
 implementation
 
 uses MainForm, H_flightOut, H_scanAirwaybill,
-  H_ScanAirwaybillNew;
+  H_ScanAirwaybillNew, G_kyriacosTypes;
 
 {$R *.DFM}
 
@@ -131,6 +144,21 @@ end;
 End;
 
 
+procedure TL_FlightOutListFRM.ScanBTNClick(Sender: TObject);
+Var
+FlightOutSerial:Integer;
+begin
+
+  FlightOutSerial:=FLightOutGRD.DataSource.DataSet.FieldbyName('serial_number').AsInteger;
+
+
+  H_ScanAirwaibillNewFRM.GAction:='EDIT';
+  H_ScanAirwaibillNewFRM.GFlightOutSerial:=FlightOutSerial;
+  H_ScanAirwaibillNewFRM.SearchFlightOutFLD.Text:=FLightOutGRD.DataSource.DataSet.FieldbyName('Mawb').AsString;
+
+  H_ScanAirwaibillNewFRM.showmodal;
+end;
+
 procedure TL_FlightOutListFRM.FlightOutGRDDblClick(Sender: TObject);
 Var
         FlightSerial:Integer;
@@ -142,6 +170,27 @@ begin
         FlightOutSQL.Close;
         FlightOutSQL.Open;
         FlightOutSQL.Locate('SERIAL_NUMBER',FlightSerial,[]);
+
+end;
+
+procedure TL_FlightOutListFRM.FlightOutGRDTitleButtonClick(Sender: TObject;
+  AFieldName: string);
+var
+       sortInfoHawb:TSortInfo;
+       Serial:integer;
+        HawbDS:TIBCQUery;
+
+begin
+
+        HawbDS:=TIBCQuery(FLightOutGRD.DataSource.DataSet);
+        Serial:=HawbDS.FieldByName('Serial_number').AsInteger;
+
+        SortInfoHawb.Table:=HawbDS;
+        G_GeneralProcs.SortGrid(HawbDs,AFieldName,SOrtInfoHawb);
+        HawbDs.First;
+
+//        hawbDs.LocateEx('Serial_number',Serial,[]);
+
 
 end;
 
@@ -192,7 +241,15 @@ begin
 
 end;
 
-procedure TL_FlightOutListFRM.DeleteSelectedBTNClick(Sender: TObject);
+
+
+procedure TL_FlightOutListFRM.Button1Click(Sender: TObject);
+begin
+If FlightOutSQL.UpdateTransaction.Active then
+        ShowMEssage('act');
+end;
+
+procedure TL_FlightOutListFRM.DeleteBTNClick(Sender: TObject);
 Var
         Serial:Integer;
 begin
@@ -211,14 +268,6 @@ DeleteFlightCountrySQL.AutoCommit:=false;
 
         FlightOutSQL.AutoCommit:=true;
         DeleteFlightCOuntrySQL.AutoCommit:=true;
-
-
-end;
-
-procedure TL_FlightOutListFRM.Button1Click(Sender: TObject);
-begin
-If FlightOutSQL.UpdateTransaction.Active then
-        ShowMEssage('act');
 end;
 
 procedure TL_FlightOutListFRM.FlightOutSQLDeleteError(DataSet: TDataSet;

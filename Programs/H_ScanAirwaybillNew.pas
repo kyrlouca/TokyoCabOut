@@ -450,6 +450,8 @@ var
 begin
   Fserial:=FlightOutSQL.FieldByName('serial_number').AsInteger;
   X_CreateMultiHighXmlFRM.LoopMultiXML(Fserial);
+  flightAirwaybillSQL.refresh;
+  ShowMessage('XML files created');
 end;
 
 procedure TH_ScanAirwaibillNewFRM.DeleteFlightAirwaybill(Var SerialNumber:Integer);

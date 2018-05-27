@@ -31,7 +31,6 @@ object H_ScanAirwaibillNewFRM: TH_ScanAirwaibillNewFRM
     Font.Style = []
     ParentFont = False
     TabOrder = 0
-    ExplicitWidth = 1068
     object Panel5: TPanel
       Left = 1030
       Top = 1
@@ -40,7 +39,6 @@ object H_ScanAirwaibillNewFRM: TH_ScanAirwaibillNewFRM
       Align = alRight
       BevelOuter = bvNone
       TabOrder = 0
-      ExplicitLeft = 916
       object wwDBEdit3: TwwDBEdit
         Left = 33
         Top = 19
@@ -70,7 +68,8 @@ object H_ScanAirwaibillNewFRM: TH_ScanAirwaibillNewFRM
     Height = 52
     Align = alBottom
     TabOrder = 1
-    ExplicitWidth = 1068
+    ExplicitLeft = -336
+    ExplicitTop = 717
     object BitBtn1: TBitBtn
       Left = 8
       Top = 8
@@ -151,7 +150,6 @@ object H_ScanAirwaibillNewFRM: TH_ScanAirwaibillNewFRM
     Height = 624
     Align = alClient
     TabOrder = 2
-    ExplicitWidth = 1068
     object HeaderPNL: TPanel
       Left = 1
       Top = 1
@@ -159,7 +157,6 @@ object H_ScanAirwaibillNewFRM: TH_ScanAirwaibillNewFRM
       Height = 169
       Align = alTop
       TabOrder = 0
-      ExplicitWidth = 1066
       object Label10: TLabel
         Left = 539
         Top = 37
@@ -415,7 +412,6 @@ object H_ScanAirwaibillNewFRM: TH_ScanAirwaibillNewFRM
       Align = alTop
       BorderOuter = fsFlat
       TabOrder = 2
-      ExplicitWidth = 1066
       object Label2: TLabel
         Left = 9
         Top = 14
@@ -556,7 +552,6 @@ object H_ScanAirwaibillNewFRM: TH_ScanAirwaibillNewFRM
       Align = alClient
       BorderOuter = fsNone
       TabOrder = 1
-      ExplicitWidth = 1066
       object FlightAirwaybillGRD: TwwDBGrid
         Left = 0
         Top = 0
@@ -922,7 +917,6 @@ object H_ScanAirwaibillNewFRM: TH_ScanAirwaibillNewFRM
         Align = alClient
         BorderOuter = fsNone
         TabOrder = 4
-        ExplicitWidth = 141
         object FlagBTN: TRzBitBtn
           AlignWithMargins = True
           Left = 15

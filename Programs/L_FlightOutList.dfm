@@ -52,7 +52,6 @@ object L_FlightOutListFRM: TL_FlightOutListFRM
     Font.Style = []
     ParentFont = False
     TabOrder = 0
-    ExplicitWidth = 931
   end
   object Panel4: TPanel
     Left = 0
@@ -61,7 +60,6 @@ object L_FlightOutListFRM: TL_FlightOutListFRM
     Height = 66
     Align = alBottom
     TabOrder = 1
-    ExplicitWidth = 931
     object BitBtn2: TBitBtn
       Left = 18
       Top = 6
@@ -142,7 +140,6 @@ object L_FlightOutListFRM: TL_FlightOutListFRM
     Height = 536
     Align = alClient
     TabOrder = 2
-    ExplicitWidth = 931
     object Panel2: TPanel
       Left = 1
       Top = 1
@@ -150,7 +147,6 @@ object L_FlightOutListFRM: TL_FlightOutListFRM
       Height = 56
       Align = alTop
       TabOrder = 0
-      ExplicitWidth = 929
       object Label1: TLabel
         Left = 17
         Top = 20
@@ -212,6 +208,7 @@ object L_FlightOutListFRM: TL_FlightOutListFRM
           Spacing = 4
           Transparent = False
           Caption = 'wwDBNavigator1First'
+          Enabled = False
           DisabledTextColors.ShadeColor = clGray
           DisabledTextColors.HighlightColor = clBtnHighlight
           Index = 0
@@ -228,6 +225,7 @@ object L_FlightOutListFRM: TL_FlightOutListFRM
           Spacing = 4
           Transparent = False
           Caption = 'wwDBNavigator1Prior'
+          Enabled = False
           DisabledTextColors.ShadeColor = clGray
           DisabledTextColors.HighlightColor = clBtnHighlight
           Index = 1
@@ -290,7 +288,6 @@ object L_FlightOutListFRM: TL_FlightOutListFRM
       Height = 478
       Align = alClient
       TabOrder = 1
-      ExplicitWidth = 929
       object FlightOutGRD: TwwDBGrid
         Left = 1
         Top = 1
@@ -335,8 +332,6 @@ object L_FlightOutListFRM: TL_FlightOutListFRM
         TitleButtons = True
         OnTitleButtonClick = FlightOutGRDTitleButtonClick
         OnDblClick = FlightBTNClick
-        ExplicitLeft = -5
-        ExplicitTop = 3
         object FlightOutGRDIButton: TwwIButton
           Left = 0
           Top = 0
@@ -401,13 +396,6 @@ object L_FlightOutListFRM: TL_FlightOutListFRM
             FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
             FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
         end
-        object RzPanel1: TRzPanel
-          Left = 512
-          Top = 336
-          Width = 185
-          Height = 41
-          TabOrder = 0
-        end
       end
       object RzPanel2: TRzPanel
         Left = 841
@@ -417,7 +405,6 @@ object L_FlightOutListFRM: TL_FlightOutListFRM
         Align = alLeft
         BorderOuter = fsNone
         TabOrder = 2
-        ExplicitLeft = 744
         object ScanBTN: TRzBitBtn
           AlignWithMargins = True
           Left = 9
