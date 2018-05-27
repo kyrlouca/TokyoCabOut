@@ -52,7 +52,7 @@ type
 
     function CheckSameSender( Const FlightSerial:Integer; XmlTime:TDateTime):Boolean;
     function CheckSameConsignee( Const FlightSerial:Integer;XmlTime:TDateTime):Boolean;
-    function CheckSameDestination( Const FlightSerial, AirSerial :Integer):Boolean;
+    function CheckSameDestination( Const FlightSerial:integer;xmlTIme:TdateTime):Boolean;
 
     Function CreateCriteriaSetXML(Const FlightOutSerial,AirSerial:Integer;Criteria:TCriteriaParams):integer;
 
@@ -608,17 +608,16 @@ begin
   DefaultKindOfPackages:=GetTableDefaultValue('AUX_KIND_OF_PACKAGES');
   DefaultDangerous:=GetTableDefaultValue('AUX_DANGEROUS_GOODS');
 
-  //89
 
   //SQL will change below for single Air
   val:=
-  '   Select first 89  fa.serial_number as AirSerial,'
-  +'    it.* from'
+  '   Select  '
+  +'    fa.serial_number as AirSerial, it.* from'
   +'    flight_airwaybill fa join'
   +'    flight_airwaybill_item it on fa.serial_number=it.fk_fa_serial'
-  +'    where fa.fk_flight_out_serial= :flightSerial'
-  +'    and fa.declaration_type = :decType and fa.type_of_declaration = :typeDec and fa.specific_circumstance = :circ and fa.incoterms= :incoterms and '
-  +'    value_type= ''H'' '
+  +'    where '
+  +'     fa.fk_flight_out_serial= :flightSerial and'
+  +'     fa.timestamp_xml= :XmlTIme'
   +'    order by fa.hawb_id, sequence';
   qrItem:=TksQuery.Create(cn,Val);
 
@@ -629,21 +628,11 @@ begin
     try
       Counter:=0;
       qrItem.ParambyName('FlightSerial').Value:= FlightSerial;
-      qrItem.ParambyName('decType').Value:= Criteria.DeclarationType;
-      qrItem.ParambyName('TypeDec').Value:= Criteria.TypeOfDeclaration;
-      qrItem.ParambyName('Circ').Value:= Criteria.Circumstance;
-      qrItem.ParambyName('incoterms').Value:= Criteria.Incoterms;
-      if airSerial>0 then begin
-        qrItem.AddWhere('fa.serial_number = :AirSerial');
-        qrItem.ParamByName('AirSerial').Value:=AirSerial;
-      end else begin
-        qrItem.AddWhere(' (fa.is_included_xml = ''N''  or fa.is_included_xml is null)');
-      end;
-
+      qrItem.ParambyName('XmlTime').Value:= XmlTime;
 //      Clipboard.AsText:=qrItem.FinalSQL;
 
-        sameSender:=CheckSameSender(FLightSerial,AirSerial);
-        SameConsignee:=CheckSameConsignee(FLightSerial,AirSerial);
+        sameSender:=CheckSameSender(FLightSerial,XmlTime);
+        SameConsignee:=CheckSameConsignee(FLightSerial,xmlTime);
 
       qrItem.Open;
 
@@ -880,7 +869,7 @@ end;
 
 
 
-function TX_CreateMultiHighXmlFRM.CheckSameSender( Const FlightSerial, XmlTime:TDateTime):Boolean;
+function TX_CreateMultiHighXmlFRM.CheckSameSender( Const FlightSerial:Integer; XmlTime:TDateTime):Boolean;
 var
   qr:TksQuery;
   DefaultVal:String;
@@ -888,38 +877,18 @@ var
 begin
 
   str1:=
-' select count(*), sender_vat from'
-  +'  ('
-  +'   select first 89 fa.sender_vat from flight_airwaybill fa'
-  +'   where fk_flight_out_serial= :flightSerial and'
-  +'    (fa.is_included_xml = ''N''  or fa.is_included_xml is null) and '
-  +'    fa.value_type= ''H'' '
-  +'   order by fa.hawb_id'
-  +'   )group by sender_vat';
-
-  str2:=
-  ' select count(*), sender_vat from'
-  +'  ('
-  +'   select first 89 fa.sender_vat from flight_airwaybill fa'
-  +'   where fk_flight_out_serial= :flightSerial and'
-  +'    fa.serial_number= :airSerial'
-  +'    fa.value_type= ''H'' '
-  +'   order by fa.hawb_id'
-  +'   )group by sender_vat';
-
-  if AirSerial=0 then begin
-    str3:=str1
-  end else begin
-    str3:=str2;
-  end;
+'  select count(*), sender_vat from'
+  +'   flight_airwaybill fa'
+  +'     where'
+  +'     fk_flight_out_serial= :flightSerial and'
+  +'      fa.timestamp_xml= :xmlTIme'
+  +'      group by Sender_vat' ;
 
   qr:=TksQuery.Create(cn, str3);
   try
 
        qr.ParamByName('FLightSerial').Value:=FlightSerial;
-      if AirSerial>0 then
-        qr.ParamByName('AirSerial').Value := AirSerial;
-      qr.Open;
+        qr.ParamByName('XmlTime').Value := XmlTime;
       Clipboard.AsText:=qr.FinalSQL;
       result:= qr.RecordCount =1 ;
   finally
@@ -934,40 +903,22 @@ function TX_CreateMultiHighXmlFRM.CheckSameConsignee( Const FlightSerial:Integer
 var
   qr:TksQuery;
   DefaultVal:String;
-  str1,str2,str3:string;
+  str1:string;
 begin
 
-  str1:=
+str1:=
 ' select count(*), consignee_vat, consignee_name, consignee_address_1 from'
-  +'  ('
-  +'   select first 89 fa.consignee_vat, fa.consignee_name, fa.consignee_address_1 from flight_airwaybill fa'
-  +'   where fk_flight_out_serial= :flightSerial and'
-  +'    (fa.is_included_xml = ''N''  or fa.is_included_xml is null) and '
-  +'    value_type= ''H'' '
-  +'   order by fa.hawb_id'
-  +'   )group by consignee_vat, consignee_name, consignee_address_1';
+  +'   flight_airwaybill fa'
+  +'     where'
+  +'     fk_flight_out_serial= :flightSerial and'
+  +'      fa.timestamp_xml= :xmlTIme'
+  +'   group by consignee_vat, consignee_name, consignee_address_1';
 
-  str2:=
-  ' select count(*), consignee_vat,consignee_name, consignee_address_1 from'
-  +'  ('
-  +'   select first 89 fa.consignee_vat,consignee_name,consignee_address_1 from flight_airwaybill fa'
-  +'   where fk_flight_out_serial= :flightSerial and'
-  +'    fa.serial_number= :airSerial and '
-  +'    value_type= ''H'' '
-  +'   order by fa.hawb_id'
-  +'   )group by consignee_vat, consignee_name, consignee_address_1';
 
-  if AirSerial=0 then begin
-    str3:=str1
-  end else begin
-    str3:=str2;
-  end;
-
-  qr:=TksQuery.Create(cn, str3);
+  qr:=TksQuery.Create(cn, str1);
   try
       qr.ParamByName('FLightSerial').Value:=FlightSerial;
-      if AirSerial>0 then
-        qr.ParamByName('AirSerial').Value := AirSerial;
+      qr.ParamByName('xmlTIme').Value := XmlTime;
       qr.Open;
       Clipboard.AsText:=qr.FinalSQL;
       result:= qr.RecordCount =1 ;
@@ -980,7 +931,7 @@ end;
 
 
 
-function TX_CreateMultiHighXmlFRM.CheckSameDestination( Const FlightSerial, AirSerial :Integer):Boolean;
+function TX_CreateMultiHighXmlFRM.CheckSameDestination( Const FlightSerial:integer;xmlTIme:TdateTime):Boolean;
 var
   qr:TksQuery;
   DefaultVal:String;
@@ -988,37 +939,19 @@ var
 begin
 
   str1:=
-' select count(*), CONSIGNEE_COUNTRY_CODE from'
-  +'  ('
-  +'   select first 89 fa.CONSIGNEE_COUNTRY_CODE '
-  +'   where fk_flight_out_serial= :flightSerial and'
-  +'    (fa.is_included_xml = ''N''  or fa.is_included_xml is null) and '
-  +'    value_type= ''H'' '
-  +'   order by fa.hawb_id'
-  +'   )group by sender_vat';
+'  select count(*), CONSIGNEE_COUNTRY_CODE from'
+  +'   flight_airwaybill fa'
+  +'     where'
+  +'     fk_flight_out_serial= :flightSerial and'
+  +'      fa.timestamp_xml= :xmlTIme'
+  +'      group by CONSIGNEE_COUNTRY_CODE' ;
 
-  str2:=
-  ' select count(*), CONSIGNEE_COUNTRY_CODE from'
-  +'  ('
-  +'   select first 89 fa.CONSIGNEE_COUNTRY_CODE from flight_airwaybill fa'
-  +'   where fk_flight_out_serial= :flightSerial and'
-  +'    fa.serial_number= :airSerial and'
-  +'    value_type= ''H'' '
-  +'   order by fa.hawb_id'
-  +'   )group by CONSIGNEE_COUNTRY_CODE';
 
-  if AirSerial=0 then begin
-    str3:=str1
-  end else begin
-    str3:=str2;
-  end;
-
-  qr:=TksQuery.Create(cn, str3);
+  qr:=TksQuery.Create(cn, str1);
   try
 
-       qr.ParamByName('FLightSerial').Value:=FlightSerial;
-      if AirSerial>0 then
-        qr.ParamByName('AirSerial').Value := AirSerial;
+      qr.ParamByName('FLightSerial').Value:=FlightSerial;
+      qr.ParamByName('xmlTime').Value := xmlTIme;
       qr.Open;
       Clipboard.AsText:=qr.FinalSQL;
       result:= qr.RecordCount =1 ;
