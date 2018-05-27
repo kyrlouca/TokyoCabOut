@@ -211,7 +211,8 @@ count:Integer;
 begin
     repeat
       count:= CreateFlightXML(FlightOutSerial,0);
-    until (Count =0)
+    until (Count =0);
+    showMessage('XML Create Finished');
 end;
 
 
@@ -557,7 +558,7 @@ str:=
      CreateXmlNodeNewDefault(FDoc,x1node,'TypeOfDeclaration',Criteria.DeclarationType,'XXX',ntText);
 
      val:=CheckSameDestination(FlightOutSerial,XmlRandom);
-     if (val>'')
+     if (val>'') then
        CreateXmlNodeNewDefault(FDoc,x1node,'CountryOfDestinationCode',val,'XXX',ntText);
 //     TblCreateXMLNode(FDoc,xlNode,'CountryOfDestinationCode',,'CONSIGNEE_COUNTRY_CODE',ntText);
 
@@ -679,10 +680,8 @@ begin
        TblCreateXMLNode(FDoc,HeaderNode,'NetMass','',qrItem,'WEIGHT',ntText);
 
 
-//       TblCreateXMLNode(FDoc,HeaderNode,'CountryOfDestinationCode','',qrAir,'CONSIGNEE_COUNTRY_CODE',ntText);
-       val:=CheckSameDestination(FlightOutSerial,XmlRandom);
-        if (val='')
-          CreateXmlNodeNewDefault(FDoc,HeaderNode,'CountryOfDestinationCode',val,'XXX',ntText);
+        if CheckSameDestination(FlightSerial,XmlRandom)='' then
+           TblCreateXMLNode(FDoc,HeaderNode,'CountryOfDestinationCode','',qrAir,'CONSIGNEE_COUNTRY_CODE',ntText);
 
        Temp:=qrAir.FieldByName('Payment_method').AsString;
         If temp='A'       then
@@ -959,7 +958,7 @@ end;
 
 
 
-function TX_CreateMultiHighXmlFRM.CheckSameDestination( Const FlightSerial:integer;XmlRandom:Integer):Boolean;
+function TX_CreateMultiHighXmlFRM.CheckSameDestination( Const FlightSerial:integer;XmlRandom:Integer):String;
 var
   qr:TksQuery;
   DefaultVal:String;
@@ -982,7 +981,11 @@ begin
       qr.ParamByName('xmlRandom').Value := xmlRandom;
       qr.Open;
       Clipboard.AsText:=qr.FinalSQL;
-      result:= qr.RecordCount =1 ;
+      if (qr.RecordCount=1) then
+        result:=qr.FieldByName('CONSIGNEE_COUNTRY_CODE').AsString
+      else
+        result:='';
+
   finally
     qr.Free;
   end;
@@ -1093,12 +1096,13 @@ var
   qr:TksQuery;
   cnt:Integer;
   xmlRandom:Integer;
+  tempQr:TksQuery;
 begin
   str1:=
   '     update  flight_airwaybill outfa'
   +'      set outfa.xml_Random = :XmlRandom, outfa.is_included_XML= ''Y'' '
   +'    where  outfa.serial_number in  ('
-  +'      select first 89 fa.serial_number from'
+  +'      select first 2 fa.serial_number from'
   +'         flight_airwaybill fa left outer join'
   +'         flight_airwaybill_item it on fa.serial_number=it.fk_fa_serial'
   +'      where fa.fk_flight_out_serial= :flightSerial and'
@@ -1121,6 +1125,7 @@ str2:=
       cnt:=ksExecSQLVar(cn,sqlStr,[XmlRandom,airSerial]);
     end else begin
       sqlStr:= str1;
+      Clipboard.AsText:=sqlStr;
         cnt:=ksExecSQLVar(cn,sqlStr,[XmlRandom,FlightSerial,Criteria.DeclarationType,Criteria.TypeOfDeclaration,Criteria.Circumstance, Criteria.Incoterms]);
     end;
 

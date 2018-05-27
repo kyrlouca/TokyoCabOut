@@ -212,6 +212,7 @@ begin
     repeat
       count:= CreateFlightXML(FlightOutSerial,0);
     until (Count =0)
+    showMessage('XML Create Finished');
 end;
 
 
@@ -679,10 +680,8 @@ begin
        TblCreateXMLNode(FDoc,HeaderNode,'NetMass','',qrItem,'WEIGHT',ntText);
 
 
-//       TblCreateXMLNode(FDoc,HeaderNode,'CountryOfDestinationCode','',qrAir,'CONSIGNEE_COUNTRY_CODE',ntText);
-       val:=CheckSameDestination(FlightSerial,XmlRandom);
-        if (val='')then
-          CreateXmlNodeNewDefault(FDoc,HeaderNode,'CountryOfDestinationCode',val,'XXX',ntText);
+        if CheckSameDestination(FlightSerial,XmlRandom)='' then
+           TblCreateXMLNode(FDoc,HeaderNode,'CountryOfDestinationCode','',qrAir,'CONSIGNEE_COUNTRY_CODE',ntText);
 
        Temp:=qrAir.FieldByName('Payment_method').AsString;
         If temp='A'       then
