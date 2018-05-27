@@ -23,7 +23,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes,system.dateUtils, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Xml.xmldom, Xml.XMLIntf,
   Xml.adomxmldom, Xml.XMLDoc, vcl.wwbutton, Xml.Win.msxmldom, Data.DB, MemDS,
-  DBAccess, IBC, RzLabel,clipbrd;
+  DBAccess, IBC, RzLabel,clipbrd,Math;
 
 type
   TCriteriaParams= record
@@ -379,6 +379,7 @@ begin
       FirstAirQr.ParambyName('xmlRandom').Value:= XmlRandom;
 
       FirstAirQr.Open;
+      Clipboard.AsText:=FirstAirQR.FinalSQL;
       if FirstAirQr.IsEmpty then
         exit;
 
@@ -909,9 +910,10 @@ begin
   qr:=TksQuery.Create(cn, str1);
   try
 
-       qr.ParamByName('FLightSerial').Value:=FlightSerial;
-        qr.ParamByName('XmlRandom').Value := XmlRandom;
+      qr.ParamByName('FLightSerial').Value:=FlightSerial;
+      qr.ParamByName('XmlRandom').Value := XmlRandom;
       Clipboard.AsText:=qr.FinalSQL;
+      qr.Open;
       result:= qr.RecordCount =1 ;
   finally
     qr.Free;
@@ -1138,6 +1140,8 @@ str2:=
   +'         set outfa.xml_random = :XmlRandom'
   +'    where outfa.serial_number= :AirSerial';
 
+    xmlRandom:= RandomRAnge(0,10000000);
+
     if AIrSerial>0 then    begin
       sqlStr:= Str2;
       cnt:=ksExecSQLVar(cn,sqlStr,[XmlRandom,airSerial]);
@@ -1149,8 +1153,7 @@ str2:=
     if cnt=0 then begin
       result:= 0;
     end else begin
-      result:= Random(10000000);
-
+      result:=xmlRandom;
     end;
 
 end;

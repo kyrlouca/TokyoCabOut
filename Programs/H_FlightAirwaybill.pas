@@ -478,7 +478,7 @@ ksfillComboF1(cn,TypeOfDeclarationFLD, 'AUX_TYPE_OF_DECLARATION','KEY','KEY','KE
 ksfillComboF1(cn,CircFLD,'AUX_SPECIFIC_CIRCUMSTANCE','KEY','KEY','KEY',false,false);
 ksfillComboF1(cn,ServiceFLD,'service_code','Code','Code','Code',false,false);
 
-ksOpenTables([currencySQL,ItinerarySQL,IncotermsSQL, GroupCertificateSQL,CertItemSQL,SelectCertSQL,Fa_ItemSQL]);
+ksOpenTables([CountrySQL,currencySQL,ItinerarySQL,IncotermsSQL, GroupCertificateSQL,CertItemSQL,SelectCertSQL,Fa_ItemSQL]);
 
 
 ItineraryFLD.Text:='';

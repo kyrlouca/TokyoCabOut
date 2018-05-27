@@ -2227,7 +2227,8 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
     Transaction = MainFormFRM.UsedForReadOnlyTrans
     UpdateTransaction = UpdateTransaction
     SQL.Strings = (
-      'Select * from Country')
+      'Select * from Country'
+      'order by COde_2')
     ReadOnly = True
     Active = True
     Left = 1001
