@@ -55,8 +55,8 @@ type
 
     function CheckSameSender( Const FlightSerial:Integer; XmlRandom:Integer):Boolean;
     function CheckSameConsignee( Const FlightSerial:Integer;XmlRandom:Integer):Boolean;
-    function CheckSameDestination( Const FlightSerial:integer;XmlRandom:Integer):String;
-//    function CheckSameIncoterm( Const FlightSerial:integer;XmlRandom:Integer):Boolean;
+    function CheckSameDestination( Const FlightSerial:integer;XmlRandom:Integer):Boolean;
+    function CheckSameIncoterm( Const FlightSerial:integer;XmlRandom:Integer):Boolean;
 
 
     Function  AddNodeAtr(FatherNode:IXMLNode;NodeName:String; NodeText:String):IXMLNode;overload;
@@ -552,14 +552,13 @@ str:=
      //Header515
      val:=MawbId+FormatDateTime('YYMMDDHHMMSS', now);
      x1node:=CreateXMLNodeNew(FDoc,FatherNode,'Msg515Header','',ntElement);
-
      CreateXMLNodeNew(FDoc,x1node,'ReferenceNumber',val,ntText);
+
+
      CreateXmlNodeNewDefault(FDoc,x1node,'TypeOfDeclaration',Criteria.DeclarationType,'XXX',ntText);
 
-     val:=CheckSameDestination(FlightOutSerial,XmlRandom);
-     if (val>'')
-       CreateXmlNodeNewDefault(FDoc,x1node,'CountryOfDestinationCode',val,'XXX',ntText);
-//     TblCreateXMLNode(FDoc,xlNode,'CountryOfDestinationCode',,'CONSIGNEE_COUNTRY_CODE',ntText);
+//     if CheckSameDestination(FlightOutSerial,AirSerial) then
+//         TblCreateXMLNode(FDoc,HeaderNode,'CountryOfDestinationCode',qrAir,'CONSIGNEE_COUNTRY_CODE',ntText);
 
 
      CreateXMLNodeNew(FDoc,x1node,'AgreedLocationOfGoodsCode','LCA',ntText); //here
@@ -678,11 +677,8 @@ begin
        TblCreateXMLNode(FDoc,HeaderNode,'GrossMass','',qrItem,'WEIGHT',ntText);
        TblCreateXMLNode(FDoc,HeaderNode,'NetMass','',qrItem,'WEIGHT',ntText);
 
-
-//       TblCreateXMLNode(FDoc,HeaderNode,'CountryOfDestinationCode','',qrAir,'CONSIGNEE_COUNTRY_CODE',ntText);
-       val:=CheckSameDestination(FlightOutSerial,XmlRandom);
-        if (val='')
-          CreateXmlNodeNewDefault(FDoc,HeaderNode,'CountryOfDestinationCode',val,'XXX',ntText);
+//      if CheckSameDestination(FlightSerial,AirSerial) then
+             TblCreateXMLNode(FDoc,HeaderNode,'CountryOfDestinationCode','',qrAir,'CONSIGNEE_COUNTRY_CODE',ntText);
 
        Temp:=qrAir.FieldByName('Payment_method').AsString;
         If temp='A'       then
@@ -979,7 +975,7 @@ begin
   try
 
       qr.ParamByName('FLightSerial').Value:=FlightSerial;
-      qr.ParamByName('xmlRandom').Value := xmlRandom;
+      qr.ParamByName('xmRandom').Value := xmlRandom;
       qr.Open;
       Clipboard.AsText:=qr.FinalSQL;
       result:= qr.RecordCount =1 ;
@@ -988,6 +984,36 @@ begin
   end;
 
 end;
+
+function TX_CreateMultiHighXmlFRM.CheckSameIncoterm( Const FlightSerial:Integer;XmlRandom:Integer):Boolean;
+var
+  qr:TksQuery;
+  DefaultVal:String;
+  str1:string;
+begin
+
+str1:=
+' select count(*), incoterms from '
+  +'   flight_airwaybill fa'
+  +'     where'
+  +'     fk_flight_out_serial= :flightSerial and'
+  +'      fa.xml_Random= :xmlRandom'
+  +'   group by incoterms';
+
+
+  qr:=TksQuery.Create(cn, str1);
+  try
+      qr.ParamByName('FLightSerial').Value:=FlightSerial;
+      qr.ParamByName('xmlRandom').Value := XmlRandom;
+      qr.Open;
+      Clipboard.AsText:=qr.FinalSQL;
+      result:= qr.RecordCount =1 ;
+  finally
+    qr.Free;
+  end;
+
+end;
+
 
 
 function TX_CreateMultiHighXmlFRM.FindCertValue(Const CertSerial,ItemSerial:Integer):String;
