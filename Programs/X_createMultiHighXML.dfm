@@ -50,6 +50,7 @@ object X_CreateMultiHighXmlFRM: TX_CreateMultiHighXmlFRM
     Color = clBtnFace
     DitherColor = clWhite
     DitherStyle = wwdsDither
+    NumGlyphs = 0
     ShadeStyle = wwbsNormal
     TabOrder = 1
     TextOptions.Alignment = taCenter

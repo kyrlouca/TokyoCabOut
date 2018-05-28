@@ -1092,7 +1092,7 @@ end;
 
 function TX_CreateMultiHighXmlFRM.MarkSelectedAirwayBills(Const FlightSErial, AIrSerial:Integer; Criteria:TCriteriaParams):Integer;
 var
-  sqlStr, str1,str2:String;
+  sqlStr, str1,str2,str3:String;
   qr:TksQuery;
   cnt:Integer;
   xmlRandom:Integer;
@@ -1100,7 +1100,7 @@ var
 begin
   str1:=
   '     update  flight_airwaybill outfa'
-  +'      set outfa.xml_Random = :XmlRandom, outfa.is_included_XML= ''Y'' '
+  +'      set outfa.xml_Random = :XmlRandom'
   +'    where  outfa.serial_number in  ('
   +'      select first 2 fa.serial_number from'
   +'         flight_airwaybill fa left outer join'
@@ -1118,6 +1118,14 @@ str2:=
   +'         set outfa.xml_random = :XmlRandom'
   +'    where outfa.serial_number= :AirSerial';
 
+str3:=
+  'update flight_airwaybill fa '
+  +'set fa.is_included_xml = ''Y'' where  '
+  +'fa.fk_flight_out_serial = :flightSerial and '
+  +'fa.xml_random= :XmlRandom  ' ;
+
+
+
     xmlRandom:= RandomRAnge(0,10000000);
 
     if AIrSerial>0 then    begin
@@ -1127,6 +1135,7 @@ str2:=
       sqlStr:= str1;
       Clipboard.AsText:=sqlStr;
         cnt:=ksExecSQLVar(cn,sqlStr,[XmlRandom,FlightSerial,Criteria.DeclarationType,Criteria.TypeOfDeclaration,Criteria.Circumstance, Criteria.Incoterms]);
+        cnt:=ksExecSQLVar(cn,str3,[FlightSerial,XmlRandom]);
     end;
 
     if cnt=0 then begin
