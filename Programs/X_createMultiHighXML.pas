@@ -258,7 +258,7 @@ begin
       Criteria.Circumstance:= GroupQr.FieldByName('specific_circumstance').AsString;
       Criteria.Incoterms:= GroupQr.FieldByName('Incoterms').AsString;
 
-      CreateXmlFileByGroup(FlightOutSerial,AirSerial,criteria);
+      result := CreateXmlFileByGroup(FlightOutSerial,AirSerial,criteria);
 
       GroupQr.Next;
     end;
@@ -307,7 +307,7 @@ begin
   xmlRandom:= MarkSelectedAirwayBills(FlightOutSerial,AirSerial,Criteria);
 
   if (XmlRandom =0 ) then begin
-  //xmlTIme 1900 denotes that no airways were marked
+    result:=0;
     exit;
   end;
 
