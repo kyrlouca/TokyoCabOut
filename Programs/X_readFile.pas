@@ -499,7 +499,7 @@ begin
      qr.FieldByName('IS_SCANNED').Value:= 'N';
 
      qr.FieldByName('INCOTERMS').Value:= hawbNode.ChildNodes['Incoterms'].Text;
-     qr.FieldByName('SERVICE_CODE').Value:= hawbNode.ChildNodes['DHLServiceCd'].Text;
+//     qr.FieldByName('SERVICE_CODE').Value:= hawbNode.ChildNodes['DHLServiceCd'].Text;
 
      qr.FieldByName('PIECES').Value:= hawbNode.ChildNodes['SDPieces'].Text;
 

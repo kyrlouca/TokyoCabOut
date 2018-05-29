@@ -247,6 +247,7 @@ begin
 
         CabOutData.Server:=ServerIP;
         CabOUtData.database:=DatabasePath;
+        //showMessage(databasePath);
        If CabOutData.connected then
                 CabOutData.Disconnect;
                 

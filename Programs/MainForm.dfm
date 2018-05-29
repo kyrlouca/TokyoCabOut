@@ -104,7 +104,7 @@ object MainFormFRM: TMainFormFRM
     Height = 41
     Align = alTop
     BevelInner = bvRaised
-    Caption = 'Tokyo CabOut '
+    Caption = 'Tokyo CabOut V1.0'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBlue
     Font.Height = -32
@@ -501,7 +501,7 @@ object MainFormFRM: TMainFormFRM
     end
   end
   object CabOutData: TIBCConnection
-    Database = 'C:\Data\DelphiProjects\Databases\Cabout\OriginalDropbox.FDB'
+    Database = 'C:\Data\DelphiProjects\Databases\Cabout\TX1.FDB'
     Options.KeepDesignConnected = False
     DefaultTransaction = UsedForReadOnlyTrans
     SQLDialect = 1
