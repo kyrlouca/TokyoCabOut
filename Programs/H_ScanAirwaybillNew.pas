@@ -447,11 +447,14 @@ End;
 procedure TH_ScanAirwaibillNewFRM.MultiHighBTNClick(Sender: TObject);
 var
   fserial:Integer;
+  Count:Integer;
 begin
   Fserial:=FlightOutSQL.FieldByName('serial_number').AsInteger;
-  X_CreateMultiHighXmlFRM.LoopMultiXML(Fserial);
+  count:=X_CreateMultiHighXmlFRM.LoopMultiXML(Fserial);
   flightAirwaybillSQL.refresh;
-  ShowMessage('XML files created');
+  showMessage('XML Create Finished. Number of Items:'+intTostr(Count) );
+
+//  ShowMessage('XML files created');
 end;
 
 procedure TH_ScanAirwaibillNewFRM.DeleteFlightAirwaybill(Var SerialNumber:Integer);

@@ -68,8 +68,6 @@ object H_ScanAirwaibillNewFRM: TH_ScanAirwaibillNewFRM
     Height = 52
     Align = alBottom
     TabOrder = 1
-    ExplicitLeft = -336
-    ExplicitTop = 717
     object BitBtn1: TBitBtn
       Left = 8
       Top = 8
@@ -499,7 +497,7 @@ object H_ScanAirwaibillNewFRM: TH_ScanAirwaibillNewFRM
         OnClick = EditAirBTNClick
       end
       object DeleteAirBTN: TBitBtn
-        Left = 370
+        Left = 358
         Top = 6
         Width = 95
         Height = 35

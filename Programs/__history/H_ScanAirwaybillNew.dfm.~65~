@@ -2,7 +2,7 @@ object H_ScanAirwaibillNewFRM: TH_ScanAirwaibillNewFRM
   Left = 192
   Top = 105
   ClientHeight = 729
-  ClientWidth = 1068
+  ClientWidth = 1182
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -20,7 +20,7 @@ object H_ScanAirwaibillNewFRM: TH_ScanAirwaibillNewFRM
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 1068
+    Width = 1182
     Height = 53
     Align = alTop
     Caption = 'Scan Airwaybill x'
@@ -32,7 +32,7 @@ object H_ScanAirwaibillNewFRM: TH_ScanAirwaibillNewFRM
     ParentFont = False
     TabOrder = 0
     object Panel5: TPanel
-      Left = 916
+      Left = 1030
       Top = 1
       Width = 151
       Height = 51
@@ -64,10 +64,12 @@ object H_ScanAirwaibillNewFRM: TH_ScanAirwaibillNewFRM
   object BottomPNL: TPanel
     Left = 0
     Top = 677
-    Width = 1068
+    Width = 1182
     Height = 52
     Align = alBottom
     TabOrder = 1
+    ExplicitLeft = -336
+    ExplicitTop = 717
     object BitBtn1: TBitBtn
       Left = 8
       Top = 8
@@ -144,29 +146,28 @@ object H_ScanAirwaibillNewFRM: TH_ScanAirwaibillNewFRM
   object Panel3: TPanel
     Left = 0
     Top = 53
-    Width = 1068
+    Width = 1182
     Height = 624
     Align = alClient
     TabOrder = 2
     object HeaderPNL: TPanel
       Left = 1
-      Top = 56
-      Width = 1066
+      Top = 1
+      Width = 1180
       Height = 169
       Align = alTop
       TabOrder = 0
-      ExplicitWidth = 883
       object Label10: TLabel
         Left = 539
         Top = 37
-        Width = 56
+        Width = 48
         Height = 14
         Caption = 'Find Flight'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
         Font.Name = 'arial'
-        Font.Style = [fsBold]
+        Font.Style = []
         ParentFont = False
         Visible = False
       end
@@ -220,8 +221,8 @@ object H_ScanAirwaibillNewFRM: TH_ScanAirwaibillNewFRM
         WordWrap = False
       end
       object BitBtn3: TBitBtn
-        Left = 494
-        Top = 101
+        Left = 605
+        Top = 68
         Width = 111
         Height = 49
         BiDiMode = bdLeftToRight
@@ -384,7 +385,7 @@ object H_ScanAirwaibillNewFRM: TH_ScanAirwaibillNewFRM
         Left = 257
         Top = 13
         Width = 150
-        Height = 117
+        Height = 124
         Caption = 'Select Hawbs'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -405,16 +406,15 @@ object H_ScanAirwaibillNewFRM: TH_ScanAirwaibillNewFRM
     end
     object RzPanel1: TRzPanel
       Left = 1
-      Top = 1
-      Width = 1066
+      Top = 170
+      Width = 1180
       Height = 55
       Align = alTop
       BorderOuter = fsFlat
       TabOrder = 2
-      ExplicitTop = 170
       object Label2: TLabel
-        Left = 15
-        Top = 11
+        Left = 9
+        Top = 14
         Width = 80
         Height = 16
         Caption = 'Scan Hawb id'
@@ -533,8 +533,8 @@ object H_ScanAirwaibillNewFRM: TH_ScanAirwaibillNewFRM
         OnClick = DeleteAirBTNClick
       end
       object HawbInputFLD: TwwDBEdit
-        Left = 115
-        Top = 6
+        Left = 109
+        Top = 12
         Width = 124
         Height = 21
         TabOrder = 2
@@ -547,18 +547,15 @@ object H_ScanAirwaibillNewFRM: TH_ScanAirwaibillNewFRM
     object MiddlePNL: TRzPanel
       Left = 1
       Top = 225
-      Width = 1066
+      Width = 1180
       Height = 398
       Align = alClient
       BorderOuter = fsNone
       TabOrder = 1
-      ExplicitLeft = -4
-      ExplicitTop = 228
-      ExplicitWidth = 954
       object FlightAirwaybillGRD: TwwDBGrid
         Left = 0
         Top = 0
-        Width = 825
+        Width = 899
         Height = 398
         ControlType.Strings = (
           'VALUE_TYPE;CustomEdit;ValueFLD'
@@ -693,8 +690,8 @@ object H_ScanAirwaibillNewFRM: TH_ScanAirwaibillNewFRM
         UnboundDataType = wwDefault
       end
       object DetailsPNL: TGroupBox
-        Left = 512
-        Top = 124
+        Left = 480
+        Top = 132
         Width = 293
         Height = 229
         Caption = 'Details'
@@ -904,29 +901,27 @@ object H_ScanAirwaibillNewFRM: TH_ScanAirwaibillNewFRM
         end
       end
       object RzPanel2: TRzPanel
-        Left = 825
+        Left = 899
         Top = 0
-        Width = 32
+        Width = 26
         Height = 398
         Align = alLeft
         BorderOuter = fsNone
         TabOrder = 3
       end
       object RzPanel3: TRzPanel
-        Left = 857
+        Left = 925
         Top = 0
-        Width = 209
+        Width = 255
         Height = 398
         Align = alClient
         BorderOuter = fsNone
         TabOrder = 4
-        ExplicitLeft = 897
-        ExplicitWidth = 149
         object FlagBTN: TRzBitBtn
           AlignWithMargins = True
-          Left = 37
+          Left = 15
           Top = 18
-          Width = 147
+          Width = 98
           Height = 48
           Margins.Left = 12
           Alignment = taLeftJustify
@@ -1007,9 +1002,9 @@ object H_ScanAirwaibillNewFRM: TH_ScanAirwaibillNewFRM
         end
         object UnflagBTN: TRzBitBtn
           AlignWithMargins = True
-          Left = 37
+          Left = 15
           Top = 72
-          Width = 147
+          Width = 106
           Height = 48
           Margins.Left = 12
           Alignment = taLeftJustify
@@ -1182,7 +1177,7 @@ object H_ScanAirwaibillNewFRM: TH_ScanAirwaibillNewFRM
           Cancel = True
           ShowDownPattern = False
           BiDiMode = bdLeftToRight
-          Caption = 'Create XML'
+          Caption = 'Create all High XML'
           DoubleBuffered = True
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
@@ -1194,6 +1189,88 @@ object H_ScanAirwaibillNewFRM: TH_ScanAirwaibillNewFRM
           ParentFont = False
           TabOrder = 3
           OnClick = MultiHighBTNClick
+          Glyph.Data = {
+            F6060000424DF606000000000000360000002800000018000000180000000100
+            180000000000C006000000000000000000000000000000000000FFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF7676727676727676727676
+            72767672767672FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF767672
+            E6E2E2E6DEDEE6DEDEE6E2E2767672FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF928E8E8E8A8AFFFFFFFF
+            FFFFFFFFFF767672D6D2CEDAD6D6DAD6D6D6D2CE767672FFFFFFFFFFFFFFFFFF
+            8E8E8A928E8EFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF8E8A8AA29E
+            9EDEDADA96928E8A8A867E7A7A726E6E6A66666E6E6E6E6E6E6A6666726E6E7E
+            7A7A8E8A8A96928EDEDADAA29E9E8E8A8AFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            8A86869A9692D6D6D2B2AEAE7E7E7A5E5E5A4242425652527A76768A86868A86
+            867A76765652524242425E5E5A7E7E7AB2AEAED6D6D69A96968A8686FFFFFFFF
+            FFFFFFFFFFFFFFFF868282D6D6D2B6B2AE7A7A763E3E3A52524E9E9A9AEAEAEA
+            FAFAFAFEFEFEFEFEFEFAFAFAEAEAEAA29E9A52524E3E3E3A7E7A7AB6B2AED6D6
+            D6868282FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF8E8E8AA29E9E5A5A56767272CA
+            C6C6E6E6E2EAE6E6EAEAEAF2EEEEF2EEEEEAEAEAEAE6E6E6E6E6CAC6C6767272
+            5A5A56A6A29E928E8AFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF8682826E6A
+            6A767272C6C6C2DEDEDAE2E2DEC6C2C2767672767672767672767672C6C2C2E2
+            E2DEDEDEDAC6C6C27672726E6A6A868282FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFF7A76765A5A56AEAAA6D6D2D2DEDADABEBEBA868282FFFFFFFFFFFFFFFF
+            FFFFFFFF868282BEBEBADEDADAD6D6D2AEAAA65A5A567A7676FFFFFFFFFFFFFF
+            FFFF7676727676727676726E6A667A7676C6C2BED2CECEBABAB6868282FFFFFF
+            9A96928A86868A86869A9696FFFFFF868282BEBAB6D6D2CEC6C2BE7A7A766E6A
+            6A767672767672767672767672AAA6A6AEAAA6726E6AA29E9EBEBAB6C6C2BE76
+            7672FFFFFF9A96968A8A86AAA6A6AAA6A68A8A869A9696FFFFFF767672C6C2BE
+            BEBABAA29E9E726E6EB2AEAAAEAAA6767672767672BAB6B6C2BEBE868282B6B2
+            B2B2AEAEB2AEAA767672FFFFFF8A8A86B2AEAACAC6C6CAC6C6B2AEAA8A8A86FF
+            FFFF767672B6B2AEB6B2AEBAB6B28A8686C6C2BEBEBAB6767672767672BEBAB6
+            C6C2BE9E9A96CAC6C6B2AEAAAEAAA6767672FFFFFF8E8A8ABAB6B2DEDAD6DEDA
+            D6BAB6B28E8A8AFFFFFF767672B2AEAAB2AEAACECAC69E9A9AC6C2C2C2BEBA76
+            7672767672D2CECEDAD6D6BEBEBAD2CECEAEAAAA9E9A9A767672FFFFFFA29E9E
+            928E8EC2BEBEC2BEBE928E8EA29E9EFFFFFF767672A29E9AB2AEAAD6D2CEC2BE
+            BEDAD6D6D6D2D2767672767672767672767672C6C6C2DEDADABEBAB68A868696
+            928E8A8686FFFFFFA29E9E928E8A928E8AA29E9EFFFFFF8A8A869692928A8686
+            BEBABADEDEDACAC6C6767672767672767672FFFFFFFFFFFFFFFFFF827E7ED6D2
+            D2DEDAD68682827E7A7A96928E8A8A86FFFFFFFFFFFFFFFFFFFFFFFF8E8A8A96
+            928E7E7A7A868282DEDADAD6D2D2827E7EFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFF928E8EBAB6B2EAE6E6BEBEBA7672726E6A6A7E7A7A7676727676727676
+            72767672827E7A726E6A767272C2BEBEEAE6E6BAB6B6928E8EFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFF9A9692DAD6D6EEEAEAEEEEEABEBAB66A66665A5A5A
+            5252524242424242425252525A5A5A6A6666BEBABAF2EEEEEEEEEADEDADA9A96
+            96FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF8E8A8AFEFEFEDED6D6EAE6E6F6F6F2F6
+            F6F2EAE6E69E9A9A6662624E4A4A4E4A4A6662629E9A9AEEEAE6F6F6F6F6F6F6
+            EAE6E6DEDADAFEFEFE8E8E8AFFFFFFFFFFFFFFFFFFFFFFFF928E8EBAB6B2FEFE
+            FEEAE2E2F2EEEECAC6C6EAEAEAFAFAFAFAF6F6F6F6F6F6F6F6FAF6F6FAFAFAEA
+            EAEACAC6C6F2EEEEEAE6E6FEFEFEBAB6B6928E8EFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFF928E8EBEBAB6FEFEFEA29E9E969692868282EAEAEAFEFEFEFEFEFEFEFE
+            FEFEFEFEEAEAEA8682829A9692A29E9EFEFEFEBEBABA96928EFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFF96928E96928EFFFFFFFFFFFFFFFFFF767672
+            F2EEEEF2EEEEF2EEEEF6F2EE767672FFFFFFFFFFFFFFFFFF96928E969292FFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFF767672FEFEFEFEFEFEFEFEFEFEFEFE767672FFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFF767672767672767672767672767672767672FF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
+          Margin = -1
+          Spacing = 8
+        end
+        object CreateLowBTN: TRzBitBtn
+          AlignWithMargins = True
+          Left = 15
+          Top = 264
+          Width = 169
+          Height = 48
+          Margins.Left = 12
+          Alignment = taLeftJustify
+          Cancel = True
+          ShowDownPattern = False
+          BiDiMode = bdLeftToRight
+          Caption = 'Create all Low XML'
+          DoubleBuffered = True
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'arial'
+          Font.Style = []
+          ParentBiDiMode = False
+          ParentDoubleBuffered = False
+          ParentFont = False
+          TabOrder = 4
           Glyph.Data = {
             F6060000424DF606000000000000360000002800000018000000180000000100
             180000000000C006000000000000000000000000000000000000FFFFFFFFFFFF

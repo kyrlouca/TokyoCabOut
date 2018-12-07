@@ -1,18 +1,22 @@
 //////////////////////
+//**  Cannot create one file for all because of 99 air per file limit
+//**  Need to group the air(items actually) and the solution is to mark each batch with a random number
 //**
-//**  CreateOneAirwabillXML ??
-//**  LoopMultiXML    calls
-//**  CreateFlightXML   -- create xml for all unflagged airs on the flight
-//**     -- creates the groups (declarationType, TypeOfDeclaration, Circumstance,Incoterm)
+//**  LoopMultiXML    calls create until no more groups
+//**    CreateFlightXML   -- Select all unflagged airs on the flight
+//**      CreateXmlFileByGroup -- select  a group of airs (declarationType, TypeOfDeclaration, Circumstance,Incoterm)
+//**          -- create the xml Doc
+//**          -- Call CreateNodeOuter for the outer xml node
 //**
 //**
-//** CreateNodeOuter   -- Fdoc, calls the Create header and Create airway bills
 //** CreateNodeHeader  -- just the header - has the totals
 //** CreateNodeAirwayBills --
 //** CreateNodeFlightCountries -- itinerary with countries on the Flight
 //** CreateNodeForItems ??
 //** Remember that MAX airwaybills = 89 and affects grouping!!
 //**
+//**  mark the airwaybills to print (max 89) with XML_Random .
+//** netxt batch will have a different XML_Random
 //////////////////////
 
 unit X_createMultiHighXML;
@@ -208,11 +212,15 @@ Function TX_CreateMultiHighXmlFRM.LoopMultiXML(Const FlightOutSerial:Integer):in
 // for the same Flight
 var
 count:Integer;
+TotalCount:integer;
 begin
+  TotalCount:=0;
     repeat
       count:= CreateFlightXML(FlightOutSerial,0);
+      TotalCount:=TotalCount+count;
     until (Count =0);
-    showMessage('XML Create Finished');
+    result:=TotalCOunt;
+//    showMessage('XML Create Finished. Number of Items:'+intTostr(TotalCount) );
 end;
 
 
@@ -229,8 +237,9 @@ var
   Criteria:TCriteriaParams;
 
 begin
-  // group  unprinted Airs by DeclationType, TypeOfDeclaration, Specs,Incoterms
+  // group  unprinted Airs (marked) grouped by DeclationType, TypeOfDeclaration, Specs,Incoterms
   // indinvidual airwayBills in each group will be marked later in CreateXmlFileByGroup
+  // Get specified single air OR the ones not marked (is_included_xml=null)
   str:=
   '     Select'
   +'      fa.declaration_type, fa.type_of_declaration, fa.specific_circumstance, fa.incoterms'
@@ -288,7 +297,7 @@ var
   CountCreated:Integer;
   XmlRandom:Integer;
 begin
-  DefaultDir:= GN_GetTheSystemParameter(cn, 'S01').P_String4;
+  DefaultDir:= trim(GN_GetTheSystemParameter(cn, 'S01').P_String4);
    If DefaultDir='' then begin
       MessageDlg('Menu ->System->Params-> System Parameters. Then Add record with Code=S01 string_4 =Path', mtWarning, [mbOK], 0);
   end;
@@ -314,6 +323,7 @@ begin
       FDoc:=XMLDocNew;
       FDoc.active:=false;
       Fdoc.XML.Text:='';
+
       FDoc.Active := True;
       FDoc.Version := '1.0';
       FDoc.Encoding := 'UTF-8';
@@ -323,7 +333,7 @@ begin
 //      TBLCreateXMLNode(FDoc,TheRoot,'Declaration','',GroupQr,'DECLARATION_TYPE',ntText);
 
      /////////////////////////////////////////////////////////////////////////
-      result := CreateNodeOuter(FlightOutSerial,xmlRandom,Criteria,Fdoc,TheRoot);
+       result := CreateNodeOuter(FlightOutSerial,xmlRandom,Criteria,Fdoc,TheRoot);
      /////////////////////////////////////////////////////////////////////////
       strXML := StringReplace(FDoc.XML.Text, ' xmlns=""', '', [rfReplaceAll]);
       FDoc := LoadXMLData(strXML);
@@ -380,7 +390,8 @@ begin
       FirstAirQr.ParambyName('xmlRandom').Value:= XmlRandom;
 
       FirstAirQr.Open;
-      Clipboard.AsText:=FirstAirQR.FinalSQL;
+      //copy to clipboard for debugging
+//      Clipboard.AsText:=FirstAirQR.FinalSQL;
       if FirstAirQr.IsEmpty then
         exit;
 
@@ -476,7 +487,7 @@ begin
 
 
         x2node:=CreateXMLNodeNew(FDoc,FatherNode,'Msg515TermsDelivery','',ntElement);
-//        TBLCreateXMLNode(FDoc,x2node,'IncotermCode','',FirstAirQr,'INCOTERMS',ntText);
+//      TBLCreateXMLNode(FDoc,x2node,'IncotermCode','',FirstAirQr,'INCOTERMS',ntText);
         CreateXmlNodeNewDefault(FDoc,x2Node,'IncotermCode',criteria.Incoterms,'XXX',ntText);
         TBLCreateXMLNode(FDoc,x2node,'ComplementOfInfo','',FirstAirQr,'INCOTERMS',ntText);
         CreateXMLNodeNew(FDoc,x2node,'ComplementOfInfoLNG','EN',ntText);
@@ -551,9 +562,9 @@ str:=
 
     //********************************************
      //Header515
-     val:=MawbId+FormatDateTime('YYMMDDHHMMSS', now);
      x1node:=CreateXMLNodeNew(FDoc,FatherNode,'Msg515Header','',ntElement);
 
+     val:=MawbId+FormatDateTime('YYMMDDHHMMSS', now);
      CreateXMLNodeNew(FDoc,x1node,'ReferenceNumber',val,ntText);
      CreateXmlNodeNewDefault(FDoc,x1node,'TypeOfDeclaration',Criteria.DeclarationType,'XXX',ntText);
 
@@ -1126,7 +1137,7 @@ str3:=
 
 
 
-    xmlRandom:= RandomRAnge(0,10000000);
+    xmlRandom:= RandomRAnge(1,10000000);
 
     if AIrSerial>0 then    begin
       sqlStr:= Str2;

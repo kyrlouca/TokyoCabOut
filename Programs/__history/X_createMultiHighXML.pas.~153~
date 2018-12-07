@@ -55,7 +55,7 @@ type
 
     function CheckSameSender( Const FlightSerial:Integer; XmlRandom:Integer):Boolean;
     function CheckSameConsignee( Const FlightSerial:Integer;XmlRandom:Integer):Boolean;
-    function CheckSameDestination( Const FlightSerial:integer;XmlRandom:Integer):Boolean;
+    function CheckSameDestination( Const FlightSerial:integer;XmlRandom:Integer):String;
 //    function CheckSameIncoterm( Const FlightSerial:integer;XmlRandom:Integer):Boolean;
 
 
@@ -211,7 +211,8 @@ count:Integer;
 begin
     repeat
       count:= CreateFlightXML(FlightOutSerial,0);
-    until (Count =0)
+    until (Count =0);
+    showMessage('XML Create Finished');
 end;
 
 
@@ -257,7 +258,7 @@ begin
       Criteria.Circumstance:= GroupQr.FieldByName('specific_circumstance').AsString;
       Criteria.Incoterms:= GroupQr.FieldByName('Incoterms').AsString;
 
-      CreateXmlFileByGroup(FlightOutSerial,AirSerial,criteria);
+      result := CreateXmlFileByGroup(FlightOutSerial,AirSerial,criteria);
 
       GroupQr.Next;
     end;
@@ -306,7 +307,7 @@ begin
   xmlRandom:= MarkSelectedAirwayBills(FlightOutSerial,AirSerial,Criteria);
 
   if (XmlRandom =0 ) then begin
-  //xmlTIme 1900 denotes that no airways were marked
+    result:=0;
     exit;
   end;
 
@@ -552,13 +553,14 @@ str:=
      //Header515
      val:=MawbId+FormatDateTime('YYMMDDHHMMSS', now);
      x1node:=CreateXMLNodeNew(FDoc,FatherNode,'Msg515Header','',ntElement);
+
      CreateXMLNodeNew(FDoc,x1node,'ReferenceNumber',val,ntText);
-
-
      CreateXmlNodeNewDefault(FDoc,x1node,'TypeOfDeclaration',Criteria.DeclarationType,'XXX',ntText);
 
-     if CheckSameDestination(FlightOutSerial,XmlRandom) then
-         TblCreateXMLNode(FDoc,HeaderNode,'CountryOfDestinationCode',qrAir,'CONSIGNEE_COUNTRY_CODE',ntText);
+     val:=CheckSameDestination(FlightOutSerial,XmlRandom);
+     if (val>'') then
+       CreateXmlNodeNewDefault(FDoc,x1node,'CountryOfDestinationCode',val,'XXX',ntText);
+//     TblCreateXMLNode(FDoc,xlNode,'CountryOfDestinationCode',,'CONSIGNEE_COUNTRY_CODE',ntText);
 
 
      CreateXMLNodeNew(FDoc,x1node,'AgreedLocationOfGoodsCode','LCA',ntText); //here
@@ -677,8 +679,9 @@ begin
        TblCreateXMLNode(FDoc,HeaderNode,'GrossMass','',qrItem,'WEIGHT',ntText);
        TblCreateXMLNode(FDoc,HeaderNode,'NetMass','',qrItem,'WEIGHT',ntText);
 
-      if CheckSameDestination(FlightSerial,XmlRandom) then
-             TblCreateXMLNode(FDoc,HeaderNode,'CountryOfDestinationCode','',qrAir,'CONSIGNEE_COUNTRY_CODE',ntText);
+
+        if CheckSameDestination(FlightSerial,XmlRandom)='' then
+           TblCreateXMLNode(FDoc,HeaderNode,'CountryOfDestinationCode','',qrAir,'CONSIGNEE_COUNTRY_CODE',ntText);
 
        Temp:=qrAir.FieldByName('Payment_method').AsString;
         If temp='A'       then
@@ -955,7 +958,7 @@ end;
 
 
 
-function TX_CreateMultiHighXmlFRM.CheckSameDestination( Const FlightSerial:integer;XmlRandom:Integer):Boolean;
+function TX_CreateMultiHighXmlFRM.CheckSameDestination( Const FlightSerial:integer;XmlRandom:Integer):String;
 var
   qr:TksQuery;
   DefaultVal:String;
@@ -978,7 +981,11 @@ begin
       qr.ParamByName('xmlRandom').Value := xmlRandom;
       qr.Open;
       Clipboard.AsText:=qr.FinalSQL;
-      result:= qr.RecordCount =1 ;
+      if (qr.RecordCount=1) then
+        result:=qr.FieldByName('CONSIGNEE_COUNTRY_CODE').AsString
+      else
+        result:='';
+
   finally
     qr.Free;
   end;
@@ -1085,16 +1092,17 @@ end;
 
 function TX_CreateMultiHighXmlFRM.MarkSelectedAirwayBills(Const FlightSErial, AIrSerial:Integer; Criteria:TCriteriaParams):Integer;
 var
-  sqlStr, str1,str2:String;
+  sqlStr, str1,str2,str3:String;
   qr:TksQuery;
   cnt:Integer;
   xmlRandom:Integer;
+  tempQr:TksQuery;
 begin
   str1:=
   '     update  flight_airwaybill outfa'
-  +'      set outfa.xml_Random = :XmlRandom, outfa.is_included_XML= ''Y'' '
+  +'      set outfa.xml_Random = :XmlRandom'
   +'    where  outfa.serial_number in  ('
-  +'      select first 89 fa.serial_number from'
+  +'      select first 2 fa.serial_number from'
   +'         flight_airwaybill fa left outer join'
   +'         flight_airwaybill_item it on fa.serial_number=it.fk_fa_serial'
   +'      where fa.fk_flight_out_serial= :flightSerial and'
@@ -1110,6 +1118,14 @@ str2:=
   +'         set outfa.xml_random = :XmlRandom'
   +'    where outfa.serial_number= :AirSerial';
 
+str3:=
+  'update flight_airwaybill fa '
+  +'set fa.is_included_xml = ''Y'' where  '
+  +'fa.fk_flight_out_serial = :flightSerial and '
+  +'fa.xml_random= :XmlRandom  ' ;
+
+
+
     xmlRandom:= RandomRAnge(0,10000000);
 
     if AIrSerial>0 then    begin
@@ -1117,7 +1133,9 @@ str2:=
       cnt:=ksExecSQLVar(cn,sqlStr,[XmlRandom,airSerial]);
     end else begin
       sqlStr:= str1;
+      Clipboard.AsText:=sqlStr;
         cnt:=ksExecSQLVar(cn,sqlStr,[XmlRandom,FlightSerial,Criteria.DeclarationType,Criteria.TypeOfDeclaration,Criteria.Circumstance, Criteria.Incoterms]);
+        cnt:=ksExecSQLVar(cn,str3,[FlightSerial,XmlRandom]);
     end;
 
     if cnt=0 then begin

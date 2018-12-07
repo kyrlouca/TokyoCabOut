@@ -6,7 +6,8 @@ uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   StdCtrls, Mask, IBC, MemDS, IBCError, wwSpeedButton, wwDBNavigator,
   wwclearpanel, Buttons, ExtCtrls, wwdbedit, Grids, Wwdbigrd, Wwdbgrid,
-  DBAccess, Data.DB, vcl.Wwdotdot, vcl.Wwdbcomb, vcl.wwdblook, RzButton, G_kyriacosTypes;
+  DBAccess, Data.DB, vcl.Wwdotdot, vcl.Wwdbcomb, vcl.wwdblook, RzButton, G_kyriacosTypes,
+  RzPanel;
 
 
 
@@ -98,7 +99,6 @@ type
     Panel5: TPanel;
     wwDBEdit3: TwwDBEdit;
     FlightAirwaybillCountrySQLORDER_POSITION: TIntegerField;
-    MiddlePNL: TPanel;
     UpdateHawbTypeSQL: TIBCSQL;
     UpdateHawbTrans: TIBCTransaction;
     FlightAirwaybillSQLVALUE_TYPE: TStringField;
@@ -190,10 +190,6 @@ type
     AirwaybillOriginalSQLCONSIGNEE_DEVICE_DETAILS: TStringField;
     AirwaybillOriginalSQLINCOTERMS: TStringField;
     AirwaybillOriginalSQLIS_SCANNED: TStringField;
-    FlightAirwaybillGRD: TwwDBGrid;
-    ValueFLD: TwwDBComboBox;
-    HawbInputFLD: TwwDBEdit;
-    Label2: TLabel;
     SelectRGP: TRadioGroup;
     SelectSQL: TIBCQuery;
     FlightAirwaybillSQLSERVICE_CODE: TStringField;
@@ -204,12 +200,6 @@ type
     AirwaybillOriginalSQLSERVICE_CODE: TStringField;
     AirwaybillOriginalSQLACCOUNT_NUMBER: TStringField;
     BitBtn1: TBitBtn;
-    FlagBTN: TRzBitBtn;
-    UnflagBTN: TRzBitBtn;
-    RzBitBtn1: TRzBitBtn;
-    EditAirBTN: TBitBtn;
-    DeleteAirBTN: TBitBtn;
-    MultiHighBTN: TRzBitBtn;
     FlightAirwaybillSQLCONSIGNEE_PREFERRED_NAME: TStringField;
     FlightAirwaybillSQLSENDER_VAT: TStringField;
     FlightAirwaybillSQLCONSIGNEE_VAT: TStringField;
@@ -217,6 +207,22 @@ type
     FlightAirwaybillSQLSPECIFIC_CIRCUMSTANCE: TStringField;
     FlightAirwaybillSQLDECLARATION_TYPE: TStringField;
     FlightAirwaybillSQLIS_INCLUDED_XML: TStringField;
+    FA_ItemSQLPROCEDURE_REQUESTED: TStringField;
+    FA_ItemSQLPREVIOUS_PROCEDURE: TStringField;
+    FA_ItemSQLKIND_OF_PACKAGES: TStringField;
+    FA_ItemSQLNUMBER_OF_PACKAGES: TIntegerField;
+    FA_ItemSQLWEIGHT_NET: TFloatField;
+    FA_ItemSQLCOUNTRY_OF_ORIGIN: TStringField;
+    FA_ItemSQLDANGEROUS_GOODS: TStringField;
+    RzPanel1: TRzPanel;
+    EditAirBTN: TBitBtn;
+    DeleteAirBTN: TBitBtn;
+    Label2: TLabel;
+    HawbInputFLD: TwwDBEdit;
+    MiddlePNL: TRzPanel;
+    FlightAirwaybillGRD: TwwDBGrid;
+    FlightAirwaybillGRDIButton: TwwIButton;
+    ValueFLD: TwwDBComboBox;
     DetailsPNL: TGroupBox;
     Label1: TLabel;
     Label5: TLabel;
@@ -229,14 +235,13 @@ type
     wwDBEdit6: TwwDBEdit;
     wwDBEdit7: TwwDBEdit;
     wwDBEdit4: TwwDBEdit;
-    FA_ItemSQLPROCEDURE_REQUESTED: TStringField;
-    FA_ItemSQLPREVIOUS_PROCEDURE: TStringField;
-    FA_ItemSQLKIND_OF_PACKAGES: TStringField;
-    FA_ItemSQLNUMBER_OF_PACKAGES: TIntegerField;
-    FA_ItemSQLWEIGHT_NET: TFloatField;
-    FA_ItemSQLCOUNTRY_OF_ORIGIN: TStringField;
-    FA_ItemSQLDANGEROUS_GOODS: TStringField;
-    FlightAirwaybillGRDIButton: TwwIButton;
+    RzPanel2: TRzPanel;
+    RzPanel3: TRzPanel;
+    FlagBTN: TRzBitBtn;
+    UnflagBTN: TRzBitBtn;
+    RzBitBtn1: TRzBitBtn;
+    MultiHighBTN: TRzBitBtn;
+    CreateLowBTN: TRzBitBtn;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure BitBtn1Click(Sender: TObject);
     procedure AirwayBillSQLAfterPost(DataSet: TDataSet);
@@ -270,6 +275,8 @@ type
     { Private declarations }
     cn:TIBCConnection;
         procedure UpdateHawbStatus(HawbSerial:Integer;IsHigh:String);
+        function GetGroupDefault:String;
+
   public
     { Public declarations }
     GAction:string;
@@ -290,7 +297,8 @@ var
 implementation
 
 uses MainForm, H_FlightAirwaybill, H_flightOut, X_createOneXML,
-  X_createMultiXML, X_createMultiHighXML, G_KyrSQL, G_generalProcs;
+  X_createMultiXML, X_createMultiHighXML, G_KyrSQL, G_generalProcs,
+  H_commonProcs;
 
 {$R *.DFM}
 
@@ -442,6 +450,8 @@ var
 begin
   Fserial:=FlightOutSQL.FieldByName('serial_number').AsInteger;
   X_CreateMultiHighXmlFRM.LoopMultiXML(Fserial);
+  flightAirwaybillSQL.refresh;
+  ShowMessage('XML files created');
 end;
 
 procedure TH_ScanAirwaibillNewFRM.DeleteFlightAirwaybill(Var SerialNumber:Integer);
@@ -455,6 +465,7 @@ Var
         AirCountry:String;
         FaSerial:Integer;
         ValueType:String;
+        DefaultGroup:String;
 
 //   DefaultProcedureRequested:String;
 //   DefaultPreviousProcedure:String;
@@ -467,6 +478,7 @@ begin
 
 //xxx
 
+    DefaultGroup:=GetGroupDefault();
 
     with FindAirwaybillSQL do begin   //cannot find original airwaybill
         close;
@@ -573,6 +585,8 @@ begin
                 ///************************************
                 // copy items
                 ///************************************
+                ///     qr:=TksQuery.Create(cn,'select * from certificate_group where is_default=''Y'' ');
+
                 with AirwaybillItemSQL do begin
                         close;
                         If not prepared then prepare;
@@ -602,6 +616,7 @@ begin
                                 FA_ItemSQL.FieldByName('DANGEROUS_GOODS').value:=GetTableDefaultValue('AUX_DANGEROUS_GOODS');
 
                                 FA_ItemSQL.Post;
+                                H_commonProcs.Cp_InsertCertificates(cn,Fa_ItemSQL.FieldByName('serial_number').AsInteger,DefaultGroup);
                                 AirwaybillItemSQL.next;
                         end;
                 end;
@@ -1022,5 +1037,24 @@ begin
 
 end;
 
+
+
+
+function TH_ScanAirwaibillNewFRM.GetGroupDefault:String;
+var
+  qr:TksQuery;
+  DefaultVal:String;
+  str:string;
+begin
+
+  str:='select code from certificate_group cg where cg.is_default= ''Y'' ';
+  qr:=TksQuery.Create(cn, str);
+  try
+   qr.Open;
+   result:=qr.FieldByName('code').AsString;
+  finally
+    qr.Free;
+  end;
+end;
 
 end.

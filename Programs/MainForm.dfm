@@ -159,7 +159,7 @@ object MainFormFRM: TMainFormFRM
     end
     object ReadXmlBTN: TRzBitBtn
       Left = 8
-      Top = 256
+      Top = 242
       Width = 185
       Height = 65
       Alignment = taLeftJustify
@@ -501,7 +501,7 @@ object MainFormFRM: TMainFormFRM
     end
   end
   object CabOutData: TIBCConnection
-    Database = 'C:\Data\DelphiProjects\Databases\Cabout\TX1.FDB'
+    Database = 'C:\Data\DelphiProjects\Databases\Cabout\CABOUTDATA _LIVE.FDB'
     Options.KeepDesignConnected = False
     DefaultTransaction = UsedForReadOnlyTrans
     SQLDialect = 1
