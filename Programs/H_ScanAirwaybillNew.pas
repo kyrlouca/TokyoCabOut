@@ -274,6 +274,8 @@ type
   private
     { Private declarations }
     cn:TIBCConnection;
+    Function CheckInvalidAirways(Const FlightOutSerial:integer):integer;
+
         procedure UpdateHawbStatus(HawbSerial:Integer;IsHigh:String);
         function GetGroupDefault:String;
 
@@ -448,8 +450,15 @@ procedure TH_ScanAirwaibillNewFRM.MultiHighBTNClick(Sender: TObject);
 var
   fserial:Integer;
   Count:Integer;
+  ErrorSerial:Integer;
 begin
   Fserial:=FlightOutSQL.FieldByName('serial_number').AsInteger;
+  ErrorSerial := CheckInvalidAirways(Fserial);
+
+  if (ErrorSerial>0) then begin
+    ShowMessage('Airway Bill missing data: '+ intToStr(ErrorSerial));
+    exit;
+  end;
   count:=X_CreateMultiHighXmlFRM.LoopMultiXML(Fserial);
   flightAirwaybillSQL.refresh;
   showMessage('XML Create Finished. Number of Items:'+intTostr(Count) );
@@ -1059,5 +1068,40 @@ begin
     qr.Free;
   end;
 end;
+
+
+
+Function TH_ScanAirwaibillNewFRM.CheckInvalidAirways(Const FlightOutSerial:integer):integer;
+var
+  Qr:TksQuery;
+  str:String;
+begin
+  str:=
+  '  Select first 1'
+  +'     fa.serial_number '
+  +'        from'
+  +'     flight_airwaybill fa'
+  +'        where'
+  +'     fa.fk_flight_out_serial= :FlightSerial and'
+  +'     fa.value_type= ''H'' and'
+  +'     (fa.is_included_xml = ''N''  or fa.is_included_xml is null) and'
+  +'     ( '
+  +'          ( fa.declaration_type is null or fa.type_of_declaration is null or  fa.specific_circumstance is null  or  fa.incoterms is null)'
+  +'       OR ( fa.declaration_type='''' or fa.type_of_declaration ='''' or  fa.specific_circumstance=''''  or  fa.incoterms ='''')'
+  +'     )';
+
+  result:=0;
+  qr:=TksQuery.Create(cn,str);
+  try
+    qr.ParamByName('flightSerial').Value:=FlightOutSerial;
+    qr.Open;
+    result := qr.FieldByName('serial_number').AsInteger;
+    qr.Close;
+  finally
+      qr.Free;
+  end;
+end;
+
+
 
 end.

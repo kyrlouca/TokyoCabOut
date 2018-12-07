@@ -1,18 +1,22 @@
 //////////////////////
+//**  Cannot create one file for all because of 99 air per file limit
+//**  Need to group the air(items actually) and the solution is to mark each batch with a random number
 //**
-//**  CreateOneAirwabillXML ??
-//**  LoopMultiXML    calls
-//**  CreateFlightXML   -- create xml for all unflagged airs on the flight
-//**     -- creates the groups (declarationType, TypeOfDeclaration, Circumstance,Incoterm)
+//**  LoopMultiXML    calls create until no more groups
+//**    CreateFlightXML   -- Select all unflagged airs on the flight
+//**      CreateXmlFileByGroup -- select  a group of airs (declarationType, TypeOfDeclaration, Circumstance,Incoterm)
+//**          -- create the xml Doc
+//**          -- Call CreateNodeOuter for the outer xml node
 //**
 //**
-//** CreateNodeOuter   -- Fdoc, calls the Create header and Create airway bills
 //** CreateNodeHeader  -- just the header - has the totals
 //** CreateNodeAirwayBills --
 //** CreateNodeFlightCountries -- itinerary with countries on the Flight
 //** CreateNodeForItems ??
 //** Remember that MAX airwaybills = 89 and affects grouping!!
 //**
+//**  mark the airwaybills to print (max 89) with XML_Random .
+//** netxt batch will have a different XML_Random
 //////////////////////
 
 unit X_createMultiHighXML;
@@ -208,10 +212,15 @@ Function TX_CreateMultiHighXmlFRM.LoopMultiXML(Const FlightOutSerial:Integer):in
 // for the same Flight
 var
 count:Integer;
+TotalCount:integer;
 begin
+  TotalCount:=0;
     repeat
       count:= CreateFlightXML(FlightOutSerial,0);
-    until (Count =0)
+      TotalCount:=TotalCount+count;
+    until (Count =0);
+    result:=TotalCOunt;
+//    showMessage('XML Create Finished. Number of Items:'+intTostr(TotalCount) );
 end;
 
 
@@ -228,8 +237,9 @@ var
   Criteria:TCriteriaParams;
 
 begin
-  // group  unprinted Airs by DeclationType, TypeOfDeclaration, Specs,Incoterms
+  // group  unprinted Airs (marked) grouped by DeclationType, TypeOfDeclaration, Specs,Incoterms
   // indinvidual airwayBills in each group will be marked later in CreateXmlFileByGroup
+  // Get specified single air OR the ones not marked (is_included_xml=null)
   str:=
   '     Select'
   +'      fa.declaration_type, fa.type_of_declaration, fa.specific_circumstance, fa.incoterms'
@@ -257,7 +267,7 @@ begin
       Criteria.Circumstance:= GroupQr.FieldByName('specific_circumstance').AsString;
       Criteria.Incoterms:= GroupQr.FieldByName('Incoterms').AsString;
 
-      CreateXmlFileByGroup(FlightOutSerial,AirSerial,criteria);
+      result := CreateXmlFileByGroup(FlightOutSerial,AirSerial,criteria);
 
       GroupQr.Next;
     end;
@@ -287,7 +297,7 @@ var
   CountCreated:Integer;
   XmlRandom:Integer;
 begin
-  DefaultDir:= GN_GetTheSystemParameter(cn, 'S01').P_String4;
+  DefaultDir:= trim(GN_GetTheSystemParameter(cn, 'S01').P_String4);
    If DefaultDir='' then begin
       MessageDlg('Menu ->System->Params-> System Parameters. Then Add record with Code=S01 string_4 =Path', mtWarning, [mbOK], 0);
   end;
@@ -306,13 +316,14 @@ begin
   xmlRandom:= MarkSelectedAirwayBills(FlightOutSerial,AirSerial,Criteria);
 
   if (XmlRandom =0 ) then begin
-  //xmlTIme 1900 denotes that no airways were marked
+    result:=0;
     exit;
   end;
 
       FDoc:=XMLDocNew;
       FDoc.active:=false;
       Fdoc.XML.Text:='';
+
       FDoc.Active := True;
       FDoc.Version := '1.0';
       FDoc.Encoding := 'UTF-8';
@@ -322,7 +333,7 @@ begin
 //      TBLCreateXMLNode(FDoc,TheRoot,'Declaration','',GroupQr,'DECLARATION_TYPE',ntText);
 
      /////////////////////////////////////////////////////////////////////////
-      result := CreateNodeOuter(FlightOutSerial,xmlRandom,Criteria,Fdoc,TheRoot);
+       result := CreateNodeOuter(FlightOutSerial,xmlRandom,Criteria,Fdoc,TheRoot);
      /////////////////////////////////////////////////////////////////////////
       strXML := StringReplace(FDoc.XML.Text, ' xmlns=""', '', [rfReplaceAll]);
       FDoc := LoadXMLData(strXML);
@@ -379,7 +390,8 @@ begin
       FirstAirQr.ParambyName('xmlRandom').Value:= XmlRandom;
 
       FirstAirQr.Open;
-      Clipboard.AsText:=FirstAirQR.FinalSQL;
+      //copy to clipboard for debugging
+//      Clipboard.AsText:=FirstAirQR.FinalSQL;
       if FirstAirQr.IsEmpty then
         exit;
 
@@ -475,7 +487,7 @@ begin
 
 
         x2node:=CreateXMLNodeNew(FDoc,FatherNode,'Msg515TermsDelivery','',ntElement);
-//        TBLCreateXMLNode(FDoc,x2node,'IncotermCode','',FirstAirQr,'INCOTERMS',ntText);
+//      TBLCreateXMLNode(FDoc,x2node,'IncotermCode','',FirstAirQr,'INCOTERMS',ntText);
         CreateXmlNodeNewDefault(FDoc,x2Node,'IncotermCode',criteria.Incoterms,'XXX',ntText);
         TBLCreateXMLNode(FDoc,x2node,'ComplementOfInfo','',FirstAirQr,'INCOTERMS',ntText);
         CreateXMLNodeNew(FDoc,x2node,'ComplementOfInfoLNG','EN',ntText);
@@ -550,9 +562,9 @@ str:=
 
     //********************************************
      //Header515
-     val:=MawbId+FormatDateTime('YYMMDDHHMMSS', now);
      x1node:=CreateXMLNodeNew(FDoc,FatherNode,'Msg515Header','',ntElement);
 
+     val:=MawbId+FormatDateTime('YYMMDDHHMMSS', now);
      CreateXMLNodeNew(FDoc,x1node,'ReferenceNumber',val,ntText);
      CreateXmlNodeNewDefault(FDoc,x1node,'TypeOfDeclaration',Criteria.DeclarationType,'XXX',ntText);
 
@@ -1091,16 +1103,17 @@ end;
 
 function TX_CreateMultiHighXmlFRM.MarkSelectedAirwayBills(Const FlightSErial, AIrSerial:Integer; Criteria:TCriteriaParams):Integer;
 var
-  sqlStr, str1,str2:String;
+  sqlStr, str1,str2,str3:String;
   qr:TksQuery;
   cnt:Integer;
   xmlRandom:Integer;
+  tempQr:TksQuery;
 begin
   str1:=
   '     update  flight_airwaybill outfa'
-  +'      set outfa.xml_Random = :XmlRandom, outfa.is_included_XML= ''Y'' '
+  +'      set outfa.xml_Random = :XmlRandom'
   +'    where  outfa.serial_number in  ('
-  +'      select first 89 fa.serial_number from'
+  +'      select first 2 fa.serial_number from'
   +'         flight_airwaybill fa left outer join'
   +'         flight_airwaybill_item it on fa.serial_number=it.fk_fa_serial'
   +'      where fa.fk_flight_out_serial= :flightSerial and'
@@ -1116,14 +1129,24 @@ str2:=
   +'         set outfa.xml_random = :XmlRandom'
   +'    where outfa.serial_number= :AirSerial';
 
-    xmlRandom:= RandomRAnge(0,10000000);
+str3:=
+  'update flight_airwaybill fa '
+  +'set fa.is_included_xml = ''Y'' where  '
+  +'fa.fk_flight_out_serial = :flightSerial and '
+  +'fa.xml_random= :XmlRandom  ' ;
+
+
+
+    xmlRandom:= RandomRAnge(1,10000000);
 
     if AIrSerial>0 then    begin
       sqlStr:= Str2;
       cnt:=ksExecSQLVar(cn,sqlStr,[XmlRandom,airSerial]);
     end else begin
       sqlStr:= str1;
+      Clipboard.AsText:=sqlStr;
         cnt:=ksExecSQLVar(cn,sqlStr,[XmlRandom,FlightSerial,Criteria.DeclarationType,Criteria.TypeOfDeclaration,Criteria.Circumstance, Criteria.Incoterms]);
+        cnt:=ksExecSQLVar(cn,str3,[FlightSerial,XmlRandom]);
     end;
 
     if cnt=0 then begin

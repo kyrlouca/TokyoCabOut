@@ -49,6 +49,7 @@ type
     { Private declarations }
     cn:TIBCConnection;
 
+
     Function CreateXmlFileByGroup(Const FlightOutSerial,AirSerial:Integer;Criteria:TCriteriaParams):integer;
 
     function GetTableDefaultValue( Const TableName:String):String;
@@ -1156,6 +1157,7 @@ str3:=
     end;
 
 end;
+
 
 
 end.
