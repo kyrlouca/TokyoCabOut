@@ -230,6 +230,9 @@ begin
       FlightName:=Qr.FieldByName('Flight_name').AsString;
       DateDepart:=Qr.FieldByName('date_depart').AsDateTime;
 
+
+
+
      CreateXMLNodeNew(FDoc,FatherNode,'SyntaxIdentifier','UNOC',ntText);
      CreateXMLNodeNew(FDoc,FatherNode,'SyntaxVersionNumber','3',ntText);
      CreateXMLNodeNew(FDoc,FatherNode,'MessageSender','CY10016129G',ntText);
@@ -249,6 +252,9 @@ begin
      val:=MawbId+FormatDateTime('YYMMDDHHMMSS', now);
      x1node:=CreateXMLNodeNew(FDoc,FatherNode,'Msg615Header','',ntElement);
      CreateXMLNodeNew(FDoc,x1node,'ReferenceNumber',val,ntText);
+//     TblCreateXMLNode(FDoc,x1node,'TotalNumberOfItems','',Dataset,'ITEMS_COUNT',ntText);
+//     TblCreateXMLNode(FDoc,x1node,'TotalNumberOfPackages','',Dataset,'PIECES',ntText);
+//     TblCreateXMLNode(FDoc,x1node,'TotalGrossMass','',Dataset,'WEIGHT',ntText);
      CreateXMLNodeNew(FDoc,x1node,'ArrivalAgreedLocationCode','LCA',ntText);
 
      DString:=FlightName+'-'+FormatDateTime('DD/MM/YYYY',DateDepart);
@@ -305,7 +311,9 @@ begin
         inc(i);
        airSerial:=qr.FieldByName('Serial_number').AsInteger;
        HeaderNode :=CreateXMLNodeNew(FDoc,FatherNode,'Msg615GoodsItem','',ntElement);
+ //       TblCreateXMLNode(FDoc,HeaderNode,'City','',qr,'HAWB_ID',ntText);
 
+//       TblCreateXMLNode(FDoc,HeaderNode,'ItemNumber','',qr,'SEQUENCE_NUMBER',ntText);
        CreateXMLNodeNew(FDoc,HeaderNode,'ItemNumber',intToStr(i),ntText);
        TblCreateXMLNode(FDoc,HeaderNode,'GoodsDescription','',qr,'DESCRIPTION',ntText);
        CreateXMLNodeNew(FDoc,HeaderNode,'GoodsDescriptionLNG','EN',ntText);

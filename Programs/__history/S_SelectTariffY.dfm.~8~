@@ -23,7 +23,7 @@ object S_SelectTariffYFRM: TS_SelectTariffYFRM
     Width = 824
     Height = 65
     Align = alTop
-    Caption = 'Select Tariff '
+    Caption = 'Select Tariff y'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBlue
     Font.Height = -33
@@ -369,7 +369,6 @@ object S_SelectTariffYFRM: TS_SelectTariffYFRM
       TitleLines = 1
       TitleButtons = False
       OnDblClick = wwDBGrid1DblClick
-      ExplicitLeft = 2
     end
   end
   object CustomerSRC: TDataSource

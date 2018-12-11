@@ -1,0 +1,6 @@
+{#TODO : CertDoctype - DO I need to enter all the invoices here?}{TODO : box22ext1 , currence with 3 chars? change xml_currency from cab}{TODO : box15, country is 2 digits alpha? (CY, GB, etc?}{TODO : box37}{TODO : Box33, tariff number  now more than 10. What are the other digits?}{TODO : box 29,30 ask marios for values}{TODO : box 24 optional for SIMPLE declaration (Is our declaration?)}{TODO : box14ext1 ask when 1,2 or 3}{TODO :
+box1ext1 ask if always IM A
+}
+{#TODO :
+test mawb = 00481363684 test hawb= 2696654936
+}

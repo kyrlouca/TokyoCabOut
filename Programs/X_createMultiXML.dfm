@@ -31,8 +31,8 @@ object X_CreateMultiXmlFRM: TX_CreateMultiXmlFRM
     ExplicitWidth = 187
   end
   object Button1: TButton
-    Left = 192
-    Top = 160
+    Left = 184
+    Top = 128
     Width = 75
     Height = 25
     Caption = 'Button1'

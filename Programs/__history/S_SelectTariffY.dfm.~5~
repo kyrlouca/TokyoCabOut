@@ -9,7 +9,7 @@ object S_SelectTariffYFRM: TS_SelectTariffYFRM
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -13
-  Font.Name = 'Arial'
+  Font.Name = 'MS Sans Serif'
   Font.Style = []
   OldCreateOrder = False
   Position = poDesktopCenter
@@ -23,7 +23,7 @@ object S_SelectTariffYFRM: TS_SelectTariffYFRM
     Width = 824
     Height = 65
     Align = alTop
-    Caption = 'Select Tariff '
+    Caption = 'Select Tariff y'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBlue
     Font.Height = -33
@@ -31,6 +31,7 @@ object S_SelectTariffYFRM: TS_SelectTariffYFRM
     Font.Style = [fsBold]
     ParentFont = False
     TabOrder = 0
+    ExplicitWidth = 629
   end
   object Panel4: TPanel
     Left = 0
@@ -39,6 +40,7 @@ object S_SelectTariffYFRM: TS_SelectTariffYFRM
     Height = 53
     Align = alBottom
     TabOrder = 1
+    ExplicitWidth = 629
     object BitBtn1: TBitBtn
       Left = 13
       Top = 5
@@ -120,6 +122,7 @@ object S_SelectTariffYFRM: TS_SelectTariffYFRM
     Align = alTop
     TabOrder = 2
     OnClick = Panel2Click
+    ExplicitWidth = 629
     object BYCodeBTN: TSpeedButton
       Left = 205
       Top = 11
@@ -130,7 +133,7 @@ object S_SelectTariffYFRM: TS_SelectTariffYFRM
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -15
-      Font.Name = 'Arial'
+      Font.Name = 'MS Sans Serif'
       Font.Style = [fsBold]
       Glyph.Data = {
         76010000424D7601000000000000760000002800000020000000100000000100
@@ -159,7 +162,7 @@ object S_SelectTariffYFRM: TS_SelectTariffYFRM
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -15
-      Font.Name = 'Arial'
+      Font.Name = 'MS Sans Serif'
       Font.Style = [fsBold]
       Glyph.Data = {
         76010000424D7601000000000000760000002800000020000000100000000100
@@ -181,14 +184,14 @@ object S_SelectTariffYFRM: TS_SelectTariffYFRM
     object Label1: TLabel
       Left = 13
       Top = 49
-      Width = 50
+      Width = 51
       Height = 16
       Caption = 'By Desc'
     end
     object Label2: TLabel
       Left = 12
       Top = 17
-      Width = 50
+      Width = 52
       Height = 16
       Caption = 'By Code'
     end
@@ -218,7 +221,7 @@ object S_SelectTariffYFRM: TS_SelectTariffYFRM
       WordWrap = False
       OnKeyUp = CodeFLDKeyUp
     end
-    object AddBtn: TRzBitBtn
+    object AddCert1BTN: TRzBitBtn
       Left = 546
       Top = 6
       Width = 130
@@ -232,7 +235,7 @@ object S_SelectTariffYFRM: TS_SelectTariffYFRM
       Font.Style = []
       ParentFont = False
       TabOrder = 2
-      OnClick = AddBtnClick
+      OnClick = AddCert1BTNClick
       Glyph.Data = {
         DE010000424DDE01000000000000760000002800000024000000120000000100
         0400000000006801000000000000000000001000000000000000000000000000
@@ -253,7 +256,7 @@ object S_SelectTariffYFRM: TS_SelectTariffYFRM
       NumGlyphs = 2
       Spacing = 5
     end
-    object EditBTN: TRzBitBtn
+    object RzBitBtn1: TRzBitBtn
       Left = 546
       Top = 44
       Width = 130
@@ -335,6 +338,7 @@ object S_SelectTariffYFRM: TS_SelectTariffYFRM
     Height = 464
     Align = alClient
     TabOrder = 3
+    ExplicitWidth = 629
     object wwDBGrid1: TwwDBGrid
       Left = 1
       Top = 1
@@ -364,12 +368,12 @@ object S_SelectTariffYFRM: TS_SelectTariffYFRM
       TitleFont.Charset = DEFAULT_CHARSET
       TitleFont.Color = clWindowText
       TitleFont.Height = -13
-      TitleFont.Name = 'Arial'
+      TitleFont.Name = 'MS Sans Serif'
       TitleFont.Style = []
       TitleLines = 1
       TitleButtons = False
       OnDblClick = wwDBGrid1DblClick
-      ExplicitLeft = 2
+      ExplicitWidth = 627
     end
   end
   object CustomerSRC: TDataSource

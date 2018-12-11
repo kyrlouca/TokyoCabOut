@@ -5,13 +5,13 @@ interface
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   StdCtrls, Mask, DBCtrls, Db,  DBAccess, IBC, MemDS, IBCError, wwSpeedButton, wwDBNavigator,
-  wwclearpanel, Buttons, ExtCtrls, wwdbedit, Grids, Wwdbigrd, Wwdbgrid,KyriacosTypes,
-  RzButton;
+  wwclearpanel, Buttons, ExtCtrls, wwdbedit, Grids, Wwdbigrd, Wwdbgrid,KyriacosTypes;
 
 type
   TS_SelectTariffYFRM = class(TForm)
     Panel1: TPanel;
     Panel4: TPanel;
+    BitBtn2: TBitBtn;
     Panel2: TPanel;
     Panel3: TPanel;
     CustomerSRC: TDataSource;
@@ -48,9 +48,7 @@ type
     ByDescBTN: TSpeedButton;
     Label1: TLabel;
     Label2: TLabel;
-    BitBtn1: TBitBtn;
-    AddBtn: TRzBitBtn;
-    EditBTN: TRzBitBtn;
+    EditBTN: TButton;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure BitBtn2Click(Sender: TObject);
     procedure CustomerSQLBeforeEdit(DataSet: TDataSet);
@@ -66,7 +64,6 @@ type
       Shift: TShiftState);
     procedure CodeFLDKeyUp(Sender: TObject; var Key: Word;
       Shift: TShiftState);
-    procedure AddBtnClick(Sender: TObject);
   private
     { Private declarations }
         procedure UpdateTariff(IsSaveAll:Boolean);
@@ -74,7 +71,6 @@ type
     { Public declarations }
     InAction:String;
     InTariffCode:String;
-    Out_TariffCode:string;
     OutIsSelect:Boolean;
         GTariffRecord:TKtTariffRecord;
     procedure SelectTariff(Const TariffName:String);
@@ -98,20 +94,11 @@ CustomerSQL.Close;
 
 end;
 
-procedure TS_SelectTariffYFRM.AddBtnClick(Sender: TObject);
-begin
-  M_TariffNew2FRM.InAction:='INSERT';
-  M_TariffNew2FRM.ShowModal;
-  CustomerSQL.Refresh;
-  customerSQL.LocateEx('code',M_TariffNew2FRM.OutTariffCode,[]);
-
-end;
-
 procedure TS_SelectTariffYFRM.BitBtn2Click(Sender: TObject);
 begin
-  InAction:='';
-  OutIsSelect:=True;
-  close;
+InAction:='';
+OutIsSelect:=True;
+close;
 end;
 
 procedure TS_SelectTariffYFRM.CustomerSQLBeforeEdit(
@@ -123,7 +110,7 @@ end;
 
 procedure TS_SelectTariffYFRM.SelectTariff(Const TariffName:String);
 Var
-   aName:String;
+ aName:String;
 begin
 
         aName:=Trim(TariffName);
@@ -161,35 +148,36 @@ end;
 
 procedure TS_SelectTariffYFRM.wwDBGrid1DblClick(Sender: TObject);
 Var
-        TariffCode:string;
+        CustomerSerial:Integer;
 begin
 //        CUstomerSerial:=CustomerSQL.fieldByName('Code').AsInteger;
-//        With CustomerSQL do begin
-//                GTariffRecord.UserKeyword:=CustomerSQL.fieldByName('USER_KEYWORD').AsString;
-//                GTariffRecord.Code:=CustomerSQL.fieldByName('Code').AsString;
-//                GTariffRecord.Description:=FieldByName('DESCRIPTION').AsString;
-//                GTariffRecord.IRate:=CustomerSQL.fieldByName('GENERAL_DUTY_RATE').AsFloat;
-//                GTariffRecord.IPerQuantity:=CustomerSQL.fieldByName('GENERAL_DUTY_RATE_QUANT').AsFloat;
-//                GTariffRecord.IBase:=CustomerSQL.fieldByName('BASE_QUANTITY').AsFloat;
-//                GTariffRecord.Trl:=CustomerSQL.fieldByName('GENERAL_DUTY_TRL').AsFloat;
-//        end;
+        With CustomerSQL do begin
+                GTariffRecord.UserKeyword:=CustomerSQL.fieldByName('USER_KEYWORD').AsString;
+                GTariffRecord.Code:=CustomerSQL.fieldByName('Code').AsString;
+                GTariffRecord.Description:=FieldByName('DESCRIPTION').AsString;
+                GTariffRecord.IRate:=CustomerSQL.fieldByName('GENERAL_DUTY_RATE').AsFloat;
+                GTariffRecord.IPerQuantity:=CustomerSQL.fieldByName('GENERAL_DUTY_RATE_QUANT').AsFloat;
+                GTariffRecord.IBase:=CustomerSQL.fieldByName('BASE_QUANTITY').AsFloat;
+                GTariffRecord.Trl:=CustomerSQL.fieldByName('GENERAL_DUTY_TRL').AsFloat;
+        end;
+        //ShowMessage(intToStr(GCustomerRecord.Code));
 
-        If InAction='SELECT' then begin
-          Out_TariffCode:=CustomerSQL.fieldByName('Code').AsString;
-          close;
+        If InAction='MENU' then begin
+              EditBTN.Click;
         end else begin
-           EditBTN.Click;
+                Close;
+                Self.OutIsSelect:=True;
         end;
 
 end;
 
 procedure TS_SelectTariffYFRM.FormActivate(Sender: TObject);
 begin
-  Self.OutIsSelect:=False;
-  If   CodeFLD.CanFocus then CodeFLD.SetFocus;
-    CodeFLd.SelStart := Length(CodeFLD.Text);
-  If CustomerSQL.Active=false then
-  CustomerSQL.Open;
+Self.OutIsSelect:=False;
+If   CodeFLD.CanFocus then CodeFLD.SetFocus;
+CodeFLd.SelStart := Length(CodeFLD.Text);
+If CustomerSQL.Active=false then
+CustomerSQL.Open;
 
 end;
 
@@ -205,9 +193,9 @@ end;
 
 procedure TS_SelectTariffYFRM.BYCodeBTNClick(Sender: TObject);
 Begin
-  If CodeFLD.Text>'' then begin
-    SelectTariffbyCode(CodeFLD.Text);
-  end;
+If CodeFLD.Text>'' then begin
+self.SelectTariffbyCode(CodeFLD.Text);
+end;
 end;
 
 procedure TS_SelectTariffYFRM.UpdateTariff(IsSaveAll:Boolean);
@@ -232,11 +220,11 @@ end;
 
 procedure TS_SelectTariffYFRM.EditBTNClick(Sender: TObject);
 begin
-  M_TariffNew2FRM.InAction:='DISPLAY';
-  M_TariffNew2FRM.InTariffCode:=CustomerSQL.FieldbyName('CODE').AsString;
-  M_TariffNew2FRM.ShowModal;
-  CustomerSQL.Refresh;
-  customerSQL.LocateEx('code',M_TariffNew2FRM.OutTariffCode,[]);
+M_TariffNew2FRM.InAction:='DISPLAY';
+M_TariffNew2FRM.InTariffCode:=CustomerSQL.FieldbyName('CODE').AsString;
+M_TariffNew2FRM.ShowModal;
+CustomerSQL.Refresh;
+customerSQL.LocateEx('code',M_TariffNew2FRM.OutTariffCode,[]);
 
 end;
 
@@ -255,6 +243,7 @@ begin
         aName:=Trim(NameFLD.Text);
         SelectTariff(aName);
 
+
 end;
 
 procedure TS_SelectTariffYFRM.NameFLDKeyUp(Sender: TObject; var Key: Word;
@@ -272,7 +261,7 @@ procedure TS_SelectTariffYFRM.CodeFLDKeyUp(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
 //If CodeFLD.Text>'' then begin
-SelectTariffbyCode(CodeFLD.Text);
+self.SelectTariffbyCode(CodeFLD.Text);
 
 
 end;

@@ -305,7 +305,9 @@ begin
         inc(i);
        airSerial:=qr.FieldByName('Serial_number').AsInteger;
        HeaderNode :=CreateXMLNodeNew(FDoc,FatherNode,'Msg615GoodsItem','',ntElement);
+ //       TblCreateXMLNode(FDoc,HeaderNode,'City','',qr,'HAWB_ID',ntText);
 
+//       TblCreateXMLNode(FDoc,HeaderNode,'ItemNumber','',qr,'SEQUENCE_NUMBER',ntText);
        CreateXMLNodeNew(FDoc,HeaderNode,'ItemNumber',intToStr(i),ntText);
        TblCreateXMLNode(FDoc,HeaderNode,'GoodsDescription','',qr,'DESCRIPTION',ntText);
        CreateXMLNodeNew(FDoc,HeaderNode,'GoodsDescriptionLNG','EN',ntText);

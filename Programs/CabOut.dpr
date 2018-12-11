@@ -36,7 +36,6 @@ uses
   R_ReadALLXMLFiles in 'R_ReadALLXMLFiles.pas' {R_ReadAllFilesFRM},
   X_createOneXML in 'X_createOneXML.pas' {X_CreateOneXmlFRM},
   X_createMultiXML in 'X_createMultiXML.pas' {X_CreateMultiXmlFRM},
-  X_createMultiHighXML in 'X_createMultiHighXML.pas' {X_CreateMultiHighXmlFRM},
   M_dangerGoods in 'M_dangerGoods.pas' {M_DangerGoodsFRM},
   M_FlightTable in 'M_FlightTable.pas' {M_FlightTableFRM},
   M_certificates in 'M_certificates.pas' {M_certificatesFRM},
@@ -49,7 +48,9 @@ uses
   M_PreviousProcedure in 'M_PreviousProcedure.pas' {M_PreviousProcedureFRM},
   m_DeclarationType in 'm_DeclarationType.pas' {M_declarationTypeFRM},
   m_KindOfPackages in 'm_KindOfPackages.pas' {M_KIndOfPackagesFRM},
-  H_commonProcs in 'H_commonProcs.pas';
+  H_commonProcs in 'H_commonProcs.pas',
+  X_createMultiLowXML in 'X_createMultiLowXML.pas' {X_CreateMultiLowXmlFRM},
+  X_createMultiHighXML in 'X_createMultiHighXML.pas' {X_CreateMultiHighXmlFRM};
 
 {$R *.RES}
 
@@ -83,8 +84,6 @@ begin
   Application.CreateForm(TS_SelectCustomerXFRM, S_SelectCustomerXFRM);
   Application.CreateForm(TR_ReadAllFilesFRM, R_ReadAllFilesFRM);
   Application.CreateForm(TX_CreateOneXmlFRM, X_CreateOneXmlFRM);
-  Application.CreateForm(TX_CreateMultiXmlFRM, X_CreateMultiXmlFRM);
-  Application.CreateForm(TX_CreateMultiHighXmlFRM, X_CreateMultiHighXmlFRM);
   Application.CreateForm(TM_DangerGoodsFRM, M_DangerGoodsFRM);
   Application.CreateForm(TM_FlightTableFRM, M_FlightTableFRM);
   Application.CreateForm(TM_certificatesFRM, M_certificatesFRM);
@@ -102,5 +101,7 @@ begin
   Application.CreateForm(TM_PreviousProcedureFRM, M_PreviousProcedureFRM);
   Application.CreateForm(TM_declarationTypeFRM, M_declarationTypeFRM);
   Application.CreateForm(TM_KIndOfPackagesFRM, M_KIndOfPackagesFRM);
+  Application.CreateForm(TX_CreateMultiLowXmlFRM, X_CreateMultiLowXmlFRM);
+  Application.CreateForm(TX_CreateMultiHighXmlFRM, X_CreateMultiHIghXmlFRM);
   Application.Run;
 end.

@@ -129,12 +129,12 @@ begin
         aName:=Trim(TariffName);
         with CustomerSQL do begin
                 close;
-                CUstomerSQL.RestoreSQL;
-                AddWhere('USER_KEYWORD starting with :SInput');
-                SetOrderBy('USER_KEYWORD Asc');
-                If not prepared then prepare;
-                ParamByName('SInput').Value:=aName;
-                Open;
+//                CUstomerSQL.RestoreSQL;
+//                AddWhere('USER_KEYWORD starting with :SInput');
+//                SetOrderBy('USER_KEYWORD Asc');
+//                If not prepared then prepare;
+//                ParamByName('SInput').Value:=aName;
+//                Open;
         end;
 
 end;
@@ -205,9 +205,9 @@ end;
 
 procedure TS_SelectTariffYFRM.BYCodeBTNClick(Sender: TObject);
 Begin
-  If CodeFLD.Text>'' then begin
-    SelectTariffbyCode(CodeFLD.Text);
-  end;
+If CodeFLD.Text>'' then begin
+self.SelectTariffbyCode(CodeFLD.Text);
+end;
 end;
 
 procedure TS_SelectTariffYFRM.UpdateTariff(IsSaveAll:Boolean);
@@ -255,6 +255,7 @@ begin
         aName:=Trim(NameFLD.Text);
         SelectTariff(aName);
 
+
 end;
 
 procedure TS_SelectTariffYFRM.NameFLDKeyUp(Sender: TObject; var Key: Word;
@@ -272,7 +273,7 @@ procedure TS_SelectTariffYFRM.CodeFLDKeyUp(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
 //If CodeFLD.Text>'' then begin
-SelectTariffbyCode(CodeFLD.Text);
+self.SelectTariffbyCode(CodeFLD.Text);
 
 
 end;

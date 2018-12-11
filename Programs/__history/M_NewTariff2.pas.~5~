@@ -56,7 +56,7 @@ type
     TariffSQLIS_TARIFF: TStringField;
     TariffSQLUSER_KEYWORD: TStringField;
     Label3: TLabel;
-    AcceptBTN: TBitBtn;
+    BitBtn1: TBitBtn;
     BitBtn2: TBitBtn;
     procedure CloseBTNClick(Sender: TObject);
     procedure FormActivate(Sender: TObject);
