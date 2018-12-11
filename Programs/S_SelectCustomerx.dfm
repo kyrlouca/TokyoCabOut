@@ -379,7 +379,7 @@ object S_SelectCustomerXFRM: TS_SelectCustomerXFRM
       DisplayLabel = 'Vat'
       DisplayWidth = 10
       FieldName = 'VAT_ID'
-      Size = 10
+      Size = 30
     end
     object CustomerSQLADDRESS1: TStringField
       DisplayLabel = 'Address1'
