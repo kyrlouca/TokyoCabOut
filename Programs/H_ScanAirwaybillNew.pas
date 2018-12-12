@@ -459,7 +459,13 @@ begin
     ShowMessage('Airway Bill missing data: '+ intToStr(ErrorSerial));
     exit;
   end;
+
   count:=X_CreateMultiHighXmlFRM.LoopMultiXML(Fserial);
+  if (count =0 ) then begin
+    ShowMessage('No available High Value Airwaybills found ');
+    exit;
+  end;
+
   flightAirwaybillSQL.refresh;
   showMessage('XML Create Finished. Number of Items:'+intTostr(Count) );
 

@@ -318,6 +318,7 @@ begin
 
   if (XmlRandom =0 ) then begin
     result:=0;
+    ShowMessage('No available High Value Airwaybills found ');
     exit;
   end;
 
@@ -1194,7 +1195,8 @@ begin
   //we are getting items actually NOT airwaybills
   str1:=
   '     update  flight_airwaybill outfa'
-  +'      set outfa.xml_Random = :XmlRandom'
+  +'      set outfa.xml_Random = :XmlRandom , '
+  +'      outfa.is_included_xml = ''Y'' '
   +'    where  outfa.serial_number in  ('
   +'      select first 2 fa.serial_number from'
   +'         flight_airwaybill fa left outer join'
@@ -1211,7 +1213,8 @@ begin
 
 str2:=
 '   update flight_airwaybill outfa'
-  +'         set outfa.xml_random = :XmlRandom'
+  +'         set outfa.xml_random = :XmlRandom ,'
+  +'         outfa.is_included_xml = ''Y'' '
   +'    where outfa.serial_number= :AirSerial';
 
 str3:=
@@ -1225,13 +1228,11 @@ str3:=
     xmlRandom:= RandomRAnge(1,10000000);
 
     if AIrSerial>0 then    begin
-      sqlStr:= Str2;
-      cnt:=ksExecSQLVar(cn,sqlStr,[XmlRandom,airSerial]);
+      cnt:=ksExecSQLVar(cn,Str1,[XmlRandom,airSerial]);
     end else begin
-      sqlStr:= str1;
-      Clipboard.AsText:=sqlStr;
-        cnt:=ksExecSQLVar(cn,sqlStr,[XmlRandom,FlightSerial,Criteria.DeclarationType,Criteria.TypeOfDeclaration,Criteria.Circumstance, Criteria.Incoterms]);
-        cnt:=ksExecSQLVar(cn,str3,[FlightSerial,XmlRandom]);
+//      Clipboard.AsText:=sqlStr;
+        cnt:=ksExecSQLVar(cn,str1,[XmlRandom,FlightSerial,Criteria.DeclarationType,Criteria.TypeOfDeclaration,Criteria.Circumstance, Criteria.Incoterms]);
+//        cnt:=ksExecSQLVar(cn,str3,[FlightSerial,XmlRandom]);
     end;
 
     if cnt=0 then begin

@@ -1165,7 +1165,7 @@ begin
   '     update  flight_airwaybill outfa'
   +'      set outfa.xml_Random = :XmlRandom'
   +'    where  outfa.serial_number in  ('
-  +'      select first 10 fa.serial_number from'
+  +'      select first 2 fa.serial_number from'
   +'         flight_airwaybill fa left outer join'
   +'         flight_airwaybill_item it on fa.serial_number=it.fk_fa_serial'
   +'      where fa.fk_flight_out_serial= :flightSerial and'
