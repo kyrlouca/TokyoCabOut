@@ -162,11 +162,12 @@ type
     wwDBNavigator1Post: TwwNavButton;
     wwDBNavigator1Cancel: TwwNavButton;
     wwDBNavigator1Refresh: TwwNavButton;
-    wwDBGrid1: TwwDBGrid;
-    CurrencyFLD: TwwDBLookupCombo;
     Panel4: TRzPanel;
     AcceptBTN: TBitBtn;
     CancelBTN: TBitBtn;
+    wwDBGrid1: TwwDBGrid;
+    CurrencyFLD: TwwDBLookupCombo;
+    SpeedButton2: TSpeedButton;
     procedure FormActivate(Sender: TObject);
     procedure BitBtn2Click(Sender: TObject);
     procedure wwDBNavigator1InsertClick(Sender: TObject);
@@ -175,6 +176,7 @@ type
     procedure SpeedButton1Click(Sender: TObject);
     procedure AirwayBillSQLAfterInsert(DataSet: TDataSet);
     procedure GroupBox2Click(Sender: TObject);
+    procedure SpeedButton2Click(Sender: TObject);
   private
     { Private declarations }
         procedure SelectCustomer(CustomerName:String);
@@ -192,7 +194,8 @@ var
 
 implementation
 
-uses MainForm,H_Movement, H_FlightAirwaybill, S_SelectCustomerx;
+uses MainForm,H_Movement, H_FlightAirwaybill, S_SelectCustomerx,
+  S_SelectTariffY;
 
 {$R *.DFM}
 
@@ -376,6 +379,20 @@ Var
         CustomerName:String;
 begin
 SElectCustomer(self.SelectNameFLD.Text);
+
+end;
+
+procedure TH_airwaybill2FRM.SpeedButton2Click(Sender: TObject);
+var
+  tariff:String;
+begin
+  S_SelectTariffYFRM.InAction:='SELECT';
+  S_SelectTariffYFRM.showModal;
+  tariff:=S_SelectTariffYFRM.Out_TariffCode;
+  if (AirItemSQL.State in [dsBrowse]) then begin
+   AirItemSQL.Edit;
+  end;
+  AirItemSQL.FieldByName('Tariff_code').AsString:=tariff;
 
 end;
 

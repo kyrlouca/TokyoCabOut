@@ -6,35 +6,14 @@ uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   StdCtrls, Mask,  IBC, MemDS, IBCError, wwSpeedButton, wwDBNavigator, DBAccess,
   Data.DB, vcl.wwclearpanel, Vcl.Grids, vcl.wwdbigrd, vcl.wwdbgrid, Vcl.Buttons,
-  vcl.wwdblook, vcl.Wwdotdot, vcl.Wwdbcomb, vcl.Wwdbedit, Vcl.ExtCtrls,KyriacosTYpes;
+  vcl.wwdblook, vcl.Wwdotdot, vcl.Wwdbcomb, vcl.Wwdbedit, Vcl.ExtCtrls,KyriacosTYpes,
+  RzPanel;
 
 type
   TH_airwaybill2FRM = class(TForm)
     TitlePNL: TPanel;
-    Panel4: TPanel;
     Panel3: TPanel;
     AirwaybillCDS: TIBCDataSource;
-    GroupBox1: TGroupBox;
-    wwDBEdit1: TwwDBEdit;
-    HawbFLD: TwwDBEdit;
-    wwDBEdit3: TwwDBEdit;
-    SequenceFLD: TwwDBEdit;
-    OriginFLD: TwwDBEdit;
-    WeightFLD: TwwDBEdit;
-    Label1: TLabel;
-    Label2: TLabel;
-    Label3: TLabel;
-    Label4: TLabel;
-    Label6: TLabel;
-    Label7: TLabel;
-    Label8: TLabel;
-    DescriptionFLD: TwwDBEdit;
-    AcceptBTN: TBitBtn;
-    CancelBTN: TBitBtn;
-    PiecesFLD: TwwDBEdit;
-    wwDBEdit13: TwwDBEdit;
-    Label25: TLabel;
-    wwDBEdit14: TwwDBEdit;
     AirwayBillSQL: TIBCQuery;
     UpdateTrans: TIBCTransaction;
     AirwayBillSQLSERIAL_NUMBER: TIntegerField;
@@ -60,19 +39,6 @@ type
     AirwayBillSQLPACKAGES_COUNT: TIntegerField;
     AirwayBillSQLITEMS_COUNT: TIntegerField;
     AirwayBillSQLPAYMENT_METHOD: TStringField;
-    GroupBox4: TGroupBox;
-    Label26: TLabel;
-    Label27: TLabel;
-    Label28: TLabel;
-    Label29: TLabel;
-    Label30: TLabel;
-    wwDBEdit15: TwwDBEdit;
-    wwDBEdit16: TwwDBEdit;
-    wwDBEdit17: TwwDBEdit;
-    wwDBEdit18: TwwDBEdit;
-    wwDBLookupCombo1: TwwDBLookupCombo;
-    wwDBEdit19: TwwDBEdit;
-    wwDBEdit20: TwwDBEdit;
     AirwayBillSQLIS_HIGH: TStringField;
     AirwayBillSQLCUSTOMS_VALUE: TFloatField;
     AirwayBillSQLCURRENCY: TStringField;
@@ -89,25 +55,10 @@ type
     AirwayBillSQLCONSIGNEE_DEVICE_DETAILS: TStringField;
     AirwayBillSQLVALUE_TYPE: TStringField;
     AirwayBillSQLINCOTERMS: TStringField;
-    GroupBox3: TGroupBox;
-    Label10: TLabel;
-    Label11: TLabel;
-    Label12: TLabel;
-    Label13: TLabel;
-    Label14: TLabel;
-    CnameFLD: TwwDBEdit;
-    Cadd1FLD: TwwDBEdit;
-    CpostFLD: TwwDBEdit;
-    CCityFLD: TwwDBEdit;
-    CAdd2FLd: TwwDBEdit;
-    CAdd3FLD: TwwDBEdit;
-    Label23: TLabel;
-    ValueFLD: TwwDBComboBox;
     SenderCountrySQL: TIBCQuery;
     SenderCountrySQLCODE_2: TStringField;
     SenderCountrySQLNAME: TStringField;
     SenderCountrySRC: TIBCDataSource;
-    CCountryFLD: TwwDBEdit;
     AirItemSQL: TIBCQuery;
     AirItemSQLSEQUENCE: TIntegerField;
     AirItemSQLWEIGHT: TFloatField;
@@ -121,9 +72,6 @@ type
     AirItemSQLCURRENCY: TStringField;
     AirItemSQLUNIT_OF_MEASURE: TStringField;
     AirItemSRC: TIBCDataSource;
-    wwDBGrid1: TwwDBGrid;
-    SelectNameFLD: TwwDBEdit;
-    SpeedButton1: TSpeedButton;
     IncotermsSQL: TIBCQuery;
     IncotermsSQLSERIAL_NUMBER: TIntegerField;
     IncotermsSQLCODE: TStringField;
@@ -134,27 +82,78 @@ type
     ServiceCodeSQLDESCRIPTION: TStringField;
     AirwayBillSQLSERVICE_CODE: TStringField;
     AirwayBillSQLACCOUNT_NUMBER: TStringField;
-    wwDBLookupCombo2: TwwDBLookupCombo;
-    wwDBLookupCombo3: TwwDBLookupCombo;
-    wwDBEdit2: TwwDBEdit;
-    Label20: TLabel;
-    Label21: TLabel;
-    Label22: TLabel;
-    Label24: TLabel;
     CurrencySQL: TIBCQuery;
     CurrencySQLDESCRIPTION: TStringField;
     CurrencySQLCURRENCY_CODE: TStringField;
     CurrencySQLCOUNTRY_CODE: TIntegerField;
     CurrencySQLXML_CURRENCY: TStringField;
-    CurrencyFLD: TwwDBLookupCombo;
+    RzPanel1: TRzPanel;
+    GroupBox1: TGroupBox;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    Label5: TLabel;
+    Label6: TLabel;
+    Label7: TLabel;
+    Label8: TLabel;
+    Label9: TLabel;
+    Label15: TLabel;
+    Label16: TLabel;
+    Label17: TLabel;
+    Label18: TLabel;
+    wwDBEdit1: TwwDBEdit;
+    HawbFLD: TwwDBEdit;
+    wwDBEdit3: TwwDBEdit;
+    SequenceFLD: TwwDBEdit;
+    OriginFLD: TwwDBEdit;
+    WeightFLD: TwwDBEdit;
+    DescriptionFLD: TwwDBEdit;
+    PiecesFLD: TwwDBEdit;
+    wwDBEdit8: TwwDBEdit;
+    wwDBEdit9: TwwDBEdit;
+    ValueFLD: TwwDBComboBox;
+    wwDBLookupCombo2: TwwDBLookupCombo;
+    wwDBLookupCombo3: TwwDBLookupCombo;
+    wwDBEdit2: TwwDBEdit;
+    GroupBox2: TGroupBox;
+    Label19: TLabel;
+    Label20: TLabel;
+    Label21: TLabel;
+    Label22: TLabel;
+    Label23: TLabel;
+    SpeedButton1: TSpeedButton;
+    Label24: TLabel;
+    Label25: TLabel;
+    wwDBEdit10: TwwDBEdit;
+    wwDBEdit11: TwwDBEdit;
+    wwDBEdit12: TwwDBEdit;
+    wwDBEdit13: TwwDBEdit;
+    wwDBLookupCombo1: TwwDBLookupCombo;
+    wwDBEdit14: TwwDBEdit;
+    wwDBEdit15: TwwDBEdit;
+    SelectNameFLD: TwwDBEdit;
     wwDBEdit4: TwwDBEdit;
     wwDBEdit5: TwwDBEdit;
-    Label31: TLabel;
-    Label32: TLabel;
-    Label33: TLabel;
+    GroupBox3: TGroupBox;
+    Label10: TLabel;
+    Label11: TLabel;
+    Label12: TLabel;
+    Label13: TLabel;
+    Label14: TLabel;
+    Label26: TLabel;
+    Label27: TLabel;
+    CnameFLD: TwwDBEdit;
+    Cadd1FLD: TwwDBEdit;
+    CpostFLD: TwwDBEdit;
+    CCityFLD: TwwDBEdit;
+    CAdd2FLd: TwwDBEdit;
+    CAdd3FLD: TwwDBEdit;
+    CCountryFLD: TwwDBEdit;
     wwDBEdit6: TwwDBEdit;
-    Label34: TLabel;
     wwDBEdit7: TwwDBEdit;
+    RzPanel2: TRzPanel;
+    RzPanel3: TRzPanel;
     wwDBNavigator1: TwwDBNavigator;
     wwDBNavigator1Prior: TwwNavButton;
     wwDBNavigator1Next: TwwNavButton;
@@ -163,6 +162,11 @@ type
     wwDBNavigator1Post: TwwNavButton;
     wwDBNavigator1Cancel: TwwNavButton;
     wwDBNavigator1Refresh: TwwNavButton;
+    wwDBGrid1: TwwDBGrid;
+    CurrencyFLD: TwwDBLookupCombo;
+    Panel4: TRzPanel;
+    AcceptBTN: TBitBtn;
+    CancelBTN: TBitBtn;
     procedure FormActivate(Sender: TObject);
     procedure BitBtn2Click(Sender: TObject);
     procedure wwDBNavigator1InsertClick(Sender: TObject);
@@ -170,7 +174,7 @@ type
     procedure CancelBTNClick(Sender: TObject);
     procedure SpeedButton1Click(Sender: TObject);
     procedure AirwayBillSQLAfterInsert(DataSet: TDataSet);
-    procedure GroupBox4Click(Sender: TObject);
+    procedure GroupBox2Click(Sender: TObject);
   private
     { Private declarations }
         procedure SelectCustomer(CustomerName:String);
@@ -222,7 +226,7 @@ end;
 
 procedure TH_airwaybill2FRM.SelectCustomer(CustomerName:String);
 Var
-        CustomerRecord:TCustomerRecord;
+        CustomerRecord:TktCustomerRecord;
    AirCDS:TDataset;
    AName:String;
 
@@ -324,10 +328,16 @@ end;
 procedure TH_airwaybill2FRM.wwDBNavigator1InsertClick(
   Sender: TObject);
 begin
-{If CodeFLD.CanFocus then
-   CodeFLD.SetFocus;
-end;
-}
+  if AirwayBillSQL.State in [dsInsert,dsEdit] then begin
+    AirwayBillSQL.Post;
+    if AirwayBillSQL.IsEmpty then
+      abort;
+  end;
+
+//  If CodeFLD.CanFocus then
+//   CodeFLD.SetFocus;
+//  end;
+
 End;
 
 procedure TH_airwaybill2FRM.AcceptBTNClick(Sender: TObject);
@@ -378,7 +388,7 @@ end;
 
 
 
-procedure TH_airwaybill2FRM.GroupBox4Click(Sender: TObject);
+procedure TH_airwaybill2FRM.GroupBox2Click(Sender: TObject);
 begin
 SElectCustomer(self.SelectNameFLD.Text);
 end;

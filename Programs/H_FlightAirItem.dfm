@@ -388,8 +388,8 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
           DataSource = TableSRC
         end
         object Label14: TLabel
-          Left = 234
-          Top = 236
+          Left = 262
+          Top = 261
           Width = 48
           Height = 14
           Caption = 'Currency'
@@ -479,7 +479,7 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
           ParentFont = False
         end
         object Label8: TLabel
-          Left = 234
+          Left = 204
           Top = 175
           Width = 23
           Height = 14
@@ -545,6 +545,35 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
           ParentColor = False
           ParentFont = False
         end
+        object BYCodeBTN: TSpeedButton
+          Left = 229
+          Top = 256
+          Width = 23
+          Height = 26
+          Hint = 'Find Hawb in this Mawb'
+          Flat = True
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -15
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Glyph.Data = {
+            76010000424D7601000000000000760000002800000020000000100000000100
+            04000000000000010000130B0000130B00001000000000000000000000000000
+            800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+            FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
+            33033333333333333F7F3333333333333000333333333333F777333333333333
+            000333333333333F777333333333333000333333333333F77733333333333300
+            033333333FFF3F777333333700073B703333333F7773F77733333307777700B3
+            33333377333777733333307F8F8F7033333337F333F337F3333377F8F9F8F773
+            3333373337F3373F3333078F898F870333337F33F7FFF37F333307F99999F703
+            33337F377777337F3333078F898F8703333373F337F33373333377F8F9F8F773
+            333337F3373337F33333307F8F8F70333333373FF333F7333333330777770333
+            333333773FF77333333333370007333333333333777333333333}
+          NumGlyphs = 2
+          ParentFont = False
+          OnClick = BYCodeBTNClick
+        end
         object FirstFLD: TwwDBEdit
           Left = 116
           Top = 46
@@ -605,7 +634,7 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
           WantReturns = False
           WordWrap = False
         end
-        object wwDBEdit4: TwwDBEdit
+        object TariffFLD: TwwDBEdit
           Left = 116
           Top = 256
           Width = 112
@@ -738,7 +767,7 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
           UnboundDataType = wwDefault
         end
         object KindOfPackFLD: TwwDBComboBox
-          Left = 234
+          Left = 204
           Top = 195
           Width = 71
           Height = 23
@@ -767,8 +796,8 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
           UnboundDataType = wwDefault
         end
         object CurrencyFLD: TwwDBComboBox
-          Left = 234
-          Top = 256
+          Left = 262
+          Top = 281
           Width = 71
           Height = 23
           ShowButton = True
@@ -804,7 +833,6 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
         Align = alTop
         BorderOuter = fsNone
         TabOrder = 1
-        ExplicitTop = 5
       end
       object GroupBox2: TGroupBox
         Left = 486
@@ -959,7 +987,7 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
             'CERT_TYPE'#9'4'#9'Type'
             'CERT_CODE'#9'10'#9'Doc Type'
             'CERT_VALUE'#9'12'#9'Doc Ref'
-            'DESCRIPTION'#9'21'#9'DescrIption'#9'F')
+            'DESCRIPTION'#9'21'#9'DescrIption')
           IniAttributes.Delimiter = ';;'
           IniAttributes.UnicodeIniFile = False
           TitleColor = clBtnFace

@@ -61,7 +61,11 @@ type
     function CheckSameSender( Const FlightSerial:Integer; XmlRandom:Integer):Boolean;
     function CheckSameConsignee( Const FlightSerial:Integer;XmlRandom:Integer):Boolean;
     function CheckSameDestination( Const FlightSerial:integer;XmlRandom:Integer):String;
-//    function CheckSameIncoterm( Const FlightSerial:integer;XmlRandom:Integer):Boolean;
+    function CheckSamePaymentMethod( Const FlightSerial:Integer; XmlRandom:Integer):String;
+    function ConvertPaymentMethod(const PaymentMethod:String):String;
+
+
+    //    function CheckSameIncoterm( Const FlightSerial:integer;XmlRandom:Integer):Boolean;
 
 
     Function  AddNodeAtr(FatherNode:IXMLNode;NodeName:String; NodeText:String):IXMLNode;overload;
@@ -69,7 +73,10 @@ type
     Function  AddAtrribute(HeaderNode:IXMLNode; AttributeName:String;AttributeText:String):IXMLNode;
     function CreateXmlNodeNew(XMLDoc:IXMLDocument;ElementFather:IXMLNode;ElementName:String;ElementValue:String; ElementType: TNodeType =ntElement):IXMLNode;
     function CreateXmlNodeNewDefault(XMLDoc:IXMLDocument;ElementFather:IXMLNode;ElementName:String;ElementValue:String; DefaultValue:String; ElementType: TNodeType =ntElement):IXMLNode;
-    function TBLCreateXMLNode(XMLDoc:IXMLDocument;ElementFather:IXMLNode;ElementName:String;ElementValue:String; Dataset: TDataset; FieldName:String; ElementType: TNodeType =ntElement):IXMLNode;
+//    function TBLCreateXMLNode(XMLDoc:IXMLDocument;ElementFather:IXMLNode;ElementName:String;ElementValue:String; Dataset: TDataset; FieldName:String; ElementType: TNodeType =ntElement):IXMLNode;
+
+  function TBLCreateXMLNode(XMLDoc:IXMLDocument;ElementFather:IXMLNode;ElementName:String;ElementValue:String; Dataset: TDataset; FieldName:String; ElementType: TNodeType =ntElement; digits:integer=2):IXMLNode;
+
 
 
   function CreateNodeOuter( Const FlightOutSerial:Integer; XmlRandom:Integer;Criteria:TCriteriaParams;const Fdoc: IXMLDocument;FatherNode:IXMLNode):Integer;
@@ -166,7 +173,7 @@ begin
   cn:= MainFormFRM.CabOutData;
 end;
 
-function TX_CreateMultiHighXmlFRM.TBLCreateXMLNode(XMLDoc:IXMLDocument;ElementFather:IXMLNode;ElementName:String;ElementValue:String; Dataset: TDataset; FieldName:String; ElementType: TNodeType =ntElement):IXMLNode;
+function TX_CreateMultiHighXmlFRM.TBLCreateXMLNode(XMLDoc:IXMLDocument;ElementFather:IXMLNode;ElementName:String;ElementValue:String; Dataset: TDataset; FieldName:String; ElementType: TNodeType =ntElement; digits:integer=2):IXMLNode;
 Var
    CxFather:IXMLNode;
    TheElement:IXMLNode;
@@ -177,7 +184,7 @@ Begin
 //     TblCreateXMLNode(FDoc,x1node,'TotalNumberOfItems','',Dataset,'ITEMS_COUNT',ntText);
 
   If Dataset.FieldBYName(FieldName).DataType in [ftfloat,ftSingle] then begin
-       MyValue:=gpFloatToStr(dataset.FieldBYName(FieldName).AsFloat,3);
+       MyValue:=gpFloatToStr(dataset.FieldBYName(FieldName).AsFloat,digits);
 //        MyValue:=format('%.3f',[dataset.FieldBYName(FieldName).AsFloat]);
   end else begin
         MyValue:=Trim(dataset.FieldBYName(FieldName).AsString);
@@ -405,7 +412,7 @@ begin
      CreateXMLNodeNew(FDoc,FatherNode,'MessageSender','CY10016129G',ntText);
      CreateXMLNodeNew(FDoc,FatherNode,'SenderIdCodeQualifier','CY',ntText);
      CreateXMLNodeNew(FDoc,FatherNode,'MessageRecipient','NECA.CY',ntText);
-     CreateXMLNodeNew(FDoc,FatherNode,'RecipientIdentifCodeQualifier','CY',ntText);
+//     CreateXMLNodeNew(FDoc,FatherNode,'RecipientIdentifCodeQualifier','CY',ntText);
      DString:=FormatDateTime('YYMMDD',now);
      CreateXMLNodeNew(FDoc,FatherNode,'DateOfPreparation',DString,ntText);
      DString:=FormatDateTime('HHMM',now);
@@ -452,10 +459,10 @@ begin
      end;
 
      x2Node:=CreateXMLNodeNew(FDoc,FatherNode,'Msg515ExportCustomsOffice','',ntElement);
-     CreateXMLNodeNew(FDoc,x2Node,'ReferenceNumber','CY000440',ntElement);
+     CreateXMLNodeNew(FDoc,x2Node,'ReferenceNumber','CY000440',ntText);
 
      x2Node:=CreateXMLNodeNew(FDoc,FatherNode,'Msg515ExitCustomsOffice','',ntElement);
-     CreateXMLNodeNew(FDoc,x2Node,'ReferenceNumber','CY000440',ntElement);
+     CreateXMLNodeNew(FDoc,x2Node,'ReferenceNumber','CY000440',ntText);
 
 
      //***GoodsItems*******************************************
@@ -490,7 +497,10 @@ begin
         x2node:=CreateXMLNodeNew(FDoc,FatherNode,'Msg515TermsDelivery','',ntElement);
 //      TBLCreateXMLNode(FDoc,x2node,'IncotermCode','',FirstAirQr,'INCOTERMS',ntText);
         CreateXmlNodeNewDefault(FDoc,x2Node,'IncotermCode',criteria.Incoterms,'XXX',ntText);
-        TBLCreateXMLNode(FDoc,x2node,'ComplementOfInfo','',FirstAirQr,'INCOTERMS',ntText);
+//        TBLCreateXMLNode(FDoc,x2node,'ComplementOfInfo','',FirstAirQr,'INCOTERMS',ntText);
+//TODO ask thanasis if ComplementaryCode always 1
+        CreateXMLNodeNew(FDoc,x2node,'ComplementaryCode ','1',ntText);
+        CreateXMLNodeNew(FDoc,x2node,'ComplementOfInfo','LARNACA',ntText);
         CreateXMLNodeNew(FDoc,x2node,'ComplementOfInfoLNG','EN',ntText);
 
      x2node:=CreateXMLNodeNew(FDoc,FatherNode,'Msg515DataTransaction','',ntElement);
@@ -521,6 +531,7 @@ var
   MawbId:String;
   FlightName:string;
   DateDepart:Tdate;
+  temp:string;
 //  CommonDeclarationType, CommonTypeOfDeclaration, CommonCirc, CommonIncoterm:String;
 begin
 
@@ -604,6 +615,13 @@ str:=
      CreateXMLNodeNew(FDoc,x1node,'DeclarationPlaceLNG','EN',ntText);
 
      CreateXmlNodeNewDefault(FDoc,x1node,'SpecificCircumstanceIndicator',criteria.Circumstance,'XXX',ntText);
+
+     temp:=CheckSamePaymentMethod(FlightOutSerial,XMLRandom);
+     if (temp>'') then begin
+          Temp:= ConvertPaymentMethod( temp);
+          CreateXMLNodeNew(FDoc,x1node,'TranspChargesMethodOfPayment',Temp,ntText);
+     end;
+
      CreateXmlNodeNewDefault(FDoc,x1node,'TypeOfDeclarationBox12',criteria.TypeOfDeclaration,'XXX',ntText);
 
     finally
@@ -689,20 +707,18 @@ begin
        TblCreateXMLNode(FDoc,HeaderNode,'GoodsDescription','',qrItem,'DESCRIPTION',ntText);
        CreateXMLNodeNew(FDoc,HeaderNode,'GoodsDescriptionLNG','EN',ntText);
        TblCreateXMLNode(FDoc,HeaderNode,'GrossMass','',qrItem,'WEIGHT',ntText);
+
+
        TblCreateXMLNode(FDoc,HeaderNode,'NetMass','',qrItem,'WEIGHT',ntText);
 
 
-        if CheckSameDestination(FlightSerial,XmlRandom)='' then
+       if CheckSameDestination(FlightSerial,XmlRandom)='' then
            TblCreateXMLNode(FDoc,HeaderNode,'CountryOfDestinationCode','',qrAir,'CONSIGNEE_COUNTRY_CODE',ntText);
 
-       Temp:=qrAir.FieldByName('Payment_method').AsString;
-        If temp='A'       then
-          DString:='Y'
-        else  if temp='C' then
-          Dstring:='D'
-        else
-          Dstring:='D';
-       CreateXMLNodeNew(FDoc,HeaderNode,'TranspChargesMethodOfPayment',Temp,ntText);
+       if (CheckSamePaymentMethod(FlightSerial,XMLRandom)='') then begin
+          Temp:= ConvertPaymentMethod( qrAir.FieldByName('Payment_method').AsString);
+          CreateXMLNodeNew(FDoc,HeaderNode,'TranspChargesMethodOfPayment',Temp,ntText);
+       end;
 
        temp:=trim(qrItem.FieldByName('PROCEDURE_REQUESTED').AsString);
        If temp='' then  temp:= DefaultProcedureRequested;
@@ -713,7 +729,7 @@ begin
        CreateXMLNodeNew(FDoc,HeaderNode,'PreviousProcedure',Temp,ntText);
 
        TblCreateXMLNode(FDoc,HeaderNode,'StatisticalValueCurrency','',qrItem,'CURRENCY',ntText);
-       TblCreateXMLNode(FDoc,HeaderNode,'StatisticalValueAmount','',qrItem,'AMOUNT',ntText);
+       TblCreateXMLNode(FDoc,HeaderNode,'StatisticalValueAmount','',qrItem,'AMOUNT',ntText,2);
        TblCreateXMLNode(FDoc,HeaderNode,'CountryOfOrigin','',qrItem,'COUNTRY_OF_ORIGIN',ntText);
        TblCreateXMLNode(FDoc,HeaderNode,'SupplementaryUnits','',qrItem,'PIECES',ntText);
 
@@ -906,6 +922,41 @@ begin
 end;
 
 
+function TX_CreateMultiHighXmlFRM.CheckSamePaymentMethod( Const FlightSerial:Integer; XmlRandom:Integer):String;
+var
+  qr:TksQuery;
+  DefaultVal:String;
+  str1,str2,str3:string;
+begin
+
+  str1:=
+'  select count(*), Payment_method from'
+  +'   flight_airwaybill fa'
+  +'     where'
+  +'     fk_flight_out_serial= :flightSerial and'
+  +'      fa.xml_random= :XmlRandom'
+  +'      group by Payment_method' ;
+
+  qr:=TksQuery.Create(cn, str1);
+  try
+
+      qr.ParamByName('FLightSerial').Value:=FlightSerial;
+      qr.ParamByName('XmlRandom').Value := XmlRandom;
+//      Clipboard.AsText:=qr.FinalSQL;
+      qr.Open;
+
+      result:='';
+      if (qr.RecordCount>1) then
+        result:=qr.FieldByName('Payment_method').AsString;
+
+  finally
+    qr.Free;
+  end;
+
+end;
+
+
+
 
 function TX_CreateMultiHighXmlFRM.CheckSameSender( Const FlightSerial:Integer; XmlRandom:Integer):Boolean;
 var
@@ -927,7 +978,7 @@ begin
 
       qr.ParamByName('FLightSerial').Value:=FlightSerial;
       qr.ParamByName('XmlRandom').Value := XmlRandom;
-      Clipboard.AsText:=qr.FinalSQL;
+//      Clipboard.AsText:=qr.FinalSQL;
       qr.Open;
       result:= qr.RecordCount =1 ;
   finally
@@ -959,7 +1010,7 @@ str1:=
       qr.ParamByName('FLightSerial').Value:=FlightSerial;
       qr.ParamByName('xmlRandom').Value := XmlRandom;
       qr.Open;
-      Clipboard.AsText:=qr.FinalSQL;
+//      Clipboard.AsText:=qr.FinalSQL;
       result:= qr.RecordCount =1 ;
   finally
     qr.Free;
@@ -992,7 +1043,7 @@ begin
       qr.ParamByName('FLightSerial').Value:=FlightSerial;
       qr.ParamByName('xmlRandom').Value := xmlRandom;
       qr.Open;
-      Clipboard.AsText:=qr.FinalSQL;
+//      Clipboard.AsText:=qr.FinalSQL;
       if (qr.RecordCount=1) then
         result:=qr.FieldByName('CONSIGNEE_COUNTRY_CODE').AsString
       else
@@ -1145,7 +1196,7 @@ str3:=
       cnt:=ksExecSQLVar(cn,sqlStr,[XmlRandom,airSerial]);
     end else begin
       sqlStr:= str1;
-      Clipboard.AsText:=sqlStr;
+//      Clipboard.AsText:=sqlStr;
         cnt:=ksExecSQLVar(cn,sqlStr,[XmlRandom,FlightSerial,Criteria.DeclarationType,Criteria.TypeOfDeclaration,Criteria.Circumstance, Criteria.Incoterms]);
         cnt:=ksExecSQLVar(cn,str3,[FlightSerial,XmlRandom]);
     end;
@@ -1158,6 +1209,14 @@ str3:=
 
 end;
 
+function TX_CreateMultiHighXmlFRM.ConvertPaymentMethod(const PaymentMethod:String):String;
+begin
+  result:='D';
+  If PaymentMethod='A'       then
+     result:='Y'
+  else  if PaymentMethod='C' then
+     result:='D';
+end;
 
 
 end.

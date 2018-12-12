@@ -40,9 +40,9 @@ object M_FlightAirwaybillItemFRM: TM_FlightAirwaybillItemFRM
       Height = 45
       Align = alClient
       Alignment = taCenter
-      Caption = 'NOT USED '
+      Caption = 'Flight Airwaybill Item'
       Layout = tlCenter
-      ExplicitWidth = 151
+      ExplicitWidth = 279
       ExplicitHeight = 32
     end
   end

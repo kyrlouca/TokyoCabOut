@@ -21,7 +21,7 @@ object X_CreateMultiHighXmlFRM: TX_CreateMultiHighXmlFRM
     Height = 45
     Align = alTop
     Alignment = taCenter
-    Caption = 'MULTI HIGH XML'
+    Caption = 'MULTI HIGH XML 515'
     Color = clWhite
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBlue
@@ -30,7 +30,7 @@ object X_CreateMultiHighXmlFRM: TX_CreateMultiHighXmlFRM
     Font.Style = []
     ParentColor = False
     ParentFont = False
-    ExplicitWidth = 288
+    ExplicitWidth = 360
   end
   object Button1: TButton
     Left = 192

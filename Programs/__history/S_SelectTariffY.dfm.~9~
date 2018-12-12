@@ -369,7 +369,7 @@ object S_SelectTariffYFRM: TS_SelectTariffYFRM
       TitleLines = 1
       TitleButtons = False
       OnDblClick = wwDBGrid1DblClick
-      ExplicitLeft = 0
+      ExplicitLeft = 2
     end
   end
   object CustomerSRC: TDataSource

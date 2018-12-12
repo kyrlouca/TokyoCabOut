@@ -163,6 +163,16 @@ procedure TS_SelectTariffYFRM.wwDBGrid1DblClick(Sender: TObject);
 Var
         TariffCode:string;
 begin
+//        CUstomerSerial:=CustomerSQL.fieldByName('Code').AsInteger;
+//        With CustomerSQL do begin
+//                GTariffRecord.UserKeyword:=CustomerSQL.fieldByName('USER_KEYWORD').AsString;
+//                GTariffRecord.Code:=CustomerSQL.fieldByName('Code').AsString;
+//                GTariffRecord.Description:=FieldByName('DESCRIPTION').AsString;
+//                GTariffRecord.IRate:=CustomerSQL.fieldByName('GENERAL_DUTY_RATE').AsFloat;
+//                GTariffRecord.IPerQuantity:=CustomerSQL.fieldByName('GENERAL_DUTY_RATE_QUANT').AsFloat;
+//                GTariffRecord.IBase:=CustomerSQL.fieldByName('BASE_QUANTITY').AsFloat;
+//                GTariffRecord.Trl:=CustomerSQL.fieldByName('GENERAL_DUTY_TRL').AsFloat;
+//        end;
 
         If InAction='SELECT' then begin
           Out_TariffCode:=CustomerSQL.fieldByName('Code').AsString;

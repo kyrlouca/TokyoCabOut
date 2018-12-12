@@ -1,7 +1,7 @@
 object H_airwaybill2FRM: TH_airwaybill2FRM
   Left = 70
   Top = -8
-  ClientHeight = 821
+  ClientHeight = 820
   ClientWidth = 1266
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -20,7 +20,7 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
     Width = 1266
     Height = 46
     Align = alTop
-    Caption = 'Edit AirwayBill'
+    Caption = 'Edit AirwayBill Y'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBlue
     Font.Height = -27
@@ -29,270 +29,13 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
     ParentFont = False
     TabOrder = 0
   end
-  object Panel4: TPanel
-    Left = 0
-    Top = 767
-    Width = 1266
-    Height = 54
-    Align = alBottom
-    TabOrder = 1
-    object AcceptBTN: TBitBtn
-      Left = 18
-      Top = 7
-      Width = 81
-      Height = 39
-      Caption = 'Accept'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -15
-      Font.Name = 'arial'
-      Font.Style = []
-      Glyph.Data = {
-        DE010000424DDE01000000000000760000002800000024000000120000000100
-        0400000000006801000000000000000000001000000000000000000000000000
-        80000080000000808000800000008000800080800000C0C0C000808080000000
-        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
-        3333333333333333333333330000333333333333333333333333F33333333333
-        00003333344333333333333333388F3333333333000033334224333333333333
-        338338F3333333330000333422224333333333333833338F3333333300003342
-        222224333333333383333338F3333333000034222A22224333333338F338F333
-        8F33333300003222A3A2224333333338F3838F338F33333300003A2A333A2224
-        33333338F83338F338F33333000033A33333A222433333338333338F338F3333
-        0000333333333A222433333333333338F338F33300003333333333A222433333
-        333333338F338F33000033333333333A222433333333333338F338F300003333
-        33333333A222433333333333338F338F00003333333333333A22433333333333
-        3338F38F000033333333333333A223333333333333338F830000333333333333
-        333A333333333333333338330000333333333333333333333333333333333333
-        0000}
-      NumGlyphs = 2
-      ParentFont = False
-      TabOrder = 0
-      OnClick = AcceptBTNClick
-    end
-    object CancelBTN: TBitBtn
-      Left = 120
-      Top = 6
-      Width = 87
-      Height = 39
-      Cancel = True
-      Caption = 'Cancel'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -15
-      Font.Name = 'arial'
-      Font.Style = []
-      Glyph.Data = {
-        DE010000424DDE01000000000000760000002800000024000000120000000100
-        0400000000006801000000000000000000001000000000000000000000000000
-        80000080000000808000800000008000800080800000C0C0C000808080000000
-        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
-        333333333333333333333333000033338833333333333333333F333333333333
-        0000333911833333983333333388F333333F3333000033391118333911833333
-        38F38F333F88F33300003339111183911118333338F338F3F8338F3300003333
-        911118111118333338F3338F833338F3000033333911111111833333338F3338
-        3333F8330000333333911111183333333338F333333F83330000333333311111
-        8333333333338F3333383333000033333339111183333333333338F333833333
-        00003333339111118333333333333833338F3333000033333911181118333333
-        33338333338F333300003333911183911183333333383338F338F33300003333
-        9118333911183333338F33838F338F33000033333913333391113333338FF833
-        38F338F300003333333333333919333333388333338FFF830000333333333333
-        3333333333333333333888330000333333333333333333333333333333333333
-        0000}
-      NumGlyphs = 2
-      ParentFont = False
-      TabOrder = 1
-      OnClick = CancelBTNClick
-    end
-  end
   object Panel3: TPanel
     Left = 0
     Top = 46
     Width = 1266
-    Height = 721
+    Height = 720
     Align = alClient
     TabOrder = 2
-    object wwDBGrid1: TwwDBGrid
-      Left = 18
-      Top = 361
-      Width = 807
-      Height = 98
-      ControlType.Strings = (
-        'CURRENCY;CustomEdit;CurrencyFLD')
-      Selected.Strings = (
-        'SERIAL_NUMBER'#9'5'#9'S/N'
-        'SEQUENCE'#9'5'#9'SQ'
-        'WEIGHT'#9'10'#9'Weight'
-        'PIECES'#9'10'#9'Pieces'
-        'DESCRIPTION'#9'28'#9'Description'
-        'TARIFF_CODE'#9'17'#9'Tariff'
-        'AMOUNT'#9'10'#9'Amount'
-        'CURRENCY'#9'13'#9'Currency'
-        'CURRENCY_RATE'#9'10'#9'Rate'
-        'UNIT_OF_MEASURE'#9'8'#9'KG')
-      IniAttributes.Delimiter = ';;'
-      IniAttributes.UnicodeIniFile = False
-      TitleColor = clBtnFace
-      FixedCols = 0
-      ShowHorzScrollBar = True
-      DataSource = AirItemSRC
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -10
-      Font.Name = 'arial'
-      Font.Style = []
-      ParentFont = False
-      TabOrder = 0
-      TitleAlignment = taLeftJustify
-      TitleFont.Charset = GREEK_CHARSET
-      TitleFont.Color = clWindowText
-      TitleFont.Height = -13
-      TitleFont.Name = 'Arial'
-      TitleFont.Style = []
-      TitleLines = 1
-      TitleButtons = False
-    end
-    object CurrencyFLD: TwwDBLookupCombo
-      Left = 599
-      Top = 405
-      Width = 98
-      Height = 21
-      DropDownAlignment = taLeftJustify
-      DataField = 'CURRENCY'
-      DataSource = AirItemSRC
-      LookupTable = CurrencySQL
-      LookupField = 'CURRENCY_CODE'
-      TabOrder = 1
-      AutoDropDown = False
-      ShowButton = True
-      PreciseEditRegion = False
-      AllowClearKey = False
-    end
-    object wwDBNavigator1: TwwDBNavigator
-      Left = 18
-      Top = 322
-      Width = 142
-      Height = 20
-      DataSource = AirItemSRC
-      RepeatInterval.InitialDelay = 500
-      RepeatInterval.Interval = 100
-      object wwDBNavigator1Prior: TwwNavButton
-        Left = 0
-        Top = 0
-        Width = 20
-        Height = 20
-        Hint = 'Move to prior record'
-        ImageIndex = -1
-        NumGlyphs = 2
-        Spacing = 4
-        Transparent = False
-        Caption = 'wwDBNavigator1Prior'
-        Enabled = False
-        DisabledTextColors.ShadeColor = clGray
-        DisabledTextColors.HighlightColor = clBtnHighlight
-        Index = 0
-        Style = nbsPrior
-      end
-      object wwDBNavigator1Next: TwwNavButton
-        Left = 20
-        Top = 0
-        Width = 21
-        Height = 20
-        Hint = 'Move to next record'
-        ImageIndex = -1
-        NumGlyphs = 2
-        Spacing = 4
-        Transparent = False
-        Caption = 'wwDBNavigator1Next'
-        Enabled = False
-        DisabledTextColors.ShadeColor = clGray
-        DisabledTextColors.HighlightColor = clBtnHighlight
-        Index = 1
-        Style = nbsNext
-      end
-      object wwDBNavigator1Insert: TwwNavButton
-        Left = 41
-        Top = 0
-        Width = 20
-        Height = 20
-        Hint = 'Insert new record'
-        ImageIndex = -1
-        NumGlyphs = 2
-        Spacing = 4
-        Transparent = False
-        Caption = 'wwDBNavigator1Insert'
-        DisabledTextColors.ShadeColor = clGray
-        DisabledTextColors.HighlightColor = clBtnHighlight
-        Index = 2
-        Style = nbsInsert
-      end
-      object wwDBNavigator1Delete: TwwNavButton
-        Left = 61
-        Top = 0
-        Width = 20
-        Height = 20
-        Hint = 'Delete current record'
-        ImageIndex = -1
-        NumGlyphs = 2
-        Spacing = 4
-        Transparent = False
-        Caption = 'wwDBNavigator1Delete'
-        Enabled = False
-        DisabledTextColors.ShadeColor = clGray
-        DisabledTextColors.HighlightColor = clBtnHighlight
-        Index = 3
-        Style = nbsDelete
-      end
-      object wwDBNavigator1Post: TwwNavButton
-        Left = 81
-        Top = 0
-        Width = 21
-        Height = 20
-        Hint = 'Post changes of current record'
-        ImageIndex = -1
-        NumGlyphs = 2
-        Spacing = 4
-        Transparent = False
-        Caption = 'wwDBNavigator1Post'
-        Enabled = False
-        DisabledTextColors.ShadeColor = clGray
-        DisabledTextColors.HighlightColor = clBtnHighlight
-        Index = 4
-        Style = nbsPost
-      end
-      object wwDBNavigator1Cancel: TwwNavButton
-        Left = 102
-        Top = 0
-        Width = 20
-        Height = 20
-        Hint = 'Cancel changes made to current record'
-        ImageIndex = -1
-        NumGlyphs = 2
-        Spacing = 4
-        Transparent = False
-        Caption = 'wwDBNavigator1Cancel'
-        Enabled = False
-        DisabledTextColors.ShadeColor = clGray
-        DisabledTextColors.HighlightColor = clBtnHighlight
-        Index = 5
-        Style = nbsCancel
-      end
-      object wwDBNavigator1Refresh: TwwNavButton
-        Left = 122
-        Top = 0
-        Width = 20
-        Height = 20
-        Hint = 'Refresh the contents of the dataset'
-        ImageIndex = -1
-        NumGlyphs = 2
-        Spacing = 4
-        Transparent = False
-        Caption = 'wwDBNavigator1Refresh'
-        DisabledTextColors.ShadeColor = clGray
-        DisabledTextColors.HighlightColor = clBtnHighlight
-        Index = 6
-        Style = nbsRefresh
-      end
-    end
     object RzPanel1: TRzPanel
       Left = 1
       Top = 1
@@ -300,7 +43,8 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
       Height = 304
       Align = alTop
       Alignment = taLeftJustify
-      TabOrder = 3
+      BorderSides = []
+      TabOrder = 0
       object GroupBox1: TGroupBox
         Left = 18
         Top = 5
@@ -1420,6 +1164,344 @@ object H_airwaybill2FRM: TH_airwaybill2FRM
           WordWrap = False
         end
       end
+    end
+    object RzPanel2: TRzPanel
+      Left = 1
+      Top = 305
+      Width = 1264
+      Height = 414
+      Align = alClient
+      BorderOuter = fsFlatRounded
+      TabOrder = 1
+      object BYCodeBTN: TSpeedButton
+        Left = 875
+        Top = 184
+        Width = 23
+        Height = 26
+        Hint = 'Find Hawb in this Mawb'
+        Flat = True
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        Glyph.Data = {
+          76010000424D7601000000000000760000002800000020000000100000000100
+          04000000000000010000130B0000130B00001000000000000000000000000000
+          800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+          FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
+          33033333333333333F7F3333333333333000333333333333F777333333333333
+          000333333333333F777333333333333000333333333333F77733333333333300
+          033333333FFF3F777333333700073B703333333F7773F77733333307777700B3
+          33333377333777733333307F8F8F7033333337F333F337F3333377F8F9F8F773
+          3333373337F3373F3333078F898F870333337F33F7FFF37F333307F99999F703
+          33337F377777337F3333078F898F8703333373F337F33373333377F8F9F8F773
+          333337F3373337F33333307F8F8F70333333373FF333F7333333330777770333
+          333333773FF77333333333370007333333333333777333333333}
+        NumGlyphs = 2
+        ParentFont = False
+      end
+      object RzPanel3: TRzPanel
+        Left = 2
+        Top = 2
+        Width = 1260
+        Height = 63
+        Align = alTop
+        BorderSides = []
+        TabOrder = 0
+        object wwDBNavigator1: TwwDBNavigator
+          Left = 0
+          Top = 27
+          Width = 142
+          Height = 20
+          DataSource = AirItemSRC
+          RepeatInterval.InitialDelay = 500
+          RepeatInterval.Interval = 100
+          object wwDBNavigator1Prior: TwwNavButton
+            Left = 0
+            Top = 0
+            Width = 20
+            Height = 20
+            Hint = 'Move to prior record'
+            ImageIndex = -1
+            NumGlyphs = 2
+            Spacing = 4
+            Transparent = False
+            Caption = 'wwDBNavigator1Prior'
+            Enabled = False
+            DisabledTextColors.ShadeColor = clGray
+            DisabledTextColors.HighlightColor = clBtnHighlight
+            Index = 0
+            Style = nbsPrior
+          end
+          object wwDBNavigator1Next: TwwNavButton
+            Left = 20
+            Top = 0
+            Width = 21
+            Height = 20
+            Hint = 'Move to next record'
+            ImageIndex = -1
+            NumGlyphs = 2
+            Spacing = 4
+            Transparent = False
+            Caption = 'wwDBNavigator1Next'
+            Enabled = False
+            DisabledTextColors.ShadeColor = clGray
+            DisabledTextColors.HighlightColor = clBtnHighlight
+            Index = 1
+            Style = nbsNext
+          end
+          object wwDBNavigator1Insert: TwwNavButton
+            Left = 41
+            Top = 0
+            Width = 20
+            Height = 20
+            Hint = 'Insert new record'
+            ImageIndex = -1
+            NumGlyphs = 2
+            Spacing = 4
+            Transparent = False
+            Caption = 'wwDBNavigator1Insert'
+            DisabledTextColors.ShadeColor = clGray
+            DisabledTextColors.HighlightColor = clBtnHighlight
+            OnClick = wwDBNavigator1InsertClick
+            Index = 2
+            Style = nbsInsert
+          end
+          object wwDBNavigator1Delete: TwwNavButton
+            Left = 61
+            Top = 0
+            Width = 20
+            Height = 20
+            Hint = 'Delete current record'
+            ImageIndex = -1
+            NumGlyphs = 2
+            Spacing = 4
+            Transparent = False
+            Caption = 'wwDBNavigator1Delete'
+            Enabled = False
+            DisabledTextColors.ShadeColor = clGray
+            DisabledTextColors.HighlightColor = clBtnHighlight
+            Index = 3
+            Style = nbsDelete
+          end
+          object wwDBNavigator1Post: TwwNavButton
+            Left = 81
+            Top = 0
+            Width = 21
+            Height = 20
+            Hint = 'Post changes of current record'
+            ImageIndex = -1
+            NumGlyphs = 2
+            Spacing = 4
+            Transparent = False
+            Caption = 'wwDBNavigator1Post'
+            Enabled = False
+            DisabledTextColors.ShadeColor = clGray
+            DisabledTextColors.HighlightColor = clBtnHighlight
+            Index = 4
+            Style = nbsPost
+          end
+          object wwDBNavigator1Cancel: TwwNavButton
+            Left = 102
+            Top = 0
+            Width = 20
+            Height = 20
+            Hint = 'Cancel changes made to current record'
+            ImageIndex = -1
+            NumGlyphs = 2
+            Spacing = 4
+            Transparent = False
+            Caption = 'wwDBNavigator1Cancel'
+            Enabled = False
+            DisabledTextColors.ShadeColor = clGray
+            DisabledTextColors.HighlightColor = clBtnHighlight
+            Index = 5
+            Style = nbsCancel
+          end
+          object wwDBNavigator1Refresh: TwwNavButton
+            Left = 122
+            Top = 0
+            Width = 20
+            Height = 20
+            Hint = 'Refresh the contents of the dataset'
+            ImageIndex = -1
+            NumGlyphs = 2
+            Spacing = 4
+            Transparent = False
+            Caption = 'wwDBNavigator1Refresh'
+            DisabledTextColors.ShadeColor = clGray
+            DisabledTextColors.HighlightColor = clBtnHighlight
+            Index = 6
+            Style = nbsRefresh
+          end
+        end
+      end
+      object wwDBGrid1: TwwDBGrid
+        Left = 2
+        Top = 65
+        Width = 839
+        Height = 347
+        ControlType.Strings = (
+          'CURRENCY;CustomEdit;CurrencyFLD')
+        PictureMasks.Strings = (
+          'TARIFF_CODE'#9'####  ## ## ##'#9'F'#9'T')
+        Selected.Strings = (
+          'SERIAL_NUMBER'#9'5'#9'S/N'#9#9
+          'SEQUENCE'#9'5'#9'SQ'#9#9
+          'WEIGHT'#9'10'#9'Weight'#9#9
+          'PIECES'#9'10'#9'Pieces'#9#9
+          'DESCRIPTION'#9'28'#9'Description'#9#9
+          'TARIFF_CODE'#9'17'#9'Tariff'#9#9
+          'AMOUNT'#9'10'#9'Amount'#9#9
+          'CURRENCY'#9'13'#9'Currency'#9#9
+          'CURRENCY_RATE'#9'10'#9'Rate'#9#9
+          'UNIT_OF_MEASURE'#9'8'#9'KG'#9#9)
+        IniAttributes.Delimiter = ';;'
+        IniAttributes.UnicodeIniFile = False
+        TitleColor = clBtnFace
+        FixedCols = 0
+        ShowHorzScrollBar = True
+        Align = alLeft
+        BorderStyle = bsNone
+        DataSource = AirItemSRC
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -10
+        Font.Name = 'arial'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 1
+        TitleAlignment = taLeftJustify
+        TitleFont.Charset = GREEK_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -13
+        TitleFont.Name = 'Arial'
+        TitleFont.Style = []
+        TitleLines = 1
+        TitleButtons = False
+        object SpeedButton2: TSpeedButton
+          Left = 768
+          Top = 6
+          Width = 23
+          Height = 26
+          Hint = 'Find Hawb in this Mawb'
+          Flat = True
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -15
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Glyph.Data = {
+            76010000424D7601000000000000760000002800000020000000100000000100
+            04000000000000010000130B0000130B00001000000000000000000000000000
+            800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+            FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
+            33033333333333333F7F3333333333333000333333333333F777333333333333
+            000333333333333F777333333333333000333333333333F77733333333333300
+            033333333FFF3F777333333700073B703333333F7773F77733333307777700B3
+            33333377333777733333307F8F8F7033333337F333F337F3333377F8F9F8F773
+            3333373337F3373F3333078F898F870333337F33F7FFF37F333307F99999F703
+            33337F377777337F3333078F898F8703333373F337F33373333377F8F9F8F773
+            333337F3373337F33333307F8F8F70333333373FF333F7333333330777770333
+            333333773FF77333333333370007333333333333777333333333}
+          NumGlyphs = 2
+          ParentFont = False
+          OnClick = SpeedButton2Click
+        end
+        object CurrencyFLD: TwwDBLookupCombo
+          Left = 18
+          Top = 60
+          Width = 98
+          Height = 21
+          DropDownAlignment = taLeftJustify
+          DataField = 'CURRENCY'
+          DataSource = AirItemSRC
+          LookupTable = CurrencySQL
+          LookupField = 'CURRENCY_CODE'
+          TabOrder = 0
+          AutoDropDown = False
+          ShowButton = True
+          PreciseEditRegion = False
+          AllowClearKey = False
+        end
+      end
+    end
+  end
+  object Panel4: TRzPanel
+    Left = 0
+    Top = 766
+    Width = 1266
+    Height = 54
+    Align = alBottom
+    BorderOuter = fsFlatRounded
+    TabOrder = 1
+    object AcceptBTN: TBitBtn
+      Left = 18
+      Top = 7
+      Width = 81
+      Height = 39
+      Caption = 'Accept'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -15
+      Font.Name = 'arial'
+      Font.Style = []
+      Glyph.Data = {
+        DE010000424DDE01000000000000760000002800000024000000120000000100
+        0400000000006801000000000000000000001000000000000000000000000000
+        80000080000000808000800000008000800080800000C0C0C000808080000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
+        3333333333333333333333330000333333333333333333333333F33333333333
+        00003333344333333333333333388F3333333333000033334224333333333333
+        338338F3333333330000333422224333333333333833338F3333333300003342
+        222224333333333383333338F3333333000034222A22224333333338F338F333
+        8F33333300003222A3A2224333333338F3838F338F33333300003A2A333A2224
+        33333338F83338F338F33333000033A33333A222433333338333338F338F3333
+        0000333333333A222433333333333338F338F33300003333333333A222433333
+        333333338F338F33000033333333333A222433333333333338F338F300003333
+        33333333A222433333333333338F338F00003333333333333A22433333333333
+        3338F38F000033333333333333A223333333333333338F830000333333333333
+        333A333333333333333338330000333333333333333333333333333333333333
+        0000}
+      NumGlyphs = 2
+      ParentFont = False
+      TabOrder = 0
+      OnClick = AcceptBTNClick
+    end
+    object CancelBTN: TBitBtn
+      Left = 120
+      Top = 6
+      Width = 87
+      Height = 39
+      Cancel = True
+      Caption = 'Cancel'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -15
+      Font.Name = 'arial'
+      Font.Style = []
+      Glyph.Data = {
+        DE010000424DDE01000000000000760000002800000024000000120000000100
+        0400000000006801000000000000000000001000000000000000000000000000
+        80000080000000808000800000008000800080800000C0C0C000808080000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
+        333333333333333333333333000033338833333333333333333F333333333333
+        0000333911833333983333333388F333333F3333000033391118333911833333
+        38F38F333F88F33300003339111183911118333338F338F3F8338F3300003333
+        911118111118333338F3338F833338F3000033333911111111833333338F3338
+        3333F8330000333333911111183333333338F333333F83330000333333311111
+        8333333333338F3333383333000033333339111183333333333338F333833333
+        00003333339111118333333333333833338F3333000033333911181118333333
+        33338333338F333300003333911183911183333333383338F338F33300003333
+        9118333911183333338F33838F338F33000033333913333391113333338FF833
+        38F338F300003333333333333919333333388333338FFF830000333333333333
+        3333333333333333333888330000333333333333333333333333333333333333
+        0000}
+      NumGlyphs = 2
+      ParentFont = False
+      TabOrder = 1
+      OnClick = CancelBTNClick
     end
   end
   object AirwaybillCDS: TIBCDataSource

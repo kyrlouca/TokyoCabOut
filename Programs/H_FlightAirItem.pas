@@ -89,7 +89,7 @@ type
     Label1: TLabel;
     wwDBEdit3: TwwDBEdit;
     Label5: TLabel;
-    wwDBEdit4: TwwDBEdit;
+    TariffFLD: TwwDBEdit;
     ProcReqFLD: TwwDBComboBox;
     Label6: TLabel;
     TableSQLPROCEDURE_REQUESTED: TStringField;
@@ -115,6 +115,7 @@ type
     TableSQLDANGEROUS_GOODS: TStringField;
     KindOfPackFLD: TwwDBComboBox;
     CurrencyFLD: TwwDBComboBox;
+    BYCodeBTN: TSpeedButton;
     procedure BitBtn2Click(Sender: TObject);
     procedure TableSQLBeforeEdit(DataSet: TDataSet);
     procedure FormActivate(Sender: TObject);
@@ -129,6 +130,7 @@ type
       FillTable: TDataSet; modified: Boolean);
     procedure Select2CloseUp(Sender: TObject; LookupTable, FillTable: TDataSet;
       modified: Boolean);
+    procedure BYCodeBTNClick(Sender: TObject);
   private
     { Private declarations }
     cn:TIBCConnection;
@@ -148,7 +150,7 @@ var
 
 implementation
 
-uses    G_generalProcs, MainForm;
+uses    G_generalProcs, MainForm, S_SelectCustomerx, S_SelectTariffY;
 
 
 {$R *.DFM}
@@ -341,6 +343,21 @@ end;
 procedure TH_FlightAirItemFRM.Nav1InsertClick(Sender: TObject);
 begin
   FirstFLD.SetFocus;
+end;
+
+procedure TH_FlightAirItemFRM.BYCodeBTNClick(Sender: TObject);
+var
+  tariff:String;
+begin
+  S_SelectTariffYFRM.InAction:='SELECT';
+  S_SelectTariffYFRM.showModal;
+  tariff:=S_SelectTariffYFRM.Out_TariffCode;
+  if (TableSQL.State in [dsBrowse]) then begin
+   TableSQL.Edit;
+//  TariffFLD.Text:=tariff;
+  end;
+  TableSQL.FieldByName('Tariff_code').AsString:=tariff;
+
 end;
 
 procedure TH_FlightAirItemFRM.CanelBTNClick(Sender: TObject);

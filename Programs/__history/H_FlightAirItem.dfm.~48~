@@ -325,8 +325,8 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
       TabOrder = 1
       VisualStyle = vsClassic
       object GroupBox1: TGroupBox
-        Left = 0
-        Top = 45
+        Left = 6
+        Top = 37
         Width = 450
         Height = 418
         Caption = 'Details'
@@ -576,7 +576,7 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
           Height = 22
           DataField = 'AMOUNT'
           DataSource = TableSRC
-          TabOrder = 9
+          TabOrder = 8
           UnboundDataType = wwDefault
           WantReturns = False
           WordWrap = False
@@ -613,7 +613,7 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
           DataField = 'TARIFF_CODE'
           DataSource = TableSRC
           Picture.PictureMask = '####  ## ## ##'
-          TabOrder = 8
+          TabOrder = 7
           UnboundDataType = wwDefault
           WantReturns = False
           WordWrap = False
@@ -628,14 +628,14 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
           MapList = False
           AllowClearKey = False
           AutoDropDown = True
+          ShowMatchText = True
           DataField = 'PROCEDURE_REQUESTED'
           DataSource = TableSRC
           DropDownCount = 8
           ItemHeight = 0
           Sorted = False
-          TabOrder = 10
+          TabOrder = 9
           UnboundDataType = wwDefault
-          TwoColumnDisplay = True
         end
         object PreviousProcFLD: TwwDBComboBox
           Left = 116
@@ -647,33 +647,14 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
           MapList = False
           AllowClearKey = False
           AutoDropDown = True
+          ShowMatchText = True
           DataField = 'PREVIOUS_PROCEDURE'
           DataSource = TableSRC
           DropDownCount = 8
           ItemHeight = 0
           Sorted = False
-          TabOrder = 11
+          TabOrder = 10
           UnboundDataType = wwDefault
-          TwoColumnDisplay = True
-        end
-        object KIndOfPackFLD: TwwDBComboBox
-          Left = 234
-          Top = 195
-          Width = 82
-          Height = 22
-          ShowButton = True
-          Style = csDropDownList
-          MapList = False
-          AllowClearKey = False
-          AutoDropDown = True
-          DataField = 'KIND_OF_PACKAGES'
-          DataSource = TableSRC
-          DropDownCount = 8
-          ItemHeight = 0
-          Sorted = False
-          TabOrder = 6
-          UnboundDataType = wwDefault
-          TwoColumnDisplay = True
         end
         object wwDBEdit5: TwwDBEdit
           Left = 116
@@ -694,7 +675,7 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
           Height = 22
           DataField = 'NUMBER_OF_PACKAGES'
           DataSource = TableSRC
-          TabOrder = 7
+          TabOrder = 6
           UnboundDataType = wwDefault
           WantReturns = False
           WordWrap = False
@@ -737,6 +718,7 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
           MapList = True
           AllowClearKey = False
           AutoDropDown = True
+          ShowMatchText = True
           DataField = 'DANGEROUS_GOODS'
           DataSource = TableSRC
           DropDownCount = 8
@@ -752,29 +734,66 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
           ItemIndex = 3
           ParentFont = False
           Sorted = False
+          TabOrder = 11
+          UnboundDataType = wwDefault
+        end
+        object KindOfPackFLD: TwwDBComboBox
+          Left = 234
+          Top = 195
+          Width = 71
+          Height = 23
+          ShowButton = True
+          Style = csDropDownList
+          MapList = True
+          AllowClearKey = False
+          AutoDropDown = True
+          ShowMatchText = True
+          Column1Width = 150
+          DataField = 'KIND_OF_PACKAGES'
+          DataSource = TableSRC
+          DropDownCount = 8
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -12
+          Font.Name = 'Arial'
+          Font.Style = []
+          ItemHeight = 0
+          Items.Strings = (
+            'A'#9'A'
+            'C'#9'C')
+          ParentFont = False
+          Sorted = True
           TabOrder = 12
           UnboundDataType = wwDefault
-          TwoColumnDisplay = True
         end
         object CurrencyFLD: TwwDBComboBox
           Left = 234
           Top = 256
-          Width = 82
-          Height = 22
+          Width = 71
+          Height = 23
           ShowButton = True
           Style = csDropDownList
-          MapList = False
+          MapList = True
           AllowClearKey = False
           AutoDropDown = True
-          CharCase = ecUpperCase
+          ShowMatchText = True
+          Column1Width = 150
           DataField = 'CURRENCY'
           DataSource = TableSRC
           DropDownCount = 8
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -12
+          Font.Name = 'Arial'
+          Font.Style = []
           ItemHeight = 0
-          Sorted = False
+          Items.Strings = (
+            'A'#9'A'
+            'C'#9'C')
+          ParentFont = False
+          Sorted = True
           TabOrder = 13
           UnboundDataType = wwDefault
-          TwoColumnDisplay = True
         end
       end
       object Panel6: TRzPanel
@@ -785,11 +804,12 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
         Align = alTop
         BorderOuter = fsNone
         TabOrder = 1
+        ExplicitTop = 5
       end
       object GroupBox2: TGroupBox
         Left = 486
         Top = 45
-        Width = 364
+        Width = 411
         Height = 332
         Caption = 'Item Certificates'
         Font.Charset = DEFAULT_CHARSET
@@ -929,19 +949,21 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
         object wwDBGrid1: TwwDBGrid
           Left = 11
           Top = 72
-          Width = 332
+          Width = 382
           Height = 156
           ControlType.Strings = (
             'COUNTRY_CODE;CustomEdit;CountryLookupFLD'
-            'CERT_CODE;CustomEdit;Select2;F')
+            'CERT_CODE;CustomEdit;Select2;F'
+            'CERT_TYPE;CheckBox;T;')
           Selected.Strings = (
-            'CERT_CODE'#9'10'#9'Code'
-            'CERT_VALUE'#9'10'#9'Value'
-            'DESCRIPTION'#9'21'#9'Desc')
+            'CERT_TYPE'#9'4'#9'Type'
+            'CERT_CODE'#9'10'#9'Doc Type'
+            'CERT_VALUE'#9'12'#9'Doc Ref'
+            'DESCRIPTION'#9'21'#9'DescrIption'#9'F')
           IniAttributes.Delimiter = ';;'
           IniAttributes.UnicodeIniFile = False
           TitleColor = clBtnFace
-          FixedCols = 0
+          FixedCols = 1
           ShowHorzScrollBar = True
           DataSource = CertItemSRC
           Font.Charset = DEFAULT_CHARSET
@@ -1379,33 +1401,32 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
         Name = 'SERIAL_NUMBER'
         Value = nil
       end>
+    object CertItemSQLCERT_TYPE: TStringField
+      DisplayLabel = 'Type'
+      DisplayWidth = 4
+      FieldName = 'CERT_TYPE'
+      FixedChar = True
+      Size = 2
+    end
     object CertItemSQLCERT_CODE: TStringField
-      DisplayLabel = 'Code'
+      DisplayLabel = 'Doc Type'
       DisplayWidth = 10
       FieldName = 'CERT_CODE'
       Size = 10
     end
     object CertItemSQLCERT_VALUE: TStringField
-      DisplayLabel = 'Value'
-      DisplayWidth = 10
+      DisplayLabel = 'Doc Ref'
+      DisplayWidth = 12
       FieldName = 'CERT_VALUE'
       FixedChar = True
       Size = 30
     end
     object CertItemSQLDESCRIPTION: TStringField
-      DisplayLabel = 'Desc'
+      DisplayLabel = 'DescrIption'
       DisplayWidth = 21
       FieldName = 'DESCRIPTION'
       FixedChar = True
       Size = 30
-    end
-    object CertItemSQLCERT_TYPE: TStringField
-      DisplayLabel = 'Type'
-      DisplayWidth = 4
-      FieldName = 'CERT_TYPE'
-      Visible = False
-      FixedChar = True
-      Size = 2
     end
     object CertItemSQLSERIAL_NUMBER: TIntegerField
       FieldName = 'SERIAL_NUMBER'
@@ -1468,8 +1489,8 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
     SQL.Strings = (
       'Select * from Country')
     ReadOnly = True
-    Left = 281
-    Top = 450
+    Left = 289
+    Top = 490
     object CountrySQLCODE_2: TStringField
       DisplayLabel = 'Code'
       DisplayWidth = 5
