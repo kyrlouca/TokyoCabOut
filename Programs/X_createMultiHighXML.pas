@@ -499,7 +499,7 @@ begin
         CreateXmlNodeNewDefault(FDoc,x2Node,'IncotermCode',criteria.Incoterms,'XXX',ntText);
 //        TBLCreateXMLNode(FDoc,x2node,'ComplementOfInfo','',FirstAirQr,'INCOTERMS',ntText);
 //TODO ask thanasis if ComplementaryCode always 1
-        CreateXMLNodeNew(FDoc,x2node,'ComplementaryCode ','1',ntText);
+        CreateXMLNodeNew(FDoc,x2node,'ComplementaryCode','1',ntText);
         CreateXMLNodeNew(FDoc,x2node,'ComplementOfInfo','LARNACA',ntText);
         CreateXMLNodeNew(FDoc,x2node,'ComplementOfInfoLNG','EN',ntText);
 
@@ -706,10 +706,10 @@ begin
        TblCreateXMLNode(FDoc,HeaderNode,'ItemNumber','',qrItem,'SEQUENCE',ntText);
        TblCreateXMLNode(FDoc,HeaderNode,'GoodsDescription','',qrItem,'DESCRIPTION',ntText);
        CreateXMLNodeNew(FDoc,HeaderNode,'GoodsDescriptionLNG','EN',ntText);
-       TblCreateXMLNode(FDoc,HeaderNode,'GrossMass','',qrItem,'WEIGHT',ntText);
+       TblCreateXMLNode(FDoc,HeaderNode,'GrossMass','',qrItem,'WEIGHT',ntText,3);
 
 
-       TblCreateXMLNode(FDoc,HeaderNode,'NetMass','',qrItem,'WEIGHT',ntText);
+       TblCreateXMLNode(FDoc,HeaderNode,'NetMass','',qrItem,'WEIGHT',ntText,3);
 
 
        if CheckSameDestination(FlightSerial,XmlRandom)='' then
@@ -946,7 +946,7 @@ begin
       qr.Open;
 
       result:='';
-      if (qr.RecordCount>1) then
+      if (qr.RecordCount=1) then
         result:=qr.FieldByName('Payment_method').AsString;
 
   finally
