@@ -594,7 +594,7 @@ str:=
      CreateXMLNodeNew(FDoc,x1node,'TransportModeAtBorder','4',ntText); //here
 
 
-     DString:= flightName +' '+ FormatDateTime('dd/mm/yyy',DateDepart);
+     DString:= flightName ;
      CreateXMLNodeNew(FDoc,x1node,'IdMeansOfTransAtDeparture',DString,ntText); //here
      CreateXMLNodeNew(FDoc,x1node,'IdMeansOfTransAtDepartureLNG','EN',ntText); //here
      CreateXMLNodeNew(FDoc,x1node,'IdMeansOfTransCrossBorder',DString,ntText); //here
