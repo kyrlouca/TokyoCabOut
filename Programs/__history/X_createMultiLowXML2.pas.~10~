@@ -35,15 +35,6 @@ type
     RecordsUpdated:Integer;
   end;
 
-  TPersonAddress=Record
-   TraderName:String;
-   StreetAndNumber:String;
-   PostalCode:string;
-   City:String;
-   CountryCode:String;
-   NADLNG:String;
-  End;
-
   TCriteriaParams= record
     DeclarationType:String;
     TypeOfDeclaration:String;
@@ -100,7 +91,6 @@ type
 
   function CreateNodeAirwayBills( Const FlightSerial:Integer;XmlRandom:Integer;const Fdoc: IXMLDocument;FatherNode:IXMLNode):Integer;
   function CreateNodeForItems( Const AirwaybillSerial:Integer; const Fdoc: IXMLDocument;FatherNode:IXMLNode):IXMLNode;
-  function CreatePersonNode( Const PersonAddress:TPersonAddress; NodeName:string; const Fdoc: IXMLDocument;FatherNode:IXMLNode):IXMLNode;
 
 
   function CreateNodeFlightCountries( Const FlightOutSerial:Integer; const Fdoc: IXMLDocument;FatherNode:IXMLNode):IXMLNode;
@@ -393,7 +383,6 @@ var
   CountCreated:Integer;
   strLowSum:String;
   strFlight:String;
-  PersonAddress:TPersonAddress;
 begin
 
     FatherNode := FDoc.AddChild('CC615A');
@@ -419,17 +408,6 @@ begin
      x2Node:=CreateXMLNodeNew(FDoc,FatherNode,'Msg615ExportCustomsOffice','',ntElement);
      CreateXMLNodeNew(FDoc,x2Node,'ReferenceNumber','CY000440',ntText);
      CreateNodeAirwayBills(FlightOutSerial,XmlRandom,Fdoc,FatherNode);
-
-
-     CreateNodeFlightCountries(FlightOutSerial,Fdoc,FatherNode);
-
-     x2Node:=CreateXMLNodeNew(FDoc,FatherNode,'Msg615LodgementCustomsOffice','',ntElement);
-     CreateXMLNodeNew(FDoc,x2Node,'ReferenceNumber','CY000440',ntText);
-
-//     PersonAddress.TraderName:=
-
-
-
      result:=1;
 
 end;
@@ -512,7 +490,6 @@ begin
      CreateXMLNodeNew(FDoc,HeaderNode,'DeclarationPlaceLNG','EN',ntText);
 
      CreateXMLNodeNew(FDoc,HeaderNode,'SpecificCircumstanceIndicator','A',ntText);
-
 
       result:=HeaderNode;
   finally
@@ -999,24 +976,6 @@ str1:=
     qr.Free;
   end;
 end;
-
-
-function TX_CreateMultiLowNewXMLFrm.CreatePersonNode( Const PersonAddress:TPersonAddress; NodeName:string; const Fdoc: IXMLDocument;FatherNode:IXMLNode):IXMLNode;
-var
-  HeaderNode,x2Node:IXMLNode;
-begin
-
-     HeaderNode :=CreateXMLNodeNew(FDoc,FatherNode,NodeName,'',ntElement);
-     CreateXMLNodeNew(FDoc,HeaderNode,'TraderName',PersonAddress.TraderName,ntText);
-     CreateXMLNodeNew(FDoc,HeaderNode,'StreetAndNumber',PersonAddress.TraderName,ntText);
-     CreateXMLNodeNew(FDoc,HeaderNode,'PostalCode',PersonAddress.PostalCode,ntText);
-     CreateXMLNodeNew(FDoc,HeaderNode,'City',PersonAddress.City,ntText);
-     CreateXMLNodeNew(FDoc,HeaderNode,'CountryCode',PersonAddress.CountryCode,ntText);
-     CreateXMLNodeNew(FDoc,HeaderNode,'NADLNG',PersonAddress.NADLNG,ntText);
-     result:= HeaderNode;
-
-end;
-
 
 
 end.
