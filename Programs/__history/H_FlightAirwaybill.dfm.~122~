@@ -127,7 +127,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
       ParentFont = False
       TabOrder = 0
       object Label1: TLabel
-        Left = 39
+        Left = 35
         Top = 22
         Width = 32
         Height = 15
@@ -142,7 +142,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         ParentFont = False
       end
       object Label2: TLabel
-        Left = 39
+        Left = 35
         Top = 53
         Width = 32
         Height = 15
@@ -157,7 +157,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         ParentFont = False
       end
       object Label3: TLabel
-        Left = 33
+        Left = 29
         Top = 145
         Width = 38
         Height = 15
@@ -172,7 +172,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         ParentFont = False
       end
       object Label7: TLabel
-        Left = 33
+        Left = 29
         Top = 170
         Width = 38
         Height = 15
@@ -187,7 +187,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         ParentFont = False
       end
       object Label4: TLabel
-        Left = 8
+        Left = 4
         Top = 191
         Width = 63
         Height = 15
@@ -202,11 +202,11 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         ParentFont = False
       end
       object Label8: TLabel
-        Left = 8
-        Top = 219
-        Width = 63
+        Left = 14
+        Top = 215
+        Width = 53
         Height = 15
-        Caption = 'Pay Method'
+        Caption = 'Pay (A, C)'
         Color = clBtnFace
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -217,7 +217,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         ParentFont = False
       end
       object Label22: TLabel
-        Left = 40
+        Left = 36
         Top = 120
         Width = 31
         Height = 15
@@ -232,7 +232,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         ParentFont = False
       end
       object Label23: TLabel
-        Left = 40
+        Left = 36
         Top = 81
         Width = 31
         Height = 15
@@ -277,7 +277,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         ParentFont = False
       end
       object Label26: TLabel
-        Left = 141
+        Left = 137
         Top = 22
         Width = 43
         Height = 15
@@ -337,7 +337,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         ParentFont = False
       end
       object SerialFLD: TwwDBEdit
-        Left = 76
+        Left = 72
         Top = 22
         Width = 59
         Height = 23
@@ -357,7 +357,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         WordWrap = False
       end
       object HawbFLD: TwwDBEdit
-        Left = 76
+        Left = 72
         Top = 50
         Width = 98
         Height = 23
@@ -377,7 +377,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         WordWrap = False
       end
       object WeightFLD: TwwDBEdit
-        Left = 76
+        Left = 72
         Top = 166
         Width = 59
         Height = 23
@@ -396,7 +396,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         WordWrap = False
       end
       object DescriptionFLD: TwwDBEdit
-        Left = 76
+        Left = 72
         Top = 191
         Width = 188
         Height = 23
@@ -415,7 +415,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         WordWrap = False
       end
       object PiecesFLD: TwwDBEdit
-        Left = 76
+        Left = 72
         Top = 141
         Width = 59
         Height = 23
@@ -434,7 +434,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         WordWrap = False
       end
       object ItemsFLD: TwwDBEdit
-        Left = 76
+        Left = 72
         Top = 116
         Width = 59
         Height = 23
@@ -453,7 +453,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         WordWrap = False
       end
       object ValueFLD: TwwDBComboBox
-        Left = 76
+        Left = 72
         Top = 77
         Width = 98
         Height = 23
@@ -508,7 +508,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         AllowClearKey = False
       end
       object AccountNumbFD: TwwDBEdit
-        Left = 190
+        Left = 186
         Top = 19
         Width = 69
         Height = 23
@@ -524,6 +524,32 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         UnboundDataType = wwDefault
         WantReturns = False
         WordWrap = False
+      end
+      object wwDBComboBox1: TwwDBComboBox
+        Left = 73
+        Top = 216
+        Width = 97
+        Height = 23
+        ShowButton = True
+        Style = csDropDownList
+        MapList = True
+        AllowClearKey = False
+        DataField = 'PAYMENT_METHOD'
+        DataSource = FlightAirwaybillCDS
+        DropDownCount = 8
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Arial'
+        Font.Style = []
+        ItemHeight = 0
+        Items.Strings = (
+          'A'#9'A'
+          'C'#9'C')
+        ParentFont = False
+        Sorted = False
+        TabOrder = 8
+        UnboundDataType = wwDefault
       end
       object DeclarationFLD: TwwDBComboBox
         Left = 3
@@ -639,35 +665,6 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         ParentFont = False
         Sorted = True
         TabOrder = 13
-        UnboundDataType = wwDefault
-      end
-      object PayMethodFLD: TwwDBComboBox
-        Left = 77
-        Top = 216
-        Width = 187
-        Height = 23
-        ShowButton = True
-        Style = csDropDownList
-        MapList = True
-        AllowClearKey = False
-        AutoDropDown = True
-        ShowMatchText = True
-        Column1Width = 150
-        DataField = 'PAYMENT_METHOD'
-        DataSource = FlightAirwaybillCDS
-        DropDownCount = 8
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -12
-        Font.Name = 'Arial'
-        Font.Style = []
-        ItemHeight = 0
-        Items.Strings = (
-          'A'#9'A'
-          'C'#9'C')
-        ParentFont = False
-        Sorted = True
-        TabOrder = 8
         UnboundDataType = wwDefault
       end
     end

@@ -1,13 +1,13 @@
 object M_countryFRM: TM_countryFRM
   Left = 352
   Top = 165
-  ClientHeight = 611
-  ClientWidth = 752
+  ClientHeight = 0
+  ClientWidth = 120
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -13
-  Font.Name = 'Arial'
+  Font.Name = 'MS Sans Serif'
   Font.Style = []
   OldCreateOrder = False
   Position = poDesktopCenter
@@ -18,7 +18,7 @@ object M_countryFRM: TM_countryFRM
   object Label5: TLabel
     Left = 55
     Top = 324
-    Width = 41
+    Width = 42
     Height = 16
     Caption = 'Weight'
   end
@@ -40,7 +40,7 @@ object M_countryFRM: TM_countryFRM
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 752
+    Width = 120
     Height = 65
     Align = alTop
     Caption = 'Edit Countries'
@@ -51,15 +51,17 @@ object M_countryFRM: TM_countryFRM
     Font.Style = [fsBold]
     ParentFont = False
     TabOrder = 0
+    ExplicitWidth = 1034
   end
   object Panel4: TPanel
     Left = 0
-    Top = 545
-    Width = 752
+    Top = -66
+    Width = 120
     Height = 66
     Align = alBottom
     TabOrder = 1
-    ExplicitTop = 459
+    ExplicitTop = 589
+    ExplicitWidth = 1034
     object AcceptBTN: TBitBtn
       Left = 22
       Top = 8
@@ -131,11 +133,10 @@ object M_countryFRM: TM_countryFRM
   object Panel3: TPanel
     Left = 0
     Top = 65
-    Width = 752
-    Height = 480
+    Width = 120
+    Height = 524
     Align = alClient
     TabOrder = 2
-    ExplicitHeight = 394
     object GroupBox1: TGroupBox
       Left = 24
       Top = 56
@@ -279,7 +280,7 @@ object M_countryFRM: TM_countryFRM
       TitleFont.Charset = DEFAULT_CHARSET
       TitleFont.Color = clWindowText
       TitleFont.Height = -13
-      TitleFont.Name = 'Arial'
+      TitleFont.Name = 'MS Sans Serif'
       TitleFont.Style = []
       TitleLines = 1
       TitleButtons = False

@@ -641,10 +641,10 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         TabOrder = 13
         UnboundDataType = wwDefault
       end
-      object PayMethodFLD: TwwDBComboBox
+      object wwDBComboBox2: TwwDBComboBox
         Left = 77
         Top = 216
-        Width = 187
+        Width = 97
         Height = 23
         ShowButton = True
         Style = csDropDownList

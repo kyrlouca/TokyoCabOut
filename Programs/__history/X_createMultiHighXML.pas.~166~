@@ -1210,26 +1210,12 @@ str3:=
 end;
 
 function TX_CreateMultiHighXmlFRM.ConvertPaymentMethod(const PaymentMethod:String):String;
-var
-  qr:TksQuery;
-  DefaultVal:String;
-  str1:string;
 begin
-
-str1:=
-' select xml_code from '
-  +'   payment_method fa'
-  +'     where'
-  +'   the_key= :key ';
-
-  qr:=TksQuery.Create(cn, str1);
-  try
-      qr.ParamByName('key').Value:= PaymentMethod;
-      qr.Open;
-      result:= qr.FieldByName('XML_Code').AsString;
-  finally
-    qr.Free;
-  end;
+  result:='D';
+  If PaymentMethod='A'       then
+     result:='Y'
+  else  if PaymentMethod='C' then
+     result:='D';
 end;
 
 

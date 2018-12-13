@@ -453,10 +453,6 @@ object MainFormFRM: TMainFormFRM
           Caption = 'Kind Of Packages'
           OnClick = KindOfPackages1Click
         end
-        object PaymentMethods1: TMenuItem
-          Caption = 'Payment Methods'
-          OnClick = PaymentMethods1Click
-        end
       end
       object Tables1: TMenuItem
         Caption = 'Tables'

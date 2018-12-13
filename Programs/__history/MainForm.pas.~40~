@@ -59,7 +59,6 @@ type
     KindOfPackages1: TMenuItem;
     N1: TMenuItem;
     N2: TMenuItem;
-    PaymentMethods1: TMenuItem;
     procedure ProductInfo1Click(Sender: TObject);
     procedure BitBtn2Click(Sender: TObject);
     procedure fcShapeBtn2Click(Sender: TObject);
@@ -98,7 +97,6 @@ type
     procedure ProcedureRequest1Click(Sender: TObject);
     procedure PreviousProcedure1Click(Sender: TObject);
     procedure KindOfPackages1Click(Sender: TObject);
-    procedure PaymentMethods1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -123,7 +121,7 @@ uses  P_Deconsolidation,
   R_ReadALLXMLFiles, X_createOneXML, M_dangerGoods, M_certificates,
   H_FlightAirwaybill, m_DeclarationType, m_TypeOfDeclaration,
   m_specificCircumstance, M_ProcedureRequest, M_PreviousProcedure,
-  m_KindOfPackages, M_PaymentMethod;
+  m_KindOfPackages;
 
 {$R *.DFM}
 
@@ -215,11 +213,6 @@ end;
 procedure TMainFormFRM.Parameters1Click(Sender: TObject);
 begin
 M_parametersFRM.ShowModal;
-end;
-
-procedure TMainFormFRM.PaymentMethods1Click(Sender: TObject);
-begin
-M_PaymentMEthodFRM.ShowModal();
 end;
 
 procedure TMainFormFRM.Certificates1Click(Sender: TObject);

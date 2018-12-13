@@ -769,7 +769,7 @@ object H_FlightAirItemFRM: TH_FlightAirItemFRM
         object KindOfPackFLD: TwwDBComboBox
           Left = 204
           Top = 195
-          Width = 129
+          Width = 71
           Height = 23
           ShowButton = True
           Style = csDropDownList

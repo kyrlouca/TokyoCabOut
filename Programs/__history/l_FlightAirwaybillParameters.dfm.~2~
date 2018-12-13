@@ -1,8 +1,8 @@
 object L_AdditionalParametersFRM: TL_AdditionalParametersFRM
   Left = 129
   Top = 89
-  ClientHeight = 471
-  ClientWidth = 701
+  ClientHeight = 0
+  ClientWidth = 120
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -40,7 +40,7 @@ object L_AdditionalParametersFRM: TL_AdditionalParametersFRM
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 701
+    Width = 120
     Height = 53
     Align = alTop
     Caption = 'Additional Parameters'
@@ -51,17 +51,17 @@ object L_AdditionalParametersFRM: TL_AdditionalParametersFRM
     Font.Style = [fsBold]
     ParentFont = False
     TabOrder = 0
-    ExplicitWidth = 120
+    ExplicitWidth = 993
   end
   object Panel4: TPanel
     Left = 0
-    Top = 417
-    Width = 701
+    Top = -54
+    Width = 120
     Height = 54
     Align = alBottom
     TabOrder = 1
-    ExplicitTop = -54
-    ExplicitWidth = 120
+    ExplicitTop = 701
+    ExplicitWidth = 993
     object BitBtn2: TBitBtn
       Left = 21
       Top = 3
@@ -95,41 +95,36 @@ object L_AdditionalParametersFRM: TL_AdditionalParametersFRM
   object Panel3: TPanel
     Left = 0
     Top = 53
-    Width = 701
-    Height = 364
+    Width = 120
+    Height = 648
     Align = alClient
     TabOrder = 2
-    ExplicitWidth = 120
-    ExplicitHeight = 94
+    ExplicitWidth = 993
     object Panel2: TPanel
       Left = 1
       Top = 1
-      Width = 699
+      Width = 991
       Height = 52
       Align = alTop
       BevelOuter = bvNone
       TabOrder = 0
-      ExplicitWidth = 118
     end
     object Panel5: TPanel
       Left = 1
       Top = 53
-      Width = 699
-      Height = 310
+      Width = 991
+      Height = 594
       Align = alClient
       BevelOuter = bvNone
       TabOrder = 1
-      ExplicitWidth = 118
-      ExplicitHeight = 40
       object Panel6: TPanel
         Left = 0
         Top = 0
         Width = 20
-        Height = 310
+        Height = 594
         Align = alLeft
         BevelOuter = bvNone
         TabOrder = 0
-        ExplicitHeight = 40
       end
       object DeleteSelectedBTN: TBitBtn
         Left = 579

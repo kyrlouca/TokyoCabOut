@@ -325,7 +325,7 @@ end;
 
 
 Procedure ksfillComboF1(Const connection: TIBCConnection; ComboBox: TwwDbComboBox;Const tableName,fieldstored,fieldShown:String; orderBy:String='';ShowEmpty:Boolean =false;ShowAll:boolean=false );
-//ShowEmpty useful to force user make a choice but have the option to select empty (Show NONe)
+//ShowEmpty useful to force user make a choice but have the option to select empty (none)
 //ShowEmpty and ShowEmpty options are usefull when printing reports and user has to select an option
 // fieldshown will show field different than the one stored
  var

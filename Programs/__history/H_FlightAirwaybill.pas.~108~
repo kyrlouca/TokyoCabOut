@@ -253,7 +253,7 @@ type
     ServiceFLD: TwwDBComboBox;
     TypeOfDeclarationFLD: TwwDBComboBox;
     CircFLD: TwwDBComboBox;
-    PayMethodFLD: TwwDBComboBox;
+    wwDBComboBox2: TwwDBComboBox;
     procedure FormActivate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure BitBtn2Click(Sender: TObject);
@@ -477,7 +477,6 @@ ksfillComboF1(cn,DeclarationFLD,'AUX_DECLARATION_TYPE','KEY','KEY','KEY',false,f
 ksfillComboF1(cn,TypeOfDeclarationFLD, 'AUX_TYPE_OF_DECLARATION','KEY','KEY','KEY',false,false);
 ksfillComboF1(cn,CircFLD,'AUX_SPECIFIC_CIRCUMSTANCE','KEY','KEY','KEY',false,false);
 ksfillComboF1(cn,ServiceFLD,'service_code','Code','Code','Code',false,false);
-ksfillComboF1(cn,PayMethodFLD,'PAYMENT_METHOD','THE_KEY','DESCRIPTION','THE_KEY',false,false);
 
 ksOpenTables([CountrySQL,currencySQL,ItinerarySQL,IncotermsSQL, GroupCertificateSQL,CertItemSQL,SelectCertSQL,Fa_ItemSQL]);
 

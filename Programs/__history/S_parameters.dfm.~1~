@@ -1,9 +1,9 @@
 object M_ParametersFRM: TM_ParametersFRM
   Left = 283
   Top = 228
+  Width = 1300
+  Height = 779
   Caption = 'M_ParametersFRM'
-  ClientHeight = 478
-  ClientWidth = 730
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -27,7 +27,7 @@ object M_ParametersFRM: TM_ParametersFRM
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 730
+    Width = 1282
     Height = 65
     Align = alTop
     Caption = 'System Parameters'
@@ -38,17 +38,14 @@ object M_ParametersFRM: TM_ParametersFRM
     Font.Style = [fsBold]
     ParentFont = False
     TabOrder = 0
-    ExplicitWidth = 120
   end
   object Panel4: TPanel
     Left = 0
-    Top = 425
-    Width = 730
+    Top = 681
+    Width = 1282
     Height = 53
     Align = alBottom
     TabOrder = 1
-    ExplicitTop = -53
-    ExplicitWidth = 120
     object BitBtn2: TBitBtn
       Left = 9
       Top = 9
@@ -60,6 +57,9 @@ object M_ParametersFRM: TM_ParametersFRM
       Font.Height = -18
       Font.Name = 'MS Sans Serif'
       Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 0
+      OnClick = BitBtn2Click
       Glyph.Data = {
         76010000424D7601000000000000760000002800000020000000100000000100
         04000000000000010000120B0000120B00001000000000000000000000000000
@@ -74,19 +74,15 @@ object M_ParametersFRM: TM_ParametersFRM
         0333337F377777337F333301111111110333337F333333337F33330111111111
         0333337FFFFFFFFF7F3333000000000003333377777777777333}
       NumGlyphs = 2
-      ParentFont = False
-      TabOrder = 0
-      OnClick = BitBtn2Click
     end
   end
   object Panel2: TPanel
     Left = 0
     Top = 65
-    Width = 730
+    Width = 1282
     Height = 48
     Align = alTop
     TabOrder = 2
-    ExplicitWidth = 120
     object wwDBNavigator1: TwwDBNavigator
       Left = 1
       Top = 9
@@ -233,10 +229,10 @@ object M_ParametersFRM: TM_ParametersFRM
       Font.Height = -18
       Font.Name = 'MS Sans Serif'
       Font.Style = [fsBold]
-      NumGlyphs = 2
       ParentFont = False
       TabOrder = 1
       OnClick = SystemSelectBTNClick
+      NumGlyphs = 2
     end
     object FileSelectBTN: TBitBtn
       Left = 438
@@ -249,10 +245,10 @@ object M_ParametersFRM: TM_ParametersFRM
       Font.Height = -18
       Font.Name = 'MS Sans Serif'
       Font.Style = [fsBold]
-      NumGlyphs = 2
       ParentFont = False
       TabOrder = 2
       OnClick = FileSelectBTNClick
+      NumGlyphs = 2
     end
     object BitBtn1: TBitBtn
       Left = 615
@@ -265,10 +261,10 @@ object M_ParametersFRM: TM_ParametersFRM
       Font.Height = -18
       Font.Name = 'MS Sans Serif'
       Font.Style = [fsBold]
-      NumGlyphs = 2
       ParentFont = False
       TabOrder = 3
       OnClick = BitBtn1Click
+      NumGlyphs = 2
     end
     object EmailBTN: TBitBtn
       Left = 791
@@ -281,21 +277,19 @@ object M_ParametersFRM: TM_ParametersFRM
       Font.Height = -18
       Font.Name = 'MS Sans Serif'
       Font.Style = [fsBold]
-      NumGlyphs = 2
       ParentFont = False
       TabOrder = 4
       OnClick = EmailBTNClick
+      NumGlyphs = 2
     end
   end
   object Panel3: TPanel
     Left = 0
     Top = 113
-    Width = 730
-    Height = 312
+    Width = 1282
+    Height = 568
     Align = alClient
     TabOrder = 3
-    ExplicitWidth = 120
-    ExplicitHeight = 568
     object GroupBox1: TGroupBox
       Left = 8
       Top = 32
@@ -444,7 +438,6 @@ object M_ParametersFRM: TM_ParametersFRM
         'STR_4'#9'20'#9'STR_4'
         'STR_5'#9'20'#9'STR_5')
       IniAttributes.Delimiter = ';;'
-      IniAttributes.UnicodeIniFile = False
       TitleColor = clBtnFace
       FixedCols = 0
       ShowHorzScrollBar = True
@@ -458,9 +451,73 @@ object M_ParametersFRM: TM_ParametersFRM
       TitleFont.Style = []
       TitleLines = 1
       TitleButtons = False
+      IndicatorColor = icBlack
+    end
+  end
+  object SystemParametersSQL: TQuery
+    BeforeInsert = SystemParametersSQLBeforeInsert
+    BeforeEdit = SystemParametersSQLBeforeEdit
+    DatabaseName = 'CabOutData'
+    RequestLive = True
+    SQL.Strings = (
+      'Select * from system_parameters where'
+      'parameter_id like '#39'S_%'#39)
+    UniDirectional = True
+    Left = 600
+    Top = 153
+    object SystemParametersSQLPARAMETER_ID: TStringField
+      DisplayLabel = 'PAR_ID'
+      DisplayWidth = 6
+      FieldName = 'PARAMETER_ID'
+      Origin = 'CLAIRDB.SYSTEM_PARAMETERS.PARAMETER_ID'
+      FixedChar = True
+    end
+    object SystemParametersSQLINT_1: TIntegerField
+      DisplayWidth = 9
+      FieldName = 'INT_1'
+      Origin = 'CLAIRDB.SYSTEM_PARAMETERS.INT_1'
+    end
+    object SystemParametersSQLSTR_1: TStringField
+      DisplayWidth = 19
+      FieldName = 'STR_1'
+      Origin = 'CLAIRDB.SYSTEM_PARAMETERS.STR_1'
+      FixedChar = True
+      Size = 30
+    end
+    object SystemParametersSQLSTR_2: TStringField
+      DisplayWidth = 20
+      FieldName = 'STR_2'
+      Origin = 'CLAIRDB.SYSTEM_PARAMETERS.STR_2'
+      FixedChar = True
+      Size = 30
+    end
+    object SystemParametersSQLSTR_3: TStringField
+      DisplayWidth = 20
+      FieldName = 'STR_3'
+      Origin = 'CLAIRDB.SYSTEM_PARAMETERS.STR_3'
+      Size = 80
+    end
+    object SystemParametersSQLSTR_4: TStringField
+      DisplayWidth = 20
+      FieldName = 'STR_4'
+      Origin = 'CLAIRDB.SYSTEM_PARAMETERS.STR_4'
+      Size = 80
+    end
+    object SystemParametersSQLSTR_5: TStringField
+      DisplayWidth = 20
+      FieldName = 'STR_5'
+      Origin = 'CLAIRDB.SYSTEM_PARAMETERS.STR_5'
+      Size = 80
+    end
+    object SystemParametersSQLINT_2: TIntegerField
+      DisplayWidth = 10
+      FieldName = 'INT_2'
+      Origin = 'CLAIRDB.SYSTEM_PARAMETERS.INT_2'
+      Visible = False
     end
   end
   object SystemParametersSRC: TDataSource
+    DataSet = SystemParametersSQL
     Left = 488
     Top = 137
   end

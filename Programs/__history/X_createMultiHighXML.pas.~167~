@@ -1222,6 +1222,7 @@ str1:=
   +'     where'
   +'   the_key= :key ';
 
+
   qr:=TksQuery.Create(cn, str1);
   try
       qr.ParamByName('key').Value:= PaymentMethod;

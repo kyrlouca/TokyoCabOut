@@ -31,6 +31,7 @@ object M_ParametersFRM: TM_ParametersFRM
     Font.Style = [fsBold]
     ParentFont = False
     TabOrder = 0
+    ExplicitWidth = 833
   end
   object Panel4: TPanel
     Left = 0
@@ -39,6 +40,8 @@ object M_ParametersFRM: TM_ParametersFRM
     Height = 53
     Align = alBottom
     TabOrder = 1
+    ExplicitTop = 509
+    ExplicitWidth = 833
     object BitBtn2: TBitBtn
       Left = 10
       Top = 5
@@ -119,6 +122,7 @@ object M_ParametersFRM: TM_ParametersFRM
     Height = 48
     Align = alTop
     TabOrder = 2
+    ExplicitWidth = 833
     object wwDBNavigator1: TwwDBNavigator
       Left = 1
       Top = 9
@@ -291,10 +295,10 @@ object M_ParametersFRM: TM_ParametersFRM
       Width = 154
       Height = 35
       Caption = 'InvoiceTransfer'
-      Font.Charset = GREEK_CHARSET
+      Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
-      Font.Height = -19
-      Font.Name = 'Arial'
+      Font.Height = -18
+      Font.Name = 'arial'
       Font.Style = []
       NumGlyphs = 2
       ParentFont = False
@@ -327,6 +331,8 @@ object M_ParametersFRM: TM_ParametersFRM
     Height = 533
     Align = alClient
     TabOrder = 3
+    ExplicitWidth = 833
+    ExplicitHeight = 396
     object GroupBox1: TGroupBox
       Left = 1
       Top = 42
@@ -335,6 +341,9 @@ object M_ParametersFRM: TM_ParametersFRM
       Align = alTop
       Caption = 'GroupBox1'
       TabOrder = 0
+      ExplicitLeft = 2
+      ExplicitTop = 36
+      ExplicitWidth = 831
       object idlbl: TLabel
         Left = 56
         Top = 54
@@ -500,6 +509,7 @@ object M_ParametersFRM: TM_ParametersFRM
       Align = alTop
       BevelOuter = bvNone
       TabOrder = 1
+      ExplicitWidth = 831
     end
     object Panel6: TPanel
       Left = 1
@@ -509,6 +519,8 @@ object M_ParametersFRM: TM_ParametersFRM
       Align = alClient
       BevelOuter = bvNone
       TabOrder = 2
+      ExplicitWidth = 831
+      ExplicitHeight = 66
       object ParamGRD: TwwDBGrid
         Left = 0
         Top = 0
@@ -549,6 +561,7 @@ object M_ParametersFRM: TM_ParametersFRM
         TitleFont.Style = []
         TitleLines = 1
         TitleButtons = False
+        ExplicitWidth = 831
       end
     end
   end
@@ -642,24 +655,30 @@ object M_ParametersFRM: TM_ParametersFRM
       DisplayWidth = 20
       FieldName = 'STR_1'
       FixedChar = True
-      Size = 300
+      Size = 30
     end
     object SystemParametersSQLSTR_4: TStringField
       DisplayWidth = 72
       FieldName = 'STR_4'
-      FixedChar = True
-      Size = 300
+      Size = 80
     end
     object SystemParametersSQLSERIAL_NUMBER: TIntegerField
+      DisplayWidth = 16
       FieldName = 'SERIAL_NUMBER'
       Visible = False
     end
     object SystemParametersSQLSYS_TYPE: TStringField
+      DisplayWidth = 10
       FieldName = 'SYS_TYPE'
       Required = True
       Visible = False
       FixedChar = True
       Size = 3
+    end
+    object SystemParametersSQLDATE_1: TDateTimeField
+      DisplayWidth = 10
+      FieldName = 'DATE_1'
+      Visible = False
     end
     object SystemParametersSQLINT_2: TIntegerField
       FieldName = 'INT_2'
@@ -669,26 +688,20 @@ object M_ParametersFRM: TM_ParametersFRM
       FieldName = 'STR_2'
       Visible = False
       FixedChar = True
-      Size = 300
+      Size = 30
     end
     object SystemParametersSQLSTR_3: TStringField
       FieldName = 'STR_3'
       Visible = False
-      FixedChar = True
-      Size = 300
+      Size = 80
     end
     object SystemParametersSQLSTR_5: TStringField
       FieldName = 'STR_5'
       Visible = False
-      FixedChar = True
-      Size = 300
+      Size = 80
     end
     object SystemParametersSQLNUM_2: TFloatField
       FieldName = 'NUM_2'
-      Visible = False
-    end
-    object SystemParametersSQLDATE_1: TDateTimeField
-      FieldName = 'DATE_1'
       Visible = False
     end
     object SystemParametersSQLDATE_2: TDateTimeField
@@ -1010,7 +1023,7 @@ object M_ParametersFRM: TM_ParametersFRM
     object StringField3: TStringField
       FieldName = 'STR_1'
       FixedChar = True
-      Size = 300
+      Size = 30
     end
     object FloatField1: TFloatField
       FieldName = 'NUM_1'
