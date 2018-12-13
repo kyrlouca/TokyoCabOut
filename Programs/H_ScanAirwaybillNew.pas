@@ -271,10 +271,12 @@ type
     procedure FlightAirwaybillGRDKeyPress(Sender: TObject; var Key: Char);
     procedure FlightAirwaybillGRDTitleButtonClick(Sender: TObject;
       AFieldName: string);
+    procedure CreateLowBTNClick(Sender: TObject);
   private
     { Private declarations }
     cn:TIBCConnection;
     Function CheckInvalidAirways(Const FlightOutSerial:integer):integer;
+    Function CheckLowInvalidAirways(Const FlightOutSerial:integer):integer;
 
         procedure UpdateHawbStatus(HawbSerial:Integer;IsHigh:String);
         function GetGroupDefault:String;
@@ -300,7 +302,7 @@ implementation
 
 uses MainForm, H_FlightAirwaybill, H_flightOut, X_createOneXML,
   X_createMultiXML, X_createMultiHighXML, G_KyrSQL, G_generalProcs,
-  H_commonProcs;
+  H_commonProcs, X_createMultiLowXML2;
 
 {$R *.DFM}
 
@@ -1109,5 +1111,62 @@ begin
 end;
 
 
+Function TH_ScanAirwaibillNewFRM.CheckLowInvalidAirways(Const FlightOutSerial:integer):integer;
+var
+  Qr:TksQuery;
+  str:String;
+begin
+  str:=
+  '  Select first 1'
+  +'     fa.serial_number '
+  +'        from'
+  +'     flight_airwaybill fa'
+  +'        where'
+  +'     fa.fk_flight_out_serial= :FlightSerial and'
+  +'     fa.value_type= ''L'' and'
+  +'     (fa.is_included_xml = ''N''  or fa.is_included_xml is null) and'
+  +'     ( '
+  +'          ( fa.declaration_type is null or fa.type_of_declaration is null or  fa.specific_circumstance is null  or  fa.incoterms is null)'
+  +'       OR ( fa.declaration_type='''' or fa.type_of_declaration ='''' or  fa.specific_circumstance=''''  or  fa.incoterms ='''')'
+  +'     )';
+
+  result:=0;
+  qr:=TksQuery.Create(cn,str);
+  try
+    qr.ParamByName('flightSerial').Value:=FlightOutSerial;
+    qr.Open;
+    result := qr.FieldByName('serial_number').AsInteger;
+    qr.Close;
+  finally
+      qr.Free;
+  end;
+end;
+
+
+
+procedure TH_ScanAirwaibillNewFRM.CreateLowBTNClick(Sender: TObject);
+var
+  fserial:Integer;
+  Count:Integer;
+  ErrorSerial:Integer;
+begin
+  Fserial:=FlightOutSQL.FieldByName('serial_number').AsInteger;
+  ErrorSerial := CheckLowInvalidAirways(Fserial);
+
+  if (ErrorSerial>0) then begin
+    ShowMessage('Airway Bill missing data: '+ intToStr(ErrorSerial));
+    exit;
+  end;
+
+  count:=X_CreateMultiLowNewXMLFrm.LoopMultiXML(Fserial);
+  if (count =0 ) then begin
+    ShowMessage('No available High Value Airwaybills found ');
+    exit;
+  end;
+
+  flightAirwaybillSQL.refresh;
+  showMessage('XML Create Finished. Number of Items:'+intTostr(Count) );
+
+end;
 
 end.

@@ -1184,10 +1184,13 @@ var
   xmlRandom:Integer;
   tempQr:TksQuery;
 begin
+//TODO  update xmlRandom and is_included_xml at the same time
 // str3 not really needed
 // let the single be updated anyway!
 
 
+//TODO *** check if the number of ITEMS is greater than 99 and do NOTHING
+// let the user know that must take out one or more items.
 
   //we are getting items actually NOT airwaybills
   str1:=

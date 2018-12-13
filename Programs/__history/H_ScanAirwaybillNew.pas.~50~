@@ -99,7 +99,6 @@ type
     Panel5: TPanel;
     wwDBEdit3: TwwDBEdit;
     FlightAirwaybillCountrySQLORDER_POSITION: TIntegerField;
-    MiddlePNL: TPanel;
     UpdateHawbTypeSQL: TIBCSQL;
     UpdateHawbTrans: TIBCTransaction;
     FlightAirwaybillSQLVALUE_TYPE: TStringField;
@@ -191,8 +190,6 @@ type
     AirwaybillOriginalSQLCONSIGNEE_DEVICE_DETAILS: TStringField;
     AirwaybillOriginalSQLINCOTERMS: TStringField;
     AirwaybillOriginalSQLIS_SCANNED: TStringField;
-    FlightAirwaybillGRD: TwwDBGrid;
-    ValueFLD: TwwDBComboBox;
     SelectRGP: TRadioGroup;
     SelectSQL: TIBCQuery;
     FlightAirwaybillSQLSERVICE_CODE: TStringField;
@@ -203,10 +200,6 @@ type
     AirwaybillOriginalSQLSERVICE_CODE: TStringField;
     AirwaybillOriginalSQLACCOUNT_NUMBER: TStringField;
     BitBtn1: TBitBtn;
-    FlagBTN: TRzBitBtn;
-    UnflagBTN: TRzBitBtn;
-    RzBitBtn1: TRzBitBtn;
-    MultiHighBTN: TRzBitBtn;
     FlightAirwaybillSQLCONSIGNEE_PREFERRED_NAME: TStringField;
     FlightAirwaybillSQLSENDER_VAT: TStringField;
     FlightAirwaybillSQLCONSIGNEE_VAT: TStringField;
@@ -214,6 +207,22 @@ type
     FlightAirwaybillSQLSPECIFIC_CIRCUMSTANCE: TStringField;
     FlightAirwaybillSQLDECLARATION_TYPE: TStringField;
     FlightAirwaybillSQLIS_INCLUDED_XML: TStringField;
+    FA_ItemSQLPROCEDURE_REQUESTED: TStringField;
+    FA_ItemSQLPREVIOUS_PROCEDURE: TStringField;
+    FA_ItemSQLKIND_OF_PACKAGES: TStringField;
+    FA_ItemSQLNUMBER_OF_PACKAGES: TIntegerField;
+    FA_ItemSQLWEIGHT_NET: TFloatField;
+    FA_ItemSQLCOUNTRY_OF_ORIGIN: TStringField;
+    FA_ItemSQLDANGEROUS_GOODS: TStringField;
+    RzPanel1: TRzPanel;
+    EditAirBTN: TBitBtn;
+    DeleteAirBTN: TBitBtn;
+    Label2: TLabel;
+    HawbInputFLD: TwwDBEdit;
+    MiddlePNL: TRzPanel;
+    FlightAirwaybillGRD: TwwDBGrid;
+    FlightAirwaybillGRDIButton: TwwIButton;
+    ValueFLD: TwwDBComboBox;
     DetailsPNL: TGroupBox;
     Label1: TLabel;
     Label5: TLabel;
@@ -226,19 +235,13 @@ type
     wwDBEdit6: TwwDBEdit;
     wwDBEdit7: TwwDBEdit;
     wwDBEdit4: TwwDBEdit;
-    FA_ItemSQLPROCEDURE_REQUESTED: TStringField;
-    FA_ItemSQLPREVIOUS_PROCEDURE: TStringField;
-    FA_ItemSQLKIND_OF_PACKAGES: TStringField;
-    FA_ItemSQLNUMBER_OF_PACKAGES: TIntegerField;
-    FA_ItemSQLWEIGHT_NET: TFloatField;
-    FA_ItemSQLCOUNTRY_OF_ORIGIN: TStringField;
-    FA_ItemSQLDANGEROUS_GOODS: TStringField;
-    FlightAirwaybillGRDIButton: TwwIButton;
-    RzPanel1: TRzPanel;
-    EditAirBTN: TBitBtn;
-    DeleteAirBTN: TBitBtn;
-    Label2: TLabel;
-    HawbInputFLD: TwwDBEdit;
+    RzPanel2: TRzPanel;
+    RzPanel3: TRzPanel;
+    FlagBTN: TRzBitBtn;
+    UnflagBTN: TRzBitBtn;
+    RzBitBtn1: TRzBitBtn;
+    MultiHighBTN: TRzBitBtn;
+    CreateLowBTN: TRzBitBtn;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure BitBtn1Click(Sender: TObject);
     procedure AirwayBillSQLAfterPost(DataSet: TDataSet);
@@ -271,6 +274,8 @@ type
   private
     { Private declarations }
     cn:TIBCConnection;
+    Function CheckInvalidAirways(Const FlightOutSerial:integer):integer;
+
         procedure UpdateHawbStatus(HawbSerial:Integer;IsHigh:String);
         function GetGroupDefault:String;
 
@@ -444,9 +449,27 @@ End;
 procedure TH_ScanAirwaibillNewFRM.MultiHighBTNClick(Sender: TObject);
 var
   fserial:Integer;
+  Count:Integer;
+  ErrorSerial:Integer;
 begin
   Fserial:=FlightOutSQL.FieldByName('serial_number').AsInteger;
-  X_CreateMultiHighXmlFRM.LoopMultiXML(Fserial);
+  ErrorSerial := CheckInvalidAirways(Fserial);
+
+  if (ErrorSerial>0) then begin
+    ShowMessage('Airway Bill missing data: '+ intToStr(ErrorSerial));
+    exit;
+  end;
+
+  count:=X_CreateMultiHighXmlFRM.LoopMultiXML(Fserial);
+  if (count =0 ) then begin
+    ShowMessage('No available High Value Airwaybills found ');
+    exit;
+  end;
+
+  flightAirwaybillSQL.refresh;
+  showMessage('XML Create Finished. Number of Items:'+intTostr(Count) );
+
+//  ShowMessage('XML files created');
 end;
 
 procedure TH_ScanAirwaibillNewFRM.DeleteFlightAirwaybill(Var SerialNumber:Integer);
@@ -1051,5 +1074,40 @@ begin
     qr.Free;
   end;
 end;
+
+
+
+Function TH_ScanAirwaibillNewFRM.CheckInvalidAirways(Const FlightOutSerial:integer):integer;
+var
+  Qr:TksQuery;
+  str:String;
+begin
+  str:=
+  '  Select first 1'
+  +'     fa.serial_number '
+  +'        from'
+  +'     flight_airwaybill fa'
+  +'        where'
+  +'     fa.fk_flight_out_serial= :FlightSerial and'
+  +'     fa.value_type= ''H'' and'
+  +'     (fa.is_included_xml = ''N''  or fa.is_included_xml is null) and'
+  +'     ( '
+  +'          ( fa.declaration_type is null or fa.type_of_declaration is null or  fa.specific_circumstance is null  or  fa.incoterms is null)'
+  +'       OR ( fa.declaration_type='''' or fa.type_of_declaration ='''' or  fa.specific_circumstance=''''  or  fa.incoterms ='''')'
+  +'     )';
+
+  result:=0;
+  qr:=TksQuery.Create(cn,str);
+  try
+    qr.ParamByName('flightSerial').Value:=FlightOutSerial;
+    qr.Open;
+    result := qr.FieldByName('serial_number').AsInteger;
+    qr.Close;
+  finally
+      qr.Free;
+  end;
+end;
+
+
 
 end.

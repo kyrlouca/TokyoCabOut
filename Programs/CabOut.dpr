@@ -49,9 +49,10 @@ uses
   m_KindOfPackages in 'm_KindOfPackages.pas' {M_KIndOfPackagesFRM},
   H_commonProcs in 'H_commonProcs.pas',
   X_createMultiLowXML in 'X_createMultiLowXML.pas' {X_CreateMultiLowXmlFRM},
-  X_createMultiHighXML in 'X_createMultiHighXML.pas' {X_CreateMultiHighXmlFRM},
   M_PaymentMethod in 'M_PaymentMethod.pas' {M_PaymentMEthodFRM},
-  M_PreviousProcedure in 'M_PreviousProcedure.pas' {M_PreviousProcedureFRM};
+  M_PreviousProcedure in 'M_PreviousProcedure.pas' {M_PreviousProcedureFRM},
+  X_createMultiLowXML2 in 'X_createMultiLowXML2.pas' {X_CreateMultiLowNewXMLFrm},
+  X_createMultiHighXML in 'X_createMultiHighXML.pas' {X_CreateMultiHighXmlFRM};
 
 {$R *.RES}
 
@@ -103,7 +104,9 @@ begin
   Application.CreateForm(TM_declarationTypeFRM, M_declarationTypeFRM);
   Application.CreateForm(TM_KIndOfPackagesFRM, M_KIndOfPackagesFRM);
   Application.CreateForm(TX_CreateMultiLowXmlFRM, X_CreateMultiLowXmlFRM);
-  Application.CreateForm(TX_CreateMultiHIghXmlFRM, X_CreateMultiHIghXmlFRM);
+  Application.CreateForm(TX_CreateMultiLowNewXMLFrm, X_CreateMultiLowNewXMLFrm);
   Application.CreateForm(TM_PreviousProcedureFRM, M_PreviousProcedureFRM);
+  Application.CreateForm(TX_CreateMultiHighXmlFRM, X_CreateMultiHighXmlFRM);
+  Application.CreateForm(TX_CreateMultiHighXmlFRM, X_CreateMultiHighXmlFRM);
   Application.Run;
 end.

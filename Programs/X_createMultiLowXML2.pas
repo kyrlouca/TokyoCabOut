@@ -6,7 +6,7 @@
 //**    CreateFlightXML   -- Select all unflagged airs on the flight
 //**      CreateXmlFileByGroup -- select  a group of airs (declarationType, TypeOfDeclaration, Circumstance,Incoterm)
 //**          -- create the xml Doc
-//**          -- Call CreateNodeOuter for the outer xml node (actually contains all the xml nodes listed below)
+//**          -- Call CreateNodeOuter for the outer xml node
 //**
 //**
 //** CreateNodeHeader  -- just the header - has the totals
@@ -19,7 +19,7 @@
 //** netxt batch will have a different XML_Random
 //////////////////////
 
-unit X_createMultiLowXML;
+unit X_createMultiLowXML2;
 
 interface
 
@@ -30,6 +30,11 @@ uses
   DBAccess, IBC, RzLabel,clipbrd,Math;
 
 type
+  THeaderResult= record
+    xmlRandom:Integer;
+    RecordsUpdated:Integer;
+  end;
+
   TCriteriaParams= record
     DeclarationType:String;
     TypeOfDeclaration:String;
@@ -37,7 +42,7 @@ type
     Incoterms:String;
   end;
 
-  TX_CreateMultiLowXmlFRM = class(TForm)
+  TX_CreateMultiLowNewXMLFrm = class(TForm)
     Button1: TButton;
     XMLDoc: TXMLDocument;
     XMLDocNew: TXMLDocument;
@@ -55,13 +60,17 @@ type
     function GetTableDefaultValue( Const TableName:String):String;
     Function TestOne(Const HawbSerial:Integer):String;
     function FindCertValue(Const CertSerial,ItemSerial:Integer):String;
-    function MarkSelectedAirwayBills(Const FlightSErial, AIrSerial:Integer; Criteria:TCriteriaParams):Integer;
+    function MarkSelectedAirwayBills(Const FlightSErial, AIrSerial:Integer; Criteria:TCriteriaParams):THeaderResult;
 
 
     function CheckSameSender( Const FlightSerial:Integer; XmlRandom:Integer):Boolean;
     function CheckSameConsignee( Const FlightSerial:Integer;XmlRandom:Integer):Boolean;
     function CheckSameDestination( Const FlightSerial:integer;XmlRandom:Integer):String;
-//    function CheckSameIncoterm( Const FlightSerial:integer;XmlRandom:Integer):Boolean;
+    function CheckSamePaymentMethod( Const FlightSerial:Integer; XmlRandom:Integer):String;
+    function ConvertPaymentMethod(const PaymentMethod:String):String;
+
+
+    //    function CheckSameIncoterm( Const FlightSerial:integer;XmlRandom:Integer):Boolean;
 
 
     Function  AddNodeAtr(FatherNode:IXMLNode;NodeName:String; NodeText:String):IXMLNode;overload;
@@ -69,11 +78,17 @@ type
     Function  AddAtrribute(HeaderNode:IXMLNode; AttributeName:String;AttributeText:String):IXMLNode;
     function CreateXmlNodeNew(XMLDoc:IXMLDocument;ElementFather:IXMLNode;ElementName:String;ElementValue:String; ElementType: TNodeType =ntElement):IXMLNode;
     function CreateXmlNodeNewDefault(XMLDoc:IXMLDocument;ElementFather:IXMLNode;ElementName:String;ElementValue:String; DefaultValue:String; ElementType: TNodeType =ntElement):IXMLNode;
-    function TBLCreateXMLNode(XMLDoc:IXMLDocument;ElementFather:IXMLNode;ElementName:String;ElementValue:String; Dataset: TDataset; FieldName:String; ElementType: TNodeType =ntElement):IXMLNode;
+//    function TBLCreateXMLNode(XMLDoc:IXMLDocument;ElementFather:IXMLNode;ElementName:String;ElementValue:String; Dataset: TDataset; FieldName:String; ElementType: TNodeType =ntElement):IXMLNode;
+
+  function TBLCreateXMLNode(XMLDoc:IXMLDocument;ElementFather:IXMLNode;ElementName:String;ElementValue:String; Dataset: TDataset; FieldName:String; ElementType: TNodeType =ntElement; digits:integer=2):IXMLNode;
 
 
-  function CreateNodeOuter( Const FlightOutSerial:Integer; XmlRandom:Integer;Criteria:TCriteriaParams;const Fdoc: IXMLDocument;FatherNode:IXMLNode):Integer;
-  function CreateNodeHeader( Const FlightOutSerial:Integer;XmlRandom:Integer;criteria:TCriteriaParams; const Fdoc: IXMLDocument;FatherNode:IXMLNode):IXMLNode;
+
+  function CreateNodeOuter( Const FlightOutSerial:Integer; XmlRandom:Integer;const Fdoc: IXMLDocument):Integer;
+
+  function CreateHeader615( Const FlightOutSerial:Integer;XmlRandom:Integer; const Fdoc: IXMLDocument;FatherNode:IXMLNode):IXMLNode;
+
+
   function CreateNodeAirwayBills( Const FlightSerial:Integer;XmlRandom:Integer;const Fdoc: IXMLDocument;FatherNode:IXMLNode):Integer;
   function CreateNodeForItems( Const AirwaybillSerial:Integer; const Fdoc: IXMLDocument;FatherNode:IXMLNode):IXMLNode;
   function CreateNodeFlightCountries( Const FlightOutSerial:Integer; const Fdoc: IXMLDocument;FatherNode:IXMLNode):IXMLNode;
@@ -90,7 +105,7 @@ type
   end;
 
 var
-  X_CreateMultiLowXmlFRM: TX_CreateMultiLowXmlFRM;
+  X_CreateMultiLowNewXMLFrm: TX_CreateMultiLowNewXMLFrm;
 
 implementation
 
@@ -98,7 +113,7 @@ implementation
 
 uses MainForm, GeneralParametersNew, G_KyrSQL, G_generalProcs;
 
-procedure TX_CreateMultiLowXmlFRM.Button1Click(Sender: TObject);
+procedure TX_CreateMultiLowNewXMLFrm.Button1Click(Sender: TObject);
 begin
 
 CreateFlightXML(IN_FlightSerial,0);
@@ -106,7 +121,7 @@ CreateFlightXML(IN_FlightSerial,0);
 end;
 
 
-Function TX_CreateMultiLowXmlFRM.TestOne(Const HawbSerial:Integer):String;
+Function TX_CreateMultiLowNewXMLFrm.TestOne(Const HawbSerial:Integer):String;
 var
   LDocument: IXMLDocument;
   DomImpl: IDOMImplementation;
@@ -125,7 +140,7 @@ begin
 
 end;
 
-function TX_CreateMultiLowXmlFRM.CreateXmlNodeNew(XMLDoc:IXMLDocument;ElementFather:IXMLNode;ElementName:String;ElementValue:String; ElementType: TNodeType =ntElement):IXMLNode;
+function TX_CreateMultiLowNewXMLFrm.CreateXmlNodeNew(XMLDoc:IXMLDocument;ElementFather:IXMLNode;ElementName:String;ElementValue:String; ElementType: TNodeType =ntElement):IXMLNode;
 Var
   HeaderNode:IXMLNode;
    CxFather:IXMLNode;
@@ -141,7 +156,7 @@ Begin
 
 End;
 
-function TX_CreateMultiLowXmlFRM.CreateXmlNodeNewDefault(XMLDoc:IXMLDocument;ElementFather:IXMLNode;ElementName:String;ElementValue:String; DefaultValue:String; ElementType: TNodeType =ntElement):IXMLNode;
+function TX_CreateMultiLowNewXMLFrm.CreateXmlNodeNewDefault(XMLDoc:IXMLDocument;ElementFather:IXMLNode;ElementName:String;ElementValue:String; DefaultValue:String; ElementType: TNodeType =ntElement):IXMLNode;
 Var
   HeaderNode:IXMLNode;
    CxFather:IXMLNode;
@@ -161,12 +176,12 @@ Begin
 End;
 
 
-procedure TX_CreateMultiLowXmlFRM.FormCreate(Sender: TObject);
+procedure TX_CreateMultiLowNewXMLFrm.FormCreate(Sender: TObject);
 begin
   cn:= MainFormFRM.CabOutData;
 end;
 
-function TX_CreateMultiLowXmlFRM.TBLCreateXMLNode(XMLDoc:IXMLDocument;ElementFather:IXMLNode;ElementName:String;ElementValue:String; Dataset: TDataset; FieldName:String; ElementType: TNodeType =ntElement):IXMLNode;
+function TX_CreateMultiLowNewXMLFrm.TBLCreateXMLNode(XMLDoc:IXMLDocument;ElementFather:IXMLNode;ElementName:String;ElementValue:String; Dataset: TDataset; FieldName:String; ElementType: TNodeType =ntElement; digits:integer=2):IXMLNode;
 Var
    CxFather:IXMLNode;
    TheElement:IXMLNode;
@@ -177,7 +192,7 @@ Begin
 //     TblCreateXMLNode(FDoc,x1node,'TotalNumberOfItems','',Dataset,'ITEMS_COUNT',ntText);
 
   If Dataset.FieldBYName(FieldName).DataType in [ftfloat,ftSingle] then begin
-       MyValue:=gpFloatToStr(dataset.FieldBYName(FieldName).AsFloat,3);
+       MyValue:=gpFloatToStr(dataset.FieldBYName(FieldName).AsFloat,digits);
 //        MyValue:=format('%.3f',[dataset.FieldBYName(FieldName).AsFloat]);
   end else begin
         MyValue:=Trim(dataset.FieldBYName(FieldName).AsString);
@@ -189,26 +204,26 @@ Begin
 End;
 
 
-Function TX_CreateMultiLowXmlFRM.AddNodeAtr(FatherNode:IXMLNode;NodeName:String; NodeText:String):IXMLNode;
+Function TX_CreateMultiLowNewXMLFrm.AddNodeAtr(FatherNode:IXMLNode;NodeName:String; NodeText:String):IXMLNode;
 Begin
   result:= FatherNode.AddChild(NodeName,-1);
   result.Attributes['VALUE']:=NodeText;
 end;
 
-Function TX_CreateMultiLowXmlFRM.AddNodeAtr(FatherNode:IXMLNode;NodeName:String; AttributeName:String;AttributeText:String):IXMLNode;
+Function TX_CreateMultiLowNewXMLFrm.AddNodeAtr(FatherNode:IXMLNode;NodeName:String; AttributeName:String;AttributeText:String):IXMLNode;
 Begin
   result:= FatherNode.AddChild(NodeName,-1);
   result.Attributes[AttributeName]:=AttributeText;
 end;
 
-Function TX_CreateMultiLowXmlFRM.AddAtrribute(HeaderNode:IXMLNode; AttributeName:String;AttributeText:String):IXMLNode;
+Function TX_CreateMultiLowNewXMLFrm.AddAtrribute(HeaderNode:IXMLNode; AttributeName:String;AttributeText:String):IXMLNode;
 Begin
   HeaderNode.Attributes[AttributeName]:=AttributeText;
   result:=HeaderNode;
 end;
 
 
-Function TX_CreateMultiLowXmlFRM.LoopMultiXML(Const FlightOutSerial:Integer):integer;
+Function TX_CreateMultiLowNewXMLFrm.LoopMultiXML(Const FlightOutSerial:Integer):integer;
 //since we can only have up to 100 (89 for safety) airs in each file we need to keep looping
 // for the same Flight
 var
@@ -225,8 +240,9 @@ begin
 end;
 
 
-Function TX_CreateMultiLowXmlFRM.CreateFlightXML(Const FlightOutSerial,AIrSerial:Integer):integer;
+Function TX_CreateMultiLowNewXMLFrm.CreateFlightXML(Const FlightOutSerial,AIrSerial:Integer):integer;
 //will create on file for each group of criteria
+//for low we don't have criteria
 var
   GroupQr:TksQuery;
   MawbId:String;
@@ -238,18 +254,19 @@ var
   Criteria:TCriteriaParams;
 
 begin
-  // group  unprinted Airs (marked) grouped by DeclationType, TypeOfDeclaration, Specs,Incoterms
+  //  grouping needed for low Not necessary
+  //  still must get less than 99
   // indinvidual airwayBills in each group will be marked later in CreateXmlFileByGroup
   // Get specified single air OR the ones not marked (is_included_xml=null)
   str:=
   '     Select'
-  +'      fa.declaration_type, fa.type_of_declaration, fa.specific_circumstance, fa.incoterms'
+  +'      fa.fk_flight_out_Serial '
   +'     from'
   +'     flight_airwaybill fa'
   +'     where'
   +'      fa.fk_flight_out_serial= :FlightSerial and'
-  +'      fa.value_type= ''H'' '
-  +'    group by     fa.declaration_type, fa.type_of_declaration, fa.specific_circumstance, fa.incoterms';
+  +'      fa.value_type= ''L'' '
+  +'    group by  fk_flight_out_serial' ;
 
    GroupQr:= TksQuery.Create(cn,str);
    if AirSerial>0 then begin
@@ -263,10 +280,10 @@ begin
    GroupQr.Open;
 
     while not GroupQr.Eof do begin
-      Criteria.DeclarationType:= GroupQr.FieldByName('Declaration_type').AsString;
-      Criteria.TypeOfDeclaration:= GroupQr.FieldByName('Type_of_Declaration').AsString;
-      Criteria.Circumstance:= GroupQr.FieldByName('specific_circumstance').AsString;
-      Criteria.Incoterms:= GroupQr.FieldByName('Incoterms').AsString;
+//      Criteria.DeclarationType:= GroupQr.FieldByName('Declaration_type').AsString;
+//      Criteria.TypeOfDeclaration:= GroupQr.FieldByName('Type_of_Declaration').AsString;
+//      Criteria.Circumstance:= GroupQr.FieldByName('specific_circumstance').AsString;
+//      Criteria.Incoterms:= GroupQr.FieldByName('Incoterms').AsString;
 
       result := CreateXmlFileByGroup(FlightOutSerial,AirSerial,criteria);
 
@@ -280,7 +297,7 @@ end;
 
 
 
-Function TX_CreateMultiLowXmlFRM.CreateXmlFileByGroup(Const FlightOutSerial,AirSErial:Integer;Criteria:TCriteriaParams):integer;
+Function TX_CreateMultiLowNewXMLFrm.CreateXmlFileByGroup(Const FlightOutSerial,AirSErial:Integer;Criteria:TCriteriaParams):integer;
 //will create on file for each set of criteria
 var
    GroupQr, Flightqr,FirstAirQr:TksQuery;
@@ -288,6 +305,7 @@ var
   FlightName:string;
   DefaultDir:String;
   val:String;
+  HeaderResult:THeaderResult;
 
 
    FDoc:IXMLDocument;
@@ -314,11 +332,11 @@ begin
   end;
 
 
-  xmlRandom:= MarkSelectedAirwayBills(FlightOutSerial,AirSerial,Criteria);
+  HEaderResult:=MarkSelectedAirwayBills(FlightOutSerial,AirSerial,Criteria);
+  xmlRandom:=HEaderResult.xmlRandom;
+  result:=HeaderResult.RecordsUpdated;
 
-  if (XmlRandom =0 ) then begin
-    result:=0;
-    ShowMessage('No available High Value Airwaybills found ');
+  if (result =0 ) then begin
     exit;
   end;
 
@@ -330,16 +348,13 @@ begin
       FDoc.Version := '1.0';
       FDoc.Encoding := 'UTF-8';
 
-      TheRoot := FDoc.AddChild('CC515A');
-      TheRoot.SetAttributeNS('xmlns', '', 'http://www.eurodyn.com' );
-//      TBLCreateXMLNode(FDoc,TheRoot,'Declaration','',GroupQr,'DECLARATION_TYPE',ntText);
 
      /////////////////////////////////////////////////////////////////////////
-       result := CreateNodeOuter(FlightOutSerial,xmlRandom,Criteria,Fdoc,TheRoot);
+     CreateNodeOuter(FlightOutSerial,xmlRandom,Fdoc);
      /////////////////////////////////////////////////////////////////////////
       strXML := StringReplace(FDoc.XML.Text, ' xmlns=""', '', [rfReplaceAll]);
       FDoc := LoadXMLData(strXML);
-      FileName:= DefaultDir+'\'+ MawbId+'_'+ FormatDateTime('yyyymmddhhmmss',now)+'_'+
+      FileName:= DefaultDir+'\'+ 'Low_'+ MawbId+'_'+ FormatDateTime('yyyymmddhhmmss',now)+'_'+
       criteria.Incoterms+'_'+ criteria.DeclarationType+'_'+Criteria.TypeOfDeclaration+'_'+Criteria.Circumstance+'_'+'.xml';
 
       if Result>0 then begin
@@ -350,12 +365,12 @@ begin
 end;
 
 
-
-function TX_CreateMultiLowXmlFRM.CreateNodeOuter( Const FlightOutSerial:Integer; XmlRandom:Integer;criteria:TCriteriaParams;const Fdoc: IXMLDocument;FatherNode:IXMLNode):Integer;
+function TX_CreateMultiLowNewXMLFrm.CreateNodeOuter( Const FlightOutSerial:Integer; XmlRandom:Integer; const Fdoc: IXMLDocument):integer;
+//TODO CreateNodeOuter does not need Criteria
 var
   Flightqr,FirstAirQr:TksQuery;
   DeclarantQr:TksQuery;
-  HeaderNode,x1Node, x2Node:IXMLNode;
+  FatherNode, HeaderNode,x1Node, x2Node:IXMLNode;
 
   val:String;
   addr:string;
@@ -364,44 +379,13 @@ var
   FlightName:string;
   DateDepart:Tdate;
   CountCreated:Integer;
+  strLowSum:String;
+  strFlight:String;
 begin
-  val:=
-  '   select'
-  +'  fo.serial_number, fo.mawb, fo.Date_depart, ft.flight_name from '
-  +'   flight_out fo  left outer join '
-  +'   flight_table ft on fo.fk_flight_table=ft.serial_number'
-  +'   where fo.serial_number = :serial';
-  FlightQr:=TksQuery.Create(cn,val);
 
-  //get the flight details of the first airbill for the header since they are all the same
-  //for single air change the SQL below
-  val:=
-  ' select first 1 * from flight_airwaybill fa where '
-  +' fa.fk_flight_out_serial = :flightSerial and '
-  +' fa.xml_random= :XmlRandom ';
-  FirstAirQR:= TksQuery.Create(cn,val);
+    FatherNode := FDoc.AddChild('CC615A');
+    FatherNode.SetAttributeNS('xmlns', '', 'http://www.eurodyn.com' );
 
-  try
-      FlightQr.ParambyName('serial').Value:= FlightOutSerial;
-      FlightQr.Open;
-      if Flightqr.IsEmpty then
-        exit;
-
-      FirstAirQr.ParambyName('FlightSerial').Value:= FlightOutSerial;
-      FirstAirQr.ParambyName('xmlRandom').Value:= XmlRandom;
-
-      FirstAirQr.Open;
-      //copy to clipboard for debugging
-//      Clipboard.AsText:=FirstAirQR.FinalSQL;
-      if FirstAirQr.IsEmpty then begin
-        //should never be empty actually
-        result:=0;
-        exit;
-      end;
-
-      MawbId:=FlightQr.FieldByName('Mawb').AsString;
-      FlightName:=FlightQr.FieldByName('Flight_name').AsString;
-      DateDepart:=FlightQr.FieldByName('date_depart').AsDateTime;
 
      CreateXMLNodeNew(FDoc,FatherNode,'SyntaxIdentifier','UNOC',ntText);
      CreateXMLNodeNew(FDoc,FatherNode,'SyntaxVersionNumber','3',ntText);
@@ -416,127 +400,39 @@ begin
      CreateXMLNodeNew(FDoc,FatherNode,'InterchangeControlReference','CY1acbae4fdb51',ntText);
      CreateXMLNodeNew(FDoc,FatherNode,'MessageIdentification','CY1acbae4fdb51',ntText);
      CreateXMLNodeNew(FDoc,FatherNode,'MessageType','CC615A',ntText);
-
-     //***Header***************************************
-     createNodeHeader(FlightOutSerial,XmlRandom,criteria, FDoc,FatherNode);
-     //*************************************************
-     //Exporter/Consignor
-     if CheckSameSender(FlightOutSerial,XmlRandom) then begin
-       //(iS IT   Msg615Exporter or Msg615Consignor???)
-       x2node:=CreateXMLNodeNew(FDoc,FatherNode,'Msg615Consignor','',ntElement);
-        TBLCreateXMLNode(FDoc,x2node,'TraderName','',FirstAirQr,'SENDER_NAME',ntText);
-       dString:=Trim(FirstAirQr.fieldbyName('SENDER_ADDRESS_1').AsString)+','+Trim(FirstAirQr.fieldbyName('SENDER_ADDRESS_2').AsString)+','+Trim(FirstAirQr.fieldbyName('SENDER_ADDRESS_3').AsString);
-       dString:=Copy(dString,1,34);
-       CreateXMLNodeNew(FDoc,x2node,'StreetAndNumber',dString,ntText);
-       TblCreateXMLNode(FDoc,x2node,'PostalCode','',FirstAirQr,'SENDER_POST_CODE',ntText);
-       TblCreateXMLNode(FDoc,x2node,'City','',FirstAirQr,'SENDER_CITY',ntText);
-       TblCreateXMLNode(FDoc,x2node,'CountryCode','',FirstAirQr,'SENDER_COUNTRY_CODE',ntText);
-       CreateXMLNodeNew(FDoc,x2node,'NADLNG','EN',ntText);
-       if FirstAirQr.FieldByName('SENDER_vat').AsString>'' then
-         TblCreateXMLNode(FDoc,x2node,'TIN','',FirstAirQr,'SENDER_VAT',ntText);
-     end;
-
-     //*************************************************
-     //Consignee
-     if CheckSameConsignee(FlightOutSerial,XmlRandom) then begin
-       x2node:=CreateXMLNodeNew(FDoc,FatherNode,'Msg615Consignee','',ntElement);
-       //error
-        TBLCreateXMLNode(FDoc,x2node,'TraderName','',FirstAirQr,'CONSIGNEE_NAME',ntText);
-       dString:=Trim(FirstAirQr.fieldbyName('CONSIGNEE_ADDRESS_1').AsString)+','+Trim(FirstAirQr.fieldbyName('CONSIGNEE_ADDRESS_2').AsString)+','+Trim(FirstAirQr.fieldbyName('CONSIGNEE_ADDRESS_3').AsString);
-       dString:=Copy(dString,1,34);
-       CreateXMLNodeNew(FDoc,x2node,'StreetAndNumber',dString,ntText);
-       TblCreateXMLNode(FDoc,x2node,'PostalCode','',FirstAirQr,'CONSIGNEE_POST_CODE',ntText);
-       TblCreateXMLNode(FDoc,x2node,'City','',FirstAirQr,'CONSIGNEE_CITY',ntText);
-       TblCreateXMLNode(FDoc,x2node,'CountryCode','',FirstAirQr,'CONSIGNEE_COUNTRY_CODE',ntText);
-       CreateXMLNodeNew(FDoc,x2node,'NADLNG','EN',ntText);
-
-       if FirstAirQr.FieldByName('CONSIGNEE_VAT').AsString>'' then
-        TblCreateXMLNode(FDoc,x2node,'TIN','',FirstAirQr,'CONSIGNEE_VAT',ntText);
-     end;
-
-     x2Node:=CreateXMLNodeNew(FDoc,FatherNode,'Msg615ExportCustomsOffice','',ntElement);
-     CreateXMLNodeNew(FDoc,x2Node,'ReferenceNumber','CY000440',ntElement);
-
-     x2Node:=CreateXMLNodeNew(FDoc,FatherNode,'Msg515ExitCustomsOffice','',ntElement);
-     CreateXMLNodeNew(FDoc,x2Node,'ReferenceNumber','CY000440',ntElement);
-
-
-     //***GoodsItems*******************************************
-     result := CreateNodeAirwayBills(FlightOutSerial,XmlRandom,Fdoc,FatherNode);
-     //** Itineraries******************************************
-     CreateNodeFlightCountries(FlightOutSerial,Fdoc,FatherNode);
-
-     //**** Declerant Trader
-     DeclarantQr:=TksQuery.Create(cn,'select first 1 * from customer cu where cu.is_dhl = ''Y'' ');
-     try
-       DeclarantQr.Open;
-       x2node:=CreateXMLNodeNew(FDoc,FatherNode,'Msg615DeclarantTrader','',ntElement);
-       TBLCreateXMLNode(FDoc,x2node,'TraderName','',DeclarantQr,'NAME',ntText);
-       dString:=Trim(DeclarantQr.fieldbyName('ADDRESS1').AsString)+','+Trim(DeclarantQr.fieldbyName('ADDRESS2').AsString)+','+Trim(DeclarantQr.fieldbyName('ADDRESS3').AsString);
-       dString:=Copy(dString,1,34);
-       CreateXMLNodeNew(FDoc,x2node,'StreetAndNumber',dString,ntText);
-       TblCreateXMLNode(FDoc,x2node,'PostalCode','',DeclarantQr,'POST_CODE',ntText);
-       TblCreateXMLNode(FDoc,x2node,'City','',DeclarantQr,'ADDRESS_CITY',ntText);
-       TblCreateXMLNode(FDoc,x2node,'CountryCode','',DeclarantQr,'ADDRESS_COUNTRY_CODE',ntText);
-       CreateXMLNodeNew(FDoc,x2node,'NADLNG','EN',ntText);
-
-       if DeclarantQr.FieldByName('VAT_ID').AsString>'' then
-         TblCreateXMLNode(FDoc,x2node,'TIN','',DeclarantQr,'VAT_ID',ntText);
-
-     finally
-       DeclarantQr.Free;
-
-     end;
-
-
-
-        x2node:=CreateXMLNodeNew(FDoc,FatherNode,'Msg615TermsDelivery','',ntElement);
-        CreateXmlNodeNewDefault(FDoc,x2Node,'IncotermCode',criteria.Incoterms,'XXX',ntText);
-
-        TBLCreateXMLNode(FDoc,x2node,'ComplementOfInfo','',FirstAirQr,'INCOTERMS',ntText);
-        CreateXMLNodeNew(FDoc,x2node,'ComplementOfInfoLNG','EN',ntText);
-
-     x2node:=CreateXMLNodeNew(FDoc,FatherNode,'Msg515DataTransaction','',ntElement);
-     CreateXMLNodeNew(FDoc,x2node,'NatureOfTransactionCode','99',ntText);
-
-     x2node:=CreateXMLNodeNew(FDoc,FatherNode,'Msg515StatusRepresentative','',ntElement);
-     CreateXMLNodeNew(FDoc,x2node,'RepresentativeStatusCode','1',ntText);
-
-      Flightqr.Close;
-    finally
-      Flightqr.Free;
-      FirstAirQr.Free;
-    end;
+     HeaderNode:=CreateHeader615(FlightOutSerial,XmlRandom,Fdoc,FatherNode);
+     result:=1;
 
 end;
 
 
 
 
-function TX_CreateMultiLowXmlFRM.CreateNodeHeader( Const FlightOutSerial:Integer;XmlRandom:Integer;criteria:TCriteriaParams; const Fdoc: IXMLDocument;FatherNode:IXMLNode):IXMLNode;
+function TX_CreateMultiLowNewXMLFrm.CreateHeader615( Const FlightOutSerial:Integer;XmlRandom:Integer; const Fdoc: IXMLDocument;FatherNode:IXMLNode):IXMLNode;
 var
-  Flightqr,TotalsQr:TksQuery;
+  FlightQr,TotalsQr:TksQuery;
   HeaderNode,x1Node:IXMLNode;
-  str:String;
+  strFLight,str:String;
   val:String;
   addr:string;
   DString:String;
   MawbId:String;
   FlightName:string;
   DateDepart:Tdate;
+  temp:string;
 //  CommonDeclarationType, CommonTypeOfDeclaration, CommonCirc, CommonIncoterm:String;
 begin
 
-  str:=
+     //Header615
+
+  strFLight:=
   '   select'
   +'  fo.serial_number, fo.mawb, fo.Date_depart, ft.flight_name'
   +'   from flight_out fo'
   +'   left outer join flight_table ft on fo.fk_flight_table=ft.serial_number'
-  +'   where fo.serial_number = :serial';
-  FlightQr:=TksQuery.Create(cn,str);
+  +'   where fo.serial_number >= :serial';
 
-//89
-str:=
+  str:=
   '   Select'
   +'    count(it.serial_number) as Cnt , sum(it.weight)as TotalWeight, sum(it.pieces) as TotalPieces from'
   +'       flight_airwaybill fa join'
@@ -545,84 +441,76 @@ str:=
   +'        fa.xml_random= :XmlRandom;';
 
 
+  result:=nil;
   TotalsQr:=TksQuery.Create(cn,str);
+  FLightQr:=TksQuery.Create(cn,strFLight);
   try
-      FlightQr.ParamByName('serial').Value:=FlightOutSerial;
-      FlightQr.Open;
-      if Flightqr.IsEmpty then
+
+      FlightQr.ParambyName('serial').Value:= FlightOutSerial;
+      flightQr.Open;
+      if FlightQr.IsEmpty then
+        exit;
+
+     TotalsQr.ParambyName('FlightSerial').Value:= FlightOutSerial;
+     TotalsQr.ParambyName('XmlRandom').Value:= XmlRandom;
+     TotalsQr.Open;
+
+     if Totalsqr.IsEmpty then
         exit;
 
 
-      TotalsQr.ParambyName('FlightSerial').Value:= FlightOutSerial;
-      TotalsQr.ParambyName('XmlRandom').Value:= XmlRandom;
-      TotalsQr.Open;
+//      FlightName:=FlightQr.FieldByName('Flight_name').AsString;
+//      DateDepart:=FlightQr.FieldByName('date_depart').AsDateTime;
 
-      if Totalsqr.IsEmpty then
-        exit;
 
-      MawbId:=FlightQr.FieldByName('Mawb').AsString;
-      FlightName:=FlightQr.FieldByName('Flight_name').AsString;
-      DateDepart:=FlightQr.FieldByName('date_depart').AsDateTime;
+     HeaderNode:=CreateXMLNodeNew(FDoc,FatherNode,'Msg615Header','',ntElement);
 
-    //********************************************
-     //Header615
-     x1node:=CreateXMLNodeNew(FDoc,FatherNode,'Msg615Header','',ntElement);
+     val:=MawbId;
+     CreateXMLNodeNew(FDoc,HeaderNode,'ReferenceNumber',val,ntText);
 
-     val:=MawbId+FormatDateTime('YYMMDDHHMMSS', now);
-     CreateXMLNodeNew(FDoc,x1node,'ReferenceNumber',val,ntText);
+     TblCreateXMLNode(FDoc,HeaderNode,'TotalNumberOfItems','',TotalsQr,'Cnt',ntText);
+     TblCreateXMLNode(FDoc,HeaderNode,'TotalNumberOfPackages','',TotalsQr,'TOTALPIECES',ntText);
+     TblCreateXMLNode(FDoc,HeaderNode,'TotalGrossMass','',TotalsQr,'TOTALWEIGHT',ntText);
 
-     TblCreateXMLNode(FDoc,x1node,'TotalNumberOfItems','',TotalsQr,'Cnt',ntText);
-     TblCreateXMLNode(FDoc,x1node,'TotalNumberOfPackages','',TotalsQr,'TOTALPIECES',ntText);
-     TblCreateXMLNode(FDoc,x1node,'TotalGrossMass','',TotalsQr,'TOTALWEIGHT',ntText);
-
-    //CustomsSubPlace
-    //TotalNumberOfItems
-    //TotalNumberOfPackages
-     CreateXMLNodeNew(FDoc,x1node,'ArrivalAgreedLocationCode','LCA',ntText);
+     CreateXMLNodeNew(FDoc,HeaderNode,'ArrivalAgreedLocationCode','LCA',ntText);
      DString:=FlightName+'-'+FormatDateTime('DD/MM/YYYY',DateDepart);
-     CreateXMLNodeNew(FDoc,x1node,'ArrivalAgreedLocOfGoods',DString,ntText); //here
-     CreateXMLNodeNew(FDoc,x1node,'ArrivalAgreedLocOfGoodsLNG','EN',ntText);
+     CreateXMLNodeNew(FDoc,HeaderNode,'ArrivalAgreedLocOfGoods',DString,ntText); //here
+     CreateXMLNodeNew(FDoc,HeaderNode,'ArrivalAgreedLocOfGoodsLNG','EN',ntText);
 
      DString:=FormatDateTime('YYYY-MM-DD"T00:00:00+03:00"',now);
-     CreateXMLNodeNew(FDoc,x1node,'DeclarationDate',DString,ntText);
+     CreateXMLNodeNew(FDoc,HeaderNode,'DeclarationDate',DString,ntText);
+     CreateXMLNodeNew(FDoc,HeaderNode,'DeclarationPlace','LARNACA',ntText);
+     CreateXMLNodeNew(FDoc,HeaderNode,'DeclarationPlaceLNG','EN',ntText);
 
-     CreateXMLNodeNew(FDoc,x1node,'DeclarationPlace','LARNACA',ntText);
-     CreateXMLNodeNew(FDoc,x1node,'DeclarationPlaceLNG','EN',ntText);
-     CreateXMLNodeNew(FDoc,x1node,'SpecificCircumstanceIndicator','A',ntText);
-     //TranspChargesMethodOfPayment
-     //CommercialReferenceNumber
+     CreateXMLNodeNew(FDoc,HeaderNode,'SpecificCircumstanceIndicator','A',ntText);
+
+      result:=HeaderNode;
+  finally
+    TotalsQR.Free;
+    FlightQr.Free;
+
+  end;
 
 
-    finally
-      Flightqr.Free;
-      TOtalsQr.Free;
-    end;
+
+
 
 end;
 
 
+function TX_CreateMultiLowNewXMLFrm.CreateNodeAirwayBills( Const FlightSerial:Integer;XmlRandom:Integer;const Fdoc: IXMLDocument;FatherNode:IXMLNode):Integer;
 
-function TX_CreateMultiLowXmlFRM.CreateNodeAirwayBills( Const FlightSerial:Integer;XmlRandom:Integer;const Fdoc: IXMLDocument;FatherNode:IXMLNode):Integer;
 var
   HeaderNode:IXMLNode;
   x2Node:IXMLNode;
   val,temp:String;
   addr:string;
   DString:String;
-  AirSerial:Integer;
-  qr, qr2: TksQuery;
-  ItemSerial:Integer;
-    i:Integer;
-//  HeaderNode:IXMLNode;
-//  x2Node:IXMLNode;
-//  val,temp:String;
-//  addr:string;
-//  DString:String;
   CurrentAirSerial:Integer;
-//  qr:TksQuery;
-//  qrItem, qrAir: TksQuery;
-//  qrCert:TksQuery;
-//  ItemSerial:Integer;
+  qr:TksQuery;
+  qrItem, qrAir: TksQuery;
+  qrCert:TksQuery;
+  ItemSerial:Integer;
 
    DefaultProcedureRequested:String;
    DefaultPreviousProcedure:String;
@@ -632,78 +520,7 @@ var
    Counter:integer;
    SameSender:Boolean;
    SameConsignee:Boolean;
-//   i:integer;
 begin
-////
-///
-///
-{
-    Qr:=TksQuery.Create(cn,' select * from FLIGHT_AIRWAYBILL where FK_FLIGHT_OUT_SERIAL= :serial');
-    try
-      i:=0;
-      Qr.ParambyName('serial').Value:= FlightSerial;
-      Qr.Open;
-//      name="Msg615ProducedDocumentsCertif"
-      while (not qr.eof) do begin
-        inc(i);
-       airSerial:=qr.FieldByName('Serial_number').AsInteger;
-       HeaderNode :=CreateXMLNodeNew(FDoc,FatherNode,'Msg615GoodsItem','',ntElement);
-
-       CreateXMLNodeNew(FDoc,HeaderNode,'ItemNumber',intToStr(i),ntText);
-       TblCreateXMLNode(FDoc,HeaderNode,'GoodsDescription','',qr,'DESCRIPTION',ntText);
-       CreateXMLNodeNew(FDoc,HeaderNode,'GoodsDescriptionLNG','EN',ntText);
-       TblCreateXMLNode(FDoc,HeaderNode,'GrossMass','',qr,'WEIGHT',ntText);
-
-       Temp:=qr.FieldByName('Payment_method').AsString;
-        If temp='A'       then DString:='Y'
-        else  if temp='C' then Dstring:='D'
-        else  Dstring:='D';
-
-       CreateXMLNodeNew(FDoc,HeaderNode,'TranspChargesMethodOfPayment',Temp,ntText);
-       TblCreateXMLNode(FDoc,HeaderNode,'CommercialReferenceNumber','',qr,'HAWB_ID',ntText);
-       CreateXMLNodeNew(FDoc,HeaderNode,'UNDangerousGoodsCode','1',ntText);
-
-       x2Node:=CreateXMLNodeNew(FDoc,HeaderNode,'Msg615ProducedDocumentsCertif',Temp,ntText);
-       CreateXMLNodeNew(FDoc,x2node,'DocumentType','N741',ntText);
-       TblCreateXMLNode(FDoc,x2node,'CommercialReferenceNumber','',qr,'HAWB_ID',ntText);
-
-
-       //Consignor
-       x2node:=CreateXMLNodeNew(FDoc,HeaderNode,'Msg615ConsignorTrader','',ntElement);
-       TBLCreateXMLNode(FDoc,x2node,'TraderName','',qr,'SENDER_NAME',ntText);
-       dString:=Trim(qr.fieldbyName('SENDER_ADDRESS_1').AsString)+','+Trim(qr.fieldbyName('SENDER_ADDRESS_2').AsString)+','+Trim(qr.fieldbyName('SENDER_ADDRESS_3').AsString);
-       dString:=Copy(dString,1,34);
-       CreateXMLNodeNew(FDoc,x2node,'StreetAndNumber',dString,ntText);
-       TblCreateXMLNode(FDoc,x2node,'PostalCode','',qr,'SENDER_POST_CODE',ntText);
-       TblCreateXMLNode(FDoc,x2node,'City','',qr,'SENDER_CITY',ntText);
-       TblCreateXMLNode(FDoc,x2node,'CountryCode','',qr,'SENDER_COUNTRY_CODE',ntText);
-       CreateXMLNodeNew(FDoc,x2node,'NADLNG','EN',ntText);
-
-       //Consignee
-       x2node:=CreateXMLNodeNew(FDoc,HeaderNode,'Msg615Consignee','',ntElement);
-       TblCreateXMLNode(FDoc,x2node,'TraderName','',qr,'CONSIGNEE_NAME',ntText);
-       dString:=Trim(qr.fieldbyName('CONSIGNEE_ADDRESS_1').AsString)+','+Trim(qr.fieldbyName('CONSIGNEE_ADDRESS_2').AsString)+','+Trim(qr.fieldbyName('CONSIGNEE_ADDRESS_3').AsString);
-       dString:=Copy(dString,1,34);
-       CreateXMLNodeNew(FDoc,x2node,'StreetAndNumber',dString,ntText);
-       TblCreateXMLNode(FDoc,x2node,'PostalCode','',qr,'CONSIGNEE_POST_CODE',ntText);
-       TblCreateXMLNode(FDoc,x2node,'City','',qr,'CONSIGNEE_CITY',ntText);
-       TblCreateXMLNode(FDoc,x2node,'CountryCode','',qr,'CONSIGNEE_COUNTRY_cODE',ntText);
-       CreateXMLNodeNew(FDoc,x2node,'NADLNG','EN',ntText);
-
-
-//       CreateNodeFlightCountries(AirSerial,Fdoc,HeaderNode);
-//       CreateNodeForItems(AirSerial,Fdoc,HeaderNode);
-
-       qr.Next;
-      end;
-      result:= FatherNOde;
-    finally
-      qr.Free;
-    end;
-
-
-///
-
 
   Counter:=0;
   DefaultProcedureRequested:=GetTableDefaultValue('AUX_PROCEDURE_REQUEST');
@@ -712,6 +529,7 @@ begin
   DefaultDangerous:=GetTableDefaultValue('AUX_DANGEROUS_GOODS');
 
 
+  //SQL will change below for single Air
   val:=
   '   Select  '
   +'    fa.serial_number as AirSerial, it.* from'
@@ -724,7 +542,6 @@ begin
   qrItem:=TksQuery.Create(cn,Val);
 
   //I did not use a Join to avoid namespace collision between item and air
-  //TODO select random here too
   val:='select * from flight_airwaybill fa where fa.serial_number= :airserial';
   qrAir:=TksQuery.Create(cn,val);
 
@@ -749,34 +566,24 @@ begin
        qrAIr.Open;
 
        HeaderNode :=CreateXMLNodeNew(FDoc,FatherNode,'Msg515GoodsItem','',ntElement);
-       ///
-       ///
-       CreateXMLNodeNew(FDoc,HeaderNode,'ItemNumber',intToStr(counter),ntText);
-       TblCreateXMLNode(FDoc,HeaderNode,'GoodsDescription','',qr,'DESCRIPTION',ntText);
-       CreateXMLNodeNew(FDoc,HeaderNode,'GoodsDescriptionLNG','EN',ntText);
-       TblCreateXMLNode(FDoc,HeaderNode,'GrossMass','',qr,'WEIGHT',ntText);
-
-       ///
-
+ //       TblCreateXMLNode(FDoc,HeaderNode,'City','',qrItem,'HAWB_ID',ntText);
 
        TblCreateXMLNode(FDoc,HeaderNode,'ItemNumber','',qrItem,'SEQUENCE',ntText);
        TblCreateXMLNode(FDoc,HeaderNode,'GoodsDescription','',qrItem,'DESCRIPTION',ntText);
        CreateXMLNodeNew(FDoc,HeaderNode,'GoodsDescriptionLNG','EN',ntText);
-       TblCreateXMLNode(FDoc,HeaderNode,'GrossMass','',qrItem,'WEIGHT',ntText);
-       TblCreateXMLNode(FDoc,HeaderNode,'NetMass','',qrItem,'WEIGHT',ntText);
+       TblCreateXMLNode(FDoc,HeaderNode,'GrossMass','',qrItem,'WEIGHT',ntText,3);
 
 
-        if CheckSameDestination(FlightSerial,XmlRandom)='' then
+       TblCreateXMLNode(FDoc,HeaderNode,'NetMass','',qrItem,'WEIGHT',ntText,3);
+
+
+       if CheckSameDestination(FlightSerial,XmlRandom)='' then
            TblCreateXMLNode(FDoc,HeaderNode,'CountryOfDestinationCode','',qrAir,'CONSIGNEE_COUNTRY_CODE',ntText);
 
-       Temp:=qrAir.FieldByName('Payment_method').AsString;
-        If temp='A'       then
-          DString:='Y'
-        else  if temp='C' then
-          Dstring:='D'
-        else
-          Dstring:='D';
-       CreateXMLNodeNew(FDoc,HeaderNode,'TranspChargesMethodOfPayment',Temp,ntText);
+       if (CheckSamePaymentMethod(FlightSerial,XMLRandom)='') then begin
+          Temp:= ConvertPaymentMethod( qrAir.FieldByName('Payment_method').AsString);
+          CreateXMLNodeNew(FDoc,HeaderNode,'TranspChargesMethodOfPayment',Temp,ntText);
+       end;
 
        temp:=trim(qrItem.FieldByName('PROCEDURE_REQUESTED').AsString);
        If temp='' then  temp:= DefaultProcedureRequested;
@@ -787,7 +594,7 @@ begin
        CreateXMLNodeNew(FDoc,HeaderNode,'PreviousProcedure',Temp,ntText);
 
        TblCreateXMLNode(FDoc,HeaderNode,'StatisticalValueCurrency','',qrItem,'CURRENCY',ntText);
-       TblCreateXMLNode(FDoc,HeaderNode,'StatisticalValueAmount','',qrItem,'AMOUNT',ntText);
+       TblCreateXMLNode(FDoc,HeaderNode,'StatisticalValueAmount','',qrItem,'AMOUNT',ntText,2);
        TblCreateXMLNode(FDoc,HeaderNode,'CountryOfOrigin','',qrItem,'COUNTRY_OF_ORIGIN',ntText);
        TblCreateXMLNode(FDoc,HeaderNode,'SupplementaryUnits','',qrItem,'PIECES',ntText);
 
@@ -887,11 +694,11 @@ begin
       qrItem.Free;
       qrAIr.Open;
     end;
-}
+
 end;
 
 
-function TX_CreateMultiLowXmlFRM.CreateNodeForItems( Const AirwaybillSerial:Integer; const Fdoc: IXMLDocument;FatherNode:IXMLNode):IXMLNode;
+function TX_CreateMultiLowNewXMLFrm.CreateNodeForItems( Const AirwaybillSerial:Integer; const Fdoc: IXMLDocument;FatherNode:IXMLNode):IXMLNode;
 var
   HeaderNode,x2Node:IXMLNode;
   val:String;
@@ -923,7 +730,7 @@ begin
 end;
 
 
-function TX_CreateMultiLowXmlFRM.CreateNodeFlightCountries( Const FlightOutSerial:Integer; const Fdoc: IXMLDocument;FatherNode:IXMLNode):IXMLNode;
+function TX_CreateMultiLowNewXMLFrm.CreateNodeFlightCountries( Const FlightOutSerial:Integer; const Fdoc: IXMLDocument;FatherNode:IXMLNode):IXMLNode;
 var
   HeaderNode,x2Node:IXMLNode;
   val:String;
@@ -958,7 +765,7 @@ val:=
 end;
 
 
-function TX_CreateMultiLowXmlFRM.GetTableDefaultValue( Const TableName:String):String;
+function TX_CreateMultiLowNewXMLFrm.GetTableDefaultValue( Const TableName:String):String;
 var
   qr:TksQuery;
   DefaultVal:String;
@@ -980,8 +787,43 @@ begin
 end;
 
 
+function TX_CreateMultiLowNewXMLFrm.CheckSamePaymentMethod( Const FlightSerial:Integer; XmlRandom:Integer):String;
+var
+  qr:TksQuery;
+  DefaultVal:String;
+  str1,str2,str3:string;
+begin
 
-function TX_CreateMultiLowXmlFRM.CheckSameSender( Const FlightSerial:Integer; XmlRandom:Integer):Boolean;
+  str1:=
+'  select count(*), Payment_method from'
+  +'   flight_airwaybill fa'
+  +'     where'
+  +'     fk_flight_out_serial= :flightSerial and'
+  +'      fa.xml_random= :XmlRandom'
+  +'      group by Payment_method' ;
+
+  qr:=TksQuery.Create(cn, str1);
+  try
+
+      qr.ParamByName('FLightSerial').Value:=FlightSerial;
+      qr.ParamByName('XmlRandom').Value := XmlRandom;
+//      Clipboard.AsText:=qr.FinalSQL;
+      qr.Open;
+
+      result:='';
+      if (qr.RecordCount=1) then
+        result:=qr.FieldByName('Payment_method').AsString;
+
+  finally
+    qr.Free;
+  end;
+
+end;
+
+
+
+
+function TX_CreateMultiLowNewXMLFrm.CheckSameSender( Const FlightSerial:Integer; XmlRandom:Integer):Boolean;
 var
   qr:TksQuery;
   DefaultVal:String;
@@ -1001,7 +843,7 @@ begin
 
       qr.ParamByName('FLightSerial').Value:=FlightSerial;
       qr.ParamByName('XmlRandom').Value := XmlRandom;
-      Clipboard.AsText:=qr.FinalSQL;
+//      Clipboard.AsText:=qr.FinalSQL;
       qr.Open;
       result:= qr.RecordCount =1 ;
   finally
@@ -1012,7 +854,7 @@ end;
 
 
 
-function TX_CreateMultiLowXmlFRM.CheckSameConsignee( Const FlightSerial:Integer;XmlRandom:Integer):Boolean;
+function TX_CreateMultiLowNewXMLFrm.CheckSameConsignee( Const FlightSerial:Integer;XmlRandom:Integer):Boolean;
 var
   qr:TksQuery;
   DefaultVal:String;
@@ -1033,7 +875,7 @@ str1:=
       qr.ParamByName('FLightSerial').Value:=FlightSerial;
       qr.ParamByName('xmlRandom').Value := XmlRandom;
       qr.Open;
-      Clipboard.AsText:=qr.FinalSQL;
+//      Clipboard.AsText:=qr.FinalSQL;
       result:= qr.RecordCount =1 ;
   finally
     qr.Free;
@@ -1044,7 +886,7 @@ end;
 
 
 
-function TX_CreateMultiLowXmlFRM.CheckSameDestination( Const FlightSerial:integer;XmlRandom:Integer):String;
+function TX_CreateMultiLowNewXMLFrm.CheckSameDestination( Const FlightSerial:integer;XmlRandom:Integer):String;
 var
   qr:TksQuery;
   DefaultVal:String;
@@ -1066,7 +908,7 @@ begin
       qr.ParamByName('FLightSerial').Value:=FlightSerial;
       qr.ParamByName('xmlRandom').Value := xmlRandom;
       qr.Open;
-      Clipboard.AsText:=qr.FinalSQL;
+//      Clipboard.AsText:=qr.FinalSQL;
       if (qr.RecordCount=1) then
         result:=qr.FieldByName('CONSIGNEE_COUNTRY_CODE').AsString
       else
@@ -1079,7 +921,7 @@ begin
 end;
 
 
-function TX_CreateMultiLowXmlFRM.FindCertValue(Const CertSerial,ItemSerial:Integer):String;
+function TX_CreateMultiLowNewXMLFrm.FindCertValue(Const CertSerial,ItemSerial:Integer):String;
 var
   qr,tblQr:TksQuery;
   temp:String;
@@ -1176,7 +1018,7 @@ end;
 
 
 
-function TX_CreateMultiLowXmlFRM.MarkSelectedAirwayBills(Const FlightSErial, AIrSerial:Integer; Criteria:TCriteriaParams):Integer;
+function TX_CreateMultiLowNewXMLFrm.MarkSelectedAirwayBills(Const FlightSErial, AIrSerial:Integer; Criteria:TCriteriaParams):THeaderResult;
 var
   sqlStr, str1,str2,str3:String;
   qr:TksQuery;
@@ -1184,62 +1026,70 @@ var
   xmlRandom:Integer;
   tempQr:TksQuery;
 begin
-// str3 not really needed
-// let the single be updated anyway!
+//TODO *** check if the number of ITEMS is greater than 99 and do NOTHING
+// let the user know that must take out one or more items.
 
-
-
-  //we are getting items actually NOT airwaybills
   str1:=
   '     update  flight_airwaybill outfa'
   +'      set outfa.xml_Random = :XmlRandom , '
   +'      outfa.is_included_xml = ''Y'' '
   +'    where  outfa.serial_number in  ('
-  +'      select first 2 fa.serial_number from'
+  +'      select first 10 fa.serial_number from'
   +'         flight_airwaybill fa left outer join'
   +'         flight_airwaybill_item it on fa.serial_number=it.fk_fa_serial'
   +'      where fa.fk_flight_out_serial= :flightSerial and'
-  +'         value_type= ''H'' and'
-  +'         (fa.is_included_xml = ''N''  or fa.is_included_xml is null) and '
-  +'         fa.declaration_type = :decType and    '
-  +'         fa.type_of_declaration = :typeDec and '
-  +'         fa.specific_circumstance = :circ and  '
-  +'         Fa.incoterms = :Incoterms '
+  +'         value_type= ''L'' and '
+  +'         (fa.is_included_xml = ''N''  or fa.is_included_xml is null) '
   +'      order by fa.hawb_id'
   +')';
 
 str2:=
 '   update flight_airwaybill outfa'
-  +'         set outfa.xml_random = :XmlRandom ,'
-  +'         outfa.is_included_xml = ''Y'' '
-  +'    where outfa.serial_number= :AirSerial';
-
-str3:=
-  'update flight_airwaybill fa '
-  +'set fa.is_included_xml = ''Y'' where  '
-  +'fa.fk_flight_out_serial = :flightSerial and '
-  +'fa.xml_random= :XmlRandom  ' ;
-
+  +'    set outfa.xml_random = :XmlRandom ,'
+  +'        fa.is_included_xml = ''Y'' where   '
+  +'   outfa.serial_number= :AirSerial';
 
 
     xmlRandom:= RandomRAnge(1,10000000);
 
     if AIrSerial>0 then    begin
-      cnt:=ksExecSQLVar(cn,Str1,[XmlRandom,airSerial]);
+      cnt:=ksExecSQLVar(cn,str2,[XmlRandom,airSerial]);
     end else begin
-//      Clipboard.AsText:=sqlStr;
-        cnt:=ksExecSQLVar(cn,str1,[XmlRandom,FlightSerial,Criteria.DeclarationType,Criteria.TypeOfDeclaration,Criteria.Circumstance, Criteria.Incoterms]);
-//        cnt:=ksExecSQLVar(cn,str3,[FlightSerial,XmlRandom]);
+        cnt:=ksExecSQLVar(cn,str1,[XmlRandom,FlightSerial]);
     end;
 
     if cnt=0 then begin
-      result:= 0;
+      result.xmlRandom:= 0;
+      result.RecordsUpdated:=0;
     end else begin
-      result:=xmlRandom;
+      result.xmlRandom:=xmlRandom;
+      result.RecordsUpdated:=cnt;
     end;
 
 end;
 
+function TX_CreateMultiLowNewXMLFrm.ConvertPaymentMethod(const PaymentMethod:String):String;
+var
+  qr:TksQuery;
+  DefaultVal:String;
+  str1:string;
+begin
+
+str1:=
+' select xml_code from '
+  +'   payment_method fa'
+  +'     where'
+  +'   the_key= :key ';
+
+  qr:=TksQuery.Create(cn, str1);
+  try
+      qr.ParamByName('key').Value:= PaymentMethod;
+      qr.Open;
+      result:= qr.FieldByName('XML_Code').AsString;
+  finally
+    qr.Free;
+  end;
+end;
 
 
 end.

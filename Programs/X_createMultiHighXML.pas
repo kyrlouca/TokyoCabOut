@@ -1161,9 +1161,13 @@ var
   xmlRandom:Integer;
   tempQr:TksQuery;
 begin
+//TODO *** check if the number of ITEMS is greater than 99 and do NOTHING
+// let the user know that must take out one or more items.
+
   str1:=
   '     update  flight_airwaybill outfa'
-  +'      set outfa.xml_Random = :XmlRandom'
+  +'      set outfa.xml_Random = :XmlRandom , '
+  +'      outfa.is_included_xml = ''Y'' '
   +'    where  outfa.serial_number in  ('
   +'      select first 10 fa.serial_number from'
   +'         flight_airwaybill fa left outer join'
@@ -1192,13 +1196,10 @@ str3:=
     xmlRandom:= RandomRAnge(1,10000000);
 
     if AIrSerial>0 then    begin
-      sqlStr:= Str2;
-      cnt:=ksExecSQLVar(cn,sqlStr,[XmlRandom,airSerial]);
+      cnt:=ksExecSQLVar(cn,str2,[XmlRandom,airSerial]);
     end else begin
-      sqlStr:= str1;
-//      Clipboard.AsText:=sqlStr;
-        cnt:=ksExecSQLVar(cn,sqlStr,[XmlRandom,FlightSerial,Criteria.DeclarationType,Criteria.TypeOfDeclaration,Criteria.Circumstance, Criteria.Incoterms]);
-        cnt:=ksExecSQLVar(cn,str3,[FlightSerial,XmlRandom]);
+        cnt:=ksExecSQLVar(cn,str1,[XmlRandom,FlightSerial,Criteria.DeclarationType,Criteria.TypeOfDeclaration,Criteria.Circumstance, Criteria.Incoterms]);
+//        cnt:=ksExecSQLVar(cn,str3,[FlightSerial,XmlRandom]);
     end;
 
     if cnt=0 then begin

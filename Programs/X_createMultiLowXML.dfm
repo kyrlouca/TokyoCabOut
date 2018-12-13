@@ -50,6 +50,7 @@ object X_CreateMultiLowXmlFRM: TX_CreateMultiLowXmlFRM
     Color = clBtnFace
     DitherColor = clWhite
     DitherStyle = wwdsDither
+    NumGlyphs = 0
     ShadeStyle = wwbsNormal
     TabOrder = 1
     TextOptions.Alignment = taCenter

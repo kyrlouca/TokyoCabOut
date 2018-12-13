@@ -1,1 +1,145 @@
-<?xml version="1.0" encoding="UTF-8"?><CC615A xmlns="http://www.eurodyn.com">   <SyntaxIdentifier>UNOC</SyntaxIdentifier>   <SyntaxVersionNumber>3</SyntaxVersionNumber>   <MessageSender>CY0000000523</MessageSender>   <SenderIdCodeQualifier>CY</SenderIdCodeQualifier>   <MessageRecipient>NECA.CY</MessageRecipient>   <RecipientIdentifCodeQualifier>CY</RecipientIdentifCodeQualifier>   <DateOfPreparation>180517</DateOfPreparation>   <TimeOfPreparation>1347</TimeOfPreparation>   <InterchangeControlReference>CY86ff8ec44868</InterchangeControlReference>   <MessageIdentification>CY86ff8ec44868</MessageIdentification>   <MessageType>CC615A</MessageType>   <Msg615Header>      <ReferenceNumber>CY20180517014705819</ReferenceNumber>      <TotalNumberOfItems>3</TotalNumberOfItems>      <TotalNumberOfPackages>4</TotalNumberOfPackages>      <TotalGrossMass>3.5</TotalGrossMass>      <ArrivalAgreedLocationCode>LCA</ArrivalAgreedLocationCode>      <ArrivalAgreedLocOfGoods>SWT7277-17/05/2018</ArrivalAgreedLocOfGoods>      <ArrivalAgreedLocOfGoodsLNG>EN</ArrivalAgreedLocOfGoodsLNG>      <DeclarationDate>2018-05-17T00:00:00+03:00</DeclarationDate>      <DeclarationPlace>LARNACA</DeclarationPlace>      <DeclarationPlaceLNG>EN</DeclarationPlaceLNG>      <SpecificCircumstanceIndicator>A</SpecificCircumstanceIndicator>   </Msg615Header>   <Msg615ExitCustomsOffice>      <ReferenceNumber>CY000440</ReferenceNumber>   </Msg615ExitCustomsOffice>   <Msg615GoodsItem>      <ItemNumber>1</ItemNumber>      <GoodsDescription>GOODS 1</GoodsDescription>      <GoodsDescriptionLNG>EN</GoodsDescriptionLNG>      <GrossMass>1</GrossMass>      <TranspChargesMethodOfPayment>Y</TranspChargesMethodOfPayment>      <CommercialReferenceNumber>1234567890</CommercialReferenceNumber>      <Msg615ConsignorTrader>         <TraderName>CONIGNOR 1</TraderName>         <StreetAndNumber>ADDRESS CNOR 1</StreetAndNumber>         <PostalCode>3095</PostalCode>         <City>LIMASSOL</City>         <CountryCode>CY</CountryCode>         <NADLNG>EN</NADLNG>      </Msg615ConsignorTrader>      <Msg615ConsigneeTrader>         <TraderName>CONSIGNEE 1</TraderName>         <StreetAndNumber>ADDRESS CNEE 1</StreetAndNumber>         <PostalCode>1234</PostalCode>         <City>DUBAI</City>         <CountryCode>AE</CountryCode>         <NADLNG>EN</NADLNG>      </Msg615ConsigneeTrader>      <Msg615Packages>         <MarksNumbersOfPackages>1234567890</MarksNumbersOfPackages>         <MarksNumbersOfPackagesLNG>EN</MarksNumbersOfPackagesLNG>         <KindOfPackages>PC</KindOfPackages>         <NumberOfPackages>1</NumberOfPackages>      </Msg615Packages>   </Msg615GoodsItem>   <Msg615GoodsItem>      <ItemNumber>2</ItemNumber>      <GoodsDescription>GOODS 2</GoodsDescription>      <GoodsDescriptionLNG>EN</GoodsDescriptionLNG>      <GrossMass>2</GrossMass>      <TranspChargesMethodOfPayment>C</TranspChargesMethodOfPayment>      <CommercialReferenceNumber>1234567899</CommercialReferenceNumber>      <Msg615ConsignorTrader>         <TraderName>CONSIGNOR 2</TraderName>         <StreetAndNumber>ADDRESS CNOR 2</StreetAndNumber>         <PostalCode>7130</PostalCode>         <City>LARNAC</City>         <CountryCode>CY</CountryCode>         <NADLNG>EN</NADLNG>      </Msg615ConsignorTrader>      <Msg615ConsigneeTrader>         <TraderName>CONSIGNEE 2</TraderName>         <StreetAndNumber>ADDRESS CNEE 2</StreetAndNumber>         <PostalCode>4567</PostalCode>         <City>OSLO</City>         <CountryCode>NO</CountryCode>         <NADLNG>EN</NADLNG>      </Msg615ConsigneeTrader>      <Msg615Packages>         <MarksNumbersOfPackages>1234567899</MarksNumbersOfPackages>         <MarksNumbersOfPackagesLNG>EN</MarksNumbersOfPackagesLNG>         <KindOfPackages>PC</KindOfPackages>         <NumberOfPackages>2</NumberOfPackages>      </Msg615Packages>   </Msg615GoodsItem>   <Msg615GoodsItem>      <ItemNumber>3</ItemNumber>      <GoodsDescription>BIOLOGICAL SUBSTANCE</GoodsDescription>      <GoodsDescriptionLNG>EN</GoodsDescriptionLNG>      <GrossMass>0.5</GrossMass>      <TranspChargesMethodOfPayment>Y</TranspChargesMethodOfPayment>      <CommercialReferenceNumber>9876543210</CommercialReferenceNumber>      <UNDangerousGoodsCode>3373</UNDangerousGoodsCode>      <Msg615ConsignorTrader>         <TraderName>CONSIGNOR 3</TraderName>         <StreetAndNumber>ADDRESS CNOR 3</StreetAndNumber>         <PostalCode>1010</PostalCode>         <City>NICOSIA</City>         <CountryCode>CY</CountryCode>         <NADLNG>EN</NADLNG>      </Msg615ConsignorTrader>      <Msg615ConsigneeTrader>         <TraderName>CONSIGNEE 3</TraderName>         <StreetAndNumber>ADDRESS CNEE 3</StreetAndNumber>         <PostalCode>55555</PostalCode>         <City>NEW YORK</City>         <CountryCode>US</CountryCode>         <NADLNG>EN</NADLNG>      </Msg615ConsigneeTrader>      <Msg615Packages>         <MarksNumbersOfPackages>9876543210</MarksNumbersOfPackages>         <MarksNumbersOfPackagesLNG>EN</MarksNumbersOfPackagesLNG>         <KindOfPackages>PC</KindOfPackages>         <NumberOfPackages>1</NumberOfPackages>      </Msg615Packages>   </Msg615GoodsItem>   <Msg615Itinerary>      <CountryOfRoutingCode>CY</CountryOfRoutingCode>   </Msg615Itinerary>   <Msg615Itinerary>      <CountryOfRoutingCode>GR</CountryOfRoutingCode>   </Msg615Itinerary>   <Msg615Itinerary>      <CountryOfRoutingCode>IT</CountryOfRoutingCode>   </Msg615Itinerary>   <Msg615Itinerary>      <CountryOfRoutingCode>DE</CountryOfRoutingCode>   </Msg615Itinerary>   <Msg615LodgementCustomsOffice>      <ReferenceNumber>CY000440</ReferenceNumber>   </Msg615LodgementCustomsOffice>   <Msg615LodgingSumDeclarationPer>      <TraderName>Operator Short name 523</TraderName>      <StreetAndNumber>Economic street 523</StreetAndNumber>      <PostalCode>19523</PostalCode>      <City>Nicosia</City>      <CountryCode>CY</CountryCode>      <NADLNG>EN</NADLNG>      <TIN>CY0000000523</TIN>   </Msg615LodgingSumDeclarationPer></CC615A>
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CC615A xmlns="http://www.eurodyn.com">
+  <SyntaxIdentifier>UNOC</SyntaxIdentifier>
+  <SyntaxVersionNumber>5</SyntaxVersionNumber>
+  <MessageSender>CY0000000523</MessageSender>
+  <SenderIdCodeQualifier>CY</SenderIdCodeQualifier>
+  <MessageRecipient>NECA.CY</MessageRecipient>
+  <RecipientIdentifCodeQualifier>CY</RecipientIdentifCodeQualifier>
+  <DateOfPreparation>180517</DateOfPreparation>
+  <TimeOfPreparation>1347</TimeOfPreparation>
+  <InterchangeControlReference>CY86ff8ec44868</InterchangeControlReference>
+  <MessageIdentification>CY86ff8ec44868</MessageIdentification>
+  <MessageType>CC615A</MessageType>
+  <Msg615Header>
+    <ReferenceNumber>CY20180517014705819</ReferenceNumber>
+    <TotalNumberOfItems>3</TotalNumberOfItems>
+    <TotalNumberOfPackages>4</TotalNumberOfPackages>
+    <TotalGrossMass>3.5</TotalGrossMass>
+    <ArrivalAgreedLocationCode>LCA</ArrivalAgreedLocationCode>
+    <ArrivalAgreedLocOfGoods>SWT7277-17/05/2018</ArrivalAgreedLocOfGoods>
+    <ArrivalAgreedLocOfGoodsLNG>EN</ArrivalAgreedLocOfGoodsLNG>
+    <DeclarationDate>2018-05-17T00:00:00+03:00</DeclarationDate>
+    <DeclarationPlace>LARNACA</DeclarationPlace>
+    <DeclarationPlaceLNG>EN</DeclarationPlaceLNG>
+    <SpecificCircumstanceIndicator>A</SpecificCircumstanceIndicator>
+  </Msg615Header>
+  <Msg615ExitCustomsOffice>
+    <ReferenceNumber>CY000440</ReferenceNumber>
+  </Msg615ExitCustomsOffice>
+  <Msg615GoodsItem>
+    <ItemNumber>1</ItemNumber>
+    <GoodsDescription>GOODS 1</GoodsDescription>
+    <GoodsDescriptionLNG>EN</GoodsDescriptionLNG>
+    <GrossMass>1</GrossMass>
+    <TranspChargesMethodOfPayment>Y</TranspChargesMethodOfPayment>
+    <CommercialReferenceNumber>1234567890</CommercialReferenceNumber>
+    <Msg615ConsignorTrader>
+      <TraderName>CONIGNOR 1</TraderName>
+      <StreetAndNumber>ADDRESS CNOR 1</StreetAndNumber>
+      <PostalCode>3095</PostalCode>
+      <City>LIMASSOL</City>
+      <CountryCode>CY</CountryCode>
+      <NADLNG>EN</NADLNG>
+    </Msg615ConsignorTrader>
+    <Msg615ConsigneeTrader>
+      <TraderName>CONSIGNEE 1</TraderName>
+      <StreetAndNumber>ADDRESS CNEE 1</StreetAndNumber>
+      <PostalCode>1234</PostalCode>
+      <City>DUBAI</City>
+      <CountryCode>AE</CountryCode>
+      <NADLNG>EN</NADLNG>
+    </Msg615ConsigneeTrader>
+    <Msg615Packages>
+      <MarksNumbersOfPackages>1234567890</MarksNumbersOfPackages>
+      <MarksNumbersOfPackagesLNG>EN</MarksNumbersOfPackagesLNG>
+      <KindOfPackages>PC</KindOfPackages>
+      <NumberOfPackages>1</NumberOfPackages>
+    </Msg615Packages>
+  </Msg615GoodsItem>
+  <Msg615GoodsItem>
+    <ItemNumber>2</ItemNumber>
+    <GoodsDescription>GOODS 2</GoodsDescription>
+    <GoodsDescriptionLNG>EN</GoodsDescriptionLNG>
+    <GrossMass>2</GrossMass>
+    <TranspChargesMethodOfPayment>C</TranspChargesMethodOfPayment>
+    <CommercialReferenceNumber>1234567899</CommercialReferenceNumber>
+    <Msg615ConsignorTrader>
+      <TraderName>CONSIGNOR 2</TraderName>
+      <StreetAndNumber>ADDRESS CNOR 2</StreetAndNumber>
+      <PostalCode>7130</PostalCode>
+      <City>LARNAC</City>
+      <CountryCode>CY</CountryCode>
+      <NADLNG>EN</NADLNG>
+    </Msg615ConsignorTrader>
+    <Msg615ConsigneeTrader>
+      <TraderName>CONSIGNEE 2</TraderName>
+      <StreetAndNumber>ADDRESS CNEE 2</StreetAndNumber>
+      <PostalCode>4567</PostalCode>
+      <City>OSLO</City>
+      <CountryCode>NO</CountryCode>
+      <NADLNG>EN</NADLNG>
+    </Msg615ConsigneeTrader>
+    <Msg615Packages>
+      <MarksNumbersOfPackages>1234567899</MarksNumbersOfPackages>
+      <MarksNumbersOfPackagesLNG>EN</MarksNumbersOfPackagesLNG>
+      <KindOfPackages>PC</KindOfPackages>
+      <NumberOfPackages>2</NumberOfPackages>
+    </Msg615Packages>
+  </Msg615GoodsItem>
+  <Msg615GoodsItem>
+    <ItemNumber>3</ItemNumber>
+    <GoodsDescription>BIOLOGICAL SUBSTANCE</GoodsDescription>
+    <GoodsDescriptionLNG>EN</GoodsDescriptionLNG>
+    <GrossMass>0.5</GrossMass>
+    <TranspChargesMethodOfPayment>Y</TranspChargesMethodOfPayment>
+    <CommercialReferenceNumber>9876543210</CommercialReferenceNumber>
+    <UNDangerousGoodsCode>3373</UNDangerousGoodsCode>
+    <Msg615ConsignorTrader>
+      <TraderName>CONSIGNOR 3</TraderName>
+      <StreetAndNumber>ADDRESS CNOR 3</StreetAndNumber>
+      <PostalCode>1010</PostalCode>
+      <City>NICOSIA</City>
+      <CountryCode>CY</CountryCode>
+      <NADLNG>EN</NADLNG>
+    </Msg615ConsignorTrader>
+    <Msg615ConsigneeTrader>
+      <TraderName>CONSIGNEE 3</TraderName>
+      <StreetAndNumber>ADDRESS CNEE 3</StreetAndNumber>
+      <PostalCode>55555</PostalCode>
+      <City>NEW YORK</City>
+      <CountryCode>US</CountryCode>
+      <NADLNG>EN</NADLNG>
+    </Msg615ConsigneeTrader>
+    <Msg615Packages>
+      <MarksNumbersOfPackages>9876543210</MarksNumbersOfPackages>
+      <MarksNumbersOfPackagesLNG>EN</MarksNumbersOfPackagesLNG>
+      <KindOfPackages>PC</KindOfPackages>
+      <NumberOfPackages>1</NumberOfPackages>
+    </Msg615Packages>
+  </Msg615GoodsItem>
+  <Msg615Itinerary>
+    <CountryOfRoutingCode>CY</CountryOfRoutingCode>
+  </Msg615Itinerary>
+  <Msg615Itinerary>
+    <CountryOfRoutingCode>GR</CountryOfRoutingCode>
+  </Msg615Itinerary>
+  <Msg615Itinerary>
+    <CountryOfRoutingCode>IT</CountryOfRoutingCode>
+  </Msg615Itinerary>
+  <Msg615Itinerary>
+    <CountryOfRoutingCode>DE</CountryOfRoutingCode>
+  </Msg615Itinerary>
+  <Msg615LodgementCustomsOffice>
+    <ReferenceNumber>CY000440</ReferenceNumber>
+  </Msg615LodgementCustomsOffice>
+  <Msg615LodgingSumDeclarationPer>
+    <TraderName>Operator Short name 523</TraderName>
+    <StreetAndNumber>Economic street 523</StreetAndNumber>
+    <PostalCode>19523</PostalCode>
+    <City>Nicosia</City>
+    <CountryCode>CY</CountryCode>
+    <NADLNG>EN</NADLNG>
+    <TIN>CY0000000523</TIN>
+  </Msg615LodgingSumDeclarationPer>
+</CC615A>

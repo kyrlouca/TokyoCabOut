@@ -262,6 +262,16 @@ begin
      CreateXMLNodeNew(FDoc,x1node,'DeclarationPlaceLNG','EN',ntText);
      CreateXMLNodeNew(FDoc,x1node,'SpecificCircumstanceIndicator','A',ntText);
 
+//     Temp:=qr.FieldByName('Payment_method').AsString;
+//     If temp='A' then
+//        DString:='Y'
+//     else if temp='C' then
+//        Dstring:='D'
+//     else
+//        Dstring:='D';
+//     CreateXMLNodeNew(FDoc,x1node,'TranspChargesMethodOfPayment',Dstring,ntText);
+//     TblCreateXMLNode(FDoc,x1node,'CommercialReferenceNumber','',Dataset,'HAWB_ID',ntText);
+
       qr.Close;
     finally
       qr.Free;

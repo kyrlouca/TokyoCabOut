@@ -1269,6 +1269,7 @@ object H_ScanAirwaibillNewFRM: TH_ScanAirwaibillNewFRM
           ParentDoubleBuffered = False
           ParentFont = False
           TabOrder = 4
+          OnClick = CreateLowBTNClick
           Glyph.Data = {
             F6060000424DF606000000000000360000002800000018000000180000000100
             180000000000C006000000000000000000000000000000000000FFFFFFFFFFFF
