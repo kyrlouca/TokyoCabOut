@@ -649,7 +649,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         ShowButton = True
         Style = csDropDownList
         MapList = True
-        AllowClearKey = False
+        AllowClearKey = True
         AutoDropDown = True
         ShowMatchText = True
         Column1Width = 150
@@ -662,9 +662,6 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
         Font.Name = 'Arial'
         Font.Style = []
         ItemHeight = 0
-        Items.Strings = (
-          'A'#9'A'
-          'C'#9'C')
         ParentFont = False
         Sorted = True
         TabOrder = 8
@@ -2147,7 +2144,7 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
     MasterSource = FlightAirwaybillCDS
     Active = True
     OnPostError = FairwaybillCountrySQLPostError
-    Left = 376
+    Left = 360
     Top = 225
     ParamData = <
       item
@@ -2775,6 +2772,17 @@ object H_FlightairwaybillFRM: TH_FlightairwaybillFRM
     object FlightAirwaybillSQLSPECIFIC_CIRCUMSTANCE: TStringField
       FieldName = 'SPECIFIC_CIRCUMSTANCE'
       Size = 10
+    end
+    object FlightAirwaybillSQLIS_INCLUDED_XML: TStringField
+      FieldName = 'IS_INCLUDED_XML'
+      FixedChar = True
+      Size = 1
+    end
+    object FlightAirwaybillSQLTIMESTAMP_XML: TDateTimeField
+      FieldName = 'TIMESTAMP_XML'
+    end
+    object FlightAirwaybillSQLXML_RANDOM: TIntegerField
+      FieldName = 'XML_RANDOM'
     end
   end
   object FA_ItemSQL: TIBCQuery

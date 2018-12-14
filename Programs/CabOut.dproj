@@ -192,10 +192,6 @@
             <Form>X_CreateOneXmlFRM</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="X_createMultiXML.pas">
-            <Form>X_CreateMultiXmlFRM</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
         <DCCReference Include="M_dangerGoods.pas">
             <Form>M_DangerGoodsFRM</Form>
             <FormType>dfm</FormType>
@@ -241,10 +237,6 @@
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="H_commonProcs.pas"/>
-        <DCCReference Include="X_createMultiLowXML.pas">
-            <Form>X_CreateMultiLowXmlFRM</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
         <DCCReference Include="M_PaymentMethod.pas">
             <Form>M_PaymentMEthodFRM</Form>
             <FormType>dfm</FormType>
@@ -253,12 +245,12 @@
             <Form>M_PreviousProcedureFRM</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="X_createMultiLowXML2.pas">
-            <Form>X_CreateMultiLowNewXMLFrm</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
         <DCCReference Include="X_createMultiHighXML.pas">
             <Form>X_CreateMultiHighXmlFRM</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="X_CreateMultiLowNewXML.pas">
+            <Form>X_CreateMultiLowNewXMLFrm</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <None Include="CabOut.todo">

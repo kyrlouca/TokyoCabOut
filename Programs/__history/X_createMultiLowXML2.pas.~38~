@@ -386,7 +386,6 @@ var
   PersonAddress:TPersonAddress;
   DhlSerial:integer;
   qr:TksQuery;
-  temp:string;
 begin
 
   FatherNode := FDoc.AddChild('CC615A');
@@ -571,7 +570,7 @@ begin
       TblCreateXMLNode(FDoc, HeaderNode, 'GrossMass', '', qr, 'WEIGHT', ntText);
 
        if (CheckSamePaymentMethod(FlightSerial,XMLRandom)='') then begin
-          Temp:= ConvertPaymentMethod( qr.FieldByName('Payment_method').AsString);
+          Temp:= ConvertPaymentMethod( qrAir.FieldByName('Payment_method').AsString);
           CreateXMLNodeNew(FDoc,HeaderNode,'TranspChargesMethodOfPayment',Temp,ntText);
        end;
 

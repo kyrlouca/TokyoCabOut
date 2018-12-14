@@ -345,7 +345,7 @@ begin
      /////////////////////////////////////////////////////////////////////////
       strXML := StringReplace(FDoc.XML.Text, ' xmlns=""', '', [rfReplaceAll]);
       FDoc := LoadXMLData(strXML);
-      FileName:= DefaultDir+'\'+ MawbId+'_'+ FormatDateTime('yyyymmddhhmmss',now)+'_'+
+      FileName:= DefaultDir+'\High_'+ MawbId+'_'+ FormatDateTime('yyyymmddhhmmss',now)+'_'+
       criteria.Incoterms+'_'+ criteria.DeclarationType+'_'+Criteria.TypeOfDeclaration+'_'+Criteria.Circumstance+'_'+'.xml';
 
       if Result>0 then begin

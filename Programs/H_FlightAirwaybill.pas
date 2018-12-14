@@ -254,6 +254,9 @@ type
     TypeOfDeclarationFLD: TwwDBComboBox;
     CircFLD: TwwDBComboBox;
     PayMethodFLD: TwwDBComboBox;
+    FlightAirwaybillSQLIS_INCLUDED_XML: TStringField;
+    FlightAirwaybillSQLTIMESTAMP_XML: TDateTimeField;
+    FlightAirwaybillSQLXML_RANDOM: TIntegerField;
     procedure FormActivate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure BitBtn2Click(Sender: TObject);

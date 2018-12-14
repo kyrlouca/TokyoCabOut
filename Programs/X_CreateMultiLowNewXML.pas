@@ -19,7 +19,7 @@
 //** netxt batch will have a different XML_Random
 //////////////////////
 
-unit X_createMultiLowXML2;
+unit X_CreateMultiLowNewXML;
 
 interface
 
@@ -406,18 +406,20 @@ begin
   CreateXMLNodeNew(FDoc, FatherNode, 'MessageIdentification', 'CY1acbae4fdb51', ntText);
   CreateXMLNodeNew(FDoc, FatherNode, 'MessageType', 'CC615A', ntText);
 
+    //Payment method
+  temp := CheckSamePaymentMethod(FlightOutSerial, XMLRandom);
+  if (temp > '') then
+  begin
+    CreateXMLNodeNew(FDoc, FatherNode, 'TranspChargesMethodOfPayment', Temp, ntText);
+  end;
+
+
   //Create header 616
   HeaderNode := CreateHeader615(FlightOutSerial, XmlRandom, Fdoc, FatherNode);
 
   x2Node := CreateXMLNodeNew(FDoc, FatherNode, 'Msg615ExportCustomsOffice', '', ntElement);
   CreateXMLNodeNew(FDoc, x2Node, 'ReferenceNumber', 'CY000440', ntText);
 
-  //Payment method
-  temp := CheckSamePaymentMethod(FlightOutSerial, XMLRandom);
-  if (temp > '') then
-  begin
-    CreateXMLNodeNew(FDoc, x1node, 'TranspChargesMethodOfPayment', Temp, ntText);
-  end;
 
   //Create Airs
   CreateNodeAirwayBills(FlightOutSerial, XmlRandom, Fdoc, FatherNode);
@@ -921,7 +923,7 @@ begin
 str2:=
 '   update flight_airwaybill outfa'
   +'    set outfa.xml_random = :XmlRandom ,'
-  +'        fa.is_included_xml = ''Y'' where   '
+  +'        outfa.is_included_xml = ''Y'' where   '
   +'   outfa.serial_number= :AirSerial';
 
 

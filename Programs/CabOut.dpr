@@ -35,7 +35,6 @@ uses
   G_generalProcs in 'G_generalProcs.pas',
   R_ReadALLXMLFiles in 'R_ReadALLXMLFiles.pas' {R_ReadAllFilesFRM},
   X_createOneXML in 'X_createOneXML.pas' {X_CreateOneXmlFRM},
-  X_createMultiXML in 'X_createMultiXML.pas' {X_CreateMultiXmlFRM},
   M_dangerGoods in 'M_dangerGoods.pas' {M_DangerGoodsFRM},
   M_FlightTable in 'M_FlightTable.pas' {M_FlightTableFRM},
   M_certificates in 'M_certificates.pas' {M_certificatesFRM},
@@ -48,11 +47,10 @@ uses
   m_DeclarationType in 'm_DeclarationType.pas' {M_declarationTypeFRM},
   m_KindOfPackages in 'm_KindOfPackages.pas' {M_KIndOfPackagesFRM},
   H_commonProcs in 'H_commonProcs.pas',
-  X_createMultiLowXML in 'X_createMultiLowXML.pas' {X_CreateMultiLowXmlFRM},
   M_PaymentMethod in 'M_PaymentMethod.pas' {M_PaymentMEthodFRM},
   M_PreviousProcedure in 'M_PreviousProcedure.pas' {M_PreviousProcedureFRM},
-  X_createMultiLowXML2 in 'X_createMultiLowXML2.pas' {X_CreateMultiLowNewXMLFrm},
-  X_createMultiHighXML in 'X_createMultiHighXML.pas' {X_CreateMultiHighXmlFRM};
+  X_createMultiHighXML in 'X_createMultiHighXML.pas' {X_CreateMultiHighXmlFRM},
+  X_CreateMultiLowNewXML in 'X_CreateMultiLowNewXML.pas' {X_CreateMultiLowNewXMLFrm};
 
 {$R *.RES}
 
@@ -103,10 +101,9 @@ begin
   Application.CreateForm(TM_PreviousProcedureFRM, M_PreviousProcedureFRM);
   Application.CreateForm(TM_declarationTypeFRM, M_declarationTypeFRM);
   Application.CreateForm(TM_KIndOfPackagesFRM, M_KIndOfPackagesFRM);
-  Application.CreateForm(TX_CreateMultiLowXmlFRM, X_CreateMultiLowXmlFRM);
   Application.CreateForm(TX_CreateMultiLowNewXMLFrm, X_CreateMultiLowNewXMLFrm);
   Application.CreateForm(TM_PreviousProcedureFRM, M_PreviousProcedureFRM);
   Application.CreateForm(TX_CreateMultiHighXmlFRM, X_CreateMultiHighXmlFRM);
-  Application.CreateForm(TX_CreateMultiHighXmlFRM, X_CreateMultiHighXmlFRM);
+  Application.CreateForm(TX_CreateMultiLowNewXMLFrm, X_CreateMultiLowNewXMLFrm);
   Application.Run;
 end.

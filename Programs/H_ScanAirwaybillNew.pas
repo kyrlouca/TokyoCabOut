@@ -302,7 +302,7 @@ implementation
 
 uses MainForm, H_FlightAirwaybill, H_flightOut, X_createOneXML,
   X_createMultiXML, X_createMultiHighXML, G_KyrSQL, G_generalProcs,
-  H_commonProcs, X_createMultiLowXML2;
+  H_commonProcs, X_CreateMultiLowNewXML;
 
 {$R *.DFM}
 
@@ -702,10 +702,25 @@ procedure TH_ScanAirwaibillNewFRM.RzBitBtn1Click(Sender: TObject);
 var
   Fserial:integer;
   AirSerial:Integer;
+  ValueType:String;
+  Count:integer;
 begin
   Fserial:=FlightOutSQL.FieldByName('serial_number').AsInteger;
   Airserial:=FlightAirwaybillSQL.FieldByName('serial_number').AsInteger;
-  X_CreateMultiHighXmlFRM.CreateFlightXML(Fserial,AirSerial);
+  ValueType :=FlightAirwaybillSQL.FieldByName('Value_type').AsString;
+  if ValueType='H' then begin
+    count:=X_CreateMultiHighXmlFRM.CreateFlightXML(Fserial,AirSerial);
+    showMessage('XML Create Finished. Number of Items:'+intTostr(Count) );
+
+  end else if ValueType='L' then begin
+    count:=X_CreateMultiLowNewXMLFrm.CreateFlightXML(Fserial,AirSerial);
+    showMessage('XML Create Finished. Number of Items:'+intTostr(Count) );
+
+  end else begin
+    ShowMessage('not high or low');
+  end;
+  flightAirwaybillSQL.refresh;
+
 end;
 
 procedure TH_ScanAirwaibillNewFRM.FlightAirwaybillGRDDblClick(Sender: TObject);

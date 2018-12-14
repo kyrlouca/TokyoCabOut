@@ -19,7 +19,7 @@
 //** netxt batch will have a different XML_Random
 //////////////////////
 
-unit X_createMultiLowXML2;
+unit X_CreateMultiLowNewXML;
 
 interface
 
