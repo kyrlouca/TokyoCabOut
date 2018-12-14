@@ -618,7 +618,6 @@ str:=
 
      temp:=CheckSamePaymentMethod(FlightOutSerial,XMLRandom);
      if (temp>'') then begin
-//          Temp:= ConvertPaymentMethod( temp);
           CreateXMLNodeNew(FDoc,x1node,'TranspChargesMethodOfPayment',Temp,ntText);
      end;
 
@@ -971,7 +970,7 @@ begin
   +'     where'
   +'     fk_flight_out_serial= :flightSerial and'
   +'      fa.xml_random= :XmlRandom'
-  +'      group by Sender_vat' ;
+  +'      group by Sender_vat, sender_name' ;
 
   qr:=TksQuery.Create(cn, str1);
   try

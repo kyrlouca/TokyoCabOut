@@ -563,12 +563,11 @@ object H_ScanAirwaibillNewFRM: TH_ScanAirwaibillNewFRM
           'IS_INCLUDED_XML'#9'3'#9'XML'
           'VALUE_TYPE'#9'5'#9'Value'
           'HAWB_ID'#9'10'#9'Hawb Id'
-          'SENDER_NAME'#9'12'#9'Sender Name'
-          'DESCRIPTION'#9'17'#9'Description'
-          'SENDER_ADDRESS_1'#9'8'#9'Address 1'
+          'DESCRIPTION'#9'21'#9'Description'
+          'SENDER_NAME'#9'25'#9'Sender Name'
+          'CONSIGNEE_NAME'#9'18'#9'Consignee'
           'ITEMS_COUNT'#9'7'#9'Items'
           'PIECES'#9'6'#9'Pieces'
-          'CONSIGNEE_NAME'#9'18'#9'Consignee'
           'WEIGHT'#9'6'#9'Weight')
         IniAttributes.Delimiter = ';;'
         IniAttributes.UnicodeIniFile = False
@@ -665,8 +664,8 @@ object H_ScanAirwaibillNewFRM: TH_ScanAirwaibillNewFRM
         end
       end
       object ValueFLD: TwwDBComboBox
-        Left = 527
-        Top = 14
+        Left = 463
+        Top = 72
         Width = 98
         Height = 21
         ShowButton = True
@@ -1502,25 +1501,25 @@ object H_ScanAirwaibillNewFRM: TH_ScanAirwaibillNewFRM
       Origin = 'CABOUTDATA.FLIGHT_AIRWAYBILL.HAWB_ID'
       Size = 10
     end
-    object FlightAirwaybillSQLSENDER_NAME: TStringField
-      DisplayLabel = 'Sender Name'
-      DisplayWidth = 12
-      FieldName = 'SENDER_NAME'
-      FixedChar = True
-      Size = 35
-    end
     object FlightAirwaybillSQLDESCRIPTION: TStringField
       DisplayLabel = 'Description'
-      DisplayWidth = 17
+      DisplayWidth = 21
       FieldName = 'DESCRIPTION'
       Origin = 'CABOUTDATA.FLIGHT_AIRWAYBILL.DESCRIPTION'
       FixedChar = True
       Size = 60
     end
-    object FlightAirwaybillSQLSENDER_ADDRESS_1: TStringField
-      DisplayLabel = 'Address 1'
-      DisplayWidth = 8
-      FieldName = 'SENDER_ADDRESS_1'
+    object FlightAirwaybillSQLSENDER_NAME: TStringField
+      DisplayLabel = 'Sender Name'
+      DisplayWidth = 25
+      FieldName = 'SENDER_NAME'
+      FixedChar = True
+      Size = 35
+    end
+    object FlightAirwaybillSQLCONSIGNEE_NAME: TStringField
+      DisplayLabel = 'Consignee'
+      DisplayWidth = 18
+      FieldName = 'CONSIGNEE_NAME'
       FixedChar = True
       Size = 35
     end
@@ -1535,19 +1534,20 @@ object H_ScanAirwaibillNewFRM: TH_ScanAirwaibillNewFRM
       FieldName = 'PIECES'
       Origin = 'CABOUTDATA.FLIGHT_AIRWAYBILL.PIECES'
     end
-    object FlightAirwaybillSQLCONSIGNEE_NAME: TStringField
-      DisplayLabel = 'Consignee'
-      DisplayWidth = 18
-      FieldName = 'CONSIGNEE_NAME'
-      FixedChar = True
-      Size = 35
-    end
     object FlightAirwaybillSQLWEIGHT: TFloatField
       DisplayLabel = 'Weight'
       DisplayWidth = 6
       FieldName = 'WEIGHT'
       Origin = 'CABOUTDATA.FLIGHT_AIRWAYBILL.WEIGHT'
       DisplayFormat = '0.00'
+    end
+    object FlightAirwaybillSQLSENDER_ADDRESS_1: TStringField
+      DisplayLabel = 'Address 1'
+      DisplayWidth = 8
+      FieldName = 'SENDER_ADDRESS_1'
+      Visible = False
+      FixedChar = True
+      Size = 35
     end
     object FlightAirwaybillSQLINCOTERMS: TStringField
       DisplayWidth = 10
@@ -2004,8 +2004,8 @@ object H_ScanAirwaibillNewFRM: TH_ScanAirwaibillNewFRM
       ' ')
     ReadOnly = True
     UniDirectional = True
-    Left = 588
-    Top = 296
+    Left = 580
+    Top = 368
     ParamData = <
       item
         DataType = ftUnknown
@@ -2305,8 +2305,8 @@ object H_ScanAirwaibillNewFRM: TH_ScanAirwaibillNewFRM
       'and hawb_id= :HawbId')
     ReadOnly = True
     UniDirectional = True
-    Left = 248
-    Top = 296
+    Left = 264
+    Top = 352
     ParamData = <
       item
         DataType = ftUnknown
@@ -2422,8 +2422,8 @@ object H_ScanAirwaibillNewFRM: TH_ScanAirwaibillNewFRM
         'Select * from airwaybill_item  where fk_airwaybill_serial=:AirSe' +
         'rial')
     UniDirectional = True
-    Left = 376
-    Top = 297
+    Left = 368
+    Top = 361
     ParamData = <
       item
         DataType = ftUnknown
