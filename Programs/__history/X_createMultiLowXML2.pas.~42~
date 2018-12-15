@@ -440,12 +440,12 @@ begin
 
   if CheckSameSender(FlightOutSerial, XmlRandom) then
   begin
-    CreateConsignorAddressNode(FlightOutSerial, 0, XmlRandom, 'Msg615Consignor', Fdoc, FatherNode);
+    CreateConsignorAddressNode(FlightOutSerial, 0, XmlRandom, 'Msg615ConsignorTrader', Fdoc, FatherNode);
   end;
 
   if CheckSameConsignee(FlightOutSerial, XmlRandom) then
   begin
-    CreateConsigneeAddressNode(FlightOutSerial, 0, XmlRandom, 'Msg615Consignee', Fdoc, FatherNode);
+    CreateConsigneeAddressNode(FlightOutSerial, 0, XmlRandom, 'Msg615ConsigneeTrader', Fdoc, FatherNode);
   end;
   result := 1;
 end;
