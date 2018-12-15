@@ -30,6 +30,11 @@ uses
   DBAccess, IBC, RzLabel,clipbrd,Math;
 
 type
+  THeaderResult = record
+    xmlRandom: Integer;
+    RecordsUpdated: Integer;
+  end;
+
   TCriteriaParams= record
     DeclarationType:String;
     TypeOfDeclaration:String;
@@ -55,7 +60,8 @@ type
     function GetTableDefaultValue( Const TableName:String):String;
     Function TestOne(Const HawbSerial:Integer):String;
     function FindCertValue(Const CertSerial,ItemSerial:Integer):String;
-    function MarkSelectedAirwayBills(Const FlightSErial, AIrSerial:Integer; Criteria:TCriteriaParams):Integer;
+//    function MarkSelectedAirwayBills(Const FlightSErial, AIrSerial:Integer; Criteria:TCriteriaParams):Integer;
+    function  MarkSelectedAirwayBills(const FlightSErial, AIrSerial: Integer; Criteria: TCriteriaParams): THeaderResult;
 
 
     function CheckSameSender( Const FlightSerial:Integer; XmlRandom:Integer):Boolean;
@@ -286,8 +292,98 @@ end;
 
 
 
+function TX_CreateMultiHighXmlFRM.MarkSelectedAirwayBills(const FlightSErial, AIrSerial: Integer; Criteria: TCriteriaParams): THeaderResult;
+var
+  sqlStr, str1, str2, str3: string;
+  qr, maxQr: TksQuery;
+  cnt,cnt2: Integer;
+  exc:integer;
+  xmlRandom: Integer;
+  tempQr: TksQuery;
+  strMaxRows: string;
+  maxHawbId: string;
+  maxSerial: integer;
+begin
+//TODO *** check if the number of ITEMS is greater than 99 and do NOTHING
+// let the user know that must take out one or more items.
+
+  str1 :=
+    '     update  flight_airwaybill outfa'
+    + '      set outfa.xml_Random = :XmlRandom , '
+    + '      outfa.is_included_xml = ''Y'' '
+    + '    where  outfa.serial_number in  ('
+    + '      select first 10 fa.serial_number from'
+    + '         flight_airwaybill fa left outer join'
+    + '         flight_airwaybill_item it on fa.serial_number=it.fk_fa_serial'
+    + '      where fa.fk_flight_out_serial= :flightSerial and'
+    + '         value_type= ''H'' and '
+    + '         (fa.is_included_xml = ''N''  or fa.is_included_xml is null) '
+    + '      order by fa.hawb_id'
+    + ')';
+
+  str2 :=
+    '   update flight_airwaybill outfa'
+    + '    set outfa.xml_random = :XmlRandom ,'
+    + '        outfa.is_included_xml = ''Y'' where   '
+    + '   outfa.serial_number= :AirSerial';
+
+  xmlRandom := RandomRAnge(1, 10000000);
+
+  if AIrSerial > 0 then begin
+    cnt := ksExecSQLVar(cn, str2, [XmlRandom, airSerial]);
+  end else begin
+    cnt := ksExecSQLVar(cn, str1, [XmlRandom, FlightSerial]);
+  end;
+
+  //more than 100 ITEMS (not airwaybills!!). we need to exclude the last AIRWAYBILL and it will become less
+  //cnt may not be correct but no prob
+
+  with maxQr do begin
+
+    strMaxRows :=
+  '    SELECT count(*) as cnt2,max(HAWB_ID) as lastHawb'
+  +'      FROM'
+  +'      FLIGHT_AIRWAYBILL Fa JOIN'
+  +'      FLIGHT_AIRWAYBILL_ITEM fi'
+  +'      ON fa.SERIAL_NUMBER=fi.FK_FA_SERIAL'
+  +'      WHERE'
+  +'        fK_FLIGHT_OUT_SERIAL= :flight AND XML_RANDOM = :xmlRandom';
+
+    try
+      maxQr := TksQuery.Create(cn, strMaxRows);
+      maxQr.ParamByName('flight').Value := FlightSErial;
+      maxQr.ParamByName('xmlRandom').Value := xmlRandom;
+      maxQR.Open;
+      maxHawbId := maxQr.FieldByName('lastHawb').AsString;
+      cnt2 := maxQr.FieldByName('cnt2').AsInteger;
+      if (cnt2 > 3) then begin
+        str3 := 'UPDATE FLIGHT_AIRWAYBILL SET IS_INCLUDED_XML=''N'',XML_RANDOM = NULL '
+          + ' WHERE HAWB_Id= :hawbId AND XML_RANDOM= :xmlRandom ';
+
+        exc := ksExecSQLVar(cn, str3, [maxHawbId, xmlRandom]);
+
+      end;
+
+    finally
+      maxQR.Free;
+    end;
+  end;
+
+
+  if cnt = 0 then begin
+    result.xmlRandom := 0;
+    result.RecordsUpdated := 0;
+  end else begin
+    result.xmlRandom := xmlRandom;
+    result.RecordsUpdated := cnt;
+  end;
+
+end;
+
+
 
 Function TX_CreateMultiHighXmlFRM.CreateXmlFileByGroup(Const FlightOutSerial,AirSErial:Integer;Criteria:TCriteriaParams):integer;
+
 //will create on file for each set of criteria
 var
    GroupQr, Flightqr,FirstAirQr:TksQuery;
@@ -295,6 +391,7 @@ var
   FlightName:string;
   DefaultDir:String;
   val:String;
+    HeaderResult: THeaderResult;
 
 
    FDoc:IXMLDocument;
@@ -321,7 +418,8 @@ begin
   end;
 
 
-  xmlRandom:= MarkSelectedAirwayBills(FlightOutSerial,AirSerial,Criteria);
+  HeaderREsult:= MarkSelectedAirwayBills(FlightOutSerial,AirSerial,Criteria);
+  xmlRandom:=HeaderResult.xmlRandom;
 
   if (XmlRandom =0 ) then begin
     result:=0;
@@ -1151,7 +1249,7 @@ begin
 end;
 
 
-
+{
 function TX_CreateMultiHighXmlFRM.MarkSelectedAirwayBills(Const FlightSErial, AIrSerial:Integer; Criteria:TCriteriaParams):Integer;
 var
   sqlStr, str1,str2,str3:String;
@@ -1208,7 +1306,7 @@ str3:=
     end;
 
 end;
-
+}
 function TX_CreateMultiHighXmlFRM.ConvertPaymentMethod(const PaymentMethod:String):String;
 var
   qr:TksQuery;
