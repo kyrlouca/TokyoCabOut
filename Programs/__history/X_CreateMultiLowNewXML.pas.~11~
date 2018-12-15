@@ -918,19 +918,19 @@ begin
     cnt := ksExecSQLVar(cn, str1, [XmlRandom, FlightSerial]);
   end;
 
-  //more than 100 ITEMS (not airwaybills!!). we need to exclude the last AIRWAYBILL and it will become less
+  //more than 100 items. we need to exclude the last hawb and it will become less
   //cnt may not be correct but no prob
 
   with maxQr do begin
 
     strMaxRows :=
-  '    SELECT count(*) as cnt2,max(HAWB_ID) as lastHawb'
-  +'      FROM'
-  +'      FLIGHT_AIRWAYBILL Fa JOIN'
-  +'      FLIGHT_AIRWAYBILL_ITEM fi'
-  +'      ON fa.SERIAL_NUMBER=fi.FK_FA_SERIAL'
-  +'      WHERE'
-  +'        fK_FLIGHT_OUT_SERIAL= :flight AND XML_RANDOM = :xmlRandom';
+   SELECT count(*) as cnt2,max(HAWB_ID) as lastHawb
+    FROM
+    FLIGHT_AIRWAYBILL Fa JOIN
+    FLIGHT_AIRWAYBILL_ITEM fi
+    ON fa.SERIAL_NUMBER=fi.FK_FA_SERIAL
+    WHERE
+      fK_FLIGHT_OUT_SERIAL= :flight AND XML_RANDOM = :xmlRand
 
     try
       maxQr := TksQuery.Create(cn, strMaxRows);

@@ -930,7 +930,7 @@ begin
   +'      FLIGHT_AIRWAYBILL_ITEM fi'
   +'      ON fa.SERIAL_NUMBER=fi.FK_FA_SERIAL'
   +'      WHERE'
-  +'        fK_FLIGHT_OUT_SERIAL= :flight AND XML_RANDOM = :xmlRandom';
+  +'        fK_FLIGHT_OUT_SERIAL= :flight AND XML_RANDOM = :xmlRand';
 
     try
       maxQr := TksQuery.Create(cn, strMaxRows);
