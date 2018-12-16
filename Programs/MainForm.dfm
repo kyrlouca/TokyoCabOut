@@ -104,7 +104,7 @@ object MainFormFRM: TMainFormFRM
     Height = 41
     Align = alTop
     BevelInner = bvRaised
-    Caption = 'Tokyo CabOut V1.02'
+    Caption = 'Tokyo CabOut V1.03'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBlue
     Font.Height = -32

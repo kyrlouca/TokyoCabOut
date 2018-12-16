@@ -21,7 +21,7 @@ object X_CreateMultiLowNewXMLFrm: TX_CreateMultiLowNewXMLFrm
     Height = 45
     Align = alTop
     Alignment = taCenter
-    Caption = 'Multi Low 615 W'
+    Caption = 'Multi Low 615 new'
     Color = clWhite
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBlue
@@ -30,7 +30,7 @@ object X_CreateMultiLowNewXMLFrm: TX_CreateMultiLowNewXMLFrm
     Font.Style = []
     ParentColor = False
     ParentFont = False
-    ExplicitWidth = 272
+    ExplicitWidth = 306
   end
   object Button1: TButton
     Left = 192
