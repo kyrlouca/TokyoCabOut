@@ -887,17 +887,15 @@ var
   maxHawbId: string;
   maxSerial: integer;
 begin
-// we mark airwaybills and not items
-// will read jointly 99 items (and airwaybills)
-// the last airwaybill may NOT containt the total of its own items
-// unmark the last one below
+//TODO *** check if the number of ITEMS is greater than 99 and do NOTHING
+// let the user know that must take out one or more items.
 
   str1 :=
     '     update  flight_airwaybill outfa'
     + '      set outfa.xml_Random = :XmlRandom , '
     + '      outfa.is_included_xml = ''Y'' '
     + '    where  outfa.serial_number in  ('
-    + '      select first 99 fa.serial_number from'
+    + '      select first 10 fa.serial_number from'
     + '         flight_airwaybill fa left outer join'
     + '         flight_airwaybill_item it on fa.serial_number=it.fk_fa_serial'
     + '      where fa.fk_flight_out_serial= :flightSerial and'
@@ -941,7 +939,7 @@ begin
       maxQR.Open;
       maxHawbId := maxQr.FieldByName('lastHawb').AsString;
       cnt2 := maxQr.FieldByName('cnt2').AsInteger;
-      if (cnt2 > 99) then begin
+      if (cnt2 > 3) then begin
         str3 := 'UPDATE FLIGHT_AIRWAYBILL SET IS_INCLUDED_XML=''N'',XML_RANDOM = NULL '
           + ' WHERE HAWB_Id= :hawbId AND XML_RANDOM= :xmlRandom ';
 
