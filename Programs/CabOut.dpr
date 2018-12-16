@@ -49,8 +49,8 @@ uses
   H_commonProcs in 'H_commonProcs.pas',
   M_PaymentMethod in 'M_PaymentMethod.pas' {M_PaymentMEthodFRM},
   M_PreviousProcedure in 'M_PreviousProcedure.pas' {M_PreviousProcedureFRM},
-  X_createMultiHighXML in 'X_createMultiHighXML.pas' {X_CreateMultiHighXmlFRM},
-  X_CreateMultiLowNewXML in 'X_CreateMultiLowNewXML.pas' {X_CreateMultiLowNewXMLFrm};
+  X_createMultiHighXML in 'X_createMultiHighXML.pas' {X_CreateMultiHighXmlFRM};
+//  X_CreateMultiLowNewXML in 'X_CreateMultiLowNewXML.pas' {X_CreateMultiLowNewXMLFrm};
 
 {$R *.RES}
 
