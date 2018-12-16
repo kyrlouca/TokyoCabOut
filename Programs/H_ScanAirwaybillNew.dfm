@@ -1166,7 +1166,7 @@ object H_ScanAirwaibillNewFRM: TH_ScanAirwaibillNewFRM
         object MultiHighBTN: TRzBitBtn
           AlignWithMargins = True
           Left = 15
-          Top = 210
+          Top = 234
           Width = 169
           Height = 48
           Margins.Left = 12
@@ -1249,7 +1249,7 @@ object H_ScanAirwaibillNewFRM: TH_ScanAirwaibillNewFRM
         object CreateLowBTN: TRzBitBtn
           AlignWithMargins = True
           Left = 15
-          Top = 264
+          Top = 288
           Width = 169
           Height = 48
           Margins.Left = 12

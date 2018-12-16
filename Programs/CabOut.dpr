@@ -34,7 +34,6 @@ uses
   GeneralParametersNew in 'GeneralParametersNew.pas',
   G_generalProcs in 'G_generalProcs.pas',
   R_ReadALLXMLFiles in 'R_ReadALLXMLFiles.pas' {R_ReadAllFilesFRM},
-  X_createOneXML in 'X_createOneXML.pas' {X_CreateOneXmlFRM},
   M_dangerGoods in 'M_dangerGoods.pas' {M_DangerGoodsFRM},
   M_FlightTable in 'M_FlightTable.pas' {M_FlightTableFRM},
   M_certificates in 'M_certificates.pas' {M_certificatesFRM},
@@ -83,7 +82,6 @@ begin
   Application.CreateForm(TX_readFileFRM, X_readFileFRM);
   Application.CreateForm(TS_SelectCustomerXFRM, S_SelectCustomerXFRM);
   Application.CreateForm(TR_ReadAllFilesFRM, R_ReadAllFilesFRM);
-  Application.CreateForm(TX_CreateOneXmlFRM, X_CreateOneXmlFRM);
   Application.CreateForm(TM_DangerGoodsFRM, M_DangerGoodsFRM);
   Application.CreateForm(TM_FlightTableFRM, M_FlightTableFRM);
   Application.CreateForm(TM_certificatesFRM, M_certificatesFRM);

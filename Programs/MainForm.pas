@@ -120,7 +120,7 @@ uses  P_Deconsolidation,
   S_SelectCustomerx, S_SelectTariffY, M_District, L_AIrwaybillHigh,
    H_ScanAirwaybillNew, M_incoterms, M_serviceCode, M_Currency,
   l_FlightAirwaybillParameters,  M_additionalParameters, X_readFile,
-  R_ReadALLXMLFiles, X_createOneXML, M_dangerGoods, M_certificates,
+  R_ReadALLXMLFiles,  M_dangerGoods, M_certificates,
   H_FlightAirwaybill, m_DeclarationType, m_TypeOfDeclaration,
   m_specificCircumstance, M_ProcedureRequest, M_PreviousProcedure,
   m_KindOfPackages, M_PaymentMethod;

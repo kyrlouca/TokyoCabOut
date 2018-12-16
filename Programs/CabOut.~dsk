@@ -1,47 +1,52 @@
 ﻿[Closed Files]
-File_0=TSourceModule,'C:\Data\DelphiProjects\TokyoCabOut\Programs\X_createMultiHighXML.pas',0,1,217,1,299,0,0,,
-File_1=TSourceModule,'C:\Data\DelphiProjects\TokyoCabOut\Programs\H_ScanAirwaybillNew.pas',0,1,1,5,12,0,0,,
-File_2=TSourceModule,'C:\Data\DelphiProjects\TokyoCabOut\Programs\H_commonProcs.pas',0,1,1,1,1,0,0,,
-File_3=TSourceModule,'C:\Data\DelphiProjects\TokyoCabOut\Programs\H_FlightAirwaybill.pas',0,1,510,1,525,0,0,,
-File_4=TSourceModule,'C:\Data\DelphiProjects\TokyoCabOut\Programs\G_generalProcs.pas',0,25,1,39,4,0,0,,
-File_5=TSourceModule,'C:\Data\DelphiProjects\TokyoCabOut\Programs\M_FlightTable.pas',0,1,1,1,1,0,0,,
-File_6=TSourceModule,'C:\Data\DelphiProjects\TokyoCabOut\Programs\H_Airwaybill2.pas',0,1,1,1,1,0,0,,
-File_7=TSourceModule,'C:\Data\DelphiProjects\TokyoCabOut\Programs\M_certificates.pas',0,1,144,21,127,0,0,,
-File_8=TSourceModule,'C:\Data\DelphiProjects\TokyoCabOut\Programs\R_ReadALLXMLFiles.pas',0,1,74,31,89,0,0,,
-File_9=TSourceModule,'C:\Data\DelphiProjects\TokyoCabOut\Programs\G_KyrSQL.pas',0,1,124,1,139,0,0,,
-File_10=TSourceModule,'C:\Data\DelphiProjects\TokyoCabOut\Programs\L_itinerary.pas',0,1,1,1,1,0,0,,
-File_11=TSourceModule,'C:\Data\DelphiProjects\TokyoCabOut\Programs\L_itinerary.dfm',0,1,1,1,1,0,0,,
-File_12=TSourceModule,'C:\Data\DelphiProjects\TokyoCabOut\Programs\M_dangerGoods.pas',0,1,41,1,1,0,0,,
-File_13=TSourceModule,'C:\Data\DelphiProjects\TokyoCabOut\Programs\M_Itinerary.pas',0,1,1,1,1,0,0,,
-File_14=TSourceModule,'C:\Data\DelphiProjects\TokyoCabOut\Programs\X_createOneXML.pas',0,1,646,25,722,0,0,,
+File_0=TSourceModule,'C:\Data\DelphiProjects\TokyoCabOut\Programs\X_createMultiLowXML2.pas',0,1,915,47,897,0,0,,
+File_1=TSourceModule,'C:\Data\DelphiProjects\TokyoCabOut\Programs\X_createMultiXML.pas',0,1,1,1,1,0,0,,
+File_2=TSourceModule,'C:\Data\DelphiProjects\TokyoCabOut\Programs\X_createMultiLowXML.pas',0,1,556,17,569,0,0,,
+File_3=TSourceModule,'C:\Data\DelphiProjects\TokyoCabOut\Programs\H_commonProcs.pas',0,1,1,1,1,0,0,,
+File_4=TSourceModule,'C:\Data\DelphiProjects\TokyoCabOut\Programs\H_FlightAirwaybill.pas',0,1,510,1,525,0,0,,
+File_5=TSourceModule,'C:\Data\DelphiProjects\TokyoCabOut\Programs\G_generalProcs.pas',0,25,1,39,4,0,0,,
+File_6=TSourceModule,'C:\Data\DelphiProjects\TokyoCabOut\Programs\M_FlightTable.pas',0,1,1,1,1,0,0,,
+File_7=TSourceModule,'C:\Data\DelphiProjects\TokyoCabOut\Programs\H_Airwaybill2.pas',0,1,1,1,1,0,0,,
+File_8=TSourceModule,'C:\Data\DelphiProjects\TokyoCabOut\Programs\M_certificates.pas',0,1,144,21,127,0,0,,
+File_9=TSourceModule,'C:\Data\DelphiProjects\TokyoCabOut\Programs\R_ReadALLXMLFiles.pas',0,1,74,31,89,0,0,,
+File_10=TSourceModule,'C:\Data\DelphiProjects\TokyoCabOut\Programs\G_KyrSQL.pas',0,1,124,1,139,0,0,,
+File_11=TSourceModule,'C:\Data\DelphiProjects\TokyoCabOut\Programs\L_itinerary.pas',0,1,1,1,1,0,0,,
+File_12=TSourceModule,'C:\Data\DelphiProjects\TokyoCabOut\Programs\L_itinerary.dfm',0,1,1,1,1,0,0,,
+File_13=TSourceModule,'C:\Data\DelphiProjects\TokyoCabOut\Programs\M_dangerGoods.pas',0,1,41,1,1,0,0,,
+File_14=TSourceModule,'C:\Data\DelphiProjects\TokyoCabOut\Programs\M_Itinerary.pas',0,1,1,1,1,0,0,,
 
 [Modules]
-Module0=C:\Data\DelphiProjects\TokyoCabOut\Programs\X_createMultiXML.pas
-Module1=C:\Data\DelphiProjects\TokyoCabOut\Programs\X_createMultiLowXML.pas
-Module2=C:\Data\DelphiProjects\TokyoCabOut\Programs\MainForm.pas
-Module3=default.htm
-Count=4
+Module0=C:\Data\DelphiProjects\TokyoCabOut\Programs\H_ScanAirwaybillNew.pas
+Module1=C:\Data\DelphiProjects\TokyoCabOut\Programs\MainForm.pas
+Module2=C:\Data\DelphiProjects\TokyoCabOut\Programs\X_CreateMultiLowNewXML.pas
+Module3=C:\Data\DelphiProjects\TokyoCabOut\Programs\X_createMultiHighXML.pas
+Module4=default.htm
+Count=5
 EditWindowCount=1
 
-[C:\Data\DelphiProjects\TokyoCabOut\Programs\X_createMultiXML.pas]
-ModuleType=TSourceModule
-
-[C:\Data\DelphiProjects\TokyoCabOut\Programs\X_createMultiLowXML.pas]
+[C:\Data\DelphiProjects\TokyoCabOut\Programs\H_ScanAirwaybillNew.pas]
 ModuleType=TSourceModule
 
 [C:\Data\DelphiProjects\TokyoCabOut\Programs\MainForm.pas]
+ModuleType=TSourceModule
+
+[C:\Data\DelphiProjects\TokyoCabOut\Programs\X_CreateMultiLowNewXML.pas]
+ModuleType=TSourceModule
+
+[C:\Data\DelphiProjects\TokyoCabOut\Programs\X_createMultiHighXML.pas]
 ModuleType=TSourceModule
 
 [default.htm]
 ModuleType=TURLModule
 
 [EditWindow0]
-ViewCount=4
-CurrentEditView=C:\Data\DelphiProjects\TokyoCabOut\Programs\X_createMultiXML.pas
+ViewCount=5
+CurrentEditView=C:\Data\DelphiProjects\TokyoCabOut\Programs\H_ScanAirwaybillNew.pas
 View0=0
 View1=1
 View2=2
 View3=3
+View4=4
 PercentageSizes=1
 Create=1
 Visible=1
@@ -85,25 +90,36 @@ EditViewName=Borland.FormDesignerView
 
 [View2]
 CustomEditViewType=TEditView
-Module=C:\Data\DelphiProjects\TokyoCabOut\Programs\X_createMultiLowXML.pas
-CursorX=1
-CursorY=1
-TopLine=1
+Module=C:\Data\DelphiProjects\TokyoCabOut\Programs\X_CreateMultiLowNewXML.pas
+CursorX=47
+CursorY=878
+TopLine=925
 LeftCol=1
 Elisions=
 Bookmarks=
-EditViewName=Borland.FormDesignerView
+EditViewName=C:\Data\DelphiProjects\TokyoCabOut\Programs\X_CreateMultiLowNewXML.pas
 
 [View3]
 CustomEditViewType=TEditView
-Module=C:\Data\DelphiProjects\TokyoCabOut\Programs\X_createMultiXML.pas
-CursorX=1
-CursorY=1
-TopLine=1
+Module=C:\Data\DelphiProjects\TokyoCabOut\Programs\X_createMultiHighXML.pas
+CursorX=45
+CursorY=300
+TopLine=350
 LeftCol=1
 Elisions=
 Bookmarks=
-EditViewName=Borland.FormDesignerView
+EditViewName=C:\Data\DelphiProjects\TokyoCabOut\Programs\X_createMultiHighXML.pas
+
+[View4]
+CustomEditViewType=TEditView
+Module=C:\Data\DelphiProjects\TokyoCabOut\Programs\H_ScanAirwaybillNew.pas
+CursorX=1
+CursorY=1168
+TopLine=1162
+LeftCol=1
+Elisions=
+Bookmarks=
+EditViewName=C:\Data\DelphiProjects\TokyoCabOut\Programs\H_ScanAirwaybillNew.pas
 
 [UndockedDesigner]
 Count=0
@@ -323,7 +339,7 @@ SplitPos=69
 [PropInspDesignerSelection]
 ArrangeBy=Name
 SelectedItem=Caption,
-ExpandedItems=Anchors=0,Constraints=0
+ExpandedItems=Anchors=0,BorderIcons=0
 
 [frmDesignPreview]
 PercentageSizes=1

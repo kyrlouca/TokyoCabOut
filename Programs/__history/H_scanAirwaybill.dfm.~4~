@@ -53,6 +53,7 @@ object H_ScanAirwaybillFRM: TH_ScanAirwaybillFRM
     Font.Style = [fsBold]
     ParentFont = False
     TabOrder = 0
+    ExplicitWidth = 120
     object Panel5: TPanel
       Left = 438
       Top = 1
@@ -61,6 +62,7 @@ object H_ScanAirwaybillFRM: TH_ScanAirwaybillFRM
       Align = alRight
       BevelOuter = bvNone
       TabOrder = 0
+      ExplicitLeft = -66
       object wwDBEdit3: TwwDBEdit
         Left = 40
         Top = 23
@@ -90,6 +92,8 @@ object H_ScanAirwaybillFRM: TH_ScanAirwaybillFRM
     Height = 66
     Align = alBottom
     TabOrder = 1
+    ExplicitTop = 135
+    ExplicitWidth = 120
     object BitBtn2: TBitBtn
       Left = 10
       Top = 4
@@ -127,6 +131,8 @@ object H_ScanAirwaybillFRM: TH_ScanAirwaybillFRM
     Height = 351
     Align = alClient
     TabOrder = 2
+    ExplicitWidth = 120
+    ExplicitHeight = 70
     object Panel2: TPanel
       Left = 1
       Top = 1
@@ -134,6 +140,7 @@ object H_ScanAirwaybillFRM: TH_ScanAirwaybillFRM
       Height = 240
       Align = alTop
       TabOrder = 0
+      ExplicitWidth = 118
       object Label10: TLabel
         Left = 16
         Top = 32
@@ -196,7 +203,7 @@ object H_ScanAirwaybillFRM: TH_ScanAirwaybillFRM
       end
       object BitBtn3: TBitBtn
         Left = 328
-        Top = 49
+        Top = 20
         Width = 137
         Height = 61
         BiDiMode = bdLeftToRight
@@ -357,6 +364,8 @@ object H_ScanAirwaybillFRM: TH_ScanAirwaybillFRM
       Align = alClient
       Caption = 'MFainPNL'
       TabOrder = 1
+      ExplicitWidth = 118
+      ExplicitHeight = 550
       object MainPNL: TPanel
         Left = 1
         Top = 1
@@ -364,6 +373,7 @@ object H_ScanAirwaybillFRM: TH_ScanAirwaybillFRM
         Height = 107
         Align = alLeft
         TabOrder = 0
+        ExplicitHeight = 548
         object FlightAirwaybillGRD: TwwDBGrid
           Left = 1
           Top = 73
@@ -410,6 +420,7 @@ object H_ScanAirwaybillFRM: TH_ScanAirwaybillFRM
           TitleLines = 1
           TitleButtons = False
           OnDblClick = FlightAirwaybillGRDDblClick
+          ExplicitHeight = 474
         end
         object ScanPNL: TPanel
           Left = 1

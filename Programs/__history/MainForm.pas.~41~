@@ -52,6 +52,14 @@ type
     Certificates1: TMenuItem;
     DeclarationType1: TMenuItem;
     ypeOfDeclaration1: TMenuItem;
+    SpecificCircumstance1: TMenuItem;
+    ProcedureRequest1: TMenuItem;
+    PreviousProcedure1: TMenuItem;
+    ableParams1: TMenuItem;
+    KindOfPackages1: TMenuItem;
+    N1: TMenuItem;
+    N2: TMenuItem;
+    PaymentMethods1: TMenuItem;
     procedure ProductInfo1Click(Sender: TObject);
     procedure BitBtn2Click(Sender: TObject);
     procedure fcShapeBtn2Click(Sender: TObject);
@@ -86,6 +94,11 @@ type
     procedure Certificates1Click(Sender: TObject);
     procedure DeclarationType1Click(Sender: TObject);
     procedure ypeOfDeclaration1Click(Sender: TObject);
+    procedure SpecificCircumstance1Click(Sender: TObject);
+    procedure ProcedureRequest1Click(Sender: TObject);
+    procedure PreviousProcedure1Click(Sender: TObject);
+    procedure KindOfPackages1Click(Sender: TObject);
+    procedure PaymentMethods1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -108,7 +121,9 @@ uses  P_Deconsolidation,
    H_ScanAirwaybillNew, M_incoterms, M_serviceCode, M_Currency,
   l_FlightAirwaybillParameters,  M_additionalParameters, X_readFile,
   R_ReadALLXMLFiles, X_createOneXML, M_dangerGoods, M_certificates,
-  H_FlightAirwaybill, m_DeclarationType, m_TypeOfDeclaration;
+  H_FlightAirwaybill, m_DeclarationType, m_TypeOfDeclaration,
+  m_specificCircumstance, M_ProcedureRequest, M_PreviousProcedure,
+  m_KindOfPackages, M_PaymentMethod;
 
 {$R *.DFM}
 
@@ -148,9 +163,20 @@ end;
 
 
 
+procedure TMainFormFRM.PreviousProcedure1Click(Sender: TObject);
+begin
+M_PreviousProcedureFRM.ShowModal;
+end;
+
+procedure TMainFormFRM.ProcedureRequest1Click(Sender: TObject);
+begin
+M_ProcedureRequestFRM.ShowModal;
+end;
+
 procedure TMainFormFRM.ProductInfo1Click(Sender: TObject);
 begin
-   ShowMessage('CabOut By LSimple. Version 2.0, Nov 17, 2014');
+//   ShowMessage('CabOut By LSimple. Version 2.0, Nov 17, 2014');
+   ShowMessage('CabOut Tokyo By LSimple. Version 1.0, May 26, 2018');
 end;
 
 procedure TMainFormFRM.BitBtn2Click(Sender: TObject);
@@ -191,6 +217,11 @@ begin
 M_parametersFRM.ShowModal;
 end;
 
+procedure TMainFormFRM.PaymentMethods1Click(Sender: TObject);
+begin
+M_PaymentMEthodFRM.ShowModal();
+end;
+
 procedure TMainFormFRM.Certificates1Click(Sender: TObject);
 begin
 M_certificatesFRM.showModal;
@@ -223,6 +254,7 @@ begin
 
         CabOutData.Server:=ServerIP;
         CabOUtData.database:=DatabasePath;
+        //showMessage(databasePath);
        If CabOutData.connected then
                 CabOutData.Disconnect;
                 
@@ -249,6 +281,11 @@ end;
 procedure TMainFormFRM.Itinerary1Click(Sender: TObject);
 begin
 L_ItineraryFRM.ShowModal;
+end;
+
+procedure TMainFormFRM.KindOfPackages1Click(Sender: TObject);
+begin
+M_KIndOfPackagesFRM.ShowModal;
 end;
 
 procedure TMainFormFRM.ListFlights1Click(Sender: TObject);
@@ -349,6 +386,11 @@ end;
 procedure TMainFormFRM.ServiceCodes1Click(Sender: TObject);
 begin
 M_ServiceCodesFRM.ShowModal;
+end;
+
+procedure TMainFormFRM.SpecificCircumstance1Click(Sender: TObject);
+begin
+M_SpecificCircumsatnceFRM.ShowModal;
 end;
 
 procedure TMainFormFRM.Currency1Click(Sender: TObject);

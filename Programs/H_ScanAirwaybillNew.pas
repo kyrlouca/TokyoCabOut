@@ -300,8 +300,8 @@ var
 
 implementation
 
-uses MainForm, H_FlightAirwaybill, H_flightOut, X_createOneXML,
-  X_createMultiXML, X_createMultiHighXML, G_KyrSQL, G_generalProcs,
+uses MainForm, H_FlightAirwaybill, H_flightOut,
+   X_createMultiHighXML, G_KyrSQL, G_generalProcs,
   H_commonProcs, X_CreateMultiLowNewXML;
 
 {$R *.DFM}
