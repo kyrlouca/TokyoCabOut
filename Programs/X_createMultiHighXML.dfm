@@ -5,7 +5,6 @@ object X_CreateMultiHighXmlFRM: TX_CreateMultiHighXmlFRM
   ClientHeight = 367
   ClientWidth = 808
   Color = clBtnFace
-  DoubleBuffered = True
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11

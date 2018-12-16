@@ -249,6 +249,10 @@
             <Form>X_CreateMultiHighXmlFRM</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="X_CreateMultiLowNewXML.pas">
+            <Form>X_CreateMultiLowNewXMLFrm</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <None Include="CabOut.todo">
             <ContainerId>ToDo</ContainerId>
         </None>
